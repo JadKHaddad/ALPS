@@ -1,0 +1,5 @@
+socket_addr: 0.0.0.0:8080
+failure_rate: 0.3
+max_work_duration: 1500ms
+max_response_duration: 1500ms
+results_file: server-results.json

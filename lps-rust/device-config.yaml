@@ -1,4 +1,4 @@
 devices_count: 10
-server_push_url: "http://localhost:8081/work" # Proxy
+server_push_url: "http://localhost:8080/work" # No-Proxy
 max_event_interval: 1s
 retry_duration: 500ms

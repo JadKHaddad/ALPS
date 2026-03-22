@@ -1,3 +1,7 @@
+//! This is a device simulator that acts like a device.
+//!
+//! The device generates events at a fixed interval and pushes them to the server. If the push fails, it will retry after a fixed duration.
+//!
 //! ```not_rust
 //!
 //! cargo run -r --bin device
