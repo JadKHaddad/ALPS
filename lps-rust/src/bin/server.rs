@@ -215,7 +215,7 @@ async fn main() -> Result<(), anyhow::Error> {
             Config::default()
         });
 
-    tracing::info!(?config, "Starting server");
+    tracing::info!(?config, "Starting");
 
     let app_state = Arc::new(AppState::new(
         config.max_work_duration,

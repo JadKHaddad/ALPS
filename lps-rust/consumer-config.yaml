@@ -1,0 +1,5 @@
+rabbit_mq_url: amqp://127.0.0.1:5672
+# rabbit_mq_url: amqp://127.0.0.1:9090 # Proxy
+server_push_url: http://localhost:8080/work
+# server_push_url: http://localhost:8081/work # Proxy
+reconnect_duration: 5s

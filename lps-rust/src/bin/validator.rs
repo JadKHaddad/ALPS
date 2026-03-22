@@ -59,6 +59,8 @@ fn main() -> Result<(), anyhow::Error> {
         Config::default()
     });
 
+    tracing::info!(?config, "Starting");
+
     std::fs::read(&config.results_file)
         .context("Failed to open results file")
         .and_then(|bytes| {

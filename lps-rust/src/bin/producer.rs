@@ -142,6 +142,10 @@ async fn main() -> Result<(), anyhow::Error> {
             Config::default()
         });
 
+    tracing::info!(?config, "Starting");
+
+    tracing::info!("Connecting to RabbitMQ");
+
     let conn = Connection::connect(
         &config.rabbit_mq_url,
         ConnectionProperties::default().enable_auto_recover(),
@@ -163,6 +167,8 @@ async fn main() -> Result<(), anyhow::Error> {
         )
         .await
         .context("Failed to declare exchange")?;
+
+    tracing::info!("Declaring queues and bindings");
 
     let queues = (0..config.queues_count).map(|i| format!("events-{i}"));
 
@@ -203,7 +209,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .context("Failed to bind queue")?;
     }
 
-    tracing::info!(?config, "Starting server");
+    tracing::info!("Starting server");
 
     let app_state = Arc::new(AppState::new(channel));
 
