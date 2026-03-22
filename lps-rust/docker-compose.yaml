@@ -1,0 +1,12 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: lps-rabbitmq
+    command: >
+      bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: unless-stopped
+
+# http://localhost:15672 (default user/pass: guest / guest)
