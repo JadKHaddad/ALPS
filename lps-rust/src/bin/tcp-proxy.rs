@@ -31,25 +31,6 @@ fn default_upstream_addr() -> SocketAddr {
     SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 5672)
 }
 
-fn default_failure_rate() -> f64 {
-    0.1
-}
-
-fn deserialize_failure_rate<'de, D>(deserializer: D) -> Result<f64, D::Error>
-where
-    D: serde::Deserializer<'de>,
-{
-    let rate = f64::deserialize(deserializer)?;
-
-    if !(0.0..=1.0).contains(&rate) {
-        return Err(serde::de::Error::custom(format!(
-            "failure rate must be between 0 and 1, got {rate}"
-        )));
-    }
-
-    Ok(rate)
-}
-
 fn default_max_up_duration() -> Duration {
     Duration::from_secs(60)
 }
@@ -68,8 +49,8 @@ struct Task {
     upstream_addr: SocketAddr,
     /// Failure rate of accepting tcp connections, between 0 and 1
     #[serde(
-        default = "default_failure_rate",
-        deserialize_with = "deserialize_failure_rate"
+        default = "lps_rust::default_failure_rate",
+        deserialize_with = "lps_rust::deserialize_failure_rate"
     )]
     failure_rate: f64,
     /// Maximum duration of proxying tcp connections before a disconnection

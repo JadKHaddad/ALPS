@@ -40,25 +40,6 @@ fn default_socket_addr() -> SocketAddr {
     SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080)
 }
 
-fn default_failure_rate() -> f64 {
-    0.1
-}
-
-fn deserialize_failure_rate<'de, D>(deserializer: D) -> Result<f64, D::Error>
-where
-    D: serde::Deserializer<'de>,
-{
-    let rate = f64::deserialize(deserializer)?;
-
-    if !(0.0..=1.0).contains(&rate) {
-        return Err(serde::de::Error::custom(format!(
-            "failure rate must be between 0 and 1, got {rate}"
-        )));
-    }
-
-    Ok(rate)
-}
-
 fn default_max_work_duration() -> Duration {
     Duration::from_secs(1)
 }
@@ -77,8 +58,8 @@ struct Config {
     socket_addr: SocketAddr,
     /// Failure rate of the server, between 0 and 1
     #[serde(
-        default = "default_failure_rate",
-        deserialize_with = "deserialize_failure_rate"
+        default = "lps_rust::default_failure_rate",
+        deserialize_with = "lps_rust::deserialize_failure_rate"
     )]
     failure_rate: f64,
     #[serde(default = "default_max_work_duration", with = "humantime_serde")]
@@ -93,7 +74,7 @@ impl Default for Config {
     fn default() -> Self {
         Self {
             socket_addr: default_socket_addr(),
-            failure_rate: default_failure_rate(),
+            failure_rate: lps_rust::default_failure_rate(),
             max_work_duration: default_max_work_duration(),
             max_response_duration: default_max_response_duration(),
             results_file: default_results_file(),
@@ -259,7 +240,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .context("Failed to bind to socket")?;
 
     _ = axum::serve(listener, app)
-        .with_graceful_shutdown(shutdown_signal())
+        .with_graceful_shutdown(lps_rust::shutdown_signal())
         .await
         .inspect_err(|err| tracing::error!(%err, "Server stopped with error"));
 
@@ -274,34 +255,4 @@ async fn main() -> Result<(), anyhow::Error> {
         .await
         .context("Validation error")
         .inspect(|_| tracing::info!("Validation succeeded"))
-}
-
-async fn shutdown_signal() {
-    let ctrl_c = async {
-        tokio::signal::ctrl_c()
-            .await
-            .expect("Failed to install CTRL+C signal handler");
-
-        tracing::info!("CTRL+C received");
-    };
-
-    #[cfg(unix)]
-    let terminate = async {
-        tokio::signal::unix::signal(tokio::signal::unix::SignalKind::terminate())
-            .expect("Failed to install SIGTERM signal handler")
-            .recv()
-            .await;
-
-        tracing::info!("SIGTERM received");
-    };
-
-    #[cfg(not(unix))]
-    let terminate = std::future::pending::<()>();
-
-    tokio::select! {
-        _ = ctrl_c => {},
-        _ = terminate => {},
-    }
-
-    tracing::info!("Shutting down");
 }

@@ -112,3 +112,53 @@ impl OrderError {
         }
     }
 }
+
+/// Default value for failure rate used in servers and proxies.
+pub fn default_failure_rate() -> f64 {
+    0.1
+}
+
+pub fn deserialize_failure_rate<'de, D>(deserializer: D) -> Result<f64, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let rate = f64::deserialize(deserializer)?;
+
+    if !(0.0..=1.0).contains(&rate) {
+        return Err(serde::de::Error::custom(format!(
+            "failure rate must be between 0 and 1, got {rate}"
+        )));
+    }
+
+    Ok(rate)
+}
+
+pub async fn shutdown_signal() {
+    let ctrl_c = async {
+        tokio::signal::ctrl_c()
+            .await
+            .expect("Failed to install CTRL+C signal handler");
+
+        tracing::info!("CTRL+C received");
+    };
+
+    #[cfg(unix)]
+    let terminate = async {
+        tokio::signal::unix::signal(tokio::signal::unix::SignalKind::terminate())
+            .expect("Failed to install SIGTERM signal handler")
+            .recv()
+            .await;
+
+        tracing::info!("SIGTERM received");
+    };
+
+    #[cfg(not(unix))]
+    let terminate = std::future::pending::<()>();
+
+    tokio::select! {
+        _ = ctrl_c => {},
+        _ = terminate => {},
+    }
+
+    tracing::info!("Shutting down");
+}
