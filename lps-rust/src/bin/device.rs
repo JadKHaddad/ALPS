@@ -4,7 +4,7 @@
 //!
 //! ```not_rust
 //!
-//! cargo run -r --bin device
+//! cargo run -r --bin device -- --config-file device-config.yaml
 //!
 //! ```
 

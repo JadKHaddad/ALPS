@@ -8,7 +8,7 @@
 //!
 //! ```not_rust
 //!
-//! cargo run -r --bin server
+//! cargo run -r --bin server -- --config-file server-config.yaml
 //!
 //! ```
 

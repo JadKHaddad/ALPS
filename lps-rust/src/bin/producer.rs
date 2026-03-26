@@ -4,7 +4,7 @@
 //!
 //! ```not_rust
 //!
-//! cargo run -r --bin producer
+//! cargo run -r --bin producer -- --config-file producer-config.yaml
 //!
 //! ```
 
@@ -189,7 +189,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .context("Failed to declare queue")?;
 
         if config.purge_queues_on_start {
-            tracing::warn!(queue = ?queue.name(), "Purging queue");
+            tracing::warn!(queue = ?queue.name().as_str(), "Purging queue");
 
             channel
                 .queue_purge(queue.name().clone(), QueuePurgeOptions::default())
