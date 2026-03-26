@@ -1580,6 +1580,7 @@ dependencies = [
  "chrono",
  "clap",
  "futures",
+ "humantime",
  "humantime-serde",
  "lapin",
  "rand 0.10.0",

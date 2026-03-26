@@ -76,9 +76,13 @@ async fn connection(config: Config) -> Result<(), anyhow::Error> {
     let queues = (0..10).map(|i| format!("events-{i}"));
 
     let conn = Arc::new(
-        Connection::connect(&config.rabbit_mq_url, ConnectionProperties::default())
-            .await
-            .context("Failed to connect")?,
+        tokio::time::timeout(
+            Duration::from_secs(1),
+            Connection::connect(&config.rabbit_mq_url, ConnectionProperties::default()),
+        )
+        .await
+        .context("Connection timed out")?
+        .context("Failed to connect")?,
     );
 
     tracing::info!("Connected");
@@ -211,8 +215,8 @@ async fn main() -> Result<(), anyhow::Error> {
                 tracing::error!(%err, "Connection error");
 
                 tracing::info!(
-                    "Reconnecting in {} seconds...",
-                    config.reconnect_duration.as_secs()
+                    "Reconnecting in {}...",
+                    humantime::Duration::from(config.reconnect_duration)
                 );
 
                 tokio::time::sleep(config.reconnect_duration).await;

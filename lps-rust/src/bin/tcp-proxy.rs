@@ -112,14 +112,14 @@ async fn main() -> Result<(), anyhow::Error> {
                                     continue;
                                 }
                                 false => {
-                                    tracing::info!("Connection accepted");
+                                    tracing::info!(addr=%task.socket_addr, "Connection accepted");
 
                                     tokio::spawn(async move {
-                                        tracing::debug!("Connecting to upstream");
+                                        tracing::debug!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Connecting to upstream");
 
                                         match tokio::net::TcpStream::connect(task.upstream_addr).await {
                                             Ok(mut upstream) => {
-                                                tracing::info!("Connected to upstream");
+                                                tracing::info!(addr=%task.socket_addr, upstream=%task.upstream_addr,  "Connected to upstream");
 
                                                 let max_ms = task.max_up_duration.as_millis();
 
@@ -129,7 +129,7 @@ async fn main() -> Result<(), anyhow::Error> {
                                                     rand::rng().random_range(0..max_ms) as u64
                                                 };
 
-                                                tracing::info!(duration_ms, "Proxying connection");
+                                                tracing::info!(duration_ms, addr=%task.socket_addr, upstream=%task.upstream_addr, "Proxying connection");
 
                                                 match tokio::time::timeout(
                                                     Duration::from_millis(duration_ms),
@@ -138,15 +138,15 @@ async fn main() -> Result<(), anyhow::Error> {
                                                 .await
                                                 {
                                                     Ok(_) => {
-                                                        tracing::info!("Proxying completed");
+                                                        tracing::info!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Proxying completed");
                                                     }
                                                     Err(_) => {
-                                                        tracing::warn!("Proxying timed out");
+                                                        tracing::warn!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Proxying timed out");
                                                     }
                                                 }
                                             }
                                             Err(err) => {
-                                                tracing::error!(%err, "Failed to connect to upstream");
+                                                tracing::error!(addr=%task.socket_addr, upstream=%task.upstream_addr, %err, "Failed to connect to upstream");
                                             }
                                         }
                                     });

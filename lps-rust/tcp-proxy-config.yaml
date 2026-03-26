@@ -4,8 +4,13 @@ tasks:
     upstream_addr: 127.0.0.1:5672
     failure_rate: 0.1
     max_up_duration: 5s
-  # Server
-  - socket_addr: 0.0.0.0:8081
-    upstream_addr: 127.0.0.1:8080
+  # # Server
+  # - socket_addr: 0.0.0.0:8081
+  #   upstream_addr: 127.0.0.1:8080
+  #   failure_rate: 0.1
+  #   max_up_duration: 2s # This is less than the server's max_work_duration and max_response_duration combined to simulate connections failures after processing the work, which would lead to duplication.
+  # HiveMq
+  - socket_addr: 0.0.0.0:2883
+    upstream_addr: 127.0.0.1:1883
     failure_rate: 0.1
-    max_up_duration: 2s # This is less than the server's max_work_duration and max_response_duration combined to simulate connections failures after processing the work, which would lead to duplication.
+    max_up_duration: 5s
