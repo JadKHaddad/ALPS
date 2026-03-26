@@ -19,20 +19,27 @@ pub struct Args {
     config_file: PathBuf,
 }
 
-fn default_results_file() -> PathBuf {
+fn default_server_results_file() -> PathBuf {
     PathBuf::from("server-results.json")
+}
+
+fn default_device_results_file() -> PathBuf {
+    PathBuf::from("device-results.json")
 }
 
 #[derive(Debug, Deserialize)]
 struct Config {
-    #[serde(default = "default_results_file")]
-    results_file: PathBuf,
+    #[serde(default = "default_server_results_file")]
+    server_results_file: PathBuf,
+    #[serde(default = "default_device_results_file")]
+    device_results_file: PathBuf,
 }
 
 impl Default for Config {
     fn default() -> Self {
         Self {
-            results_file: default_results_file(),
+            server_results_file: default_server_results_file(),
+            device_results_file: default_device_results_file(),
         }
     }
 }
@@ -61,25 +68,51 @@ fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
-    std::fs::read(&config.results_file)
-        .context("Failed to open results file")
+    let server_events = std::fs::read(&config.server_results_file)
+        .context("Failed to open server results file")
         .and_then(|bytes| {
-            serde_json::from_slice::<Vec<Event>>(&bytes).context("Failed to deserialize events")
+            serde_json::from_slice::<Vec<Event>>(&bytes)
+                .context("Failed to deserialize server events")
         })
-        .and_then(|events| {
-            let (unique, duplicates) = Event::remove_duplication(events.iter());
+        .context("Failed to load server events")?;
 
-            let duplicates: Vec<_> = duplicates.collect();
-
-            if !duplicates.is_empty() {
-                tracing::warn!(
-                    count = duplicates.len(),
-                    ?duplicates,
-                    "Found duplicated events"
-                );
-            }
-
-            Event::validate_order(unique).context("Validation error")
+    let device_events = std::fs::read(&config.device_results_file)
+        .context("Failed to open device results file")
+        .and_then(|bytes| {
+            serde_json::from_slice::<Vec<Event>>(&bytes)
+                .context("Failed to deserialize device events")
         })
-        .inspect(|_| tracing::info!("Validation succeeded"))
+        .context("Failed to load device events")?;
+
+    tracing::info!(
+        server_count = server_events.len(),
+        device_count = device_events.len(),
+        "Loaded events"
+    );
+
+    tracing::info!("Checking for duplicates");
+
+    let (unique, duplicates) = Event::remove_duplication(server_events.iter());
+
+    let duplicates: Vec<_> = duplicates.collect();
+
+    if !duplicates.is_empty() {
+        tracing::warn!(
+            count = duplicates.len(),
+            ?duplicates,
+            "Found duplicated events"
+        );
+    }
+
+    tracing::info!("Validating order");
+
+    let order_result = Event::validate_order(unique).context("Order Validation error");
+
+    tracing::info!("Validating completeness");
+
+    let completeness_result =
+        Event::validate_completeness(device_events.iter(), server_events.iter())
+            .context("Completeness Validation error");
+
+    completeness_result.and(order_result)
 }

@@ -8,14 +8,15 @@
 //!
 //! ```
 
-use std::{path::PathBuf, time::Duration};
+use std::{path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
-use lps_rust::SimpleCall;
+use lps_rust::{Event, SimpleCall};
 use rand::RngExt;
 use serde::Deserialize;
 
 use clap::Parser;
+use tokio::sync::Mutex;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -40,6 +41,10 @@ fn default_retry_duration() -> Duration {
     Duration::from_millis(500)
 }
 
+fn default_results_file() -> PathBuf {
+    PathBuf::from("device-results.json")
+}
+
 #[derive(Debug, Clone, Deserialize)]
 struct Config {
     /// The number of devices to simulate.
@@ -56,6 +61,8 @@ struct Config {
     /// How long should the device wait before retrying to push an event if the previous attempt fails
     #[serde(default = "default_retry_duration", with = "humantime_serde")]
     retry_duration: Duration,
+    #[serde(default = "default_results_file")]
+    results_file: PathBuf,
 }
 
 impl Default for Config {
@@ -66,6 +73,7 @@ impl Default for Config {
             max_event_interval: default_max_event_interval(),
             max_events: None,
             retry_duration: default_retry_duration(),
+            results_file: default_results_file(),
         }
     }
 }
@@ -91,6 +99,34 @@ impl Config {
     }
 }
 
+#[derive(Debug)]
+struct State {
+    events: Mutex<Vec<Event>>,
+    results_file: PathBuf,
+}
+
+impl State {
+    fn new(results_file: PathBuf) -> Self {
+        Self {
+            events: Mutex::new(Vec::new()),
+            results_file,
+        }
+    }
+
+    async fn push(&self, event: Event) {
+        self.events.lock().await.push(event);
+    }
+
+    async fn save(&self) -> anyhow::Result<()> {
+        let data = serde_json::to_vec(&*self.events.lock().await)
+            .context("Failed to serialize results")?;
+
+        tokio::fs::write(&self.results_file, data)
+            .await
+            .context("Failed to write results file")
+    }
+}
+
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let filter = tracing_subscriber::EnvFilter::try_from_default_env()
@@ -111,9 +147,12 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
+    let state = Arc::new(State::new(config.results_file.clone()));
+
     let tasks: Vec<_> = (0..config.devices_count)
         .map(|id| {
             let config = config.clone();
+            let state = state.clone();
 
             tokio::spawn(async move {
                 let client = reqwest::Client::new();
@@ -152,6 +191,8 @@ async fn main() -> Result<(), anyhow::Error> {
                             Ok(response) if response.status().is_success() => {
                                 tracing::info!(request_id, ?call, "Work succeeded");
 
+                                state.push(Event::from(call)).await;
+
                                 break 'work;
                             }
                             Ok(response) => {
@@ -178,6 +219,10 @@ async fn main() -> Result<(), anyhow::Error> {
     for task in tasks {
         task.await?;
     }
+
+    tracing::info!("Saving results");
+
+    state.save().await?;
 
     Ok(())
 }

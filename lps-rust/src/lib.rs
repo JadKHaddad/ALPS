@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use serde::{Deserialize, Serialize};
 
@@ -101,6 +101,25 @@ impl Event {
 
         Ok(())
     }
+
+    /// Validates that all events in `should` are present in `actual`. The order of the events is not considered.
+    pub fn validate_completeness<'a>(
+        should: impl Iterator<Item = &'a Event>,
+        actual: impl Iterator<Item = &'a Event>,
+    ) -> Result<(), CompletenessError> {
+        let actual_set: HashSet<_> = actual.collect();
+
+        let missing = should
+            .filter(|e| !actual_set.contains(e))
+            .cloned()
+            .collect::<Vec<_>>();
+
+        if missing.is_empty() {
+            Ok(())
+        } else {
+            Err(CompletenessError { missing })
+        }
+    }
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -119,6 +138,12 @@ impl OrderError {
             second_event_id: second,
         }
     }
+}
+
+#[derive(Debug, thiserror::Error)]
+#[error("Missing events: {missing:?}")]
+pub struct CompletenessError {
+    missing: Vec<Event>,
 }
 
 /// Default value for failure rate used in servers and proxies.
