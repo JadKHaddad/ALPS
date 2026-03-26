@@ -118,7 +118,7 @@ async fn main() -> Result<(), anyhow::Error> {
             tokio::spawn(async move {
                 let client = reqwest::Client::new();
 
-                for _ in config.iter() {
+                for i in config.iter() {
                     let max_ms = config.max_event_interval.as_millis();
 
                     let duration_ms = if max_ms == 0 {
@@ -131,23 +131,38 @@ async fn main() -> Result<(), anyhow::Error> {
 
                     let call = SimpleCall::new_now(id.to_string());
 
+                    let mut try_index = 0;
+
                     'work: loop {
-                        tracing::info!(?call, "Sending work request");
+                        try_index += 1;
+
+                        // The request id is not used in our system
+                        let request_id = format!("device-{}-event-{}-try-{}", id, i, try_index);
+
+                        tracing::info!(request_id, ?call, "Sending work request");
 
                         let response = client
                             .post(&config.server_push_url)
+                            .header("request-id", request_id.clone())
                             .json(&call)
                             .send()
                             .await;
 
                         match response {
                             Ok(response) if response.status().is_success() => {
-                                tracing::info!(?call, "Work succeeded");
+                                tracing::info!(request_id, ?call, "Work succeeded");
 
                                 break 'work;
                             }
-                            _ => {
-                                tracing::warn!(?call, "Work failed");
+                            Ok(response) => {
+                                tracing::warn!(request_id, status=%response.status(), ?call, "Work failed");
+
+                                tokio::time::sleep(config.retry_duration).await;
+
+                                continue 'work;
+                            }
+                            Err(err) => {
+                                tracing::warn!(request_id, %err, ?call, "Work failed");
 
                                 tokio::time::sleep(config.retry_duration).await;
 

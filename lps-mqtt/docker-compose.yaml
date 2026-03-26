@@ -1,0 +1,11 @@
+services:
+  hivemq:
+    image: hivemq/hivemq-edge:latest
+    container_name: lps-hivemq
+    ports:
+      - "1883:1883"
+      - "8090:8080"
+    volumes:
+      - ./hivemq/hivemq_broker/conf/config-edge.xml:/opt/hivemq/conf/config.xml
+      - ./hivemq/hivemq_broker/extensions:/opt/hivemq/extensions
+    restart: unless-stopped
