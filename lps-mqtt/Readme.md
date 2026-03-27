@@ -19,10 +19,18 @@ HTTP_PORT=7071 \
 TARGET_URL=http://localhost:8080/work \
 python3 ars_comp_2_proxy.py
 
-HTTP_PORT=7072 MQTT_TOPIC="proxy1/message" python3 legacy_proxy_1.py
+HTTP_PORT=7072 \
+MQTT_TOPIC="proxy1/message" \
+python3 legacy_proxy_1.py
 
-HTTP_PORT=7073 \
+SERVICE_NAME=legacy_proxy_2_1 \
 TARGET_URL=http://localhost:7071/ID_REQ_KC_STORE7D3BPACKET \
+MQTT_PORT=2883 \
+python3 legacy_proxy_2.py
+
+SERVICE_NAME=legacy_proxy_2_2 \
+TARGET_URL=http://localhost:7071/ID_REQ_KC_STORE7D3BPACKET \
+MQTT_PORT=2883 \
 python3 legacy_proxy_2.py
 
 ```
