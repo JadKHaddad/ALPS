@@ -13,8 +13,10 @@ import gleam/http/request.{type Request}
 import gleam/http/response.{type Response}
 import gleam/httpc
 import gleam/json
+import gleam/list
 import gleam/result
 import gleam/string
+import gmnesia/lock
 import gmnesia/read
 import gmnesia/schema
 import gmnesia/system
@@ -36,7 +38,16 @@ pub fn main() -> Nil {
 
   let assert Ok(_) = system.stop()
 
-  let _ = schema.create_schema(nodes: [node.name(node.self())])
+  logging.log(logging.Info, string.inspect(node.self()))
+
+  let nodes = list.map(config.nodes, atom.create)
+
+  logging.log(
+    logging.Info,
+    "Creating schema on nodes: " <> string.inspect(nodes),
+  )
+
+  let _ = schema.create_schema(nodes)
 
   let assert Ok(_) = system.start()
 
@@ -116,73 +127,84 @@ fn handle_work(
 
     let table = atom.create("event")
 
-    use database_events <- result.try(
-      fn() { table |> read.new(key: database_event.id) |> read.read }
-      |> transaction.new
-      |> transaction.execute
-      |> result.map_error(fn(_) { Nil }),
-    )
+    fn() {
+      use database_events <- result.try(
+        table
+        |> read.new(key: database_event.id)
+        |> read.lock(lock.Write)
+        |> read.read
+        |> Ok
+        |> result.map_error(fn(_) { Nil }),
+      )
 
-    case database_events {
-      [event, ..] -> {
-        logging.log(
-          logging.Info,
-          "Duplicate event: "
-            <> string.inspect(event)
-            <> " for call: "
-            <> string.inspect(call),
-        )
+      case database_events {
+        [event, ..] -> {
+          logging.log(
+            logging.Warning,
+            "Duplicate event: "
+              <> string.inspect(event)
+              <> " for call: "
+              <> string.inspect(call),
+          )
 
-        Ok(response.new(200) |> response.set_body(mist.Bytes(bytes_tree.new())))
-      }
-      [] -> {
-        logging.log(logging.Info, "Posting call: " <> string.inspect(call))
+          Ok(
+            response.new(200) |> response.set_body(mist.Bytes(bytes_tree.new())),
+          )
+        }
+        [] -> {
+          logging.log(logging.Info, "Posting call: " <> string.inspect(call))
 
-        use _ <- result.try(
-          post_call(call, config)
-          |> result.map_error(fn(err) {
-            logging.log(
-              logging.Error,
-              "Failed to post call: " <> string.inspect(call) <> " err: " <> err,
-            )
-            Nil
-          }),
-        )
+          use _ <- result.try(
+            post_call(call, config)
+            |> result.map_error(fn(err) {
+              logging.log(
+                logging.Error,
+                "Failed to post call: "
+                  <> string.inspect(call)
+                  <> " err: "
+                  <> err,
+              )
+              Nil
+            }),
+          )
 
-        logging.log(
-          logging.Info,
-          "Writing event: " <> string.inspect(database_event),
-        )
+          logging.log(
+            logging.Info,
+            "Writing event: " <> string.inspect(database_event),
+          )
 
-        use _ <- result.try(
-          fn() {
+          use _ <- result.try(
             database_event
             |> write.new
             |> write.write
-          }
-          |> transaction.new
-          |> transaction.execute
-          |> result.map_error(fn(err) {
-            logging.log(
-              logging.Error,
-              "Failed to write event: "
-                <> string.inspect(database_event)
-                <> " for call: "
-                <> string.inspect(call)
-                <> " err: "
-                <> string.inspect(err),
-            )
-            Nil
-          }),
-        )
+            |> Ok
+            |> result.map_error(fn(err) {
+              logging.log(
+                logging.Error,
+                "Failed to write event: "
+                  <> string.inspect(database_event)
+                  <> " for call: "
+                  <> string.inspect(call)
+                  <> " err: "
+                  <> string.inspect(err),
+              )
+              Nil
+            }),
+          )
 
-        Ok(response.new(200) |> response.set_body(mist.Bytes(bytes_tree.new())))
+          Ok(
+            response.new(200) |> response.set_body(mist.Bytes(bytes_tree.new())),
+          )
+        }
       }
     }
+    |> transaction.new
+    |> transaction.execute
+    |> result.map_error(fn(_) { Nil })
   }
 
   result.unwrap(
-    result,
+    result.flatten(result),
     response.new(400) |> response.set_body(mist.Bytes(bytes_tree.new())),
   )
 }

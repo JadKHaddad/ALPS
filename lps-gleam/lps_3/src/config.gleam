@@ -1,12 +1,13 @@
 import glaml
+import gleam/list
 import simplifile
 
 pub type Config {
-  Config(port: Int, server_push_url: String)
+  Config(port: Int, server_push_url: String, nodes: List(String))
 }
 
 pub fn default_config() -> Config {
-  Config(port: 4000, server_push_url: "http://localhost:8080/work")
+  Config(port: 4000, server_push_url: "http://localhost:8080/work", nodes: [])
 }
 
 fn decode_config(doc: glaml.Node) -> Result(Config, String) {
@@ -20,7 +21,18 @@ fn decode_config(doc: glaml.Node) -> Result(Config, String) {
     _ -> default_config().server_push_url
   }
 
-  Ok(Config(port: port, server_push_url: server_push_url))
+  let nodes = case glaml.select_sugar(doc, "nodes") {
+    Ok(glaml.NodeSeq(items)) ->
+      list.filter_map(items, fn(item) {
+        case item {
+          glaml.NodeStr(s) -> Ok(s)
+          _ -> Error(Nil)
+        }
+      })
+    _ -> default_config().nodes
+  }
+
+  Ok(Config(port: port, server_push_url: server_push_url, nodes: nodes))
 }
 
 pub fn load_config(path: String) -> Result(Config, String) {

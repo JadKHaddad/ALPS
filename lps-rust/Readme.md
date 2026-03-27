@@ -9,6 +9,8 @@ docker compose up
 ## Run
 
 ```bash
+cargo run -r --bin tcp-proxy -- --config-file tcp-proxy-config.yaml
+
 cargo run -r --bin server -- --config-file server-config.yaml
 
 cargo run -r --bin producer -- --config-file producer-config.yaml
