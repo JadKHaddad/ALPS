@@ -16,6 +16,7 @@ import gleam/json
 import gleam/list
 import gleam/result
 import gleam/string
+import gmnesia/debug
 import gmnesia/lock
 import gmnesia/read
 import gmnesia/schema
@@ -30,6 +31,8 @@ import mist.{type Connection, type ResponseData}
 
 pub fn main() -> Nil {
   logging.configure()
+
+  debug.set_debug_level(debug.Verbose)
 
   let assert Ok(args) = args.run()
   let assert Ok(config) = config.load_config(args.config_file)
