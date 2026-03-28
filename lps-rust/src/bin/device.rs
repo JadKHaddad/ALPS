@@ -155,62 +155,67 @@ async fn main() -> Result<(), anyhow::Error> {
             let state = state.clone();
 
             tokio::spawn(async move {
-                let client = reqwest::Client::new();
+                tokio::select! {
+                    _ = async move {
+                        let client = reqwest::Client::new();
 
-                for i in config.iter() {
-                    let max_ms = config.max_event_interval.as_millis();
+                        for i in config.iter() {
+                            let max_ms = config.max_event_interval.as_millis();
 
-                    let duration_ms = if max_ms == 0 {
-                        0
-                    } else {
-                        rand::rng().random_range(0..max_ms) as u64
-                    };
+                            let duration_ms = if max_ms == 0 {
+                                0
+                            } else {
+                                rand::rng().random_range(0..max_ms) as u64
+                            };
 
-                    tokio::time::sleep(Duration::from_millis(duration_ms)).await;
+                            tokio::time::sleep(Duration::from_millis(duration_ms)).await;
 
-                    let call = SimpleCall::new_now(id.to_string());
+                            let call = SimpleCall::new_now(id.to_string());
 
-                    let mut try_index = 0;
+                            let mut try_index = 0;
 
-                    'work: loop {
-                        try_index += 1;
+                            'work: loop {
+                                try_index += 1;
 
-                        // The request id is not used in our system
-                        let request_id = format!("device-{}-event-{}-try-{}", id, i, try_index);
+                                // The request id is not used in our system
+                                let request_id = format!("device-{}-event-{}-try-{}", id, i, try_index);
 
-                        tracing::info!(request_id, ?call, "Sending work request");
+                                tracing::info!(request_id, ?call, "Sending work request");
 
-                        let response = client
-                            .post(&config.server_push_url)
-                            .header("request-id", request_id.clone())
-                            .json(&call)
-                            .send()
-                            .await;
+                                let response = client
+                                    .post(&config.server_push_url)
+                                    .header("request-id", request_id.clone())
+                                    .json(&call)
+                                    .send()
+                                    .await;
 
-                        match response {
-                            Ok(response) if response.status().is_success() => {
-                                tracing::info!(request_id, ?call, "Work succeeded");
+                                match response {
+                                    Ok(response) if response.status().is_success() => {
+                                        tracing::info!(request_id, ?call, "Work succeeded");
 
-                                state.push(Event::from(call)).await;
+                                        state.push(Event::from(call)).await;
 
-                                break 'work;
-                            }
-                            Ok(response) => {
-                                tracing::warn!(request_id, status=%response.status(), ?call, "Work failed");
+                                        break 'work;
+                                    }
+                                    Ok(response) => {
+                                        tracing::warn!(request_id, status=%response.status(), ?call, "Work failed");
 
-                                tokio::time::sleep(config.retry_duration).await;
+                                        tokio::time::sleep(config.retry_duration).await;
 
-                                continue 'work;
-                            }
-                            Err(err) => {
-                                tracing::warn!(request_id, %err, ?call, "Work failed");
+                                        continue 'work;
+                                    }
+                                    Err(err) => {
+                                        tracing::warn!(request_id, %err, ?call, "Work failed");
 
-                                tokio::time::sleep(config.retry_duration).await;
+                                        tokio::time::sleep(config.retry_duration).await;
 
-                                continue 'work;
+                                        continue 'work;
+                                    }
+                                }
                             }
                         }
-                    }
+                    } => {},
+                    _ = lps_rust::shutdown_signal() => {}
                 }
             })
         })
