@@ -41,6 +41,12 @@ pub struct Event {
     ///
     /// It should also impl [`Ord`] and [`Eq`] to ensure that events can be ordered and compared.
     pub event_id: u64,
+    /// The arrived_at is the time when the event arrives at our server.
+    ///
+    /// It is used to measure the latency of the event processing.
+    ///
+    /// Events are created without this field, and it is filled when the event arrives at our server.
+    pub arrived_at: Option<chrono::DateTime<chrono::Utc>>,
     /// This is the original event [`SimpleCall`].
     ///
     /// We intentionally erase it, since our system does not care about the content of the event.
@@ -52,12 +58,18 @@ impl From<SimpleCall> for Event {
         Self {
             device_id: call.phone.clone(),
             event_id: call.triggertime.timestamp_millis() as u64,
+            arrived_at: None,
             original: serde_json::to_value(call).expect("Failed to serialize SimpleCall"),
         }
     }
 }
 
 impl Event {
+    pub fn with_arrived_at_now(mut self) -> Self {
+        self.arrived_at = Some(chrono::Utc::now());
+        self
+    }
+
     /// Removes the duplicated events, and returns the unique events and the duplicated events separately. The order of the events is preserved.
     pub fn remove_duplication<'a>(
         events: impl Iterator<Item = &'a Event> + 'a,

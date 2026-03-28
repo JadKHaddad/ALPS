@@ -119,6 +119,8 @@ impl AppState {
     }
 
     async fn work(&self, call: SimpleCall) -> StatusCode {
+        let event = Event::from(call.clone()).with_arrived_at_now();
+
         let max_ms = self.max_work_duration.as_millis();
 
         let work_duration_ms = if max_ms == 0 {
@@ -154,7 +156,7 @@ impl AppState {
             false => {
                 tracing::info!(?call, "Work succeeded");
 
-                self.push(Event::from(call.clone())).await;
+                self.push(event).await;
 
                 tracing::info!(ms = response_duration_ms, ?call, "Responding");
 
