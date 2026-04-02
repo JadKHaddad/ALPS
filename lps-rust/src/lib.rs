@@ -1,4 +1,7 @@
-use std::collections::{HashMap, HashSet};
+use std::{
+    collections::{HashMap, HashSet},
+    hash::{Hash, Hasher},
+};
 
 use serde::{Deserialize, Serialize};
 
@@ -33,7 +36,7 @@ impl SimpleCall {
 /// This is the event our system processes.
 ///
 /// It wraps the original event sent from the device, and adds some metadata to it.
-#[derive(Debug, Clone, Serialize, Deserialize, Eq, Hash, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Event {
     /// The device_id helps us ensure in order delivery of events from the same device.
     pub device_id: String,
@@ -51,6 +54,21 @@ pub struct Event {
     ///
     /// We intentionally erase it, since our system does not care about the content of the event.
     pub original: serde_json::Value,
+}
+
+impl PartialEq for Event {
+    fn eq(&self, other: &Self) -> bool {
+        self.device_id == other.device_id && self.event_id == other.event_id
+    }
+}
+
+impl Eq for Event {}
+
+impl Hash for Event {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.device_id.hash(state);
+        self.event_id.hash(state);
+    }
 }
 
 impl From<SimpleCall> for Event {
@@ -95,23 +113,30 @@ impl Event {
     }
 
     pub fn validate_order<'a>(
-        mut events: impl Iterator<Item = &'a Event> + 'a,
+        events: impl Iterator<Item = &'a Event> + 'a,
     ) -> Result<(), OrderError> {
-        events.try_fold(HashMap::<String, u64>::new(), |mut last, event| {
-            last.get(&event.device_id)
-                .filter(|&&prev| event.event_id < prev)
-                .map(|&prev| OrderError::new(event.device_id.clone(), event.event_id, prev))
-                .map_or_else(
-                    || {
-                        last.insert(event.device_id.clone(), event.event_id);
+        let mut last = HashMap::<String, u64>::new();
+        let mut violations = Vec::new();
 
-                        Ok(last)
-                    },
-                    Err,
-                )
-        })?;
+        for event in events {
+            if let Some(&prev) = last.get(&event.device_id)
+                && event.event_id < prev
+            {
+                violations.push(OrderViolation::new(
+                    event.device_id.clone(),
+                    event.event_id,
+                    prev,
+                ));
+            }
 
-        Ok(())
+            last.insert(event.device_id.clone(), event.event_id);
+        }
+
+        if violations.is_empty() {
+            Ok(())
+        } else {
+            Err(OrderError::new(violations))
+        }
     }
 
     /// Validates that all events in `should` are present in `actual`. The order of the events is not considered.
@@ -134,16 +159,15 @@ impl Event {
     }
 }
 
-#[derive(Debug, thiserror::Error)]
-#[error("Events with id {device_id} are out of order: {first_event_id} < {second_event_id}")]
-pub struct OrderError {
-    device_id: String,
-    first_event_id: u64,
-    second_event_id: u64,
+#[derive(Debug)]
+pub struct OrderViolation {
+    pub device_id: String,
+    pub first_event_id: u64,
+    pub second_event_id: u64,
 }
 
-impl OrderError {
-    const fn new(device_id: String, first: u64, second: u64) -> Self {
+impl OrderViolation {
+    fn new(device_id: String, first: u64, second: u64) -> Self {
         Self {
             device_id,
             first_event_id: first,
@@ -153,7 +177,19 @@ impl OrderError {
 }
 
 #[derive(Debug, thiserror::Error)]
-#[error("Missing events: {missing:?}")]
+#[error("Found {} ordering errors: {violations:?}", violations.len())]
+pub struct OrderError {
+    violations: Vec<OrderViolation>,
+}
+
+impl OrderError {
+    fn new(violations: Vec<OrderViolation>) -> Self {
+        Self { violations }
+    }
+}
+
+#[derive(Debug, thiserror::Error)]
+#[error("Missing {} events: {missing:?}", missing.len())]
 pub struct CompletenessError {
     missing: Vec<Event>,
 }

@@ -40,6 +40,10 @@ fn default_reconnect_duration() -> Duration {
     Duration::from_secs(5)
 }
 
+fn default_queues_count() -> u32 {
+    10
+}
+
 #[derive(Debug, Clone, Deserialize)]
 struct Config {
     #[serde(default = "default_rabbit_mq_url")]
@@ -48,6 +52,9 @@ struct Config {
     server_push_url: String,
     #[serde(default = "default_reconnect_duration", with = "humantime_serde")]
     reconnect_duration: Duration,
+    /// The number of queues to consume from.
+    #[serde(default = "default_queues_count")]
+    queues_count: u32,
 }
 
 impl Default for Config {
@@ -56,6 +63,7 @@ impl Default for Config {
             rabbit_mq_url: default_rabbit_mq_url(),
             server_push_url: default_server_push_url(),
             reconnect_duration: default_reconnect_duration(),
+            queues_count: default_queues_count(),
         }
     }
 }
@@ -73,7 +81,7 @@ impl Config {
 
 // XXX: We will have duplicated events if the connection to RabbitMQ is interrupted while the server is processing our sent event.
 async fn connection(config: Config) -> Result<(), anyhow::Error> {
-    let queues = (0..10).map(|i| format!("events-{i}"));
+    let queues = (0..config.queues_count).map(|i| format!("events-{i}"));
 
     let conn = Arc::new(
         tokio::time::timeout(

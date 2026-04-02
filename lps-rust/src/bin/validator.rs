@@ -108,11 +108,21 @@ fn main() -> Result<(), anyhow::Error> {
 
     let order_result = Event::validate_order(unique).context("Order Validation error");
 
+    if let Err(order_result) = &order_result {
+        tracing::error!("Order validation failed: {:#}", order_result);
+    }
+
     tracing::info!("Validating completeness");
 
     let completeness_result =
         Event::validate_completeness(device_events.iter(), server_events.iter())
             .context("Completeness Validation error");
 
-    completeness_result.and(order_result)
+    if let Err(completeness_result) = &completeness_result {
+        tracing::error!("Completeness validation failed: {:#}", completeness_result);
+    }
+
+    completeness_result
+        .and(order_result)
+        .map_err(|_| anyhow::anyhow!("Validation failed. Check logs for details."))
 }
