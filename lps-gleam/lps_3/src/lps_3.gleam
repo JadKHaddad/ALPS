@@ -44,6 +44,9 @@ pub fn main() -> Nil {
   logging.log(logging.Info, string.inspect(node.self()))
 
   let nodes = list.map(config.nodes, atom.create)
+  let other_nodes = list.filter(nodes, fn(n) { n != node.name(node.self()) })
+  list.each(other_nodes, fn(n) { node.connect(n) })
+  process.sleep(500)
 
   logging.log(
     logging.Info,
@@ -58,14 +61,28 @@ pub fn main() -> Nil {
 
   logging.log(logging.Info, "Creating table")
 
-  let _ =
-    table
-    |> table_create.new
-    |> table_create.options([
-      table.Attributes([atom.create("id"), atom.create("data")]),
-      table.Type(table.Set),
-    ])
-    |> table_create.create
+  let _ = case node.name(node.self()) == atom.create("node_1@localhost") {
+    True -> {
+      let _ =
+        table
+        |> table_create.new
+        |> table_create.options([
+          table.Attributes([atom.create("id"), atom.create("data")]),
+          table.Type(table.Set),
+        ])
+        |> table_create.create
+    }
+    False -> Ok(Nil)
+  }
+
+  // let _ =
+  //   table
+  //   |> table_create.new
+  //   |> table_create.options([
+  //     table.Attributes([atom.create("id"), atom.create("data")]),
+  //     table.Type(table.Set),
+  //   ])
+  //   |> table_create.create
 
   logging.log(logging.Info, "Waiting for table to be ready")
 

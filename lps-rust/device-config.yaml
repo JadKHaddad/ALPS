@@ -1,7 +1,7 @@
 devices_count: 50
-server_push_url: "http://localhost:8088/work" # Producer URL
+# server_push_url: "http://localhost:8088/work" # Producer URL
 # server_push_url: "http://localhost:8080/work" # Server URL
-# server_push_url: "http://localhost:7070/api/v1/simple" # ARS Comp 1 Proxy URL
+server_push_url: "http://localhost:7070/api/v1/simple" # ARS Comp 1 Proxy URL
 # server_push_url: "http://localhost:4000/work" # Gleam lps3 URL
 max_event_interval: 500ms
 retry_duration: 500ms

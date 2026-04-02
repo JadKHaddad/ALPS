@@ -21,7 +21,7 @@ use std::{
 
 use anyhow::Context;
 use axum::{Json, Router, extract::State, routing::post};
-use lps_rust::{Event, SimpleCall};
+use lps_rust::{Event, Failure, SimpleCall};
 use rand::RngExt;
 use reqwest::StatusCode;
 use serde::Deserialize;
@@ -52,6 +52,10 @@ fn default_results_file() -> PathBuf {
     PathBuf::from("server-results.json")
 }
 
+fn default_failures_file() -> PathBuf {
+    PathBuf::from("server-failures.json")
+}
+
 #[derive(Debug, Deserialize)]
 struct Config {
     #[serde(default = "default_socket_addr")]
@@ -68,6 +72,8 @@ struct Config {
     max_response_duration: Duration,
     #[serde(default = "default_results_file")]
     results_file: PathBuf,
+    #[serde(default = "default_failures_file")]
+    failures_file: PathBuf,
 }
 
 impl Default for Config {
@@ -78,6 +84,7 @@ impl Default for Config {
             max_work_duration: default_max_work_duration(),
             max_response_duration: default_max_response_duration(),
             results_file: default_results_file(),
+            failures_file: default_failures_file(),
         }
     }
 }
@@ -96,10 +103,12 @@ impl Config {
 #[derive(Debug)]
 struct AppState {
     events: Mutex<Vec<Event>>,
+    failures: Mutex<Vec<Failure>>,
     max_work_duration: Duration,
     max_response_duration: Duration,
     failure_rate: f64,
     results_file: PathBuf,
+    failures_file: PathBuf,
 }
 
 impl AppState {
@@ -108,13 +117,16 @@ impl AppState {
         max_response_duration: Duration,
         failure_rate: f64,
         results_file: PathBuf,
+        failures_file: PathBuf,
     ) -> Self {
         Self {
             events: Mutex::new(Vec::new()),
+            failures: Mutex::new(Vec::new()),
             max_work_duration,
             max_response_duration,
             failure_rate,
             results_file,
+            failures_file,
         }
     }
 
@@ -147,6 +159,8 @@ impl AppState {
             true => {
                 tracing::warn!(?call, "Work failed");
 
+                self.push_failure(Failure::new_now(event)).await;
+
                 tracing::info!(ms = response_duration_ms, ?call, "Responding");
 
                 tokio::time::sleep(Duration::from_millis(response_duration_ms)).await;
@@ -156,7 +170,7 @@ impl AppState {
             false => {
                 tracing::info!(?call, "Work succeeded");
 
-                self.push(event).await;
+                self.push_event(event).await;
 
                 tracing::info!(ms = response_duration_ms, ?call, "Responding");
 
@@ -167,17 +181,30 @@ impl AppState {
         }
     }
 
-    async fn push(&self, event: Event) {
+    async fn push_event(&self, event: Event) {
         self.events.lock().await.push(event);
     }
 
-    async fn save(&self) -> anyhow::Result<()> {
+    async fn push_failure(&self, failure: Failure) {
+        self.failures.lock().await.push(failure);
+    }
+
+    async fn save_events(&self) -> anyhow::Result<()> {
         let data = serde_json::to_vec(&*self.events.lock().await)
             .context("Failed to serialize results")?;
 
         tokio::fs::write(&self.results_file, data)
             .await
             .context("Failed to write results file")
+    }
+
+    async fn save_failures(&self) -> anyhow::Result<()> {
+        let data = serde_json::to_vec(&*self.failures.lock().await)
+            .context("Failed to serialize failures")?;
+
+        tokio::fs::write(&self.failures_file, data)
+            .await
+            .context("Failed to write failures file")
     }
 
     async fn validate(&self) -> anyhow::Result<()> {
@@ -224,6 +251,7 @@ async fn main() -> Result<(), anyhow::Error> {
         config.max_response_duration,
         config.failure_rate,
         config.results_file,
+        config.failures_file,
     ));
 
     let app = Router::new()
@@ -248,7 +276,15 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!("Saving results");
 
-    app_state.save().await.context("Failed to save results")?;
+    app_state
+        .save_events()
+        .await
+        .context("Failed to save results")?;
+
+    app_state
+        .save_failures()
+        .await
+        .context("Failed to save failures")?;
 
     tracing::info!("Validation results");
 

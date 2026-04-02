@@ -3,3 +3,4 @@ failure_rate: 0.1
 max_work_duration: 500ms
 max_response_duration: 0ms
 results_file: server-results.json
+failures_file: server-failures.json

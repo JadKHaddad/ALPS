@@ -1,4 +1,4 @@
 rabbit_mq_url: "amqp://127.0.0.1:5672"
 socket_addr: 0.0.0.0:8088
-queues_count: 20
+queues_count: 10
 purge_queues_on_start: true

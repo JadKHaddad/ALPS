@@ -4,4 +4,4 @@ server_push_url: http://localhost:8080/work # Server Url
 # server_push_url: http://localhost:8081/work # Proxy
 # server_push_url: "http://localhost:4000/work" # Gleam lps3 URL
 reconnect_duration: 500ms
-queues_count: 20
+queues_count: 10

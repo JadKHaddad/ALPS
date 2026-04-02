@@ -3,6 +3,7 @@ use std::{
     hash::{Hash, Hasher},
 };
 
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
 /// This is the event sent from a device to the system.
@@ -13,7 +14,7 @@ pub struct SimpleCall {
     /// The triggertime is the event identifier.
     ///
     /// Retried events have the same triggertime as the original event.
-    pub triggertime: chrono::DateTime<chrono::Utc>,
+    pub triggertime: DateTime<Utc>,
     /// Not used in our system.
     #[serde(default)]
     branch: String,
@@ -26,7 +27,7 @@ impl SimpleCall {
     pub fn new_now(phone: String) -> Self {
         Self {
             phone,
-            triggertime: chrono::Utc::now(),
+            triggertime: Utc::now(),
             branch: String::from("Branch"),
             headnumber: String::from("Headnumber"),
         }
@@ -49,7 +50,7 @@ pub struct Event {
     /// It is used to measure the latency of the event processing.
     ///
     /// Events are created without this field, and it is filled when the event arrives at our server.
-    pub arrived_at: Option<chrono::DateTime<chrono::Utc>>,
+    pub arrived_at: Option<DateTime<Utc>>,
     /// This is the original event [`SimpleCall`].
     ///
     /// We intentionally erase it, since our system does not care about the content of the event.
@@ -84,7 +85,7 @@ impl From<SimpleCall> for Event {
 
 impl Event {
     pub fn with_arrived_at_now(mut self) -> Self {
-        self.arrived_at = Some(chrono::Utc::now());
+        self.arrived_at = Some(Utc::now());
         self
     }
 
@@ -255,7 +256,7 @@ const _: () = {
     #[derive(Debug, Deserialize)]
     struct SimpleCallHelper {
         phone: String,
-        triggertime: chrono::DateTime<chrono::Utc>,
+        triggertime: DateTime<Utc>,
 
         #[serde(default)]
         branch: String,
@@ -316,6 +317,21 @@ const _: () = {
         Err("invalid SimpleCall format".into())
     }
 };
+
+#[derive(Debug, Serialize)]
+pub struct Failure {
+    failed_at: DateTime<Utc>,
+    event: Event,
+}
+
+impl Failure {
+    pub fn new_now(event: Event) -> Self {
+        Self {
+            failed_at: Utc::now(),
+            event,
+        }
+    }
+}
 
 #[cfg(test)]
 mod tests {
