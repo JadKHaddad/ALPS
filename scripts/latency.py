@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from datetime import datetime
 
-if len(sys.argv) < 2:
-    print("Usage: python plot.py <data.json>")
+if len(sys.argv) < 3:
+    print("Usage: python latency.py <data.json> <output.png>")
     sys.exit(1)
 
 with open(sys.argv[1], "r") as f:
@@ -119,5 +119,5 @@ fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
 
 plt.tight_layout(rect=(0, 0.04, 1, 1))
 
-plt.savefig("png/latency_stats.png", dpi=150, bbox_inches="tight")
-print("Saved png/latency_stats.png")
+plt.savefig(sys.argv[2], dpi=150, bbox_inches="tight")
+print(f"Saved {sys.argv[2]}")

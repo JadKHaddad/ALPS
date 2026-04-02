@@ -1,0 +1,4 @@
+amqp_consumer_consumers_count: 3 # the number of consumer processes that was started in parallel
+amqp_consumer_queues_count: 10 # the number of queues that was created for consuming events
+
+# python latency.py results/0/amqp/0/server-results.json results/0/amqp/0/latency.png
