@@ -133,6 +133,12 @@ n_ooo = sum(ooo_flags)
 n_failed = len(failure_map)
 n_orphan = len(orphan_failures)
 
+# Events the device sent that never appeared in server events at all
+server_keys = {(e["device_id"], e["event_id"]) for e in server_events}
+n_never_arrived = sum(
+    1 for e in device_events if (e["device_id"], e["event_id"]) not in server_keys
+)
+
 # ── plot ──────────────────────────────────────────────────────────────────────
 
 fig, axes = plt.subplots(2, 1, figsize=(14, 9), sharex=True)
@@ -220,6 +226,7 @@ fig.autofmt_xdate(rotation=30)
 # ── summary footer ────────────────────────────────────────────────────────────
 summary = (
     f"Total arrived: {n_total}  |  "
+    f"Never arrived: {n_never_arrived}  |  "
     f"Out-of-order: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)  |  "
     f"Failures: {n_failed}  |  "
     f"Orphan failures (never arrived): {n_orphan}"

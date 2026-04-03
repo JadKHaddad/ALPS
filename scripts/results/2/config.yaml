@@ -6,3 +6,5 @@ server_max_work_duration: 500ms # the maximum time the server will take to proce
 server_max_response_duration: 500ms # the maximum time the server will take to respond to an event after processing it
 tcp_proxy_failure_rate: 0.0 # the TCP proxy failure rate
 tcp_proxy_max_up_duration: 5s # the maximum time of TCP proxying before it fails
+
+# No server failures but TCP proxy between the broker and the consumers might fail with a connection drop.

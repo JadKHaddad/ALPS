@@ -25,17 +25,17 @@ python3 legacy_proxy_1.py
 
 SERVICE_NAME=legacy_proxy_2_1 \
 TARGET_URL=http://localhost:7071/ID_REQ_KC_STORE7D3BPACKET \
-MQTT_PORT=1883 \
+MQTT_PORT=2883 \
 python3 legacy_proxy_2.py
 
 SERVICE_NAME=legacy_proxy_2_2 \
 TARGET_URL=http://localhost:7071/ID_REQ_KC_STORE7D3BPACKET \
-MQTT_PORT=1883 \
+MQTT_PORT=2883 \
 python3 legacy_proxy_2.py
 
 SERVICE_NAME=legacy_proxy_2_3 \
 TARGET_URL=http://localhost:7071/ID_REQ_KC_STORE7D3BPACKET \
-MQTT_PORT=1883 \
+MQTT_PORT=2883 \
 python3 legacy_proxy_2.py
 
 SERVICE_NAME=legacy_proxy_2_4 \

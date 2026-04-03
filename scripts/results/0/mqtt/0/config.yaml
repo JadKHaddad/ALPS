@@ -2,3 +2,4 @@ mqtt_consumer_consumers_count: 3 # the number of consumer processes that was sta
 
 # python latency.py results/0/mqtt/0/server-results.json results/0/mqtt/0/latency.png
 # python failure_order.py results/0/mqtt/0/device-results.json results/0/mqtt/0/server-results.json results/0/mqtt/0/server-failures.json results/0/mqtt/0/failure-order.png
+# python tcp_drop_duplicate.py results/0/mqtt/0/device-results.json results/0/mqtt/0/server-results.json results/0/mqtt/0/tcp-proxy-results.json results/0/mqtt/0/tcp-drop-duplicate.png

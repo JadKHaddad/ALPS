@@ -3,3 +3,4 @@ amqp_consumer_queues_count: 10 # the number of queues that was created for consu
 
 # python latency.py results/0/amqp/0/server-results.json results/0/amqp/0/latency.png
 # python failure_order.py results/0/amqp/0/device-results.json results/0/amqp/0/server-results.json results/0/amqp/0/server-failures.json results/0/amqp/0/failure-order.png
+# python tcp_drop_duplicate.py results/0/amqp/0/device-results.json results/0/amqp/0/server-results.json results/0/amqp/0/tcp-proxy-results.json results/0/amqp/0/tcp-drop-duplicate.png

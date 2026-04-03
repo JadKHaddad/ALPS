@@ -1,4 +1,4 @@
-devices_count: 20
+devices_count: 50
 server_push_url: "http://localhost:8088/work" # Producer URL
 # server_push_url: "http://localhost:8080/work" # Server URL
 # server_push_url: "http://localhost:7070/api/v1/simple" # ARS Comp 1 Proxy URL

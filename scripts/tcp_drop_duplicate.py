@@ -1,5 +1,5 @@
 """
-Usage: python tcp_drop_duplicate_plot.py <server_events.json> <tcp_drops.json> <output.png>
+Usage: python tcp_drop_duplicate_plot.py <device_events.json> <server_events.json> <tcp_drops.json> <output.png>
 
 Correlates TCP proxy connection drops with duplicated event deliveries.
 
@@ -31,13 +31,13 @@ import matplotlib.dates as mdates
 import matplotlib.lines as mlines
 import numpy as np
 
-if len(sys.argv) < 4:
+if len(sys.argv) < 5:
     print(
-        "Usage: python tcp_drop_duplicate.py <server_events.json> <tcp_drops.json> <output.png>"
+        "Usage: python tcp_drop_duplicate.py <device_events.json> <server_events.json> <tcp_drops.json> <output.png>"
     )
     sys.exit(1)
 
-server_file, drops_file, out_file = sys.argv[1:]
+device_file, server_file, drops_file, out_file = sys.argv[1:]
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -58,6 +58,7 @@ def load_json(path):
 
 # ── load ──────────────────────────────────────────────────────────────────────
 
+raw_device_events = load_json(device_file)
 raw_events = load_json(server_file)
 raw_drops = load_json(drops_file)
 
@@ -164,6 +165,12 @@ n_dup_events = sum(len(v) - 1 for v in groups.values() if len(v) > 1)
 n_drops = len(drop_times)
 n_explained = len(explained)
 explain_pct = 100 * n_explained / max(len(dup_pairs), 1)
+
+# Events the device sent that never appeared in server events at all
+server_keys = {(e["device_id"], e["event_id"]) for e in raw_events}
+n_never_arrived = sum(
+    1 for e in raw_device_events if (e["device_id"], e["event_id"]) not in server_keys
+)
 
 # ── plot ──────────────────────────────────────────────────────────────────────
 
@@ -308,6 +315,7 @@ fig.autofmt_xdate(rotation=30)
 # ── summary footer ────────────────────────────────────────────────────────────
 summary = (
     f"Total arrivals: {n_events}  |  "
+    f"Never arrived: {n_never_arrived}  |  "
     f"Duplicate extra copies: {n_dup_events}  |  "
     f"TCP drops: {n_drops}  |  "
     f"Dup pairs explained by a drop: {n_explained}/{len(dup_pairs)} ({explain_pct:.0f}%)"
