@@ -182,11 +182,27 @@ impl AppState {
     }
 
     async fn push_event(&self, event: Event) {
-        self.events.lock().await.push(event);
+        let count = {
+            let mut events = self.events.lock().await;
+
+            events.push(event);
+
+            events.len()
+        };
+
+        tracing::debug!(count, "Events count");
     }
 
     async fn push_failure(&self, failure: Failure) {
-        self.failures.lock().await.push(failure);
+        let count = {
+            let mut failures = self.failures.lock().await;
+
+            failures.push(failure);
+
+            failures.len()
+        };
+
+        tracing::debug!(count, "Failures count");
     }
 
     async fn save_events(&self) -> anyhow::Result<()> {

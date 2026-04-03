@@ -114,7 +114,15 @@ impl State {
     }
 
     async fn push(&self, event: Event) {
-        self.events.lock().await.push(event);
+        let count = {
+            let mut events = self.events.lock().await;
+
+            events.push(event);
+
+            events.len()
+        };
+
+        tracing::debug!(count, "Events count");
     }
 
     async fn save(&self) -> anyhow::Result<()> {

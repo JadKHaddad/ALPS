@@ -1,0 +1,5 @@
+device_devices_count: 50 # the number of devices
+device_max_events: 50 # the number of events pro device
+device_max_event_interval: 500ms # the maximum time between two events of the same device
+server_failure_rate: 0.0 # the server failure rate
+server_max_work_duration: 500ms # the maximum time the server will take to process an event
