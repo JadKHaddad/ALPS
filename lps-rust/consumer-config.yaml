@@ -1,5 +1,5 @@
-rabbit_mq_url: amqp://127.0.0.1:5672
-# rabbit_mq_url: amqp://127.0.0.1:9090 # Proxy
+# rabbit_mq_url: amqp://127.0.0.1:5672
+rabbit_mq_url: amqp://127.0.0.1:9090 # Proxy
 server_push_url: http://localhost:8080/work # Server Url
 # server_push_url: http://localhost:8081/work # Proxy
 # server_push_url: "http://localhost:4000/work" # Gleam lps3 URL

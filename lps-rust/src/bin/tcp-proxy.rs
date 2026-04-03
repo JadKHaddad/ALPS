@@ -6,15 +6,17 @@
 use std::{
     net::{IpAddr, Ipv4Addr, SocketAddr},
     path::PathBuf,
+    sync::Arc,
     time::Duration,
 };
 
 use anyhow::Context;
+use lps_rust::{TcpConnectionDrop, shutdown_signal};
 use rand::RngExt;
 use serde::Deserialize;
 
 use clap::Parser;
-use tokio::net::TcpListener;
+use tokio::{net::TcpListener, sync::Mutex};
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -35,10 +37,25 @@ fn default_max_up_duration() -> Duration {
     Duration::from_secs(60)
 }
 
-#[derive(Debug, Default, Deserialize)]
+fn default_results_file() -> PathBuf {
+    PathBuf::from("tcp-proxy-results.json")
+}
+
+#[derive(Debug, Deserialize)]
 struct Config {
     #[serde(default)]
     tasks: Vec<Task>,
+    #[serde(default = "default_results_file")]
+    results_file: PathBuf,
+}
+
+impl Default for Config {
+    fn default() -> Self {
+        Self {
+            tasks: Vec::new(),
+            results_file: default_results_file(),
+        }
+    }
 }
 
 #[derive(Debug, Deserialize)]
@@ -69,6 +86,42 @@ impl Config {
     }
 }
 
+#[derive(Debug)]
+struct State {
+    drops: Mutex<Vec<TcpConnectionDrop>>,
+    results_file: PathBuf,
+}
+
+impl State {
+    fn new(results_file: PathBuf) -> Self {
+        Self {
+            drops: Mutex::new(Vec::new()),
+            results_file,
+        }
+    }
+
+    async fn push(&self, drop: TcpConnectionDrop) {
+        let count = {
+            let mut drops = self.drops.lock().await;
+
+            drops.push(drop);
+
+            drops.len()
+        };
+
+        tracing::debug!(count, "Drops count");
+    }
+
+    async fn save(&self) -> anyhow::Result<()> {
+        let data =
+            serde_json::to_vec(&*self.drops.lock().await).context("Failed to serialize results")?;
+
+        tokio::fs::write(&self.results_file, data)
+            .await
+            .context("Failed to write results file")
+    }
+}
+
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let filter = tracing_subscriber::EnvFilter::try_from_default_env()
@@ -89,10 +142,13 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
+    let state = Arc::new(State::new(config.results_file.clone()));
+
     let tasks: Vec<_> = config
         .tasks
         .into_iter()
         .map(|task| {
+            let state = state.clone();
             tokio::spawn(async move {
                 let listener = TcpListener::bind(task.socket_addr)
                     .await
@@ -109,10 +165,14 @@ async fn main() -> Result<(), anyhow::Error> {
                                 true => {
                                     tracing::warn!("Connection failed");
 
+                                    state.push(TcpConnectionDrop::new_now()).await;
+
                                     continue;
                                 }
                                 false => {
                                     tracing::info!(addr=%task.socket_addr, "Connection accepted");
+
+                                    let state = state.clone();
 
                                     tokio::spawn(async move {
                                         tracing::debug!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Connecting to upstream");
@@ -141,6 +201,8 @@ async fn main() -> Result<(), anyhow::Error> {
                                                         tracing::info!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Proxying completed");
                                                     }
                                                     Err(_) => {
+                                                        state.push(TcpConnectionDrop::new_now()).await;
+
                                                         tracing::warn!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Proxying timed out");
                                                     }
                                                 }
@@ -168,9 +230,18 @@ async fn main() -> Result<(), anyhow::Error> {
         })
         .collect();
 
+    shutdown_signal().await;
+
+    tracing::info!("Shutdown signal received, shutting down");
+
     for task in tasks {
-        task.await??;
+        task.abort();
+        task.await.ok();
     }
+
+    tracing::info!("Saving results");
+
+    state.save().await?;
 
     Ok(())
 }

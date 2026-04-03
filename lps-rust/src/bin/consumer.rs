@@ -179,17 +179,20 @@ async fn connection(config: Config) -> Result<(), anyhow::Error> {
         })
         .collect();
 
-    let mut result = Result::Ok(());
+    let (result, _, _) = futures::future::select_all(tasks).await;
 
-    for task in tasks {
-        if let Err(err) = task.await.context("Task panicked")? {
-            tracing::error!(?err, "Task failed");
+    match result.context("Task panicked")? {
+        Ok(()) => {
+            tracing::info!("A task finished successfully, shutting down");
 
-            result = Err(anyhow::anyhow!("One or more tasks failed"));
+            Ok(())
+        }
+        Err(err) => {
+            tracing::error!(?err, "Task failed, shutting down");
+
+            Err(anyhow::anyhow!("Task failed: {err}"))
         }
     }
-
-    result
 }
 
 #[tokio::main]
@@ -216,19 +219,17 @@ async fn main() -> Result<(), anyhow::Error> {
         tracing::info!("Connecting to RabbitMQ");
 
         match connection(config.clone()).await {
-            Ok(()) => {
-                return Ok(());
-            }
+            Ok(()) => {}
             Err(err) => {
                 tracing::error!(%err, "Connection error");
-
-                tracing::info!(
-                    "Reconnecting in {}...",
-                    humantime::Duration::from(config.reconnect_duration)
-                );
-
-                tokio::time::sleep(config.reconnect_duration).await;
             }
         }
+
+        tracing::info!(
+            "Reconnecting in {}...",
+            humantime::Duration::from(config.reconnect_duration)
+        );
+
+        tokio::time::sleep(config.reconnect_duration).await;
     }
 }

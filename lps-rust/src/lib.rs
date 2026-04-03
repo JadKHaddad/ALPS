@@ -333,6 +333,19 @@ impl Failure {
     }
 }
 
+#[derive(Debug, Serialize)]
+pub struct TcpConnectionDrop {
+    dropped_at: DateTime<Utc>,
+}
+
+impl TcpConnectionDrop {
+    pub fn new_now() -> Self {
+        Self {
+            dropped_at: Utc::now(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -23,7 +23,7 @@ from datetime import datetime
 
 if len(sys.argv) < 5:
     print(
-        "Usage: python failure_order.py <device_events.json> <server_events.json> <failures.json> <output.png>"
+        "Usage: python failure_order_plot.py <device_events.json> <server_events.json> <failures.json> <output.png>"
     )
     sys.exit(1)
 
@@ -135,7 +135,7 @@ n_orphan = len(orphan_failures)
 
 # ── plot ──────────────────────────────────────────────────────────────────────
 
-fig, axes = plt.subplots(3, 1, figsize=(14, 12), sharex=True)
+fig, axes = plt.subplots(2, 1, figsize=(14, 9), sharex=True)
 fig.suptitle(
     "Event Pipeline Health: Out-of-Order Arrival vs Failures",
     fontsize=15,
@@ -146,50 +146,14 @@ fig.suptitle(
 date_fmt = mdates.DateFormatter("%H:%M:%S")
 colors = {
     "ok": "#4C72B0",
-    "ooo": "#DD8452",
+    "ooo": "#F5C518",
     "failed": "#C44E52",
     "rate": "#937860",
     "latency": "#55A868",
 }
 
-# ── subplot 1: OOO violation severity ────────────────────────────────────────
-ax1 = axes[0]
-
-for r in records:
-    if r["failed"]:
-        ax1.axvline(r["arr_ts"], color=colors["failed"], alpha=0.15, linewidth=6)
-
-ax1.bar(
-    trig_times,
-    severities,
-    width=0.0003,
-    color=[colors["ooo"] if o else colors["ok"] for o in ooo_flags],
-    alpha=0.8,
-    label="OOO severity (prev_event_id − event_id for violations, 0 = in order)",
-)
-
-failed_ts = [r["arr_ts"] for r in records if r["failed"]]
-failed_sev = [r["ooo_severity"] + 0.3 for r in records if r["failed"]]
-ax1.scatter(
-    failed_ts,
-    failed_sev,
-    marker="x",
-    color=colors["failed"],
-    s=80,
-    linewidths=2,
-    zorder=5,
-    label="Failed event",
-)
-
-ax1.set_ylabel("event_id jump (violation magnitude)")
-ax1.set_title(
-    "Out-of-Order Violation Severity per Event  (per-device, in arrival order)"
-)
-ax1.legend(fontsize=9)
-ax1.grid(True, linestyle="--", alpha=0.3)
-
 # ── subplot 2: rolling OOO rate + failure events ──────────────────────────────
-ax2 = axes[1]
+ax2 = axes[0]
 
 ax2.plot(
     trig_times,
@@ -225,7 +189,7 @@ ax2.legend(fontsize=9)
 ax2.grid(True, linestyle="--", alpha=0.3)
 
 # ── subplot 3: latency coloured by OOO / failed ───────────────────────────────
-ax3 = axes[2]
+ax3 = axes[1]
 
 
 def point_color(r):
