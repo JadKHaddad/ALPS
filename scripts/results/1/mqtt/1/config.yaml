@@ -1,0 +1,5 @@
+mqtt_consumer_consumers_count: 6 # the number of consumer processes that was started in parallel
+
+# python latency.py results/1/mqtt/1/server-results.json results/1/mqtt/1/latency.png
+# python failure_order.py results/1/mqtt/1/device-results.json results/1/mqtt/1/server-results.json results/1/mqtt/1/server-failures.json results/1/mqtt/1/failure-order.png
+# python tcp_drop_duplicate.py results/1/mqtt/1/device-results.json results/1/mqtt/1/server-results.json results/1/mqtt/1/tcp-proxy-results.json results/1/mqtt/1/tcp-drop-duplicate.png

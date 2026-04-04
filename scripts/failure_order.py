@@ -143,7 +143,7 @@ n_never_arrived = sum(
 
 fig, axes = plt.subplots(2, 1, figsize=(14, 9), sharex=True)
 fig.suptitle(
-    "Event Pipeline Health: Out-of-Order Arrival vs Failures",
+    "Out-of-Order Arrival vs Failures",
     fontsize=15,
     fontweight="bold",
     y=0.98,

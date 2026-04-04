@@ -178,7 +178,7 @@ fig, (ax1, ax3) = plt.subplots(2, 1, figsize=(15, 9), sharex=True)
 axes = [ax1, ax3]
 
 fig.suptitle(
-    "TCP Proxy Drop ↔ Duplicate Event Correlation",
+    "TCP Drops vs Duplications",
     fontsize=15,
     fontweight="bold",
     y=0.98,
@@ -196,7 +196,7 @@ C = {
 
 # ── panel 1: timeline — drops (top lane) and duplicate pairs (bottom lane) ────
 ax1 = axes[0]
-ax1.set_title("Timeline: TCP Drops and Duplicate Redeliveries")
+ax1.set_title("TCP Drops and Duplicate Redeliveries")
 
 DROP_Y = 1.0
 DUP_Y = 0.0

@@ -62,9 +62,9 @@ trigger_times, latencies, s = load_events(sys.argv[1])
 
 # ── plot ──────────────────────────────────────────────────────────────────────
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
 fig.suptitle(
-    "Event Latency Statistics (arrived_at − triggertime)",
+    "Event Latency",
     fontsize=14,
     fontweight="bold",
 )
