@@ -5,6 +5,7 @@ import database
 import event
 import gleam/bit_array
 import gleam/bytes_tree
+import gleam/dynamic/decode
 import gleam/erlang/atom
 import gleam/erlang/node
 import gleam/erlang/process
@@ -16,10 +17,12 @@ import gleam/json
 import gleam/list
 import gleam/result
 import gleam/string
+import gmnesia/config as gmnesia_config
 import gmnesia/debug
 import gmnesia/lock
 import gmnesia/read
 import gmnesia/schema
+import gmnesia/storage
 import gmnesia/system
 import gmnesia/table
 import gmnesia/table/create as table_create
@@ -31,67 +34,130 @@ import mist.{type Connection, type ResponseData}
 
 pub fn main() -> Nil {
   logging.configure()
-
   debug.set_debug_level(debug.Verbose)
 
   let assert Ok(args) = args.run()
   let assert Ok(config) = config.load_config(args.config_file)
 
-  logging.log(logging.Info, string.inspect(config))
+  let self_node = node.name(node.self())
+  let table_name = atom.create("event")
+  let schema_name = atom.create("schema")
 
-  let assert Ok(_) = system.stop()
-
-  logging.log(logging.Info, string.inspect(node.self()))
-
-  let nodes = list.map(config.nodes, atom.create)
-  let other_nodes = list.filter(nodes, fn(n) { n != node.name(node.self()) })
-  list.each(other_nodes, fn(n) { node.connect(n) })
-  process.sleep(500)
-
-  logging.log(
-    logging.Info,
-    "Creating schema on nodes: " <> string.inspect(nodes),
-  )
-
-  let _ = schema.create_schema(nodes)
-
-  let assert Ok(_) = system.start()
-
-  let table = atom.create("event")
-
-  logging.log(logging.Info, "Creating table")
-
-  let _ = case node.name(node.self()) == atom.create("node_1@localhost") {
+  case config.bootstrap {
     True -> {
+      logging.log(logging.Info, "Bootstrap mode: Initializing...")
+
+      let _ = system.stop()
+
+      case schema.create_schema([self_node]) {
+        Ok(_) -> logging.log(logging.Info, "Schema created")
+        Error(_) -> logging.log(logging.Warning, "Schema already exists")
+      }
+
+      let assert Ok(_) = system.start()
+
       let _ =
-        table
+        table_name
         |> table_create.new
         |> table_create.options([
           table.Attributes([atom.create("id"), atom.create("data")]),
-          table.Type(table.Set),
+          table.DiscCopies([self_node]),
         ])
         |> table_create.create
+
+      logging.log(
+        logging.Info,
+        "Bootstrap complete. Restart without bootstrap: True.",
+      )
     }
-    False -> Ok(Nil)
+
+    False -> {
+      logging.log(logging.Info, "Cluster join mode")
+
+      let other_nodes =
+        config.nodes
+        |> list.map(atom.create)
+        |> list.filter(fn(n) { n != self_node })
+
+      let reachable_nodes =
+        other_nodes
+        |> list.filter(fn(n) {
+          case node.connect(n) {
+            Ok(_) -> True
+            Error(_) -> False
+          }
+        })
+
+      let assert Ok(_) = system.start()
+
+      logging.log(
+        logging.Info,
+        "Attempting to join cluster nodes: " <> string.inspect(reachable_nodes),
+      )
+
+      case gmnesia_config.change_config_extra_db_nodes(reachable_nodes) {
+        Ok(nodes) ->
+          logging.log(
+            logging.Info,
+            "Joined cluster nodes: " <> string.inspect(nodes),
+          )
+        Error(e) ->
+          logging.log(logging.Error, "Failed to join: " <> string.inspect(e))
+      }
+
+      case
+        table.change_table_copy_type(schema_name, self_node, storage.DiscCopies)
+      {
+        Ok(_) ->
+          logging.log(logging.Info, "Local schema promoted to DiscCopies")
+        Error(e) ->
+          logging.log(
+            logging.Warning,
+            "Schema promotion skipped: " <> string.inspect(e),
+          )
+      }
+
+      let _ = [schema_name] |> wait.new |> wait.wait
+
+      wait_for_discovery(table_name)
+
+      case table.add_table_copy(table_name, self_node, storage.DiscCopies) {
+        Ok(_) -> logging.log(logging.Info, "Table copy added!")
+        Error(e) ->
+          logging.log(logging.Error, "Copy error: " <> string.inspect(e))
+      }
+
+      let _ = [table_name] |> wait.new |> wait.wait
+
+      logging.log(logging.Info, "Cluster join complete")
+      run_server(config)
+    }
   }
+}
 
-  // let _ =
-  //   table
-  //   |> table_create.new
-  //   |> table_create.options([
-  //     table.Attributes([atom.create("id"), atom.create("data")]),
-  //     table.Type(table.Set),
-  //   ])
-  //   |> table_create.create
+fn wait_for_discovery(table_name: atom.Atom) {
+  let known_tables = system.system_info(system.Tables)
 
-  logging.log(logging.Info, "Waiting for table to be ready")
+  logging.log(logging.Info, "Known tables: " <> string.inspect(known_tables))
 
-  let assert Ok(_) =
-    [table]
-    |> wait.new
-    |> wait.timeout(table.Finite(5000))
-    |> wait.wait
+  let assert Ok(known_tables) =
+    decode.run(known_tables, decode.list(decode.dynamic))
 
+  let known_tables = list.map(known_tables, atom.cast_from_dynamic)
+
+  case list.contains(known_tables, table_name) {
+    True -> logging.log(logging.Info, "Table discovered in schema")
+    False -> {
+      logging.log(logging.Info, "Table not in schema yet. Retrying...")
+
+      process.sleep(1000)
+
+      wait_for_discovery(table_name)
+    }
+  }
+}
+
+fn run_server(config: config.Config) -> Nil {
   logging.log(logging.Info, "Starting server")
 
   let assert Ok(_) =

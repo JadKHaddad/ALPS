@@ -3,11 +3,21 @@ import gleam/list
 import simplifile
 
 pub type Config {
-  Config(port: Int, server_push_url: String, nodes: List(String))
+  Config(
+    port: Int,
+    server_push_url: String,
+    nodes: List(String),
+    bootstrap: Bool,
+  )
 }
 
 pub fn default_config() -> Config {
-  Config(port: 4000, server_push_url: "http://localhost:8080/work", nodes: [])
+  Config(
+    port: 4000,
+    server_push_url: "http://localhost:8080/work",
+    nodes: [],
+    bootstrap: False,
+  )
 }
 
 fn decode_config(doc: glaml.Node) -> Result(Config, String) {
@@ -32,7 +42,17 @@ fn decode_config(doc: glaml.Node) -> Result(Config, String) {
     _ -> default_config().nodes
   }
 
-  Ok(Config(port: port, server_push_url: server_push_url, nodes: nodes))
+  let bootstrap = case glaml.select_sugar(doc, "bootstrap") {
+    Ok(glaml.NodeBool(b)) -> b
+    _ -> default_config().bootstrap
+  }
+
+  Ok(Config(
+    port: port,
+    server_push_url: server_push_url,
+    nodes: nodes,
+    bootstrap: bootstrap,
+  ))
 }
 
 pub fn load_config(path: String) -> Result(Config, String) {
