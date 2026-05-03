@@ -1,10 +1,59 @@
 services:
+  consumer-0:
+    image: TODO
+    container_name: consumer-0
+    command: consumer --config-file /app/consumer-0.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  consumer-1:
+    image: TODO
+    container_name: consumer-1
+    command: consumer --config-file /app/consumer-1.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  consumer-amqp-proxy:
+    image: TODO
+    container_name: consumer-amqp-proxy
+    command: tcp-proxy --config-file /app/consumer-amqp-proxy-config.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  consumer-server-proxy:
+    image: TODO
+    container_name: consumer-server-proxy
+    command: tcp-proxy --config-file /app/consumer-server-proxy-config.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
   device:
     image: TODO
     container_name: lps-device
-    command: devices --config-file device-config.yaml
+    command: devices --config-file /app/device-config.yaml
     volumes:
-    - ./mount:/etc/config/
+    - ./mount:/app
+  producer-0:
+    image: TODO
+    container_name: producer-0
+    command: producer --config-file /app/producer-0.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  producer-1:
+    image: TODO
+    container_name: producer-1
+    command: producer --config-file /app/producer-1.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  producer-amqp-proxy:
+    image: TODO
+    container_name: producer-amqp-proxy
+    command: tcp-proxy --config-file /app/producer-amqp-proxy-config.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
   rabbitmq:
     image: rabbitmq:4-management
     container_name: lps-rabbitmq
@@ -13,7 +62,7 @@ services:
   server:
     image: TODO
     container_name: lps-server
-    command: server --config-file server-config.yaml
+    command: server --config-file /app/server-config.yaml
     volumes:
-    - ./mount:/etc/config/
+    - ./mount:/app
     restart: unless-stopped

@@ -1,3 +1,4 @@
+use std::collections::BTreeMap;
 use std::time::Duration;
 use std::{net::SocketAddr, path::PathBuf};
 
@@ -46,7 +47,11 @@ impl Config {
     }
 
     fn volume_mount(&self) -> String {
-        format!("{}:/etc/config/", self.host_volume(),)
+        format!("{}:{}", self.host_volume(), self.container_work_dir())
+    }
+
+    fn container_work_dir(&self) -> String {
+        String::from("/app")
     }
 
     pub async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
@@ -66,8 +71,10 @@ impl Config {
                 max_work_duration: self.server.max_work_duration,
                 max_response_duration: self.server.max_response_duration,
                 socket_addr: self.server.socket_addr,
-                results_file: self.server_results_file().into(),
-                failures_file: self.server_failures_file().into(),
+                results_file: PathBuf::from(self.container_work_dir())
+                    .join(self.server_results_file()),
+                failures_file: PathBuf::from(self.container_work_dir())
+                    .join(self.server_failures_file()),
             }),
         }]
     }
@@ -88,7 +95,8 @@ impl Config {
                         upstream_domain: self.amqp.broker_domain.clone(),
                         upstream_port: self.amqp.broker_port,
                     }],
-                    results_file: PathBuf::from("producer-amqp-proxy-results.json"),
+                    results_file: PathBuf::from(self.container_work_dir())
+                        .join("producer-amqp-proxy-results.json"),
                 });
 
         let producer_amqp_proxy_config_file = producer_amqp_proxy_config.map(|config| ConfigFile {
@@ -149,7 +157,8 @@ impl Config {
                         upstream_domain: self.amqp.broker_domain.clone(),
                         upstream_port: self.amqp.broker_port,
                     }],
-                    results_file: PathBuf::from("consumer-amqp-proxy-results.json"),
+                    results_file: PathBuf::from(self.container_work_dir())
+                        .join("consumer-amqp-proxy-results.json"),
                 });
 
         let consumer_amqp_proxy_config_file = consumer_amqp_proxy_config.map(|config| ConfigFile {
@@ -174,7 +183,8 @@ impl Config {
                         upstream_domain: self.server.server_domain.clone(),
                         upstream_port: self.server.socket_addr.port(),
                     }],
-                    results_file: PathBuf::from("consumer-server-proxy-results.json"),
+                    results_file: PathBuf::from(self.container_work_dir())
+                        .join("consumer-server-proxy-results.json"),
                 });
 
         let consumer_server_proxy_config_file =
@@ -252,7 +262,8 @@ impl Config {
                         )
                     })
                     .collect(),
-                results_file: self.device_results_file().into(),
+                results_file: PathBuf::from(self.container_work_dir())
+                    .join(self.device_results_file()),
             }),
         }]
     }
@@ -279,7 +290,10 @@ impl Config {
     }
 
     fn server_docker_service(&self) -> DockerService {
-        let config_file = self.server_config_file();
+        let config_file = PathBuf::from(self.container_work_dir())
+            .join(self.server_config_file())
+            .display()
+            .to_string();
 
         DockerService::default()
             .with_image(String::from("TODO"))
@@ -290,7 +304,10 @@ impl Config {
     }
 
     fn device_docker_service(&self) -> DockerService {
-        let config_file = self.device_config_file();
+        let config_file = PathBuf::from(self.container_work_dir())
+            .join(self.device_config_file())
+            .display()
+            .to_string();
 
         DockerService::default()
             .with_image(String::from("TODO"))
@@ -299,12 +316,111 @@ impl Config {
             .with_volumes(vec![self.volume_mount()])
     }
 
+    fn producers_docker_service(&self) -> BTreeMap<String, DockerService> {
+        let mut services = BTreeMap::new();
+
+        if self.amqp.producers.amqp_proxy.is_some() {
+            services.insert(
+                String::from("producer-amqp-proxy"),
+                DockerService::default()
+                    .with_image(String::from("TODO"))
+                    .with_container_name(String::from("producer-amqp-proxy"))
+                    .with_command(format!(
+                        "tcp-proxy --config-file {}",
+                        PathBuf::from(self.container_work_dir())
+                            .join("producer-amqp-proxy-config.yaml")
+                            .display()
+                    ))
+                    .with_volumes(vec![self.volume_mount()])
+                    .with_unless_stopped(),
+            );
+        }
+
+        for i in 0..self.amqp.producers_count() {
+            let config_file = PathBuf::from(self.container_work_dir())
+                .join(format!("producer-{i}.yaml"))
+                .display()
+                .to_string();
+
+            services.insert(
+                format!("producer-{i}"),
+                DockerService::default()
+                    .with_image(String::from("TODO"))
+                    .with_container_name(format!("producer-{i}"))
+                    .with_command(format!("producer --config-file {config_file}"))
+                    .with_volumes(vec![self.volume_mount()])
+                    .with_unless_stopped(),
+            );
+        }
+
+        services
+    }
+
+    fn consumers_docker_service(&self) -> BTreeMap<String, DockerService> {
+        let mut services = BTreeMap::new();
+
+        if self.amqp.consumers.amqp_proxy.is_some() {
+            services.insert(
+                String::from("consumer-amqp-proxy"),
+                DockerService::default()
+                    .with_image(String::from("TODO"))
+                    .with_container_name(String::from("consumer-amqp-proxy"))
+                    .with_command(format!(
+                        "tcp-proxy --config-file {}",
+                        PathBuf::from(self.container_work_dir())
+                            .join("consumer-amqp-proxy-config.yaml")
+                            .display()
+                    ))
+                    .with_volumes(vec![self.volume_mount()])
+                    .with_unless_stopped(),
+            );
+        }
+
+        if self.amqp.consumers.server_proxy.is_some() {
+            services.insert(
+                String::from("consumer-server-proxy"),
+                DockerService::default()
+                    .with_image(String::from("TODO"))
+                    .with_container_name(String::from("consumer-server-proxy"))
+                    .with_command(format!(
+                        "tcp-proxy --config-file {}",
+                        PathBuf::from(self.container_work_dir())
+                            .join("consumer-server-proxy-config.yaml")
+                            .display()
+                    ))
+                    .with_volumes(vec![self.volume_mount()])
+                    .with_unless_stopped(),
+            );
+        }
+
+        for i in 0..self.amqp.consumers_count() {
+            let config_file = PathBuf::from(self.container_work_dir())
+                .join(format!("consumer-{i}.yaml"))
+                .display()
+                .to_string();
+
+            services.insert(
+                format!("consumer-{i}"),
+                DockerService::default()
+                    .with_image(String::from("TODO"))
+                    .with_container_name(format!("consumer-{i}"))
+                    .with_command(format!("consumer --config-file {config_file}"))
+                    .with_volumes(vec![self.volume_mount()])
+                    .with_unless_stopped(),
+            );
+        }
+
+        services
+    }
+
     pub fn docker_compose(&self) -> DockerCompose {
-        let mut services = std::collections::BTreeMap::new();
+        let mut services = BTreeMap::new();
 
         services.insert(String::from("rabbitmq"), self.rabbit_mq_docker_service());
         services.insert(String::from("server"), self.server_docker_service());
         services.insert(String::from("device"), self.device_docker_service());
+        services.extend(self.producers_docker_service());
+        services.extend(self.consumers_docker_service());
 
         DockerCompose { services }
     }

@@ -5,4 +5,4 @@ server_push_urls:
 max_event_interval: 500ms
 max_events: 50
 retry_duration: 500ms
-results_file: device-results.json
+results_file: /app/device-results.json

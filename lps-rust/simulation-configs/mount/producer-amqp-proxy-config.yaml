@@ -4,4 +4,4 @@ tasks:
   upstream_port: 5672
   failure_rate: 0.0
   max_up_duration: 5s
-results_file: producer-amqp-proxy-results.json
+results_file: /app/producer-amqp-proxy-results.json
