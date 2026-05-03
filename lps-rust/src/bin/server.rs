@@ -12,19 +12,13 @@
 //!
 //! ```
 
-use std::{
-    net::{IpAddr, Ipv4Addr, SocketAddr},
-    path::PathBuf,
-    sync::Arc,
-    time::Duration,
-};
+use std::{path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
 use axum::{Json, Router, extract::State, routing::post};
-use lps_rust::{Event, Failure, SimpleCall};
+use lps_rust::{Event, Failure, SimpleCall, server::Config};
 use rand::RngExt;
 use reqwest::StatusCode;
-use serde::Deserialize;
 
 use clap::Parser;
 use tokio::{net::TcpListener, sync::Mutex};
@@ -34,70 +28,6 @@ pub struct Args {
     #[clap(long, default_value = "server-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
-}
-
-fn default_socket_addr() -> SocketAddr {
-    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080)
-}
-
-fn default_max_work_duration() -> Duration {
-    Duration::from_secs(1)
-}
-
-fn default_max_response_duration() -> Duration {
-    Duration::from_secs(1)
-}
-
-fn default_results_file() -> PathBuf {
-    PathBuf::from("server-results.json")
-}
-
-fn default_failures_file() -> PathBuf {
-    PathBuf::from("server-failures.json")
-}
-
-#[derive(Debug, Deserialize)]
-struct Config {
-    #[serde(default = "default_socket_addr")]
-    socket_addr: SocketAddr,
-    /// Failure rate of the server, between 0 and 1
-    #[serde(
-        default = "lps_rust::default_failure_rate",
-        deserialize_with = "lps_rust::deserialize_failure_rate"
-    )]
-    failure_rate: f64,
-    #[serde(default = "default_max_work_duration", with = "humantime_serde")]
-    max_work_duration: Duration,
-    #[serde(default = "default_max_response_duration", with = "humantime_serde")]
-    max_response_duration: Duration,
-    #[serde(default = "default_results_file")]
-    results_file: PathBuf,
-    #[serde(default = "default_failures_file")]
-    failures_file: PathBuf,
-}
-
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            socket_addr: default_socket_addr(),
-            failure_rate: lps_rust::default_failure_rate(),
-            max_work_duration: default_max_work_duration(),
-            max_response_duration: default_max_response_duration(),
-            results_file: default_results_file(),
-            failures_file: default_failures_file(),
-        }
-    }
-}
-
-impl Config {
-    async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
-        serde_yaml::from_slice(
-            &tokio::fs::read(path)
-                .await
-                .context("Failed to read config file")?,
-        )
-        .context("Failed to deserialize config file")
-    }
 }
 
 #[derive(Debug)]

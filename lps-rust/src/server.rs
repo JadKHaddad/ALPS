@@ -1,0 +1,72 @@
+use std::{
+    net::{IpAddr, Ipv4Addr, SocketAddr},
+    path::PathBuf,
+    time::Duration,
+};
+
+use anyhow::Context;
+use serde::Deserialize;
+
+fn default_socket_addr() -> SocketAddr {
+    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080)
+}
+
+fn default_max_work_duration() -> Duration {
+    Duration::from_secs(1)
+}
+
+fn default_max_response_duration() -> Duration {
+    Duration::from_secs(1)
+}
+
+fn default_results_file() -> PathBuf {
+    PathBuf::from("server-results.json")
+}
+
+fn default_failures_file() -> PathBuf {
+    PathBuf::from("server-failures.json")
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Config {
+    #[serde(default = "default_socket_addr")]
+    pub socket_addr: SocketAddr,
+    /// Failure rate of the server, between 0 and 1
+    #[serde(
+        default = "crate::default_failure_rate",
+        deserialize_with = "crate::deserialize_failure_rate"
+    )]
+    pub failure_rate: f64,
+    #[serde(default = "default_max_work_duration", with = "humantime_serde")]
+    pub max_work_duration: Duration,
+    #[serde(default = "default_max_response_duration", with = "humantime_serde")]
+    pub max_response_duration: Duration,
+    #[serde(default = "default_results_file")]
+    pub results_file: PathBuf,
+    #[serde(default = "default_failures_file")]
+    pub failures_file: PathBuf,
+}
+
+impl Default for Config {
+    fn default() -> Self {
+        Self {
+            socket_addr: default_socket_addr(),
+            failure_rate: crate::default_failure_rate(),
+            max_work_duration: default_max_work_duration(),
+            max_response_duration: default_max_response_duration(),
+            results_file: default_results_file(),
+            failures_file: default_failures_file(),
+        }
+    }
+}
+
+impl Config {
+    pub async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
+        serde_yaml::from_slice(
+            &tokio::fs::read(path)
+                .await
+                .context("Failed to read config file")?,
+        )
+        .context("Failed to deserialize config file")
+    }
+}

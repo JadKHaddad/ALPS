@@ -3,17 +3,11 @@
 //! cargo run -r --bin tcp-proxy -- --config-file tcp-proxy-config.yaml
 //! ```
 
-use std::{
-    net::{IpAddr, Ipv4Addr, SocketAddr},
-    path::PathBuf,
-    sync::Arc,
-    time::Duration,
-};
+use std::{path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
-use lps_rust::{TcpConnectionDrop, shutdown_signal};
+use lps_rust::{TcpConnectionDrop, shutdown_signal, tcp_proxy::Config};
 use rand::RngExt;
-use serde::Deserialize;
 
 use clap::Parser;
 use tokio::{net::TcpListener, sync::Mutex};
@@ -23,67 +17,6 @@ pub struct Args {
     #[clap(long, default_value = "tcp-proxy-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
-}
-
-fn default_socket_addr() -> SocketAddr {
-    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 9090)
-}
-
-fn default_upstream_addr() -> SocketAddr {
-    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 5672)
-}
-
-fn default_max_up_duration() -> Duration {
-    Duration::from_secs(60)
-}
-
-fn default_results_file() -> PathBuf {
-    PathBuf::from("tcp-proxy-results.json")
-}
-
-#[derive(Debug, Deserialize)]
-struct Config {
-    #[serde(default)]
-    tasks: Vec<Task>,
-    #[serde(default = "default_results_file")]
-    results_file: PathBuf,
-}
-
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            tasks: Vec::new(),
-            results_file: default_results_file(),
-        }
-    }
-}
-
-#[derive(Debug, Deserialize)]
-struct Task {
-    #[serde(default = "default_socket_addr")]
-    socket_addr: SocketAddr,
-    #[serde(default = "default_upstream_addr")]
-    upstream_addr: SocketAddr,
-    /// Failure rate of accepting tcp connections, between 0 and 1
-    #[serde(
-        default = "lps_rust::default_failure_rate",
-        deserialize_with = "lps_rust::deserialize_failure_rate"
-    )]
-    failure_rate: f64,
-    /// Maximum duration of proxying tcp connections before a disconnection
-    #[serde(default = "default_max_up_duration", with = "humantime_serde")]
-    max_up_duration: Duration,
-}
-
-impl Config {
-    async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
-        serde_yaml::from_slice(
-            &tokio::fs::read(path)
-                .await
-                .context("Failed to read config file")?,
-        )
-        .context("Failed to deserialize config file")
-    }
 }
 
 #[derive(Debug)]

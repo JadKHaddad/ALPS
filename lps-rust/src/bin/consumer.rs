@@ -18,65 +18,13 @@ use lapin::{
     options::*,
     types::{FieldTable, ShortString},
 };
-use lps_rust::Event;
-use serde::Deserialize;
+use lps_rust::{Event, consumer::Config};
 
 #[derive(Debug, Parser)]
 pub struct Args {
     #[clap(long, default_value = "consumer-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
-}
-
-fn default_server_push_url() -> String {
-    String::from("http://localhost:8080/work")
-}
-
-fn default_rabbit_mq_url() -> String {
-    String::from("amqp://127.0.0.1:5672")
-}
-
-fn default_reconnect_duration() -> Duration {
-    Duration::from_secs(5)
-}
-
-fn default_queues_count() -> u32 {
-    10
-}
-
-#[derive(Debug, Clone, Deserialize)]
-struct Config {
-    #[serde(default = "default_rabbit_mq_url")]
-    rabbit_mq_url: String,
-    #[serde(default = "default_server_push_url")]
-    server_push_url: String,
-    #[serde(default = "default_reconnect_duration", with = "humantime_serde")]
-    reconnect_duration: Duration,
-    /// The number of queues to consume from.
-    #[serde(default = "default_queues_count")]
-    queues_count: u32,
-}
-
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            rabbit_mq_url: default_rabbit_mq_url(),
-            server_push_url: default_server_push_url(),
-            reconnect_duration: default_reconnect_duration(),
-            queues_count: default_queues_count(),
-        }
-    }
-}
-
-impl Config {
-    async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
-        serde_yaml::from_slice(
-            &tokio::fs::read(path)
-                .await
-                .context("Failed to read config file")?,
-        )
-        .context("Failed to deserialize config file")
-    }
 }
 
 // XXX: We will have duplicated events if the connection to RabbitMQ is interrupted while the server is processing our sent event.

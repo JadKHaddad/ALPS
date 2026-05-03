@@ -6,6 +6,12 @@ use std::{
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
+pub mod consumer;
+pub mod device;
+pub mod producer;
+pub mod server;
+pub mod tcp_proxy;
+
 /// This is the event sent from a device to the system.
 #[derive(Debug, Clone, Serialize, Eq, Hash, PartialEq)]
 pub struct SimpleCall {
