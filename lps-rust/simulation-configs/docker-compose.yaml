@@ -1,0 +1,19 @@
+services:
+  device:
+    image: TODO
+    container_name: lps-device
+    command: devices --config-file device-config.yaml
+    volumes:
+    - ./mount:/etc/config/
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: lps-rabbitmq
+    command: bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
+    restart: unless-stopped
+  server:
+    image: TODO
+    container_name: lps-server
+    command: server --config-file server-config.yaml
+    volumes:
+    - ./mount:/etc/config/
+    restart: unless-stopped

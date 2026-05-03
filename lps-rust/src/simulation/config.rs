@@ -4,6 +4,7 @@ use std::{net::SocketAddr, path::PathBuf};
 use anyhow::Context;
 use serde::{Deserialize, Serialize};
 
+use crate::simulation::docker::{DockerCompose, DockerService};
 use crate::{
     consumer::Config as CrateConsumerConfig,
     device::Config as CrateDeviceConfig,
@@ -20,6 +21,34 @@ pub struct Config {
 }
 
 impl Config {
+    fn server_config_file(&self) -> String {
+        String::from("server-config.yaml")
+    }
+
+    fn server_failures_file(&self) -> String {
+        String::from("server-failures.json")
+    }
+
+    fn server_results_file(&self) -> String {
+        String::from("server-results.json")
+    }
+
+    fn device_config_file(&self) -> String {
+        String::from("device-config.yaml")
+    }
+
+    fn device_results_file(&self) -> String {
+        String::from("device-results.json")
+    }
+
+    pub fn host_volume(&self) -> String {
+        String::from("./mount")
+    }
+
+    fn volume_mount(&self) -> String {
+        format!("{}:/etc/config/", self.host_volume(),)
+    }
+
     pub async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
         serde_yaml::from_slice(
             &tokio::fs::read(path)
@@ -31,13 +60,14 @@ impl Config {
 
     fn server_config_files(&self) -> Vec<ConfigFile> {
         vec![ConfigFile {
-            name: "server-config.yaml".to_string(),
+            name: self.server_config_file(),
             ty: ConfigType::Server(CrateServerConfig {
                 failure_rate: self.server.failure_rate,
                 max_work_duration: self.server.max_work_duration,
                 max_response_duration: self.server.max_response_duration,
                 socket_addr: self.server.socket_addr,
-                ..Default::default()
+                results_file: self.server_results_file().into(),
+                failures_file: self.server_failures_file().into(),
             }),
         }]
     }
@@ -208,7 +238,7 @@ impl Config {
 
     fn devices_config_files(&self) -> Vec<ConfigFile> {
         vec![ConfigFile {
-            name: "device-config.yaml".to_string(),
+            name: self.device_config_file(),
             ty: ConfigType::Device(CrateDeviceConfig {
                 devices_count: self.devices.devices_count,
                 max_event_interval: self.devices.max_event_interval,
@@ -222,7 +252,7 @@ impl Config {
                         )
                     })
                     .collect(),
-                ..Default::default()
+                results_file: self.device_results_file().into(),
             }),
         }]
     }
@@ -236,6 +266,47 @@ impl Config {
         config_files.extend(self.devices_config_files());
 
         config_files
+    }
+
+    fn rabbit_mq_docker_service(&self) -> DockerService {
+        DockerService::default()
+            .with_container_name(String::from("lps-rabbitmq"))
+            .with_image(String::from("rabbitmq:4-management"))
+            .with_command(String::from(
+                "bash -c \" rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server \"",
+            ))
+            .with_unless_stopped()
+    }
+
+    fn server_docker_service(&self) -> DockerService {
+        let config_file = self.server_config_file();
+
+        DockerService::default()
+            .with_image(String::from("TODO"))
+            .with_container_name(String::from("lps-server"))
+            .with_command(format!("server --config-file {config_file}"))
+            .with_volumes(vec![self.volume_mount()])
+            .with_unless_stopped()
+    }
+
+    fn device_docker_service(&self) -> DockerService {
+        let config_file = self.device_config_file();
+
+        DockerService::default()
+            .with_image(String::from("TODO"))
+            .with_container_name(String::from("lps-device"))
+            .with_command(format!("devices --config-file {config_file}"))
+            .with_volumes(vec![self.volume_mount()])
+    }
+
+    pub fn docker_compose(&self) -> DockerCompose {
+        let mut services = std::collections::BTreeMap::new();
+
+        services.insert(String::from("rabbitmq"), self.rabbit_mq_docker_service());
+        services.insert(String::from("server"), self.server_docker_service());
+        services.insert(String::from("device"), self.device_docker_service());
+
+        DockerCompose { services }
     }
 }
 
