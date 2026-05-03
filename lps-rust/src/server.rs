@@ -5,7 +5,7 @@ use std::{
 };
 
 use anyhow::Context;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 fn default_socket_addr() -> SocketAddr {
     SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080)
@@ -27,7 +27,7 @@ fn default_failures_file() -> PathBuf {
     PathBuf::from("server-failures.json")
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     #[serde(default = "default_socket_addr")]
     pub socket_addr: SocketAddr,

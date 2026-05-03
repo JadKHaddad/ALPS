@@ -10,6 +10,7 @@ pub mod consumer;
 pub mod device;
 pub mod producer;
 pub mod server;
+pub mod simulation;
 pub mod tcp_proxy;
 
 /// This is the event sent from a device to the system.

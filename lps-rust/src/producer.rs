@@ -4,9 +4,9 @@ use std::{
 };
 
 use anyhow::Context;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     #[serde(default = "default_socket_addr")]
     pub socket_addr: SocketAddr,

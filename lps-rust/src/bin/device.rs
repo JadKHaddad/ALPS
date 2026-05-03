@@ -107,6 +107,8 @@ async fn main() -> Result<(), anyhow::Error> {
 
                             let mut try_index = 0;
 
+                            let mut server_push_urls = config.server_push_urls.clone().into_iter().cycle();
+
                             'work: loop {
                                 try_index += 1;
 
@@ -115,8 +117,10 @@ async fn main() -> Result<(), anyhow::Error> {
 
                                 tracing::info!(request_id, ?call, "Sending work request");
 
+                                let server_push_url = server_push_urls.next().expect("server_push_urls should not be empty");
+
                                 let response = client
-                                    .post(&config.server_push_url)
+                                    .post(&server_push_url)
                                     .header("request-id", request_id.clone())
                                     .json(&call)
                                     .send()

@@ -5,7 +5,7 @@ use std::{
 };
 
 use anyhow::Context;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 fn default_socket_addr() -> SocketAddr {
     SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 9090)
@@ -23,7 +23,7 @@ fn default_results_file() -> PathBuf {
     PathBuf::from("tcp-proxy-results.json")
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     #[serde(default)]
     pub tasks: Vec<Task>,
@@ -40,7 +40,7 @@ impl Default for Config {
     }
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Task {
     #[serde(default = "default_socket_addr")]
     pub socket_addr: SocketAddr,
@@ -55,6 +55,17 @@ pub struct Task {
     /// Maximum duration of proxying tcp connections before a disconnection
     #[serde(default = "default_max_up_duration", with = "humantime_serde")]
     pub max_up_duration: Duration,
+}
+
+impl Default for Task {
+    fn default() -> Self {
+        Self {
+            socket_addr: default_socket_addr(),
+            upstream_addr: default_upstream_addr(),
+            failure_rate: crate::default_failure_rate(),
+            max_up_duration: default_max_up_duration(),
+        }
+    }
 }
 
 impl Config {

@@ -1,7 +1,7 @@
 use std::{path::PathBuf, time::Duration};
 
 use anyhow::Context;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 fn default_server_push_url() -> String {
     String::from("http://localhost:8080/work")
@@ -19,7 +19,7 @@ fn default_queues_count() -> u32 {
     10
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Config {
     #[serde(default = "default_rabbit_mq_url")]
     pub rabbit_mq_url: String,
