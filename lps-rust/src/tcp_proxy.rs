@@ -11,8 +11,12 @@ fn default_socket_addr() -> SocketAddr {
     SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 9090)
 }
 
-fn default_upstream_addr() -> SocketAddr {
-    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 5672)
+fn default_upstream_domain() -> String {
+    String::from("localhost")
+}
+
+fn default_upstream_port() -> u16 {
+    5672
 }
 
 fn default_max_up_duration() -> Duration {
@@ -44,8 +48,10 @@ impl Default for Config {
 pub struct Task {
     #[serde(default = "default_socket_addr")]
     pub socket_addr: SocketAddr,
-    #[serde(default = "default_upstream_addr")]
-    pub upstream_addr: SocketAddr,
+    #[serde(default = "default_upstream_domain")]
+    pub upstream_domain: String,
+    #[serde(default = "default_upstream_port")]
+    pub upstream_port: u16,
     /// Failure rate of accepting tcp connections, between 0 and 1
     #[serde(
         default = "crate::default_failure_rate",
@@ -61,7 +67,8 @@ impl Default for Task {
     fn default() -> Self {
         Self {
             socket_addr: default_socket_addr(),
-            upstream_addr: default_upstream_addr(),
+            upstream_domain: default_upstream_domain(),
+            upstream_port: default_upstream_port(),
             failure_rate: crate::default_failure_rate(),
             max_up_duration: default_max_up_duration(),
         }

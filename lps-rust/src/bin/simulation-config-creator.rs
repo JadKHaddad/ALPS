@@ -32,7 +32,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .await
         .context("Failed to create output directory")?;
 
-    let config_files = config.to_config_files();
+    let config_files = config.config_files();
 
     for config_file in config_files {
         let path = args.out_dir.join(&config_file.name);

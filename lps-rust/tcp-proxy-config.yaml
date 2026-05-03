@@ -1,17 +1,20 @@
 tasks:
   # RabbitMQ
   - socket_addr: 0.0.0.0:9090
-    upstream_addr: 127.0.0.1:5672
+    upstream_domain: localhost
+    upstream_port: 5672
     failure_rate: 0.0
     max_up_duration: 5s
   # # Server
   # - socket_addr: 0.0.0.0:8081
-  #   upstream_addr: 127.0.0.1:8080
+  #   upstream_domain: localhost
+  #   upstream_port: 8080
   #   failure_rate: 0.1
   #   max_up_duration: 2s # This is less than the server's max_work_duration and max_response_duration combined to simulate connections failures after processing the work, which would lead to duplication.
   # HiveMq
   - socket_addr: 0.0.0.0:2883
-    upstream_addr: 127.0.0.1:1883
+    upstream_domain: localhost
+    upstream_port: 1883
     failure_rate: 0.0
     max_up_duration: 5s
 results_file: tcp-proxy-results.json

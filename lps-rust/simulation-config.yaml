@@ -11,16 +11,17 @@ server:
   max_response_duration: 0ms
 amqp:
   broker_domain: "rabbitmq"
+  broker_port: 5672
   queues_count: 25
   producers:
-    producers_count: 1
+    producers_count: 2
     socket_addr: 0.0.0.0:5672
     amqp_proxy: # Optional, if not set, the producer will connect directly to rabbitmq
       socket_addr: 0.0.0.0:9090
       failure_rate: 0.0
       max_up_duration: 5s 
   consumers:
-    consumers_count: 1
+    consumers_count: 2
     reconnect_duration: 500ms
     amqp_proxy: # Optional, if not set, the consumer will connect directly to rabbitmq
       socket_addr: 0.0.0.0:9090

@@ -1,0 +1,4 @@
+socket_addr: 0.0.0.0:5672
+rabbit_mq_url: amqp://producer-amqp-proxy:9090
+queues_count: 25
+purge_queues_on_start: true

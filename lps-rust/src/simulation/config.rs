@@ -29,10 +29,8 @@ impl Config {
         .context("Failed to deserialize config file")
     }
 
-    pub fn to_config_files(&self) -> Vec<ConfigFile> {
-        let mut config_files = Vec::new();
-
-        let server_config_file = ConfigFile {
+    fn server_config_files(&self) -> Vec<ConfigFile> {
+        vec![ConfigFile {
             name: "server-config.yaml".to_string(),
             ty: ConfigType::Server(CrateServerConfig {
                 failure_rate: self.server.failure_rate,
@@ -41,9 +39,11 @@ impl Config {
                 socket_addr: self.server.socket_addr,
                 ..Default::default()
             }),
-        };
+        }]
+    }
 
-        config_files.push(server_config_file);
+    fn producers_config_files(&self) -> Vec<ConfigFile> {
+        let mut config_files = Vec::new();
 
         let producer_amqp_proxy_config =
             self.amqp
@@ -55,7 +55,8 @@ impl Config {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
                         socket_addr: proxy.socket_addr,
-                        ..Default::default() // TODO: we need to make the upstream addr an upstream domain instead
+                        upstream_domain: self.amqp.broker_domain.clone(),
+                        upstream_port: self.amqp.broker_port,
                     }],
                     results_file: PathBuf::from("producer-amqp-proxy-results.json"),
                 });
@@ -78,12 +79,20 @@ impl Config {
                 .map(|_| String::from("producer-amqp-proxy"))
                 .unwrap_or(self.amqp.broker_domain.clone());
 
+            let broker_port = self
+                .amqp
+                .producers
+                .amqp_proxy
+                .as_ref()
+                .map(|proxy| proxy.socket_addr.port())
+                .unwrap_or(self.amqp.broker_port);
+
             let producer_config_file = ConfigFile {
                 name: format!("producer-{}.yaml", i),
                 ty: ConfigType::Producer(CrateProducerConfig {
                     queues_count: self.amqp.queues_count,
                     purge_queues_on_start: true,
-                    rabbit_mq_url: format!("amqp://{}:5672", broker_domain),
+                    rabbit_mq_url: format!("amqp://{}:{}", broker_domain, broker_port),
                     socket_addr: self.amqp.producers.socket_addr,
                 }),
             };
@@ -91,7 +100,11 @@ impl Config {
             config_files.push(producer_config_file);
         }
 
-        // ------
+        config_files
+    }
+
+    fn consumers_config_files(&self) -> Vec<ConfigFile> {
+        let mut config_files = Vec::new();
 
         let consumer_amqp_proxy_config =
             self.amqp
@@ -103,7 +116,8 @@ impl Config {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
                         socket_addr: proxy.socket_addr,
-                        ..Default::default() // TODO: we need to make the upstream addr an upstream domain instead
+                        upstream_domain: self.amqp.broker_domain.clone(),
+                        upstream_port: self.amqp.broker_port,
                     }],
                     results_file: PathBuf::from("consumer-amqp-proxy-results.json"),
                 });
@@ -117,8 +131,6 @@ impl Config {
             config_files.push(config);
         }
 
-        // ------
-
         let consumer_server_proxy_config =
             self.amqp
                 .consumers
@@ -129,7 +141,8 @@ impl Config {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
                         socket_addr: proxy.socket_addr,
-                        ..Default::default() // TODO: we need to make the upstream addr an upstream domain instead
+                        upstream_domain: self.server.server_domain.clone(),
+                        upstream_port: self.server.socket_addr.port(),
                     }],
                     results_file: PathBuf::from("consumer-server-proxy-results.json"),
                 });
@@ -153,6 +166,14 @@ impl Config {
                 .map(|_| String::from("consumer-amqp-proxy"))
                 .unwrap_or(self.amqp.broker_domain.clone());
 
+            let broker_port = self
+                .amqp
+                .consumers
+                .amqp_proxy
+                .as_ref()
+                .map(|proxy| proxy.socket_addr.port())
+                .unwrap_or(self.amqp.broker_port);
+
             let server_domain = self
                 .amqp
                 .consumers
@@ -161,18 +182,58 @@ impl Config {
                 .map(|_| String::from("consumer-server-proxy"))
                 .unwrap_or(self.server.server_domain.clone());
 
+            let server_port = self
+                .amqp
+                .consumers
+                .server_proxy
+                .as_ref()
+                .map(|proxy| proxy.socket_addr.port())
+                .unwrap_or(self.server.socket_addr.port());
+
             let consumer_config_file = ConfigFile {
                 name: format!("consumer-{}.yaml", i),
                 ty: ConfigType::Consumer(CrateConsumerConfig {
                     queues_count: self.amqp.queues_count,
                     reconnect_duration: self.amqp.consumers.reconnect_duration,
-                    rabbit_mq_url: format!("amqp://{}:5672", broker_domain),
-                    server_push_url: format!("http://{}:8080/work", server_domain),
+                    rabbit_mq_url: format!("amqp://{}:{}", broker_domain, broker_port),
+                    server_push_url: format!("http://{}:{}/work", server_domain, server_port),
                 }),
             };
 
             config_files.push(consumer_config_file);
         }
+
+        config_files
+    }
+
+    fn devices_config_files(&self) -> Vec<ConfigFile> {
+        vec![ConfigFile {
+            name: "device-config.yaml".to_string(),
+            ty: ConfigType::Device(CrateDeviceConfig {
+                devices_count: self.devices.devices_count,
+                max_event_interval: self.devices.max_event_interval,
+                max_events: self.devices.max_events,
+                retry_duration: self.devices.retry_duration,
+                server_push_urls: (0..self.amqp.producers_count())
+                    .map(|i| {
+                        format!(
+                            "http://producer-{i}:{}/work",
+                            self.amqp.producers.socket_addr.port()
+                        )
+                    })
+                    .collect(),
+                ..Default::default()
+            }),
+        }]
+    }
+
+    pub fn config_files(&self) -> Vec<ConfigFile> {
+        let mut config_files = Vec::new();
+
+        config_files.extend(self.server_config_files());
+        config_files.extend(self.producers_config_files());
+        config_files.extend(self.consumers_config_files());
+        config_files.extend(self.devices_config_files());
 
         config_files
     }
@@ -203,6 +264,7 @@ pub struct ServerConfig {
 #[derive(Debug, Deserialize)]
 pub struct AmqpConfig {
     pub broker_domain: String,
+    pub broker_port: u16,
     pub queues_count: u32,
     pub producers: ProducersConfig,
     pub consumers: ConsumersConfig,

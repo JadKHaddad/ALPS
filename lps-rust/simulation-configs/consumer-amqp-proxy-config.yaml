@@ -1,6 +1,7 @@
 tasks:
 - socket_addr: 0.0.0.0:9090
-  upstream_addr: 127.0.0.1:5672
+  upstream_domain: rabbitmq
+  upstream_port: 5672
   failure_rate: 0.0
   max_up_duration: 5s
 results_file: consumer-amqp-proxy-results.json

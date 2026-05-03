@@ -3,7 +3,7 @@
 //! cargo run -r --bin tcp-proxy -- --config-file tcp-proxy-config.yaml
 //! ```
 
-use std::{path::PathBuf, sync::Arc, time::Duration};
+use std::{net::SocketAddr, path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
 use lps_rust::{TcpConnectionDrop, shutdown_signal, tcp_proxy::Config};
@@ -87,6 +87,19 @@ async fn main() -> Result<(), anyhow::Error> {
                     .await
                     .context("Failed to bind to socket")?;
 
+                let resolver = hickory_resolver::TokioResolver::builder_tokio()
+                    .and_then(|builder| builder.build())
+                    .context("Failed to create dns resolver")?; 
+
+                let ip_addr = resolver.lookup_ip(task.upstream_domain)
+                    .await
+                    .context("Failed to lookup IP")?
+                    .iter()
+                    .next()
+                    .ok_or_else(|| { anyhow::anyhow!("No IP found") })?;
+
+                let upstream_addr = SocketAddr::new(ip_addr, task.upstream_port);
+
                 loop {
                     let stream = listener.accept().await;
 
@@ -108,11 +121,11 @@ async fn main() -> Result<(), anyhow::Error> {
                                     let state = state.clone();
 
                                     tokio::spawn(async move {
-                                        tracing::debug!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Connecting to upstream");
+                                        tracing::debug!(addr=%task.socket_addr, upstream=%upstream_addr, "Connecting to upstream");
 
-                                        match tokio::net::TcpStream::connect(task.upstream_addr).await {
+                                        match tokio::net::TcpStream::connect(upstream_addr).await {
                                             Ok(mut upstream) => {
-                                                tracing::info!(addr=%task.socket_addr, upstream=%task.upstream_addr,  "Connected to upstream");
+                                                tracing::info!(addr=%task.socket_addr, upstream=%upstream_addr, "Connected to upstream");
 
                                                 let max_ms = task.max_up_duration.as_millis();
 
@@ -122,7 +135,7 @@ async fn main() -> Result<(), anyhow::Error> {
                                                     rand::rng().random_range(0..max_ms) as u64
                                                 };
 
-                                                tracing::info!(duration_ms, addr=%task.socket_addr, upstream=%task.upstream_addr, "Proxying connection");
+                                                tracing::info!(duration_ms, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying connection");
 
                                                 match tokio::time::timeout(
                                                     Duration::from_millis(duration_ms),
@@ -131,17 +144,17 @@ async fn main() -> Result<(), anyhow::Error> {
                                                 .await
                                                 {
                                                     Ok(_) => {
-                                                        tracing::info!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Proxying completed");
+                                                        tracing::info!(addr=%task.socket_addr, upstream=%upstream_addr, "Proxying completed");
                                                     }
                                                     Err(_) => {
                                                         state.push(TcpConnectionDrop::new_now()).await;
 
-                                                        tracing::warn!(addr=%task.socket_addr, upstream=%task.upstream_addr, "Proxying timed out");
+                                                        tracing::warn!(addr=%task.socket_addr, upstream=%upstream_addr, "Proxying timed out");
                                                     }
                                                 }
                                             }
                                             Err(err) => {
-                                                tracing::error!(addr=%task.socket_addr, upstream=%task.upstream_addr, %err, "Failed to connect to upstream");
+                                                tracing::error!(addr=%task.socket_addr, upstream=%upstream_addr, %err, "Failed to connect to upstream");
                                             }
                                         }
                                     });

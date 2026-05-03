@@ -21,3 +21,7 @@ clap = { version = "4.5.23", features = ["derive", "env"] }
 serde_yaml = "0.9.34"
 chrono = { version = "0.4.43", features = ["serde"] }
 humantime = "2.3.0"
+hickory-resolver = { version = "0.26.0", default-features = false, features = [
+    "tokio",
+    "system-config",
+] }
