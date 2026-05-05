@@ -18,7 +18,7 @@ use lapin::{
     options::*,
     types::{FieldTable, ShortString},
 };
-use lps_rust::{Event, consumer::Config};
+use lps_rust::{Event, consumer::Config, shutdown_signal};
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -163,21 +163,30 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
-    loop {
-        tracing::info!("Connecting to RabbitMQ");
-
-        match connection(config.clone()).await {
-            Ok(()) => {}
-            Err(err) => {
-                tracing::error!(%err, "Connection error");
-            }
+    tokio::select! {
+        _ = shutdown_signal() => {
+            tracing::info!("Received shutdown signal, shutting down");
         }
+        _ = async move {
+            loop {
+                tracing::info!("Connecting to RabbitMQ");
 
-        tracing::info!(
-            "Reconnecting in {}...",
-            humantime::Duration::from(config.reconnect_duration)
-        );
+                match connection(config.clone()).await {
+                    Ok(()) => {}
+                    Err(err) => {
+                        tracing::error!(%err, "Connection error");
+                    }
+                }
 
-        tokio::time::sleep(config.reconnect_duration).await;
+                tracing::info!(
+                    "Reconnecting in {}...",
+                    humantime::Duration::from(config.reconnect_duration)
+                );
+
+                tokio::time::sleep(config.reconnect_duration).await;
+            }
+        } => {}
     }
+
+    Ok(())
 }

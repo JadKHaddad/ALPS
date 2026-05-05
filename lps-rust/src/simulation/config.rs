@@ -54,6 +54,10 @@ impl Config {
         String::from("/app")
     }
 
+    fn lps_rust_image_name(&self) -> String {
+        String::from("lps-rs:latest")
+    }
+
     pub async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
         serde_yaml::from_slice(
             &tokio::fs::read(path)
@@ -296,7 +300,7 @@ impl Config {
             .to_string();
 
         DockerService::default()
-            .with_image(String::from("TODO"))
+            .with_image(self.lps_rust_image_name())
             .with_container_name(String::from("lps-server"))
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
@@ -310,9 +314,9 @@ impl Config {
             .to_string();
 
         DockerService::default()
-            .with_image(String::from("TODO"))
+            .with_image(self.lps_rust_image_name())
             .with_container_name(String::from("lps-device"))
-            .with_command(format!("devices --config-file {config_file}"))
+            .with_command(format!("device --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
     }
 
@@ -323,7 +327,7 @@ impl Config {
             services.insert(
                 String::from("producer-amqp-proxy"),
                 DockerService::default()
-                    .with_image(String::from("TODO"))
+                    .with_image(self.lps_rust_image_name())
                     .with_container_name(String::from("producer-amqp-proxy"))
                     .with_command(format!(
                         "tcp-proxy --config-file {}",
@@ -345,7 +349,7 @@ impl Config {
             services.insert(
                 format!("producer-{i}"),
                 DockerService::default()
-                    .with_image(String::from("TODO"))
+                    .with_image(self.lps_rust_image_name())
                     .with_container_name(format!("producer-{i}"))
                     .with_command(format!("producer --config-file {config_file}"))
                     .with_volumes(vec![self.volume_mount()])
@@ -363,7 +367,7 @@ impl Config {
             services.insert(
                 String::from("consumer-amqp-proxy"),
                 DockerService::default()
-                    .with_image(String::from("TODO"))
+                    .with_image(self.lps_rust_image_name())
                     .with_container_name(String::from("consumer-amqp-proxy"))
                     .with_command(format!(
                         "tcp-proxy --config-file {}",
@@ -380,7 +384,7 @@ impl Config {
             services.insert(
                 String::from("consumer-server-proxy"),
                 DockerService::default()
-                    .with_image(String::from("TODO"))
+                    .with_image(self.lps_rust_image_name())
                     .with_container_name(String::from("consumer-server-proxy"))
                     .with_command(format!(
                         "tcp-proxy --config-file {}",
@@ -402,7 +406,7 @@ impl Config {
             services.insert(
                 format!("consumer-{i}"),
                 DockerService::default()
-                    .with_image(String::from("TODO"))
+                    .with_image(self.lps_rust_image_name())
                     .with_container_name(format!("consumer-{i}"))
                     .with_command(format!("consumer --config-file {config_file}"))
                     .with_volumes(vec![self.volume_mount()])
