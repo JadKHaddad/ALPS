@@ -12,6 +12,7 @@ server:
   failure_rate: 0.0
   max_work_duration: 500ms
   max_response_duration: 0ms
+  shutdown_after_idle_duration: 5s # Optional, if set, the server will shut down after being idle for this duration (no events received). If not set, the server will run indefinitely.
 amqp:
   broker_domain: "rabbitmq"
   broker_port: 5672

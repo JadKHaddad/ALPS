@@ -80,6 +80,7 @@ impl Config {
                     .join(self.server_results_file()),
                 failures_file: PathBuf::from(self.container_work_dir())
                     .join(self.server_failures_file()),
+                shutdown_after_idle_duration: self.server.shutdown_after_idle_duration,
             }),
         }]
     }
@@ -318,7 +319,6 @@ impl Config {
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
             .with_ports(ports)
-            .with_unless_stopped()
     }
 
     fn device_docker_service(&self) -> DockerService {
@@ -481,6 +481,8 @@ pub struct ServerConfig {
     pub max_work_duration: Duration,
     #[serde(with = "humantime_serde")]
     pub max_response_duration: Duration,
+    #[serde(default, with = "humantime_serde")]
+    pub shutdown_after_idle_duration: Option<Duration>,
 }
 
 #[derive(Debug, Deserialize)]

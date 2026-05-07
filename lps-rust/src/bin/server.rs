@@ -15,13 +15,21 @@
 use std::{path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
-use axum::{Json, Router, extract::State, routing::post};
+use axum::{
+    Json, Router,
+    extract::State,
+    routing::{get, post},
+};
 use lps_rust::{Event, Failure, SimpleCall, server::Config};
 use rand::RngExt;
 use reqwest::StatusCode;
 
 use clap::Parser;
-use tokio::{net::TcpListener, sync::Mutex};
+use tokio::{
+    net::TcpListener,
+    sync::{Mutex, RwLock},
+};
+use tokio_util::sync::CancellationToken;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -39,6 +47,7 @@ struct AppState {
     failure_rate: f64,
     results_file: PathBuf,
     failures_file: PathBuf,
+    last_event: RwLock<Option<Event>>,
 }
 
 impl AppState {
@@ -57,11 +66,25 @@ impl AppState {
             failure_rate,
             results_file,
             failures_file,
+            last_event: RwLock::new(None),
         }
+    }
+
+    async fn set_last_event(&self, event: Event) {
+        *self.last_event.write().await = Some(event);
+    }
+
+    /// We check the arrived_at of the last event periodically to make sure that the server is still working and receiving calls.
+    ///
+    /// If the server did not receive any calls for a while, we can shutdown the simulation.
+    async fn get_last_event(&self) -> Option<Event> {
+        self.last_event.read().await.clone()
     }
 
     async fn work(&self, call: SimpleCall) -> StatusCode {
         let event = Event::from(call.clone()).with_arrived_at_now();
+
+        self.set_last_event(event.clone()).await;
 
         let max_ms = self.max_work_duration.as_millis();
 
@@ -209,14 +232,71 @@ async fn main() -> Result<(), anyhow::Error> {
                 },
             ),
         )
+        .route(
+            "/last",
+            get(|State(state): State<Arc<AppState>>| async move {
+                let event = state.get_last_event().await;
+
+                Json(event)
+            }),
+        )
         .with_state(app_state.clone());
 
     let listener = TcpListener::bind(config.socket_addr)
         .await
         .context("Failed to bind to socket")?;
 
+    let cancellation_token = Arc::new(CancellationToken::new());
+
+    if let Some(idle_duration) = config.shutdown_after_idle_duration {
+        let cancellation_token = cancellation_token.clone();
+        let app_state = app_state.clone();
+
+        tokio::spawn(async move {
+            tracing::info!(?idle_duration, "Idle shutdown monitor started");
+
+            let monitor_start_time = chrono::Utc::now();
+            let mut interval = tokio::time::interval(Duration::from_secs(1));
+
+            loop {
+                interval.tick().await;
+
+                let last_activity = if let Some(event) = app_state.get_last_event().await {
+                    event.arrived_at.unwrap_or(monitor_start_time)
+                } else {
+                    monitor_start_time
+                };
+
+                let now = chrono::Utc::now();
+                let duration_since = now.signed_duration_since(last_activity);
+
+                if let Ok(elapsed_std) = duration_since.to_std()
+                    && elapsed_std > idle_duration
+                {
+                    tracing::warn!(
+                        ?elapsed_std,
+                        "Server idle threshold reached (no recent activity). Shutting down."
+                    );
+                    cancellation_token.cancel();
+                    break;
+                }
+            }
+        });
+    }
+
+    let shutdown_signal = async move {
+        tokio::select! {
+            _ = lps_rust::shutdown_signal() => {
+                tracing::info!("Received shutdown signal, shutting down");
+            }
+            _ = cancellation_token.cancelled() => {
+                tracing::info!("Idle shutdown triggered, shutting down");
+            }
+        }
+    };
+
     _ = axum::serve(listener, app)
-        .with_graceful_shutdown(lps_rust::shutdown_signal())
+        .with_graceful_shutdown(shutdown_signal)
         .await
         .inspect_err(|err| tracing::error!(%err, "Server stopped with error"));
 

@@ -45,6 +45,8 @@ pub struct Config {
     pub results_file: PathBuf,
     #[serde(default = "default_failures_file")]
     pub failures_file: PathBuf,
+    #[serde(default, with = "humantime_serde")]
+    pub shutdown_after_idle_duration: Option<Duration>,
 }
 
 impl Default for Config {
@@ -56,6 +58,7 @@ impl Default for Config {
             max_response_duration: default_max_response_duration(),
             results_file: default_results_file(),
             failures_file: default_failures_file(),
+            shutdown_after_idle_duration: None,
         }
     }
 }
