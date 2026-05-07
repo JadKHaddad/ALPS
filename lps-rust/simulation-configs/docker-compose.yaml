@@ -23,12 +23,12 @@ services:
     restart: unless-stopped
   rabbitmq:
     image: rabbitmq:4-management
-    container_name: lps-rabbitmq
+    container_name: rabbitmq
     command: bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
     restart: unless-stopped
   server:
     image: lps-rs:latest
-    container_name: lps-server
+    container_name: server
     command: server --config-file /app/server-config.yaml
     ports:
     - 0.0.0.0:8080:8080

@@ -1,7 +1,7 @@
 //!
 //! ```not_rust
 //!
-//! cargo run -r --bin validator
+//! cargo run -r --bin validator -- --config-file validator-config.yaml
 //!
 //! ```
 

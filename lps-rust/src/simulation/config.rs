@@ -289,7 +289,7 @@ impl Config {
 
     fn rabbit_mq_docker_service(&self) -> DockerService {
         DockerService::default()
-            .with_container_name(String::from("lps-rabbitmq"))
+            .with_container_name(self.amqp.broker_domain.clone())
             .with_image(String::from("rabbitmq:4-management"))
             .with_command(String::from(
                 "bash -c \" rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server \"",
@@ -324,7 +324,7 @@ impl Config {
 
         DockerService::default()
             .with_image(self.lps_rust_image_name())
-            .with_container_name(String::from("lps-server"))
+            .with_container_name(self.server.server_domain.clone())
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
             .with_ports(ports)

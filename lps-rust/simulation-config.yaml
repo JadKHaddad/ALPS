@@ -1,18 +1,18 @@
 devices:
-  devices_count: 5
+  devices_count: 100
   max_event_interval: 500ms
   retry_duration: 500ms
-  max_events: 5 # Optional, if not set, the device will generate events indefinitely
+  max_events: 100 # Optional, if not set, the device will generate events indefinitely
   wait_for_start_socket_addr: 0.0.0.0:5000 # Optional, if set, the device will wait for a tcp connection before generating events.
   expose_socket_addr: 0.0.0.0:5000 # Optional, if set, the device will expose the wait_for_start_socket on this address. If not set, it will be exposed on the same port as wait_for_start_socket_addr.
 server:
   server_domain: "server"
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080 # Optional, if set, the server will expose its socket on this address. If not set, it will be exposed on the same port as socket_addr.
-  failure_rate: 0.0
+  failure_rate: 0.1
   max_work_duration: 500ms
-  max_response_duration: 0ms
-  shutdown_after_idle_duration: 5s # Optional, if set, the server will shut down after being idle for this duration (no events received). If not set, the server will run indefinitely.
+  max_response_duration: 100ms
+  shutdown_after_idle_duration: 15s # Optional, if set, the server will shut down after being idle for this duration (no events received). If not set, the server will run indefinitely.
 amqp:
   broker_domain: "rabbitmq"
   broker_port: 5672
@@ -29,9 +29,9 @@ amqp:
     reconnect_duration: 500ms
     # amqp_proxy: # Optional, if not set, the consumer will connect directly to rabbitmq
     #   socket_addr: 0.0.0.0:9090
-    #   failure_rate: 0.0
+    #   failure_rate: 0.1
     #   max_up_duration: 5s 
     # server_proxy: # Optional, if not set, the consumer will connect directly to the server
     #   socket_addr: 0.0.0.0:8080
-    #   failure_rate: 0.0
+    #   failure_rate: 0.1
     #   max_up_duration: 5s
