@@ -1,5 +1,6 @@
 use std::collections::BTreeMap;
 use std::net::{IpAddr, Ipv4Addr};
+use std::path::Path;
 use std::time::Duration;
 use std::{net::SocketAddr, path::PathBuf};
 
@@ -468,6 +469,44 @@ impl Config {
         services.extend(self.consumers_docker_service());
 
         DockerCompose { services }
+    }
+
+    pub async fn write_files(&self, out_dir: &Path) -> anyhow::Result<()> {
+        tokio::fs::create_dir_all(out_dir)
+            .await
+            .context("Failed to create output directory")?;
+
+        let host_volume = self.host_volume();
+
+        tokio::fs::create_dir_all(out_dir.join(&host_volume))
+            .await
+            .context("Failed to create host volume directory")?;
+
+        let config_out_dir = out_dir.join(&host_volume);
+
+        let config_files = self.config_files();
+
+        for config_file in config_files {
+            let path = config_out_dir.join(&config_file.name);
+
+            let data = serde_yaml::to_string(&config_file.ty)
+                .context("Failed to serialize config file")?;
+
+            tokio::fs::write(path, data)
+                .await
+                .context("Failed to write config file")?;
+        }
+
+        let docker_compose = self.docker_compose();
+
+        let docker_compose_data =
+            serde_yaml::to_string(&docker_compose).context("Failed to serialize docker compose")?;
+
+        tokio::fs::write(out_dir.join("docker-compose.yaml"), docker_compose_data)
+            .await
+            .context("Failed to write docker compose file")?;
+
+        Ok(())
     }
 }
 
