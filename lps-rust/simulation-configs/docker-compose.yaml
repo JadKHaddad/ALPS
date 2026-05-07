@@ -11,7 +11,7 @@ services:
     container_name: lps-device
     command: device --config-file /app/device-config.yaml
     ports:
-    - 5000:5000
+    - 0.0.0.0:5000:5000
     volumes:
     - ./mount:/app
   producer-0:
@@ -30,6 +30,8 @@ services:
     image: lps-rs:latest
     container_name: lps-server
     command: server --config-file /app/server-config.yaml
+    ports:
+    - 0.0.0.0:8080:8080
     volumes:
     - ./mount:/app
     restart: unless-stopped

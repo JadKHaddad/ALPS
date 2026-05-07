@@ -1,4 +1,5 @@
 use std::collections::BTreeMap;
+use std::net::{IpAddr, Ipv4Addr};
 use std::time::Duration;
 use std::{net::SocketAddr, path::PathBuf};
 
@@ -300,11 +301,23 @@ impl Config {
             .display()
             .to_string();
 
+        let ports = vec![
+            self.server
+                .expose_socket_addr
+                .map(|addr| format!("{}:{}", addr, self.server.socket_addr.port()))
+                .unwrap_or(format!(
+                    "{}:{}",
+                    self.server.socket_addr.port(),
+                    self.server.socket_addr.port()
+                )),
+        ];
+
         DockerService::default()
             .with_image(self.lps_rust_image_name())
             .with_container_name(String::from("lps-server"))
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
+            .with_ports(ports)
             .with_unless_stopped()
     }
 
@@ -317,7 +330,13 @@ impl Config {
         let ports = self
             .devices
             .wait_for_start_socket_addr
-            .map(|addr| format!("{}:{}", addr.port(), addr.port()))
+            .map(|addr| {
+                let expose_addr = self.devices.expose_socket_addr.unwrap_or_else(|| {
+                    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), addr.port())
+                });
+
+                format!("{}:{}", expose_addr, addr.port())
+            })
             .map(|port| vec![port])
             .unwrap_or_default();
 
@@ -448,12 +467,14 @@ pub struct DeviceConfig {
     #[serde(with = "humantime_serde")]
     pub retry_duration: Duration,
     pub wait_for_start_socket_addr: Option<SocketAddr>,
+    pub expose_socket_addr: Option<SocketAddr>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct ServerConfig {
     pub server_domain: String,
     pub socket_addr: SocketAddr,
+    pub expose_socket_addr: Option<SocketAddr>,
     #[serde(deserialize_with = "crate::deserialize_failure_rate")]
     pub failure_rate: f64,
     #[serde(with = "humantime_serde")]
