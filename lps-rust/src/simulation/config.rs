@@ -14,6 +14,7 @@ use crate::{
     producer::Config as CrateProducerConfig,
     server::Config as CrateServerConfig,
     tcp_proxy::{Config as CrateTcpProxyConfig, Task as CrateTcpProxyTask},
+    validator::Config as CrateValidatorConfig,
 };
 
 #[derive(Debug, Deserialize)]
@@ -42,6 +43,10 @@ impl Config {
 
     fn device_results_file(&self) -> String {
         String::from("device-results.json")
+    }
+
+    fn validator_config_file(&self) -> String {
+        String::from("validator-config.yaml")
     }
 
     pub fn host_volume(&self) -> String {
@@ -280,6 +285,16 @@ impl Config {
         }]
     }
 
+    fn validator_config_files(&self) -> Vec<ConfigFile> {
+        vec![ConfigFile {
+            name: self.validator_config_file(),
+            ty: ConfigType::Validator(CrateValidatorConfig {
+                server_results_file: self.server_results_file().into(),
+                device_results_file: self.device_results_file().into(),
+            }),
+        }]
+    }
+
     pub fn config_files(&self) -> Vec<ConfigFile> {
         let mut config_files = Vec::new();
 
@@ -287,6 +302,7 @@ impl Config {
         config_files.extend(self.producers_config_files());
         config_files.extend(self.consumers_config_files());
         config_files.extend(self.devices_config_files());
+        config_files.extend(self.validator_config_files());
 
         config_files
     }
@@ -463,6 +479,21 @@ impl Config {
         services
     }
 
+    fn validator_docker_service(&self) -> DockerService {
+        let config_file = PathBuf::from(self.container_work_dir())
+            .join(self.validator_config_file())
+            .display()
+            .to_string();
+
+        DockerService::default()
+            .with_image(self.lps_rust_image_name())
+            .with_container_name(String::from("lps-validator"))
+            .with_command(format!(
+                "sh -c \"validator --config-file {config_file} > /app/validator.log 2>&1\""
+            ))
+            .with_volumes(vec![self.volume_mount()])
+    }
+
     fn scripts_docker_service(&self) -> DockerService {
         DockerService::default()
             .with_image(self.lps_scripts_image_name())
@@ -482,6 +513,7 @@ impl Config {
         services.insert(String::from("device"), self.device_docker_service());
         services.extend(self.producers_docker_service());
         services.extend(self.consumers_docker_service());
+        services.insert(String::from("validator"), self.validator_docker_service());
         services.insert(String::from("scripts"), self.scripts_docker_service());
 
         DockerCompose { services }
@@ -613,4 +645,5 @@ pub enum ConfigType {
     Producer(CrateProducerConfig),
     Consumer(CrateConsumerConfig),
     TcpProxy(CrateTcpProxyConfig),
+    Validator(CrateValidatorConfig),
 }

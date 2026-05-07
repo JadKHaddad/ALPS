@@ -12,6 +12,7 @@ pub mod producer;
 pub mod server;
 pub mod simulation;
 pub mod tcp_proxy;
+pub mod validator;
 
 /// This is the event sent from a device to the system.
 #[derive(Debug, Clone, Serialize, Eq, Hash, PartialEq)]

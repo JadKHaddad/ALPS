@@ -54,3 +54,9 @@ services:
     - 0.0.0.0:8080:8080
     volumes:
     - ./mount:/app
+  validator:
+    image: lps-rs:latest
+    container_name: lps-validator
+    command: sh -c "validator --config-file /app/validator-config.yaml > /app/validator.log 2>&1"
+    volumes:
+    - ./mount:/app

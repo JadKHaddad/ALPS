@@ -152,6 +152,17 @@ async fn main() -> Result<(), anyhow::Error> {
         .await
         .context("Failed to wait for docker compose logs")?;
 
+    tracing::info!("Running validator");
+
+    tokio::process::Command::new("docker")
+        .arg("compose")
+        .arg("up")
+        .arg("validator")
+        .current_dir(&args.out_dir)
+        .status()
+        .await
+        .context("Failed to run docker compose up for validator")?;
+
     tracing::info!("Running scripts");
 
     tokio::process::Command::new("docker")

@@ -1,8 +1,8 @@
 devices:
-  devices_count: 50
+  devices_count: 100
   max_event_interval: 500ms
   retry_duration: 500ms
-  max_events: 50 # Optional, if not set, the device will generate events indefinitely
+  max_events: 100 # Optional, if not set, the device will generate events indefinitely
   wait_for_start_socket_addr: 0.0.0.0:5000 # Optional, if set, the device will wait for a tcp connection before generating events.
   expose_socket_addr: 0.0.0.0:5000 # Optional, if set, the device will expose the wait_for_start_socket on this address. If not set, it will be exposed on the same port as wait_for_start_socket_addr.
 server:

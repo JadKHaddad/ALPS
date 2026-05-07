@@ -9,46 +9,13 @@ use std::path::PathBuf;
 
 use anyhow::Context;
 use clap::Parser;
-use lps_rust::Event;
-use serde::Deserialize;
+use lps_rust::{Event, validator::Config};
 
 #[derive(Debug, Parser)]
 pub struct Args {
     #[clap(long, default_value = "validator-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
-}
-
-fn default_server_results_file() -> PathBuf {
-    PathBuf::from("server-results.json")
-}
-
-fn default_device_results_file() -> PathBuf {
-    PathBuf::from("device-results.json")
-}
-
-#[derive(Debug, Deserialize)]
-struct Config {
-    #[serde(default = "default_server_results_file")]
-    server_results_file: PathBuf,
-    #[serde(default = "default_device_results_file")]
-    device_results_file: PathBuf,
-}
-
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            server_results_file: default_server_results_file(),
-            device_results_file: default_device_results_file(),
-        }
-    }
-}
-
-impl Config {
-    fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
-        serde_yaml::from_slice(&std::fs::read(path).context("Failed to read config file")?)
-            .context("Failed to deserialize config file")
-    }
 }
 
 fn main() -> Result<(), anyhow::Error> {
