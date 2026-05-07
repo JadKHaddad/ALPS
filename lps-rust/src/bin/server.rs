@@ -240,6 +240,7 @@ async fn main() -> Result<(), anyhow::Error> {
                 Json(event)
             }),
         )
+        .route("/health", get(|| async move { StatusCode::OK }))
         .with_state(app_state.clone());
 
     let listener = TcpListener::bind(config.socket_addr)
