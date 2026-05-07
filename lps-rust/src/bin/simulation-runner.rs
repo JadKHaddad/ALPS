@@ -152,5 +152,18 @@ async fn main() -> Result<(), anyhow::Error> {
         .await
         .context("Failed to wait for docker compose logs")?;
 
+    tracing::info!("Running scripts");
+
+    tokio::process::Command::new("docker")
+        .arg("compose")
+        .arg("up")
+        .arg("scripts")
+        .current_dir(&args.out_dir)
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .status()
+        .await
+        .context("Failed to run docker compose up for scripts")?;
+
     Ok(())
 }

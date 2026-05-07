@@ -60,6 +60,10 @@ impl Config {
         String::from("lps-rs:latest")
     }
 
+    fn lps_scripts_image_name(&self) -> String {
+        String::from("lps-scripts:latest")
+    }
+
     pub async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
         serde_yaml::from_slice(
             &tokio::fs::read(path)
@@ -459,6 +463,17 @@ impl Config {
         services
     }
 
+    fn scripts_docker_service(&self) -> DockerService {
+        DockerService::default()
+            .with_image(self.lps_scripts_image_name())
+            .with_container_name(String::from("lps-scripts"))
+            .with_command(format!(
+                "python /scripts/latency.py {} latency.png",
+                self.server_results_file()
+            ))
+            .with_volumes(vec![self.volume_mount()])
+    }
+
     pub fn docker_compose(&self) -> DockerCompose {
         let mut services = BTreeMap::new();
 
@@ -467,6 +482,7 @@ impl Config {
         services.insert(String::from("device"), self.device_docker_service());
         services.extend(self.producers_docker_service());
         services.extend(self.consumers_docker_service());
+        services.insert(String::from("scripts"), self.scripts_docker_service());
 
         DockerCompose { services }
     }

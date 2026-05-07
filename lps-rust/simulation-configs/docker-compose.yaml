@@ -6,6 +6,20 @@ services:
     volumes:
     - ./mount:/app
     restart: unless-stopped
+  consumer-1:
+    image: lps-rs:latest
+    container_name: consumer-1
+    command: consumer --config-file /app/consumer-1.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  consumer-2:
+    image: lps-rs:latest
+    container_name: consumer-2
+    command: consumer --config-file /app/consumer-2.yaml
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
   device:
     image: lps-rs:latest
     container_name: lps-device
@@ -26,6 +40,12 @@ services:
     container_name: rabbitmq
     command: bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
     restart: unless-stopped
+  scripts:
+    image: lps-scripts:latest
+    container_name: lps-scripts
+    command: python /scripts/latency.py server-results.json latency.png
+    volumes:
+    - ./mount:/app
   server:
     image: lps-rs:latest
     container_name: server
