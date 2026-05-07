@@ -258,6 +258,7 @@ impl Config {
                 max_event_interval: self.devices.max_event_interval,
                 max_events: self.devices.max_events,
                 retry_duration: self.devices.retry_duration,
+                wait_for_start_socket_addr: self.devices.wait_for_start_socket_addr,
                 server_push_urls: (0..self.amqp.producers_count())
                     .map(|i| {
                         format!(
@@ -313,11 +314,19 @@ impl Config {
             .display()
             .to_string();
 
+        let ports = self
+            .devices
+            .wait_for_start_socket_addr
+            .map(|addr| format!("{}:{}", addr.port(), addr.port()))
+            .map(|port| vec![port])
+            .unwrap_or_default();
+
         DockerService::default()
             .with_image(self.lps_rust_image_name())
             .with_container_name(String::from("lps-device"))
             .with_command(format!("device --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
+            .with_ports(ports)
     }
 
     fn producers_docker_service(&self) -> BTreeMap<String, DockerService> {
@@ -438,6 +447,7 @@ pub struct DeviceConfig {
     pub max_events: Option<u64>,
     #[serde(with = "humantime_serde")]
     pub retry_duration: Duration,
+    pub wait_for_start_socket_addr: Option<SocketAddr>,
 }
 
 #[derive(Debug, Deserialize)]

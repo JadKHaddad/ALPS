@@ -7,3 +7,4 @@ max_event_interval: 500ms
 retry_duration: 500ms
 max_events: 50 # Optional, if not set, the device will generate events indefinitely
 results_file: device-results.json
+# wait_for_start_socket_addr: 0.0.0.0:5000 # Optional, if set, the device will wait for a tcp connection before generating events.

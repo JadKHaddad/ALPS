@@ -10,6 +10,8 @@ services:
     image: lps-rs:latest
     container_name: lps-device
     command: device --config-file /app/device-config.yaml
+    ports:
+    - 5000:5000
     volumes:
     - ./mount:/app
   producer-0:
