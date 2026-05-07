@@ -296,22 +296,30 @@ impl Config {
             .with_unless_stopped()
     }
 
+    pub fn server_docker_exposed_socket_addr_and_container_port(&self) -> (SocketAddr, u16) {
+        self.server
+            .expose_socket_addr
+            .map(|addr| (addr, self.server.socket_addr.port()))
+            .unwrap_or_else(|| {
+                let addr = SocketAddr::new(
+                    IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)),
+                    self.server.socket_addr.port(),
+                );
+
+                (addr, self.server.socket_addr.port())
+            })
+    }
+
     fn server_docker_service(&self) -> DockerService {
         let config_file = PathBuf::from(self.container_work_dir())
             .join(self.server_config_file())
             .display()
             .to_string();
 
-        let ports = vec![
-            self.server
-                .expose_socket_addr
-                .map(|addr| format!("{}:{}", addr, self.server.socket_addr.port()))
-                .unwrap_or(format!(
-                    "{}:{}",
-                    self.server.socket_addr.port(),
-                    self.server.socket_addr.port()
-                )),
-        ];
+        let (exposed_addr, container_port) =
+            self.server_docker_exposed_socket_addr_and_container_port();
+
+        let ports = vec![format!("{exposed_addr}:{container_port}")];
 
         DockerService::default()
             .with_image(self.lps_rust_image_name())
@@ -321,6 +329,18 @@ impl Config {
             .with_ports(ports)
     }
 
+    pub fn device_docker_exposed_socket_addr_and_container_port(
+        &self,
+    ) -> Option<(SocketAddr, u16)> {
+        self.devices.wait_for_start_socket_addr.map(|addr| {
+            let exposed_addr = self.devices.expose_socket_addr.unwrap_or_else(|| {
+                SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), addr.port())
+            });
+
+            (exposed_addr, addr.port())
+        })
+    }
+
     fn device_docker_service(&self) -> DockerService {
         let config_file = PathBuf::from(self.container_work_dir())
             .join(self.device_config_file())
@@ -328,15 +348,8 @@ impl Config {
             .to_string();
 
         let ports = self
-            .devices
-            .wait_for_start_socket_addr
-            .map(|addr| {
-                let expose_addr = self.devices.expose_socket_addr.unwrap_or_else(|| {
-                    SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), addr.port())
-                });
-
-                format!("{}:{}", expose_addr, addr.port())
-            })
+            .device_docker_exposed_socket_addr_and_container_port()
+            .map(|(exposed_addr, container_port)| format!("{}:{}", exposed_addr, container_port))
             .map(|port| vec![port])
             .unwrap_or_default();
 
