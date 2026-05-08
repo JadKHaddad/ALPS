@@ -17,6 +17,13 @@ pub struct Args {
     #[clap(long, default_value = "device-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
+    #[clap(long)]
+    /// Root absolute path: The absolute path to the root directory
+    ///
+    /// Important if you are running this file in a docker container to run the simulation.
+    ///
+    /// The value must be: --root-abs-path $(pwd)
+    root_abs_path: Option<PathBuf>,
     #[clap(long, default_value = "false")]
     /// If set, the simulation runner will not create the simulation config files and will instead expect them to already exist in the output directory.
     no_create: bool,
@@ -42,11 +49,15 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let args = Args::parse();
 
-    let config = Config::load_from_file(&args.config_file)
+    let mut config = Config::load_from_file(&args.config_file)
         .await
         .context("Failed to load config file")?;
 
-    let simulation_dir = config.relative_simulation_dir();
+    if let Some(root_abs_path) = args.root_abs_path {
+        config = config.with_root_abs_path(root_abs_path);
+    }
+
+    let simulation_dir = config.simulation_dir.clone();
 
     if !args.no_create {
         config
@@ -58,10 +69,11 @@ async fn main() -> Result<(), anyhow::Error> {
     select(&token, async {
         tokio::process::Command::new("docker")
             .arg("compose")
+            .arg("--project-directory")
+            .arg(&simulation_dir)
             .arg("up")
             .arg("rabbitmq")
             .arg("-d")
-            .current_dir(&simulation_dir)
             .status()
             .await
             .map(|_| ())
@@ -71,9 +83,10 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let mut docker_compose_logs = tokio::process::Command::new("docker")
         .arg("compose")
+        .arg("--project-directory")
+        .arg(&simulation_dir)
         .arg("logs")
         .arg("-f")
-        .current_dir(&simulation_dir)
         .stdout(Stdio::piped())
         .stderr(Stdio::inherit())
         .spawn()
@@ -112,9 +125,10 @@ async fn main() -> Result<(), anyhow::Error> {
     select(&token, async {
         tokio::process::Command::new("docker")
             .arg("compose")
+            .arg("--project-directory")
+            .arg(&simulation_dir)
             .arg("up")
             .arg("-d")
-            .current_dir(&simulation_dir)
             .stdout(Stdio::inherit())
             .stderr(Stdio::inherit())
             .status()
@@ -132,11 +146,12 @@ async fn main() -> Result<(), anyhow::Error> {
 
             let output = tokio::process::Command::new("docker")
                 .arg("compose")
+                .arg("--project-directory")
+                .arg(&simulation_dir)
                 .arg("ps")
                 .arg("server")
                 .arg("--format")
-                .arg("json") // JSON is easier to parse reliably than plain text
-                .current_dir(&simulation_dir)
+                .arg("json")
                 .output()
                 .await
                 .context("Failed to check server status")?;
@@ -163,8 +178,9 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tokio::process::Command::new("docker")
         .arg("compose")
+        .arg("--project-directory")
+        .arg(&simulation_dir)
         .arg("down")
-        .current_dir(&simulation_dir)
         .status()
         .await
         .context("Failed to run docker compose down")?;
@@ -174,9 +190,10 @@ async fn main() -> Result<(), anyhow::Error> {
 
         tokio::process::Command::new("docker")
             .arg("compose")
+            .arg("--project-directory")
+            .arg(&simulation_dir)
             .arg("up")
             .arg("validator")
-            .current_dir(&simulation_dir)
             .status()
             .await
             .map(|_| ())
@@ -189,9 +206,10 @@ async fn main() -> Result<(), anyhow::Error> {
 
         tokio::process::Command::new("docker")
             .arg("compose")
+            .arg("--project-directory")
+            .arg(&simulation_dir)
             .arg("up")
             .arg("scripts")
-            .current_dir(&simulation_dir)
             .stdout(Stdio::inherit())
             .stderr(Stdio::inherit())
             .status()

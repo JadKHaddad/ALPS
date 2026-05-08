@@ -18,7 +18,9 @@ use crate::{
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    pub simulation_dir_absolute_path: String,
+    #[serde(skip)]
+    pub root_abs_path: Option<PathBuf>,
+    pub simulation_dir: String,
     pub simulation_docker_network: String,
     pub devices: DeviceConfig,
     pub server: ServerConfig,
@@ -26,6 +28,11 @@ pub struct Config {
 }
 
 impl Config {
+    pub fn with_root_abs_path(mut self, root_abs_path: PathBuf) -> Self {
+        self.root_abs_path = Some(root_abs_path);
+        self
+    }
+
     fn server_config_file(&self) -> String {
         String::from("server-config.yaml")
     }
@@ -54,20 +61,19 @@ impl Config {
         String::from("mount")
     }
 
-    pub fn host_absolute_volume(&self) -> String {
-        format!(
-            "{}/{}",
-            self.simulation_dir_absolute_path,
-            self.host_volume()
-        )
-    }
-
     fn volume_mount(&self) -> String {
-        format!(
-            "{}:{}",
-            self.host_absolute_volume(),
-            self.container_work_dir()
-        )
+        let host_volume = self
+            .root_abs_path
+            .as_ref()
+            .map(|path| {
+                path.join(&self.simulation_dir)
+                    .join(self.host_volume())
+                    .display()
+                    .to_string()
+            })
+            .unwrap_or_else(|| format!("./{}", self.host_volume()));
+
+        format!("{}:{}", host_volume, self.container_work_dir())
     }
 
     fn container_work_dir(&self) -> String {
@@ -438,22 +444,14 @@ impl Config {
         DockerCompose { networks, services }
     }
 
-    pub fn relative_simulation_dir(&self) -> PathBuf {
-        PathBuf::from("./").join(
-            PathBuf::from(&self.simulation_dir_absolute_path)
-                .file_name()
-                .expect("Failed to get simulation directory name"),
-        )
-    }
-
     pub async fn write_files(&self) -> anyhow::Result<()> {
-        let relative_simulation_dir = self.relative_simulation_dir();
+        let simulation_dir = PathBuf::from(&self.simulation_dir);
 
-        tokio::fs::create_dir_all(&relative_simulation_dir)
+        tokio::fs::create_dir_all(&simulation_dir)
             .await
             .context("Failed to create output directory")?;
 
-        let host_volume = relative_simulation_dir.join(self.host_volume());
+        let host_volume = simulation_dir.join(self.host_volume());
 
         tokio::fs::create_dir_all(&host_volume)
             .await
@@ -478,7 +476,7 @@ impl Config {
             serde_yaml::to_string(&docker_compose).context("Failed to serialize docker compose")?;
 
         tokio::fs::write(
-            relative_simulation_dir.join("docker-compose.yaml"),
+            simulation_dir.join("docker-compose.yaml"),
             docker_compose_data,
         )
         .await

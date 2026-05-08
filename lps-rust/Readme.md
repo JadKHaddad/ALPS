@@ -32,5 +32,5 @@ docker run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v "$(pwd):/app" \
   lps-rs:latest \
-  simulation-runner --config-file simulation-config.yaml
+  simulation-runner --config-file simulation-config.yaml --root-abs-path $(pwd)
 ```

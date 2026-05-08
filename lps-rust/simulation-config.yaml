@@ -1,10 +1,10 @@
-simulation_dir_absolute_path: "/home/jadkhaddad/Desktop/LPS/lps-rust/simulation"
+simulation_dir: "simulation"
 simulation_docker_network: "lps-simulation-net"
 devices:
-  devices_count: 25
+  devices_count: 10
   max_event_interval: 500ms
   retry_duration: 500ms
-  max_events: 25 # Optional, if not set, the device will generate events indefinitely
+  max_events: 10 # Optional, if not set, the device will generate events indefinitely
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080 # Optional, if set, the server will expose its socket on this address. If not set, it will be exposed on the same port as socket_addr.

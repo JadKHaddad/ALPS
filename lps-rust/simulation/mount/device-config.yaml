@@ -1,7 +1,7 @@
-devices_count: 25
+devices_count: 10
 server_push_urls:
 - http://lps-producer-0:5672/work
 max_event_interval: 500ms
-max_events: 25
+max_events: 10
 retry_duration: 500ms
 results_file: /app/device-results.json
