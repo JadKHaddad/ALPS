@@ -78,27 +78,6 @@ async fn main() -> Result<(), anyhow::Error> {
             Config::default()
         });
 
-    if let Some(addr) = config.wait_for_start_socket_addr {
-        tracing::info!(?addr, "Waiting for start signal");
-
-        let listener = tokio::net::TcpListener::bind(addr)
-            .await
-            .context("Failed to bind start signal socket")?;
-
-        tokio::select! {
-            _ = lps_rust::shutdown_signal() => {
-                tracing::info!("Received shutdown signal while waiting for start signal, shutting down");
-
-                return Ok(());
-            }
-            result = listener.accept() => {
-                let _ = result.context("Failed to accept start signal connection")?;
-            }
-        }
-
-        tracing::info!(?addr, "Received start signal");
-    }
-
     tracing::info!(?config, "Starting");
 
     let state = Arc::new(State::new(config.results_file.clone()));

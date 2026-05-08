@@ -24,3 +24,13 @@ RUST_LOG="device=debug" cargo run -r --bin device -- --config-file device-config
 ```bash
 cargo run -r --bin validator -- --config-file validator-config.yaml
 ```
+
+```bash
+docker network create lps-simulation-net
+
+docker run --rm -it \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v "$(pwd):/app" \
+  lps-rs:latest \
+  simulation-runner --config-file simulation-config.yaml
+```

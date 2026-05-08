@@ -1,13 +1,12 @@
 use std::collections::BTreeMap;
 use std::net::{IpAddr, Ipv4Addr};
-use std::path::Path;
 use std::time::Duration;
 use std::{net::SocketAddr, path::PathBuf};
 
 use anyhow::Context;
 use serde::{Deserialize, Serialize};
 
-use crate::simulation::docker::{DockerCompose, DockerService};
+use crate::simulation::docker::{DockerCompose, DockerNetwork, DockerService};
 use crate::{
     consumer::Config as CrateConsumerConfig,
     device::Config as CrateDeviceConfig,
@@ -19,6 +18,8 @@ use crate::{
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
+    pub simulation_dir_absolute_path: String,
+    pub simulation_docker_network: String,
     pub devices: DeviceConfig,
     pub server: ServerConfig,
     pub amqp: AmqpConfig,
@@ -50,15 +51,38 @@ impl Config {
     }
 
     pub fn host_volume(&self) -> String {
-        String::from("./mount")
+        String::from("mount")
+    }
+
+    pub fn host_absolute_volume(&self) -> String {
+        format!(
+            "{}/{}",
+            self.simulation_dir_absolute_path,
+            self.host_volume()
+        )
     }
 
     fn volume_mount(&self) -> String {
-        format!("{}:{}", self.host_volume(), self.container_work_dir())
+        format!(
+            "{}:{}",
+            self.host_absolute_volume(),
+            self.container_work_dir()
+        )
     }
 
     fn container_work_dir(&self) -> String {
         String::from("/app")
+    }
+
+    fn service_network_name(&self) -> String {
+        String::from("lps-net")
+    }
+
+    fn docker_compose_network(&self) -> DockerNetwork {
+        DockerNetwork {
+            external: true,
+            name: self.simulation_docker_network.clone(),
+        }
     }
 
     fn lps_rust_image_name(&self) -> String {
@@ -270,7 +294,6 @@ impl Config {
                 max_event_interval: self.devices.max_event_interval,
                 max_events: self.devices.max_events,
                 retry_duration: self.devices.retry_duration,
-                wait_for_start_socket_addr: self.devices.wait_for_start_socket_addr,
                 server_push_urls: (0..self.amqp.producers_count())
                     .map(|i| {
                         format!(
@@ -315,6 +338,7 @@ impl Config {
                 "bash -c \" rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server \"",
             ))
             .with_unless_stopped()
+            .with_networks(vec![self.service_network_name()])
     }
 
     pub fn server_docker_exposed_socket_addr_and_container_port(&self) -> (SocketAddr, u16) {
@@ -348,18 +372,8 @@ impl Config {
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
             .with_ports(ports)
-    }
-
-    pub fn device_docker_exposed_socket_addr_and_container_port(
-        &self,
-    ) -> Option<(SocketAddr, u16)> {
-        self.devices.wait_for_start_socket_addr.map(|addr| {
-            let exposed_addr = self.devices.expose_socket_addr.unwrap_or_else(|| {
-                SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), addr.port())
-            });
-
-            (exposed_addr, addr.port())
-        })
+            .with_networks(vec![self.service_network_name()])
+            .with_manual_profile()
     }
 
     fn device_docker_service(&self) -> DockerService {
@@ -368,18 +382,13 @@ impl Config {
             .display()
             .to_string();
 
-        let ports = self
-            .device_docker_exposed_socket_addr_and_container_port()
-            .map(|(exposed_addr, container_port)| format!("{}:{}", exposed_addr, container_port))
-            .map(|port| vec![port])
-            .unwrap_or_default();
-
         DockerService::default()
             .with_image(self.lps_rust_image_name())
             .with_container_name(String::from("lps-device"))
             .with_command(format!("device --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
-            .with_ports(ports)
+            .with_networks(vec![self.service_network_name()])
+            .with_manual_profile()
     }
 
     fn producers_docker_service(&self) -> BTreeMap<String, DockerService> {
@@ -398,6 +407,7 @@ impl Config {
                             .display()
                     ))
                     .with_volumes(vec![self.volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
         }
@@ -415,6 +425,7 @@ impl Config {
                     .with_container_name(format!("producer-{i}"))
                     .with_command(format!("producer --config-file {config_file}"))
                     .with_volumes(vec![self.volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
         }
@@ -438,6 +449,7 @@ impl Config {
                             .display()
                     ))
                     .with_volumes(vec![self.volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
         }
@@ -455,6 +467,7 @@ impl Config {
                             .display()
                     ))
                     .with_volumes(vec![self.volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
         }
@@ -472,6 +485,7 @@ impl Config {
                     .with_container_name(format!("consumer-{i}"))
                     .with_command(format!("consumer --config-file {config_file}"))
                     .with_volumes(vec![self.volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
         }
@@ -492,6 +506,7 @@ impl Config {
                 "sh -c \"validator --config-file {config_file} > /app/validator.log 2>&1\""
             ))
             .with_volumes(vec![self.volume_mount()])
+            .with_networks(vec![self.service_network_name()])
             .with_manual_profile()
     }
 
@@ -504,10 +519,15 @@ impl Config {
                 self.server_results_file()
             ))
             .with_volumes(vec![self.volume_mount()])
+            .with_networks(vec![self.service_network_name()])
             .with_manual_profile()
     }
 
     pub fn docker_compose(&self) -> DockerCompose {
+        let networks = [(self.service_network_name(), self.docker_compose_network())]
+            .into_iter()
+            .collect();
+
         let mut services = BTreeMap::new();
 
         services.insert(String::from("rabbitmq"), self.rabbit_mq_docker_service());
@@ -518,26 +538,34 @@ impl Config {
         services.insert(String::from("validator"), self.validator_docker_service());
         services.insert(String::from("scripts"), self.scripts_docker_service());
 
-        DockerCompose { services }
+        DockerCompose { networks, services }
     }
 
-    pub async fn write_files(&self, out_dir: &Path) -> anyhow::Result<()> {
-        tokio::fs::create_dir_all(out_dir)
+    pub fn relative_simulation_dir(&self) -> PathBuf {
+        PathBuf::from("./").join(
+            PathBuf::from(&self.simulation_dir_absolute_path)
+                .file_name()
+                .expect("Failed to get simulation directory name"),
+        )
+    }
+
+    pub async fn write_files(&self) -> anyhow::Result<()> {
+        let relative_simulation_dir = self.relative_simulation_dir();
+
+        tokio::fs::create_dir_all(&relative_simulation_dir)
             .await
             .context("Failed to create output directory")?;
 
-        let host_volume = self.host_volume();
+        let host_volume = relative_simulation_dir.join(self.host_volume());
 
-        tokio::fs::create_dir_all(out_dir.join(&host_volume))
+        tokio::fs::create_dir_all(&host_volume)
             .await
             .context("Failed to create host volume directory")?;
-
-        let config_out_dir = out_dir.join(&host_volume);
 
         let config_files = self.config_files();
 
         for config_file in config_files {
-            let path = config_out_dir.join(&config_file.name);
+            let path = host_volume.join(&config_file.name);
 
             let data = serde_yaml::to_string(&config_file.ty)
                 .context("Failed to serialize config file")?;
@@ -552,9 +580,12 @@ impl Config {
         let docker_compose_data =
             serde_yaml::to_string(&docker_compose).context("Failed to serialize docker compose")?;
 
-        tokio::fs::write(out_dir.join("docker-compose.yaml"), docker_compose_data)
-            .await
-            .context("Failed to write docker compose file")?;
+        tokio::fs::write(
+            relative_simulation_dir.join("docker-compose.yaml"),
+            docker_compose_data,
+        )
+        .await
+        .context("Failed to write docker compose file")?;
 
         Ok(())
     }
@@ -568,8 +599,6 @@ pub struct DeviceConfig {
     pub max_events: Option<u64>,
     #[serde(with = "humantime_serde")]
     pub retry_duration: Duration,
-    pub wait_for_start_socket_addr: Option<SocketAddr>,
-    pub expose_socket_addr: Option<SocketAddr>,
 }
 
 #[derive(Debug, Deserialize)]

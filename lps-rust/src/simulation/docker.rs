@@ -4,7 +4,14 @@ use serde::Serialize;
 
 #[derive(Debug, Serialize)]
 pub struct DockerCompose {
+    pub networks: BTreeMap<String, DockerNetwork>,
     pub services: BTreeMap<String, DockerService>,
+}
+
+#[derive(Default, Debug, Serialize)]
+pub struct DockerNetwork {
+    pub external: bool,
+    pub name: String,
 }
 
 #[derive(Default, Debug, Serialize)]
@@ -17,6 +24,8 @@ pub struct DockerService {
     pub environment: BTreeMap<String, String>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub profiles: Vec<String>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub networks: Vec<String>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub ports: Vec<String>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
@@ -68,6 +77,11 @@ impl DockerService {
 
     pub fn with_unless_stopped(mut self) -> Self {
         self.restart = Some(String::from("unless-stopped"));
+        self
+    }
+
+    pub fn with_networks(mut self, networks: Vec<String>) -> Self {
+        self.networks = networks;
         self
     }
 }

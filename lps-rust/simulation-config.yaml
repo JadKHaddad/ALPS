@@ -1,10 +1,10 @@
+simulation_dir_absolute_path: "/home/jadkhaddad/Desktop/LPS/lps-rust/simulation"
+simulation_docker_network: "lps-simulation-net"
 devices:
-  devices_count: 100
+  devices_count: 10
   max_event_interval: 500ms
   retry_duration: 500ms
-  max_events: 100 # Optional, if not set, the device will generate events indefinitely
-  wait_for_start_socket_addr: 0.0.0.0:5000 # Optional, if set, the device will wait for a tcp connection before generating events.
-  expose_socket_addr: 0.0.0.0:5000 # Optional, if set, the device will expose the wait_for_start_socket on this address. If not set, it will be exposed on the same port as wait_for_start_socket_addr.
+  max_events: 10 # Optional, if not set, the device will generate events indefinitely
 server:
   server_domain: "server"
   socket_addr: 0.0.0.0:8080

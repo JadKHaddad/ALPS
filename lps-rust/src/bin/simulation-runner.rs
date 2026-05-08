@@ -1,6 +1,6 @@
 //! ```not_rust
 //!
-//! cargo run -r --bin simulation-runner -- --config-file simulation-config.yaml --out-dir ./simulation-configs
+//! cargo run -r --bin simulation-runner -- --config-file simulation-config.yaml
 //!
 //! ```
 
@@ -9,7 +9,6 @@ use std::{path::PathBuf, process::Stdio, sync::Arc};
 use anyhow::Context;
 use clap::Parser;
 use lps_rust::simulation::config::Config;
-use reqwest::StatusCode;
 use tokio::io::AsyncBufReadExt;
 use tokio_util::sync::CancellationToken;
 
@@ -18,9 +17,9 @@ pub struct Args {
     #[clap(long, default_value = "device-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
-    #[clap(long, default_value = "./simulation-configs")]
-    /// Output directory: The directory to save the generated simulation config files
-    out_dir: PathBuf,
+    #[clap(long, default_value = "false")]
+    /// If set, the simulation runner will not create the simulation config files and will instead expect them to already exist in the output directory.
+    no_create: bool,
 }
 
 #[tokio::main]
@@ -47,30 +46,21 @@ async fn main() -> Result<(), anyhow::Error> {
         .await
         .context("Failed to load config file")?;
 
-    config
-        .write_files(&args.out_dir)
-        .await
-        .context("Failed to write simulation config files")?;
+    let simulation_dir = config.relative_simulation_dir();
 
-    let device_exposed_host_port = config
-        .device_docker_exposed_socket_addr_and_container_port()
-        .map(|(socket_addr, _)| socket_addr.port());
-
-    let device_addr = device_exposed_host_port.map(|port| format!("127.0.0.1:{}", port));
-
-    let server_exposed_host_port = config
-        .server_docker_exposed_socket_addr_and_container_port()
-        .0
-        .port();
-
-    let server_addr = format!("127.0.0.1:{}", server_exposed_host_port);
+    if !args.no_create {
+        config
+            .write_files()
+            .await
+            .context("Failed to write simulation config files")?;
+    }
 
     select(&token, async {
         tokio::process::Command::new("docker")
             .arg("compose")
             .arg("up")
             .arg("-d")
-            .current_dir(&args.out_dir)
+            .current_dir(&simulation_dir)
             .status()
             .await
             .map(|_| ())
@@ -82,7 +72,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .arg("compose")
         .arg("logs")
         .arg("-f")
-        .current_dir(&args.out_dir)
+        .current_dir(&simulation_dir)
         .stdout(Stdio::piped())
         .stderr(Stdio::inherit())
         .spawn()
@@ -118,41 +108,63 @@ async fn main() -> Result<(), anyhow::Error> {
         }
     });
 
-    if let Some(addr) = device_addr {
-        select(&token, async {
-            tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+    tokio::time::sleep(std::time::Duration::from_secs(5)).await;
 
-            tracing::info!("Starting devices");
+    tracing::info!("Starting server");
 
-            tokio::net::TcpStream::connect(addr)
-                .await
-                .map(|_| ())
-                .context("Failed to connect to device socket address")
-        })
-        .await?;
-    }
+    let docker_compose_server = select(&token, async {
+        tokio::process::Command::new("docker")
+            .arg("compose")
+            .arg("up")
+            .arg("server")
+            .current_dir(&simulation_dir)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .context("Failed to run docker compose up for server")
+    })
+    .await?;
 
-    let client = reqwest::Client::new();
+    tracing::info!("Starting devices");
+
+    let docker_compose_device = select(&token, async {
+        tokio::process::Command::new("docker")
+            .arg("compose")
+            .arg("up")
+            .arg("device")
+            .current_dir(&simulation_dir)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .context("Failed to run docker compose up for device")
+    })
+    .await?;
+
+    tracing::info!("Monitoring server status...");
 
     select(&token, async {
         loop {
-            let res = client
-                .get(format!("http://{server_addr}/health"))
-                .send()
-                .await;
+            tokio::time::sleep(std::time::Duration::from_secs(5)).await;
 
-            match res {
-                Ok(response) if response.status() == StatusCode::OK => {
-                    tokio::time::sleep(std::time::Duration::from_secs(5)).await;
-                }
-                _ => {
-                    tracing::info!(?res, "Server is no longer reachable. Simulation complete.");
+            let output = tokio::process::Command::new("docker")
+                .arg("compose")
+                .arg("ps")
+                .arg("server")
+                .arg("--format")
+                .arg("json") // JSON is easier to parse reliably than plain text
+                .current_dir(&simulation_dir)
+                .output()
+                .await
+                .context("Failed to check server status")?;
 
-                    break;
-                }
+            let stdout = String::from_utf8_lossy(&output.stdout);
+
+            // If the output is empty, the container might have been removed or stopped
+            if stdout.trim().is_empty() || !stdout.contains("running") {
+                tracing::info!("Server is no longer running. Moving to shutdown.");
+                break;
             }
         }
-
         Ok(())
     })
     .await?;
@@ -160,19 +172,34 @@ async fn main() -> Result<(), anyhow::Error> {
     tracing::info!("Shutting down simulation runner.");
 
     let _ = docker_compose_logs.kill().await;
-
-    tokio::process::Command::new("docker")
-        .arg("compose")
-        .arg("down")
-        .current_dir(&args.out_dir)
-        .status()
-        .await
-        .context("Failed to run docker compose down")?;
-
     let _ = docker_compose_logs
         .wait()
         .await
         .context("Failed to wait for docker compose logs")?;
+
+    tokio::process::Command::new("docker")
+        .arg("compose")
+        .arg("down")
+        .current_dir(&simulation_dir)
+        .status()
+        .await
+        .context("Failed to run docker compose down")?;
+
+    if let Some(mut docker_compose_server) = docker_compose_server {
+        let _ = docker_compose_server.kill().await;
+        let _ = docker_compose_server
+            .wait()
+            .await
+            .context("Failed to wait for docker compose server")?;
+    }
+
+    if let Some(mut docker_compose_device) = docker_compose_device {
+        let _ = docker_compose_device.kill().await;
+        let _ = docker_compose_device
+            .wait()
+            .await
+            .context("Failed to wait for docker compose device")?;
+    }
 
     select(&token, async {
         tracing::info!("Running validator");
@@ -181,7 +208,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .arg("compose")
             .arg("up")
             .arg("validator")
-            .current_dir(&args.out_dir)
+            .current_dir(&simulation_dir)
             .status()
             .await
             .map(|_| ())
@@ -196,7 +223,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .arg("compose")
             .arg("up")
             .arg("scripts")
-            .current_dir(&args.out_dir)
+            .current_dir(&simulation_dir)
             .stdout(Stdio::inherit())
             .stderr(Stdio::inherit())
             .status()
@@ -209,16 +236,16 @@ async fn main() -> Result<(), anyhow::Error> {
     Ok(())
 }
 
-async fn select<F: Future<Output = anyhow::Result<()>>>(
+async fn select<T, F: Future<Output = anyhow::Result<T>>>(
     token: &CancellationToken,
     f: F,
-) -> anyhow::Result<()> {
+) -> anyhow::Result<Option<T>> {
     if token.is_cancelled() {
-        return Ok(());
+        return Ok(None);
     }
 
     tokio::select! {
-        _ = token.cancelled() => Ok(()),
-        res = f => res,
+        _ = token.cancelled() => Ok(None),
+        res = f => res.map(Some),
     }
 }

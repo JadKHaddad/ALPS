@@ -1,6 +1,6 @@
 //! ```not_rust
 //!
-//! cargo run -r --bin simulation-config-creator -- --config-file simulation-config.yaml --out-dir ./simulation-configs
+//! cargo run -r --bin simulation-config-creator -- --config-file simulation-config.yaml
 //!
 //! ```
 
@@ -15,7 +15,7 @@ pub struct Args {
     #[clap(long, default_value = "device-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
-    #[clap(long, default_value = "./simulation-configs")]
+    #[clap(long, default_value = "simulation-configs")]
     /// Output directory: The directory to save the generated simulation config files
     out_dir: PathBuf,
 }
@@ -29,7 +29,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .context("Failed to load config file")?;
 
     config
-        .write_files(&args.out_dir)
+        .write_files()
         .await
         .context("Failed to write simulation config files")?;
 

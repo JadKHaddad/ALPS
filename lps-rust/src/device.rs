@@ -1,4 +1,4 @@
-use std::{net::SocketAddr, path::PathBuf, time::Duration};
+use std::{path::PathBuf, time::Duration};
 
 use anyhow::Context;
 use serde::{Deserialize, Serialize};
@@ -41,9 +41,6 @@ pub struct Config {
     pub retry_duration: Duration,
     #[serde(default = "default_results_file")]
     pub results_file: PathBuf,
-    #[serde(default)]
-    /// If set, the device will wait for a tcp connection before generating events.
-    pub wait_for_start_socket_addr: Option<SocketAddr>,
 }
 
 impl Default for Config {
@@ -55,7 +52,6 @@ impl Default for Config {
             max_events: None,
             retry_duration: default_retry_duration(),
             results_file: default_results_file(),
-            wait_for_start_socket_addr: None,
         }
     }
 }
