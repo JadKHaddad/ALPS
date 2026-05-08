@@ -20,6 +20,8 @@ use crate::{
 pub struct Config {
     #[serde(skip)]
     pub root_abs_path: Option<PathBuf>,
+    pub lps_rust_image: String,
+    pub lps_scripts_image: String,
     pub simulation_dir: String,
     pub simulation_docker_network: String,
     pub devices: DeviceConfig,
@@ -92,11 +94,11 @@ impl Config {
     }
 
     fn lps_rust_image_name(&self) -> String {
-        String::from("lps-rs:latest")
+        self.lps_rust_image.clone()
     }
 
     fn lps_scripts_image_name(&self) -> String {
-        String::from("lps-scripts:latest")
+        self.lps_scripts_image.clone()
     }
 
     fn server_container_name(&self) -> String {
