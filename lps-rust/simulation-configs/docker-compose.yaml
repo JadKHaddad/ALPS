@@ -44,6 +44,8 @@ services:
     image: lps-scripts:latest
     container_name: lps-scripts
     command: python /scripts/latency.py server-results.json latency.png
+    profiles:
+    - manual
     volumes:
     - ./mount:/app
   server:
@@ -58,5 +60,7 @@ services:
     image: lps-rs:latest
     container_name: lps-validator
     command: sh -c "validator --config-file /app/validator-config.yaml > /app/validator.log 2>&1"
+    profiles:
+    - manual
     volumes:
     - ./mount:/app

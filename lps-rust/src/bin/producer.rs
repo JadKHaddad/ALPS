@@ -90,70 +90,79 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
-    tracing::info!("Connecting to RabbitMQ");
+    let channel = tokio::select! {
+        _ = lps_rust::shutdown_signal() => {
+            anyhow::bail!("Shutdown signal received while connecting to RabbitMQ")
+        },
+        channel = async {
+            tracing::info!("Connecting to RabbitMQ");
 
-    let conn = Connection::connect(
-        &config.rabbit_mq_url,
-        ConnectionProperties::default().enable_auto_recover(),
-    )
-    .await
-    .context("Failed to connect to RabbitMQ")?;
-
-    let channel = conn
-        .create_channel()
-        .await
-        .context("Failed to create channel")?;
-
-    channel
-        .exchange_declare(
-            ShortString::from(String::from("events.hash")),
-            ExchangeKind::Custom(String::from("x-consistent-hash")),
-            ExchangeDeclareOptions::default(),
-            FieldTable::default(),
-        )
-        .await
-        .context("Failed to declare exchange")?;
-
-    tracing::info!("Declaring queues and bindings");
-
-    let queues = (0..config.queues_count).map(|i| format!("events-{i}"));
-
-    for queue_name in queues {
-        let queue = channel
-            .queue_declare(
-                ShortString::from(queue_name),
-                QueueDeclareOptions {
-                    durable: true, // persist across broker restarts
-                    ..Default::default()
-                },
-                FieldTable::from(BTreeMap::<_, _>::from([(
-                    ShortString::from("x-single-active-consumer"),
-                    AMQPValue::Boolean(true),
-                )])),
+            let conn = Connection::connect(
+                &config.rabbit_mq_url,
+                ConnectionProperties::default().enable_auto_recover(),
             )
             .await
-            .context("Failed to declare queue")?;
+            .context("Failed to connect to RabbitMQ")?;
 
-        if config.purge_queues_on_start {
-            tracing::warn!(queue = ?queue.name().as_str(), "Purging queue");
+            let channel = conn
+                .create_channel()
+                .await
+                .context("Failed to create channel")?;
 
             channel
-                .queue_purge(queue.name().clone(), QueuePurgeOptions::default())
+                .exchange_declare(
+                    ShortString::from(String::from("events.hash")),
+                    ExchangeKind::Custom(String::from("x-consistent-hash")),
+                    ExchangeDeclareOptions::default(),
+                    FieldTable::default(),
+                )
                 .await
-                .context("Failed to purge queue")?;
-        }
+                .context("Failed to declare exchange")?;
 
-        channel
-            .queue_bind(
-                queue.name().clone(),
-                ShortString::from("events.hash"),
-                ShortString::from("1"), // weight = 1
-                QueueBindOptions::default(),
-                FieldTable::default(),
-            )
-            .await
-            .context("Failed to bind queue")?;
-    }
+            tracing::info!("Declaring queues and bindings");
+
+            let queues = (0..config.queues_count).map(|i| format!("events-{i}"));
+
+            for queue_name in queues {
+                let queue = channel
+                    .queue_declare(
+                        ShortString::from(queue_name),
+                        QueueDeclareOptions {
+                            durable: true, // persist across broker restarts
+                            ..Default::default()
+                        },
+                        FieldTable::from(BTreeMap::<_, _>::from([(
+                            ShortString::from("x-single-active-consumer"),
+                            AMQPValue::Boolean(true),
+                        )])),
+                    )
+                    .await
+                    .context("Failed to declare queue")?;
+
+                if config.purge_queues_on_start {
+                    tracing::warn!(queue = ?queue.name().as_str(), "Purging queue");
+
+                    channel
+                        .queue_purge(queue.name().clone(), QueuePurgeOptions::default())
+                        .await
+                        .context("Failed to purge queue")?;
+                }
+
+                channel
+                    .queue_bind(
+                        queue.name().clone(),
+                        ShortString::from("events.hash"),
+                        ShortString::from("1"), // weight = 1
+                        QueueBindOptions::default(),
+                        FieldTable::default(),
+                    )
+                    .await
+                    .context("Failed to bind queue")?;
+            }
+
+            anyhow::Ok(channel)
+        } => channel
+    }?;
 
     tracing::info!("Starting server");
 

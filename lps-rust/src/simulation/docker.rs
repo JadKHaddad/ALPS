@@ -16,6 +16,8 @@ pub struct DockerService {
     #[serde(skip_serializing_if = "BTreeMap::is_empty")]
     pub environment: BTreeMap<String, String>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub profiles: Vec<String>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
     pub ports: Vec<String>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub volumes: Vec<String>,
@@ -51,6 +53,16 @@ impl DockerService {
 
     pub fn with_volumes(mut self, volumes: Vec<String>) -> Self {
         self.volumes = volumes;
+        self
+    }
+
+    pub fn with_profiles(mut self, profiles: Vec<String>) -> Self {
+        self.profiles = profiles;
+        self
+    }
+
+    pub fn with_manual_profile(mut self) -> Self {
+        self.profiles.push(String::from("manual"));
         self
     }
 

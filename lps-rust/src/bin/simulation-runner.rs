@@ -4,13 +4,14 @@
 //!
 //! ```
 
-use std::{path::PathBuf, process::Stdio};
+use std::{path::PathBuf, process::Stdio, sync::Arc};
 
 use anyhow::Context;
 use clap::Parser;
 use lps_rust::simulation::config::Config;
 use reqwest::StatusCode;
 use tokio::io::AsyncBufReadExt;
+use tokio_util::sync::CancellationToken;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -28,6 +29,17 @@ async fn main() -> Result<(), anyhow::Error> {
         .or_else(|_| tracing_subscriber::EnvFilter::try_new("simulation_runner=info"))?;
 
     tracing_subscriber::fmt().with_env_filter(filter).init();
+
+    let token = Arc::new(CancellationToken::new());
+    let token_c = token.clone();
+
+    tokio::spawn(async move {
+        lps_rust::shutdown_signal().await;
+
+        tracing::info!("Shutdown signal received, shutting down.");
+
+        token_c.cancel();
+    });
 
     let args = Args::parse();
 
@@ -53,18 +65,18 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let server_addr = format!("127.0.0.1:{}", server_exposed_host_port);
 
-    let mut docker_compose_up = tokio::process::Command::new("docker")
-        .arg("compose")
-        .arg("up")
-        .arg("-d")
-        .current_dir(&args.out_dir)
-        .spawn()
-        .context("Failed to run docker compose up")?;
-
-    docker_compose_up
-        .wait()
-        .await
-        .context("Failed waiting for docker compose up")?;
+    select(&token, async {
+        tokio::process::Command::new("docker")
+            .arg("compose")
+            .arg("up")
+            .arg("-d")
+            .current_dir(&args.out_dir)
+            .status()
+            .await
+            .map(|_| ())
+            .context("Failed to run docker compose up")
+    })
+    .await?;
 
     let mut docker_compose_logs = tokio::process::Command::new("docker")
         .arg("compose")
@@ -85,96 +97,128 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let mut reader = tokio::io::BufReader::new(logs).lines();
 
-    while let Some(line) = reader.next_line().await? {
-        println!("{line}");
+    select(&token, async {
+        while let Ok(Some(line)) = reader.next_line().await {
+            println!("{line}");
 
-        if line.contains("Time to start RabbitMQ") {
-            tracing::info!("RabbitMQ is ready, starting simulation");
+            if line.contains("Time to start RabbitMQ") {
+                tracing::info!("RabbitMQ is ready, starting simulation");
 
-            break;
+                break;
+            }
         }
-    }
+
+        Ok(())
+    })
+    .await?;
 
     tokio::spawn(async move {
-        while let Some(Ok(line)) = reader.next_line().await.transpose() {
+        while let Ok(Some(line)) = reader.next_line().await {
             println!("{line}");
         }
     });
 
     if let Some(addr) = device_addr {
-        tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+        select(&token, async {
+            tokio::time::sleep(std::time::Duration::from_secs(5)).await;
 
-        tracing::info!("Starting devices");
+            tracing::info!("Starting devices");
 
-        let _ = tokio::net::TcpStream::connect(addr)
-            .await
-            .context("Failed to connect to device socket address")?;
+            tokio::net::TcpStream::connect(addr)
+                .await
+                .map(|_| ())
+                .context("Failed to connect to device socket address")
+        })
+        .await?;
     }
 
     let client = reqwest::Client::new();
 
-    loop {
-        let res = client
-            .get(format!("http://{server_addr}/health"))
-            .send()
-            .await;
+    select(&token, async {
+        loop {
+            let res = client
+                .get(format!("http://{server_addr}/health"))
+                .send()
+                .await;
 
-        match res {
-            Ok(response) if response.status() == StatusCode::OK => {
-                tokio::time::sleep(std::time::Duration::from_secs(5)).await;
-            }
-            _ => {
-                tracing::info!(?res, "Server is no longer reachable. Simulation complete.");
+            match res {
+                Ok(response) if response.status() == StatusCode::OK => {
+                    tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+                }
+                _ => {
+                    tracing::info!(?res, "Server is no longer reachable. Simulation complete.");
 
-                break;
+                    break;
+                }
             }
         }
-    }
+
+        Ok(())
+    })
+    .await?;
 
     tracing::info!("Shutting down simulation runner.");
 
     let _ = docker_compose_logs.kill().await;
 
-    let mut docker_compose_down = tokio::process::Command::new("docker")
+    tokio::process::Command::new("docker")
         .arg("compose")
         .arg("down")
         .current_dir(&args.out_dir)
-        .spawn()
-        .context("Failed to run docker compose down")?;
-
-    let _ = docker_compose_down
-        .wait()
+        .status()
         .await
-        .context("Failed to wait for docker compose down")?;
+        .context("Failed to run docker compose down")?;
 
     let _ = docker_compose_logs
         .wait()
         .await
         .context("Failed to wait for docker compose logs")?;
 
-    tracing::info!("Running validator");
+    select(&token, async {
+        tracing::info!("Running validator");
 
-    tokio::process::Command::new("docker")
-        .arg("compose")
-        .arg("up")
-        .arg("validator")
-        .current_dir(&args.out_dir)
-        .status()
-        .await
-        .context("Failed to run docker compose up for validator")?;
+        tokio::process::Command::new("docker")
+            .arg("compose")
+            .arg("up")
+            .arg("validator")
+            .current_dir(&args.out_dir)
+            .status()
+            .await
+            .map(|_| ())
+            .context("Failed to run docker compose up for validator")
+    })
+    .await?;
 
-    tracing::info!("Running scripts");
+    select(&token, async {
+        tracing::info!("Running scripts");
 
-    tokio::process::Command::new("docker")
-        .arg("compose")
-        .arg("up")
-        .arg("scripts")
-        .current_dir(&args.out_dir)
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .status()
-        .await
-        .context("Failed to run docker compose up for scripts")?;
+        tokio::process::Command::new("docker")
+            .arg("compose")
+            .arg("up")
+            .arg("scripts")
+            .current_dir(&args.out_dir)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .status()
+            .await
+            .map(|_| ())
+            .context("Failed to run docker compose up for scripts")
+    })
+    .await?;
 
     Ok(())
+}
+
+async fn select<F: Future<Output = anyhow::Result<()>>>(
+    token: &CancellationToken,
+    f: F,
+) -> anyhow::Result<()> {
+    if token.is_cancelled() {
+        return Ok(());
+    }
+
+    tokio::select! {
+        _ = token.cancelled() => Ok(()),
+        res = f => res,
+    }
 }

@@ -492,6 +492,7 @@ impl Config {
                 "sh -c \"validator --config-file {config_file} > /app/validator.log 2>&1\""
             ))
             .with_volumes(vec![self.volume_mount()])
+            .with_manual_profile()
     }
 
     fn scripts_docker_service(&self) -> DockerService {
@@ -503,6 +504,7 @@ impl Config {
                 self.server_results_file()
             ))
             .with_volumes(vec![self.volume_mount()])
+            .with_manual_profile()
     }
 
     pub fn docker_compose(&self) -> DockerCompose {
