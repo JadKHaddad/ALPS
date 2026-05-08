@@ -15,9 +15,6 @@ pub struct Args {
     #[clap(long, default_value = "device-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
-    #[clap(long, default_value = "simulation-configs")]
-    /// Output directory: The directory to save the generated simulation config files
-    out_dir: PathBuf,
 }
 
 #[tokio::main]
