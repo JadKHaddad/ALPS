@@ -93,6 +93,18 @@ impl Config {
         String::from("lps-scripts:latest")
     }
 
+    fn server_container_name(&self) -> String {
+        String::from("lps-server")
+    }
+
+    fn rabbit_mq_container_name(&self) -> String {
+        String::from("lps-rabbitmq")
+    }
+
+    fn rabbit_mq_container_port(&self) -> u16 {
+        5672
+    }
+
     pub async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
         serde_yaml::from_slice(
             &tokio::fs::read(path)
@@ -122,55 +134,17 @@ impl Config {
     fn producers_config_files(&self) -> Vec<ConfigFile> {
         let mut config_files = Vec::new();
 
-        let producer_amqp_proxy_config =
-            self.amqp
-                .producers
-                .amqp_proxy
-                .as_ref()
-                .map(|proxy| CrateTcpProxyConfig {
-                    tasks: vec![CrateTcpProxyTask {
-                        failure_rate: proxy.failure_rate,
-                        max_up_duration: proxy.max_up_duration,
-                        socket_addr: proxy.socket_addr,
-                        upstream_domain: self.amqp.broker_domain.clone(),
-                        upstream_port: self.amqp.broker_port,
-                    }],
-                    results_file: PathBuf::from(self.container_work_dir())
-                        .join("producer-amqp-proxy-results.json"),
-                });
-
-        let producer_amqp_proxy_config_file = producer_amqp_proxy_config.map(|config| ConfigFile {
-            name: "producer-amqp-proxy-config.yaml".to_string(),
-            ty: ConfigType::TcpProxy(config),
-        });
-
-        if let Some(config) = producer_amqp_proxy_config_file {
-            config_files.push(config);
-        }
-
         for i in 0..self.amqp.producers_count() {
-            let broker_domain = self
-                .amqp
-                .producers
-                .amqp_proxy
-                .as_ref()
-                .map(|_| String::from("producer-amqp-proxy"))
-                .unwrap_or(self.amqp.broker_domain.clone());
-
-            let broker_port = self
-                .amqp
-                .producers
-                .amqp_proxy
-                .as_ref()
-                .map(|proxy| proxy.socket_addr.port())
-                .unwrap_or(self.amqp.broker_port);
-
             let producer_config_file = ConfigFile {
                 name: format!("producer-{}.yaml", i),
                 ty: ConfigType::Producer(CrateProducerConfig {
                     queues_count: self.amqp.queues_count,
                     purge_queues_on_start: true,
-                    rabbit_mq_url: format!("amqp://{}:{}", broker_domain, broker_port),
+                    rabbit_mq_url: format!(
+                        "amqp://{}:{}",
+                        self.rabbit_mq_container_name(),
+                        self.rabbit_mq_container_port()
+                    ),
                     socket_addr: self.amqp.producers.socket_addr,
                 }),
             };
@@ -194,8 +168,8 @@ impl Config {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
                         socket_addr: proxy.socket_addr,
-                        upstream_domain: self.amqp.broker_domain.clone(),
-                        upstream_port: self.amqp.broker_port,
+                        upstream_domain: self.rabbit_mq_container_name(),
+                        upstream_port: self.rabbit_mq_container_port(),
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join("consumer-amqp-proxy-results.json"),
@@ -210,41 +184,14 @@ impl Config {
             config_files.push(config);
         }
 
-        let consumer_server_proxy_config =
-            self.amqp
-                .consumers
-                .server_proxy
-                .as_ref()
-                .map(|proxy| CrateTcpProxyConfig {
-                    tasks: vec![CrateTcpProxyTask {
-                        failure_rate: proxy.failure_rate,
-                        max_up_duration: proxy.max_up_duration,
-                        socket_addr: proxy.socket_addr,
-                        upstream_domain: self.server.server_domain.clone(),
-                        upstream_port: self.server.socket_addr.port(),
-                    }],
-                    results_file: PathBuf::from(self.container_work_dir())
-                        .join("consumer-server-proxy-results.json"),
-                });
-
-        let consumer_server_proxy_config_file =
-            consumer_server_proxy_config.map(|config| ConfigFile {
-                name: "consumer-server-proxy-config.yaml".to_string(),
-                ty: ConfigType::TcpProxy(config),
-            });
-
-        if let Some(config) = consumer_server_proxy_config_file {
-            config_files.push(config);
-        }
-
         for i in 0..self.amqp.consumers_count() {
             let broker_domain = self
                 .amqp
                 .consumers
                 .amqp_proxy
                 .as_ref()
-                .map(|_| String::from("consumer-amqp-proxy"))
-                .unwrap_or(self.amqp.broker_domain.clone());
+                .map(|_| String::from("lps-consumer-amqp-proxy"))
+                .unwrap_or(self.rabbit_mq_container_name());
 
             let broker_port = self
                 .amqp
@@ -252,23 +199,7 @@ impl Config {
                 .amqp_proxy
                 .as_ref()
                 .map(|proxy| proxy.socket_addr.port())
-                .unwrap_or(self.amqp.broker_port);
-
-            let server_domain = self
-                .amqp
-                .consumers
-                .server_proxy
-                .as_ref()
-                .map(|_| String::from("consumer-server-proxy"))
-                .unwrap_or(self.server.server_domain.clone());
-
-            let server_port = self
-                .amqp
-                .consumers
-                .server_proxy
-                .as_ref()
-                .map(|proxy| proxy.socket_addr.port())
-                .unwrap_or(self.server.socket_addr.port());
+                .unwrap_or(self.rabbit_mq_container_port());
 
             let consumer_config_file = ConfigFile {
                 name: format!("consumer-{}.yaml", i),
@@ -276,7 +207,11 @@ impl Config {
                     queues_count: self.amqp.queues_count,
                     reconnect_duration: self.amqp.consumers.reconnect_duration,
                     rabbit_mq_url: format!("amqp://{}:{}", broker_domain, broker_port),
-                    server_push_url: format!("http://{}:{}/work", server_domain, server_port),
+                    server_push_url: format!(
+                        "http://{}:{}/work",
+                        self.server_container_name(),
+                        self.server.socket_addr.port()
+                    ),
                 }),
             };
 
@@ -297,7 +232,7 @@ impl Config {
                 server_push_urls: (0..self.amqp.producers_count())
                     .map(|i| {
                         format!(
-                            "http://producer-{i}:{}/work",
+                            "http://lps-producer-{i}:{}/work",
                             self.amqp.producers.socket_addr.port()
                         )
                     })
@@ -332,7 +267,7 @@ impl Config {
 
     fn rabbit_mq_docker_service(&self) -> DockerService {
         DockerService::default()
-            .with_container_name(self.amqp.broker_domain.clone())
+            .with_container_name(self.rabbit_mq_container_name())
             .with_image(String::from("rabbitmq:4-management"))
             .with_command(String::from(
                 "bash -c \" rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server \"",
@@ -368,7 +303,7 @@ impl Config {
 
         DockerService::default()
             .with_image(self.lps_rust_image_name())
-            .with_container_name(self.server.server_domain.clone())
+            .with_container_name(self.server_container_name())
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
             .with_ports(ports)
@@ -394,24 +329,6 @@ impl Config {
     fn producers_docker_service(&self) -> BTreeMap<String, DockerService> {
         let mut services = BTreeMap::new();
 
-        if self.amqp.producers.amqp_proxy.is_some() {
-            services.insert(
-                String::from("producer-amqp-proxy"),
-                DockerService::default()
-                    .with_image(self.lps_rust_image_name())
-                    .with_container_name(String::from("producer-amqp-proxy"))
-                    .with_command(format!(
-                        "tcp-proxy --config-file {}",
-                        PathBuf::from(self.container_work_dir())
-                            .join("producer-amqp-proxy-config.yaml")
-                            .display()
-                    ))
-                    .with_volumes(vec![self.volume_mount()])
-                    .with_networks(vec![self.service_network_name()])
-                    .with_unless_stopped(),
-            );
-        }
-
         for i in 0..self.amqp.producers_count() {
             let config_file = PathBuf::from(self.container_work_dir())
                 .join(format!("producer-{i}.yaml"))
@@ -422,7 +339,7 @@ impl Config {
                 format!("producer-{i}"),
                 DockerService::default()
                     .with_image(self.lps_rust_image_name())
-                    .with_container_name(format!("producer-{i}"))
+                    .with_container_name(format!("lps-producer-{i}"))
                     .with_command(format!("producer --config-file {config_file}"))
                     .with_volumes(vec![self.volume_mount()])
                     .with_networks(vec![self.service_network_name()])
@@ -441,29 +358,11 @@ impl Config {
                 String::from("consumer-amqp-proxy"),
                 DockerService::default()
                     .with_image(self.lps_rust_image_name())
-                    .with_container_name(String::from("consumer-amqp-proxy"))
+                    .with_container_name(String::from("lps-consumer-amqp-proxy"))
                     .with_command(format!(
                         "tcp-proxy --config-file {}",
                         PathBuf::from(self.container_work_dir())
                             .join("consumer-amqp-proxy-config.yaml")
-                            .display()
-                    ))
-                    .with_volumes(vec![self.volume_mount()])
-                    .with_networks(vec![self.service_network_name()])
-                    .with_unless_stopped(),
-            );
-        }
-
-        if self.amqp.consumers.server_proxy.is_some() {
-            services.insert(
-                String::from("consumer-server-proxy"),
-                DockerService::default()
-                    .with_image(self.lps_rust_image_name())
-                    .with_container_name(String::from("consumer-server-proxy"))
-                    .with_command(format!(
-                        "tcp-proxy --config-file {}",
-                        PathBuf::from(self.container_work_dir())
-                            .join("consumer-server-proxy-config.yaml")
                             .display()
                     ))
                     .with_volumes(vec![self.volume_mount()])
@@ -482,7 +381,7 @@ impl Config {
                 format!("consumer-{i}"),
                 DockerService::default()
                     .with_image(self.lps_rust_image_name())
-                    .with_container_name(format!("consumer-{i}"))
+                    .with_container_name(format!("lps-consumer-{i}"))
                     .with_command(format!("consumer --config-file {config_file}"))
                     .with_volumes(vec![self.volume_mount()])
                     .with_networks(vec![self.service_network_name()])
@@ -603,7 +502,6 @@ pub struct DeviceConfig {
 
 #[derive(Debug, Deserialize)]
 pub struct ServerConfig {
-    pub server_domain: String,
     pub socket_addr: SocketAddr,
     pub expose_socket_addr: Option<SocketAddr>,
     #[serde(deserialize_with = "crate::deserialize_failure_rate")]
@@ -618,8 +516,6 @@ pub struct ServerConfig {
 
 #[derive(Debug, Deserialize)]
 pub struct AmqpConfig {
-    pub broker_domain: String,
-    pub broker_port: u16,
     pub queues_count: u32,
     pub producers: ProducersConfig,
     pub consumers: ConsumersConfig,
@@ -641,7 +537,6 @@ impl AmqpConfig {
 pub struct ProducersConfig {
     pub producers_count: u32,
     pub socket_addr: SocketAddr,
-    pub amqp_proxy: Option<ProxyConfig>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -650,7 +545,6 @@ pub struct ConsumersConfig {
     #[serde(with = "humantime_serde")]
     pub reconnect_duration: Duration,
     pub amqp_proxy: Option<ProxyConfig>,
-    pub server_proxy: Option<ProxyConfig>,
 }
 
 #[derive(Debug, Deserialize)]

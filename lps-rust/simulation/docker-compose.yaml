@@ -5,7 +5,7 @@ networks:
 services:
   consumer-0:
     image: lps-rs:latest
-    container_name: consumer-0
+    container_name: lps-consumer-0
     command: consumer --config-file /app/consumer-0.yaml
     networks:
     - lps-net
@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
   consumer-1:
     image: lps-rs:latest
-    container_name: consumer-1
+    container_name: lps-consumer-1
     command: consumer --config-file /app/consumer-1.yaml
     networks:
     - lps-net
@@ -23,8 +23,17 @@ services:
     restart: unless-stopped
   consumer-2:
     image: lps-rs:latest
-    container_name: consumer-2
+    container_name: lps-consumer-2
     command: consumer --config-file /app/consumer-2.yaml
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    restart: unless-stopped
+  consumer-amqp-proxy:
+    image: lps-rs:latest
+    container_name: lps-consumer-amqp-proxy
+    command: tcp-proxy --config-file /app/consumer-amqp-proxy-config.yaml
     networks:
     - lps-net
     volumes:
@@ -42,7 +51,7 @@ services:
     - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
   producer-0:
     image: lps-rs:latest
-    container_name: producer-0
+    container_name: lps-producer-0
     command: producer --config-file /app/producer-0.yaml
     networks:
     - lps-net
@@ -51,7 +60,7 @@ services:
     restart: unless-stopped
   rabbitmq:
     image: rabbitmq:4-management
-    container_name: rabbitmq
+    container_name: lps-rabbitmq
     command: bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
     networks:
     - lps-net
@@ -68,7 +77,7 @@ services:
     - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
   server:
     image: lps-rs:latest
-    container_name: server
+    container_name: lps-server
     command: server --config-file /app/server-config.yaml
     profiles:
     - manual

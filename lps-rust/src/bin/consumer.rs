@@ -100,7 +100,7 @@ async fn connection(config: Config) -> Result<(), anyhow::Error> {
                                 tracing::info!(%queue, ?event, "Acknowledged");
                             }
                             _ => {
-                                tracing::warn!(%queue, ?event, "Work failed");
+                                tracing::warn!(%queue, ?event, ?response, "Work failed");
 
                                 delivery
                                     .nack(BasicNackOptions {
