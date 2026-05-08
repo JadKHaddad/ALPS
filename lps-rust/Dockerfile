@@ -32,4 +32,5 @@ COPY --from=builder /app/target/release/ /usr/local/bin/
 
 CMD ["device"]
 
-# docker build -t lps-rs .
+# docker build -t jadkhaddad/lps-rs:0.0.1 .
+# docker push jadkhaddad/lps-rs:0.0.1

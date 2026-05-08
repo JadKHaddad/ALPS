@@ -10,5 +10,7 @@ COPY . .
 
 WORKDIR /app
 
-# docker build -t lps-scripts .
-# docker run --rm -it lps-scripts python /scripts/latency.py
+# docker build -t jadkhaddad/lps-scripts:0.0.1 .
+# docker run --rm -it jadkhaddad/lps-scripts:0.0.1 python /scripts/latency.py
+
+# docker push jadkhaddad/lps-scripts:0.0.1

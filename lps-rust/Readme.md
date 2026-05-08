@@ -26,11 +26,14 @@ cargo run -r --bin validator -- --config-file validator-config.yaml
 ```
 
 ```bash
+docker pull jadkhaddad/lps-rs:0.0.1
+docker pull jadkhaddad/lps-scripts:0.0.1
+
 docker network create lps-simulation-net
 
 docker run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v "$(pwd):/app" \
-  lps-rs:latest \
+  jadkhaddad/lps-rs:0.0.1 \
   simulation-runner --config-file simulation-config.yaml --root-abs-path $(pwd)
 ```
