@@ -308,7 +308,6 @@ impl Config {
             .with_volumes(vec![self.volume_mount()])
             .with_ports(ports)
             .with_networks(vec![self.service_network_name()])
-            .with_manual_profile()
     }
 
     fn device_docker_service(&self) -> DockerService {
@@ -323,7 +322,6 @@ impl Config {
             .with_command(format!("device --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
             .with_networks(vec![self.service_network_name()])
-            .with_manual_profile()
     }
 
     fn producers_docker_service(&self) -> BTreeMap<String, DockerService> {

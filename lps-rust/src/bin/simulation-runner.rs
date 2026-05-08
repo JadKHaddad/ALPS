@@ -59,12 +59,13 @@ async fn main() -> Result<(), anyhow::Error> {
         tokio::process::Command::new("docker")
             .arg("compose")
             .arg("up")
+            .arg("rabbitmq")
             .arg("-d")
             .current_dir(&simulation_dir)
             .status()
             .await
             .map(|_| ())
-            .context("Failed to run docker compose up")
+            .context("Failed to run docker compose up rabbitmq")
     })
     .await?;
 
@@ -108,35 +109,18 @@ async fn main() -> Result<(), anyhow::Error> {
         }
     });
 
-    tokio::time::sleep(std::time::Duration::from_secs(5)).await;
-
-    tracing::info!("Starting server");
-
-    let docker_compose_server = select(&token, async {
+    select(&token, async {
         tokio::process::Command::new("docker")
             .arg("compose")
             .arg("up")
-            .arg("server")
+            .arg("-d")
             .current_dir(&simulation_dir)
             .stdout(Stdio::inherit())
             .stderr(Stdio::inherit())
-            .spawn()
-            .context("Failed to run docker compose up for server")
-    })
-    .await?;
-
-    tracing::info!("Starting devices");
-
-    let docker_compose_device = select(&token, async {
-        tokio::process::Command::new("docker")
-            .arg("compose")
-            .arg("up")
-            .arg("device")
-            .current_dir(&simulation_dir)
-            .stdout(Stdio::inherit())
-            .stderr(Stdio::inherit())
-            .spawn()
-            .context("Failed to run docker compose up for device")
+            .status()
+            .await
+            .map(|_| ())
+            .context("Failed to run docker compose up")
     })
     .await?;
 
@@ -144,7 +128,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     select(&token, async {
         loop {
-            tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+            tokio::time::sleep(std::time::Duration::from_secs(1)).await;
 
             let output = tokio::process::Command::new("docker")
                 .arg("compose")
@@ -184,22 +168,6 @@ async fn main() -> Result<(), anyhow::Error> {
         .status()
         .await
         .context("Failed to run docker compose down")?;
-
-    if let Some(mut docker_compose_server) = docker_compose_server {
-        let _ = docker_compose_server.kill().await;
-        let _ = docker_compose_server
-            .wait()
-            .await
-            .context("Failed to wait for docker compose server")?;
-    }
-
-    if let Some(mut docker_compose_device) = docker_compose_device {
-        let _ = docker_compose_device.kill().await;
-        let _ = docker_compose_device
-            .wait()
-            .await
-            .context("Failed to wait for docker compose device")?;
-    }
 
     select(&token, async {
         tracing::info!("Running validator");

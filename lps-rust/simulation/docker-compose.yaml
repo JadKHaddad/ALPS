@@ -43,8 +43,6 @@ services:
     image: lps-rs:latest
     container_name: lps-device
     command: device --config-file /app/device-config.yaml
-    profiles:
-    - manual
     networks:
     - lps-net
     volumes:
@@ -79,8 +77,6 @@ services:
     image: lps-rs:latest
     container_name: lps-server
     command: server --config-file /app/server-config.yaml
-    profiles:
-    - manual
     networks:
     - lps-net
     ports:
