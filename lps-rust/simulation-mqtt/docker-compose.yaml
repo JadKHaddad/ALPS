@@ -1,0 +1,69 @@
+networks:
+  lps-net:
+    external: true
+    name: lps-simulation-net
+services:
+  ars-comp-1-proxy-0:
+    image: lps-mqtt
+    container_name: ars-comp-1-proxy-0
+    command: python3 ars_comp_1_proxy.py
+    environment:
+      HTTP_PORT: '8080'
+      TARGET_URL: http://lps-legacy-proxy-1-0:8080/ID_REQ_KC_STORE7D3BPACKET
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  device:
+    image: jadkhaddad/lps-rs:0.0.1
+    container_name: lps-device
+    command: device --config-file /app/device-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  legacy-proxy-1-0:
+    image: lps-mqtt
+    container_name: legacy-proxy-1-0
+    command: python3 legacy_proxy_1.py
+    environment:
+      HTTP_PORT: '8080'
+      MQTT_BROKER: lps-hivemq
+      MQTT_PORT: '1883'
+      MQTT_TOPIC: proxy1/message
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  scripts:
+    image: jadkhaddad/lps-scripts:0.0.1
+    container_name: lps-scripts
+    command: python /scripts/latency.py server-results.json latency.png
+    profiles:
+    - manual
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  server:
+    image: jadkhaddad/lps-rs:0.0.1
+    container_name: lps-server
+    command: server --config-file /app/server-config.yaml
+    networks:
+    - lps-net
+    ports:
+    - 0.0.0.0:8080:8080
+    volumes:
+    - ./mount:/app
+  validator:
+    image: jadkhaddad/lps-rs:0.0.1
+    container_name: lps-validator
+    command: sh -c "validator --config-file /app/validator-config.yaml > /app/validator.log 2>&1"
+    profiles:
+    - manual
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app

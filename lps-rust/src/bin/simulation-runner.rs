@@ -14,7 +14,7 @@ use tokio_util::sync::CancellationToken;
 
 #[derive(Debug, Parser)]
 pub struct Args {
-    #[clap(long, default_value = "device-config.yaml")]
+    #[clap(long, default_value = "simulation-config.yaml")]
     /// Config file: The path to the configuration file
     config_file: PathBuf,
     #[clap(long)]
@@ -61,7 +61,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     if !args.no_create {
         config
-            .write_files()
+            .amqp_write_files()
             .await
             .context("Failed to write simulation config files")?;
     }
