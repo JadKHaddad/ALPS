@@ -18,7 +18,7 @@ mqtt:
   producers:
     producers_count: 1
   consumers:
-    consumers_count: 3
+    consumers_count: 1
     mqtt_proxy: # Optional, if not set, the consumer will connect directly to hivemq
       socket_addr: 0.0.0.0:9090
       failure_rate: 0.1

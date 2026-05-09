@@ -5,11 +5,25 @@ networks:
 services:
   ars-comp-1-proxy-0:
     image: lps-mqtt
-    container_name: ars-comp-1-proxy-0
+    container_name: lps-ars-comp-1-proxy-0
     command: python3 ars_comp_1_proxy.py
     environment:
       HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-1-proxy-0
       TARGET_URL: http://lps-legacy-proxy-1-0:8080/ID_REQ_KC_STORE7D3BPACKET
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  ars-comp-2-proxy:
+    image: lps-mqtt
+    container_name: lps-ars-comp-2-proxy
+    command: python3 ars_comp_2_proxy.py
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-2-proxy
+      TARGET_URL: http://lps-server:8080/work
     networks:
     - lps-net
     volumes:
@@ -25,13 +39,28 @@ services:
     - ./mount:/app
   legacy-proxy-1-0:
     image: lps-mqtt
-    container_name: legacy-proxy-1-0
+    container_name: lps-legacy-proxy-1-0
     command: python3 legacy_proxy_1.py
     environment:
       HTTP_PORT: '8080'
       MQTT_BROKER: lps-hivemq
       MQTT_PORT: '1883'
       MQTT_TOPIC: proxy1/message
+      SERVICE_NAME: legacy-proxy-1-0
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  legacy-proxy-2-0:
+    image: lps-mqtt
+    container_name: lps-legacy-proxy-2-0
+    command: python3 legacy_proxy_2.py
+    environment:
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
+      SERVICE_NAME: legacy-proxy-2-0
+      TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
     networks:
     - lps-net
     volumes:

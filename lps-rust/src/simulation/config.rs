@@ -659,7 +659,7 @@ impl Config {
         }]
     }
 
-    fn mqtt_producers_docker_service(&self) -> BTreeMap<String, DockerService> {
+    fn mqtt_producers_and_ars_comp_1_docker_service(&self) -> BTreeMap<String, DockerService> {
         let mut services = BTreeMap::new();
 
         for i in 0..self.mqtt.producers_count() {
@@ -667,10 +667,14 @@ impl Config {
                 format!("ars-comp-1-proxy-{i}"),
                 DockerService::default()
                     .with_image(self.lps_mqtt_image_name())
-                    .with_container_name(format!("ars-comp-1-proxy-{i}"))
+                    .with_container_name(format!("lps-ars-comp-1-proxy-{i}"))
                     .with_command(String::from("python3 ars_comp_1_proxy.py"))
                     .with_environment(
                         [
+                            (
+                                String::from("SERVICE_NAME"),
+                                format!("ars-comp-1-proxy-{i}"),
+                            ),
                             (String::from("HTTP_PORT"), self.default_http_port()),
                             (
                                 String::from("TARGET_URL"),
@@ -691,13 +695,83 @@ impl Config {
                 format!("legacy-proxy-1-{i}"),
                 DockerService::default()
                     .with_image(self.lps_mqtt_image_name())
-                    .with_container_name(format!("legacy-proxy-1-{i}"))
+                    .with_container_name(format!("lps-legacy-proxy-1-{i}"))
                     .with_command(String::from("python3 legacy_proxy_1.py"))
                     .with_environment(
                         [
+                            (String::from("SERVICE_NAME"), format!("legacy-proxy-1-{i}")),
                             (String::from("MQTT_TOPIC"), String::from("proxy1/message")),
                             (String::from("HTTP_PORT"), self.default_http_port()),
                             (String::from("MQTT_BROKER"), self.hive_mq_container_name()),
+                            (String::from("MQTT_PORT"), self.hive_mq_container_port()),
+                        ]
+                        .into(),
+                    )
+                    .with_volumes(vec![self.volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
+                    .with_unless_stopped(),
+            );
+        }
+
+        services
+    }
+
+    fn mqtt_ars_comp_2_docker_service(&self) -> BTreeMap<String, DockerService> {
+        let mut services = BTreeMap::new();
+
+        services.insert(
+            String::from("ars-comp-2-proxy"),
+            DockerService::default()
+                .with_image(self.lps_mqtt_image_name())
+                .with_container_name(String::from("lps-ars-comp-2-proxy"))
+                .with_command(String::from("python3 ars_comp_2_proxy.py"))
+                .with_environment(
+                    [
+                        (
+                            String::from("SERVICE_NAME"),
+                            String::from("ars-comp-2-proxy"),
+                        ),
+                        (String::from("HTTP_PORT"), self.default_http_port()),
+                        (
+                            String::from("TARGET_URL"),
+                            format!(
+                                "http://{}:{}/work",
+                                self.server_container_name(),
+                                self.server.socket_addr.port()
+                            ),
+                        ),
+                    ]
+                    .into(),
+                )
+                .with_volumes(vec![self.volume_mount()])
+                .with_networks(vec![self.service_network_name()])
+                .with_unless_stopped(),
+        );
+
+        services
+    }
+
+    fn mqtt_consumers_docker_service(&self) -> BTreeMap<String, DockerService> {
+        let mut services = BTreeMap::new();
+
+        for i in 0..self.mqtt.consumers_count() {
+            services.insert(
+                format!("legacy-proxy-2-{i}"),
+                DockerService::default()
+                    .with_image(self.lps_mqtt_image_name())
+                    .with_container_name(format!("lps-legacy-proxy-2-{i}"))
+                    .with_command(String::from("python3 legacy_proxy_2.py"))
+                    .with_environment(
+                        [
+                            (String::from("SERVICE_NAME"), format!("legacy-proxy-2-{i}")),
+                            (
+                                String::from("TARGET_URL"),
+                                format!(
+                                    "http://lps-ars-comp-2-proxy:{}/ID_REQ_KC_STORE7D3BPACKET",
+                                    self.default_http_port()
+                                ),
+                            ),
+                            (String::from("MQTT_HOST"), self.hive_mq_container_name()),
                             (String::from("MQTT_PORT"), self.hive_mq_container_port()),
                         ]
                         .into(),
@@ -730,7 +804,9 @@ impl Config {
 
         services.insert(String::from("server"), self.server_docker_service());
         services.insert(String::from("device"), self.device_docker_service());
-        services.extend(self.mqtt_producers_docker_service());
+        services.extend(self.mqtt_producers_and_ars_comp_1_docker_service());
+        services.extend(self.mqtt_ars_comp_2_docker_service());
+        services.extend(self.mqtt_consumers_docker_service());
         services.insert(String::from("validator"), self.validator_docker_service());
         services.insert(String::from("scripts"), self.scripts_docker_service());
 
