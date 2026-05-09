@@ -633,8 +633,20 @@ impl Config {
         String::from("lps-hivemq")
     }
 
+    fn hive_mq_container_port_u16(&self) -> u16 {
+        1883
+    }
+
     fn hive_mq_container_port(&self) -> String {
-        String::from("1883")
+        self.hive_mq_container_port_u16().to_string()
+    }
+
+    // TODO
+    fn hive_mq_docker_service(&self) -> DockerService {
+        DockerService::default()
+            .with_container_name(self.hive_mq_container_name())
+            .with_unless_stopped()
+            .with_networks(vec![self.service_network_name()])
     }
 
     fn mqtt_devices_config_files(&self) -> Vec<ConfigFile> {
@@ -751,8 +763,74 @@ impl Config {
         services
     }
 
+    fn mqtt_consumers_config_files(&self) -> Vec<ConfigFile> {
+        let mut config_files = Vec::new();
+
+        let consumer_mqtt_proxy_config =
+            self.mqtt
+                .consumers
+                .mqtt_proxy
+                .as_ref()
+                .map(|proxy| CrateTcpProxyConfig {
+                    tasks: vec![CrateTcpProxyTask {
+                        failure_rate: proxy.failure_rate,
+                        max_up_duration: proxy.max_up_duration,
+                        socket_addr: proxy.socket_addr,
+                        upstream_domain: self.hive_mq_container_name(),
+                        upstream_port: self.hive_mq_container_port_u16(),
+                    }],
+                    results_file: PathBuf::from(self.container_work_dir())
+                        .join("consumer-mqtt-proxy-results.json"),
+                });
+
+        let consumer_mqtt_proxy_config_file = consumer_mqtt_proxy_config.map(|config| ConfigFile {
+            name: "consumer-mqtt-proxy-config.yaml".to_string(),
+            ty: ConfigType::TcpProxy(config),
+        });
+
+        if let Some(config) = consumer_mqtt_proxy_config_file {
+            config_files.push(config);
+        }
+
+        config_files
+    }
+
     fn mqtt_consumers_docker_service(&self) -> BTreeMap<String, DockerService> {
         let mut services = BTreeMap::new();
+
+        if self.mqtt.consumers.mqtt_proxy.is_some() {
+            services.insert(
+                String::from("consumer-mqtt-proxy"),
+                DockerService::default()
+                    .with_image(self.lps_rust_image_name())
+                    .with_container_name(String::from("lps-consumer-mqtt-proxy"))
+                    .with_command(format!(
+                        "tcp-proxy --config-file {}",
+                        PathBuf::from(self.container_work_dir())
+                            .join("consumer-mqtt-proxy-config.yaml")
+                            .display()
+                    ))
+                    .with_volumes(vec![self.volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
+                    .with_unless_stopped(),
+            );
+        }
+
+        let broker_domain = self
+            .mqtt
+            .consumers
+            .mqtt_proxy
+            .as_ref()
+            .map(|_| String::from("lps-consumer-mqtt-proxy"))
+            .unwrap_or(self.hive_mq_container_name());
+
+        let broker_port = self
+            .mqtt
+            .consumers
+            .mqtt_proxy
+            .as_ref()
+            .map(|proxy| proxy.socket_addr.port())
+            .unwrap_or(self.hive_mq_container_port_u16());
 
         for i in 0..self.mqtt.consumers_count() {
             services.insert(
@@ -771,8 +849,8 @@ impl Config {
                                     self.default_http_port()
                                 ),
                             ),
-                            (String::from("MQTT_HOST"), self.hive_mq_container_name()),
-                            (String::from("MQTT_PORT"), self.hive_mq_container_port()),
+                            (String::from("MQTT_HOST"), broker_domain.clone()),
+                            (String::from("MQTT_PORT"), broker_port.to_string()),
                         ]
                         .into(),
                     )
@@ -790,6 +868,7 @@ impl Config {
 
         config_files.extend(self.server_config_files());
         config_files.extend(self.mqtt_devices_config_files());
+        config_files.extend(self.mqtt_consumers_config_files());
         config_files.extend(self.validator_config_files());
 
         config_files
@@ -802,6 +881,7 @@ impl Config {
 
         let mut services = BTreeMap::new();
 
+        services.insert(String::from("hivemq"), self.hive_mq_docker_service());
         services.insert(String::from("server"), self.server_docker_service());
         services.insert(String::from("device"), self.device_docker_service());
         services.extend(self.mqtt_producers_and_ars_comp_1_docker_service());

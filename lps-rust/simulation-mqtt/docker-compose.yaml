@@ -29,6 +29,15 @@ services:
     volumes:
     - ./mount:/app
     restart: unless-stopped
+  consumer-mqtt-proxy:
+    image: jadkhaddad/lps-rs:0.0.1
+    container_name: lps-consumer-mqtt-proxy
+    command: tcp-proxy --config-file /app/consumer-mqtt-proxy-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
   device:
     image: jadkhaddad/lps-rs:0.0.1
     container_name: lps-device
@@ -37,6 +46,12 @@ services:
     - lps-net
     volumes:
     - ./mount:/app
+  hivemq:
+    image: ''
+    container_name: lps-hivemq
+    networks:
+    - lps-net
+    restart: unless-stopped
   legacy-proxy-1-0:
     image: lps-mqtt
     container_name: lps-legacy-proxy-1-0
@@ -57,8 +72,8 @@ services:
     container_name: lps-legacy-proxy-2-0
     command: python3 legacy_proxy_2.py
     environment:
-      MQTT_HOST: lps-hivemq
-      MQTT_PORT: '1883'
+      MQTT_HOST: lps-consumer-mqtt-proxy
+      MQTT_PORT: '9090'
       SERVICE_NAME: legacy-proxy-2-0
       TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
     networks:
