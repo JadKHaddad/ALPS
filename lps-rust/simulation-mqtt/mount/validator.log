@@ -1,0 +1,5 @@
+[2m2026-05-14T10:12:28.025068Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Starting [3mconfig[0m[2m=[0mConfig { server_results_file: "server-results.json", device_results_file: "device-results.json" }
+[2m2026-05-14T10:12:28.030837Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Loaded events [3mserver_count[0m[2m=[0m2500 [3mdevice_count[0m[2m=[0m2500
+[2m2026-05-14T10:12:28.030847Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Checking for duplicates
+[2m2026-05-14T10:12:28.031121Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating order
+[2m2026-05-14T10:12:28.031291Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating completeness

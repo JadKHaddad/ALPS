@@ -181,6 +181,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .arg("--project-directory")
         .arg(&simulation_dir)
         .arg("down")
+        .arg("--remove-orphans")
         .status()
         .await
         .context("Failed to run docker compose down")?;

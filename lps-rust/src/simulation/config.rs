@@ -20,8 +20,14 @@ use crate::{
 pub struct Config {
     #[serde(skip)]
     pub root_abs_path: Option<PathBuf>,
+    #[serde(default)]
     pub lps_rust_image: String,
+    #[serde(default)]
     pub lps_scripts_image: String,
+    #[serde(default)]
+    pub lps_mqtt_python_image: String,
+    #[serde(default)]
+    pub lps_mqtt_hivemq_image: String,
     pub simulation_dir: String,
     pub simulation_docker_network: String,
     pub devices: DeviceConfig,
@@ -238,7 +244,7 @@ impl Config {
             ty: ConfigType::Device(CrateDeviceConfig {
                 devices_count: self.devices.devices_count,
                 max_event_interval: self.devices.max_event_interval,
-                max_events: self.devices.max_events,
+                max_events: Some(self.devices.max_events),
                 retry_duration: self.devices.retry_duration,
                 server_push_urls: (0..self.amqp.producers_count())
                     .map(|i| {
@@ -423,7 +429,7 @@ impl Config {
             .with_image(self.lps_scripts_image_name())
             .with_container_name(String::from("lps-scripts"))
             .with_command(format!(
-                "python /scripts/latency.py {} latency.png",
+                "python3 /scripts/latency.py {} latency.png",
                 self.server_results_file()
             ))
             .with_volumes(vec![self.volume_mount()])
@@ -496,7 +502,7 @@ pub struct DeviceConfig {
     pub devices_count: u32,
     #[serde(with = "humantime_serde")]
     pub max_event_interval: Duration,
-    pub max_events: Option<u64>,
+    pub max_events: u64,
     #[serde(with = "humantime_serde")]
     pub retry_duration: Duration,
 }
@@ -624,9 +630,12 @@ impl Config {
         String::from("8080")
     }
 
-    // TODO
-    fn lps_mqtt_image_name(&self) -> String {
-        String::from("lps-mqtt")
+    fn lps_mqtt_python_image_name(&self) -> String {
+        self.lps_mqtt_python_image.clone()
+    }
+
+    fn lps_mqtt_hivemq_image_name(&self) -> String {
+        self.lps_mqtt_hivemq_image.clone()
     }
 
     fn hive_mq_container_name(&self) -> String {
@@ -641,9 +650,9 @@ impl Config {
         self.hive_mq_container_port_u16().to_string()
     }
 
-    // TODO
     fn hive_mq_docker_service(&self) -> DockerService {
         DockerService::default()
+            .with_image(self.lps_mqtt_hivemq_image_name())
             .with_container_name(self.hive_mq_container_name())
             .with_unless_stopped()
             .with_networks(vec![self.service_network_name()])
@@ -655,7 +664,7 @@ impl Config {
             ty: ConfigType::Device(CrateDeviceConfig {
                 devices_count: self.devices.devices_count,
                 max_event_interval: self.devices.max_event_interval,
-                max_events: self.devices.max_events,
+                max_events: Some(self.devices.max_events),
                 retry_duration: self.devices.retry_duration,
                 server_push_urls: (0..self.mqtt.producers_count())
                     .map(|i| {
@@ -678,9 +687,9 @@ impl Config {
             services.insert(
                 format!("ars-comp-1-proxy-{i}"),
                 DockerService::default()
-                    .with_image(self.lps_mqtt_image_name())
+                    .with_image(self.lps_mqtt_python_image_name())
                     .with_container_name(format!("lps-ars-comp-1-proxy-{i}"))
-                    .with_command(String::from("python3 ars_comp_1_proxy.py"))
+                    .with_command(String::from("python3 /scripts/ars_comp_1_proxy.py"))
                     .with_environment(
                         [
                             (
@@ -706,9 +715,9 @@ impl Config {
             services.insert(
                 format!("legacy-proxy-1-{i}"),
                 DockerService::default()
-                    .with_image(self.lps_mqtt_image_name())
+                    .with_image(self.lps_mqtt_python_image_name())
                     .with_container_name(format!("lps-legacy-proxy-1-{i}"))
-                    .with_command(String::from("python3 legacy_proxy_1.py"))
+                    .with_command(String::from("python3 /scripts/legacy_proxy_1.py"))
                     .with_environment(
                         [
                             (String::from("SERVICE_NAME"), format!("legacy-proxy-1-{i}")),
@@ -734,9 +743,9 @@ impl Config {
         services.insert(
             String::from("ars-comp-2-proxy"),
             DockerService::default()
-                .with_image(self.lps_mqtt_image_name())
+                .with_image(self.lps_mqtt_python_image_name())
                 .with_container_name(String::from("lps-ars-comp-2-proxy"))
-                .with_command(String::from("python3 ars_comp_2_proxy.py"))
+                .with_command(String::from("python3 /scripts/ars_comp_2_proxy.py"))
                 .with_environment(
                     [
                         (
@@ -836,9 +845,9 @@ impl Config {
             services.insert(
                 format!("legacy-proxy-2-{i}"),
                 DockerService::default()
-                    .with_image(self.lps_mqtt_image_name())
+                    .with_image(self.lps_mqtt_python_image_name())
                     .with_container_name(format!("lps-legacy-proxy-2-{i}"))
-                    .with_command(String::from("python3 legacy_proxy_2.py"))
+                    .with_command(String::from("python3 /scripts/legacy_proxy_2.py"))
                     .with_environment(
                         [
                             (String::from("SERVICE_NAME"), format!("legacy-proxy-2-{i}")),

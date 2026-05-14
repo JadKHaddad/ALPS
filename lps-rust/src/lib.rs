@@ -255,9 +255,12 @@ pub async fn shutdown_signal() {
 
 /// Helpers to deserialize [`SimpleCall`] from different formats.
 ///
-/// - Correct json object with the correct fields.
-/// - Json object with a `body` field that contains the correct json object as a string.
-/// - A string that contains a json object with a `body` field that contains the correct json object as a string.
+/// - A JSON object with the correct fields directly.
+/// - A JSON object with a `body` field containing either:
+///   - A JSON string representing the correct object.
+///   - A Python [`str`]-formatted string (`"Phone: X, Branch: Y, Headnumber: Z, TriggerTime: T"`).
+/// - A string containing a JSON object, handled recursively via the above cases.
+/// - A bare Python [`str`]-formatted string directly.
 const _: () = {
     use serde::{Deserialize, Deserializer, de};
 
@@ -304,25 +307,97 @@ const _: () = {
 
         // Case 2: wrapper object with body
         if let Ok(wrapper) = serde_json::from_value::<BodyWrapper>(value.clone()) {
-            let data: SimpleCallHelper =
-                serde_json::from_str(&wrapper.body).map_err(|e| e.to_string())?;
+            let body = &wrapper.body;
 
-            return Ok(SimpleCall {
-                phone: data.phone,
-                triggertime: data.triggertime,
-                branch: data.branch,
-                headnumber: data.headnumber,
-            });
+            // Case 2a: body is a JSON string
+            if let Ok(data) = serde_json::from_str::<SimpleCallHelper>(body) {
+                return Ok(SimpleCall {
+                    phone: data.phone,
+                    triggertime: data.triggertime,
+                    branch: data.branch,
+                    headnumber: data.headnumber,
+                });
+            }
+
+            // Case 2b: body is the Python __str__ format
+            return parse_simplecall_python_str(body);
         }
 
-        // Case 3: top-level string containing wrapper object
+        // Case 3: top-level string containing wrapper object or Python __str__ format
         if let serde_json::Value::String(s) = value {
-            let nested: serde_json::Value = serde_json::from_str(&s).map_err(|e| e.to_string())?;
+            // Case 3a: try parsing as a JSON value first (recursive)
+            if let Ok(nested) = serde_json::from_str::<serde_json::Value>(&s) {
+                return parse_simplecall_value(nested);
+            }
 
-            return parse_simplecall_value(nested);
+            // Case 3b: try parsing as Python __str__ format directly
+            return parse_simplecall_python_str(&s);
         }
 
         Err("invalid SimpleCall format".into())
+    }
+
+    /// Parses the Python `__str__` format:
+    /// `Phone: <phone>, Branch: <branch>, Headnumber: <headnumber>, TriggerTime: <triggertime>`
+    fn parse_simplecall_python_str(s: &str) -> Result<SimpleCall, String> {
+        let mut phone = None;
+        let mut branch = None;
+        let mut headnumber = None;
+        let mut triggertime_str = None;
+
+        // The string looks like "Phone: X, Branch: Y, Headnumber: Z, TriggerTime: T"
+        // TriggerTime must be captured last since it may contain commas (though RFC3339 won't).
+        // We split on ", " but only at known key boundaries to be safe.
+        let keys = ["Phone: ", "Branch: ", "Headnumber: ", "TriggerTime: "];
+
+        // Find each key and extract the value up to the next key (or end of string).
+        for (i, key) in keys.iter().enumerate() {
+            let start = s
+                .find(key)
+                .ok_or_else(|| format!("missing field '{key}' in Python str format"))?;
+            let value_start = start + key.len();
+
+            // Value ends at the start of the next known key (minus the ", "), or end of string.
+            let value_end = keys[i + 1..]
+                .iter()
+                .filter_map(|next_key| {
+                    // The separator before each key is ", "
+                    s[value_start..]
+                        .find(&format!(", {next_key}"))
+                        .map(|pos| value_start + pos)
+                })
+                .min()
+                .unwrap_or(s.len());
+
+            let value = s[value_start..value_end].trim().to_string();
+
+            match *key {
+                "Phone: " => phone = Some(value),
+                "Branch: " => branch = Some(value),
+                "Headnumber: " => headnumber = Some(value),
+                "TriggerTime: " => triggertime_str = Some(value),
+                _ => {}
+            }
+        }
+
+        let phone = phone.ok_or("missing phone")?;
+        let branch = branch.ok_or("missing branch")?;
+        let headnumber = headnumber.ok_or("missing headnumber")?;
+        let triggertime_str = triggertime_str.ok_or("missing triggertime")?;
+
+        // Python datetime str format: "2026-03-26 10:30:00+00:00" (space instead of T, offset instead of Z)
+        // DateTime<Utc> can parse RFC3339, so we normalise it first.
+        let normalised = triggertime_str.replacen(' ', "T", 1);
+        let triggertime = DateTime::parse_from_rfc3339(&normalised)
+            .map(|dt| dt.with_timezone(&Utc))
+            .map_err(|e| format!("invalid triggertime '{triggertime_str}': {e}"))?;
+
+        Ok(SimpleCall {
+            phone,
+            triggertime,
+            branch,
+            headnumber,
+        })
     }
 };
 
@@ -357,7 +432,7 @@ impl TcpConnectionDrop {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use chrono::{TimeZone, Timelike, Utc};
+    use chrono::{TimeZone, Utc};
 
     #[test]
     fn deserialize_direct_simplecall() {
@@ -401,22 +476,38 @@ mod tests {
     }
 
     #[test]
-    fn deserialize_string_wrapper_simplecall() {
-        let json = r#"
-    "{\"id\":\"9\",\"body\":\"{\\\"phone\\\":\\\"9\\\",\\\"branch\\\":\\\"Branch\\\",\\\"headnumber\\\":\\\"Headnumber\\\",\\\"triggertime\\\":\\\"2026-03-26T09:49:37.044594Z\\\"}\",\"request_id\":\"device-9-event-0-try-1\"}"
-    "#;
+    fn deserialize_python_str_simplecall() {
+        // Simulates what Python's __str__ produces:
+        // f"Phone: {phone}, Branch: {branch}, Headnumber: {headnumber}, TriggerTime: {triggertime}"
+        // Python datetime UTC str looks like "2026-03-26 10:30:00+00:00"
+        let json = r#""Phone: 123456, Branch: A, Headnumber: 999, TriggerTime: 2026-03-26 10:30:00+00:00""#;
 
         let call: SimpleCall = serde_json::from_str(json).unwrap();
 
-        assert_eq!(call.phone, "9");
-        assert_eq!(call.branch, "Branch");
-        assert_eq!(call.headnumber, "Headnumber");
+        assert_eq!(call.phone, "123456");
+        assert_eq!(call.branch, "A");
+        assert_eq!(call.headnumber, "999");
         assert_eq!(
             call.triggertime,
-            Utc.with_ymd_and_hms(2026, 3, 26, 9, 49, 37)
-                .unwrap()
-                .with_nanosecond(44_594_000)
-                .unwrap()
+            Utc.with_ymd_and_hms(2026, 3, 26, 10, 30, 0).unwrap()
+        );
+    }
+
+    #[test]
+    fn deserialize_python_str_wrapped_in_body() {
+        // The Python str format wrapped in a body field (e.g. sent as an event body)
+        let inner =
+            "Phone: 123456, Branch: A, Headnumber: 999, TriggerTime: 2026-03-26 10:30:00+00:00";
+        let json = format!(r#"{{"body": "{inner}"}}"#);
+
+        let call: SimpleCall = serde_json::from_str(&json).unwrap();
+
+        assert_eq!(call.phone, "123456");
+        assert_eq!(call.branch, "A");
+        assert_eq!(call.headnumber, "999");
+        assert_eq!(
+            call.triggertime,
+            Utc.with_ymd_and_hms(2026, 3, 26, 10, 30, 0).unwrap()
         );
     }
 }

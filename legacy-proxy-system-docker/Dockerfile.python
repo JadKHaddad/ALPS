@@ -4,14 +4,16 @@ COPY python/requirements.txt requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /app
+WORKDIR /scripts
 
 COPY python/ars_comp_1_proxy.py ars_comp_1_proxy.py
 COPY python/ars_comp_2_proxy.py ars_comp_2_proxy.py
 COPY python/mqtt/legacy_proxy_1.py legacy_proxy_1.py
 COPY python/mqtt/legacy_proxy_2.py legacy_proxy_2.py
 
+WORKDIR /app
+
 # docker build -t jadkhaddad/lps-mqtt-python:0.0.1 -f Dockerfile.python ../legacy-proxy-system/
-# docker run --rm -it jadkhaddad/lps-mqtt-python:0.0.1 python /ars_comp_1_proxy.py
+# docker run --rm -it jadkhaddad/lps-mqtt-python:0.0.1 python /scripts/ars_comp_1_proxy.py
 
 # docker push jadkhaddad/lps-mqtt-python:0.0.1

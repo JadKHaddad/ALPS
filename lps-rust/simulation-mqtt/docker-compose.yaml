@@ -4,9 +4,9 @@ networks:
     name: lps-simulation-net
 services:
   ars-comp-1-proxy-0:
-    image: lps-mqtt
+    image: jadkhaddad/lps-mqtt-python:0.0.1
     container_name: lps-ars-comp-1-proxy-0
-    command: python3 ars_comp_1_proxy.py
+    command: python3 /scripts/ars_comp_1_proxy.py
     environment:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-1-proxy-0
@@ -17,22 +17,13 @@ services:
     - ./mount:/app
     restart: unless-stopped
   ars-comp-2-proxy:
-    image: lps-mqtt
+    image: jadkhaddad/lps-mqtt-python:0.0.1
     container_name: lps-ars-comp-2-proxy
-    command: python3 ars_comp_2_proxy.py
+    command: python3 /scripts/ars_comp_2_proxy.py
     environment:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-2-proxy
       TARGET_URL: http://lps-server:8080/work
-    networks:
-    - lps-net
-    volumes:
-    - ./mount:/app
-    restart: unless-stopped
-  consumer-mqtt-proxy:
-    image: jadkhaddad/lps-rs:0.0.1
-    container_name: lps-consumer-mqtt-proxy
-    command: tcp-proxy --config-file /app/consumer-mqtt-proxy-config.yaml
     networks:
     - lps-net
     volumes:
@@ -47,15 +38,15 @@ services:
     volumes:
     - ./mount:/app
   hivemq:
-    image: ''
+    image: jadkhaddad/lps-mqtt-hivemq:0.0.1
     container_name: lps-hivemq
     networks:
     - lps-net
     restart: unless-stopped
   legacy-proxy-1-0:
-    image: lps-mqtt
+    image: jadkhaddad/lps-mqtt-python:0.0.1
     container_name: lps-legacy-proxy-1-0
-    command: python3 legacy_proxy_1.py
+    command: python3 /scripts/legacy_proxy_1.py
     environment:
       HTTP_PORT: '8080'
       MQTT_BROKER: lps-hivemq
@@ -68,13 +59,69 @@ services:
     - ./mount:/app
     restart: unless-stopped
   legacy-proxy-2-0:
-    image: lps-mqtt
+    image: jadkhaddad/lps-mqtt-python:0.0.1
     container_name: lps-legacy-proxy-2-0
-    command: python3 legacy_proxy_2.py
+    command: python3 /scripts/legacy_proxy_2.py
     environment:
-      MQTT_HOST: lps-consumer-mqtt-proxy
-      MQTT_PORT: '9090'
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
       SERVICE_NAME: legacy-proxy-2-0
+      TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  legacy-proxy-2-1:
+    image: jadkhaddad/lps-mqtt-python:0.0.1
+    container_name: lps-legacy-proxy-2-1
+    command: python3 /scripts/legacy_proxy_2.py
+    environment:
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
+      SERVICE_NAME: legacy-proxy-2-1
+      TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  legacy-proxy-2-2:
+    image: jadkhaddad/lps-mqtt-python:0.0.1
+    container_name: lps-legacy-proxy-2-2
+    command: python3 /scripts/legacy_proxy_2.py
+    environment:
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
+      SERVICE_NAME: legacy-proxy-2-2
+      TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  legacy-proxy-2-3:
+    image: jadkhaddad/lps-mqtt-python:0.0.1
+    container_name: lps-legacy-proxy-2-3
+    command: python3 /scripts/legacy_proxy_2.py
+    environment:
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
+      SERVICE_NAME: legacy-proxy-2-3
+      TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  legacy-proxy-2-4:
+    image: jadkhaddad/lps-mqtt-python:0.0.1
+    container_name: lps-legacy-proxy-2-4
+    command: python3 /scripts/legacy_proxy_2.py
+    environment:
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
+      SERVICE_NAME: legacy-proxy-2-4
       TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
     networks:
     - lps-net
@@ -84,7 +131,7 @@ services:
   scripts:
     image: jadkhaddad/lps-scripts:0.0.1
     container_name: lps-scripts
-    command: python /scripts/latency.py server-results.json latency.png
+    command: python3 /scripts/latency.py server-results.json latency.png
     profiles:
     - manual
     networks:

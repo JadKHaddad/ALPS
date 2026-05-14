@@ -1,7 +1,7 @@
-FROM hivemq/hivemq-edge:2026.8
+FROM hivemq/hivemq-ce:2025.5
 
-COPY hivemq/hivemq_broker/conf/config-edge.xml /opt/hivemq/conf/config.xml
-COPY hivemq/hivemq_broker/extensions /opt/hivemq/extensions
+COPY hivemq/hivemq_broker/conf/config.xml /opt/hivemq/conf/config.xml
+COPY hivemq/hivemq_broker/extensions/* /tmp/custom-extensions
 
 EXPOSE 1883 8080
 
