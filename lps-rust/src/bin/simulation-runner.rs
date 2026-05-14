@@ -168,25 +168,6 @@ async fn main() -> Result<(), anyhow::Error> {
     })
     .await?;
 
-    select(&token, async {
-        tracing::info!("Running validator and scripts");
-
-        tokio::process::Command::new("docker")
-            .arg("compose")
-            .arg("--project-directory")
-            .arg(&simulation_dir)
-            .arg("up")
-            .arg("scripts")
-            .arg("validator")
-            .stdout(Stdio::inherit())
-            .stderr(Stdio::inherit())
-            .status()
-            .await
-            .map(|_| ())
-            .context("Failed to run docker compose up for validator and scripts")
-    })
-    .await?;
-
     tracing::info!("Shutting down simulation runner.");
 
     let _ = docker_compose_logs.kill().await;
@@ -204,6 +185,40 @@ async fn main() -> Result<(), anyhow::Error> {
         .status()
         .await
         .context("Failed to run docker compose down")?;
+
+    select(&token, async {
+        tracing::info!("Running validator");
+
+        tokio::process::Command::new("docker")
+            .arg("compose")
+            .arg("--project-directory")
+            .arg(&simulation_dir)
+            .arg("up")
+            .arg("validator")
+            .status()
+            .await
+            .map(|_| ())
+            .context("Failed to run docker compose up for validator")
+    })
+    .await?;
+
+    select(&token, async {
+        tracing::info!("Running scripts");
+
+        tokio::process::Command::new("docker")
+            .arg("compose")
+            .arg("--project-directory")
+            .arg(&simulation_dir)
+            .arg("up")
+            .arg("scripts")
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .status()
+            .await
+            .map(|_| ())
+            .context("Failed to run docker compose up for scripts")
+    })
+    .await?;
 
     Ok(())
 }
