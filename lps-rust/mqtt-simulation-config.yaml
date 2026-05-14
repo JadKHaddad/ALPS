@@ -1,6 +1,6 @@
 simulation_dir: "simulation-mqtt"
 simulation_docker_network: "lps-simulation-net"
-lps_rust_image: "jadkhaddad/lps-rs:0.1.1"
+lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
 lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
 lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 lps_mqtt_hivemq_image: "jadkhaddad/lps-mqtt-hivemq:0.1.0"

@@ -4,7 +4,7 @@ networks:
     name: lps-simulation-net
 services:
   consumer-0:
-    image: jadkhaddad/lps-rs:0.1.1
+    image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-0
     command: consumer --config-file /app/consumer-0.yaml
     networks:
@@ -13,7 +13,7 @@ services:
       - ./mount:/app
     restart: unless-stopped
   consumer-1:
-    image: jadkhaddad/lps-rs:0.1.1
+    image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-1
     command: consumer --config-file /app/consumer-1.yaml
     networks:
@@ -22,7 +22,7 @@ services:
       - ./mount:/app
     restart: unless-stopped
   consumer-2:
-    image: jadkhaddad/lps-rs:0.1.1
+    image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-2
     command: consumer --config-file /app/consumer-2.yaml
     networks:
@@ -31,7 +31,7 @@ services:
       - ./mount:/app
     restart: unless-stopped
   consumer-amqp-proxy:
-    image: jadkhaddad/lps-rs:0.1.1
+    image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-amqp-proxy
     command: tcp-proxy --config-file /app/consumer-amqp-proxy-config.yaml
     networks:
@@ -40,7 +40,7 @@ services:
       - ./mount:/app
     restart: unless-stopped
   device:
-    image: jadkhaddad/lps-rs:0.1.1
+    image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-device
     command: device --config-file /app/device-config.yaml
     networks:
@@ -48,7 +48,7 @@ services:
     volumes:
       - ./mount:/app
   producer-0:
-    image: jadkhaddad/lps-rs:0.1.1
+    image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-producer-0
     command: producer --config-file /app/producer-0.yaml
     networks:
@@ -74,7 +74,7 @@ services:
     volumes:
       - ./mount:/app
   server:
-    image: jadkhaddad/lps-rs:0.1.1
+    image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server
     command: server --config-file /app/server-config.yaml
     networks:
@@ -84,7 +84,7 @@ services:
     volumes:
       - ./mount:/app
   validator:
-    image: jadkhaddad/lps-rs:0.1.1
+    image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-validator
     command: sh -c "validator --config-file /app/validator-config.yaml > /app/validator.log 2>&1"
     profiles:
