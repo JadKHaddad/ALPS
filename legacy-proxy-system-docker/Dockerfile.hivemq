@@ -1,0 +1,10 @@
+FROM hivemq/hivemq-edge:2026.8
+
+COPY hivemq/hivemq_broker/conf/config-edge.xml /opt/hivemq/conf/config.xml
+COPY hivemq/hivemq_broker/extensions /opt/hivemq/extensions
+
+EXPOSE 1883 8080
+
+# docker build -t jadkhaddad/lps-mqtt-hivemq:0.0.1 -f Dockerfile.hivemq ../legacy-proxy-system/
+
+# docker push jadkhaddad/lps-mqtt-hivemq:0.0.1
