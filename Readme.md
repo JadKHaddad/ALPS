@@ -45,6 +45,9 @@ docker run --rm -it \
   -v "$(pwd):/app" \
   jadkhaddad/lps-rs:0.1.1 \
   simulation-runner --config-file simulation-config.yaml --root-abs-path $(pwd)
+
+# These containers may still be around because of the manual profile
+docker rm -f lps-scripts lps-validator || true
 ```
 
 ## Run the mqtt simulation
@@ -55,6 +58,9 @@ docker run --rm -it \
   -v "$(pwd):/app" \
   jadkhaddad/lps-rs:0.1.1 \
   mqtt-simulation-runner --config-file mqtt-simulation-config.yaml --root-abs-path $(pwd)
+
+# These containers may still be around because of the manual profile
+docker rm -f lps-scripts lps-validator || true
 ```
 
 ## Run the validator and the plots generator manually
