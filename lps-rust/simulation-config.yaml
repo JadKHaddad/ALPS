@@ -1,7 +1,7 @@
 simulation_dir: "simulation"
 simulation_docker_network: "lps-simulation-net"
-lps_rust_image: "jadkhaddad/lps-rs:0.0.1"
-lps_scripts_image: "jadkhaddad/lps-scripts:0.0.1"
+lps_rust_image: "jadkhaddad/lps-rs:0.1.1"
+lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
 devices:
   devices_count: 10
   max_event_interval: 500ms
