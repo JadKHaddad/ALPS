@@ -39,11 +39,14 @@ pub fn main() -> Nil {
   let assert Ok(args) = args.run()
   let assert Ok(config) = config.load_config(args.config_file)
 
+  logging.log(logging.Info, "Args: " <> string.inspect(args))
+  logging.log(logging.Info, "Config: " <> string.inspect(config))
+
   let self_node = node.name(node.self())
   let table_name = atom.create("event")
   let schema_name = atom.create("schema")
 
-  case config.bootstrap {
+  case args.bootstrap {
     True -> {
       logging.log(logging.Info, "Bootstrap mode: Initializing...")
 
