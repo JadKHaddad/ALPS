@@ -1,7 +1,7 @@
 # LPS 3
 
 ```bash
-ERL_FLAGS="-sname node_1@localhost -setcookie secret" gleam run -- --config-file lps3-config-1.yaml --bootstrap true
+ERL_FLAGS="-sname node_1@localhost -setcookie secret" gleam run -- --config-file lps3-config-1.yaml --bootstrap
 
 ERL_FLAGS="-sname node_1@localhost -setcookie secret" gleam run -- --config-file lps3-config-1.yaml
 
