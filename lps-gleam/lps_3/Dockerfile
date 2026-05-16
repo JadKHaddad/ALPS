@@ -18,7 +18,7 @@ ENTRYPOINT ["/gleam/entrypoint.sh"]
 
 CMD ["run"]
 
-# docker build -t jadkhaddad/lps-3-gleam:0.0.1 .
-# docker push jadkhaddad/lps-3-gleam:0.0.1
+# docker build -t jadkhaddad/lps-gleam:0.1.0 .
+# docker push jadkhaddad/lps-gleam:0.1.0
 
-# docker run -it --rm -v $(pwd):/app -e ERL_FLAGS="-sname node_1@localhost -setcookie secret" jadkhaddad/lps-3-gleam:0.0.1 run --config-file lps3-config-1.yaml --bootstrap
+# docker run -it --rm -v $(pwd):/app -e ERL_FLAGS="-sname node_1@localhost -setcookie secret" jadkhaddad/lps-gleam:0.1.0 run --config-file lps3-config-1.yaml --bootstrap

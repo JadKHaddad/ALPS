@@ -68,6 +68,42 @@ async fn main() -> Result<(), anyhow::Error> {
 
     select(&token, async {
         tokio::process::Command::new("docker")
+            .arg("rm")
+            .arg("-f")
+            .arg("lps-scripts")
+            .arg("lps-validator")
+            .status()
+            .await
+            .map(|_| ())
+            .context("Failed to remove existing lps-scripts and lps-validator containers")
+    })
+    .await?;
+
+    if config.server.deduplication {
+        let config_file = config.deduplication_mounted_config_file();
+
+        // docker compose --project-directory simulation run deduplication run --config-file /app/deduplication-config.yaml --bootstrap
+        select(&token, async {
+            tokio::process::Command::new("docker")
+                .arg("compose")
+                .arg("--project-directory")
+                .arg(&simulation_dir)
+                .arg("run")
+                .arg("deduplication")
+                .arg("run")
+                .arg("--config-file")
+                .arg(config_file)
+                .arg("--bootstrap")
+                .status()
+                .await
+                .map(|_| ())
+                .context("Failed to run docker compose up deduplication")
+        })
+        .await?;
+    }
+
+    select(&token, async {
+        tokio::process::Command::new("docker")
             .arg("compose")
             .arg("--project-directory")
             .arg(&simulation_dir)

@@ -25,6 +25,8 @@ pub struct Config {
     #[serde(default)]
     pub lps_scripts_image: String,
     #[serde(default)]
+    pub lps_gleam_image: String,
+    #[serde(default)]
     pub lps_mqtt_python_image: String,
     #[serde(default)]
     pub lps_mqtt_hivemq_image: String,
@@ -54,6 +56,38 @@ impl Config {
 
     fn server_results_file(&self) -> String {
         String::from("server-results.json")
+    }
+
+    fn server_push_url(&self) -> String {
+        format!(
+            "http://{}:{}/work",
+            self.server_container_name(),
+            self.server.socket_addr.port()
+        )
+    }
+
+    fn deduplication_config_file(&self) -> String {
+        String::from("deduplication-config.yaml")
+    }
+
+    fn deduplication_http_port_u16(&self) -> u16 {
+        4000
+    }
+
+    fn deduplication_push_url(&self) -> String {
+        format!(
+            "http://{}:{}/work",
+            self.deduplication_container_name(),
+            self.deduplication_http_port_u16()
+        )
+    }
+
+    fn server_or_deduplication_push_url(&self) -> String {
+        if self.server.deduplication {
+            self.deduplication_push_url()
+        } else {
+            self.server_push_url()
+        }
     }
 
     fn device_config_file(&self) -> String {
@@ -110,8 +144,16 @@ impl Config {
         self.lps_scripts_image.clone()
     }
 
+    fn lps_gleam_image_name(&self) -> String {
+        self.lps_gleam_image.clone()
+    }
+
     fn server_container_name(&self) -> String {
         String::from("lps-server")
+    }
+
+    fn deduplication_container_name(&self) -> String {
+        String::from("lps-deduplication")
     }
 
     fn rabbit_mq_container_name(&self) -> String {
@@ -129,6 +171,23 @@ impl Config {
                 .context("Failed to read config file")?,
         )
         .context("Failed to deserialize config file")
+    }
+
+    fn deduplication_config_files(&self) -> Vec<ConfigFile> {
+        let mut config_files = Vec::new();
+
+        if self.server.deduplication {
+            config_files.push(ConfigFile {
+                name: self.deduplication_config_file(),
+                ty: ConfigType::Deduplication(DeduplicationConfig {
+                    port: self.deduplication_http_port_u16(),
+                    server_push_url: self.server_push_url(),
+                    nodes: vec![self.deduplication_container_name()],
+                }),
+            });
+        }
+
+        config_files
     }
 
     fn server_config_files(&self) -> Vec<ConfigFile> {
@@ -224,11 +283,7 @@ impl Config {
                     queues_count: self.amqp.queues_count,
                     reconnect_duration: self.amqp.consumers.reconnect_duration,
                     rabbit_mq_url: format!("amqp://{}:{}", broker_domain, broker_port),
-                    server_push_url: format!(
-                        "http://{}:{}/work",
-                        self.server_container_name(),
-                        self.server.socket_addr.port()
-                    ),
+                    server_push_url: self.server_or_deduplication_push_url(),
                 }),
             };
 
@@ -274,6 +329,7 @@ impl Config {
         let mut config_files = Vec::new();
 
         config_files.extend(self.server_config_files());
+        config_files.extend(self.deduplication_config_files());
         config_files.extend(self.amqp_producers_config_files());
         config_files.extend(self.amqp_consumers_config_files());
         config_files.extend(self.amqp_devices_config_files());
@@ -324,6 +380,40 @@ impl Config {
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
             .with_ports(ports)
+            .with_networks(vec![self.service_network_name()])
+    }
+
+    /// This is used from the runner to run the service in bootstrap mode.
+    ///
+    /// ```not_rust
+    /// run --config-file file.yaml --bootstrap
+    /// ```
+    pub fn deduplication_mounted_config_file(&self) -> String {
+        PathBuf::from(self.container_work_dir())
+            .join(self.deduplication_config_file())
+            .display()
+            .to_string()
+    }
+
+    fn deduplication_docker_service(&self) -> DockerService {
+        DockerService::default()
+            .with_image(self.lps_gleam_image_name())
+            .with_container_name(self.deduplication_container_name())
+            .with_command(format!(
+                "run --config-file {}",
+                self.deduplication_mounted_config_file()
+            ))
+            .with_environment(
+                [(
+                    String::from("ERL_FLAGS"),
+                    format!(
+                        "-sname node@{} -setcookie secret",
+                        self.deduplication_container_name()
+                    ),
+                )]
+                .into(),
+            )
+            .with_volumes(vec![self.volume_mount()])
             .with_networks(vec![self.service_network_name()])
     }
 
@@ -446,6 +536,10 @@ impl Config {
 
         services.insert(String::from("rabbitmq"), self.rabbit_mq_docker_service());
         services.insert(String::from("server"), self.server_docker_service());
+        services.insert(
+            String::from("deduplication"),
+            self.deduplication_docker_service(),
+        );
         services.insert(String::from("device"), self.device_docker_service());
         services.extend(self.amqp_producers_docker_service());
         services.extend(self.amqp_consumers_docker_service());
@@ -519,6 +613,8 @@ pub struct ServerConfig {
     pub max_response_duration: Duration,
     #[serde(default, with = "humantime_serde")]
     pub shutdown_after_idle_duration: Option<Duration>,
+    #[serde(default)]
+    pub deduplication: bool,
 }
 
 #[derive(Debug, Deserialize, Default)]
@@ -579,10 +675,18 @@ pub struct ConfigFile {
 }
 
 #[derive(Debug, Serialize)]
+pub struct DeduplicationConfig {
+    pub port: u16,
+    pub server_push_url: String,
+    pub nodes: Vec<String>,
+}
+
+#[derive(Debug, Serialize)]
 #[serde(untagged)]
 pub enum ConfigType {
     Device(CrateDeviceConfig),
     Server(CrateServerConfig),
+    Deduplication(DeduplicationConfig),
     Producer(CrateProducerConfig),
     Consumer(CrateConsumerConfig),
     TcpProxy(CrateTcpProxyConfig),
@@ -627,7 +731,11 @@ fn default_socket_addr() -> SocketAddr {
 impl Config {
     /// Used for all mqtt http components as HTTP_PORT
     fn default_http_port(&self) -> String {
-        String::from("8080")
+        self.default_http_port_u16().to_string()
+    }
+
+    fn default_http_port_u16(&self) -> u16 {
+        8080
     }
 
     fn lps_mqtt_python_image_name(&self) -> String {
@@ -755,11 +863,7 @@ impl Config {
                         (String::from("HTTP_PORT"), self.default_http_port()),
                         (
                             String::from("TARGET_URL"),
-                            format!(
-                                "http://{}:{}/work",
-                                self.server_container_name(),
-                                self.server.socket_addr.port()
-                            ),
+                            self.server_or_deduplication_push_url(),
                         ),
                     ]
                     .into(),
@@ -876,6 +980,7 @@ impl Config {
         let mut config_files = Vec::new();
 
         config_files.extend(self.server_config_files());
+        config_files.extend(self.deduplication_config_files());
         config_files.extend(self.mqtt_devices_config_files());
         config_files.extend(self.mqtt_consumers_config_files());
         config_files.extend(self.validator_config_files());
@@ -892,6 +997,10 @@ impl Config {
 
         services.insert(String::from("hivemq"), self.hive_mq_docker_service());
         services.insert(String::from("server"), self.server_docker_service());
+        services.insert(
+            String::from("deduplication"),
+            self.deduplication_docker_service(),
+        );
         services.insert(String::from("device"), self.device_docker_service());
         services.extend(self.mqtt_producers_and_ars_comp_1_docker_service());
         services.extend(self.mqtt_ars_comp_2_docker_service());

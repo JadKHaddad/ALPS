@@ -8,88 +8,98 @@ services:
     container_name: lps-consumer-0
     command: consumer --config-file /app/consumer-0.yaml
     networks:
-      - lps-net
+    - lps-net
     volumes:
-      - ./mount:/app
+    - ./mount:/app
     restart: unless-stopped
   consumer-1:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-1
     command: consumer --config-file /app/consumer-1.yaml
     networks:
-      - lps-net
+    - lps-net
     volumes:
-      - ./mount:/app
+    - ./mount:/app
     restart: unless-stopped
   consumer-2:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-2
     command: consumer --config-file /app/consumer-2.yaml
     networks:
-      - lps-net
+    - lps-net
     volumes:
-      - ./mount:/app
+    - ./mount:/app
     restart: unless-stopped
   consumer-amqp-proxy:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-amqp-proxy
     command: tcp-proxy --config-file /app/consumer-amqp-proxy-config.yaml
     networks:
-      - lps-net
+    - lps-net
     volumes:
-      - ./mount:/app
+    - ./mount:/app
     restart: unless-stopped
+  deduplication:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication
+    command: run --config-file /app/deduplication-config.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication -setcookie secret
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
   device:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-device
     command: device --config-file /app/device-config.yaml
     networks:
-      - lps-net
+    - lps-net
     volumes:
-      - ./mount:/app
+    - ./mount:/app
   producer-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-producer-0
     command: producer --config-file /app/producer-0.yaml
     networks:
-      - lps-net
+    - lps-net
     volumes:
-      - ./mount:/app
+    - ./mount:/app
     restart: unless-stopped
   rabbitmq:
     image: rabbitmq:4-management
     container_name: lps-rabbitmq
     command: bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
     networks:
-      - lps-net
+    - lps-net
     restart: unless-stopped
   scripts:
     image: jadkhaddad/lps-scripts:0.1.0
     container_name: lps-scripts
     command: python3 /scripts/latency.py server-results.json latency.png
     profiles:
-      - manual
+    - manual
     networks:
-      - lps-net
+    - lps-net
     volumes:
-      - ./mount:/app
+    - ./mount:/app
   server:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server
     command: server --config-file /app/server-config.yaml
     networks:
-      - lps-net
+    - lps-net
     ports:
-      - 0.0.0.0:8080:8080
+    - 0.0.0.0:8080:8080
     volumes:
-      - ./mount:/app
+    - ./mount:/app
   validator:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-validator
     command: sh -c "validator --config-file /app/validator-config.yaml > /app/validator.log 2>&1"
     profiles:
-      - manual
+    - manual
     networks:
-      - lps-net
+    - lps-net
     volumes:
-      - ./mount:/app
+    - ./mount:/app
