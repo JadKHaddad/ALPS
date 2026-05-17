@@ -10,6 +10,7 @@ pub mod consumer;
 pub mod device;
 pub mod producer;
 pub mod server;
+pub mod server_proxy;
 pub mod simulation;
 pub mod tcp_proxy;
 pub mod validator;
