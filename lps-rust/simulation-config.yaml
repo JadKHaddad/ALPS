@@ -4,7 +4,7 @@ lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
 lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
 lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 devices:
-  devices_count: 5
+  devices_count: 20
   max_event_interval: 500ms
   retry_duration: 500ms
   max_events: 5

@@ -143,7 +143,7 @@ impl AppState {
             events.len()
         };
 
-        tracing::debug!(count, "Events count");
+        tracing::info!(count, "Events count");
     }
 
     async fn push_failure(&self, failure: Failure) {

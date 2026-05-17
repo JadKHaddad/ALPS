@@ -89,11 +89,27 @@ async fn main() -> Result<(), anyhow::Error> {
                 .arg("--project-directory")
                 .arg(&simulation_dir)
                 .arg("run")
+                .arg("--rm")
                 .arg("deduplication-0")
                 .arg("run")
                 .arg("--config-file")
                 .arg(config_file)
                 .arg("--bootstrap")
+                .status()
+                .await
+                .map(|_| ())
+                .context("Failed to run docker compose up deduplication")
+        })
+        .await?;
+
+        select(&token, async {
+            tokio::process::Command::new("docker")
+                .arg("compose")
+                .arg("--project-directory")
+                .arg(&simulation_dir)
+                .arg("up")
+                .arg("deduplication-0")
+                .arg("-d")
                 .status()
                 .await
                 .map(|_| ())
@@ -133,24 +149,55 @@ async fn main() -> Result<(), anyhow::Error> {
         .take()
         .context("Failed to take docker compose logs stdout")?;
 
-    tracing::info!("Waiting for RabbitMQ to be ready...");
+    tracing::info!("Waiting for broker to be ready...");
+
+    if config.server.deduplication {
+        tracing::info!("Waiting for deduplication to be ready...");
+    }
 
     let mut reader = tokio::io::BufReader::new(logs).lines();
 
     select(&token, async {
+        // deduplication is ready if we are not using it or when deduplication-0 is ready
+        let mut deduplication_ready = !config.server.deduplication;
+        let mut broker_ready = false;
+
         while let Ok(Some(line)) = reader.next_line().await {
             println!("{line}");
 
             if line.contains("Time to start RabbitMQ") {
-                tracing::info!("RabbitMQ is ready, starting simulation");
+                tracing::info!("Broker is ready");
 
-                break;
+                broker_ready = true;
+
+                if deduplication_ready && broker_ready {
+                    break;
+                }
+            }
+
+            if line.contains("lps-deduplication-0")
+                && (
+                    // First run, no schema was created on disk
+                    line.contains("Starting server") || 
+                    // Subsequent runs, if the schema dir was not deleted
+                    line.contains("Table discovered in schema")
+                )
+            {
+                tracing::info!("Deduplication is ready");
+
+                deduplication_ready = true;
+
+                if deduplication_ready && broker_ready {
+                    break;
+                }
             }
         }
 
         Ok(())
     })
     .await?;
+
+    tracing::info!("Starting simulation...");
 
     tokio::spawn(async move {
         while let Ok(Some(line)) = reader.next_line().await {
