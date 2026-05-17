@@ -15,8 +15,8 @@ server:
   max_work_duration: 500ms
   max_response_duration: 100ms
   shutdown_after_idle_duration: 15s # Optional, if set, the server will shut down after being idle for this duration (no events received). If not set, the server will run indefinitely.
-  deduplication: False # Optional
-  server_count: 2
+  deduplication: True # Optional
+  server_count: 3
 amqp:
   queues_count: 10
   producers:

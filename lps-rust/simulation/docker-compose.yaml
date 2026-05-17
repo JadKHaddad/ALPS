@@ -47,12 +47,32 @@ services:
     - lps-net
     volumes:
     - ./mount:/app
-  deduplication:
+  deduplication-0:
     image: jadkhaddad/lps-gleam:0.1.0
-    container_name: lps-deduplication
-    command: run --config-file /app/deduplication-config.yaml
+    container_name: lps-deduplication-0
+    command: run --config-file /app/deduplication-0.yaml
     environment:
-      ERL_FLAGS: -sname node@lps-deduplication -setcookie secret
+      ERL_FLAGS: -sname node@lps-deduplication-0 -setcookie secret
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  deduplication-1:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-1
+    command: run --config-file /app/deduplication-1.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-1 -setcookie secret
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  deduplication-2:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-2
+    command: run --config-file /app/deduplication-2.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-2 -setcookie secret
     networks:
     - lps-net
     volumes:
@@ -113,6 +133,14 @@ services:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server-server-proxy-1
     command: server-proxy --config-file /app/server-server-proxy-1.yaml
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  server-server-proxy-2:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server-server-proxy-2
+    command: server-proxy --config-file /app/server-server-proxy-2.yaml
     networks:
     - lps-net
     volumes:

@@ -79,28 +79,8 @@ impl Config {
         )
     }
 
-    fn deduplication_config_file(&self) -> String {
-        String::from("deduplication-config.yaml")
-    }
-
     fn deduplication_http_port_u16(&self) -> u16 {
         4000
-    }
-
-    fn deduplication_push_url(&self) -> String {
-        format!(
-            "http://{}:{}/work",
-            self.deduplication_container_name(),
-            self.deduplication_http_port_u16()
-        )
-    }
-
-    fn server_or_deduplication_push_url(&self) -> String {
-        if self.server.deduplication {
-            self.deduplication_push_url()
-        } else {
-            self.server_push_url()
-        }
     }
 
     fn device_config_file(&self) -> String {
@@ -169,10 +149,6 @@ impl Config {
         String::from("lps-consumers-server-proxy")
     }
 
-    fn deduplication_container_name(&self) -> String {
-        String::from("lps-deduplication")
-    }
-
     fn rabbit_mq_container_name(&self) -> String {
         String::from("lps-rabbitmq")
     }
@@ -190,18 +166,26 @@ impl Config {
         .context("Failed to deserialize config file")
     }
 
+    /// One for each server -> server-server-proxy -> server
     fn deduplication_config_files(&self) -> Vec<ConfigFile> {
         let mut config_files = Vec::new();
 
         if self.server.deduplication {
-            config_files.push(ConfigFile {
-                name: self.deduplication_config_file(),
-                ty: ConfigType::Deduplication(DeduplicationConfig {
-                    port: self.deduplication_http_port_u16(),
-                    server_push_url: self.server_push_url(),
-                    nodes: vec![self.deduplication_container_name()],
-                }),
-            });
+            for i in 0..self.server.server_count() {
+                config_files.push(ConfigFile {
+                    name: format!("deduplication-{}.yaml", i),
+                    ty: ConfigType::Deduplication(DeduplicationConfig {
+                        port: self.deduplication_http_port_u16(),
+                        server_push_url: format!(
+                            "http://lps-server-server-proxy-{i}:{}/work",
+                            self.server_proxy_default_socket_addr().port()
+                        ),
+                        nodes: (0..self.server.server_count())
+                            .map(|id| format!("node@lps-deduplication-{}", id))
+                            .collect(),
+                    }),
+                });
+            }
         }
 
         config_files
@@ -211,7 +195,29 @@ impl Config {
         SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), 8080)
     }
 
-    /// One consumers-server-proxy -> server-server-proxies
+    fn deduplication_or_server_proxy_push_urls(&self) -> Vec<String> {
+        if self.server.deduplication {
+            (0..self.server.server_count())
+                .map(|i| {
+                    format!(
+                        "http://lps-deduplication-{i}:{}/work",
+                        self.deduplication_http_port_u16()
+                    )
+                })
+                .collect()
+        } else {
+            (0..self.server.server_count())
+                .map(|i| {
+                    format!(
+                        "http://lps-server-server-proxy-{i}:{}/work",
+                        self.server_proxy_default_socket_addr().port()
+                    )
+                })
+                .collect()
+        }
+    }
+
+    /// One consumers-server-proxy -> server-server-proxies or (if deduplication) deduplication -> server-server-proxies)
     /// Multiple server-server-proxies according to server count -> server
     /// One server
     fn server_config_files(&self) -> Vec<ConfigFile> {
@@ -231,14 +237,7 @@ impl Config {
             name: self.consumers_server_proxy_config_file(),
             ty: ConfigType::ServerProxy(CrateServerProxyConfig {
                 socket_addr: self.server_proxy_default_socket_addr(),
-                server_push_urls: (0..self.server.server_count())
-                    .map(|i| {
-                        format!(
-                            "http://lps-server-server-proxy-{i}:{}/work",
-                            self.server_proxy_default_socket_addr().port()
-                        )
-                    })
-                    .collect(),
+                server_push_urls: self.deduplication_or_server_proxy_push_urls(),
             }),
         });
 
@@ -479,33 +478,42 @@ impl Config {
     /// ```not_rust
     /// run --config-file file.yaml --bootstrap
     /// ```
-    pub fn deduplication_mounted_config_file(&self) -> String {
+    pub fn fist_deduplication_mounted_config_file(&self) -> String {
         PathBuf::from(self.container_work_dir())
-            .join(self.deduplication_config_file())
+            .join("deduplication-0.yaml")
             .display()
             .to_string()
     }
 
-    fn deduplication_docker_service(&self) -> DockerService {
-        DockerService::default()
-            .with_image(self.lps_gleam_image_name())
-            .with_container_name(self.deduplication_container_name())
-            .with_command(format!(
-                "run --config-file {}",
-                self.deduplication_mounted_config_file()
-            ))
-            .with_environment(
-                [(
-                    String::from("ERL_FLAGS"),
-                    format!(
-                        "-sname node@{} -setcookie secret",
-                        self.deduplication_container_name()
-                    ),
-                )]
-                .into(),
-            )
-            .with_volumes(vec![self.volume_mount()])
-            .with_networks(vec![self.service_network_name()])
+    fn deduplication_docker_services(&self) -> BTreeMap<String, DockerService> {
+        let mut services = BTreeMap::new();
+
+        if self.server.deduplication {
+            for i in 0..self.server.server_count() {
+                let config_file = PathBuf::from(self.container_work_dir())
+                    .join(format!("deduplication-{}.yaml", i))
+                    .display()
+                    .to_string();
+
+                let service = DockerService::default()
+                    .with_image(self.lps_gleam_image_name())
+                    .with_container_name(format!("lps-deduplication-{i}"))
+                    .with_command(format!("run --config-file {config_file}",))
+                    .with_environment(
+                        [(
+                            String::from("ERL_FLAGS"),
+                            format!("-sname node@lps-deduplication-{i} -setcookie secret",),
+                        )]
+                        .into(),
+                    )
+                    .with_volumes(vec![self.volume_mount()])
+                    .with_networks(vec![self.service_network_name()]);
+
+                services.insert(format!("deduplication-{i}"), service);
+            }
+        }
+
+        services
     }
 
     fn device_docker_service(&self) -> DockerService {
@@ -627,10 +635,7 @@ impl Config {
 
         services.insert(String::from("rabbitmq"), self.rabbit_mq_docker_service());
         services.extend(self.server_docker_services());
-        services.insert(
-            String::from("deduplication"),
-            self.deduplication_docker_service(),
-        );
+        services.extend(self.deduplication_docker_services());
         services.insert(String::from("device"), self.device_docker_service());
         services.extend(self.amqp_producers_docker_service());
         services.extend(self.amqp_consumers_docker_service());
@@ -1094,10 +1099,7 @@ impl Config {
 
         services.insert(String::from("hivemq"), self.hive_mq_docker_service());
         services.extend(self.server_docker_services());
-        services.insert(
-            String::from("deduplication"),
-            self.deduplication_docker_service(),
-        );
+        services.extend(self.deduplication_docker_services());
         services.insert(String::from("device"), self.device_docker_service());
         services.extend(self.mqtt_producers_and_ars_comp_1_docker_service());
         services.extend(self.mqtt_ars_comp_2_docker_service());
