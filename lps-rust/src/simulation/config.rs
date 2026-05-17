@@ -12,6 +12,7 @@ use crate::{
     device::Config as CrateDeviceConfig,
     producer::Config as CrateProducerConfig,
     server::Config as CrateServerConfig,
+    server_proxy::Config as CrateServerProxyConfig,
     tcp_proxy::{Config as CrateTcpProxyConfig, Task as CrateTcpProxyTask},
     validator::Config as CrateValidatorConfig,
 };
@@ -50,6 +51,10 @@ impl Config {
         String::from("server-config.yaml")
     }
 
+    fn consumers_server_proxy_config_file(&self) -> String {
+        String::from("consumers-server-proxy-config.yaml")
+    }
+
     fn server_failures_file(&self) -> String {
         String::from("server-failures.json")
     }
@@ -63,6 +68,14 @@ impl Config {
             "http://{}:{}/work",
             self.server_container_name(),
             self.server.socket_addr.port()
+        )
+    }
+
+    fn consumers_server_push_url(&self) -> String {
+        format!(
+            "http://{}:{}/work",
+            self.consumers_server_proxy_container_name(),
+            self.server_proxy_default_socket_addr().port()
         )
     }
 
@@ -152,6 +165,10 @@ impl Config {
         String::from("lps-server")
     }
 
+    fn consumers_server_proxy_container_name(&self) -> String {
+        String::from("lps-consumers-server-proxy")
+    }
+
     fn deduplication_container_name(&self) -> String {
         String::from("lps-deduplication")
     }
@@ -190,8 +207,42 @@ impl Config {
         config_files
     }
 
+    fn server_proxy_default_socket_addr(&self) -> SocketAddr {
+        SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), 8080)
+    }
+
+    /// One consumers-server-proxy -> server-server-proxies
+    /// Multiple server-server-proxies according to server count -> server
+    /// One server
     fn server_config_files(&self) -> Vec<ConfigFile> {
-        vec![ConfigFile {
+        let mut config_files = Vec::new();
+
+        for i in 0..self.server.server_count() {
+            config_files.push(ConfigFile {
+                name: format!("server-server-proxy-{}.yaml", i),
+                ty: ConfigType::ServerProxy(CrateServerProxyConfig {
+                    socket_addr: self.server_proxy_default_socket_addr(),
+                    server_push_urls: vec![self.server_push_url()],
+                }),
+            });
+        }
+
+        config_files.push(ConfigFile {
+            name: self.consumers_server_proxy_config_file(),
+            ty: ConfigType::ServerProxy(CrateServerProxyConfig {
+                socket_addr: self.server_proxy_default_socket_addr(),
+                server_push_urls: (0..self.server.server_count())
+                    .map(|i| {
+                        format!(
+                            "http://lps-server-server-proxy-{i}:{}",
+                            self.server_proxy_default_socket_addr().port()
+                        )
+                    })
+                    .collect(),
+            }),
+        });
+
+        config_files.push(ConfigFile {
             name: self.server_config_file(),
             ty: ConfigType::Server(CrateServerConfig {
                 failure_rate: self.server.failure_rate,
@@ -204,7 +255,9 @@ impl Config {
                     .join(self.server_failures_file()),
                 shutdown_after_idle_duration: self.server.shutdown_after_idle_duration,
             }),
-        }]
+        });
+
+        config_files
     }
 
     fn amqp_producers_config_files(&self) -> Vec<ConfigFile> {
@@ -283,7 +336,7 @@ impl Config {
                     queues_count: self.amqp.queues_count,
                     reconnect_duration: self.amqp.consumers.reconnect_duration,
                     rabbit_mq_url: format!("amqp://{}:{}", broker_domain, broker_port),
-                    server_push_url: self.server_or_deduplication_push_url(),
+                    server_push_url: self.consumers_server_push_url(),
                 }),
             };
 
@@ -363,7 +416,9 @@ impl Config {
             })
     }
 
-    fn server_docker_service(&self) -> DockerService {
+    fn server_docker_services(&self) -> BTreeMap<String, DockerService> {
+        let mut services = BTreeMap::new();
+
         let config_file = PathBuf::from(self.container_work_dir())
             .join(self.server_config_file())
             .display()
@@ -374,13 +429,49 @@ impl Config {
 
         let ports = vec![format!("{exposed_addr}:{container_port}")];
 
-        DockerService::default()
+        let service = DockerService::default()
             .with_image(self.lps_rust_image_name())
             .with_container_name(self.server_container_name())
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
             .with_ports(ports)
-            .with_networks(vec![self.service_network_name()])
+            .with_networks(vec![self.service_network_name()]);
+
+        services.insert(String::from("server"), service);
+
+        // The consumers-server-proxy
+        let config_file = PathBuf::from(self.container_work_dir())
+            .join(self.consumers_server_proxy_config_file())
+            .display()
+            .to_string();
+
+        let service = DockerService::default()
+            .with_image(self.lps_rust_image_name())
+            .with_container_name(self.consumers_server_proxy_container_name())
+            .with_command(format!("server-proxy --config-file {config_file}"))
+            .with_volumes(vec![self.volume_mount()])
+            .with_networks(vec![self.service_network_name()]);
+
+        services.insert(String::from("consumers-server-proxy"), service);
+
+        // The server-server-proxies
+        for i in 0..self.server.server_count() {
+            let config_file = PathBuf::from(self.container_work_dir())
+                .join(format!("server-server-proxy-{}.yaml", i))
+                .display()
+                .to_string();
+
+            let service = DockerService::default()
+                .with_image(self.lps_rust_image_name())
+                .with_container_name(format!("lps-server-server-proxy-{i}"))
+                .with_command(format!("server-proxy --config-file {config_file}"))
+                .with_volumes(vec![self.volume_mount()])
+                .with_networks(vec![self.service_network_name()]);
+
+            services.insert(format!("server-server-proxy-{i}"), service);
+        }
+
+        services
     }
 
     /// This is used from the runner to run the service in bootstrap mode.
@@ -535,7 +626,7 @@ impl Config {
         let mut services = BTreeMap::new();
 
         services.insert(String::from("rabbitmq"), self.rabbit_mq_docker_service());
-        services.insert(String::from("server"), self.server_docker_service());
+        services.extend(self.server_docker_services());
         services.insert(
             String::from("deduplication"),
             self.deduplication_docker_service(),
@@ -613,8 +704,16 @@ pub struct ServerConfig {
     pub max_response_duration: Duration,
     #[serde(default, with = "humantime_serde")]
     pub shutdown_after_idle_duration: Option<Duration>,
+    pub server_count: u32,
     #[serde(default)]
     pub deduplication: bool,
+}
+
+impl ServerConfig {
+    /// A non-zero number
+    fn server_count(&self) -> u32 {
+        self.server_count.max(1)
+    }
 }
 
 #[derive(Debug, Deserialize, Default)]
@@ -686,6 +785,7 @@ pub struct DeduplicationConfig {
 pub enum ConfigType {
     Device(CrateDeviceConfig),
     Server(CrateServerConfig),
+    ServerProxy(CrateServerProxyConfig),
     Deduplication(DeduplicationConfig),
     Producer(CrateProducerConfig),
     Consumer(CrateConsumerConfig),
@@ -861,10 +961,7 @@ impl Config {
                             String::from("ars-comp-2-proxy"),
                         ),
                         (String::from("HTTP_PORT"), self.default_http_port()),
-                        (
-                            String::from("TARGET_URL"),
-                            self.server_or_deduplication_push_url(),
-                        ),
+                        (String::from("TARGET_URL"), self.consumers_server_push_url()),
                     ]
                     .into(),
                 )
@@ -996,7 +1093,7 @@ impl Config {
         let mut services = BTreeMap::new();
 
         services.insert(String::from("hivemq"), self.hive_mq_docker_service());
-        services.insert(String::from("server"), self.server_docker_service());
+        services.extend(self.server_docker_services());
         services.insert(
             String::from("deduplication"),
             self.deduplication_docker_service(),
