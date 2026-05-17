@@ -1,5 +1,5 @@
-[2m2026-05-16T16:45:14.076446Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Starting [3mconfig[0m[2m=[0mConfig { server_results_file: "server-results.json", device_results_file: "device-results.json" }
-[2m2026-05-16T16:45:14.106586Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Loaded events [3mserver_count[0m[2m=[0m10000 [3mdevice_count[0m[2m=[0m10000
-[2m2026-05-16T16:45:14.106608Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Checking for duplicates
-[2m2026-05-16T16:45:14.108066Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating order
-[2m2026-05-16T16:45:14.108732Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating completeness
+[2m2026-05-17T09:10:21.473993Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Starting [3mconfig[0m[2m=[0mConfig { server_results_file: "server-results.json", device_results_file: "device-results.json" }
+[2m2026-05-17T09:10:21.474512Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Loaded events [3mserver_count[0m[2m=[0m25 [3mdevice_count[0m[2m=[0m25
+[2m2026-05-17T09:10:21.474545Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Checking for duplicates
+[2m2026-05-17T09:10:21.474572Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating order
+[2m2026-05-17T09:10:21.474592Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating completeness

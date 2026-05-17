@@ -89,9 +89,7 @@ async fn main() -> Result<(), anyhow::Error> {
             Config::default()
         });
 
-    config
-        .server_push_urls
-        .is_empty()
+    (!config.server_push_urls.is_empty())
         .then_some(())
         .ok_or(anyhow::anyhow!("server_push_urls should not be empty"))?;
 

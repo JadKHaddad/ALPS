@@ -234,7 +234,7 @@ impl Config {
                 server_push_urls: (0..self.server.server_count())
                     .map(|i| {
                         format!(
-                            "http://lps-server-server-proxy-{i}:{}",
+                            "http://lps-server-server-proxy-{i}:{}/work",
                             self.server_proxy_default_socket_addr().port()
                         )
                     })
