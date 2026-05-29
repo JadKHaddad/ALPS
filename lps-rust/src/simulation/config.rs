@@ -434,7 +434,8 @@ impl Config {
             .with_command(format!("server --config-file {config_file}"))
             .with_volumes(vec![self.volume_mount()])
             .with_ports(ports)
-            .with_networks(vec![self.service_network_name()]);
+            .with_networks(vec![self.service_network_name()])
+            .with_environment([(String::from("RUST_LOG"), String::from("server=debug"))].into());
 
         services.insert(String::from("server"), service);
 
