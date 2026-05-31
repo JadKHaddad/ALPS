@@ -173,7 +173,7 @@ summary = (
     f"Gesamt angekommen: {n_total}  |  "
     f"Nie angekommen: {n_never_arrived}  |  "
     f"Außer Reihenfolge: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)  |  "
-    f"Fehler: {n_failed}"
+    f"Fehlgeschlagen: {n_failed}"
 )
 fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
 
