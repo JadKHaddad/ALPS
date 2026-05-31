@@ -16,6 +16,32 @@ services:
     volumes:
     - ./mount:/app
     restart: unless-stopped
+  ars-comp-1-proxy-1:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-ars-comp-1-proxy-1
+    command: python3 /scripts/ars_comp_1_proxy.py
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-1-proxy-1
+      TARGET_URL: http://lps-legacy-proxy-1-1:8080/ID_REQ_KC_STORE7D3BPACKET
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  ars-comp-1-proxy-2:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-ars-comp-1-proxy-2
+    command: python3 /scripts/ars_comp_1_proxy.py
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-1-proxy-2
+      TARGET_URL: http://lps-legacy-proxy-1-2:8080/ID_REQ_KC_STORE7D3BPACKET
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
   ars-comp-2-proxy:
     image: jadkhaddad/lps-mqtt-python:0.1.0
     container_name: lps-ars-comp-2-proxy
@@ -24,15 +50,6 @@ services:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-2-proxy
       TARGET_URL: http://lps-consumers-server-proxy:8080/work
-    networks:
-    - lps-net
-    volumes:
-    - ./mount:/app
-    restart: unless-stopped
-  consumer-mqtt-proxy:
-    image: jadkhaddad/lps-rs:0.1.0
-    container_name: lps-consumer-mqtt-proxy
-    command: tcp-proxy --config-file /app/consumer-mqtt-proxy-config.yaml
     networks:
     - lps-net
     volumes:
@@ -75,13 +92,43 @@ services:
     volumes:
     - ./mount:/app
     restart: unless-stopped
+  legacy-proxy-1-1:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-legacy-proxy-1-1
+    command: python3 /scripts/legacy_proxy_1.py
+    environment:
+      HTTP_PORT: '8080'
+      MQTT_BROKER: lps-hivemq
+      MQTT_PORT: '1883'
+      MQTT_TOPIC: proxy1/message
+      SERVICE_NAME: legacy-proxy-1-1
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  legacy-proxy-1-2:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-legacy-proxy-1-2
+    command: python3 /scripts/legacy_proxy_1.py
+    environment:
+      HTTP_PORT: '8080'
+      MQTT_BROKER: lps-hivemq
+      MQTT_PORT: '1883'
+      MQTT_TOPIC: proxy1/message
+      SERVICE_NAME: legacy-proxy-1-2
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
   legacy-proxy-2-0:
     image: jadkhaddad/lps-mqtt-python:0.1.0
     container_name: lps-legacy-proxy-2-0
     command: python3 /scripts/legacy_proxy_2.py
     environment:
-      MQTT_HOST: lps-consumer-mqtt-proxy
-      MQTT_PORT: '9090'
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
       SERVICE_NAME: legacy-proxy-2-0
       TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
     networks:
@@ -94,8 +141,8 @@ services:
     container_name: lps-legacy-proxy-2-1
     command: python3 /scripts/legacy_proxy_2.py
     environment:
-      MQTT_HOST: lps-consumer-mqtt-proxy
-      MQTT_PORT: '9090'
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
       SERVICE_NAME: legacy-proxy-2-1
       TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
     networks:
@@ -108,8 +155,8 @@ services:
     container_name: lps-legacy-proxy-2-2
     command: python3 /scripts/legacy_proxy_2.py
     environment:
-      MQTT_HOST: lps-consumer-mqtt-proxy
-      MQTT_PORT: '9090'
+      MQTT_HOST: lps-hivemq
+      MQTT_PORT: '1883'
       SERVICE_NAME: legacy-proxy-2-2
       TARGET_URL: http://lps-ars-comp-2-proxy:8080/ID_REQ_KC_STORE7D3BPACKET
     networks:
@@ -120,7 +167,7 @@ services:
   scripts:
     image: jadkhaddad/lps-scripts:0.1.0
     container_name: lps-scripts
-    command: python3 /scripts/latency.py server-results.json latency.png
+    command: sh -c 'python3 /scripts/latency.py server-results.json latency-line.png latency-hist.png && python3 /scripts/failure_order.py device-results.json server-results.json server-failures.json failure.png'
     profiles:
     - manual
     networks:

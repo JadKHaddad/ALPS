@@ -1,5 +1,5 @@
 """
-Usage: python failure_order_plot.py <device_events.json> <server_events.json> <failures.json> <output.png>
+Usage: python failure_order.py <device_events.json> <server_events.json> <failures.json> <output.png>
 
 Plots a timeline showing:
   - Per-event latency coloured by status (in-order / out-of-order / failed)
@@ -19,7 +19,7 @@ from datetime import datetime
 
 if len(sys.argv) < 5:
     print(
-        "Usage: python failure_order_plot.py <device_events.json> <server_events.json> <failures.json> <output.png>"
+        "Usage: python failure_order.py <device_events.json> <server_events.json> <failures.json> <output.png>"
     )
     sys.exit(1)
 

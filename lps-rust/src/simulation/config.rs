@@ -619,8 +619,12 @@ impl Config {
             .with_image(self.lps_scripts_image_name())
             .with_container_name(String::from("lps-scripts"))
             .with_command(format!(
-                "python3 /scripts/latency.py {} latency.png",
-                self.server_results_file()
+                "sh -c 'python3 /scripts/latency.py {} latency-line.png latency-hist.png && \
+             python3 /scripts/failure_order.py {} {} {} failure.png'",
+                self.server_results_file(),
+                self.device_results_file(),
+                self.server_results_file(),
+                self.server_failures_file()
             ))
             .with_volumes(vec![self.volume_mount()])
             .with_networks(vec![self.service_network_name()])
