@@ -139,16 +139,13 @@ n_never_arrived = sum(
 
 colors = {
     "ok": "#4C72B0",
-    "ooo": "#F5C518",
-    "failed": "#C44E52",
+    "ooo": "#C44E52",
 }
 
 fig, ax = plt.subplots(figsize=(14, 5))
 
 
 def point_color(r):
-    if r["failed"]:
-        return colors["failed"]
     if r["out_of_order"]:
         return colors["ooo"]
     return colors["ok"]
@@ -164,7 +161,6 @@ ax.grid(True, linestyle="--", alpha=0.3)
 legend_handles = [
     mpatches.Patch(color=colors["ok"], label="In Reihenfolge"),
     mpatches.Patch(color=colors["ooo"], label="Außer Reihenfolge"),
-    mpatches.Patch(color=colors["failed"], label="Fehlgeschlagen"),
 ]
 ax.legend(handles=legend_handles, fontsize=9)
 
@@ -172,8 +168,7 @@ ax.legend(handles=legend_handles, fontsize=9)
 summary = (
     f"Gesamt angekommen: {n_total}  |  "
     f"Nie angekommen: {n_never_arrived}  |  "
-    f"Außer Reihenfolge: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)  |  "
-    f"Fehlgeschlagen: {n_failed}"
+    f"Außer Reihenfolge: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)"
 )
 fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
 

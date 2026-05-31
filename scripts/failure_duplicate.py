@@ -122,15 +122,12 @@ n_never_arrived = sum(
 colors = {
     "unique": "#4C72B0",
     "duplicated": "#F5C518",
-    "failed": "#C44E52",
 }
 
 fig, ax = plt.subplots(figsize=(14, 5))
 
 
 def point_color(r):
-    if r["failed"]:
-        return colors["failed"]
     if r["duplicated"]:
         return colors["duplicated"]
     return colors["unique"]
@@ -146,7 +143,6 @@ ax.grid(True, linestyle="--", alpha=0.3)
 legend_handles = [
     mpatches.Patch(color=colors["unique"], label="Eindeutig"),
     mpatches.Patch(color=colors["duplicated"], label="Dupliziert"),
-    mpatches.Patch(color=colors["failed"], label="Fehlgeschlagen"),
 ]
 ax.legend(handles=legend_handles, fontsize=9)
 
@@ -155,8 +151,7 @@ summary = (
     f"Gesamt angekommen: {n_total}  |  "
     f"Eindeutig: {n_unique}  |  "
     f"Dupliziert: {n_duplicated} ({100 * n_duplicated / max(n_total, 1):.1f}%)  |  "
-    f"Nie angekommen: {n_never_arrived}  |  "
-    f"Fehlgeschlagen: {n_failed}"
+    f"Nie angekommen: {n_never_arrived}"
 )
 fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
 
