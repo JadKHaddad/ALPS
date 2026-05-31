@@ -1,18 +1,18 @@
 """
-Usage: python latency.py <data.json> <output.png>
+Usage: python latency.py <data.json> <output_line.png> <output_hist.png>
 
-Plots latency per event over trigger time (left) and latency distribution histogram (right).
+Plots latency per event over trigger time and latency distribution histogram
+into two separate output files.
 """
 
 import json
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 from datetime import datetime
 
-if len(sys.argv) < 3:
-    print("Usage: python latency.py <data.json> <output.png>")
+if len(sys.argv) < 4:
+    print("Usage: python latency.py <data.json> <output_line.png> <output_hist.png>")
     sys.exit(1)
 
 
@@ -53,23 +53,25 @@ def load_events(path):
         "n": len(latencies),
     }
 
-    return trigger_times, latencies, stats
+    t0 = trigger_times[0]
+    elapsed_seconds = np.array([(t - t0).total_seconds() for t in trigger_times])
+
+    return elapsed_seconds, latencies, stats
 
 
 # ── load ──────────────────────────────────────────────────────────────────────
 
 trigger_times, latencies, s = load_events(sys.argv[1])
+out_line, out_hist = sys.argv[2], sys.argv[3]
 
-# ── plot ──────────────────────────────────────────────────────────────────────
-
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
-fig.suptitle(
-    "Event Latency",
-    fontsize=14,
-    fontweight="bold",
+footer = (
+    f"Ereignisse: {s['n']}  |  Min: {s['min']:.3f} ms  |  "
+    f"Max: {s['max']:.3f} ms  |  Std: {s['std']:.3f} ms"
 )
 
-# ── left: latency over trigger time ──────────────────────────────────────────
+# ── plot 1: Latenz über Triggerzeit ───────────────────────────────────────────
+
+fig1, ax1 = plt.subplots(figsize=(10, 5))
 
 ax1.plot(
     trigger_times,
@@ -79,44 +81,50 @@ ax1.plot(
     alpha=0.6,
     markersize=4,
     linewidth=1,
-    label="Latency",
+    label="Latenz",
 )
 ax1.axhline(
     s["avg"],
     color="red",
     linestyle="--",
     linewidth=1.5,
-    label=f"Mean:   {s['avg']:.3f} ms",
+    label=f"Mittelwert: {s['avg']:.3f} ms",
 )
 ax1.axhline(
     s["median"],
     color="green",
     linestyle="--",
     linewidth=1.5,
-    label=f"Median: {s['median']:.3f} ms",
+    label=f"Median:     {s['median']:.3f} ms",
 )
 ax1.axhline(
     s["p95"],
     color="orange",
     linestyle=":",
     linewidth=1.5,
-    label=f"P95:    {s['p95']:.3f} ms",
+    label=f"P95:        {s['p95']:.3f} ms",
 )
 ax1.axhline(
     s["p99"],
     color="purple",
     linestyle=":",
     linewidth=1.5,
-    label=f"P99:    {s['p99']:.3f} ms",
+    label=f"P99:        {s['p99']:.3f} ms",
 )
-ax1.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M:%S"))
-ax1.set_xlabel("Trigger Time")
-ax1.set_ylabel("Latency (ms)")
-ax1.set_title("Latency per Event")
+ax1.set_xlabel("Triggerzeit (Sekunden seit Beginn)")
+ax1.set_ylabel("Latenz (ms)")
+ax1.set_title("Latenz pro Ereignis")
 ax1.legend(fontsize=9)
 ax1.grid(True, linestyle="--", alpha=0.4)
+fig1.text(0.5, 0.01, footer, ha="center", fontsize=10, color="gray")
+plt.tight_layout(rect=(0, 0.04, 1, 1))
+plt.savefig(out_line, dpi=150, bbox_inches="tight")
+print(f"Saved: {out_line}")
+plt.close(fig1)
 
-# ── right: histogram ──────────────────────────────────────────────────────────
+# ── plot 2: Histogramm ────────────────────────────────────────────────────────
+
+fig2, ax2 = plt.subplots(figsize=(10, 5))
 
 ax2.hist(latencies, bins=20, color="#4C72B0", alpha=0.7, edgecolor="white")
 ax2.axvline(
@@ -124,44 +132,36 @@ ax2.axvline(
     color="red",
     linestyle="--",
     linewidth=1.5,
-    label=f"Mean:   {s['avg']:.3f} ms",
+    label=f"Mittelwert: {s['avg']:.3f} ms",
 )
 ax2.axvline(
     s["median"],
     color="green",
     linestyle="--",
     linewidth=1.5,
-    label=f"Median: {s['median']:.3f} ms",
+    label=f"Median:     {s['median']:.3f} ms",
 )
 ax2.axvline(
     s["p95"],
     color="orange",
     linestyle=":",
     linewidth=1.5,
-    label=f"P95:    {s['p95']:.3f} ms",
+    label=f"P95:        {s['p95']:.3f} ms",
 )
 ax2.axvline(
     s["p99"],
     color="purple",
     linestyle=":",
     linewidth=1.5,
-    label=f"P99:    {s['p99']:.3f} ms",
+    label=f"P99:        {s['p99']:.3f} ms",
 )
-ax2.set_xlabel("Latency (ms)")
-ax2.set_ylabel("Count")
-ax2.set_title("Latency Distribution")
+ax2.set_xlabel("Latenz (ms)")
+ax2.set_ylabel("Anzahl")
+ax2.set_title("Latenzverteilung")
 ax2.legend(fontsize=9)
 ax2.grid(True, linestyle="--", alpha=0.4)
-
-# ── footer ────────────────────────────────────────────────────────────────────
-
-summary = (
-    f"n={s['n']}  |  Min: {s['min']:.3f} ms  |  "
-    f"Max: {s['max']:.3f} ms  |  Std: {s['std']:.3f} ms"
-)
-fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
-
-fig.autofmt_xdate(rotation=30)
+fig2.text(0.5, 0.01, footer, ha="center", fontsize=10, color="gray")
 plt.tight_layout(rect=(0, 0.04, 1, 1))
-plt.savefig(sys.argv[2], dpi=150, bbox_inches="tight")
-print(f"Saved {sys.argv[2]}")
+plt.savefig(out_hist, dpi=150, bbox_inches="tight")
+print(f"Saved: {out_hist}")
+plt.close(fig2)

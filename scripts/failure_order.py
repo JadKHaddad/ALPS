@@ -2,10 +2,7 @@
 Usage: python failure_order_plot.py <device_events.json> <server_events.json> <failures.json> <output.png>
 
 Plots a timeline showing:
-  - Which events arrived out of order, and by how much
-  - Which events failed (and when)
-  - Rolling out-of-order rate overlaid with failure markers
-  - Per-event latency coloured by status
+  - Per-event latency coloured by status (in-order / out-of-order / failed)
 
 "Out of order" mirrors validate_order() in the Rust server:
   Events are walked in arrival order. Per device_id, we track the last seen event_id.
@@ -17,7 +14,6 @@ import json
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 import matplotlib.patches as mpatches
 from datetime import datetime
 
@@ -116,20 +112,20 @@ orphan_failures = [
 
 # ── derived series ────────────────────────────────────────────────────────────
 
-trig_times = [
+arr_times = [
     r["arr_ts"] for r in records
 ]  # x-axis = arrival time (matches detection order)
-severities = [r["ooo_severity"] for r in records]
 latencies = [r["latency_ms"] for r in records]
-ooo_flags = [r["out_of_order"] for r in records]
 
-# Rolling out-of-order rate (window = 10 events)
-window = max(1, min(10, len(records) // 5))
-ooo_arr = np.array(ooo_flags, dtype=float)
-rolling_ooo = np.convolve(ooo_arr, np.ones(window) / window, mode="same")
+# Normalize x-axis: seconds elapsed since first arrival
+if arr_times:
+    t0 = min(arr_times)
+    elapsed_seconds = [(t - t0).total_seconds() for t in arr_times]
+else:
+    elapsed_seconds = []
 
 n_total = len(records)
-n_ooo = sum(ooo_flags)
+n_ooo = sum(r["out_of_order"] for r in records)
 n_failed = len(failure_map)
 n_orphan = len(orphan_failures)
 
@@ -141,61 +137,13 @@ n_never_arrived = sum(
 
 # ── plot ──────────────────────────────────────────────────────────────────────
 
-fig, axes = plt.subplots(2, 1, figsize=(14, 9), sharex=True)
-fig.suptitle(
-    "Out-of-Order Arrival vs Failures",
-    fontsize=15,
-    fontweight="bold",
-    y=0.98,
-)
-
-date_fmt = mdates.DateFormatter("%H:%M:%S")
 colors = {
     "ok": "#4C72B0",
     "ooo": "#F5C518",
     "failed": "#C44E52",
-    "rate": "#937860",
-    "latency": "#55A868",
 }
 
-# ── subplot 2: rolling OOO rate + failure events ──────────────────────────────
-ax2 = axes[0]
-
-ax2.plot(
-    trig_times,
-    rolling_ooo * 100,
-    color=colors["rate"],
-    linewidth=2,
-    label=f"Rolling OOO rate (window={window})",
-)
-ax2.fill_between(trig_times, rolling_ooo * 100, alpha=0.15, color=colors["rate"])
-
-# Vertical lines for failures (including orphans)
-first_fail = True
-for r in records:
-    if r["failed"]:
-        label = "Failure" if first_fail else None
-        ax2.axvline(
-            r["arr_ts"],
-            color=colors["failed"],
-            linestyle="--",
-            linewidth=1.2,
-            alpha=0.7,
-            label=label,
-        )
-        first_fail = False
-
-for fat, _ in orphan_failures:
-    ax2.axvline(fat, color=colors["failed"], linestyle=":", linewidth=1, alpha=0.5)
-
-ax2.set_ylabel("OOO rate (%)")
-ax2.set_title("Rolling Out-of-Order Rate with Failure Markers")
-ax2.set_ylim(0, 105)
-ax2.legend(fontsize=9)
-ax2.grid(True, linestyle="--", alpha=0.3)
-
-# ── subplot 3: latency coloured by OOO / failed ───────────────────────────────
-ax3 = axes[1]
+fig, ax = plt.subplots(figsize=(14, 5))
 
 
 def point_color(r):
@@ -208,31 +156,27 @@ def point_color(r):
 
 point_colors = [point_color(r) for r in records]
 
-ax3.scatter(trig_times, latencies, c=point_colors, s=20, alpha=0.75, zorder=3)
-ax3.set_ylabel("Latency (ms)")
-ax3.set_xlabel("Arrival Time")
-ax3.set_title("Latency per Event  (colour = in-order / out-of-order / failed)")
-ax3.grid(True, linestyle="--", alpha=0.3)
+ax.scatter(elapsed_seconds, latencies, c=point_colors, s=20, alpha=0.75, zorder=3)
+ax.set_ylabel("Latenz (ms)")
+ax.set_xlabel("Ankunftszeit (Sekunden seit Beginn)")
+ax.grid(True, linestyle="--", alpha=0.3)
 
 legend_handles = [
-    mpatches.Patch(color=colors["ok"], label="In order"),
-    mpatches.Patch(color=colors["ooo"], label="Out of order"),
-    mpatches.Patch(color=colors["failed"], label="Failed"),
+    mpatches.Patch(color=colors["ok"], label="In Reihenfolge"),
+    mpatches.Patch(color=colors["ooo"], label="Außer Reihenfolge"),
+    mpatches.Patch(color=colors["failed"], label="Fehlgeschlagen"),
 ]
-ax3.legend(handles=legend_handles, fontsize=9)
-ax3.xaxis.set_major_formatter(date_fmt)
-fig.autofmt_xdate(rotation=30)
+ax.legend(handles=legend_handles, fontsize=9)
 
 # ── summary footer ────────────────────────────────────────────────────────────
 summary = (
-    f"Total arrived: {n_total}  |  "
-    f"Never arrived: {n_never_arrived}  |  "
-    f"Out-of-order: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)  |  "
-    f"Failures: {n_failed}  |  "
-    f"Orphan failures (never arrived): {n_orphan}"
+    f"Gesamt angekommen: {n_total}  |  "
+    f"Nie angekommen: {n_never_arrived}  |  "
+    f"Außer Reihenfolge: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)  |  "
+    f"Fehler: {n_failed}"
 )
 fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
 
-plt.tight_layout(rect=(0, 0.03, 1, 0.97))
+plt.tight_layout(rect=(0, 0.05, 1, 1))
 plt.savefig(out_file, dpi=150, bbox_inches="tight")
-print(f"Saved {out_file}")
+print(f"Saved: {out_file}")
