@@ -23,6 +23,7 @@ import gmnesia/lock
 import gmnesia/read
 import gmnesia/schema
 import gmnesia/storage
+import gmnesia/subscribe
 import gmnesia/system
 import gmnesia/table
 import gmnesia/table/create as table_create
@@ -31,6 +32,35 @@ import gmnesia/transaction
 import gmnesia/write
 import logging
 import mist.{type Connection, type ResponseData}
+
+pub fn listen() {
+  process.new_selector()
+  |> process.select_other(fn(msg) {
+    logging.log(
+      logging.Info,
+      "Received Mnesia message: " <> string.inspect(msg),
+    )
+  })
+  |> process.selector_receive_forever
+
+  listen()
+}
+
+fn reconnect(config: config.Config, self_node: atom.Atom) {
+  let other_nodes =
+    config.nodes
+    |> list.map(atom.create)
+    |> list.filter(fn(n) { n != self_node })
+
+  list.each(other_nodes, fn(n) {
+    let _ = node.connect(n)
+    Nil
+  })
+
+  process.sleep(5000)
+
+  reconnect(config, self_node)
+}
 
 pub fn main() -> Nil {
   logging.configure()
@@ -131,6 +161,21 @@ pub fn main() -> Nil {
       }
 
       let _ = [table_name] |> wait.new |> wait.wait
+
+      process.spawn(fn() {
+        let assert Ok(_) =
+          subscribe.subscribe(subscribe.Table(table_name, subscribe.Simple))
+
+        listen()
+      })
+
+      process.spawn(fn() {
+        let assert Ok(_) = subscribe.subscribe(subscribe.System)
+
+        listen()
+      })
+
+      process.spawn(fn() { reconnect(config, self_node) })
 
       logging.log(logging.Info, "Cluster join complete")
       run_server(config)
