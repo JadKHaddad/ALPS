@@ -10,6 +10,9 @@ COPY . /gleam/
 RUN cd /gleam && gleam export erlang-shipment
 
 FROM erlang:${ERLANG_VERSION}-alpine
+
+RUN apk add --no-cache iptables
+
 COPY --from=build /gleam/build/erlang-shipment /gleam
 
 WORKDIR /app
