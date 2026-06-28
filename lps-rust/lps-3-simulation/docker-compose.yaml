@@ -17,7 +17,7 @@ services:
     container_name: lps-deduplication-0
     command: run --config-file /app/deduplication-0.yaml
     environment:
-      ERL_FLAGS: -sname node@lps-deduplication-0 -setcookie secret
+      ERL_FLAGS: -sname node@lps-deduplication-0 -setcookie secret -kernel net_ticktime 5
     ports:
       - 0.0.0.0:4000:4000
     networks:
@@ -32,7 +32,7 @@ services:
     container_name: lps-deduplication-1
     command: run --config-file /app/deduplication-1.yaml
     environment:
-      ERL_FLAGS: -sname node@lps-deduplication-1 -setcookie secret
+      ERL_FLAGS: -sname node@lps-deduplication-1 -setcookie secret -kernel net_ticktime 5
     ports:
       - 0.0.0.0:4001:4000
     networks:
@@ -47,7 +47,7 @@ services:
     container_name: lps-deduplication-2
     command: run --config-file /app/deduplication-2.yaml
     environment:
-      ERL_FLAGS: -sname node@lps-deduplication-2 -setcookie secret
+      ERL_FLAGS: -sname node@lps-deduplication-2 -setcookie secret -kernel net_ticktime 5
     ports:
       - 0.0.0.0:4002:4000
     networks:
