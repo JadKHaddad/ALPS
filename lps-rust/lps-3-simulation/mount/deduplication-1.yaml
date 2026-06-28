@@ -1,6 +1,7 @@
 port: 4000
-server_push_url: http://lps-server-server-proxy-1:8080/work
+server_push_url: http://lps-server:8080/work
 nodes:
 - node@lps-deduplication-0
 - node@lps-deduplication-1
 - node@lps-deduplication-2
+

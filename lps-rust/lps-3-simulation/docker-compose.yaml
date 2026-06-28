@@ -1,0 +1,71 @@
+networks:
+  lps-net:
+    external: true
+    name: lps-simulation-net
+
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: lps-rabbitmq
+    command: bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
+    networks:
+      - lps-net
+    restart: unless-stopped
+
+  deduplication-0:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-0
+    command: run --config-file /app/deduplication-0.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-0 -setcookie secret
+    ports:
+      - 0.0.0.0:4000:4000
+    networks:
+      - lps-net
+    volumes:
+      - ./mount:/app
+    cap_add:
+      - NET_ADMIN
+
+  deduplication-1:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-1
+    command: run --config-file /app/deduplication-1.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-1 -setcookie secret
+    ports:
+      - 0.0.0.0:4001:4000
+    networks:
+      - lps-net
+    volumes:
+      - ./mount:/app
+    cap_add:
+      - NET_ADMIN
+
+  deduplication-2:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-2
+    command: run --config-file /app/deduplication-2.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-2 -setcookie secret
+    ports:
+      - 0.0.0.0:4002:4000
+    networks:
+      - lps-net
+    volumes:
+      - ./mount:/app
+    cap_add:
+      - NET_ADMIN
+
+  server:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server
+    command: server --config-file /app/server-config.yaml
+    environment:
+      RUST_LOG: server=debug
+    networks:
+      - lps-net
+    ports:
+      - 0.0.0.0:8080:8080
+    volumes:
+      - ./mount:/app
