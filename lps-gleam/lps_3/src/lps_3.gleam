@@ -160,23 +160,21 @@ fn connect_to_other_nodes(config: config.Config) -> List(atom.Atom) {
   })
 }
 
-// TODO: if the connection was dropped between two nodes and the `net_ticktime` did not catch it, connect_to_other_nodes_or_fail will not fail
-// despite the fact the nodes are unreachable. We need to find a way to detect this and fail if the nodes are unreachable.
 fn connect_to_other_nodes_or_fail(config: config.Config) -> Result(Nil, String) {
   let expected_nodes = other_nodes(config)
-  let reachable_nodes = connect_to_other_nodes(config)
+  let _ = connect_to_other_nodes(config)
 
-  case list.length(expected_nodes) == list.length(reachable_nodes) {
-    True -> Ok(Nil)
-    False -> {
-      let missing =
-        list.filter(expected_nodes, fn(n) { !list.contains(reachable_nodes, n) })
+  let unreachable =
+    expected_nodes
+    |> list.filter(fn(n) { !is_node_alive(n) })
 
+  case unreachable {
+    [] -> Ok(Nil)
+    _ ->
       Error(
         "Could not connect to all cluster nodes. Missing: "
-        <> string.inspect(missing),
+        <> string.inspect(unreachable),
       )
-    }
   }
 }
 
@@ -378,4 +376,11 @@ fn post_call(
     200 -> Ok(Nil)
     code -> Error("Server responded with status code " <> string.inspect(code))
   }
+}
+
+@external(erlang, "net_adm", "ping")
+fn net_adm_ping(node: atom.Atom) -> atom.Atom
+
+fn is_node_alive(n: atom.Atom) -> Bool {
+  net_adm_ping(n) == atom.create("pong")
 }
