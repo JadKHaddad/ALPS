@@ -23,47 +23,21 @@ import gmnesia/lock
 import gmnesia/read
 import gmnesia/schema
 import gmnesia/storage
-import gmnesia/subscribe
 import gmnesia/system
 import gmnesia/table
 import gmnesia/table/create as table_create
 import gmnesia/table/wait
 import gmnesia/transaction
+import gmnesia/unsplit
+import gmnesia/unsplit/server as unsplit_server
 import gmnesia/write
 import logging
 import mist.{type Connection, type ResponseData}
 
-pub fn listen() {
-  process.new_selector()
-  |> process.select_other(fn(msg) {
-    logging.log(
-      logging.Info,
-      "Received Mnesia message: " <> string.inspect(msg),
-    )
-  })
-  |> process.selector_receive_forever
-
-  listen()
-}
-
-fn reconnect(config: config.Config, self_node: atom.Atom) {
-  let other_nodes =
-    config.nodes
-    |> list.map(atom.create)
-    |> list.filter(fn(n) { n != self_node })
-
-  list.each(other_nodes, fn(n) {
-    let _ = node.connect(n)
-    Nil
-  })
-
-  process.sleep(5000)
-
-  reconnect(config, self_node)
-}
-
 pub fn main() -> Nil {
   logging.configure()
+  logging.set_level(logging.Debug)
+
   debug.set_debug_level(debug.Verbose)
 
   let assert Ok(args) = args.run()
@@ -94,7 +68,9 @@ pub fn main() -> Nil {
         |> table_create.new
         |> table_create.options([
           table.Attributes([atom.create("id"), atom.create("data")]),
+          table.Type(table.Set),
           table.DiscCopies([self_node]),
+          table.UserProperties([unsplit.unsplit_bag()]),
         ])
         |> table_create.create
 
@@ -107,19 +83,7 @@ pub fn main() -> Nil {
     False -> {
       logging.log(logging.Info, "Cluster join mode")
 
-      let other_nodes =
-        config.nodes
-        |> list.map(atom.create)
-        |> list.filter(fn(n) { n != self_node })
-
-      let reachable_nodes =
-        other_nodes
-        |> list.filter(fn(n) {
-          case node.connect(n) {
-            Ok(_) -> True
-            Error(_) -> False
-          }
-        })
+      let reachable_nodes = connect_to_other_nodes(config)
 
       let assert Ok(_) = system.start()
 
@@ -162,23 +126,56 @@ pub fn main() -> Nil {
 
       let _ = [table_name] |> wait.new |> wait.wait
 
-      process.spawn(fn() {
-        let assert Ok(_) =
-          subscribe.subscribe(subscribe.Table(table_name, subscribe.Simple))
-
-        listen()
-      })
-
-      process.spawn(fn() {
-        let assert Ok(_) = subscribe.subscribe(subscribe.System)
-
-        listen()
-      })
-
-      process.spawn(fn() { reconnect(config, self_node) })
-
       logging.log(logging.Info, "Cluster join complete")
+
+      let assert Ok(_) = unsplit_server.start()
+
       run_server(config)
+    }
+  }
+}
+
+fn other_nodes(config: config.Config) -> List(atom.Atom) {
+  let self_node = node.name(node.self())
+
+  config.nodes
+  |> list.map(atom.create)
+  |> list.filter(fn(n) { n != self_node })
+}
+
+fn connect_to_other_nodes(config: config.Config) -> List(atom.Atom) {
+  let other_nodes = other_nodes(config)
+
+  logging.log(
+    logging.Info,
+    "Connecting to other nodes: " <> string.inspect(other_nodes),
+  )
+
+  other_nodes
+  |> list.filter(fn(n) {
+    case node.connect(n) {
+      Ok(_) -> True
+      Error(_) -> False
+    }
+  })
+}
+
+// TODO: if the connection was dropped between two nodes and the `net_ticktime` did not catch it, connect_to_other_nodes_or_fail will not fail
+// despite the fact the nodes are unreachable. We need to find a way to detect this and fail if the nodes are unreachable.
+fn connect_to_other_nodes_or_fail(config: config.Config) -> Result(Nil, String) {
+  let expected_nodes = other_nodes(config)
+  let reachable_nodes = connect_to_other_nodes(config)
+
+  case list.length(expected_nodes) == list.length(reachable_nodes) {
+    True -> Ok(Nil)
+    False -> {
+      let missing =
+        list.filter(expected_nodes, fn(n) { !list.contains(reachable_nodes, n) })
+
+      Error(
+        "Could not connect to all cluster nodes. Missing: "
+        <> string.inspect(missing),
+      )
     }
   }
 }
@@ -230,6 +227,10 @@ fn handle_work(
   config: config.Config,
 ) -> Response(ResponseData) {
   let result = {
+    use _ <- result.try(
+      connect_to_other_nodes_or_fail(config) |> result.map_error(fn(_) { Nil }),
+    )
+
     use req <- result.try(
       mist.read_body(req, 1024 * 1024 * 10)
       |> result.map_error(fn(_) { Nil }),
@@ -262,6 +263,11 @@ fn handle_work(
     let table = atom.create("event")
 
     fn() {
+      logging.log(
+        logging.Debug,
+        "Checking for duplicate event: " <> string.inspect(database_event),
+      )
+
       use database_events <- result.try(
         table
         |> read.new(key: database_event.id)
@@ -286,6 +292,11 @@ fn handle_work(
           )
         }
         [] -> {
+          logging.log(
+            logging.Info,
+            "No duplicate event found. Proceeding to post call and write event.",
+          )
+
           logging.log(logging.Info, "Posting call: " <> string.inspect(call))
 
           use _ <- result.try(
