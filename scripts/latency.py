@@ -1,8 +1,12 @@
 """
-Usage: python latency.py <data.json> <output_line.png> <output_hist.png>
+Usage: python latency.py <data.json> <output_line.png> <output_hist.png> [y_max]
 
 Plots latency per event over trigger time and latency distribution histogram
 into two separate output files.
+
+Optional 4th argument y_max sets the maximum value of the y-axis on the
+"Latenz pro Ereignis" line plot (e.g. 100000 for 100000 ms). If omitted,
+matplotlib auto-scales the axis as before.
 """
 
 import json
@@ -12,7 +16,9 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 if len(sys.argv) < 4:
-    print("Usage: python latency.py <data.json> <output_line.png> <output_hist.png>")
+    print(
+        "Usage: python latency.py <data.json> <output_line.png> <output_hist.png> [y_max]"
+    )
     sys.exit(1)
 
 
@@ -64,6 +70,14 @@ def load_events(path):
 trigger_times, latencies, s = load_events(sys.argv[1])
 out_line, out_hist = sys.argv[2], sys.argv[3]
 
+y_max = None
+if len(sys.argv) > 4:
+    try:
+        y_max = float(sys.argv[4])
+    except ValueError:
+        print(f"Invalid y_max value: {sys.argv[4]!r} (must be a number)")
+        sys.exit(1)
+
 footer = (
     f"Ereignisse: {s['n']}  |  Min: {s['min']:.3f} ms  |  "
     f"Max: {s['max']:.3f} ms  |  Std: {s['std']:.3f} ms"
@@ -114,6 +128,8 @@ ax1.axhline(
 ax1.set_xlabel("Triggerzeit (Sekunden seit Beginn)")
 ax1.set_ylabel("Latenz (ms)")
 ax1.set_title("Latenz pro Ereignis")
+if y_max is not None:
+    ax1.set_ylim(0, y_max)
 ax1.legend(fontsize=9)
 ax1.grid(True, linestyle="--", alpha=0.4)
 fig1.text(0.5, 0.01, footer, ha="center", fontsize=10, color="gray")
