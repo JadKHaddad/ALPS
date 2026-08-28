@@ -1,5 +1,5 @@
 
-# LPS
+# ALPS - Advanced Legacy Proxy System
 
 ```bash
 docker build -t jadkhaddad/lps-rs:0.1.0 -f lps-rust/Dockerfile lps-rust
