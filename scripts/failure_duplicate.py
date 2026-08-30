@@ -1,8 +1,11 @@
 """
-Usage: python failure_duplicate.py <device_events.json> <server_events.json> <failures.json> <output.png>
+Usage: python failure_duplicate.py <device_events.json> <server_events.json> <failures.json> <output.svg>
 
 Plots a timeline showing:
   - Per-event latency coloured by status (unique / duplicated / failed)
+
+Output format is inferred from the output filename's extension (.svg, .png,
+.pdf, ...). SVG is recommended for crisp, resolution-independent plots.
 
 Duplicate definition:
   Two or more server records with the same (device_id, event_id). The first
@@ -11,6 +14,7 @@ Duplicate definition:
 """
 
 import json
+import os
 import sys
 from collections import defaultdict
 from datetime import datetime
@@ -20,7 +24,7 @@ import matplotlib.pyplot as plt
 
 if len(sys.argv) < 5:
     print(
-        "Usage: python failure_duplicate.py <device_events.json> <server_events.json> <failures.json> <output.png>"
+        "Usage: python failure_duplicate.py <device_events.json> <server_events.json> <failures.json> <output.svg>"
     )
     sys.exit(1)
 
@@ -156,5 +160,14 @@ summary = (
 fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
 
 plt.tight_layout(rect=(0, 0.05, 1, 1))
-plt.savefig(out_file, dpi=150, bbox_inches="tight")
+
+# Infer save format from the output extension. SVG/PDF are vector formats,
+# so dpi is only meaningful for raster formats like PNG.
+_, ext = os.path.splitext(out_file)
+ext = ext.lower().lstrip(".")
+if ext in ("svg", "pdf", "eps"):
+    plt.savefig(out_file, format=ext, bbox_inches="tight")
+else:
+    plt.savefig(out_file, dpi=150, bbox_inches="tight")
+
 print(f"Saved: {out_file}")

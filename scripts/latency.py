@@ -1,8 +1,11 @@
 """
-Usage: python latency.py <data.json> <output_line.png> <output_hist.png> [y_max]
+Usage: python latency.py <data.json> <output_line.svg> <output_hist.svg> [y_max]
 
 Plots latency per event over trigger time and latency distribution histogram
 into two separate output files.
+
+Output format for each file is inferred from its extension (.svg, .png,
+.pdf, ...). SVG is recommended for crisp, resolution-independent plots.
 
 Optional 4th argument y_max sets the maximum value of the y-axis on the
 "Latenz pro Ereignis" line plot (e.g. 100000 for 100000 ms). If omitted,
@@ -10,6 +13,7 @@ matplotlib auto-scales the axis as before.
 """
 
 import json
+import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,7 +21,7 @@ from datetime import datetime
 
 if len(sys.argv) < 4:
     print(
-        "Usage: python latency.py <data.json> <output_line.png> <output_hist.png> [y_max]"
+        "Usage: python latency.py <data.json> <output_line.svg> <output_hist.svg> [y_max]"
     )
     sys.exit(1)
 
@@ -63,6 +67,17 @@ def load_events(path):
     elapsed_seconds = np.array([(t - t0).total_seconds() for t in trigger_times])
 
     return elapsed_seconds, latencies, stats
+
+
+def save_fig(fig, out_file):
+    """Save a figure, inferring vector vs. raster handling from the extension."""
+    _, ext = os.path.splitext(out_file)
+    ext = ext.lower().lstrip(".")
+    if ext in ("svg", "pdf", "eps"):
+        # Vector formats: dpi is not meaningful, omit it.
+        fig.savefig(out_file, format=ext, bbox_inches="tight")
+    else:
+        fig.savefig(out_file, dpi=150, bbox_inches="tight")
 
 
 # ── load ──────────────────────────────────────────────────────────────────────
@@ -134,7 +149,7 @@ ax1.legend(fontsize=9)
 ax1.grid(True, linestyle="--", alpha=0.4)
 fig1.text(0.5, 0.01, footer, ha="center", fontsize=10, color="gray")
 plt.tight_layout(rect=(0, 0.04, 1, 1))
-plt.savefig(out_line, dpi=150, bbox_inches="tight")
+save_fig(fig1, out_line)
 print(f"Saved: {out_line}")
 plt.close(fig1)
 
@@ -178,6 +193,6 @@ ax2.legend(fontsize=9)
 ax2.grid(True, linestyle="--", alpha=0.4)
 fig2.text(0.5, 0.01, footer, ha="center", fontsize=10, color="gray")
 plt.tight_layout(rect=(0, 0.04, 1, 1))
-plt.savefig(out_hist, dpi=150, bbox_inches="tight")
+save_fig(fig2, out_hist)
 print(f"Saved: {out_hist}")
 plt.close(fig2)

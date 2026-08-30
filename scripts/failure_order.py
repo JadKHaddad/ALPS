@@ -1,8 +1,11 @@
 """
-Usage: python failure_order.py <device_events.json> <server_events.json> <failures.json> <output.png>
+Usage: python failure_order.py <device_events.json> <server_events.json> <failures.json> <output.svg>
 
 Plots a timeline showing:
   - Per-event latency coloured by status (in-order / out-of-order / failed)
+
+Output format is inferred from the output filename's extension (.svg, .png,
+.pdf, ...). SVG is recommended for crisp, resolution-independent plots.
 
 "Out of order" mirrors validate_order() in the Rust server:
   Events are walked in arrival order. Per device_id, we track the last seen event_id.
@@ -11,6 +14,7 @@ Plots a timeline showing:
 """
 
 import json
+import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,7 +23,7 @@ from datetime import datetime
 
 if len(sys.argv) < 5:
     print(
-        "Usage: python failure_order.py <device_events.json> <server_events.json> <failures.json> <output.png>"
+        "Usage: python failure_order.py <device_events.json> <server_events.json> <failures.json> <output.svg>"
     )
     sys.exit(1)
 
@@ -173,5 +177,14 @@ summary = (
 fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
 
 plt.tight_layout(rect=(0, 0.05, 1, 1))
-plt.savefig(out_file, dpi=150, bbox_inches="tight")
+
+# Infer save format from the output extension. SVG/PDF are vector formats,
+# so dpi is only meaningful for raster formats like PNG.
+_, ext = os.path.splitext(out_file)
+ext = ext.lower().lstrip(".")
+if ext in ("svg", "pdf", "eps"):
+    plt.savefig(out_file, format=ext, bbox_inches="tight")
+else:
+    plt.savefig(out_file, dpi=150, bbox_inches="tight")
+
 print(f"Saved: {out_file}")
