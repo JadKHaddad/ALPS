@@ -1,6 +1,0 @@
-amqp_consumer_consumers_count: 3 # the number of consumer processes that was started in parallel
-amqp_consumer_queues_count: 25 # the number of queues that was created for consuming events
-
-# python latency.py results/1/amqp/1/server-results.json results/1/amqp/1/latency.png
-# python failure_order.py results/1/amqp/1/device-results.json results/1/amqp/1/server-results.json results/1/amqp/1/server-failures.json results/1/amqp/1/failure-order.png
-# python tcp_drop_duplicate.py results/1/amqp/1/device-results.json results/1/amqp/1/server-results.json results/1/amqp/1/tcp-proxy-results.json results/1/amqp/1/tcp-drop-duplicate.png

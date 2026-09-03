@@ -1,13 +1,12 @@
 """
-Usage: python latency.py <data.json> <output_line.svg> <output_hist.svg> [y_max]
+Usage: python latency.py <data.json> <output_line.svg> [y_max]
 
-Plots latency per event over trigger time and latency distribution histogram
-into two separate output files.
+Plots latency per event over trigger time into an output file.
 
-Output format for each file is inferred from its extension (.svg, .png,
-.pdf, ...). SVG is recommended for crisp, resolution-independent plots.
+Output format is inferred from its extension (.svg, .png, .pdf, ...). SVG is
+recommended for crisp, resolution-independent plots.
 
-Optional 4th argument y_max sets the maximum value of the y-axis on the
+Optional 3rd argument y_max sets the maximum value of the y-axis on the
 "Latenz pro Ereignis" line plot (e.g. 100000 for 100000 ms). If omitted,
 matplotlib auto-scales the axis as before.
 """
@@ -19,10 +18,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-if len(sys.argv) < 4:
-    print(
-        "Usage: python latency.py <data.json> <output_line.svg> <output_hist.svg> [y_max]"
-    )
+if len(sys.argv) < 3:
+    print("Usage: python latency.py server-results.json latency-line.pdf [y_max]")
     sys.exit(1)
 
 
@@ -83,14 +80,14 @@ def save_fig(fig, out_file):
 # ── load ──────────────────────────────────────────────────────────────────────
 
 trigger_times, latencies, s = load_events(sys.argv[1])
-out_line, out_hist = sys.argv[2], sys.argv[3]
+out_line = sys.argv[2]
 
 y_max = None
-if len(sys.argv) > 4:
+if len(sys.argv) > 3:
     try:
-        y_max = float(sys.argv[4])
+        y_max = float(sys.argv[3])
     except ValueError:
-        print(f"Invalid y_max value: {sys.argv[4]!r} (must be a number)")
+        print(f"Invalid y_max value: {sys.argv[3]!r} (must be a number)")
         sys.exit(1)
 
 footer = (
@@ -98,7 +95,7 @@ footer = (
     f"Max: {s['max']:.3f} ms  |  Std: {s['std']:.3f} ms"
 )
 
-# ── plot 1: Latenz über Triggerzeit ───────────────────────────────────────────
+# ── plot: Latenz über Triggerzeit ─────────────────────────────────────────────
 
 fig1, ax1 = plt.subplots(figsize=(10, 5))
 
@@ -153,46 +150,4 @@ save_fig(fig1, out_line)
 print(f"Saved: {out_line}")
 plt.close(fig1)
 
-# ── plot 2: Histogramm ────────────────────────────────────────────────────────
-
-fig2, ax2 = plt.subplots(figsize=(10, 5))
-
-ax2.hist(latencies, bins=20, color="#4C72B0", alpha=0.7, edgecolor="white")
-ax2.axvline(
-    s["avg"],
-    color="red",
-    linestyle="--",
-    linewidth=1.5,
-    label=f"Mittelwert: {s['avg']:.3f} ms",
-)
-ax2.axvline(
-    s["median"],
-    color="green",
-    linestyle="--",
-    linewidth=1.5,
-    label=f"Median:     {s['median']:.3f} ms",
-)
-ax2.axvline(
-    s["p95"],
-    color="orange",
-    linestyle=":",
-    linewidth=1.5,
-    label=f"P95:        {s['p95']:.3f} ms",
-)
-ax2.axvline(
-    s["p99"],
-    color="purple",
-    linestyle=":",
-    linewidth=1.5,
-    label=f"P99:        {s['p99']:.3f} ms",
-)
-ax2.set_xlabel("Latenz (ms)")
-ax2.set_ylabel("Anzahl")
-ax2.set_title("Latenzverteilung")
-ax2.legend(fontsize=9)
-ax2.grid(True, linestyle="--", alpha=0.4)
-fig2.text(0.5, 0.01, footer, ha="center", fontsize=10, color="gray")
-plt.tight_layout(rect=(0, 0.04, 1, 1))
-save_fig(fig2, out_hist)
-print(f"Saved: {out_hist}")
-plt.close(fig2)
+# python latency.py ../dev/simulation-mqtt/mount/server-results.json latency-line.pdf

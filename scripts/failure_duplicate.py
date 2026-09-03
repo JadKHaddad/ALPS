@@ -171,3 +171,5 @@ else:
     plt.savefig(out_file, dpi=150, bbox_inches="tight")
 
 print(f"Saved: {out_file}")
+
+# python failure_duplicate.py ../dev/simulation-mqtt/mount/device-results.json ../dev/simulation-mqtt/mount/server-results.json ../dev/simulation-mqtt/mount/server-failures.json failure-duplicate.pdf

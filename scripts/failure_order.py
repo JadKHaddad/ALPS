@@ -8,9 +8,12 @@ Output format is inferred from the output filename's extension (.svg, .png,
 .pdf, ...). SVG is recommended for crisp, resolution-independent plots.
 
 "Out of order" mirrors validate_order() in the Rust server:
-  Events are walked in arrival order. Per device_id, we track the last seen event_id.
-  A violation occurs when event.event_id < last_seen_event_id for that device.
-  The severity is (last_seen_event_id - event.event_id): how far back the event_id jumped.
+  Events are walked in their ORIGINAL ARRAY ORDER (after dedup), which is
+  the true arrival/receipt order the server recorded. Per device_id, we
+  track the last seen event_id. A violation occurs when
+  event.event_id < last_seen_event_id for that device.
+  The severity is (last_seen_event_id - event.event_id): how far back the
+  event_id jumped.
 """
 
 import json
@@ -67,38 +70,58 @@ for f in failures_raw:
 
 server_by_id = {e["event_id"]: e for e in server_events}
 
-# Walk events in arrival order — this is what validate_order() does.
-arrived_events = [e for e in server_events if e.get("arrived_at")]
-arrived_events.sort(key=lambda e: parse_ts(e["arrived_at"]) or datetime.min)
+# ── determine true arrival order + detect violations (mirrors Rust) ──────────
+# Event::remove_duplication: dedupe on (device_id, event_id), keep first
+# occurrence, preserving the ORIGINAL ARRAY ORDER — NOT sorted by arrived_at.
+# The array order of server_events *is* the true arrival order recorded by
+# the server; sorting by parsed arrived_at is only a lossy approximation of
+# that (ties, clock skew, and jitter can all reorder it) and produces
+# spurious violations that validate_order() never actually flagged.
+seen_keys = set()
+unique_events = []
+for e in server_events:
+    key = (e["device_id"], e["event_id"])
+    if key not in seen_keys:
+        seen_keys.add(key)
+        unique_events.append(e)
 
-# Per-device last-seen event_id, mirroring:
-#   if event.event_id < last[device_id] → violation
+# Event::validate_order: walk in that same array order, track last event_id
+# per device. Severity is keyed by (device_id, event_id), NOT event_id alone
+# — event_id is triggertime.timestamp_millis(), which is not guaranteed
+# unique across different devices, so a single-key dict can let one
+# device's result silently overwrite another's.
 last_seen: dict[str, int] = {}
-ooo_severity: dict[int, int] = {}  # event_id → how far back it jumped (0 = in order)
+ooo_severity: dict[tuple[str, int], int] = {}  # (device_id, event_id) -> severity
 
-for e in arrived_events:
+for e in unique_events:
     eid = e["event_id"]
     device_id = e["device_id"]
     prev = last_seen.get(device_id)
     if prev is not None and eid < prev:
-        ooo_severity[eid] = prev - eid  # positive = violation magnitude
+        ooo_severity[(device_id, eid)] = prev - eid  # positive = violation magnitude
     else:
-        ooo_severity[eid] = 0
+        ooo_severity[(device_id, eid)] = 0
     last_seen[device_id] = eid
 
-# Build records (sorted by arrival time, matching the order violations were detected)
+# Build records — sort by arrival time only for the x-axis/plot ordering.
+# Detection above already used the correct (array) order, so this sort has
+# no effect on which events are flagged as out-of-order.
+arrived_events = [e for e in server_events if e.get("arrived_at")]
+arrived_events.sort(key=lambda e: parse_ts(e["arrived_at"]) or datetime.min)
+
 records = []
-for e in arrived_events:
+for e in unique_events:
     eid = e["event_id"]
+    device_id = e["device_id"]
     trig_ts = parse_ts(e["original"]["triggertime"])
     arr_ts = parse_ts(e["arrived_at"])
     latency = (arr_ts - trig_ts).total_seconds() * 1000  # type: ignore[operator]
-    severity = ooo_severity[eid]
+    severity = ooo_severity.get((device_id, eid), 0)
     failed = eid in failure_map
     records.append(
         {
             "event_id": eid,
-            "device_id": e["device_id"],
+            "device_id": device_id,
             "trig_ts": trig_ts,
             "arr_ts": arr_ts,
             "latency_ms": latency,
@@ -170,7 +193,7 @@ ax.legend(handles=legend_handles, fontsize=9)
 
 # ── summary footer ────────────────────────────────────────────────────────────
 summary = (
-    f"Gesamt angekommen: {n_total}  |  "
+    f"Eindutig angekommen: {n_total}  |  "
     f"Nie angekommen: {n_never_arrived}  |  "
     f"Außer Reihenfolge: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)"
 )
@@ -188,3 +211,5 @@ else:
     plt.savefig(out_file, dpi=150, bbox_inches="tight")
 
 print(f"Saved: {out_file}")
+
+# python failure_order.py ../dev/simulation-mqtt/mount/device-results.json ../dev/simulation-mqtt/mount/server-results.json ../dev/simulation-mqtt/mount/server-failures.json failure-order.pdf
