@@ -1,0 +1,7 @@
+{
+    "total_runs": 5,
+    "overall_median_latency_ms": 3664.0,
+    "closest_run_index": 5,
+    "closest_run_latency_ms": 3664.0,
+    "target_directory": "simulation-mqtt-5"
+}
