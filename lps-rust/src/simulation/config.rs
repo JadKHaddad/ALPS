@@ -87,6 +87,14 @@ impl Config {
         String::from("device-config.yaml")
     }
 
+    fn duplicate_events_file(&self) -> String {
+        String::from("duplicate-events.json")
+    }
+
+    fn out_of_order_events_file(&self) -> String {
+        String::from("out-of-order-events.json")
+    }
+
     fn device_results_file(&self) -> String {
         String::from("device-results.json")
     }
@@ -373,6 +381,8 @@ impl Config {
             ty: ConfigType::Validator(CrateValidatorConfig {
                 server_results_file: self.server_results_file().into(),
                 device_results_file: self.device_results_file().into(),
+                duplicate_events_file: self.duplicate_events_file().into(),
+                out_of_order_events_file: self.out_of_order_events_file().into(),
             }),
         }]
     }

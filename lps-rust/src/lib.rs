@@ -169,7 +169,7 @@ impl Event {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Serialize)]
 pub struct OrderViolation {
     pub device_id: String,
     pub first_event_id: u64,
@@ -189,7 +189,7 @@ impl OrderViolation {
 #[derive(Debug, thiserror::Error)]
 #[error("Found {} ordering errors: {violations:?}", violations.len())]
 pub struct OrderError {
-    violations: Vec<OrderViolation>,
+    pub violations: Vec<OrderViolation>,
 }
 
 impl OrderError {

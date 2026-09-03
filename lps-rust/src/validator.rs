@@ -11,12 +11,24 @@ fn default_device_results_file() -> PathBuf {
     PathBuf::from("device-results.json")
 }
 
+fn default_duplicate_events_file() -> PathBuf {
+    PathBuf::from("duplicate-events.json")
+}
+
+fn default_out_of_order_events_file() -> PathBuf {
+    PathBuf::from("out-of-order-events.json")
+}
+
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     #[serde(default = "default_server_results_file")]
     pub server_results_file: PathBuf,
     #[serde(default = "default_device_results_file")]
     pub device_results_file: PathBuf,
+    #[serde(default = "default_duplicate_events_file")]
+    pub duplicate_events_file: PathBuf,
+    #[serde(default = "default_out_of_order_events_file")]
+    pub out_of_order_events_file: PathBuf,
 }
 
 impl Default for Config {
@@ -24,6 +36,8 @@ impl Default for Config {
         Self {
             server_results_file: default_server_results_file(),
             device_results_file: default_device_results_file(),
+            duplicate_events_file: default_duplicate_events_file(),
+            out_of_order_events_file: default_out_of_order_events_file(),
         }
     }
 }

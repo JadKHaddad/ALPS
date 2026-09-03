@@ -63,6 +63,13 @@ fn main() -> Result<(), anyhow::Error> {
 
     let duplicates: Vec<_> = duplicates.collect();
 
+    std::fs::write(
+        &config.duplicate_events_file,
+        serde_json::to_string_pretty(&duplicates)
+            .context("Failed to serialize duplicate events")?,
+    )
+    .context("Failed to write duplicate events file")?;
+
     if !duplicates.is_empty() {
         tracing::warn!(
             count = duplicates.len(),
@@ -73,11 +80,21 @@ fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!("Validating order");
 
-    let order_result = Event::validate_order(unique).context("Order Validation error");
+    let mut order_violations = Vec::new();
+    let order_result = Event::validate_order(unique);
 
     if let Err(order_result) = &order_result {
         tracing::error!("Order validation failed: {:#}", order_result);
+
+        order_violations = order_result.violations.clone();
     }
+
+    std::fs::write(
+        &config.out_of_order_events_file,
+        serde_json::to_string_pretty(&order_violations)
+            .context("Failed to serialize out-of-order events")?,
+    )
+    .context("Failed to write out-of-order events file")?;
 
     tracing::info!("Validating completeness");
 
@@ -90,6 +107,6 @@ fn main() -> Result<(), anyhow::Error> {
     }
 
     completeness_result
-        .and(order_result)
+        .and(order_result.context("Order Validation error"))
         .map_err(|_| anyhow::anyhow!("Validation failed. Check logs for details."))
 }
