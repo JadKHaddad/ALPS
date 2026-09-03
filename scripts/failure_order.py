@@ -51,6 +51,16 @@ def load_json(path):
         return json.load(f)
 
 
+plt.rcParams.update(
+    {
+        "font.family": "serif",
+        "font.serif": ["Times New Roman", "DejaVu Serif"],
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+    }
+)
+
+
 # ── load data ─────────────────────────────────────────────────────────────────
 
 device_events = load_json(device_file)  # sent by device; arrived_at may be null
@@ -197,7 +207,7 @@ summary = (
     f"Nie angekommen: {n_never_arrived}  |  "
     f"Außer Reihenfolge: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)"
 )
-fig.text(0.5, 0.01, summary, ha="center", fontsize=10, color="gray")
+fig.text(0.5, 0.01, summary, ha="center", fontsize=10)
 
 plt.tight_layout(rect=(0, 0.05, 1, 1))
 

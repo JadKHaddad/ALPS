@@ -77,6 +77,15 @@ def save_fig(fig, out_file):
         fig.savefig(out_file, dpi=150, bbox_inches="tight")
 
 
+plt.rcParams.update(
+    {
+        "font.family": "serif",
+        "font.serif": ["Times New Roman", "DejaVu Serif"],
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+    }
+)
+
 # ── load ──────────────────────────────────────────────────────────────────────
 
 trigger_times, latencies, s = load_events(sys.argv[1])
@@ -144,10 +153,11 @@ if y_max is not None:
     ax1.set_ylim(0, y_max)
 ax1.legend(fontsize=9)
 ax1.grid(True, linestyle="--", alpha=0.4)
-fig1.text(0.5, 0.01, footer, ha="center", fontsize=10, color="gray")
+fig1.text(0.5, 0.01, footer, ha="center", fontsize=10)
 plt.tight_layout(rect=(0, 0.04, 1, 1))
+
 save_fig(fig1, out_line)
 print(f"Saved: {out_line}")
 plt.close(fig1)
 
-# python latency.py ../dev/simulation-mqtt/mount/server-results.json latency-line.pdf
+# python latency.py ../dev/simulation-mqtt/mount/server-results.json latency-line-0.pdf
