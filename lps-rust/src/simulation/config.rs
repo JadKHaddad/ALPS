@@ -95,6 +95,10 @@ impl Config {
         String::from("out-of-order-events.json")
     }
 
+    fn rates_file(&self) -> String {
+        String::from("rates-results.json")
+    }
+
     fn device_results_file(&self) -> String {
         String::from("device-results.json")
     }
@@ -383,6 +387,7 @@ impl Config {
                 device_results_file: self.device_results_file().into(),
                 duplicate_events_file: self.duplicate_events_file().into(),
                 out_of_order_events_file: self.out_of_order_events_file().into(),
+                rates_file: self.rates_file().into(),
             }),
         }]
     }
@@ -629,9 +634,9 @@ impl Config {
             .with_image(self.lps_scripts_image_name())
             .with_container_name(String::from("lps-scripts"))
             .with_command(format!(
-    "sh -c 'python3 /scripts/latency.py {server} latency-line.png latency-hist.png && \
-             python3 /scripts/failure_order.py {device} {server} {failures} failure-order.png && \
-             python3 /scripts/failure_duplicate.py {device} {server} {failures} failure-duplicate.png'",
+    "sh -c 'python3 /scripts/latency.py {server} latency-line.pdf && \
+             python3 /scripts/failure_order.py {device} {server} {failures} failure-order.pdf && \
+             python3 /scripts/failure_duplicate.py {device} {server} {failures} failure-duplicate.pdf'",
     server   = self.server_results_file(),
     device   = self.device_results_file(),
     failures = self.server_failures_file(),

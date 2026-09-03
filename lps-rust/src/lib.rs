@@ -167,6 +167,40 @@ impl Event {
             Err(CompletenessError { missing })
         }
     }
+
+    pub fn calculate_median_latency_ms<'a>(
+        events: impl Iterator<Item = &'a Event>,
+    ) -> Result<f64, anyhow::Error> {
+        let mut latencies: Vec<f64> = events
+            .filter_map(|event| {
+                event.arrived_at.map(|arrived| {
+                    let arrived_ms = arrived.timestamp_millis() as f64;
+                    let trigger_ms = event.event_id as f64;
+
+                    arrived_ms - trigger_ms
+                })
+            })
+            .collect();
+
+        if latencies.is_empty() {
+            return Err(anyhow::anyhow!(
+                "No events with arrival times found to calculate latency"
+            ));
+        }
+
+        latencies.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+
+        let len = latencies.len();
+        let mid = len / 2;
+
+        let median = if len.is_multiple_of(2) {
+            (latencies[mid - 1] + latencies[mid]) / 2.0
+        } else {
+            latencies[mid]
+        };
+
+        Ok(median)
+    }
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -201,7 +235,7 @@ impl OrderError {
 #[derive(Debug, thiserror::Error)]
 #[error("Missing {} events: {missing:?}", missing.len())]
 pub struct CompletenessError {
-    missing: Vec<Event>,
+    pub missing: Vec<Event>,
 }
 
 /// Default value for failure rate used in servers and proxies.
@@ -428,6 +462,14 @@ impl TcpConnectionDrop {
             dropped_at: Utc::now(),
         }
     }
+}
+
+#[derive(Debug, Serialize)]
+pub struct Rates {
+    pub median_latency_ms: f64,
+    pub duplication_rate: f64,
+    pub out_of_order_rate: f64,
+    pub missing_rate: f64,
 }
 
 #[cfg(test)]

@@ -9,7 +9,7 @@ use std::path::PathBuf;
 
 use anyhow::Context;
 use clap::Parser;
-use lps_rust::{Event, validator::Config};
+use lps_rust::{Event, Rates, validator::Config};
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -60,6 +60,8 @@ fn main() -> Result<(), anyhow::Error> {
     tracing::info!("Checking for duplicates");
 
     let (unique, duplicates) = Event::remove_duplication(server_events.iter());
+    let unique: Vec<_> = unique.collect();
+    let unique_count = unique.len();
 
     let duplicates: Vec<_> = duplicates.collect();
 
@@ -81,7 +83,7 @@ fn main() -> Result<(), anyhow::Error> {
     tracing::info!("Validating order");
 
     let mut order_violations = Vec::new();
-    let order_result = Event::validate_order(unique);
+    let order_result = Event::validate_order(unique.into_iter());
 
     if let Err(order_result) = &order_result {
         tracing::error!("Order validation failed: {:#}", order_result);
@@ -99,14 +101,37 @@ fn main() -> Result<(), anyhow::Error> {
     tracing::info!("Validating completeness");
 
     let completeness_result =
-        Event::validate_completeness(device_events.iter(), server_events.iter())
-            .context("Completeness Validation error");
+        Event::validate_completeness(device_events.iter(), server_events.iter());
 
     if let Err(completeness_result) = &completeness_result {
         tracing::error!("Completeness validation failed: {:#}", completeness_result);
     }
 
+    let median_latency = Event::calculate_median_latency_ms(server_events.iter())
+        .context("Failed to calculate median latency")?;
+
+    let duplication_rate = duplicates.len() as f64 / server_events.len() as f64;
+    let out_of_order_rate = order_violations.len() as f64 / unique_count as f64;
+    let missing_rate = match completeness_result {
+        Ok(_) => 0.0,
+        Err(ref err) => err.missing.len() as f64 / device_events.len() as f64,
+    };
+
+    let results = Rates {
+        median_latency_ms: median_latency,
+        duplication_rate,
+        out_of_order_rate,
+        missing_rate,
+    };
+
+    std::fs::write(
+        &config.rates_file,
+        serde_json::to_string_pretty(&results).context("Failed to serialize validation results")?,
+    )
+    .context("Failed to write validation results file")?;
+
     completeness_result
+        .context("Completeness Validation error")
         .and(order_result.context("Order Validation error"))
         .map_err(|_| anyhow::anyhow!("Validation failed. Check logs for details."))
 }
