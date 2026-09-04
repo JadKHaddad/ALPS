@@ -28,3 +28,5 @@ mqtt:
       socket_addr: 0.0.0.0:9090
       failure_rate: 0.1
       max_up_duration: 10s
+  
+# python3 runner.py --protocol "mqtt" --base-dir "simulations/mqtt/phase-2" --base-config "simulations/mqtt/phase-2/mqtt-simulation-config.yaml" --summary-file "simulations/mqtt/phase-2/simulation-summary.json"

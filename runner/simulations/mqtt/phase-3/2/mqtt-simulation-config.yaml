@@ -30,3 +30,5 @@ mqtt:
     #   max_up_duration: 10s
 
 # python /home/jadkhaddad/Desktop/LPS/scripts/latency.py server-results.json latency-line.png latency-hist.png 600000
+
+# python3 runner.py --protocol "mqtt" --base-dir "simulations/mqtt/phase-3/2" --base-config "simulations/mqtt/phase-3/2/mqtt-simulation-config.yaml" --summary-file "simulations/mqtt/phase-3/2/simulation-summary.json"
