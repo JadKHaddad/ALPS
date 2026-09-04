@@ -45,8 +45,8 @@ def parse_args():
     parser.add_argument(
         "--initial-runs",
         type=int,
-        default=3,
-        help="Number of initial runs before checking convergence (default: 3)",
+        default=5,
+        help="Number of initial runs before checking convergence (default: 5)",
     )
     return parser.parse_args()
 
