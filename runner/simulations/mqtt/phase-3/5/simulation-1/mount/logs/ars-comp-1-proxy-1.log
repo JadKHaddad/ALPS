@@ -1,0 +1,34 @@
+2026-09-04 17:24:57,534 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 17:24:57,534 - __main__ - INFO - Sending to: http://lps-legacy-proxy-1-1:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 17:24:57,591 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 17:24:57,591 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 17:24:57,595 - __main__ - INFO - DNS resolved lps-legacy-proxy-1-1 -> 172.19.0.19
+2026-09-04 17:24:57,712 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.19:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 17:24:57,713 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 17:24:57,715 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 17:24:58,426 - uvicorn.error - INFO - Shutting down
+2026-09-04 17:24:58,527 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 17:24:58,609 - __main__ - INFO - HTTP client closed
+2026-09-04 17:24:58,611 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 17:24:58,611 - uvicorn.error - INFO - Finished server process [1]
+2026-09-04 17:26:53,197 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 17:26:53,197 - __main__ - INFO - Sending to: http://lps-legacy-proxy-1-1:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 17:26:53,299 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 17:26:53,299 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 17:26:53,306 - __main__ - INFO - DNS resolved lps-legacy-proxy-1-1 -> 172.19.0.13
+2026-09-04 17:26:53,416 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.13:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 17:26:53,416 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 17:26:53,417 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 17:26:54,005 - __main__ - DEBUG - [MIDDLEWARE_START][device-59-event-0-try-2] Request received at 17:26:54.005
+2026-09-04 17:26:54,008 - __main__ - DEBUG - [ENDPOINT_START][device-59-event-0-try-2] Handler started at 17:26:54.008
+2026-09-04 17:26:54,008 - __main__ - INFO - [rps:0.2|conns:0][device-59-event-0-try-2] Sending message Phone: 59, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 17:26:53.411021+00:00 to http://172.19.0.13:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 17:26:54,030 - __main__ - DEBUG - [device-59-event-0-try-2] Response: 200
+2026-09-04 17:26:54,030 - __main__ - DEBUG - [device-59-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 17:26:54,034 - __main__ - INFO - [device-59-event-0-try-2] Successfully send message
+2026-09-04 17:26:54,034 - __main__ - DEBUG - [MIDDLEWARE_END][device-59-event-0-try-2] Request completed in 0.029s
+2026-09-04 17:26:54,034 - uvicorn.access - INFO - 172.19.0.21:41828 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 17:32:11,130 - uvicorn.error - INFO - Shutting down
+2026-09-04 17:32:11,233 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 17:32:11,241 - __main__ - INFO - HTTP client closed
+2026-09-04 17:32:11,242 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 17:32:11,242 - uvicorn.error - INFO - Finished server process [1]

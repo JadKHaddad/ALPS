@@ -1,0 +1,26 @@
+2026-09-04 17:24:55,613 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 17:24:55,613 - __main__ - INFO - Sending to: http://lps-legacy-proxy-1-2:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 17:24:55,742 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 17:24:55,745 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 17:24:55,755 - __main__ - INFO - DNS resolved lps-legacy-proxy-1-2 -> 172.19.0.22
+2026-09-04 17:24:55,986 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.22:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 17:24:55,987 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 17:24:56,003 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 17:24:58,528 - uvicorn.error - INFO - Shutting down
+2026-09-04 17:24:58,629 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 17:24:58,716 - __main__ - INFO - HTTP client closed
+2026-09-04 17:24:58,716 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 17:24:58,719 - uvicorn.error - INFO - Finished server process [1]
+2026-09-04 17:26:53,008 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 17:26:53,009 - __main__ - INFO - Sending to: http://lps-legacy-proxy-1-2:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 17:26:53,052 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 17:26:53,053 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 17:26:53,055 - __main__ - INFO - DNS resolved lps-legacy-proxy-1-2 -> 172.19.0.15
+2026-09-04 17:26:53,148 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 17:26:53,148 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 17:26:53,149 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 17:32:11,138 - uvicorn.error - INFO - Shutting down
+2026-09-04 17:32:11,240 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 17:32:11,383 - __main__ - INFO - HTTP client closed
+2026-09-04 17:32:11,383 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 17:32:11,383 - uvicorn.error - INFO - Finished server process [1]

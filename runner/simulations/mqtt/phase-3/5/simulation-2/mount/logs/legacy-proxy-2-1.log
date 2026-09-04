@@ -1,0 +1,41 @@
+2026-09-04 17:32:36,380 - __main__ - INFO - DNS resolved lps-ars-comp-2-proxy -> 172.19.0.20
+2026-09-04 17:32:36,610 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.20:8080/ID_REQ_KC_STORE7D3BPACKET, HTTP/2: False
+2026-09-04 17:32:36,615 - __main__ - INFO - Starting MQTT to HTTP forwarder
+2026-09-04 17:32:36,619 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-1' properties=None
+2026-09-04 17:32:36,715 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[TopicAliasMaximum : 5]
+2026-09-04 17:32:36,715 - __main__ - INFO - Connected to MQTT broker at lps-hivemq:1883
+2026-09-04 17:32:36,715 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-04 17:32:36,715 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m1) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-04 17:32:36,715 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 1
+2026-09-04 17:32:36,716 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m2) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-04 17:32:36,716 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 2
+2026-09-04 17:32:36,805 - __main__ - DEBUG - Received SUBACK
+2026-09-04 17:32:36,805 - __main__ - INFO - SUBACK received for mid 1, reason_codes: ['Granted QoS 1']
+2026-09-04 17:32:36,805 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-04 17:32:36,829 - __main__ - DEBUG - Received SUBACK
+2026-09-04 17:32:36,829 - __main__ - INFO - SUBACK received for mid 2, reason_codes: ['Granted QoS 1']
+2026-09-04 17:32:36,829 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-04 17:33:36,896 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:33:36,898 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:34:36,959 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:34:36,962 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:35:37,036 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:35:37,039 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:36:37,101 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:36:37,103 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:37:37,170 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:37:37,172 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:38:37,236 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:38:37,237 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:39:37,304 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:39:37,306 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:40:37,373 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:40:37,374 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:41:37,438 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:41:37,440 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:42:37,504 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 17:42:37,505 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 17:43:02,533 - __main__ - INFO - Shutdown signal received
+2026-09-04 17:43:02,539 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-04 17:43:02,546 - __main__ - INFO - MQTT client stopped
+2026-09-04 17:43:02,547 - __main__ - INFO - HTTP client closed

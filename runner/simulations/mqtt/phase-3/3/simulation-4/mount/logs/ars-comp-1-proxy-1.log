@@ -1,0 +1,21 @@
+2026-09-04 15:38:14,504 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 15:38:14,504 - __main__ - INFO - Sending to: http://lps-legacy-proxy-1-1:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 15:38:14,601 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 15:38:14,602 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 15:38:14,607 - __main__ - INFO - DNS resolved lps-legacy-proxy-1-1 -> 172.19.0.15
+2026-09-04 15:38:14,806 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 15:38:14,809 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 15:38:14,813 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 15:38:43,617 - __main__ - DEBUG - [MIDDLEWARE_START][device-87-event-27-try-2] Request received at 15:38:43.617
+2026-09-04 15:38:43,620 - __main__ - DEBUG - [ENDPOINT_START][device-87-event-27-try-2] Handler started at 15:38:43.620
+2026-09-04 15:38:43,620 - __main__ - INFO - [rps:0.2|conns:0][device-87-event-27-try-2] Sending message Phone: 87, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 15:38:42.531016+00:00 to http://172.19.0.15:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 15:38:43,630 - __main__ - DEBUG - [device-87-event-27-try-2] Response: 200
+2026-09-04 15:38:43,631 - __main__ - DEBUG - [device-87-event-27-try-2] HTTP version: HTTP/1.1
+2026-09-04 15:38:43,631 - __main__ - INFO - [device-87-event-27-try-2] Successfully send message
+2026-09-04 15:38:43,631 - __main__ - DEBUG - [MIDDLEWARE_END][device-87-event-27-try-2] Request completed in 0.014s
+2026-09-04 15:38:43,631 - uvicorn.access - INFO - 172.19.0.8:50134 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 15:48:34,828 - uvicorn.error - INFO - Shutting down
+2026-09-04 15:48:34,933 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 15:48:34,945 - __main__ - INFO - HTTP client closed
+2026-09-04 15:48:34,946 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 15:48:34,946 - uvicorn.error - INFO - Finished server process [1]

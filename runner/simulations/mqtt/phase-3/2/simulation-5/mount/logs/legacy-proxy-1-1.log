@@ -1,0 +1,53 @@
+2026-09-04 13:05:38,959 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 13:05:38,959 - __main__ - INFO - MQTT broker configured at lps-hivemq:1883
+2026-09-04 13:05:38,960 - __main__ - INFO - Publishing to topic: proxy1/message
+2026-09-04 13:05:39,043 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 13:05:39,043 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 13:05:39,043 - __main__ - INFO - Connecting to MQTT broker at lps-hivemq:1883 using MQTT5
+2026-09-04 13:05:39,095 - __main__ - INFO - Successfully connected to MQTT broker
+2026-09-04 13:05:39,096 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 13:05:39,118 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 13:05:40,149 - __main__ - INFO - [device-47-event-0-try-2] Publishing message {"id": "47", "body": "Phone: 47, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.588295+00:00", "request_id": "device-47-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,150 - __main__ - INFO - [device-22-event-0-try-2] Publishing message {"id": "22", "body": "Phone: 22, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.603116+00:00", "request_id": "device-22-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,151 - __main__ - INFO - [device-42-event-0-try-2] Publishing message {"id": "42", "body": "Phone: 42, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.605463+00:00", "request_id": "device-42-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,152 - __main__ - INFO - [device-9-event-0-try-2] Publishing message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.621540+00:00", "request_id": "device-9-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,158 - __main__ - INFO - [device-11-event-0-try-2] Publishing message {"id": "11", "body": "Phone: 11, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.645461+00:00", "request_id": "device-11-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,158 - __main__ - INFO - [device-44-event-0-try-2] Publishing message {"id": "44", "body": "Phone: 44, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.642191+00:00", "request_id": "device-44-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,179 - __main__ - INFO - [device-49-event-0-try-2] Publishing message {"id": "49", "body": "Phone: 49, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.664891+00:00", "request_id": "device-49-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,201 - __main__ - INFO - [device-47-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,201 - uvicorn.access - INFO - 172.19.0.13:49798 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:05:40,203 - __main__ - INFO - [device-22-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,203 - uvicorn.access - INFO - 172.19.0.13:49800 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:05:40,204 - __main__ - INFO - [device-42-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,204 - uvicorn.access - INFO - 172.19.0.13:49816 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:05:40,204 - __main__ - INFO - [device-9-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,205 - uvicorn.access - INFO - 172.19.0.13:49828 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:05:40,205 - __main__ - INFO - [device-11-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,205 - uvicorn.access - INFO - 172.19.0.13:49834 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:05:40,205 - __main__ - INFO - [device-44-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,206 - uvicorn.access - INFO - 172.19.0.13:49840 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:05:40,206 - __main__ - INFO - [device-49-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,206 - uvicorn.access - INFO - 172.19.0.13:49856 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:05:40,332 - __main__ - INFO - [device-48-event-0-try-2] Publishing message {"id": "48", "body": "Phone: 48, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.820910+00:00", "request_id": "device-48-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,348 - __main__ - INFO - [device-48-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,348 - uvicorn.access - INFO - 172.19.0.13:49798 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:05:40,360 - __main__ - INFO - [device-46-event-0-try-2] Publishing message {"id": "46", "body": "Phone: 46, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 13:05:39.843763+00:00", "request_id": "device-46-event-0-try-2"} to Broker ...
+2026-09-04 13:05:40,373 - __main__ - INFO - [device-46-event-0-try-2] Successfully published message
+2026-09-04 13:05:40,373 - uvicorn.access - INFO - 172.19.0.13:49798 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 13:08:20,876 - uvicorn.error - INFO - Shutting down
+2026-09-04 13:08:20,978 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 13:08:20,979 - __main__ - INFO - Closing MQTT connection
+2026-09-04 13:08:20,992 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/contextlib.py", line 221, in __aexit__
+    await anext(self.gen)
+  File "/scripts/legacy_proxy_1.py", line 66, in lifespan
+    await mqtt_client.__aexit__(None, None, None)
+  File "/usr/local/lib/python3.13/site-packages/aiomqtt/client.py", line 792, in __aexit__
+    raise exc
+aiomqtt.exceptions.MqttCodeError: [code:128] Unspecified error
+
+2026-09-04 13:08:20,994 - uvicorn.error - ERROR - Application shutdown failed. Exiting.
+2026-09-04 13:08:20,994 - uvicorn.error - INFO - Finished server process [1]

@@ -1,0 +1,52 @@
+2026-09-04 17:24:57,720 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 17:24:57,720 - __main__ - INFO - MQTT broker configured at lps-hivemq:1883
+2026-09-04 17:24:57,720 - __main__ - INFO - Publishing to topic: proxy1/message
+2026-09-04 17:24:57,775 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 17:24:57,776 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 17:24:57,776 - __main__ - INFO - Connecting to MQTT broker at lps-hivemq:1883 using MQTT5
+2026-09-04 17:24:57,797 - __main__ - INFO - Successfully connected to MQTT broker
+2026-09-04 17:24:57,797 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 17:24:57,799 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 17:24:58,505 - uvicorn.error - INFO - Shutting down
+2026-09-04 17:24:58,605 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 17:24:58,606 - __main__ - INFO - Closing MQTT connection
+2026-09-04 17:24:58,621 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/contextlib.py", line 221, in __aexit__
+    await anext(self.gen)
+  File "/scripts/legacy_proxy_1.py", line 66, in lifespan
+    await mqtt_client.__aexit__(None, None, None)
+  File "/usr/local/lib/python3.13/site-packages/aiomqtt/client.py", line 792, in __aexit__
+    raise exc
+aiomqtt.exceptions.MqttCodeError: [code:128] Unspecified error
+
+2026-09-04 17:24:58,622 - uvicorn.error - ERROR - Application shutdown failed. Exiting.
+2026-09-04 17:24:58,622 - uvicorn.error - INFO - Finished server process [1]
+2026-09-04 17:26:52,613 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 17:26:52,614 - __main__ - INFO - MQTT broker configured at lps-hivemq:1883
+2026-09-04 17:26:52,614 - __main__ - INFO - Publishing to topic: proxy1/message
+2026-09-04 17:26:52,740 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 17:26:52,741 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 17:26:52,741 - __main__ - INFO - Connecting to MQTT broker at lps-hivemq:1883 using MQTT5
+2026-09-04 17:26:52,785 - __main__ - INFO - Successfully connected to MQTT broker
+2026-09-04 17:26:52,785 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 17:26:52,789 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 17:32:11,125 - uvicorn.error - INFO - Shutting down
+2026-09-04 17:32:11,228 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 17:32:11,229 - __main__ - INFO - Closing MQTT connection
+2026-09-04 17:32:11,236 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/contextlib.py", line 221, in __aexit__
+    await anext(self.gen)
+  File "/scripts/legacy_proxy_1.py", line 66, in lifespan
+    await mqtt_client.__aexit__(None, None, None)
+  File "/usr/local/lib/python3.13/site-packages/aiomqtt/client.py", line 792, in __aexit__
+    raise exc
+aiomqtt.exceptions.MqttCodeError: [code:128] Unspecified error
+
+2026-09-04 17:32:11,236 - uvicorn.error - ERROR - Application shutdown failed. Exiting.
+2026-09-04 17:32:11,236 - uvicorn.error - INFO - Finished server process [1]

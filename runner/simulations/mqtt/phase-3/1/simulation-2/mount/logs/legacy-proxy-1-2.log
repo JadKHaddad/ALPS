@@ -1,0 +1,38 @@
+2026-09-04 12:45:48,431 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 12:45:48,431 - __main__ - INFO - MQTT broker configured at lps-hivemq:1883
+2026-09-04 12:45:48,431 - __main__ - INFO - Publishing to topic: proxy1/message
+2026-09-04 12:45:48,482 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 12:45:48,483 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 12:45:48,483 - __main__ - INFO - Connecting to MQTT broker at lps-hivemq:1883 using MQTT5
+2026-09-04 12:45:48,528 - __main__ - INFO - Successfully connected to MQTT broker
+2026-09-04 12:45:48,528 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 12:45:48,539 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 12:45:48,776 - __main__ - INFO - [device-2-event-0-try-6] Publishing message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:46.204583+00:00", "request_id": "device-2-event-0-try-6"} to Broker ...
+2026-09-04 12:45:48,778 - __main__ - INFO - [device-9-event-0-try-6] Publishing message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:46.213008+00:00", "request_id": "device-9-event-0-try-6"} to Broker ...
+2026-09-04 12:45:48,815 - __main__ - INFO - [device-3-event-0-try-6] Publishing message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:46.273569+00:00", "request_id": "device-3-event-0-try-6"} to Broker ...
+2026-09-04 12:45:48,820 - __main__ - INFO - [device-2-event-0-try-6] Successfully published message
+2026-09-04 12:45:48,820 - uvicorn.access - INFO - 172.19.0.12:57288 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:48,826 - __main__ - INFO - [device-9-event-0-try-6] Successfully published message
+2026-09-04 12:45:48,827 - uvicorn.access - INFO - 172.19.0.12:57296 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:48,829 - __main__ - INFO - [device-3-event-0-try-6] Successfully published message
+2026-09-04 12:45:48,829 - uvicorn.access - INFO - 172.19.0.12:57312 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:48,840 - __main__ - INFO - [device-8-event-0-try-6] Publishing message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:46.303581+00:00", "request_id": "device-8-event-0-try-6"} to Broker ...
+2026-09-04 12:45:48,845 - __main__ - INFO - [device-8-event-0-try-6] Successfully published message
+2026-09-04 12:45:48,845 - uvicorn.access - INFO - 172.19.0.12:57288 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:59,982 - uvicorn.error - INFO - Shutting down
+2026-09-04 12:46:00,083 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 12:46:00,083 - __main__ - INFO - Closing MQTT connection
+2026-09-04 12:46:00,096 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/contextlib.py", line 221, in __aexit__
+    await anext(self.gen)
+  File "/scripts/legacy_proxy_1.py", line 66, in lifespan
+    await mqtt_client.__aexit__(None, None, None)
+  File "/usr/local/lib/python3.13/site-packages/aiomqtt/client.py", line 792, in __aexit__
+    raise exc
+aiomqtt.exceptions.MqttCodeError: [code:128] Unspecified error
+
+2026-09-04 12:46:00,096 - uvicorn.error - ERROR - Application shutdown failed. Exiting.
+2026-09-04 12:46:00,096 - uvicorn.error - INFO - Finished server process [1]

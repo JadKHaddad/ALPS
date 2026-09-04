@@ -1,0 +1,55 @@
+2026-09-04 17:24:57,298 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 17:24:57,298 - __main__ - INFO - MQTT broker configured at lps-hivemq:1883
+2026-09-04 17:24:57,298 - __main__ - INFO - Publishing to topic: proxy1/message
+2026-09-04 17:24:57,360 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 17:24:57,361 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 17:24:57,361 - __main__ - INFO - Connecting to MQTT broker at lps-hivemq:1883 using MQTT5
+2026-09-04 17:24:57,386 - __main__ - INFO - Successfully connected to MQTT broker
+2026-09-04 17:24:57,386 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 17:24:57,397 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 17:24:58,406 - uvicorn.error - INFO - Shutting down
+2026-09-04 17:24:58,507 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 17:24:58,507 - __main__ - INFO - Closing MQTT connection
+2026-09-04 17:24:58,523 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/contextlib.py", line 221, in __aexit__
+    await anext(self.gen)
+  File "/scripts/legacy_proxy_1.py", line 66, in lifespan
+    await mqtt_client.__aexit__(None, None, None)
+  File "/usr/local/lib/python3.13/site-packages/aiomqtt/client.py", line 792, in __aexit__
+    raise exc
+aiomqtt.exceptions.MqttCodeError: [code:128] Unspecified error
+
+2026-09-04 17:24:58,523 - uvicorn.error - ERROR - Application shutdown failed. Exiting.
+2026-09-04 17:24:58,525 - uvicorn.error - INFO - Finished server process [1]
+2026-09-04 17:26:52,097 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 17:26:52,098 - __main__ - INFO - MQTT broker configured at lps-hivemq:1883
+2026-09-04 17:26:52,098 - __main__ - INFO - Publishing to topic: proxy1/message
+2026-09-04 17:26:52,186 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 17:26:52,187 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 17:26:52,190 - __main__ - INFO - Connecting to MQTT broker at lps-hivemq:1883 using MQTT5
+2026-09-04 17:26:52,224 - __main__ - INFO - Successfully connected to MQTT broker
+2026-09-04 17:26:52,224 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 17:26:52,241 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 17:26:54,016 - __main__ - INFO - [device-59-event-0-try-2] Publishing message {"id": "59", "body": "Phone: 59, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 17:26:53.411021+00:00", "request_id": "device-59-event-0-try-2"} to Broker ...
+2026-09-04 17:26:54,027 - __main__ - INFO - [device-59-event-0-try-2] Successfully published message
+2026-09-04 17:26:54,027 - uvicorn.access - INFO - 172.19.0.19:36674 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 17:32:11,133 - uvicorn.error - INFO - Shutting down
+2026-09-04 17:32:11,238 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 17:32:11,239 - __main__ - INFO - Closing MQTT connection
+2026-09-04 17:32:11,245 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/contextlib.py", line 221, in __aexit__
+    await anext(self.gen)
+  File "/scripts/legacy_proxy_1.py", line 66, in lifespan
+    await mqtt_client.__aexit__(None, None, None)
+  File "/usr/local/lib/python3.13/site-packages/aiomqtt/client.py", line 792, in __aexit__
+    raise exc
+aiomqtt.exceptions.MqttCodeError: [code:128] Unspecified error
+
+2026-09-04 17:32:11,250 - uvicorn.error - ERROR - Application shutdown failed. Exiting.
+2026-09-04 17:32:11,250 - uvicorn.error - INFO - Finished server process [1]

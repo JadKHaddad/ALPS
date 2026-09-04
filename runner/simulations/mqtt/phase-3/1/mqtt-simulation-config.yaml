@@ -12,7 +12,7 @@ devices:
   max_events: 10
 server:
   socket_addr: 0.0.0.0:8080
-  expose_socket_addr: 0.0.0.0:8080 # Optional, if set, the server will expose its socket on this address. If not set, it will be exposed on the same port as socket_addr.
+  expose_socket_addr: 0.0.0.0:8021 # Optional, if set, the server will expose its socket on this address. If not set, it will be exposed on the same port as socket_addr.
   failure_rate: 0.0
   max_work_duration: 50ms
   max_response_duration: 50ms

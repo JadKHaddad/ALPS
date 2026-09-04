@@ -1,0 +1,513 @@
+2026-09-04 12:45:14,364 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 12:45:14,364 - __main__ - INFO - Forwarding to: http://lps-consumers-server-proxy:8080/work
+2026-09-04 12:45:14,423 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 12:45:14,424 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 12:45:14,435 - __main__ - INFO - DNS resolved lps-consumers-server-proxy -> 172.19.0.4
+2026-09-04 12:45:14,547 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.4:8080/work
+2026-09-04 12:45:14,547 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 12:45:14,548 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 12:45:14,600 - __main__ - INFO - [device-4-event-0-try-4] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:13.007539+00:00", "request_id": "device-4-event-0-try-4"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:14,687 - __main__ - DEBUG - [device-4-event-0-try-4] Response: 200
+2026-09-04 12:45:14,687 - __main__ - DEBUG - [device-4-event-0-try-4] HTTP version: HTTP/1.1
+2026-09-04 12:45:14,687 - __main__ - INFO - [device-4-event-0-try-4] Successfully forwarded message
+2026-09-04 12:45:14,687 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:14,703 - __main__ - INFO - [device-9-event-0-try-4] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:13.104553+00:00", "request_id": "device-9-event-0-try-4"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:14,778 - __main__ - DEBUG - [device-9-event-0-try-4] Response: 200
+2026-09-04 12:45:14,778 - __main__ - DEBUG - [device-9-event-0-try-4] HTTP version: HTTP/1.1
+2026-09-04 12:45:14,778 - __main__ - INFO - [device-9-event-0-try-4] Successfully forwarded message
+2026-09-04 12:45:14,779 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:14,869 - __main__ - INFO - [device-4-event-1-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:14.851284+00:00", "request_id": "device-4-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:14,924 - __main__ - DEBUG - [device-4-event-1-try-1] Response: 200
+2026-09-04 12:45:14,924 - __main__ - DEBUG - [device-4-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:14,924 - __main__ - INFO - [device-4-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:14,924 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:14,934 - __main__ - INFO - [device-2-event-0-try-5] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:12.857654+00:00", "request_id": "device-2-event-0-try-5"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,001 - __main__ - DEBUG - [device-2-event-0-try-5] Response: 200
+2026-09-04 12:45:15,001 - __main__ - DEBUG - [device-2-event-0-try-5] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,001 - __main__ - INFO - [device-2-event-0-try-5] Successfully forwarded message
+2026-09-04 12:45:15,002 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,011 - __main__ - INFO - [device-8-event-0-try-5] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:12.883188+00:00", "request_id": "device-8-event-0-try-5"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,082 - __main__ - DEBUG - [device-8-event-0-try-5] Response: 200
+2026-09-04 12:45:15,082 - __main__ - DEBUG - [device-8-event-0-try-5] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,082 - __main__ - INFO - [device-8-event-0-try-5] Successfully forwarded message
+2026-09-04 12:45:15,082 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,086 - __main__ - INFO - [device-2-event-1-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:14.947001+00:00", "request_id": "device-2-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,110 - __main__ - DEBUG - [device-2-event-1-try-1] Response: 200
+2026-09-04 12:45:15,110 - __main__ - DEBUG - [device-2-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,110 - __main__ - INFO - [device-2-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:15,110 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,162 - __main__ - INFO - [device-4-event-2-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.054181+00:00", "request_id": "device-4-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,198 - __main__ - DEBUG - [device-4-event-2-try-1] Response: 200
+2026-09-04 12:45:15,198 - __main__ - DEBUG - [device-4-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,198 - __main__ - INFO - [device-4-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:15,198 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,201 - __main__ - INFO - [device-5-event-0-try-6] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:12.548699+00:00", "request_id": "device-5-event-0-try-6"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,271 - __main__ - DEBUG - [device-5-event-0-try-6] Response: 200
+2026-09-04 12:45:15,271 - __main__ - DEBUG - [device-5-event-0-try-6] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,272 - __main__ - INFO - [device-5-event-0-try-6] Successfully forwarded message
+2026-09-04 12:45:15,272 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,276 - __main__ - INFO - [device-3-event-0-try-6] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:12.562547+00:00", "request_id": "device-3-event-0-try-6"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,342 - __main__ - DEBUG - [device-3-event-0-try-6] Response: 200
+2026-09-04 12:45:15,342 - __main__ - DEBUG - [device-3-event-0-try-6] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,342 - __main__ - INFO - [device-3-event-0-try-6] Successfully forwarded message
+2026-09-04 12:45:15,343 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,347 - __main__ - INFO - [device-7-event-0-try-6] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:12.524657+00:00", "request_id": "device-7-event-0-try-6"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,381 - __main__ - DEBUG - [device-7-event-0-try-6] Response: 200
+2026-09-04 12:45:15,382 - __main__ - DEBUG - [device-7-event-0-try-6] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,382 - __main__ - INFO - [device-7-event-0-try-6] Successfully forwarded message
+2026-09-04 12:45:15,382 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,386 - __main__ - INFO - [device-9-event-1-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.143829+00:00", "request_id": "device-9-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,451 - __main__ - DEBUG - [device-9-event-1-try-1] Response: 200
+2026-09-04 12:45:15,452 - __main__ - DEBUG - [device-9-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,452 - __main__ - INFO - [device-9-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:15,452 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,471 - __main__ - INFO - [device-0-event-0-try-6] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:12.602534+00:00", "request_id": "device-0-event-0-try-6"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,524 - __main__ - DEBUG - [device-0-event-0-try-6] Response: 200
+2026-09-04 12:45:15,524 - __main__ - DEBUG - [device-0-event-0-try-6] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,524 - __main__ - INFO - [device-0-event-0-try-6] Successfully forwarded message
+2026-09-04 12:45:15,525 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,531 - __main__ - INFO - [device-1-event-0-try-6] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:12.595675+00:00", "request_id": "device-1-event-0-try-6"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,557 - __main__ - DEBUG - [device-1-event-0-try-6] Response: 200
+2026-09-04 12:45:15,557 - __main__ - DEBUG - [device-1-event-0-try-6] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,557 - __main__ - INFO - [device-1-event-0-try-6] Successfully forwarded message
+2026-09-04 12:45:15,557 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,563 - __main__ - INFO - [device-6-event-0-try-6] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:12.614301+00:00", "request_id": "device-6-event-0-try-6"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,581 - __main__ - DEBUG - [device-6-event-0-try-6] Response: 200
+2026-09-04 12:45:15,581 - __main__ - DEBUG - [device-6-event-0-try-6] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,581 - __main__ - INFO - [device-6-event-0-try-6] Successfully forwarded message
+2026-09-04 12:45:15,581 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,593 - __main__ - INFO - [device-7-event-1-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.193887+00:00", "request_id": "device-7-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,686 - __main__ - DEBUG - [device-7-event-1-try-1] Response: 200
+2026-09-04 12:45:15,687 - __main__ - DEBUG - [device-7-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,687 - __main__ - INFO - [device-7-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:15,687 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,691 - __main__ - INFO - [device-4-event-3-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.208462+00:00", "request_id": "device-4-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,708 - __main__ - DEBUG - [device-4-event-3-try-1] Response: 200
+2026-09-04 12:45:15,708 - __main__ - DEBUG - [device-4-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,708 - __main__ - INFO - [device-4-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:15,708 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,713 - __main__ - INFO - [device-6-event-1-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.322068+00:00", "request_id": "device-6-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,775 - __main__ - DEBUG - [device-6-event-1-try-1] Response: 200
+2026-09-04 12:45:15,775 - __main__ - DEBUG - [device-6-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,775 - __main__ - INFO - [device-6-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:15,775 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,778 - __main__ - INFO - [device-1-event-1-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.323426+00:00", "request_id": "device-1-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,839 - __main__ - DEBUG - [device-1-event-1-try-1] Response: 200
+2026-09-04 12:45:15,839 - __main__ - DEBUG - [device-1-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,839 - __main__ - INFO - [device-1-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:15,840 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,843 - __main__ - INFO - [device-7-event-2-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.347872+00:00", "request_id": "device-7-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,906 - __main__ - DEBUG - [device-7-event-2-try-1] Response: 200
+2026-09-04 12:45:15,906 - __main__ - DEBUG - [device-7-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,906 - __main__ - INFO - [device-7-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:15,906 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,910 - __main__ - INFO - [device-8-event-1-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.346284+00:00", "request_id": "device-8-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:15,961 - __main__ - DEBUG - [device-8-event-1-try-1] Response: 200
+2026-09-04 12:45:15,961 - __main__ - DEBUG - [device-8-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:15,961 - __main__ - INFO - [device-8-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:15,961 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:15,966 - __main__ - INFO - [device-6-event-2-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.369226+00:00", "request_id": "device-6-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,034 - __main__ - DEBUG - [device-6-event-2-try-1] Response: 200
+2026-09-04 12:45:16,034 - __main__ - DEBUG - [device-6-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,034 - __main__ - INFO - [device-6-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:16,034 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,038 - __main__ - INFO - [device-2-event-2-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.371870+00:00", "request_id": "device-2-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,098 - __main__ - DEBUG - [device-2-event-2-try-1] Response: 200
+2026-09-04 12:45:16,098 - __main__ - DEBUG - [device-2-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,098 - __main__ - INFO - [device-2-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:16,099 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,102 - __main__ - INFO - [device-0-event-1-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.411131+00:00", "request_id": "device-0-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,174 - __main__ - DEBUG - [device-0-event-1-try-1] Response: 200
+2026-09-04 12:45:16,174 - __main__ - DEBUG - [device-0-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,174 - __main__ - INFO - [device-0-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:16,174 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,179 - __main__ - INFO - [device-3-event-1-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.423781+00:00", "request_id": "device-3-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,277 - __main__ - DEBUG - [device-3-event-1-try-1] Response: 200
+2026-09-04 12:45:16,277 - __main__ - DEBUG - [device-3-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,277 - __main__ - INFO - [device-3-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:16,277 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,281 - __main__ - INFO - [device-2-event-3-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.444560+00:00", "request_id": "device-2-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,359 - __main__ - DEBUG - [device-2-event-3-try-1] Response: 200
+2026-09-04 12:45:16,359 - __main__ - DEBUG - [device-2-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,359 - __main__ - INFO - [device-2-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:16,359 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,377 - __main__ - INFO - [device-5-event-1-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.496744+00:00", "request_id": "device-5-event-1-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,426 - __main__ - DEBUG - [device-5-event-1-try-1] Response: 200
+2026-09-04 12:45:16,426 - __main__ - DEBUG - [device-5-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,426 - __main__ - INFO - [device-5-event-1-try-1] Successfully forwarded message
+2026-09-04 12:45:16,427 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,429 - __main__ - INFO - [device-0-event-2-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.523639+00:00", "request_id": "device-0-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,492 - __main__ - DEBUG - [device-0-event-2-try-1] Response: 200
+2026-09-04 12:45:16,493 - __main__ - DEBUG - [device-0-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,493 - __main__ - INFO - [device-0-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:16,493 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,496 - __main__ - INFO - [device-6-event-3-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.536835+00:00", "request_id": "device-6-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,554 - __main__ - DEBUG - [device-6-event-3-try-1] Response: 200
+2026-09-04 12:45:16,554 - __main__ - DEBUG - [device-6-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,554 - __main__ - INFO - [device-6-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:16,554 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,557 - __main__ - INFO - [device-7-event-3-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.538206+00:00", "request_id": "device-7-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,591 - __main__ - DEBUG - [device-7-event-3-try-1] Response: 200
+2026-09-04 12:45:16,591 - __main__ - DEBUG - [device-7-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,591 - __main__ - INFO - [device-7-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:16,591 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,596 - __main__ - INFO - [device-4-event-4-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.570551+00:00", "request_id": "device-4-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,626 - __main__ - DEBUG - [device-4-event-4-try-1] Response: 200
+2026-09-04 12:45:16,626 - __main__ - DEBUG - [device-4-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,626 - __main__ - INFO - [device-4-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:16,626 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,631 - __main__ - INFO - [device-8-event-2-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.573251+00:00", "request_id": "device-8-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,721 - __main__ - DEBUG - [device-8-event-2-try-1] Response: 200
+2026-09-04 12:45:16,721 - __main__ - DEBUG - [device-8-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,721 - __main__ - INFO - [device-8-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:16,721 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,725 - __main__ - INFO - [device-6-event-4-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.590010+00:00", "request_id": "device-6-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,799 - __main__ - DEBUG - [device-6-event-4-try-1] Response: 200
+2026-09-04 12:45:16,799 - __main__ - DEBUG - [device-6-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,800 - __main__ - INFO - [device-6-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:16,800 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,805 - __main__ - INFO - [device-5-event-2-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.614574+00:00", "request_id": "device-5-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,886 - __main__ - DEBUG - [device-5-event-2-try-1] Response: 200
+2026-09-04 12:45:16,886 - __main__ - DEBUG - [device-5-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,886 - __main__ - INFO - [device-5-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:16,886 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,891 - __main__ - INFO - [device-9-event-2-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.642945+00:00", "request_id": "device-9-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,954 - __main__ - DEBUG - [device-9-event-2-try-1] Response: 200
+2026-09-04 12:45:16,954 - __main__ - DEBUG - [device-9-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,954 - __main__ - INFO - [device-9-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:16,954 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,958 - __main__ - INFO - [device-7-event-4-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.654681+00:00", "request_id": "device-7-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:16,970 - __main__ - DEBUG - [device-7-event-4-try-1] Response: 200
+2026-09-04 12:45:16,971 - __main__ - DEBUG - [device-7-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:16,971 - __main__ - INFO - [device-7-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:16,971 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:16,976 - __main__ - INFO - [device-6-event-5-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.731267+00:00", "request_id": "device-6-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,009 - __main__ - DEBUG - [device-6-event-5-try-1] Response: 200
+2026-09-04 12:45:17,009 - __main__ - DEBUG - [device-6-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,009 - __main__ - INFO - [device-6-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:17,010 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,014 - __main__ - INFO - [device-1-event-2-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.781918+00:00", "request_id": "device-1-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,052 - __main__ - DEBUG - [device-1-event-2-try-1] Response: 200
+2026-09-04 12:45:17,052 - __main__ - DEBUG - [device-1-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,052 - __main__ - INFO - [device-1-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:17,052 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,056 - __main__ - INFO - [device-4-event-5-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.793911+00:00", "request_id": "device-4-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,104 - __main__ - DEBUG - [device-4-event-5-try-1] Response: 200
+2026-09-04 12:45:17,104 - __main__ - DEBUG - [device-4-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,104 - __main__ - INFO - [device-4-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:17,105 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,111 - __main__ - INFO - [device-8-event-3-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.813318+00:00", "request_id": "device-8-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,205 - __main__ - DEBUG - [device-8-event-3-try-1] Response: 200
+2026-09-04 12:45:17,205 - __main__ - DEBUG - [device-8-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,205 - __main__ - INFO - [device-8-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:17,205 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,209 - __main__ - INFO - [device-9-event-3-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.819686+00:00", "request_id": "device-9-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,272 - __main__ - DEBUG - [device-9-event-3-try-1] Response: 200
+2026-09-04 12:45:17,272 - __main__ - DEBUG - [device-9-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,272 - __main__ - INFO - [device-9-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:17,273 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,278 - __main__ - INFO - [device-4-event-6-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.821828+00:00", "request_id": "device-4-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,325 - __main__ - DEBUG - [device-4-event-6-try-1] Response: 200
+2026-09-04 12:45:17,325 - __main__ - DEBUG - [device-4-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,325 - __main__ - INFO - [device-4-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:17,325 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,335 - __main__ - INFO - [device-3-event-2-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.843030+00:00", "request_id": "device-3-event-2-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,397 - __main__ - DEBUG - [device-3-event-2-try-1] Response: 200
+2026-09-04 12:45:17,397 - __main__ - DEBUG - [device-3-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,397 - __main__ - INFO - [device-3-event-2-try-1] Successfully forwarded message
+2026-09-04 12:45:17,397 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,401 - __main__ - INFO - [device-3-event-3-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.882965+00:00", "request_id": "device-3-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,432 - __main__ - DEBUG - [device-3-event-3-try-1] Response: 200
+2026-09-04 12:45:17,432 - __main__ - DEBUG - [device-3-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,432 - __main__ - INFO - [device-3-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:17,432 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,436 - __main__ - INFO - [device-2-event-4-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.887404+00:00", "request_id": "device-2-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,501 - __main__ - DEBUG - [device-2-event-4-try-1] Response: 200
+2026-09-04 12:45:17,502 - __main__ - DEBUG - [device-2-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,502 - __main__ - INFO - [device-2-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:17,502 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,508 - __main__ - INFO - [device-1-event-3-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.956882+00:00", "request_id": "device-1-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,555 - __main__ - DEBUG - [device-1-event-3-try-1] Response: 200
+2026-09-04 12:45:17,555 - __main__ - DEBUG - [device-1-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,555 - __main__ - INFO - [device-1-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:17,556 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,559 - __main__ - INFO - [device-6-event-6-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.993455+00:00", "request_id": "device-6-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,590 - __main__ - DEBUG - [device-6-event-6-try-1] Response: 200
+2026-09-04 12:45:17,590 - __main__ - DEBUG - [device-6-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,590 - __main__ - INFO - [device-6-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:17,590 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,594 - __main__ - INFO - [device-3-event-4-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:15.999266+00:00", "request_id": "device-3-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,653 - __main__ - DEBUG - [device-3-event-4-try-1] Response: 200
+2026-09-04 12:45:17,654 - __main__ - DEBUG - [device-3-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,654 - __main__ - INFO - [device-3-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:17,654 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,661 - __main__ - INFO - [device-8-event-4-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.032079+00:00", "request_id": "device-8-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,718 - __main__ - DEBUG - [device-8-event-4-try-1] Response: 200
+2026-09-04 12:45:17,718 - __main__ - DEBUG - [device-8-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,718 - __main__ - INFO - [device-8-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:17,718 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,722 - __main__ - INFO - [device-0-event-3-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.048163+00:00", "request_id": "device-0-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,792 - __main__ - DEBUG - [device-0-event-3-try-1] Response: 200
+2026-09-04 12:45:17,792 - __main__ - DEBUG - [device-0-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,792 - __main__ - INFO - [device-0-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:17,793 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,796 - __main__ - INFO - [device-6-event-7-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.059537+00:00", "request_id": "device-6-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,852 - __main__ - DEBUG - [device-6-event-7-try-1] Response: 200
+2026-09-04 12:45:17,852 - __main__ - DEBUG - [device-6-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,852 - __main__ - INFO - [device-6-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:17,852 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,856 - __main__ - INFO - [device-5-event-3-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.061820+00:00", "request_id": "device-5-event-3-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,941 - __main__ - DEBUG - [device-5-event-3-try-1] Response: 200
+2026-09-04 12:45:17,941 - __main__ - DEBUG - [device-5-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,941 - __main__ - INFO - [device-5-event-3-try-1] Successfully forwarded message
+2026-09-04 12:45:17,942 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,946 - __main__ - INFO - [device-3-event-5-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.101623+00:00", "request_id": "device-3-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:17,972 - __main__ - DEBUG - [device-3-event-5-try-1] Response: 200
+2026-09-04 12:45:17,972 - __main__ - DEBUG - [device-3-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:17,972 - __main__ - INFO - [device-3-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:17,973 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:17,976 - __main__ - INFO - [device-0-event-4-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.111150+00:00", "request_id": "device-0-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,041 - __main__ - DEBUG - [device-0-event-4-try-1] Response: 200
+2026-09-04 12:45:18,041 - __main__ - DEBUG - [device-0-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,041 - __main__ - INFO - [device-0-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:18,041 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,046 - __main__ - INFO - [device-9-event-4-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.122062+00:00", "request_id": "device-9-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,101 - __main__ - DEBUG - [device-9-event-4-try-1] Response: 200
+2026-09-04 12:45:18,101 - __main__ - DEBUG - [device-9-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,101 - __main__ - INFO - [device-9-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:18,102 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,106 - __main__ - INFO - [device-8-event-5-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.120745+00:00", "request_id": "device-8-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,147 - __main__ - DEBUG - [device-8-event-5-try-1] Response: 200
+2026-09-04 12:45:18,147 - __main__ - DEBUG - [device-8-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,147 - __main__ - INFO - [device-8-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:18,147 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,150 - __main__ - INFO - [device-7-event-5-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.129728+00:00", "request_id": "device-7-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,192 - __main__ - DEBUG - [device-7-event-5-try-1] Response: 200
+2026-09-04 12:45:18,192 - __main__ - DEBUG - [device-7-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,192 - __main__ - INFO - [device-7-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:18,192 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,195 - __main__ - INFO - [device-9-event-5-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.160597+00:00", "request_id": "device-9-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,243 - __main__ - DEBUG - [device-9-event-5-try-1] Response: 200
+2026-09-04 12:45:18,243 - __main__ - DEBUG - [device-9-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,243 - __main__ - INFO - [device-9-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:18,243 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,248 - __main__ - INFO - [device-4-event-7-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.186521+00:00", "request_id": "device-4-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,281 - __main__ - DEBUG - [device-4-event-7-try-1] Response: 200
+2026-09-04 12:45:18,282 - __main__ - DEBUG - [device-4-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,282 - __main__ - INFO - [device-4-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:18,282 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,287 - __main__ - INFO - [device-6-event-8-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.206721+00:00", "request_id": "device-6-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,321 - __main__ - DEBUG - [device-6-event-8-try-1] Response: 200
+2026-09-04 12:45:18,321 - __main__ - DEBUG - [device-6-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,322 - __main__ - INFO - [device-6-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:18,322 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,326 - __main__ - INFO - [device-5-event-4-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.229392+00:00", "request_id": "device-5-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,371 - __main__ - DEBUG - [device-5-event-4-try-1] Response: 200
+2026-09-04 12:45:18,371 - __main__ - DEBUG - [device-5-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,371 - __main__ - INFO - [device-5-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:18,372 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,376 - __main__ - INFO - [device-9-event-6-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.289110+00:00", "request_id": "device-9-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,433 - __main__ - DEBUG - [device-9-event-6-try-1] Response: 200
+2026-09-04 12:45:18,433 - __main__ - DEBUG - [device-9-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,433 - __main__ - INFO - [device-9-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:18,434 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,442 - __main__ - INFO - [device-2-event-5-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.306976+00:00", "request_id": "device-2-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,466 - __main__ - DEBUG - [device-2-event-5-try-1] Response: 200
+2026-09-04 12:45:18,466 - __main__ - DEBUG - [device-2-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,466 - __main__ - INFO - [device-2-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:18,467 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,487 - __main__ - INFO - [device-9-event-7-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.375484+00:00", "request_id": "device-9-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,533 - __main__ - DEBUG - [device-9-event-7-try-1] Response: 200
+2026-09-04 12:45:18,533 - __main__ - DEBUG - [device-9-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,533 - __main__ - INFO - [device-9-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:18,533 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,537 - __main__ - INFO - [device-1-event-4-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.468544+00:00", "request_id": "device-1-event-4-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,613 - __main__ - DEBUG - [device-1-event-4-try-1] Response: 200
+2026-09-04 12:45:18,613 - __main__ - DEBUG - [device-1-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,613 - __main__ - INFO - [device-1-event-4-try-1] Successfully forwarded message
+2026-09-04 12:45:18,614 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,618 - __main__ - INFO - [device-8-event-6-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.521017+00:00", "request_id": "device-8-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,689 - __main__ - DEBUG - [device-8-event-6-try-1] Response: 200
+2026-09-04 12:45:18,689 - __main__ - DEBUG - [device-8-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,689 - __main__ - INFO - [device-8-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:18,689 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,693 - __main__ - INFO - [device-0-event-5-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.521241+00:00", "request_id": "device-0-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,769 - __main__ - DEBUG - [device-0-event-5-try-1] Response: 200
+2026-09-04 12:45:18,769 - __main__ - DEBUG - [device-0-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,769 - __main__ - INFO - [device-0-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:18,769 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,773 - __main__ - INFO - [device-3-event-6-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.521277+00:00", "request_id": "device-3-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,871 - __main__ - DEBUG - [device-3-event-6-try-1] Response: 200
+2026-09-04 12:45:18,871 - __main__ - DEBUG - [device-3-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,872 - __main__ - INFO - [device-3-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:18,872 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,875 - __main__ - INFO - [device-7-event-6-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.563689+00:00", "request_id": "device-7-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,934 - __main__ - DEBUG - [device-7-event-6-try-1] Response: 200
+2026-09-04 12:45:18,934 - __main__ - DEBUG - [device-7-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,934 - __main__ - INFO - [device-7-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:18,934 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,937 - __main__ - INFO - [device-5-event-5-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.567131+00:00", "request_id": "device-5-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:18,970 - __main__ - DEBUG - [device-5-event-5-try-1] Response: 200
+2026-09-04 12:45:18,970 - __main__ - DEBUG - [device-5-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:18,970 - __main__ - INFO - [device-5-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:18,970 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:18,974 - __main__ - INFO - [device-6-event-9-try-1] Forwarding message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.635658+00:00", "request_id": "device-6-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,020 - __main__ - DEBUG - [device-6-event-9-try-1] Response: 200
+2026-09-04 12:45:19,020 - __main__ - DEBUG - [device-6-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,020 - __main__ - INFO - [device-6-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:19,020 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,024 - __main__ - INFO - [device-4-event-8-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.640227+00:00", "request_id": "device-4-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,104 - __main__ - DEBUG - [device-4-event-8-try-1] Response: 200
+2026-09-04 12:45:19,104 - __main__ - DEBUG - [device-4-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,104 - __main__ - INFO - [device-4-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:19,104 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,109 - __main__ - INFO - [device-5-event-6-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.643313+00:00", "request_id": "device-5-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,209 - __main__ - DEBUG - [device-5-event-6-try-1] Response: 200
+2026-09-04 12:45:19,210 - __main__ - DEBUG - [device-5-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,210 - __main__ - INFO - [device-5-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:19,210 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,213 - __main__ - INFO - [device-1-event-5-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.645529+00:00", "request_id": "device-1-event-5-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,250 - __main__ - DEBUG - [device-1-event-5-try-1] Response: 200
+2026-09-04 12:45:19,250 - __main__ - DEBUG - [device-1-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,250 - __main__ - INFO - [device-1-event-5-try-1] Successfully forwarded message
+2026-09-04 12:45:19,250 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,253 - __main__ - INFO - [device-2-event-6-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.720454+00:00", "request_id": "device-2-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,294 - __main__ - DEBUG - [device-2-event-6-try-1] Response: 200
+2026-09-04 12:45:19,294 - __main__ - DEBUG - [device-2-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,294 - __main__ - INFO - [device-2-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:19,294 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,297 - __main__ - INFO - [device-3-event-7-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.811879+00:00", "request_id": "device-3-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,318 - __main__ - DEBUG - [device-3-event-7-try-1] Response: 200
+2026-09-04 12:45:19,318 - __main__ - DEBUG - [device-3-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,318 - __main__ - INFO - [device-3-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:19,318 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,321 - __main__ - INFO - [device-9-event-8-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.838190+00:00", "request_id": "device-9-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,406 - __main__ - DEBUG - [device-9-event-8-try-1] Response: 200
+2026-09-04 12:45:19,406 - __main__ - DEBUG - [device-9-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,407 - __main__ - INFO - [device-9-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:19,407 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,411 - __main__ - INFO - [device-8-event-7-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.849998+00:00", "request_id": "device-8-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,431 - __main__ - DEBUG - [device-8-event-7-try-1] Response: 200
+2026-09-04 12:45:19,431 - __main__ - DEBUG - [device-8-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,431 - __main__ - INFO - [device-8-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:19,431 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,434 - __main__ - INFO - [device-3-event-8-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.915754+00:00", "request_id": "device-3-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,479 - __main__ - DEBUG - [device-3-event-8-try-1] Response: 200
+2026-09-04 12:45:19,479 - __main__ - DEBUG - [device-3-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,479 - __main__ - INFO - [device-3-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:19,480 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,483 - __main__ - INFO - [device-9-event-9-try-1] Forwarding message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.936410+00:00", "request_id": "device-9-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,557 - __main__ - DEBUG - [device-9-event-9-try-1] Response: 200
+2026-09-04 12:45:19,557 - __main__ - DEBUG - [device-9-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,557 - __main__ - INFO - [device-9-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:19,557 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,560 - __main__ - INFO - [device-8-event-8-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:16.983035+00:00", "request_id": "device-8-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,630 - __main__ - DEBUG - [device-8-event-8-try-1] Response: 200
+2026-09-04 12:45:19,630 - __main__ - DEBUG - [device-8-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,630 - __main__ - INFO - [device-8-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:19,630 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,633 - __main__ - INFO - [device-0-event-6-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.017023+00:00", "request_id": "device-0-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,703 - __main__ - DEBUG - [device-0-event-6-try-1] Response: 200
+2026-09-04 12:45:19,703 - __main__ - DEBUG - [device-0-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,703 - __main__ - INFO - [device-0-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:19,704 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,707 - __main__ - INFO - [device-5-event-7-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.051401+00:00", "request_id": "device-5-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,738 - __main__ - DEBUG - [device-5-event-7-try-1] Response: 200
+2026-09-04 12:45:19,738 - __main__ - DEBUG - [device-5-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,739 - __main__ - INFO - [device-5-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:19,739 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,744 - __main__ - INFO - [device-0-event-7-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.054772+00:00", "request_id": "device-0-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,784 - __main__ - DEBUG - [device-0-event-7-try-1] Response: 200
+2026-09-04 12:45:19,784 - __main__ - DEBUG - [device-0-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,784 - __main__ - INFO - [device-0-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:19,784 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,788 - __main__ - INFO - [device-7-event-7-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.076573+00:00", "request_id": "device-7-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,827 - __main__ - DEBUG - [device-7-event-7-try-1] Response: 200
+2026-09-04 12:45:19,827 - __main__ - DEBUG - [device-7-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,828 - __main__ - INFO - [device-7-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:19,828 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,831 - __main__ - INFO - [device-4-event-9-try-1] Forwarding message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.087283+00:00", "request_id": "device-4-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,910 - __main__ - DEBUG - [device-4-event-9-try-1] Response: 200
+2026-09-04 12:45:19,911 - __main__ - DEBUG - [device-4-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,911 - __main__ - INFO - [device-4-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:19,911 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,914 - __main__ - INFO - [device-1-event-6-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.141018+00:00", "request_id": "device-1-event-6-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:19,965 - __main__ - DEBUG - [device-1-event-6-try-1] Response: 200
+2026-09-04 12:45:19,965 - __main__ - DEBUG - [device-1-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:19,965 - __main__ - INFO - [device-1-event-6-try-1] Successfully forwarded message
+2026-09-04 12:45:19,965 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:19,969 - __main__ - INFO - [device-7-event-8-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.191281+00:00", "request_id": "device-7-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,009 - __main__ - DEBUG - [device-7-event-8-try-1] Response: 200
+2026-09-04 12:45:20,009 - __main__ - DEBUG - [device-7-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,009 - __main__ - INFO - [device-7-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:20,010 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,014 - __main__ - INFO - [device-2-event-7-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.212781+00:00", "request_id": "device-2-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,036 - __main__ - DEBUG - [device-2-event-7-try-1] Response: 200
+2026-09-04 12:45:20,036 - __main__ - DEBUG - [device-2-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,036 - __main__ - INFO - [device-2-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:20,036 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,039 - __main__ - INFO - [device-0-event-8-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.223389+00:00", "request_id": "device-0-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,080 - __main__ - DEBUG - [device-0-event-8-try-1] Response: 200
+2026-09-04 12:45:20,080 - __main__ - DEBUG - [device-0-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,080 - __main__ - INFO - [device-0-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:20,080 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,086 - __main__ - INFO - [device-5-event-8-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.315910+00:00", "request_id": "device-5-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,127 - __main__ - DEBUG - [device-5-event-8-try-1] Response: 200
+2026-09-04 12:45:20,128 - __main__ - DEBUG - [device-5-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,128 - __main__ - INFO - [device-5-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:20,128 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,132 - __main__ - INFO - [device-3-event-9-try-1] Forwarding message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.417012+00:00", "request_id": "device-3-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,174 - __main__ - DEBUG - [device-3-event-9-try-1] Response: 200
+2026-09-04 12:45:20,174 - __main__ - DEBUG - [device-3-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,174 - __main__ - INFO - [device-3-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:20,174 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,178 - __main__ - INFO - [device-7-event-9-try-1] Forwarding message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.450387+00:00", "request_id": "device-7-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,201 - __main__ - DEBUG - [device-7-event-9-try-1] Response: 200
+2026-09-04 12:45:20,201 - __main__ - DEBUG - [device-7-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,201 - __main__ - INFO - [device-7-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:20,201 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,205 - __main__ - INFO - [device-8-event-9-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.495570+00:00", "request_id": "device-8-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,233 - __main__ - DEBUG - [device-8-event-9-try-1] Response: 200
+2026-09-04 12:45:20,233 - __main__ - DEBUG - [device-8-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,233 - __main__ - INFO - [device-8-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:20,234 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,237 - __main__ - INFO - [device-0-event-9-try-1] Forwarding message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.504830+00:00", "request_id": "device-0-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,308 - __main__ - DEBUG - [device-0-event-9-try-1] Response: 200
+2026-09-04 12:45:20,309 - __main__ - DEBUG - [device-0-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,309 - __main__ - INFO - [device-0-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:20,309 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,313 - __main__ - INFO - [device-1-event-7-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.581385+00:00", "request_id": "device-1-event-7-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,351 - __main__ - DEBUG - [device-1-event-7-try-1] Response: 200
+2026-09-04 12:45:20,351 - __main__ - DEBUG - [device-1-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,351 - __main__ - INFO - [device-1-event-7-try-1] Successfully forwarded message
+2026-09-04 12:45:20,351 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,354 - __main__ - INFO - [device-2-event-8-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.651869+00:00", "request_id": "device-2-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,444 - __main__ - DEBUG - [device-2-event-8-try-1] Response: 200
+2026-09-04 12:45:20,445 - __main__ - DEBUG - [device-2-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,445 - __main__ - INFO - [device-2-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:20,445 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,448 - __main__ - INFO - [device-5-event-9-try-1] Forwarding message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.757375+00:00", "request_id": "device-5-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,492 - __main__ - DEBUG - [device-5-event-9-try-1] Response: 200
+2026-09-04 12:45:20,492 - __main__ - DEBUG - [device-5-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,492 - __main__ - INFO - [device-5-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:20,492 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,495 - __main__ - INFO - [device-2-event-9-try-1] Forwarding message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:17.794092+00:00", "request_id": "device-2-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,535 - __main__ - DEBUG - [device-2-event-9-try-1] Response: 200
+2026-09-04 12:45:20,535 - __main__ - DEBUG - [device-2-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,535 - __main__ - INFO - [device-2-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:20,535 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,542 - __main__ - INFO - [device-1-event-8-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:18.083086+00:00", "request_id": "device-1-event-8-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,612 - __main__ - DEBUG - [device-1-event-8-try-1] Response: 200
+2026-09-04 12:45:20,613 - __main__ - DEBUG - [device-1-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,613 - __main__ - INFO - [device-1-event-8-try-1] Successfully forwarded message
+2026-09-04 12:45:20,613 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:20,617 - __main__ - INFO - [device-1-event-9-try-1] Forwarding message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:45:18.151292+00:00", "request_id": "device-1-event-9-try-1"} to http://172.19.0.4:8080/work ...
+2026-09-04 12:45:20,707 - __main__ - DEBUG - [device-1-event-9-try-1] Response: 200
+2026-09-04 12:45:20,707 - __main__ - DEBUG - [device-1-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-04 12:45:20,707 - __main__ - INFO - [device-1-event-9-try-1] Successfully forwarded message
+2026-09-04 12:45:20,707 - uvicorn.access - INFO - 172.19.0.10:35128 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:45:26,998 - uvicorn.error - INFO - Shutting down
+2026-09-04 12:45:27,101 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 12:45:27,103 - __main__ - INFO - HTTP client closed
+2026-09-04 12:45:27,104 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 12:45:27,104 - uvicorn.error - INFO - Finished server process [1]

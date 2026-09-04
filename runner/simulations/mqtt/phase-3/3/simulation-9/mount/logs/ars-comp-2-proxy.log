@@ -1,0 +1,27 @@
+2026-09-04 16:32:15,321 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 16:32:15,322 - __main__ - INFO - Forwarding to: http://lps-consumers-server-proxy:8080/work
+2026-09-04 16:32:15,363 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 16:32:15,364 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 16:32:15,367 - __main__ - INFO - DNS resolved lps-consumers-server-proxy -> 172.19.0.13
+2026-09-04 16:32:15,474 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.13:8080/work
+2026-09-04 16:32:15,477 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 16:32:15,482 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 16:32:16,386 - __main__ - INFO - [device-49-event-0-try-1] Forwarding message {"id": "49", "body": "Phone: 49, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 16:32:15.753432+00:00", "request_id": "device-49-event-0-try-1"} to http://172.19.0.13:8080/work ...
+2026-09-04 16:32:16,438 - __main__ - DEBUG - [device-49-event-0-try-1] Response: 500
+2026-09-04 16:32:16,438 - __main__ - DEBUG - [device-49-event-0-try-1] HTTP version: HTTP/1.1
+2026-09-04 16:32:16,438 - __main__ - ERROR - [device-49-event-0-try-1] HTTP error 500: 
+2026-09-04 16:32:16,438 - __main__ - ERROR - [device-49-event-0-try-1] HTTP forward failed: [device-49-event-0-try-1] HTTP error 500: 
+2026-09-04 16:32:16,438 - __main__ - ERROR - [device-49-event-0-try-1] Error processing request: 500: Failed to forward message: [device-49-event-0-try-1] HTTP error 500: 
+2026-09-04 16:32:16,439 - uvicorn.access - INFO - 172.19.0.11:42038 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 500
+2026-09-04 16:32:17,449 - __main__ - INFO - [device-8-event-0-try-1] Forwarding message {"id": "8", "body": "Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 16:32:15.763250+00:00", "request_id": "device-8-event-0-try-1"} to http://172.19.0.13:8080/work ...
+2026-09-04 16:32:17,464 - __main__ - DEBUG - [device-8-event-0-try-1] Response: 500
+2026-09-04 16:32:17,464 - __main__ - DEBUG - [device-8-event-0-try-1] HTTP version: HTTP/1.1
+2026-09-04 16:32:17,464 - __main__ - ERROR - [device-8-event-0-try-1] HTTP error 500: 
+2026-09-04 16:32:17,464 - __main__ - ERROR - [device-8-event-0-try-1] HTTP forward failed: [device-8-event-0-try-1] HTTP error 500: 
+2026-09-04 16:32:17,464 - __main__ - ERROR - [device-8-event-0-try-1] Error processing request: 500: Failed to forward message: [device-8-event-0-try-1] HTTP error 500: 
+2026-09-04 16:32:17,464 - uvicorn.access - INFO - 172.19.0.11:42038 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 500
+2026-09-04 16:32:17,524 - uvicorn.error - INFO - Shutting down
+2026-09-04 16:32:17,625 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 16:32:17,626 - __main__ - INFO - HTTP client closed
+2026-09-04 16:32:17,626 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 16:32:17,626 - uvicorn.error - INFO - Finished server process [1]

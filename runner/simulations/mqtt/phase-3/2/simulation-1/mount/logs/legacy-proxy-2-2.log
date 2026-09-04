@@ -1,0 +1,31 @@
+2026-09-04 12:53:21,383 - __main__ - INFO - DNS resolved lps-ars-comp-2-proxy -> 172.19.0.5
+2026-09-04 12:53:21,669 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.5:8080/ID_REQ_KC_STORE7D3BPACKET, HTTP/2: False
+2026-09-04 12:53:21,673 - __main__ - INFO - Starting MQTT to HTTP forwarder
+2026-09-04 12:53:21,679 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-2' properties=None
+2026-09-04 12:53:22,372 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[TopicAliasMaximum : 5]
+2026-09-04 12:53:22,373 - __main__ - INFO - Connected to MQTT broker at lps-hivemq:1883
+2026-09-04 12:53:22,373 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-04 12:53:22,373 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m1) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-04 12:53:22,373 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 1
+2026-09-04 12:53:22,374 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m2) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-04 12:53:22,374 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 2
+2026-09-04 12:53:22,645 - __main__ - DEBUG - Received SUBACK
+2026-09-04 12:53:22,646 - __main__ - INFO - SUBACK received for mid 1, reason_codes: ['Granted QoS 1']
+2026-09-04 12:53:22,646 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-04 12:53:22,668 - __main__ - DEBUG - Received SUBACK
+2026-09-04 12:53:22,668 - __main__ - INFO - SUBACK received for mid 2, reason_codes: ['Granted QoS 1']
+2026-09-04 12:53:22,668 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-04 12:53:23,566 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'proxy1/message', properties=[], ...  (161 bytes)
+2026-09-04 12:53:23,566 - __main__ - INFO - [device-12-event-0-try-2] Received message 1 on topic proxy1/message (QoS 1, DUP False): {"id": "12", "body": "Phone: 12, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 12:53:22.987212+00:00", "request_id": "device-12-event-0-try-2"}
+2026-09-04 12:53:23,677 - __main__ - DEBUG - [device-12-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 12:53:23,677 - __main__ - INFO - [device-12-event-0-try-2] Successfully forwarded message to http://172.19.0.5:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 12:53:23,677 - __main__ - INFO - [device-12-event-0-try-2] Sending Ack for 1 with QoS 1
+2026-09-04 12:53:23,677 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-04 12:54:21,741 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 12:54:21,743 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 12:55:21,809 - __main__ - DEBUG - Sending PINGREQ
+2026-09-04 12:55:21,812 - __main__ - DEBUG - Received PINGRESP
+2026-09-04 12:56:04,051 - __main__ - INFO - Shutdown signal received
+2026-09-04 12:56:04,064 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-04 12:56:04,065 - __main__ - INFO - MQTT client stopped
+2026-09-04 12:56:04,066 - __main__ - INFO - HTTP client closed
