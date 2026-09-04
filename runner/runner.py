@@ -54,12 +54,17 @@ def parse_args():
         default=5,
         help="Number of initial runs before checking convergence (default: 5)",
     )
+    parser.add_argument(
+        "--start-index",
+        type=int,
+        default=1,
+        help="The index to start/resume the simulation from (default: 1)",
+    )
     return parser.parse_args()
 
 
 def run_simulation(run_index, cwd, base_dir, base_config_file, protocol):
     """Generates a config for the current run and executes the Docker container."""
-
     simulation_dir = os.path.join(base_dir, f"simulation-{run_index}")
     run_config_file = os.path.join(base_dir, f"simulation-config-run-{run_index}.yaml")
 
@@ -124,7 +129,18 @@ def main():
     # Ensure the base directory exists
     os.makedirs(args.base_dir, exist_ok=True)
 
-    for i in range(1, args.max_runs + 1):
+    if args.start_index > 1:
+        print(f"Resuming from index {args.start_index}. Loading previous run data...")
+        for i in range(1, args.start_index):
+            sim_dir = os.path.join(args.base_dir, f"simulation-{i}")
+            try:
+                latency = read_latency(sim_dir)
+                run_data.append((i, latency))
+                print(f"  Loaded run {i} latency: {latency} ms")
+            except FileNotFoundError:
+                print(f"  Warning: No prior data found for run {i} at {sim_dir}")
+
+    for i in range(args.start_index, args.max_runs + 1):
         try:
             sim_dir, _ = run_simulation(
                 i, cwd, args.base_dir, args.base_config, args.protocol
@@ -137,7 +153,7 @@ def main():
 
             run_data.append((i, current_latency))
 
-            if i > args.initial_runs:
+            if len(past_latencies) >= args.initial_runs:
                 baseline_median = statistics.median(past_latencies)
                 diff = abs(current_latency - baseline_median)
 
@@ -175,7 +191,7 @@ def main():
         print("SIMULATION SUMMARY")
         print("=" * 50)
         print(f"Protocol: {args.protocol.upper()}")
-        print(f"Total runs executed: {len(run_data)}")
+        print(f"Total runs tracked: {len(run_data)}")
         print(f"Overall Median Latency: {overall_median:.2f} ms")
         print(f"Closest run to overall median: Run {best_index} ({best_latency} ms)")
         print(f"Use directory: {best_dir} for your plots.")
