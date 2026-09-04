@@ -280,3 +280,20 @@
 2026-09-04 12:19:35,858 - uvicorn.access - INFO - 172.18.0.8:56124 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
 2026-09-04 12:19:35,858 - __main__ - INFO - [device-29-event-0-try-3] Successfully published message
 2026-09-04 12:19:35,858 - uvicorn.access - INFO - 172.18.0.8:56156 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 12:40:10,634 - uvicorn.error - INFO - Shutting down
+2026-09-04 12:40:10,735 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 12:40:10,735 - __main__ - INFO - Closing MQTT connection
+2026-09-04 12:40:10,737 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/contextlib.py", line 221, in __aexit__
+    await anext(self.gen)
+  File "/scripts/legacy_proxy_1.py", line 66, in lifespan
+    await mqtt_client.__aexit__(None, None, None)
+  File "/usr/local/lib/python3.13/site-packages/aiomqtt/client.py", line 792, in __aexit__
+    raise exc
+aiomqtt.exceptions.MqttCodeError: [code:128] Unspecified error
+
+2026-09-04 12:40:10,737 - uvicorn.error - ERROR - Application shutdown failed. Exiting.
+2026-09-04 12:40:10,737 - uvicorn.error - INFO - Finished server process [1]

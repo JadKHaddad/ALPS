@@ -39206,3 +39206,8 @@
 2026-09-04 12:19:53,087 - __main__ - INFO - [device-5-event-49-try-1] Successfully send message
 2026-09-04 12:19:53,087 - __main__ - DEBUG - [MIDDLEWARE_END][device-5-event-49-try-1] Request completed in 0.014s
 2026-09-04 12:19:53,087 - uvicorn.access - INFO - 172.18.0.3:59264 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 12:40:10,638 - uvicorn.error - INFO - Shutting down
+2026-09-04 12:40:10,739 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 12:40:10,740 - __main__ - INFO - HTTP client closed
+2026-09-04 12:40:10,740 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 12:40:10,740 - uvicorn.error - INFO - Finished server process [1]
