@@ -1,0 +1,221 @@
+2026-09-04 10:22:00,719 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 10:22:00,719 - __main__ - INFO - MQTT broker configured at lps-hivemq:1883
+2026-09-04 10:22:00,719 - __main__ - INFO - Publishing to topic: proxy1/message
+2026-09-04 10:22:00,737 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 10:22:00,737 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 10:22:00,737 - __main__ - INFO - Connecting to MQTT broker at lps-hivemq:1883 using MQTT5
+2026-09-04 10:22:00,754 - __main__ - INFO - Successfully connected to MQTT broker
+2026-09-04 10:22:00,754 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 10:22:00,755 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 10:22:01,383 - __main__ - INFO - [device-1-event-0-try-2] Publishing message {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.759538+00:00", "request_id": "device-1-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,383 - __main__ - INFO - [device-51-event-0-try-2] Publishing message {"id": "51", "body": "Phone: 51, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.763167+00:00", "request_id": "device-51-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,383 - __main__ - INFO - [device-38-event-0-try-2] Publishing message {"id": "38", "body": "Phone: 38, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.764314+00:00", "request_id": "device-38-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,388 - __main__ - INFO - [device-9-event-0-try-2] Publishing message {"id": "9", "body": "Phone: 9, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.759095+00:00", "request_id": "device-9-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,388 - __main__ - INFO - [device-47-event-0-try-2] Publishing message {"id": "47", "body": "Phone: 47, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.761036+00:00", "request_id": "device-47-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,388 - __main__ - INFO - [device-45-event-0-try-2] Publishing message {"id": "45", "body": "Phone: 45, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.760996+00:00", "request_id": "device-45-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,388 - __main__ - INFO - [device-19-event-0-try-2] Publishing message {"id": "19", "body": "Phone: 19, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.759390+00:00", "request_id": "device-19-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,389 - __main__ - INFO - [device-35-event-0-try-2] Publishing message {"id": "35", "body": "Phone: 35, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.761465+00:00", "request_id": "device-35-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,389 - __main__ - INFO - [device-21-event-0-try-2] Publishing message {"id": "21", "body": "Phone: 21, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.762293+00:00", "request_id": "device-21-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,389 - __main__ - INFO - [device-18-event-0-try-2] Publishing message {"id": "18", "body": "Phone: 18, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.759218+00:00", "request_id": "device-18-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,394 - __main__ - INFO - [device-2-event-0-try-2] Publishing message {"id": "2", "body": "Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.761644+00:00", "request_id": "device-2-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,395 - __main__ - INFO - [device-33-event-0-try-2] Publishing message {"id": "33", "body": "Phone: 33, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.760425+00:00", "request_id": "device-33-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,396 - __main__ - INFO - [device-1-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,396 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,396 - __main__ - INFO - [device-51-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,396 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,396 - __main__ - INFO - [device-38-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,396 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,396 - __main__ - INFO - [device-9-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,396 - uvicorn.access - INFO - 172.18.0.11:43694 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,396 - __main__ - INFO - [device-47-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,396 - uvicorn.access - INFO - 172.18.0.11:43710 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,397 - __main__ - INFO - [device-45-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,397 - uvicorn.access - INFO - 172.18.0.11:43726 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,398 - __main__ - INFO - [device-19-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,398 - uvicorn.access - INFO - 172.18.0.11:43728 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,398 - __main__ - INFO - [device-35-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,398 - uvicorn.access - INFO - 172.18.0.11:43740 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,398 - __main__ - INFO - [device-21-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,398 - uvicorn.access - INFO - 172.18.0.11:43744 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,398 - __main__ - INFO - [device-18-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,398 - uvicorn.access - INFO - 172.18.0.11:43760 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,399 - __main__ - INFO - [device-2-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,399 - uvicorn.access - INFO - 172.18.0.11:43772 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,400 - __main__ - INFO - [device-64-event-0-try-2] Publishing message {"id": "64", "body": "Phone: 64, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770728+00:00", "request_id": "device-64-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,403 - __main__ - INFO - [device-54-event-0-try-2] Publishing message {"id": "54", "body": "Phone: 54, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.765373+00:00", "request_id": "device-54-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,404 - __main__ - INFO - [device-33-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,404 - uvicorn.access - INFO - 172.18.0.11:43786 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,405 - __main__ - INFO - [device-64-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,405 - uvicorn.access - INFO - 172.18.0.11:43788 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,408 - __main__ - INFO - [device-54-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,408 - uvicorn.access - INFO - 172.18.0.11:43794 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,411 - __main__ - INFO - [device-3-event-0-try-2] Publishing message {"id": "3", "body": "Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.762316+00:00", "request_id": "device-3-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,413 - __main__ - INFO - [device-3-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,413 - uvicorn.access - INFO - 172.18.0.11:43802 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,420 - __main__ - INFO - [device-32-event-0-try-2] Publishing message {"id": "32", "body": "Phone: 32, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.760897+00:00", "request_id": "device-32-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,423 - __main__ - INFO - [device-32-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,423 - uvicorn.access - INFO - 172.18.0.11:43816 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,423 - __main__ - INFO - [device-25-event-0-try-2] Publishing message {"id": "25", "body": "Phone: 25, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.762250+00:00", "request_id": "device-25-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,425 - __main__ - INFO - [device-25-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,425 - uvicorn.access - INFO - 172.18.0.11:43832 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,427 - __main__ - INFO - [device-56-event-0-try-2] Publishing message {"id": "56", "body": "Phone: 56, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.760585+00:00", "request_id": "device-56-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,429 - __main__ - INFO - [device-56-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,429 - uvicorn.access - INFO - 172.18.0.11:43848 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,432 - __main__ - INFO - [device-20-event-0-try-2] Publishing message {"id": "20", "body": "Phone: 20, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.760743+00:00", "request_id": "device-20-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,434 - __main__ - INFO - [device-20-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,434 - uvicorn.access - INFO - 172.18.0.11:43864 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,435 - __main__ - INFO - [device-40-event-0-try-2] Publishing message {"id": "40", "body": "Phone: 40, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.769426+00:00", "request_id": "device-40-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,436 - __main__ - INFO - [device-46-event-0-try-2] Publishing message {"id": "46", "body": "Phone: 46, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.762417+00:00", "request_id": "device-46-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,438 - __main__ - INFO - [device-40-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,438 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,438 - __main__ - INFO - [device-46-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,438 - uvicorn.access - INFO - 172.18.0.11:43870 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,442 - __main__ - INFO - [device-81-event-0-try-2] Publishing message {"id": "81", "body": "Phone: 81, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770696+00:00", "request_id": "device-81-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,443 - __main__ - INFO - [device-4-event-0-try-2] Publishing message {"id": "4", "body": "Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.769704+00:00", "request_id": "device-4-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,443 - __main__ - INFO - [device-67-event-0-try-2] Publishing message {"id": "67", "body": "Phone: 67, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770115+00:00", "request_id": "device-67-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,445 - __main__ - INFO - [device-81-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,445 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,445 - __main__ - INFO - [device-4-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,445 - uvicorn.access - INFO - 172.18.0.11:43884 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,445 - __main__ - INFO - [device-67-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,445 - uvicorn.access - INFO - 172.18.0.11:43900 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,446 - __main__ - INFO - [device-34-event-0-try-2] Publishing message {"id": "34", "body": "Phone: 34, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.762018+00:00", "request_id": "device-34-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,447 - __main__ - INFO - [device-34-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,447 - uvicorn.access - INFO - 172.18.0.11:43908 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,450 - __main__ - INFO - [device-55-event-0-try-2] Publishing message {"id": "55", "body": "Phone: 55, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770437+00:00", "request_id": "device-55-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,451 - __main__ - INFO - [device-55-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,452 - uvicorn.access - INFO - 172.18.0.11:43916 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,453 - __main__ - INFO - [device-53-event-0-try-2] Publishing message {"id": "53", "body": "Phone: 53, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770574+00:00", "request_id": "device-53-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,454 - __main__ - INFO - [device-53-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,454 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,460 - __main__ - INFO - [device-61-event-0-try-2] Publishing message {"id": "61", "body": "Phone: 61, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.763244+00:00", "request_id": "device-61-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,462 - __main__ - INFO - [device-61-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,462 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,466 - __main__ - INFO - [device-69-event-0-try-2] Publishing message {"id": "69", "body": "Phone: 69, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770987+00:00", "request_id": "device-69-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,467 - __main__ - INFO - [device-69-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,467 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,472 - __main__ - INFO - [device-50-event-0-try-2] Publishing message {"id": "50", "body": "Phone: 50, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770575+00:00", "request_id": "device-50-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,474 - __main__ - INFO - [device-36-event-0-try-2] Publishing message {"id": "36", "body": "Phone: 36, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770603+00:00", "request_id": "device-36-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,474 - __main__ - INFO - [device-50-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,474 - uvicorn.access - INFO - 172.18.0.11:43694 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,476 - __main__ - INFO - [device-36-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,476 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,482 - __main__ - INFO - [device-37-event-0-try-2] Publishing message {"id": "37", "body": "Phone: 37, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770537+00:00", "request_id": "device-37-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,483 - __main__ - INFO - [device-37-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,483 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,485 - __main__ - INFO - [device-23-event-0-try-2] Publishing message {"id": "23", "body": "Phone: 23, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.763203+00:00", "request_id": "device-23-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,488 - __main__ - INFO - [device-23-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,488 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,492 - __main__ - INFO - [device-28-event-0-try-2] Publishing message {"id": "28", "body": "Phone: 28, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770881+00:00", "request_id": "device-28-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,494 - __main__ - INFO - [device-28-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,494 - uvicorn.access - INFO - 172.18.0.11:43710 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,499 - __main__ - INFO - [device-44-event-0-try-2] Publishing message {"id": "44", "body": "Phone: 44, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770015+00:00", "request_id": "device-44-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,501 - __main__ - INFO - [device-22-event-0-try-2] Publishing message {"id": "22", "body": "Phone: 22, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770805+00:00", "request_id": "device-22-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,503 - __main__ - INFO - [device-44-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,503 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,503 - __main__ - INFO - [device-22-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,503 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,510 - __main__ - INFO - [device-57-event-0-try-2] Publishing message {"id": "57", "body": "Phone: 57, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.768903+00:00", "request_id": "device-57-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,511 - __main__ - INFO - [device-57-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,511 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,513 - __main__ - INFO - [device-66-event-0-try-2] Publishing message {"id": "66", "body": "Phone: 66, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770914+00:00", "request_id": "device-66-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,516 - __main__ - INFO - [device-66-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,516 - uvicorn.access - INFO - 172.18.0.11:43710 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,517 - __main__ - INFO - [device-30-event-0-try-2] Publishing message {"id": "30", "body": "Phone: 30, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770834+00:00", "request_id": "device-30-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,518 - __main__ - INFO - [device-30-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,518 - uvicorn.access - INFO - 172.18.0.11:43694 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,524 - __main__ - INFO - [device-11-event-0-try-2] Publishing message {"id": "11", "body": "Phone: 11, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770761+00:00", "request_id": "device-11-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,525 - __main__ - INFO - [device-11-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,525 - uvicorn.access - INFO - 172.18.0.11:43726 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,527 - __main__ - INFO - [device-75-event-0-try-2] Publishing message {"id": "75", "body": "Phone: 75, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770654+00:00", "request_id": "device-75-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,528 - __main__ - INFO - [device-75-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,528 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,530 - __main__ - INFO - [device-7-event-0-try-2] Publishing message {"id": "7", "body": "Phone: 7, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.769195+00:00", "request_id": "device-7-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,532 - __main__ - INFO - [device-7-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,532 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,537 - __main__ - INFO - [device-59-event-0-try-2] Publishing message {"id": "59", "body": "Phone: 59, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770567+00:00", "request_id": "device-59-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,538 - __main__ - INFO - [device-62-event-0-try-2] Publishing message {"id": "62", "body": "Phone: 62, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.762337+00:00", "request_id": "device-62-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,539 - __main__ - INFO - [device-59-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,540 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,540 - __main__ - INFO - [device-62-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,540 - uvicorn.access - INFO - 172.18.0.11:43694 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,545 - __main__ - INFO - [device-83-event-0-try-2] Publishing message {"id": "83", "body": "Phone: 83, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.803110+00:00", "request_id": "device-83-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,547 - __main__ - INFO - [device-98-event-0-try-2] Publishing message {"id": "98", "body": "Phone: 98, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.783011+00:00", "request_id": "device-98-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,549 - __main__ - INFO - [device-83-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,549 - uvicorn.access - INFO - 172.18.0.11:43710 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,549 - __main__ - INFO - [device-98-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,549 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,554 - __main__ - INFO - [device-65-event-0-try-2] Publishing message {"id": "65", "body": "Phone: 65, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.769939+00:00", "request_id": "device-65-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,556 - __main__ - INFO - [device-65-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,556 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,560 - __main__ - INFO - [device-0-event-0-try-2] Publishing message {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.769886+00:00", "request_id": "device-0-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,563 - __main__ - INFO - [device-68-event-0-try-2] Publishing message {"id": "68", "body": "Phone: 68, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.803055+00:00", "request_id": "device-68-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,564 - __main__ - INFO - [device-0-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,564 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,564 - __main__ - INFO - [device-68-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,564 - uvicorn.access - INFO - 172.18.0.11:43726 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,567 - __main__ - INFO - [device-6-event-0-try-2] Publishing message {"id": "6", "body": "Phone: 6, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.766884+00:00", "request_id": "device-6-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,568 - __main__ - INFO - [device-43-event-0-try-2] Publishing message {"id": "43", "body": "Phone: 43, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.782398+00:00", "request_id": "device-43-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,569 - __main__ - INFO - [device-63-event-0-try-2] Publishing message {"id": "63", "body": "Phone: 63, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770606+00:00", "request_id": "device-63-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,570 - __main__ - INFO - [device-6-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,570 - uvicorn.access - INFO - 172.18.0.11:43694 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,570 - __main__ - INFO - [device-43-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,570 - uvicorn.access - INFO - 172.18.0.11:43710 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,571 - __main__ - INFO - [device-63-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,571 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,574 - __main__ - INFO - [device-58-event-0-try-2] Publishing message {"id": "58", "body": "Phone: 58, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.762262+00:00", "request_id": "device-58-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,574 - __main__ - INFO - [device-92-event-0-try-2] Publishing message {"id": "92", "body": "Phone: 92, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.802569+00:00", "request_id": "device-92-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,578 - __main__ - INFO - [device-58-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,578 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,578 - __main__ - INFO - [device-92-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,578 - uvicorn.access - INFO - 172.18.0.11:43728 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,580 - __main__ - INFO - [device-85-event-0-try-2] Publishing message {"id": "85", "body": "Phone: 85, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.818206+00:00", "request_id": "device-85-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,582 - __main__ - INFO - [device-85-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,582 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,585 - __main__ - INFO - [device-5-event-0-try-2] Publishing message {"id": "5", "body": "Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.816800+00:00", "request_id": "device-5-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,586 - __main__ - INFO - [device-91-event-0-try-2] Publishing message {"id": "91", "body": "Phone: 91, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.773339+00:00", "request_id": "device-91-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,587 - __main__ - INFO - [device-5-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,587 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,588 - __main__ - INFO - [device-91-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,588 - uvicorn.access - INFO - 172.18.0.11:43694 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,591 - __main__ - INFO - [device-24-event-0-try-2] Publishing message {"id": "24", "body": "Phone: 24, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.769862+00:00", "request_id": "device-24-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,593 - __main__ - INFO - [device-79-event-0-try-2] Publishing message {"id": "79", "body": "Phone: 79, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.786462+00:00", "request_id": "device-79-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,593 - __main__ - INFO - [device-24-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,593 - uvicorn.access - INFO - 172.18.0.11:43710 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,595 - __main__ - INFO - [device-79-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,595 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,595 - __main__ - INFO - [device-12-event-0-try-2] Publishing message {"id": "12", "body": "Phone: 12, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.793026+00:00", "request_id": "device-12-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,597 - __main__ - INFO - [device-60-event-0-try-2] Publishing message {"id": "60", "body": "Phone: 60, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.803103+00:00", "request_id": "device-60-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,600 - __main__ - INFO - [device-12-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,601 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,601 - __main__ - INFO - [device-27-event-0-try-2] Publishing message {"id": "27", "body": "Phone: 27, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.818220+00:00", "request_id": "device-27-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,601 - __main__ - INFO - [device-60-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,601 - uvicorn.access - INFO - 172.18.0.11:43726 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,603 - __main__ - INFO - [device-27-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,603 - uvicorn.access - INFO - 172.18.0.11:43678 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,607 - __main__ - INFO - [device-84-event-0-try-2] Publishing message {"id": "84", "body": "Phone: 84, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.819888+00:00", "request_id": "device-84-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,608 - __main__ - INFO - [device-26-event-0-try-2] Publishing message {"id": "26", "body": "Phone: 26, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.803009+00:00", "request_id": "device-26-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,608 - __main__ - INFO - [device-48-event-0-try-2] Publishing message {"id": "48", "body": "Phone: 48, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:22:00.770594+00:00", "request_id": "device-48-event-0-try-2"} to Broker ...
+2026-09-04 10:22:01,610 - __main__ - INFO - [device-84-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,610 - uvicorn.access - INFO - 172.18.0.11:43680 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,611 - __main__ - INFO - [device-26-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,611 - uvicorn.access - INFO - 172.18.0.11:43694 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:22:01,611 - __main__ - INFO - [device-48-event-0-try-2] Successfully published message
+2026-09-04 10:22:01,611 - uvicorn.access - INFO - 172.18.0.11:43690 - "POST /ID_REQ_KC_STORE7D3BPACKET HTTP/1.1" 200
+2026-09-04 10:27:21,916 - uvicorn.error - INFO - Shutting down
+2026-09-04 10:27:22,017 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 10:27:22,017 - __main__ - INFO - Closing MQTT connection
+2026-09-04 10:27:22,018 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/contextlib.py", line 221, in __aexit__
+    await anext(self.gen)
+  File "/scripts/legacy_proxy_1.py", line 66, in lifespan
+    await mqtt_client.__aexit__(None, None, None)
+  File "/usr/local/lib/python3.13/site-packages/aiomqtt/client.py", line 792, in __aexit__
+    raise exc
+aiomqtt.exceptions.MqttCodeError: [code:128] Unspecified error
+
+2026-09-04 10:27:22,018 - uvicorn.error - ERROR - Application shutdown failed. Exiting.
+2026-09-04 10:27:22,018 - uvicorn.error - INFO - Finished server process [1]

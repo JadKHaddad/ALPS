@@ -1,0 +1,653 @@
+2026-09-04 10:36:15,241 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 10:36:15,242 - __main__ - INFO - Sending to: http://lps-legacy-proxy-1-1:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 10:36:15,261 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 10:36:15,261 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 10:36:15,262 - __main__ - INFO - DNS resolved lps-legacy-proxy-1-1 -> 172.18.0.9
+2026-09-04 10:36:15,301 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 10:36:15,301 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 10:36:15,301 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 10:36:15,630 - __main__ - DEBUG - [MIDDLEWARE_START][device-78-event-0-try-2] Request received at 10:36:15.630
+2026-09-04 10:36:15,631 - __main__ - DEBUG - [MIDDLEWARE_START][device-51-event-0-try-2] Request received at 10:36:15.631
+2026-09-04 10:36:15,631 - __main__ - DEBUG - [MIDDLEWARE_START][device-32-event-0-try-2] Request received at 10:36:15.631
+2026-09-04 10:36:15,632 - __main__ - DEBUG - [MIDDLEWARE_START][device-20-event-0-try-2] Request received at 10:36:15.632
+2026-09-04 10:36:15,633 - __main__ - DEBUG - [MIDDLEWARE_START][device-54-event-0-try-2] Request received at 10:36:15.633
+2026-09-04 10:36:15,634 - __main__ - DEBUG - [MIDDLEWARE_START][device-0-event-0-try-2] Request received at 10:36:15.634
+2026-09-04 10:36:15,639 - __main__ - DEBUG - [MIDDLEWARE_START][device-33-event-0-try-2] Request received at 10:36:15.639
+2026-09-04 10:36:15,641 - __main__ - DEBUG - [MIDDLEWARE_START][device-45-event-0-try-2] Request received at 10:36:15.641
+2026-09-04 10:36:15,643 - __main__ - DEBUG - [MIDDLEWARE_START][device-62-event-0-try-2] Request received at 10:36:15.643
+2026-09-04 10:36:15,645 - __main__ - DEBUG - [MIDDLEWARE_START][device-34-event-0-try-2] Request received at 10:36:15.645
+2026-09-04 10:36:15,646 - __main__ - DEBUG - [MIDDLEWARE_START][device-28-event-0-try-2] Request received at 10:36:15.646
+2026-09-04 10:36:15,647 - __main__ - DEBUG - [ENDPOINT_START][device-78-event-0-try-2] Handler started at 10:36:15.647
+2026-09-04 10:36:15,647 - __main__ - INFO - [rps:2.2|conns:0][device-78-event-0-try-2] Sending message Phone: 78, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.024583+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,648 - __main__ - DEBUG - [ENDPOINT_START][device-51-event-0-try-2] Handler started at 10:36:15.648
+2026-09-04 10:36:15,648 - __main__ - INFO - [rps:2.2|conns:1][device-51-event-0-try-2] Sending message Phone: 51, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.011653+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,651 - __main__ - DEBUG - [ENDPOINT_START][device-32-event-0-try-2] Handler started at 10:36:15.651
+2026-09-04 10:36:15,651 - __main__ - INFO - [rps:2.2|conns:2][device-32-event-0-try-2] Sending message Phone: 32, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.026063+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,655 - __main__ - DEBUG - [MIDDLEWARE_START][device-24-event-0-try-2] Request received at 10:36:15.655
+2026-09-04 10:36:15,657 - __main__ - DEBUG - [MIDDLEWARE_START][device-25-event-0-try-2] Request received at 10:36:15.657
+2026-09-04 10:36:15,658 - __main__ - DEBUG - [ENDPOINT_START][device-20-event-0-try-2] Handler started at 10:36:15.658
+2026-09-04 10:36:15,658 - __main__ - INFO - [rps:2.6|conns:3][device-20-event-0-try-2] Sending message Phone: 20, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.022692+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,660 - __main__ - DEBUG - [ENDPOINT_START][device-54-event-0-try-2] Handler started at 10:36:15.660
+2026-09-04 10:36:15,660 - __main__ - INFO - [rps:2.6|conns:4][device-54-event-0-try-2] Sending message Phone: 54, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.026728+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,661 - __main__ - DEBUG - [MIDDLEWARE_START][device-63-event-0-try-2] Request received at 10:36:15.661
+2026-09-04 10:36:15,663 - __main__ - DEBUG - [ENDPOINT_START][device-0-event-0-try-2] Handler started at 10:36:15.662
+2026-09-04 10:36:15,663 - __main__ - INFO - [rps:2.8|conns:5][device-0-event-0-try-2] Sending message Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.025031+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,664 - __main__ - DEBUG - [MIDDLEWARE_START][device-2-event-0-try-2] Request received at 10:36:15.664
+2026-09-04 10:36:15,665 - __main__ - DEBUG - [ENDPOINT_START][device-33-event-0-try-2] Handler started at 10:36:15.665
+2026-09-04 10:36:15,666 - __main__ - INFO - [rps:3.0|conns:6][device-33-event-0-try-2] Sending message Phone: 33, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.026248+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,668 - __main__ - DEBUG - [MIDDLEWARE_START][device-27-event-0-try-2] Request received at 10:36:15.668
+2026-09-04 10:36:15,669 - __main__ - DEBUG - [ENDPOINT_START][device-45-event-0-try-2] Handler started at 10:36:15.669
+2026-09-04 10:36:15,669 - __main__ - INFO - [rps:3.2|conns:7][device-45-event-0-try-2] Sending message Phone: 45, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.011898+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,671 - __main__ - DEBUG - [MIDDLEWARE_START][device-3-event-0-try-2] Request received at 10:36:15.671
+2026-09-04 10:36:15,671 - __main__ - DEBUG - [ENDPOINT_START][device-62-event-0-try-2] Handler started at 10:36:15.671
+2026-09-04 10:36:15,671 - __main__ - INFO - [rps:3.4|conns:8][device-62-event-0-try-2] Sending message Phone: 62, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.025449+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,675 - __main__ - DEBUG - [MIDDLEWARE_START][device-23-event-0-try-2] Request received at 10:36:15.675
+2026-09-04 10:36:15,676 - __main__ - DEBUG - [ENDPOINT_START][device-34-event-0-try-2] Handler started at 10:36:15.676
+2026-09-04 10:36:15,676 - __main__ - INFO - [rps:3.6|conns:9][device-34-event-0-try-2] Sending message Phone: 34, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.025859+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,678 - __main__ - DEBUG - [MIDDLEWARE_START][device-35-event-0-try-2] Request received at 10:36:15.678
+2026-09-04 10:36:15,679 - __main__ - DEBUG - [ENDPOINT_START][device-28-event-0-try-2] Handler started at 10:36:15.679
+2026-09-04 10:36:15,679 - __main__ - INFO - [rps:3.8|conns:10][device-28-event-0-try-2] Sending message Phone: 28, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.026639+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,683 - __main__ - DEBUG - [MIDDLEWARE_START][device-71-event-0-try-2] Request received at 10:36:15.683
+2026-09-04 10:36:15,683 - __main__ - DEBUG - [ENDPOINT_START][device-24-event-0-try-2] Handler started at 10:36:15.683
+2026-09-04 10:36:15,684 - __main__ - INFO - [rps:4.0|conns:11][device-24-event-0-try-2] Sending message Phone: 24, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.026866+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,690 - __main__ - DEBUG - [MIDDLEWARE_START][device-68-event-0-try-2] Request received at 10:36:15.690
+2026-09-04 10:36:15,690 - __main__ - DEBUG - [ENDPOINT_START][device-25-event-0-try-2] Handler started at 10:36:15.690
+2026-09-04 10:36:15,691 - __main__ - INFO - [rps:4.2|conns:12][device-25-event-0-try-2] Sending message Phone: 25, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.026373+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,694 - __main__ - DEBUG - [MIDDLEWARE_START][device-65-event-0-try-2] Request received at 10:36:15.694
+2026-09-04 10:36:15,698 - __main__ - DEBUG - [ENDPOINT_START][device-63-event-0-try-2] Handler started at 10:36:15.698
+2026-09-04 10:36:15,698 - __main__ - INFO - [rps:4.4|conns:13][device-63-event-0-try-2] Sending message Phone: 63, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.027072+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,700 - __main__ - DEBUG - [MIDDLEWARE_START][device-67-event-0-try-2] Request received at 10:36:15.700
+2026-09-04 10:36:15,703 - __main__ - DEBUG - [ENDPOINT_START][device-2-event-0-try-2] Handler started at 10:36:15.703
+2026-09-04 10:36:15,703 - __main__ - INFO - [rps:4.6|conns:14][device-2-event-0-try-2] Sending message Phone: 2, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.027222+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,706 - __main__ - DEBUG - [MIDDLEWARE_START][device-74-event-0-try-2] Request received at 10:36:15.706
+2026-09-04 10:36:15,707 - __main__ - DEBUG - [ENDPOINT_START][device-27-event-0-try-2] Handler started at 10:36:15.707
+2026-09-04 10:36:15,707 - __main__ - INFO - [rps:4.8|conns:15][device-27-event-0-try-2] Sending message Phone: 27, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.026935+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,708 - __main__ - DEBUG - [device-78-event-0-try-2] Response: 200
+2026-09-04 10:36:15,708 - __main__ - DEBUG - [device-78-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,708 - __main__ - INFO - [device-78-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,709 - __main__ - DEBUG - [device-51-event-0-try-2] Response: 200
+2026-09-04 10:36:15,709 - __main__ - DEBUG - [device-51-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,709 - __main__ - INFO - [device-51-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,709 - __main__ - DEBUG - [device-32-event-0-try-2] Response: 200
+2026-09-04 10:36:15,709 - __main__ - DEBUG - [device-32-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,709 - __main__ - INFO - [device-32-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,711 - __main__ - DEBUG - [MIDDLEWARE_START][device-76-event-0-try-2] Request received at 10:36:15.711
+2026-09-04 10:36:15,712 - __main__ - DEBUG - [ENDPOINT_START][device-3-event-0-try-2] Handler started at 10:36:15.712
+2026-09-04 10:36:15,712 - __main__ - INFO - [rps:5.0|conns:16][device-3-event-0-try-2] Sending message Phone: 3, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.028277+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,715 - __main__ - DEBUG - [device-20-event-0-try-2] Response: 200
+2026-09-04 10:36:15,715 - __main__ - DEBUG - [device-20-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,715 - __main__ - INFO - [device-20-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,716 - __main__ - DEBUG - [device-54-event-0-try-2] Response: 200
+2026-09-04 10:36:15,716 - __main__ - DEBUG - [device-54-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,716 - __main__ - INFO - [device-54-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,716 - __main__ - DEBUG - [device-0-event-0-try-2] Response: 200
+2026-09-04 10:36:15,716 - __main__ - DEBUG - [device-0-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,716 - __main__ - INFO - [device-0-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,717 - __main__ - DEBUG - [MIDDLEWARE_START][device-1-event-0-try-2] Request received at 10:36:15.717
+2026-09-04 10:36:15,718 - __main__ - DEBUG - [ENDPOINT_START][device-23-event-0-try-2] Handler started at 10:36:15.718
+2026-09-04 10:36:15,718 - __main__ - INFO - [rps:5.2|conns:16][device-23-event-0-try-2] Sending message Phone: 23, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.027396+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,719 - __main__ - DEBUG - [MIDDLEWARE_END][device-78-event-0-try-2] Request completed in 0.089s
+2026-09-04 10:36:15,720 - uvicorn.access - INFO - 172.18.0.15:32996 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,720 - __main__ - DEBUG - [MIDDLEWARE_END][device-51-event-0-try-2] Request completed in 0.089s
+2026-09-04 10:36:15,720 - uvicorn.access - INFO - 172.18.0.15:32984 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,720 - __main__ - DEBUG - [MIDDLEWARE_END][device-32-event-0-try-2] Request completed in 0.089s
+2026-09-04 10:36:15,720 - uvicorn.access - INFO - 172.18.0.15:33008 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,721 - __main__ - DEBUG - [device-33-event-0-try-2] Response: 200
+2026-09-04 10:36:15,721 - __main__ - DEBUG - [device-33-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,721 - __main__ - INFO - [device-33-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,722 - __main__ - DEBUG - [MIDDLEWARE_START][device-82-event-0-try-2] Request received at 10:36:15.722
+2026-09-04 10:36:15,722 - __main__ - DEBUG - [ENDPOINT_START][device-35-event-0-try-2] Handler started at 10:36:15.722
+2026-09-04 10:36:15,722 - __main__ - INFO - [rps:5.4|conns:16][device-35-event-0-try-2] Sending message Phone: 35, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.023301+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,724 - __main__ - DEBUG - [MIDDLEWARE_END][device-20-event-0-try-2] Request completed in 0.092s
+2026-09-04 10:36:15,724 - uvicorn.access - INFO - 172.18.0.15:33012 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,724 - __main__ - DEBUG - [MIDDLEWARE_END][device-54-event-0-try-2] Request completed in 0.091s
+2026-09-04 10:36:15,724 - uvicorn.access - INFO - 172.18.0.15:33018 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,724 - __main__ - DEBUG - [MIDDLEWARE_END][device-0-event-0-try-2] Request completed in 0.091s
+2026-09-04 10:36:15,724 - uvicorn.access - INFO - 172.18.0.15:33028 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,725 - __main__ - DEBUG - [device-45-event-0-try-2] Response: 200
+2026-09-04 10:36:15,725 - __main__ - DEBUG - [device-45-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,725 - __main__ - INFO - [device-45-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,726 - __main__ - DEBUG - [MIDDLEWARE_START][device-18-event-0-try-2] Request received at 10:36:15.726
+2026-09-04 10:36:15,727 - __main__ - DEBUG - [ENDPOINT_START][device-71-event-0-try-2] Handler started at 10:36:15.727
+2026-09-04 10:36:15,727 - __main__ - INFO - [rps:5.6|conns:16][device-71-event-0-try-2] Sending message Phone: 71, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.036137+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,729 - __main__ - DEBUG - [MIDDLEWARE_END][device-33-event-0-try-2] Request completed in 0.090s
+2026-09-04 10:36:15,729 - uvicorn.access - INFO - 172.18.0.15:33036 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,730 - __main__ - DEBUG - [device-62-event-0-try-2] Response: 200
+2026-09-04 10:36:15,730 - __main__ - DEBUG - [device-62-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,730 - __main__ - INFO - [device-62-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,732 - __main__ - DEBUG - [MIDDLEWARE_START][device-66-event-0-try-2] Request received at 10:36:15.732
+2026-09-04 10:36:15,734 - __main__ - DEBUG - [ENDPOINT_START][device-68-event-0-try-2] Handler started at 10:36:15.734
+2026-09-04 10:36:15,734 - __main__ - INFO - [rps:5.8|conns:16][device-68-event-0-try-2] Sending message Phone: 68, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.035966+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,735 - __main__ - DEBUG - [MIDDLEWARE_END][device-45-event-0-try-2] Request completed in 0.094s
+2026-09-04 10:36:15,735 - uvicorn.access - INFO - 172.18.0.15:33052 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,736 - __main__ - DEBUG - [device-34-event-0-try-2] Response: 200
+2026-09-04 10:36:15,736 - __main__ - DEBUG - [device-34-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,736 - __main__ - INFO - [device-34-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,737 - __main__ - DEBUG - [MIDDLEWARE_START][device-22-event-0-try-2] Request received at 10:36:15.737
+2026-09-04 10:36:15,739 - __main__ - DEBUG - [MIDDLEWARE_END][device-62-event-0-try-2] Request completed in 0.096s
+2026-09-04 10:36:15,739 - uvicorn.access - INFO - 172.18.0.15:33054 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,739 - __main__ - DEBUG - [ENDPOINT_START][device-65-event-0-try-2] Handler started at 10:36:15.739
+2026-09-04 10:36:15,739 - __main__ - INFO - [rps:6.0|conns:16][device-65-event-0-try-2] Sending message Phone: 65, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.036003+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,740 - __main__ - DEBUG - [device-28-event-0-try-2] Response: 200
+2026-09-04 10:36:15,740 - __main__ - DEBUG - [device-28-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,740 - __main__ - INFO - [device-28-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,742 - __main__ - DEBUG - [MIDDLEWARE_START][device-80-event-0-try-2] Request received at 10:36:15.742
+2026-09-04 10:36:15,743 - __main__ - DEBUG - [ENDPOINT_START][device-67-event-0-try-2] Handler started at 10:36:15.743
+2026-09-04 10:36:15,743 - __main__ - INFO - [rps:6.2|conns:16][device-67-event-0-try-2] Sending message Phone: 67, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.037098+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,744 - __main__ - DEBUG - [MIDDLEWARE_END][device-34-event-0-try-2] Request completed in 0.100s
+2026-09-04 10:36:15,744 - uvicorn.access - INFO - 172.18.0.15:33080 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,745 - __main__ - DEBUG - [device-3-event-0-try-2] Response: 200
+2026-09-04 10:36:15,745 - __main__ - DEBUG - [device-3-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,745 - __main__ - INFO - [device-3-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,745 - __main__ - DEBUG - [device-24-event-0-try-2] Response: 200
+2026-09-04 10:36:15,745 - __main__ - DEBUG - [device-24-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,745 - __main__ - INFO - [device-24-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,747 - __main__ - DEBUG - [MIDDLEWARE_START][device-75-event-0-try-2] Request received at 10:36:15.747
+2026-09-04 10:36:15,749 - __main__ - DEBUG - [ENDPOINT_START][device-74-event-0-try-2] Handler started at 10:36:15.749
+2026-09-04 10:36:15,749 - __main__ - INFO - [rps:6.4|conns:16][device-74-event-0-try-2] Sending message Phone: 74, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.036078+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,750 - __main__ - DEBUG - [MIDDLEWARE_END][device-28-event-0-try-2] Request completed in 0.104s
+2026-09-04 10:36:15,750 - uvicorn.access - INFO - 172.18.0.15:33070 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,751 - __main__ - DEBUG - [device-25-event-0-try-2] Response: 200
+2026-09-04 10:36:15,751 - __main__ - DEBUG - [device-25-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,751 - __main__ - INFO - [device-25-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,752 - __main__ - DEBUG - [MIDDLEWARE_START][device-46-event-0-try-2] Request received at 10:36:15.752
+2026-09-04 10:36:15,753 - __main__ - DEBUG - [ENDPOINT_START][device-76-event-0-try-2] Handler started at 10:36:15.753
+2026-09-04 10:36:15,753 - __main__ - INFO - [rps:6.6|conns:16][device-76-event-0-try-2] Sending message Phone: 76, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038237+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,755 - __main__ - DEBUG - [MIDDLEWARE_END][device-3-event-0-try-2] Request completed in 0.084s
+2026-09-04 10:36:15,755 - uvicorn.access - INFO - 172.18.0.15:33140 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,755 - __main__ - DEBUG - [MIDDLEWARE_END][device-24-event-0-try-2] Request completed in 0.100s
+2026-09-04 10:36:15,755 - uvicorn.access - INFO - 172.18.0.15:33096 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,755 - __main__ - DEBUG - [device-63-event-0-try-2] Response: 200
+2026-09-04 10:36:15,755 - __main__ - DEBUG - [device-63-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,755 - __main__ - INFO - [device-63-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,756 - __main__ - DEBUG - [MIDDLEWARE_START][device-36-event-0-try-2] Request received at 10:36:15.756
+2026-09-04 10:36:15,757 - __main__ - DEBUG - [ENDPOINT_START][device-1-event-0-try-2] Handler started at 10:36:15.757
+2026-09-04 10:36:15,757 - __main__ - INFO - [rps:6.8|conns:16][device-1-event-0-try-2] Sending message Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038292+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,758 - __main__ - DEBUG - [MIDDLEWARE_END][device-25-event-0-try-2] Request completed in 0.101s
+2026-09-04 10:36:15,758 - uvicorn.access - INFO - 172.18.0.15:33104 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,760 - __main__ - DEBUG - [MIDDLEWARE_START][device-79-event-0-try-2] Request received at 10:36:15.760
+2026-09-04 10:36:15,761 - __main__ - DEBUG - [ENDPOINT_START][device-82-event-0-try-2] Handler started at 10:36:15.760
+2026-09-04 10:36:15,761 - __main__ - INFO - [rps:7.0|conns:16][device-82-event-0-try-2] Sending message Phone: 82, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038127+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,761 - __main__ - DEBUG - [MIDDLEWARE_END][device-63-event-0-try-2] Request completed in 0.100s
+2026-09-04 10:36:15,762 - uvicorn.access - INFO - 172.18.0.15:33110 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,762 - __main__ - DEBUG - [device-71-event-0-try-2] Response: 200
+2026-09-04 10:36:15,762 - __main__ - DEBUG - [device-71-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,762 - __main__ - INFO - [device-71-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,762 - __main__ - DEBUG - [device-2-event-0-try-2] Response: 200
+2026-09-04 10:36:15,763 - __main__ - DEBUG - [device-2-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,763 - __main__ - INFO - [device-2-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,763 - __main__ - DEBUG - [device-27-event-0-try-2] Response: 200
+2026-09-04 10:36:15,763 - __main__ - DEBUG - [device-27-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,763 - __main__ - INFO - [device-27-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,765 - __main__ - DEBUG - [MIDDLEWARE_START][device-31-event-0-try-2] Request received at 10:36:15.764
+2026-09-04 10:36:15,765 - __main__ - DEBUG - [ENDPOINT_START][device-18-event-0-try-2] Handler started at 10:36:15.765
+2026-09-04 10:36:15,766 - __main__ - INFO - [rps:7.2|conns:16][device-18-event-0-try-2] Sending message Phone: 18, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.037857+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,767 - __main__ - DEBUG - [device-65-event-0-try-2] Response: 200
+2026-09-04 10:36:15,767 - __main__ - DEBUG - [device-65-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,767 - __main__ - INFO - [device-65-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,768 - __main__ - DEBUG - [MIDDLEWARE_START][device-37-event-0-try-2] Request received at 10:36:15.768
+2026-09-04 10:36:15,769 - __main__ - DEBUG - [ENDPOINT_START][device-66-event-0-try-2] Handler started at 10:36:15.769
+2026-09-04 10:36:15,769 - __main__ - INFO - [rps:7.4|conns:16][device-66-event-0-try-2] Sending message Phone: 66, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.037789+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,770 - __main__ - DEBUG - [MIDDLEWARE_END][device-71-event-0-try-2] Request completed in 0.087s
+2026-09-04 10:36:15,770 - uvicorn.access - INFO - 172.18.0.15:33170 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,770 - __main__ - DEBUG - [MIDDLEWARE_END][device-2-event-0-try-2] Request completed in 0.106s
+2026-09-04 10:36:15,770 - uvicorn.access - INFO - 172.18.0.15:33126 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,770 - __main__ - DEBUG - [MIDDLEWARE_END][device-27-event-0-try-2] Request completed in 0.102s
+2026-09-04 10:36:15,770 - uvicorn.access - INFO - 172.18.0.15:33128 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,771 - __main__ - DEBUG - [MIDDLEWARE_START][device-29-event-0-try-2] Request received at 10:36:15.770
+2026-09-04 10:36:15,772 - __main__ - DEBUG - [ENDPOINT_START][device-22-event-0-try-2] Handler started at 10:36:15.772
+2026-09-04 10:36:15,772 - __main__ - INFO - [rps:7.6|conns:16][device-22-event-0-try-2] Sending message Phone: 22, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.030088+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,773 - __main__ - DEBUG - [MIDDLEWARE_END][device-65-event-0-try-2] Request completed in 0.079s
+2026-09-04 10:36:15,773 - uvicorn.access - INFO - 172.18.0.15:33180 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,774 - __main__ - DEBUG - [MIDDLEWARE_START][device-55-event-0-try-2] Request received at 10:36:15.773
+2026-09-04 10:36:15,775 - __main__ - DEBUG - [ENDPOINT_START][device-80-event-0-try-2] Handler started at 10:36:15.775
+2026-09-04 10:36:15,775 - __main__ - INFO - [rps:7.8|conns:16][device-80-event-0-try-2] Sending message Phone: 80, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.037952+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,776 - __main__ - DEBUG - [device-35-event-0-try-2] Response: 200
+2026-09-04 10:36:15,776 - __main__ - DEBUG - [device-35-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,776 - __main__ - INFO - [device-35-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,777 - __main__ - DEBUG - [MIDDLEWARE_START][device-47-event-0-try-2] Request received at 10:36:15.777
+2026-09-04 10:36:15,777 - __main__ - DEBUG - [ENDPOINT_START][device-75-event-0-try-2] Handler started at 10:36:15.777
+2026-09-04 10:36:15,777 - __main__ - INFO - [rps:8.0|conns:16][device-75-event-0-try-2] Sending message Phone: 75, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.035881+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,778 - __main__ - DEBUG - [device-67-event-0-try-2] Response: 200
+2026-09-04 10:36:15,779 - __main__ - DEBUG - [device-67-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,779 - __main__ - INFO - [device-67-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,779 - __main__ - DEBUG - [MIDDLEWARE_START][device-70-event-0-try-2] Request received at 10:36:15.779
+2026-09-04 10:36:15,781 - __main__ - DEBUG - [ENDPOINT_START][device-46-event-0-try-2] Handler started at 10:36:15.781
+2026-09-04 10:36:15,781 - __main__ - INFO - [rps:8.2|conns:16][device-46-event-0-try-2] Sending message Phone: 46, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.037706+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,782 - __main__ - DEBUG - [MIDDLEWARE_END][device-35-event-0-try-2] Request completed in 0.104s
+2026-09-04 10:36:15,782 - uvicorn.access - INFO - 172.18.0.15:33156 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,782 - __main__ - DEBUG - [MIDDLEWARE_START][device-90-event-0-try-2] Request received at 10:36:15.782
+2026-09-04 10:36:15,786 - __main__ - DEBUG - [ENDPOINT_START][device-36-event-0-try-2] Handler started at 10:36:15.786
+2026-09-04 10:36:15,786 - __main__ - INFO - [rps:8.4|conns:16][device-36-event-0-try-2] Sending message Phone: 36, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.037504+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,787 - __main__ - DEBUG - [MIDDLEWARE_END][device-67-event-0-try-2] Request completed in 0.087s
+2026-09-04 10:36:15,787 - uvicorn.access - INFO - 172.18.0.15:33196 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,788 - __main__ - DEBUG - [MIDDLEWARE_START][device-91-event-0-try-2] Request received at 10:36:15.788
+2026-09-04 10:36:15,789 - __main__ - DEBUG - [ENDPOINT_START][device-79-event-0-try-2] Handler started at 10:36:15.789
+2026-09-04 10:36:15,789 - __main__ - INFO - [rps:8.6|conns:16][device-79-event-0-try-2] Sending message Phone: 79, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038638+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,790 - __main__ - DEBUG - [MIDDLEWARE_START][device-50-event-0-try-2] Request received at 10:36:15.790
+2026-09-04 10:36:15,791 - __main__ - DEBUG - [device-68-event-0-try-2] Response: 200
+2026-09-04 10:36:15,791 - __main__ - DEBUG - [device-68-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,791 - __main__ - INFO - [device-68-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,792 - __main__ - DEBUG - [ENDPOINT_START][device-31-event-0-try-2] Handler started at 10:36:15.792
+2026-09-04 10:36:15,792 - __main__ - INFO - [rps:8.8|conns:16][device-31-event-0-try-2] Sending message Phone: 31, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038694+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,793 - __main__ - DEBUG - [MIDDLEWARE_START][device-81-event-0-try-2] Request received at 10:36:15.793
+2026-09-04 10:36:15,794 - __main__ - DEBUG - [ENDPOINT_START][device-37-event-0-try-2] Handler started at 10:36:15.794
+2026-09-04 10:36:15,794 - __main__ - INFO - [rps:9.0|conns:16][device-37-event-0-try-2] Sending message Phone: 37, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038351+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,795 - __main__ - DEBUG - [device-74-event-0-try-2] Response: 200
+2026-09-04 10:36:15,795 - __main__ - DEBUG - [device-74-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,795 - __main__ - INFO - [device-74-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,796 - __main__ - DEBUG - [MIDDLEWARE_START][device-64-event-0-try-2] Request received at 10:36:15.796
+2026-09-04 10:36:15,797 - __main__ - DEBUG - [MIDDLEWARE_END][device-68-event-0-try-2] Request completed in 0.107s
+2026-09-04 10:36:15,797 - uvicorn.access - INFO - 172.18.0.15:33174 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,799 - __main__ - DEBUG - [ENDPOINT_START][device-29-event-0-try-2] Handler started at 10:36:15.799
+2026-09-04 10:36:15,799 - __main__ - INFO - [rps:9.2|conns:16][device-29-event-0-try-2] Sending message Phone: 29, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038822+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,800 - __main__ - DEBUG - [MIDDLEWARE_START][device-4-event-0-try-2] Request received at 10:36:15.800
+2026-09-04 10:36:15,800 - __main__ - DEBUG - [device-76-event-0-try-2] Response: 200
+2026-09-04 10:36:15,800 - __main__ - DEBUG - [device-76-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,800 - __main__ - INFO - [device-76-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,801 - __main__ - DEBUG - [ENDPOINT_START][device-55-event-0-try-2] Handler started at 10:36:15.801
+2026-09-04 10:36:15,802 - __main__ - INFO - [rps:9.4|conns:16][device-55-event-0-try-2] Sending message Phone: 55, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.039553+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,802 - __main__ - DEBUG - [MIDDLEWARE_END][device-74-event-0-try-2] Request completed in 0.096s
+2026-09-04 10:36:15,802 - uvicorn.access - INFO - 172.18.0.15:33206 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,803 - __main__ - DEBUG - [MIDDLEWARE_START][device-17-event-0-try-2] Request received at 10:36:15.803
+2026-09-04 10:36:15,804 - __main__ - DEBUG - [ENDPOINT_START][device-47-event-0-try-2] Handler started at 10:36:15.804
+2026-09-04 10:36:15,804 - __main__ - INFO - [rps:9.6|conns:16][device-47-event-0-try-2] Sending message Phone: 47, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038743+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,805 - __main__ - DEBUG - [MIDDLEWARE_START][device-39-event-0-try-2] Request received at 10:36:15.805
+2026-09-04 10:36:15,806 - __main__ - DEBUG - [MIDDLEWARE_END][device-76-event-0-try-2] Request completed in 0.095s
+2026-09-04 10:36:15,806 - uvicorn.access - INFO - 172.18.0.15:33220 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,807 - __main__ - DEBUG - [device-18-event-0-try-2] Response: 200
+2026-09-04 10:36:15,807 - __main__ - DEBUG - [device-18-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,807 - __main__ - INFO - [device-18-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,807 - __main__ - DEBUG - [ENDPOINT_START][device-70-event-0-try-2] Handler started at 10:36:15.807
+2026-09-04 10:36:15,807 - __main__ - INFO - [rps:9.8|conns:16][device-70-event-0-try-2] Sending message Phone: 70, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038570+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,808 - __main__ - DEBUG - [MIDDLEWARE_START][device-44-event-0-try-2] Request received at 10:36:15.808
+2026-09-04 10:36:15,810 - __main__ - DEBUG - [ENDPOINT_START][device-90-event-0-try-2] Handler started at 10:36:15.810
+2026-09-04 10:36:15,810 - __main__ - INFO - [rps:10.0|conns:16][device-90-event-0-try-2] Sending message Phone: 90, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038464+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,811 - __main__ - DEBUG - [MIDDLEWARE_START][device-86-event-0-try-2] Request received at 10:36:15.811
+2026-09-04 10:36:15,812 - __main__ - DEBUG - [device-1-event-0-try-2] Response: 200
+2026-09-04 10:36:15,812 - __main__ - DEBUG - [device-1-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,812 - __main__ - INFO - [device-1-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,813 - __main__ - DEBUG - [MIDDLEWARE_END][device-18-event-0-try-2] Request completed in 0.087s
+2026-09-04 10:36:15,813 - uvicorn.access - INFO - 172.18.0.15:33264 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,814 - __main__ - DEBUG - [ENDPOINT_START][device-91-event-0-try-2] Handler started at 10:36:15.814
+2026-09-04 10:36:15,815 - __main__ - INFO - [rps:10.2|conns:16][device-91-event-0-try-2] Sending message Phone: 91, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.039747+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,816 - __main__ - DEBUG - [MIDDLEWARE_START][device-19-event-0-try-2] Request received at 10:36:15.816
+2026-09-04 10:36:15,818 - __main__ - DEBUG - [device-66-event-0-try-2] Response: 200
+2026-09-04 10:36:15,818 - __main__ - DEBUG - [device-66-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,818 - __main__ - INFO - [device-66-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,819 - __main__ - DEBUG - [MIDDLEWARE_START][device-88-event-0-try-2] Request received at 10:36:15.818
+2026-09-04 10:36:15,819 - __main__ - DEBUG - [MIDDLEWARE_END][device-1-event-0-try-2] Request completed in 0.102s
+2026-09-04 10:36:15,819 - uvicorn.access - INFO - 172.18.0.15:33234 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,819 - __main__ - DEBUG - [ENDPOINT_START][device-50-event-0-try-2] Handler started at 10:36:15.819
+2026-09-04 10:36:15,820 - __main__ - INFO - [rps:10.6|conns:16][device-50-event-0-try-2] Sending message Phone: 50, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.039799+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,821 - __main__ - DEBUG - [device-23-event-0-try-2] Response: 200
+2026-09-04 10:36:15,821 - __main__ - DEBUG - [device-23-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,821 - __main__ - INFO - [device-23-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,821 - __main__ - DEBUG - [MIDDLEWARE_START][device-38-event-0-try-2] Request received at 10:36:15.821
+2026-09-04 10:36:15,823 - __main__ - DEBUG - [ENDPOINT_START][device-81-event-0-try-2] Handler started at 10:36:15.823
+2026-09-04 10:36:15,823 - __main__ - INFO - [rps:10.8|conns:16][device-81-event-0-try-2] Sending message Phone: 81, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.039694+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,824 - __main__ - DEBUG - [ENDPOINT_START][device-64-event-0-try-2] Handler started at 10:36:15.824
+2026-09-04 10:36:15,824 - __main__ - INFO - [rps:10.8|conns:16][device-64-event-0-try-2] Sending message Phone: 64, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.039638+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,825 - __main__ - DEBUG - [MIDDLEWARE_END][device-66-event-0-try-2] Request completed in 0.093s
+2026-09-04 10:36:15,825 - uvicorn.access - INFO - 172.18.0.15:33272 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,826 - __main__ - DEBUG - [MIDDLEWARE_START][device-58-event-0-try-2] Request received at 10:36:15.826
+2026-09-04 10:36:15,827 - __main__ - DEBUG - [ENDPOINT_START][device-4-event-0-try-2] Handler started at 10:36:15.827
+2026-09-04 10:36:15,827 - __main__ - INFO - [rps:11.0|conns:16][device-4-event-0-try-2] Sending message Phone: 4, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.040017+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,827 - __main__ - DEBUG - [MIDDLEWARE_END][device-23-event-0-try-2] Request completed in 0.153s
+2026-09-04 10:36:15,827 - uvicorn.access - INFO - 172.18.0.15:33144 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,828 - __main__ - DEBUG - [device-79-event-0-try-2] Response: 200
+2026-09-04 10:36:15,828 - __main__ - DEBUG - [device-79-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,828 - __main__ - INFO - [device-79-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,828 - __main__ - DEBUG - [device-47-event-0-try-2] Response: 200
+2026-09-04 10:36:15,828 - __main__ - DEBUG - [device-47-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,828 - __main__ - INFO - [device-47-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,829 - __main__ - DEBUG - [MIDDLEWARE_START][device-53-event-0-try-2] Request received at 10:36:15.829
+2026-09-04 10:36:15,832 - __main__ - DEBUG - [ENDPOINT_START][device-17-event-0-try-2] Handler started at 10:36:15.832
+2026-09-04 10:36:15,832 - __main__ - INFO - [rps:11.2|conns:16][device-17-event-0-try-2] Sending message Phone: 17, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.040135+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,833 - __main__ - DEBUG - [MIDDLEWARE_START][device-99-event-0-try-2] Request received at 10:36:15.833
+2026-09-04 10:36:15,834 - __main__ - DEBUG - [ENDPOINT_START][device-39-event-0-try-2] Handler started at 10:36:15.834
+2026-09-04 10:36:15,834 - __main__ - INFO - [rps:11.4|conns:16][device-39-event-0-try-2] Sending message Phone: 39, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.040114+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,835 - __main__ - DEBUG - [MIDDLEWARE_END][device-79-event-0-try-2] Request completed in 0.075s
+2026-09-04 10:36:15,835 - uvicorn.access - INFO - 172.18.0.15:33320 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,835 - __main__ - DEBUG - [MIDDLEWARE_END][device-47-event-0-try-2] Request completed in 0.059s
+2026-09-04 10:36:15,835 - uvicorn.access - INFO - 172.18.0.15:33356 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,836 - __main__ - DEBUG - [MIDDLEWARE_START][device-8-event-0-try-2] Request received at 10:36:15.836
+2026-09-04 10:36:15,836 - __main__ - DEBUG - [device-37-event-0-try-2] Response: 200
+2026-09-04 10:36:15,836 - __main__ - DEBUG - [device-37-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,836 - __main__ - INFO - [device-37-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,837 - __main__ - DEBUG - [ENDPOINT_START][device-44-event-0-try-2] Handler started at 10:36:15.837
+2026-09-04 10:36:15,837 - __main__ - INFO - [rps:11.6|conns:16][device-44-event-0-try-2] Sending message Phone: 44, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.039963+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,839 - __main__ - DEBUG - [MIDDLEWARE_START][device-21-event-0-try-2] Request received at 10:36:15.839
+2026-09-04 10:36:15,840 - __main__ - DEBUG - [ENDPOINT_START][device-86-event-0-try-2] Handler started at 10:36:15.840
+2026-09-04 10:36:15,840 - __main__ - INFO - [rps:11.8|conns:16][device-86-event-0-try-2] Sending message Phone: 86, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.039851+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,841 - __main__ - DEBUG - [device-70-event-0-try-2] Response: 200
+2026-09-04 10:36:15,841 - __main__ - DEBUG - [device-70-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,841 - __main__ - INFO - [device-70-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,842 - __main__ - DEBUG - [MIDDLEWARE_START][device-69-event-0-try-2] Request received at 10:36:15.842
+2026-09-04 10:36:15,842 - __main__ - DEBUG - [MIDDLEWARE_END][device-37-event-0-try-2] Request completed in 0.075s
+2026-09-04 10:36:15,842 - uvicorn.access - INFO - 172.18.0.15:33334 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,844 - __main__ - DEBUG - [ENDPOINT_START][device-19-event-0-try-2] Handler started at 10:36:15.844
+2026-09-04 10:36:15,844 - __main__ - INFO - [rps:12.0|conns:16][device-19-event-0-try-2] Sending message Phone: 19, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.038879+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,845 - __main__ - DEBUG - [MIDDLEWARE_START][device-41-event-0-try-2] Request received at 10:36:15.845
+2026-09-04 10:36:15,846 - __main__ - DEBUG - [device-46-event-0-try-2] Response: 200
+2026-09-04 10:36:15,847 - __main__ - DEBUG - [device-46-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,847 - __main__ - INFO - [device-46-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,849 - __main__ - DEBUG - [ENDPOINT_START][device-88-event-0-try-2] Handler started at 10:36:15.849
+2026-09-04 10:36:15,849 - __main__ - INFO - [rps:12.2|conns:16][device-88-event-0-try-2] Sending message Phone: 88, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.039902+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,850 - __main__ - DEBUG - [MIDDLEWARE_END][device-70-event-0-try-2] Request completed in 0.071s
+2026-09-04 10:36:15,850 - uvicorn.access - INFO - 172.18.0.15:33362 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,850 - __main__ - DEBUG - [MIDDLEWARE_START][device-96-event-0-try-2] Request received at 10:36:15.850
+2026-09-04 10:36:15,852 - __main__ - DEBUG - [device-80-event-0-try-2] Response: 200
+2026-09-04 10:36:15,852 - __main__ - DEBUG - [device-80-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,852 - __main__ - INFO - [device-80-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,853 - __main__ - DEBUG - [ENDPOINT_START][device-38-event-0-try-2] Handler started at 10:36:15.853
+2026-09-04 10:36:15,853 - __main__ - INFO - [rps:12.4|conns:16][device-38-event-0-try-2] Sending message Phone: 38, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.054402+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,854 - __main__ - DEBUG - [MIDDLEWARE_START][device-93-event-0-try-2] Request received at 10:36:15.854
+2026-09-04 10:36:15,855 - __main__ - DEBUG - [MIDDLEWARE_END][device-46-event-0-try-2] Request completed in 0.103s
+2026-09-04 10:36:15,855 - uvicorn.access - INFO - 172.18.0.15:33304 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,856 - __main__ - DEBUG - [ENDPOINT_START][device-58-event-0-try-2] Handler started at 10:36:15.856
+2026-09-04 10:36:15,856 - __main__ - INFO - [rps:12.6|conns:16][device-58-event-0-try-2] Sending message Phone: 58, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.061041+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,857 - __main__ - DEBUG - [MIDDLEWARE_START][device-13-event-0-try-2] Request received at 10:36:15.857
+2026-09-04 10:36:15,859 - __main__ - DEBUG - [MIDDLEWARE_END][device-80-event-0-try-2] Request completed in 0.117s
+2026-09-04 10:36:15,859 - uvicorn.access - INFO - 172.18.0.15:33286 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,859 - __main__ - DEBUG - [ENDPOINT_START][device-53-event-0-try-2] Handler started at 10:36:15.859
+2026-09-04 10:36:15,859 - __main__ - INFO - [rps:12.8|conns:16][device-53-event-0-try-2] Sending message Phone: 53, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.061627+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,860 - __main__ - DEBUG - [device-91-event-0-try-2] Response: 200
+2026-09-04 10:36:15,860 - __main__ - DEBUG - [device-91-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,860 - __main__ - INFO - [device-91-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,861 - __main__ - DEBUG - [device-39-event-0-try-2] Response: 200
+2026-09-04 10:36:15,861 - __main__ - DEBUG - [device-39-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,861 - __main__ - INFO - [device-39-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,861 - __main__ - DEBUG - [MIDDLEWARE_START][device-5-event-0-try-2] Request received at 10:36:15.861
+2026-09-04 10:36:15,866 - __main__ - DEBUG - [ENDPOINT_START][device-99-event-0-try-2] Handler started at 10:36:15.866
+2026-09-04 10:36:15,866 - __main__ - INFO - [rps:13.0|conns:16][device-99-event-0-try-2] Sending message Phone: 99, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.064964+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,868 - __main__ - DEBUG - [MIDDLEWARE_START][device-83-event-0-try-2] Request received at 10:36:15.868
+2026-09-04 10:36:15,870 - __main__ - DEBUG - [ENDPOINT_START][device-8-event-0-try-2] Handler started at 10:36:15.870
+2026-09-04 10:36:15,870 - __main__ - INFO - [rps:13.2|conns:16][device-8-event-0-try-2] Sending message Phone: 8, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.094581+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,871 - __main__ - DEBUG - [MIDDLEWARE_END][device-91-event-0-try-2] Request completed in 0.083s
+2026-09-04 10:36:15,871 - uvicorn.access - INFO - 172.18.0.15:33374 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,871 - __main__ - DEBUG - [MIDDLEWARE_END][device-39-event-0-try-2] Request completed in 0.066s
+2026-09-04 10:36:15,871 - uvicorn.access - INFO - 172.18.0.15:33442 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,871 - __main__ - DEBUG - [device-75-event-0-try-2] Response: 200
+2026-09-04 10:36:15,871 - __main__ - DEBUG - [device-75-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,871 - __main__ - INFO - [device-75-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,873 - __main__ - DEBUG - [MIDDLEWARE_START][device-26-event-0-try-2] Request received at 10:36:15.873
+2026-09-04 10:36:15,875 - __main__ - DEBUG - [ENDPOINT_START][device-21-event-0-try-2] Handler started at 10:36:15.875
+2026-09-04 10:36:15,875 - __main__ - INFO - [rps:13.4|conns:16][device-21-event-0-try-2] Sending message Phone: 21, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.094683+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,876 - __main__ - DEBUG - [MIDDLEWARE_START][device-97-event-0-try-2] Request received at 10:36:15.876
+2026-09-04 10:36:15,876 - __main__ - DEBUG - [device-81-event-0-try-2] Response: 200
+2026-09-04 10:36:15,876 - __main__ - DEBUG - [device-81-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,876 - __main__ - INFO - [device-81-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,877 - __main__ - DEBUG - [ENDPOINT_START][device-69-event-0-try-2] Handler started at 10:36:15.877
+2026-09-04 10:36:15,878 - __main__ - INFO - [rps:13.6|conns:16][device-69-event-0-try-2] Sending message Phone: 69, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.094496+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,878 - __main__ - DEBUG - [MIDDLEWARE_END][device-75-event-0-try-2] Request completed in 0.131s
+2026-09-04 10:36:15,878 - uvicorn.access - INFO - 172.18.0.15:33288 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,879 - __main__ - DEBUG - [MIDDLEWARE_START][device-48-event-0-try-2] Request received at 10:36:15.879
+2026-09-04 10:36:15,880 - __main__ - DEBUG - [device-29-event-0-try-2] Response: 200
+2026-09-04 10:36:15,880 - __main__ - DEBUG - [device-29-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,880 - __main__ - INFO - [device-29-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,881 - __main__ - DEBUG - [device-22-event-0-try-2] Response: 200
+2026-09-04 10:36:15,881 - __main__ - DEBUG - [device-22-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,881 - __main__ - INFO - [device-22-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,881 - __main__ - DEBUG - [ENDPOINT_START][device-41-event-0-try-2] Handler started at 10:36:15.881
+2026-09-04 10:36:15,882 - __main__ - INFO - [rps:13.8|conns:16][device-41-event-0-try-2] Sending message Phone: 41, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.094773+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,883 - __main__ - DEBUG - [MIDDLEWARE_START][device-59-event-0-try-2] Request received at 10:36:15.882
+2026-09-04 10:36:15,883 - __main__ - DEBUG - [MIDDLEWARE_END][device-81-event-0-try-2] Request completed in 0.090s
+2026-09-04 10:36:15,883 - uvicorn.access - INFO - 172.18.0.15:33394 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,884 - __main__ - DEBUG - [ENDPOINT_START][device-96-event-0-try-2] Handler started at 10:36:15.884
+2026-09-04 10:36:15,884 - __main__ - INFO - [rps:14.0|conns:16][device-96-event-0-try-2] Sending message Phone: 96, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.094309+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,887 - __main__ - DEBUG - [MIDDLEWARE_START][device-72-event-0-try-2] Request received at 10:36:15.886
+2026-09-04 10:36:15,888 - __main__ - DEBUG - [MIDDLEWARE_END][device-29-event-0-try-2] Request completed in 0.117s
+2026-09-04 10:36:15,888 - uvicorn.access - INFO - 172.18.0.15:33340 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,889 - __main__ - DEBUG - [MIDDLEWARE_END][device-22-event-0-try-2] Request completed in 0.151s
+2026-09-04 10:36:15,889 - uvicorn.access - INFO - 172.18.0.15:33282 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,889 - __main__ - DEBUG - [ENDPOINT_START][device-93-event-0-try-2] Handler started at 10:36:15.889
+2026-09-04 10:36:15,889 - __main__ - INFO - [rps:14.2|conns:16][device-93-event-0-try-2] Sending message Phone: 93, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.099892+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,890 - __main__ - DEBUG - [device-36-event-0-try-2] Response: 200
+2026-09-04 10:36:15,890 - __main__ - DEBUG - [device-36-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,890 - __main__ - INFO - [device-36-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,891 - __main__ - DEBUG - [MIDDLEWARE_START][device-57-event-0-try-2] Request received at 10:36:15.891
+2026-09-04 10:36:15,891 - __main__ - DEBUG - [device-82-event-0-try-2] Response: 200
+2026-09-04 10:36:15,891 - __main__ - DEBUG - [device-82-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,891 - __main__ - INFO - [device-82-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,893 - __main__ - DEBUG - [ENDPOINT_START][device-13-event-0-try-2] Handler started at 10:36:15.893
+2026-09-04 10:36:15,893 - __main__ - INFO - [rps:14.4|conns:16][device-13-event-0-try-2] Sending message Phone: 13, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.098952+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,894 - __main__ - DEBUG - [MIDDLEWARE_START][device-60-event-0-try-2] Request received at 10:36:15.894
+2026-09-04 10:36:15,895 - __main__ - DEBUG - [ENDPOINT_START][device-5-event-0-try-2] Handler started at 10:36:15.895
+2026-09-04 10:36:15,895 - __main__ - INFO - [rps:14.6|conns:16][device-5-event-0-try-2] Sending message Phone: 5, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.107174+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,897 - __main__ - DEBUG - [MIDDLEWARE_END][device-36-event-0-try-2] Request completed in 0.141s
+2026-09-04 10:36:15,897 - uvicorn.access - INFO - 172.18.0.15:33306 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,898 - __main__ - DEBUG - [MIDDLEWARE_START][device-87-event-0-try-2] Request received at 10:36:15.897
+2026-09-04 10:36:15,899 - __main__ - DEBUG - [MIDDLEWARE_END][device-82-event-0-try-2] Request completed in 0.177s
+2026-09-04 10:36:15,899 - uvicorn.access - INFO - 172.18.0.15:33250 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,899 - __main__ - DEBUG - [device-64-event-0-try-2] Response: 200
+2026-09-04 10:36:15,899 - __main__ - DEBUG - [device-64-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,899 - __main__ - INFO - [device-64-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,900 - __main__ - DEBUG - [ENDPOINT_START][device-83-event-0-try-2] Handler started at 10:36:15.900
+2026-09-04 10:36:15,900 - __main__ - INFO - [rps:14.8|conns:16][device-83-event-0-try-2] Sending message Phone: 83, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.120625+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,901 - __main__ - DEBUG - [MIDDLEWARE_START][device-95-event-0-try-2] Request received at 10:36:15.901
+2026-09-04 10:36:15,902 - __main__ - DEBUG - [device-17-event-0-try-2] Response: 200
+2026-09-04 10:36:15,902 - __main__ - DEBUG - [device-17-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,902 - __main__ - INFO - [device-17-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,904 - __main__ - DEBUG - [ENDPOINT_START][device-26-event-0-try-2] Handler started at 10:36:15.904
+2026-09-04 10:36:15,904 - __main__ - INFO - [rps:15.0|conns:16][device-26-event-0-try-2] Sending message Phone: 26, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.128616+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,905 - __main__ - DEBUG - [MIDDLEWARE_START][device-40-event-0-try-2] Request received at 10:36:15.905
+2026-09-04 10:36:15,906 - __main__ - DEBUG - [MIDDLEWARE_END][device-64-event-0-try-2] Request completed in 0.110s
+2026-09-04 10:36:15,906 - uvicorn.access - INFO - 172.18.0.15:33406 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,907 - __main__ - DEBUG - [ENDPOINT_START][device-97-event-0-try-2] Handler started at 10:36:15.907
+2026-09-04 10:36:15,907 - __main__ - INFO - [rps:15.2|conns:16][device-97-event-0-try-2] Sending message Phone: 97, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.144420+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,908 - __main__ - DEBUG - [MIDDLEWARE_START][device-30-event-0-try-2] Request received at 10:36:15.908
+2026-09-04 10:36:15,909 - __main__ - DEBUG - [MIDDLEWARE_END][device-17-event-0-try-2] Request completed in 0.106s
+2026-09-04 10:36:15,909 - uvicorn.access - INFO - 172.18.0.15:33436 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,910 - __main__ - DEBUG - [device-41-event-0-try-2] Response: 200
+2026-09-04 10:36:15,910 - __main__ - DEBUG - [device-41-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,910 - __main__ - INFO - [device-41-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,911 - __main__ - DEBUG - [ENDPOINT_START][device-48-event-0-try-2] Handler started at 10:36:15.911
+2026-09-04 10:36:15,911 - __main__ - INFO - [rps:15.4|conns:16][device-48-event-0-try-2] Sending message Phone: 48, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.147886+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,912 - __main__ - DEBUG - [MIDDLEWARE_START][device-84-event-0-try-2] Request received at 10:36:15.912
+2026-09-04 10:36:15,915 - __main__ - DEBUG - [ENDPOINT_START][device-59-event-0-try-2] Handler started at 10:36:15.915
+2026-09-04 10:36:15,915 - __main__ - INFO - [rps:15.6|conns:16][device-59-event-0-try-2] Sending message Phone: 59, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.151273+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,917 - __main__ - DEBUG - [MIDDLEWARE_START][device-77-event-0-try-2] Request received at 10:36:15.917
+2026-09-04 10:36:15,918 - __main__ - DEBUG - [device-50-event-0-try-2] Response: 200
+2026-09-04 10:36:15,918 - __main__ - DEBUG - [device-50-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,918 - __main__ - INFO - [device-50-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,919 - __main__ - DEBUG - [MIDDLEWARE_END][device-41-event-0-try-2] Request completed in 0.074s
+2026-09-04 10:36:15,919 - uvicorn.access - INFO - 172.18.0.15:33538 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,919 - __main__ - DEBUG - [ENDPOINT_START][device-72-event-0-try-2] Handler started at 10:36:15.919
+2026-09-04 10:36:15,919 - __main__ - INFO - [rps:15.8|conns:16][device-72-event-0-try-2] Sending message Phone: 72, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.149331+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,920 - __main__ - DEBUG - [MIDDLEWARE_START][device-73-event-0-try-2] Request received at 10:36:15.920
+2026-09-04 10:36:15,920 - __main__ - DEBUG - [device-55-event-0-try-2] Response: 200
+2026-09-04 10:36:15,921 - __main__ - DEBUG - [device-55-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,921 - __main__ - INFO - [device-55-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,922 - __main__ - DEBUG - [ENDPOINT_START][device-57-event-0-try-2] Handler started at 10:36:15.922
+2026-09-04 10:36:15,922 - __main__ - INFO - [rps:16.0|conns:16][device-57-event-0-try-2] Sending message Phone: 57, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.149292+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,924 - __main__ - DEBUG - [MIDDLEWARE_END][device-50-event-0-try-2] Request completed in 0.134s
+2026-09-04 10:36:15,924 - uvicorn.access - INFO - 172.18.0.15:33382 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,925 - __main__ - DEBUG - [ENDPOINT_START][device-60-event-0-try-2] Handler started at 10:36:15.925
+2026-09-04 10:36:15,925 - __main__ - INFO - [rps:16.0|conns:16][device-60-event-0-try-2] Sending message Phone: 60, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.160564+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,926 - __main__ - DEBUG - [device-58-event-0-try-2] Response: 200
+2026-09-04 10:36:15,926 - __main__ - DEBUG - [device-58-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,926 - __main__ - INFO - [device-58-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,927 - __main__ - DEBUG - [device-31-event-0-try-2] Response: 200
+2026-09-04 10:36:15,927 - __main__ - DEBUG - [device-31-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,927 - __main__ - INFO - [device-31-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,928 - __main__ - DEBUG - [MIDDLEWARE_END][device-55-event-0-try-2] Request completed in 0.154s
+2026-09-04 10:36:15,928 - uvicorn.access - INFO - 172.18.0.15:33352 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,930 - __main__ - DEBUG - [ENDPOINT_START][device-87-event-0-try-2] Handler started at 10:36:15.930
+2026-09-04 10:36:15,930 - __main__ - INFO - [rps:16.0|conns:16][device-87-event-0-try-2] Sending message Phone: 87, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.163375+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,932 - __main__ - DEBUG - [device-90-event-0-try-2] Response: 200
+2026-09-04 10:36:15,932 - __main__ - DEBUG - [device-90-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,932 - __main__ - INFO - [device-90-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,933 - __main__ - DEBUG - [ENDPOINT_START][device-95-event-0-try-2] Handler started at 10:36:15.933
+2026-09-04 10:36:15,933 - __main__ - INFO - [rps:16.0|conns:16][device-95-event-0-try-2] Sending message Phone: 95, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.160656+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,934 - __main__ - DEBUG - [MIDDLEWARE_END][device-58-event-0-try-2] Request completed in 0.108s
+2026-09-04 10:36:15,934 - uvicorn.access - INFO - 172.18.0.15:33490 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,934 - __main__ - DEBUG - [MIDDLEWARE_END][device-31-event-0-try-2] Request completed in 0.170s
+2026-09-04 10:36:15,934 - uvicorn.access - INFO - 172.18.0.15:33324 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,935 - __main__ - DEBUG - [device-38-event-0-try-2] Response: 200
+2026-09-04 10:36:15,935 - __main__ - DEBUG - [device-38-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,935 - __main__ - INFO - [device-38-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,936 - __main__ - DEBUG - [device-99-event-0-try-2] Response: 200
+2026-09-04 10:36:15,936 - __main__ - DEBUG - [device-99-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,936 - __main__ - INFO - [device-99-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,937 - __main__ - DEBUG - [ENDPOINT_START][device-40-event-0-try-2] Handler started at 10:36:15.937
+2026-09-04 10:36:15,937 - __main__ - INFO - [rps:16.0|conns:16][device-40-event-0-try-2] Sending message Phone: 40, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.188217+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,939 - __main__ - DEBUG - [MIDDLEWARE_END][device-90-event-0-try-2] Request completed in 0.156s
+2026-09-04 10:36:15,939 - uvicorn.access - INFO - 172.18.0.15:33372 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,939 - __main__ - DEBUG - [ENDPOINT_START][device-30-event-0-try-2] Handler started at 10:36:15.939
+2026-09-04 10:36:15,939 - __main__ - INFO - [rps:16.0|conns:16][device-30-event-0-try-2] Sending message Phone: 30, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.192637+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,940 - __main__ - DEBUG - [MIDDLEWARE_END][device-38-event-0-try-2] Request completed in 0.119s
+2026-09-04 10:36:15,940 - uvicorn.access - INFO - 172.18.0.15:33480 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,943 - __main__ - DEBUG - [MIDDLEWARE_END][device-99-event-0-try-2] Request completed in 0.109s
+2026-09-04 10:36:15,943 - uvicorn.access - INFO - 172.18.0.15:33502 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,943 - __main__ - DEBUG - [ENDPOINT_START][device-84-event-0-try-2] Handler started at 10:36:15.943
+2026-09-04 10:36:15,943 - __main__ - INFO - [rps:16.0|conns:16][device-84-event-0-try-2] Sending message Phone: 84, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.192629+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,944 - __main__ - DEBUG - [device-53-event-0-try-2] Response: 200
+2026-09-04 10:36:15,944 - __main__ - DEBUG - [device-53-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,944 - __main__ - INFO - [device-53-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,944 - __main__ - DEBUG - [device-13-event-0-try-2] Response: 200
+2026-09-04 10:36:15,944 - __main__ - DEBUG - [device-13-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,944 - __main__ - INFO - [device-13-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,946 - __main__ - DEBUG - [ENDPOINT_START][device-77-event-0-try-2] Handler started at 10:36:15.946
+2026-09-04 10:36:15,946 - __main__ - INFO - [rps:16.0|conns:16][device-77-event-0-try-2] Sending message Phone: 77, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.201367+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,949 - __main__ - DEBUG - [ENDPOINT_START][device-73-event-0-try-2] Handler started at 10:36:15.949
+2026-09-04 10:36:15,949 - __main__ - INFO - [rps:16.0|conns:16][device-73-event-0-try-2] Sending message Phone: 73, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-04 10:36:15.202246+00:00 to http://172.18.0.9:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-04 10:36:15,950 - __main__ - DEBUG - [MIDDLEWARE_END][device-53-event-0-try-2] Request completed in 0.121s
+2026-09-04 10:36:15,950 - uvicorn.access - INFO - 172.18.0.15:33496 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,950 - __main__ - DEBUG - [device-88-event-0-try-2] Response: 200
+2026-09-04 10:36:15,951 - __main__ - DEBUG - [device-88-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,951 - __main__ - INFO - [device-88-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,952 - __main__ - DEBUG - [MIDDLEWARE_END][device-13-event-0-try-2] Request completed in 0.094s
+2026-09-04 10:36:15,952 - uvicorn.access - INFO - 172.18.0.15:33564 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,954 - __main__ - DEBUG - [device-86-event-0-try-2] Response: 200
+2026-09-04 10:36:15,955 - __main__ - DEBUG - [device-86-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,955 - __main__ - INFO - [device-86-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,956 - __main__ - DEBUG - [MIDDLEWARE_END][device-88-event-0-try-2] Request completed in 0.137s
+2026-09-04 10:36:15,956 - uvicorn.access - INFO - 172.18.0.15:33468 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,957 - __main__ - DEBUG - [device-19-event-0-try-2] Response: 200
+2026-09-04 10:36:15,957 - __main__ - DEBUG - [device-19-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,957 - __main__ - INFO - [device-19-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,959 - __main__ - DEBUG - [MIDDLEWARE_END][device-86-event-0-try-2] Request completed in 0.147s
+2026-09-04 10:36:15,959 - uvicorn.access - INFO - 172.18.0.15:33450 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,960 - __main__ - DEBUG - [device-44-event-0-try-2] Response: 200
+2026-09-04 10:36:15,960 - __main__ - DEBUG - [device-44-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,960 - __main__ - INFO - [device-44-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,961 - __main__ - DEBUG - [MIDDLEWARE_END][device-19-event-0-try-2] Request completed in 0.145s
+2026-09-04 10:36:15,962 - uvicorn.access - INFO - 172.18.0.15:33458 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,964 - __main__ - DEBUG - [device-30-event-0-try-2] Response: 200
+2026-09-04 10:36:15,964 - __main__ - DEBUG - [device-30-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,964 - __main__ - INFO - [device-30-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,966 - __main__ - DEBUG - [MIDDLEWARE_END][device-44-event-0-try-2] Request completed in 0.157s
+2026-09-04 10:36:15,966 - uvicorn.access - INFO - 172.18.0.15:33444 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,967 - __main__ - DEBUG - [device-72-event-0-try-2] Response: 200
+2026-09-04 10:36:15,967 - __main__ - DEBUG - [device-72-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,967 - __main__ - INFO - [device-72-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,968 - __main__ - DEBUG - [MIDDLEWARE_END][device-30-event-0-try-2] Request completed in 0.059s
+2026-09-04 10:36:15,968 - uvicorn.access - INFO - 172.18.0.15:33660 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,969 - __main__ - DEBUG - [device-26-event-0-try-2] Response: 200
+2026-09-04 10:36:15,969 - __main__ - DEBUG - [device-26-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,969 - __main__ - INFO - [device-26-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,970 - __main__ - DEBUG - [MIDDLEWARE_END][device-72-event-0-try-2] Request completed in 0.084s
+2026-09-04 10:36:15,971 - uvicorn.access - INFO - 172.18.0.15:33614 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,971 - __main__ - DEBUG - [device-95-event-0-try-2] Response: 200
+2026-09-04 10:36:15,972 - __main__ - DEBUG - [device-95-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,972 - __main__ - INFO - [device-95-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,973 - __main__ - DEBUG - [MIDDLEWARE_END][device-26-event-0-try-2] Request completed in 0.100s
+2026-09-04 10:36:15,973 - uvicorn.access - INFO - 172.18.0.15:33594 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,975 - __main__ - DEBUG - [MIDDLEWARE_END][device-95-event-0-try-2] Request completed in 0.074s
+2026-09-04 10:36:15,975 - uvicorn.access - INFO - 172.18.0.15:33654 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,976 - __main__ - DEBUG - [device-97-event-0-try-2] Response: 200
+2026-09-04 10:36:15,976 - __main__ - DEBUG - [device-97-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,976 - __main__ - INFO - [device-97-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,977 - __main__ - DEBUG - [device-5-event-0-try-2] Response: 200
+2026-09-04 10:36:15,977 - __main__ - DEBUG - [device-5-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,977 - __main__ - INFO - [device-5-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,979 - __main__ - DEBUG - [MIDDLEWARE_END][device-97-event-0-try-2] Request completed in 0.104s
+2026-09-04 10:36:15,979 - uvicorn.access - INFO - 172.18.0.15:33600 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,980 - __main__ - DEBUG - [device-8-event-0-try-2] Response: 200
+2026-09-04 10:36:15,980 - __main__ - DEBUG - [device-8-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,980 - __main__ - INFO - [device-8-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,981 - __main__ - DEBUG - [device-60-event-0-try-2] Response: 200
+2026-09-04 10:36:15,981 - __main__ - DEBUG - [device-60-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,981 - __main__ - INFO - [device-60-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,982 - __main__ - DEBUG - [MIDDLEWARE_END][device-5-event-0-try-2] Request completed in 0.121s
+2026-09-04 10:36:15,982 - uvicorn.access - INFO - 172.18.0.15:33568 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,985 - __main__ - DEBUG - [MIDDLEWARE_END][device-8-event-0-try-2] Request completed in 0.149s
+2026-09-04 10:36:15,985 - uvicorn.access - INFO - 172.18.0.15:33500 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,985 - __main__ - DEBUG - [device-21-event-0-try-2] Response: 200
+2026-09-04 10:36:15,985 - __main__ - DEBUG - [device-21-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,985 - __main__ - INFO - [device-21-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,985 - __main__ - DEBUG - [MIDDLEWARE_END][device-60-event-0-try-2] Request completed in 0.091s
+2026-09-04 10:36:15,985 - uvicorn.access - INFO - 172.18.0.15:33638 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,988 - __main__ - DEBUG - [MIDDLEWARE_END][device-21-event-0-try-2] Request completed in 0.150s
+2026-09-04 10:36:15,988 - uvicorn.access - INFO - 172.18.0.15:33516 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,989 - __main__ - DEBUG - [device-57-event-0-try-2] Response: 200
+2026-09-04 10:36:15,989 - __main__ - DEBUG - [device-57-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,989 - __main__ - INFO - [device-57-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,990 - __main__ - DEBUG - [device-69-event-0-try-2] Response: 200
+2026-09-04 10:36:15,990 - __main__ - DEBUG - [device-69-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,990 - __main__ - INFO - [device-69-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,992 - __main__ - DEBUG - [device-4-event-0-try-2] Response: 200
+2026-09-04 10:36:15,992 - __main__ - DEBUG - [device-4-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,992 - __main__ - INFO - [device-4-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,993 - __main__ - DEBUG - [device-93-event-0-try-2] Response: 200
+2026-09-04 10:36:15,993 - __main__ - DEBUG - [device-93-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,993 - __main__ - INFO - [device-93-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,993 - __main__ - DEBUG - [MIDDLEWARE_END][device-57-event-0-try-2] Request completed in 0.102s
+2026-09-04 10:36:15,993 - uvicorn.access - INFO - 172.18.0.15:33624 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,994 - __main__ - DEBUG - [MIDDLEWARE_END][device-69-event-0-try-2] Request completed in 0.152s
+2026-09-04 10:36:15,994 - uvicorn.access - INFO - 172.18.0.15:33532 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,995 - __main__ - DEBUG - [MIDDLEWARE_END][device-4-event-0-try-2] Request completed in 0.195s
+2026-09-04 10:36:15,995 - uvicorn.access - INFO - 172.18.0.15:33422 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,995 - __main__ - DEBUG - [MIDDLEWARE_END][device-93-event-0-try-2] Request completed in 0.142s
+2026-09-04 10:36:15,995 - uvicorn.access - INFO - 172.18.0.15:33554 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:15,996 - __main__ - DEBUG - [device-73-event-0-try-2] Response: 200
+2026-09-04 10:36:15,996 - __main__ - DEBUG - [device-73-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:15,996 - __main__ - INFO - [device-73-event-0-try-2] Successfully send message
+2026-09-04 10:36:15,999 - __main__ - DEBUG - [MIDDLEWARE_END][device-73-event-0-try-2] Request completed in 0.079s
+2026-09-04 10:36:16,000 - uvicorn.access - INFO - 172.18.0.15:33684 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:16,002 - __main__ - DEBUG - [device-40-event-0-try-2] Response: 200
+2026-09-04 10:36:16,002 - __main__ - DEBUG - [device-40-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:16,002 - __main__ - INFO - [device-40-event-0-try-2] Successfully send message
+2026-09-04 10:36:16,004 - __main__ - DEBUG - [MIDDLEWARE_END][device-40-event-0-try-2] Request completed in 0.099s
+2026-09-04 10:36:16,004 - uvicorn.access - INFO - 172.18.0.15:33658 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:16,004 - __main__ - DEBUG - [device-48-event-0-try-2] Response: 200
+2026-09-04 10:36:16,004 - __main__ - DEBUG - [device-48-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:16,004 - __main__ - INFO - [device-48-event-0-try-2] Successfully send message
+2026-09-04 10:36:16,006 - __main__ - DEBUG - [device-83-event-0-try-2] Response: 200
+2026-09-04 10:36:16,006 - __main__ - DEBUG - [device-83-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:16,006 - __main__ - INFO - [device-83-event-0-try-2] Successfully send message
+2026-09-04 10:36:16,007 - __main__ - DEBUG - [MIDDLEWARE_END][device-48-event-0-try-2] Request completed in 0.128s
+2026-09-04 10:36:16,007 - uvicorn.access - INFO - 172.18.0.15:33602 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:16,007 - __main__ - DEBUG - [device-84-event-0-try-2] Response: 200
+2026-09-04 10:36:16,007 - __main__ - DEBUG - [device-84-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:16,007 - __main__ - INFO - [device-84-event-0-try-2] Successfully send message
+2026-09-04 10:36:16,007 - __main__ - DEBUG - [MIDDLEWARE_END][device-83-event-0-try-2] Request completed in 0.139s
+2026-09-04 10:36:16,008 - uvicorn.access - INFO - 172.18.0.15:33578 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:16,008 - __main__ - DEBUG - [MIDDLEWARE_END][device-84-event-0-try-2] Request completed in 0.096s
+2026-09-04 10:36:16,008 - uvicorn.access - INFO - 172.18.0.15:33668 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:16,009 - __main__ - DEBUG - [device-96-event-0-try-2] Response: 200
+2026-09-04 10:36:16,009 - __main__ - DEBUG - [device-96-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:16,009 - __main__ - INFO - [device-96-event-0-try-2] Successfully send message
+2026-09-04 10:36:16,009 - __main__ - DEBUG - [MIDDLEWARE_END][device-96-event-0-try-2] Request completed in 0.159s
+2026-09-04 10:36:16,009 - uvicorn.access - INFO - 172.18.0.15:33542 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:16,012 - __main__ - DEBUG - [device-77-event-0-try-2] Response: 200
+2026-09-04 10:36:16,012 - __main__ - DEBUG - [device-77-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:16,012 - __main__ - INFO - [device-77-event-0-try-2] Successfully send message
+2026-09-04 10:36:16,014 - __main__ - DEBUG - [device-87-event-0-try-2] Response: 200
+2026-09-04 10:36:16,014 - __main__ - DEBUG - [device-87-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:16,014 - __main__ - INFO - [device-87-event-0-try-2] Successfully send message
+2026-09-04 10:36:16,014 - __main__ - DEBUG - [MIDDLEWARE_END][device-77-event-0-try-2] Request completed in 0.098s
+2026-09-04 10:36:16,014 - uvicorn.access - INFO - 172.18.0.15:33680 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:16,015 - __main__ - DEBUG - [device-59-event-0-try-2] Response: 200
+2026-09-04 10:36:16,015 - __main__ - DEBUG - [device-59-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-04 10:36:16,015 - __main__ - INFO - [device-59-event-0-try-2] Successfully send message
+2026-09-04 10:36:16,015 - __main__ - DEBUG - [MIDDLEWARE_END][device-87-event-0-try-2] Request completed in 0.118s
+2026-09-04 10:36:16,015 - uvicorn.access - INFO - 172.18.0.15:33648 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:36:16,015 - __main__ - DEBUG - [MIDDLEWARE_END][device-59-event-0-try-2] Request completed in 0.133s
+2026-09-04 10:36:16,015 - uvicorn.access - INFO - 172.18.0.15:33610 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-04 10:41:34,089 - uvicorn.error - INFO - Shutting down
+2026-09-04 10:41:34,189 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 10:41:34,205 - __main__ - INFO - HTTP client closed
+2026-09-04 10:41:34,205 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 10:41:34,205 - uvicorn.error - INFO - Finished server process [1]
