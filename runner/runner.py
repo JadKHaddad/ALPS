@@ -25,6 +25,12 @@ def parse_args():
         help="Path to the base configuration file (default: simulation-config.yaml)",
     )
     parser.add_argument(
+        "--base-dir",
+        type=str,
+        default=".",
+        help="Base directory to place simulation outputs and configs (default: current directory)",
+    )
+    parser.add_argument(
         "--summary-file",
         type=str,
         default="simulation-summary.json",
@@ -51,14 +57,16 @@ def parse_args():
     return parser.parse_args()
 
 
-def run_simulation(run_index, cwd, base_config_file, protocol):
+def run_simulation(run_index, cwd, base_dir, base_config_file, protocol):
     """Generates a config for the current run and executes the Docker container."""
-    simulation_dir = f"simulation-{run_index}"
-    run_config_file = f"simulation-config-run-{run_index}.yaml"
+
+    simulation_dir = os.path.join(base_dir, f"simulation-{run_index}")
+    run_config_file = os.path.join(base_dir, f"simulation-config-run-{run_index}.yaml")
 
     with open(base_config_file, "r") as f:
         config = yaml.safe_load(f)
 
+    # Use the path containing the base_dir so the runner saves outputs there
     config["simulation_dir"] = simulation_dir
 
     with open(run_config_file, "w") as f:
@@ -113,9 +121,14 @@ def main():
     cwd = os.getcwd()
     run_data = []  # Will store tuples of (run_index, latency)
 
+    # Ensure the base directory exists
+    os.makedirs(args.base_dir, exist_ok=True)
+
     for i in range(1, args.max_runs + 1):
         try:
-            sim_dir, _ = run_simulation(i, cwd, args.base_config, args.protocol)
+            sim_dir, _ = run_simulation(
+                i, cwd, args.base_dir, args.base_config, args.protocol
+            )
             current_latency = read_latency(sim_dir)
 
             print(f"[{i}] Run complete. Median Latency: {current_latency} ms")
@@ -156,7 +169,7 @@ def main():
         best_run = min(run_data, key=lambda x: abs(x[1] - overall_median))
         best_index = best_run[0]
         best_latency = best_run[1]
-        best_dir = f"simulation-{best_index}"
+        best_dir = os.path.join(args.base_dir, f"simulation-{best_index}")
 
         print("\n" + "=" * 50)
         print("SIMULATION SUMMARY")

@@ -29,3 +29,5 @@ amqp:
       socket_addr: 0.0.0.0:9090
       failure_rate: 0.1
       max_up_duration: 10s 
+
+# python3 runner.py --protocol "amqp" --base-dir "simulations/amqp/phase-1" --base-config "simulations/amqp/phase-1/simulation-config.yaml" --summary-file "simulations/amqp/phase-1/simulation-summary.json"
