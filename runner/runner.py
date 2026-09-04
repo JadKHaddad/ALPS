@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import statistics
@@ -5,19 +6,57 @@ import subprocess
 
 import yaml
 
-BASE_CONFIG_FILE = "mqtt-simulation-config.yaml"
-SUMMARY_FILE = "simulation-summary.json"
-DELTA_THRESHOLD = 1000  # Acceptable delta (in ms) here
-MAX_RUNS = 50  # Failsafe to prevent infinite loops
-INITIAL_RUNS = 3  # Number of initial runs before checking convergence
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Run MQTT/AMQP simulations until median latency converges."
+    )
+    parser.add_argument(
+        "--protocol",
+        type=str,
+        choices=["mqtt", "amqp"],
+        default="mqtt",
+        help="The protocol to simulate: 'mqtt' or 'amqp' (default: mqtt)",
+    )
+    parser.add_argument(
+        "--base-config",
+        type=str,
+        default="simulation-config.yaml",
+        help="Path to the base configuration file (default: simulation-config.yaml)",
+    )
+    parser.add_argument(
+        "--summary-file",
+        type=str,
+        default="simulation-summary.json",
+        help="Path for the output summary file (default: simulation-summary.json)",
+    )
+    parser.add_argument(
+        "--delta-threshold",
+        type=float,
+        default=1000.0,
+        help="Acceptable delta in ms for convergence (default: 1000)",
+    )
+    parser.add_argument(
+        "--max-runs",
+        type=int,
+        default=50,
+        help="Failsafe to prevent infinite loops (default: 50)",
+    )
+    parser.add_argument(
+        "--initial-runs",
+        type=int,
+        default=3,
+        help="Number of initial runs before checking convergence (default: 3)",
+    )
+    return parser.parse_args()
 
 
-def run_simulation(run_index, cwd):
+def run_simulation(run_index, cwd, base_config_file, protocol):
     """Generates a config for the current run and executes the Docker container."""
-    simulation_dir = f"simulation-mqtt-{run_index}"
-    run_config_file = f"mqtt-simulation-config-run-{run_index}.yaml"
+    simulation_dir = f"simulation-{run_index}"
+    run_config_file = f"simulation-config-run-{run_index}.yaml"
 
-    with open(BASE_CONFIG_FILE, "r") as f:
+    with open(base_config_file, "r") as f:
         config = yaml.safe_load(f)
 
     config["simulation_dir"] = simulation_dir
@@ -26,7 +65,11 @@ def run_simulation(run_index, cwd):
         yaml.dump(config, f, default_flow_style=False)
 
     print(
-        f"\n[{run_index}] Starting simulation into directory: {simulation_dir} (Docker output suppressed)..."
+        f"\n[{run_index}] Starting {protocol.upper()} simulation into directory: {simulation_dir} (Docker output suppressed)..."
+    )
+
+    runner_executable = (
+        "mqtt-simulation-runner" if protocol == "mqtt" else "simulation-runner"
     )
 
     cmd = [
@@ -38,7 +81,7 @@ def run_simulation(run_index, cwd):
         "-v",
         f"{cwd}:/app",
         "jadkhaddad/lps-rs:0.1.0",
-        "mqtt-simulation-runner",
+        runner_executable,
         "--config-file",
         run_config_file,
         "--root-abs-path",
@@ -54,7 +97,6 @@ def run_simulation(run_index, cwd):
 
 def read_latency(simulation_dir):
     """Reads the median_latency_ms from the results file."""
-
     results_path = os.path.join(simulation_dir, "mount", "rates-results.json")
 
     if not os.path.exists(results_path):
@@ -67,12 +109,13 @@ def read_latency(simulation_dir):
 
 
 def main():
+    args = parse_args()
     cwd = os.getcwd()
     run_data = []  # Will store tuples of (run_index, latency)
 
-    for i in range(1, MAX_RUNS + 1):
+    for i in range(1, args.max_runs + 1):
         try:
-            sim_dir, temp_config = run_simulation(i, cwd)
+            sim_dir, _ = run_simulation(i, cwd, args.base_config, args.protocol)
             current_latency = read_latency(sim_dir)
 
             print(f"[{i}] Run complete. Median Latency: {current_latency} ms")
@@ -81,7 +124,7 @@ def main():
 
             run_data.append((i, current_latency))
 
-            if i > INITIAL_RUNS:
+            if i > args.initial_runs:
                 baseline_median = statistics.median(past_latencies)
                 diff = abs(current_latency - baseline_median)
 
@@ -89,21 +132,17 @@ def main():
                     f"[{i}] Checking convergence: |{current_latency} - {baseline_median}| = {diff:.2f} ms"
                 )
 
-                if diff <= DELTA_THRESHOLD:
+                if diff <= args.delta_threshold:
                     print(
-                        f"\nConvergence reached! The latency difference ({diff:.2f} ms) is under the threshold of {DELTA_THRESHOLD} ms."
+                        f"\nConvergence reached! The latency difference ({diff:.2f} ms) is under the threshold of {args.delta_threshold} ms."
                     )
                     break
                 else:
                     print(
-                        f"Difference ({diff:.2f} ms) > {DELTA_THRESHOLD} ms. Continuing simulations..."
+                        f"Difference ({diff:.2f} ms) > {args.delta_threshold} ms. Continuing simulations..."
                     )
 
-            # Clean up the temporary config file
-            if os.path.exists(temp_config):
-                os.remove(temp_config)
-
-        except subprocess.CalledProcessError as e:
+        except subprocess.CalledProcessError:
             print(f"Docker execution failed on run {i}.")
             break
         except Exception as e:
@@ -117,11 +156,12 @@ def main():
         best_run = min(run_data, key=lambda x: abs(x[1] - overall_median))
         best_index = best_run[0]
         best_latency = best_run[1]
-        best_dir = f"simulation-mqtt-{best_index}"
+        best_dir = f"simulation-{best_index}"
 
         print("\n" + "=" * 50)
         print("SIMULATION SUMMARY")
         print("=" * 50)
+        print(f"Protocol: {args.protocol.upper()}")
         print(f"Total runs executed: {len(run_data)}")
         print(f"Overall Median Latency: {overall_median:.2f} ms")
         print(f"Closest run to overall median: Run {best_index} ({best_latency} ms)")
@@ -129,6 +169,7 @@ def main():
         print("=" * 50)
 
         summary_data = {
+            "protocol": args.protocol,
             "total_runs": len(run_data),
             "overall_median_latency_ms": overall_median,
             "closest_run_index": best_index,
@@ -136,10 +177,10 @@ def main():
             "target_directory": best_dir,
         }
 
-        with open(SUMMARY_FILE, "w") as f:
+        with open(args.summary_file, "w") as f:
             json.dump(summary_data, f, indent=4)
 
-        print(f"Summary saved to {SUMMARY_FILE}")
+        print(f"Summary saved to {args.summary_file}")
 
 
 if __name__ == "__main__":
