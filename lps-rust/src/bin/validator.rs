@@ -107,8 +107,14 @@ fn main() -> Result<(), anyhow::Error> {
         tracing::error!("Completeness validation failed: {:#}", completeness_result);
     }
 
-    let median_latency = Event::calculate_median_latency_ms(server_events.iter())
+    let median_latency_ms = Event::calculate_median_latency_ms(server_events.iter())
         .context("Failed to calculate median latency")?;
+
+    let average_latency_ms = Event::calculate_average_latency_ms(server_events.iter())
+        .context("Failed to calculate average latency")?;
+
+    let p99_latency_ms = Event::calculate_p99_latency_ms(server_events.iter())
+        .context("Failed to calculate p99 latency")?;
 
     let duplication_rate = duplicates.len() as f64 / server_events.len() as f64;
     let out_of_order_rate = order_violations.len() as f64 / unique_count as f64;
@@ -118,7 +124,9 @@ fn main() -> Result<(), anyhow::Error> {
     };
 
     let results = Rates {
-        median_latency_ms: median_latency,
+        median_latency_ms,
+        average_latency_ms,
+        p99_latency_ms,
         duplication_rate,
         out_of_order_rate,
         missing_rate,

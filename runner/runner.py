@@ -9,7 +9,7 @@ import yaml
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Run MQTT/AMQP simulations until median latency converges."
+        description="Run MQTT/AMQP simulations until average latency converges."
     )
     parser.add_argument(
         "--protocol",
@@ -109,7 +109,7 @@ def run_simulation(run_index, cwd, base_dir, base_config_file, protocol):
 
 
 def read_latency(simulation_dir):
-    """Reads the median_latency_ms from the results file."""
+    """Reads the average_latency_ms from the results file."""
     results_path = os.path.join(simulation_dir, "mount", "rates-results.json")
 
     if not os.path.exists(results_path):
@@ -118,7 +118,7 @@ def read_latency(simulation_dir):
     with open(results_path, "r") as f:
         results = json.load(f)
 
-    return results["median_latency_ms"]
+    return results["average_latency_ms"]
 
 
 def main():
@@ -147,18 +147,18 @@ def main():
             )
             current_latency = read_latency(sim_dir)
 
-            print(f"[{i}] Run complete. Median Latency: {current_latency} ms")
+            print(f"[{i}] Run complete. Average Latency: {current_latency} ms")
 
             past_latencies = [data[1] for data in run_data]
 
             run_data.append((i, current_latency))
 
             if len(past_latencies) >= args.initial_runs:
-                baseline_median = statistics.median(past_latencies)
-                diff = abs(current_latency - baseline_median)
+                baseline_average = statistics.mean(past_latencies)
+                diff = abs(current_latency - baseline_average)
 
                 print(
-                    f"[{i}] Checking convergence: |{current_latency} - {baseline_median}| = {diff:.2f} ms"
+                    f"[{i}] Checking convergence: |{current_latency} - {baseline_average}| = {diff:.2f} ms"
                 )
 
                 if diff <= args.delta_threshold:
@@ -180,9 +180,9 @@ def main():
 
     if run_data:
         all_latencies = [data[1] for data in run_data]
-        overall_median = statistics.median(all_latencies)
+        overall_average = statistics.mean(all_latencies)
 
-        best_run = min(run_data, key=lambda x: abs(x[1] - overall_median))
+        best_run = min(run_data, key=lambda x: abs(x[1] - overall_average))
         best_index = best_run[0]
         best_latency = best_run[1]
         best_dir = os.path.join(args.base_dir, f"simulation-{best_index}")
@@ -192,15 +192,17 @@ def main():
         print("=" * 50)
         print(f"Protocol: {args.protocol.upper()}")
         print(f"Total runs tracked: {len(run_data)}")
-        print(f"Overall Median Latency: {overall_median:.2f} ms")
-        print(f"Closest run to overall median: Run {best_index} ({best_latency} ms)")
+        print(
+            f"Overall Average Latency (avg of all run averages): {overall_average:.2f} ms"
+        )
+        print(f"Closest run to overall average: Run {best_index} ({best_latency} ms)")
         print(f"Use directory: {best_dir} for your plots.")
         print("=" * 50)
 
         summary_data = {
             "protocol": args.protocol,
             "total_runs": len(run_data),
-            "overall_median_latency_ms": overall_median,
+            "overall_average_latency_ms": overall_average,
             "closest_run_index": best_index,
             "closest_run_latency_ms": best_latency,
             "target_directory": best_dir,

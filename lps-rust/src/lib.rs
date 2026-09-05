@@ -201,6 +201,62 @@ impl Event {
 
         Ok(median)
     }
+
+    pub fn calculate_average_latency_ms<'a>(
+        events: impl Iterator<Item = &'a Event>,
+    ) -> Result<f64, anyhow::Error> {
+        let latencies: Vec<f64> = events
+            .filter_map(|event| {
+                event.arrived_at.map(|arrived| {
+                    let arrived_ms = arrived.timestamp_millis() as f64;
+                    let trigger_ms = event.event_id as f64;
+
+                    arrived_ms - trigger_ms
+                })
+            })
+            .collect();
+
+        if latencies.is_empty() {
+            return Err(anyhow::anyhow!(
+                "No events with arrival times found to calculate latency"
+            ));
+        }
+
+        let sum: f64 = latencies.iter().sum();
+        let average = sum / latencies.len() as f64;
+
+        Ok(average)
+    }
+
+    pub fn calculate_p99_latency_ms<'a>(
+        events: impl Iterator<Item = &'a Event>,
+    ) -> Result<f64, anyhow::Error> {
+        let mut latencies: Vec<f64> = events
+            .filter_map(|event| {
+                event.arrived_at.map(|arrived| {
+                    let arrived_ms = arrived.timestamp_millis() as f64;
+                    let trigger_ms = event.event_id as f64;
+
+                    arrived_ms - trigger_ms
+                })
+            })
+            .collect();
+
+        if latencies.is_empty() {
+            return Err(anyhow::anyhow!(
+                "No events with arrival times found to calculate latency"
+            ));
+        }
+
+        latencies.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+
+        let len = latencies.len();
+        // Nearest-rank method: index of the 99th percentile.
+        let rank = ((0.99 * len as f64).ceil() as usize).clamp(1, len);
+        let index = rank - 1;
+
+        Ok(latencies[index])
+    }
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -467,6 +523,8 @@ impl TcpConnectionDrop {
 #[derive(Debug, Serialize)]
 pub struct Rates {
     pub median_latency_ms: f64,
+    pub average_latency_ms: f64,
+    pub p99_latency_ms: f64,
     pub duplication_rate: f64,
     pub out_of_order_rate: f64,
     pub missing_rate: f64,
