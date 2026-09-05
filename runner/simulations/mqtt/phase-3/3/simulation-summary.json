@@ -1,0 +1,8 @@
+{
+    "protocol": "mqtt",
+    "total_runs": 2,
+    "overall_average_latency_ms": 259656.9525,
+    "closest_run_index": 1,
+    "closest_run_latency_ms": 261471.6119,
+    "target_directory": "simulations/mqtt/phase-3/3/simulation-1"
+}
