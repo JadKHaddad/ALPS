@@ -1,6 +1,0 @@
-[2m2026-09-04T10:20:42.552734Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Starting [3mconfig[0m[2m=[0mConfig { server_results_file: "server-results.json", device_results_file: "device-results.json", duplicate_events_file: "duplicate-events.json", out_of_order_events_file: "out-of-order-events.json", rates_file: "rates-results.json" }
-[2m2026-09-04T10:20:42.588698Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Loaded events [3mserver_count[0m[2m=[0m10000 [3mdevice_count[0m[2m=[0m10000
-[2m2026-09-04T10:20:42.588715Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Checking for duplicates
-[2m2026-09-04T10:20:42.590383Z[0m [33m WARN[0m [2mvalidator[0m[2m:[0m Found duplicated events [3mcount[0m[2m=[0m1 [3mduplicates[0m[2m=[0m[Event { device_id: "35", event_id: 1788517125445, arrived_at: Some(2026-09-04T10:19:08.573708813Z), original: Object {"branch": String("Branch"), "headnumber": String("Headnumber"), "phone": String("35"), "triggertime": String("2026-09-04T10:18:45.445744786Z")} }]
-[2m2026-09-04T10:20:42.590393Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating order
-[2m2026-09-04T10:20:42.591203Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating completeness

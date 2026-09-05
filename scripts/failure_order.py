@@ -203,7 +203,7 @@ ax.legend(handles=legend_handles, fontsize=9)
 
 # ── summary footer ────────────────────────────────────────────────────────────
 summary = (
-    f"Eindutig angekommen: {n_total}  |  "
+    f"Eindeutig angekommen: {n_total}  |  "
     f"Nie angekommen: {n_never_arrived}  |  "
     f"Außer Reihenfolge: {n_ooo} ({100 * n_ooo / max(n_total, 1):.1f}%)"
 )
