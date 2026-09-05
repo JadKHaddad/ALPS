@@ -1,0 +1,29 @@
+2026-09-05 02:26:39,966 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-05 02:26:39,966 - __main__ - INFO - Sending to: http://lps-legacy-proxy-1-1:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-05 02:26:40,010 - uvicorn.error - INFO - Started server process [1]
+2026-09-05 02:26:40,010 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-05 02:26:40,013 - __main__ - INFO - DNS resolved lps-legacy-proxy-1-1 -> 172.19.0.6
+2026-09-05 02:26:40,108 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-05 02:26:40,108 - uvicorn.error - INFO - Application startup complete.
+2026-09-05 02:26:40,109 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-05 02:26:40,217 - __main__ - DEBUG - [MIDDLEWARE_START][device-99-event-0-try-2] Request received at 02:26:40.217
+2026-09-05 02:26:40,218 - __main__ - DEBUG - [MIDDLEWARE_START][device-91-event-0-try-2] Request received at 02:26:40.218
+2026-09-05 02:26:40,222 - __main__ - DEBUG - [ENDPOINT_START][device-99-event-0-try-2] Handler started at 02:26:40.222
+2026-09-05 02:26:40,222 - __main__ - INFO - [rps:0.4|conns:0][device-99-event-0-try-2] Sending message Phone: 99, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-05 02:26:39.665999+00:00 to http://172.19.0.6:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-05 02:26:40,224 - __main__ - DEBUG - [ENDPOINT_START][device-91-event-0-try-2] Handler started at 02:26:40.224
+2026-09-05 02:26:40,224 - __main__ - INFO - [rps:0.4|conns:1][device-91-event-0-try-2] Sending message Phone: 91, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-05 02:26:39.697570+00:00 to http://172.19.0.6:8080/ID_REQ_KC_STORE7D3BPACKET ...
+2026-09-05 02:26:40,287 - __main__ - DEBUG - [device-99-event-0-try-2] Response: 200
+2026-09-05 02:26:40,287 - __main__ - DEBUG - [device-99-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-05 02:26:40,287 - __main__ - INFO - [device-99-event-0-try-2] Successfully send message
+2026-09-05 02:26:40,288 - __main__ - DEBUG - [device-91-event-0-try-2] Response: 200
+2026-09-05 02:26:40,288 - __main__ - DEBUG - [device-91-event-0-try-2] HTTP version: HTTP/1.1
+2026-09-05 02:26:40,288 - __main__ - INFO - [device-91-event-0-try-2] Successfully send message
+2026-09-05 02:26:40,288 - __main__ - DEBUG - [MIDDLEWARE_END][device-99-event-0-try-2] Request completed in 0.072s
+2026-09-05 02:26:40,289 - uvicorn.access - INFO - 172.19.0.7:53510 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-05 02:26:40,289 - __main__ - DEBUG - [MIDDLEWARE_END][device-91-event-0-try-2] Request completed in 0.071s
+2026-09-05 02:26:40,289 - uvicorn.access - INFO - 172.19.0.7:53512 - "POST /api/v1/simple HTTP/1.1" 200
+2026-09-05 02:48:29,256 - uvicorn.error - INFO - Shutting down
+2026-09-05 02:48:29,358 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-05 02:48:29,372 - __main__ - INFO - HTTP client closed
+2026-09-05 02:48:29,373 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-05 02:48:29,373 - uvicorn.error - INFO - Finished server process [1]

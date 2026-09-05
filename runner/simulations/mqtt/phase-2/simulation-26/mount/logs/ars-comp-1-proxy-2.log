@@ -1,0 +1,13 @@
+2026-09-04 22:11:24,932 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-04 22:11:24,933 - __main__ - INFO - Sending to: http://lps-legacy-proxy-1-2:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 22:11:24,989 - uvicorn.error - INFO - Started server process [1]
+2026-09-04 22:11:24,990 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-04 22:11:24,994 - __main__ - INFO - DNS resolved lps-legacy-proxy-1-2 -> 172.19.0.13
+2026-09-04 22:11:25,102 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.19.0.13:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-04 22:11:25,102 - uvicorn.error - INFO - Application startup complete.
+2026-09-04 22:11:25,104 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-04 22:29:12,113 - uvicorn.error - INFO - Shutting down
+2026-09-04 22:29:12,226 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-04 22:29:12,445 - __main__ - INFO - HTTP client closed
+2026-09-04 22:29:12,447 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-04 22:29:12,448 - uvicorn.error - INFO - Finished server process [1]

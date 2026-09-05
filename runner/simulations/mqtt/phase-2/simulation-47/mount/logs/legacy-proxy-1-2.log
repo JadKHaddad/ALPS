@@ -1,0 +1,14 @@
+2026-09-05 05:14:56,644 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-05 05:14:56,644 - __main__ - INFO - MQTT broker configured at lps-hivemq:1883
+2026-09-05 05:14:56,644 - __main__ - INFO - Publishing to topic: proxy1/message
+2026-09-05 05:14:56,682 - uvicorn.error - INFO - Started server process [1]
+2026-09-05 05:14:56,683 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-05 05:14:56,683 - __main__ - INFO - Connecting to MQTT broker at lps-hivemq:1883 using MQTT5
+2026-09-05 05:14:56,714 - __main__ - INFO - Successfully connected to MQTT broker
+2026-09-05 05:14:56,714 - uvicorn.error - INFO - Application startup complete.
+2026-09-05 05:14:56,718 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-05 05:36:30,827 - uvicorn.error - INFO - Shutting down
+2026-09-05 05:36:30,935 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-05 05:36:30,936 - __main__ - INFO - Closing MQTT connection
+2026-09-05 05:36:30,947 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-05 05:36:30,947 - uvicorn.error - INFO - Finished server process [1]

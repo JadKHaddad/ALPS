@@ -14,7 +14,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   ars-comp-1-proxy-1:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -27,7 +27,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   ars-comp-1-proxy-2:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -40,7 +40,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   ars-comp-2-proxy:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -53,7 +53,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   consumer-mqtt-proxy:
     image: jadkhaddad/lps-rs:0.1.0
@@ -62,7 +62,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   consumers-server-proxy:
     image: jadkhaddad/lps-rs:0.1.0
@@ -71,7 +71,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
   device:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-device
@@ -79,7 +79,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
   hivemq:
     image: jadkhaddad/lps-mqtt-hivemq:0.1.0
     container_name: lps-hivemq
@@ -99,7 +99,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   legacy-proxy-1-1:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -114,7 +114,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   legacy-proxy-1-2:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -129,7 +129,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   legacy-proxy-2-0:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -143,7 +143,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   legacy-proxy-2-1:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -157,7 +157,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   legacy-proxy-2-2:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -171,7 +171,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
     restart: unless-stopped
   scripts:
     image: jadkhaddad/lps-scripts:0.1.0
@@ -182,7 +182,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
   server:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server
@@ -194,7 +194,7 @@ services:
     ports:
     - 0.0.0.0:8080:8080
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
   server-server-proxy-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server-server-proxy-0
@@ -202,7 +202,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
   validator:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-validator
@@ -212,4 +212,4 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
+    - /opt/ALPS/runner/simulations/mqtt/phase-2/simulation-17/mount:/app
