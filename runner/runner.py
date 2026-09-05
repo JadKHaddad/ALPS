@@ -60,10 +60,16 @@ def parse_args():
         default=1,
         help="The index to start/resume the simulation from (default: 1)",
     )
+    parser.add_argument(
+        "--log-dir",
+        type=str,
+        default=None,
+        help="Directory to place stdout and stderr logs for each run. (default: suppressed)",
+    )
     return parser.parse_args()
 
 
-def run_simulation(run_index, cwd, base_dir, base_config_file, protocol):
+def run_simulation(run_index, cwd, base_dir, base_config_file, protocol, log_dir):
     """Generates a config for the current run and executes the Docker container."""
     simulation_dir = os.path.join(base_dir, f"simulation-{run_index}")
     run_config_file = os.path.join(base_dir, f"simulation-config-run-{run_index}.yaml")
@@ -77,8 +83,20 @@ def run_simulation(run_index, cwd, base_dir, base_config_file, protocol):
     with open(run_config_file, "w") as f:
         yaml.dump(config, f, default_flow_style=False)
 
+    stdout_target = subprocess.DEVNULL
+    stderr_target = subprocess.DEVNULL
+    log_msg = "(Docker output suppressed)"
+
+    if log_dir:
+        stdout_file = os.path.join(log_dir, f"stdout-run-{run_index}.log")
+        stderr_file = os.path.join(log_dir, f"stderr-run-{run_index}.log")
+        # Open in write mode since each run gets its own unique file
+        stdout_target = open(stdout_file, "w")
+        stderr_target = open(stderr_file, "w")
+        log_msg = f"(Logs saved to {log_dir}/std{{out,err}}-run-{run_index}.log)"
+
     print(
-        f"\n[{run_index}] Starting {protocol.upper()} simulation into directory: {simulation_dir} (Docker output suppressed)..."
+        f"\n[{run_index}] Starting {protocol.upper()} simulation into directory: {simulation_dir} {log_msg}..."
     )
 
     runner_executable = (
@@ -101,9 +119,14 @@ def run_simulation(run_index, cwd, base_dir, base_config_file, protocol):
         cwd,
     ]
 
-    subprocess.run(
-        cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-    )
+    try:
+        subprocess.run(cmd, check=True, stdout=stdout_target, stderr=stderr_target)
+    finally:
+        # Ensure file descriptors are safely closed after the run
+        if stdout_target is not subprocess.DEVNULL:
+            stdout_target.close()
+        if stderr_target is not subprocess.DEVNULL:
+            stderr_target.close()
 
     return simulation_dir, run_config_file
 
@@ -129,6 +152,10 @@ def main():
     # Ensure the base directory exists
     os.makedirs(args.base_dir, exist_ok=True)
 
+    # Ensure the log directory exists if specified
+    if args.log_dir:
+        os.makedirs(args.log_dir, exist_ok=True)
+
     if args.start_index > 1:
         print(f"Resuming from index {args.start_index}. Loading previous run data...")
         for i in range(1, args.start_index):
@@ -143,7 +170,7 @@ def main():
     for i in range(args.start_index, args.max_runs + 1):
         try:
             sim_dir, _ = run_simulation(
-                i, cwd, args.base_dir, args.base_config, args.protocol
+                i, cwd, args.base_dir, args.base_config, args.protocol, args.log_dir
             )
             current_latency = read_latency(sim_dir)
 
