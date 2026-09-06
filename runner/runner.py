@@ -40,7 +40,32 @@ def parse_args():
         "--delta-threshold",
         type=float,
         default=1000.0,
-        help="Acceptable delta in ms for convergence (default: 1000)",
+        help=(
+            "Convergence threshold in ms, applied to the standard error of the "
+            "mean (SEM) of all tracked run latencies (default: 1000). This is "
+            "NOT compared against a single new sample; it reflects how tightly "
+            "the estimate of the true mean has converged."
+        ),
+    )
+    parser.add_argument(
+        "--consecutive-required",
+        type=int,
+        default=3,
+        help=(
+            "Number of consecutive runs where SEM must stay under the "
+            "threshold before declaring convergence (default: 3). Prevents "
+            "stopping on a single lucky/noisy sample."
+        ),
+    )
+    parser.add_argument(
+        "--outlier-zscore",
+        type=float,
+        default=2.0,
+        help=(
+            "If a new run's latency is more than this many standard deviations "
+            "from the mean of prior runs, flag it as an outlier in the logs "
+            "(default: 2.0). Purely informational; does not affect convergence."
+        ),
     )
     parser.add_argument(
         "--max-runs",
@@ -65,6 +90,18 @@ def parse_args():
         type=str,
         default=None,
         help="Directory to place stdout and stderr logs for each run. (default: suppressed)",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help=(
+            "Don't launch any Docker containers. Instead, read latencies from "
+            "already-existing simulation-N directories under --base-dir and run "
+            "the exact same convergence checks against them. Useful for "
+            "re-analyzing a batch of runs you already have on disk, or for "
+            "tuning --delta-threshold / --consecutive-required without paying "
+            "for new simulations."
+        ),
     )
     return parser.parse_args()
 
@@ -144,10 +181,41 @@ def read_latency(simulation_dir):
     return results["average_latency_ms"]
 
 
+def compute_stats(latencies):
+    """Returns (mean, stdev, sem) for a list of latencies.
+
+    stdev/sem are 0.0 / inf respectively when there isn't enough data to
+    compute a sample standard deviation.
+    """
+    n = len(latencies)
+    mean = statistics.mean(latencies)
+    stdev = statistics.stdev(latencies) if n > 1 else 0.0
+    sem = (stdev / (n**0.5)) if n > 1 else float("inf")
+    return mean, stdev, sem
+
+
+def check_outlier(current_latency, past_latencies, zscore_threshold):
+    """Flags (prints a warning about) current_latency if it's far from the
+    distribution of past_latencies. Purely informational."""
+    if len(past_latencies) < 2:
+        return
+    mean, stdev, _ = compute_stats(past_latencies)
+    if stdev == 0:
+        return
+    z = abs(current_latency - mean) / stdev
+    if z > zscore_threshold:
+        print(
+            f"  ⚠ Outlier warning: this run is {z:.2f} std devs from the prior "
+            f"mean ({mean:.2f} ms, stdev {stdev:.2f} ms). Consider investigating "
+            f"this run rather than letting it feed the convergence average."
+        )
+
+
 def main():
     args = parse_args()
     cwd = os.getcwd()
     run_data = []  # Will store tuples of (run_index, latency)
+    consecutive_converged = 0
 
     # Ensure the base directory exists
     os.makedirs(args.base_dir, exist_ok=True)
@@ -167,35 +235,77 @@ def main():
             except FileNotFoundError:
                 print(f"  Warning: No prior data found for run {i} at {sim_dir}")
 
+    if args.dry_run:
+        print(
+            f"\n[DRY RUN] Skipping Docker execution. Reading existing simulation "
+            f"directories under '{args.base_dir}' instead.\n"
+        )
+
     for i in range(args.start_index, args.max_runs + 1):
         try:
-            sim_dir, _ = run_simulation(
-                i, cwd, args.base_dir, args.base_config, args.protocol, args.log_dir
-            )
-            current_latency = read_latency(sim_dir)
+            if args.dry_run:
+                sim_dir = os.path.join(args.base_dir, f"simulation-{i}")
+                try:
+                    current_latency = read_latency(sim_dir)
+                except FileNotFoundError:
+                    print(
+                        f"[DRY RUN] No results found for run {i} at {sim_dir} "
+                        "(stopping here; this is likely the end of your existing runs)."
+                    )
+                    break
+                print(
+                    f"[{i}] Loaded existing result from {sim_dir}. "
+                    f"Average Latency: {current_latency} ms"
+                )
+            else:
+                sim_dir, _ = run_simulation(
+                    i, cwd, args.base_dir, args.base_config, args.protocol, args.log_dir
+                )
+                current_latency = read_latency(sim_dir)
 
-            print(f"[{i}] Run complete. Average Latency: {current_latency} ms")
+                print(f"[{i}] Run complete. Average Latency: {current_latency} ms")
 
             past_latencies = [data[1] for data in run_data]
 
-            run_data.append((i, current_latency))
+            # Informational only: flag runs that look statistically unusual
+            # compared to everything seen so far, so you can investigate
+            # bimodal/anomalous behavior instead of averaging over it.
+            check_outlier(current_latency, past_latencies, args.outlier_zscore)
 
-            if len(past_latencies) >= args.initial_runs:
-                baseline_average = statistics.mean(past_latencies)
-                diff = abs(current_latency - baseline_average)
+            run_data.append((i, current_latency))
+            all_latencies = [data[1] for data in run_data]
+
+            if len(all_latencies) >= args.initial_runs:
+                mean, stdev, sem = compute_stats(all_latencies)
 
                 print(
-                    f"[{i}] Checking convergence: |{current_latency} - {baseline_average}| = {diff:.2f} ms"
+                    f"[{i}] Checking convergence: mean={mean:.2f} ms, "
+                    f"stdev={stdev:.2f} ms, SEM={sem:.2f} ms "
+                    f"(threshold {args.delta_threshold} ms)"
                 )
 
-                if diff <= args.delta_threshold:
+                if sem <= args.delta_threshold:
+                    consecutive_converged += 1
                     print(
-                        f"\nConvergence reached! The latency difference ({diff:.2f} ms) is under the threshold of {args.delta_threshold} ms."
+                        f"  SEM under threshold ({consecutive_converged}/"
+                        f"{args.consecutive_required} consecutive runs)."
                     )
-                    break
+                    if consecutive_converged >= args.consecutive_required:
+                        print(
+                            f"\nConvergence reached! SEM ({sem:.2f} ms) has stayed "
+                            f"under the threshold of {args.delta_threshold} ms for "
+                            f"{args.consecutive_required} consecutive runs."
+                        )
+                        break
                 else:
+                    if consecutive_converged > 0:
+                        print(
+                            "  SEM back above threshold; resetting consecutive count."
+                        )
+                    consecutive_converged = 0
                     print(
-                        f"Difference ({diff:.2f} ms) > {args.delta_threshold} ms. Continuing simulations..."
+                        f"SEM ({sem:.2f} ms) > {args.delta_threshold} ms. "
+                        "Continuing simulations..."
                     )
 
         except subprocess.CalledProcessError:
@@ -208,6 +318,14 @@ def main():
     if run_data:
         all_latencies = [data[1] for data in run_data]
         overall_average = statistics.mean(all_latencies)
+        overall_stdev = (
+            statistics.stdev(all_latencies) if len(all_latencies) > 1 else 0.0
+        )
+        overall_sem = (
+            overall_stdev / (len(all_latencies) ** 0.5)
+            if len(all_latencies) > 1
+            else float("inf")
+        )
 
         best_run = min(run_data, key=lambda x: abs(x[1] - overall_average))
         best_index = best_run[0]
@@ -215,21 +333,24 @@ def main():
         best_dir = os.path.join(args.base_dir, f"simulation-{best_index}")
 
         print("\n" + "=" * 50)
-        print("SIMULATION SUMMARY")
+        print("SIMULATION SUMMARY" + (" (DRY RUN)" if args.dry_run else ""))
         print("=" * 50)
         print(f"Protocol: {args.protocol.upper()}")
         print(f"Total runs tracked: {len(run_data)}")
-        print(
-            f"Overall Average Latency (avg of all run averages): {overall_average:.2f} ms"
-        )
+        print(f"Overall Average Latency: {overall_average:.2f} ms")
+        print(f"Overall Stdev: {overall_stdev:.2f} ms")
+        print(f"Overall SEM: {overall_sem:.2f} ms")
         print(f"Closest run to overall average: Run {best_index} ({best_latency} ms)")
         print(f"Use directory: {best_dir} for your plots.")
         print("=" * 50)
 
         summary_data = {
             "protocol": args.protocol,
+            "dry_run": args.dry_run,
             "total_runs": len(run_data),
             "overall_average_latency_ms": overall_average,
+            "overall_stdev_latency_ms": overall_stdev,
+            "overall_sem_latency_ms": overall_sem,
             "closest_run_index": best_index,
             "closest_run_latency_ms": best_latency,
             "target_directory": best_dir,
