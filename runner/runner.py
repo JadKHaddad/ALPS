@@ -29,10 +29,10 @@ def parse_args():
         help="Base directory to place simulation outputs and configs (default: current directory)",
     )
     parser.add_argument(
-        "--max-runs",
+        "--runs",
         type=int,
         default=50,
-        help="Failsafe to prevent infinite loops (default: 50)",
+        help="Number of simulation runs to perform (default: 50)",
     )
     parser.add_argument(
         "--start-index",
@@ -125,7 +125,7 @@ def main():
     if args.start_index > 1:
         print(f"Resuming from index {args.start_index}...")
 
-    for i in range(args.start_index, args.max_runs + 1):
+    for i in range(args.start_index, args.runs + 1):
         try:
             _ = run_simulation(
                 i, cwd, args.base_dir, args.base_config, args.protocol, args.log_dir
@@ -146,4 +146,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-# python3 runner.py --protocol "amqp" --max-runs 10 --base-dir "simulation" --base-config "dev-simulation-config.yaml" --log-dir "simulation/logs"
+# python3 runner.py --protocol "amqp" --runs 10 --base-dir "simulation" --base-config "dev-simulation-config.yaml" --log-dir "simulation/logs"

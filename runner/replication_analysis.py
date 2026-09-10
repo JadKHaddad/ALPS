@@ -38,8 +38,6 @@ For each requested metric, the script:
 It also always computes a representative run: the run whose value for
 --representative-metric is closest to the overall mean of that metric.
 
-Results (per-metric stats + representative run) are always written to a
-JSON file (default: <dir>/replication_analysis.json, override with --json).
 
 Usage:
     python replication_analysis.py --dir /path/to/folder \
@@ -320,8 +318,7 @@ def main():
     parser.add_argument(
         "--json",
         default=None,
-        help="Optional path to write the full results + representative run as "
-        "JSON. Not written unless this is set.",
+        help="Optional path to write the full results + representative run as JSON",
     )
     args = parser.parse_args()
 
@@ -358,7 +355,6 @@ def main():
             values.append(float(val))
         results.append(analyze_metric(metric, values, args.confidence, args.precision))
 
-    # Representative run is always computed, regardless of --metrics.
     representative = pick_representative_run(runs, args.representative_metric)
 
     print_report(results, args.confidence, representative)
@@ -377,6 +373,11 @@ if __name__ == "__main__":
 # python3 replication_analysis.py --dir simulations/amqp/phase-1/2 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-1/2/summary.json
 # python3 replication_analysis.py --dir simulations/mqtt/phase-1 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-1/summary.json
 
+# needs run again
 # python3 replication_analysis.py --dir simulations/amqp/phase-2/1 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-2/1/summary.json --metrics duplication_rate,out_of_order_rate
+
+# needs run again
 # python3 replication_analysis.py --dir simulations/amqp/phase-2/2 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-2/2/summary.json --metrics duplication_rate,out_of_order_rate
-# python3 replication_analysis.py --dir simulations/mqtt/phase-2/1 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-2/1/summary.json --metrics duplication_rate,out_of_order_rate
+
+# needs 3 more
+# python3 replication_analysis.py --dir simulations/mqtt/phase-2/1 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-2/1/summary.json --metrics duplication_rate,out_of_order_rate --representative-metric duplication_rate
