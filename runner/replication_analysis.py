@@ -396,5 +396,8 @@ if __name__ == "__main__":
 
 # python3 replication_analysis.py --dir simulations/amqp/phase-1/1 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-1/1/summary.json
 # python3 replication_analysis.py --dir simulations/amqp/phase-1/2 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-1/2/summary.json
-
 # python3 replication_analysis.py --dir simulations/mqtt/phase-1 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-1/summary.json
+
+# python3 replication_analysis.py --dir simulations/amqp/phase-2/1 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-2/1/summary.json --metrics duplication_rate,out_of_order_rate
+# python3 replication_analysis.py --dir simulations/amqp/phase-2/2 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-2/2/summary.json --metrics duplication_rate,out_of_order_rate
+# python3 replication_analysis.py --dir simulations/mqtt/phase-2/1 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-2/1/summary.json --metrics duplication_rate,out_of_order_rate

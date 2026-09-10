@@ -13,11 +13,12 @@ devices:
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
-  failure_rate: 0.0
+  failure_rate: 0.1
   max_work_duration: 25ms
   max_response_duration: 25ms
   shutdown_after_idle_duration: 120s
   server_count: 1
+  deduplication: True
 
 amqp:
   queues_count: 3
