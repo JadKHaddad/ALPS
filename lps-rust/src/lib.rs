@@ -528,6 +528,11 @@ pub struct Rates {
     pub duplication_rate: f64,
     pub out_of_order_rate: f64,
     pub missing_rate: f64,
+    pub total_events: usize,
+    pub unique_events: usize,
+    pub duplicate_events: usize,
+    pub out_of_order_events: usize,
+    pub missing_events: usize,
 }
 
 #[cfg(test)]

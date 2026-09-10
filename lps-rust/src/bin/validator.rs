@@ -123,6 +123,15 @@ fn main() -> Result<(), anyhow::Error> {
         Err(ref err) => err.missing.len() as f64 / device_events.len() as f64,
     };
 
+    let total_events: usize = server_events.len();
+    let unique_events: usize = unique_count;
+    let duplicate_events: usize = duplicates.len();
+    let out_of_order_events: usize = order_violations.len();
+    let missing_events: usize = match completeness_result {
+        Ok(_) => 0,
+        Err(ref err) => err.missing.len(),
+    };
+
     let results = Rates {
         median_latency_ms,
         average_latency_ms,
@@ -130,6 +139,11 @@ fn main() -> Result<(), anyhow::Error> {
         duplication_rate,
         out_of_order_rate,
         missing_rate,
+        total_events,
+        unique_events,
+        duplicate_events,
+        out_of_order_events,
+        missing_events,
     };
 
     std::fs::write(
