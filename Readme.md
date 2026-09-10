@@ -4,7 +4,9 @@
 ## Build the retry extension
 
 ```bash
-./legacy-proxy-system/hivemq/build_retry_extension.sh
+cd /legacy-proxy-system/hivemq
+
+build_retry_extension.sh
 ```
 
 ```bash
