@@ -1,0 +1,26 @@
+amqp:
+  consumers:
+    consumers_count: 3
+    reconnect_duration: 500ms
+  producers:
+    producers_count: 3
+    socket_addr: 0.0.0.0:5672
+  queues_count: 3
+devices:
+  devices_count: 100
+  max_event_interval: 250ms
+  max_events: 50
+  retry_duration: 250ms
+lps_gleam_image: jadkhaddad/lps-gleam:0.1.0
+lps_rust_image: jadkhaddad/lps-rs:0.1.0
+lps_scripts_image: jadkhaddad/lps-scripts:0.1.0
+server:
+  expose_socket_addr: 0.0.0.0:8080
+  failure_rate: 0.0
+  max_response_duration: 25ms
+  max_work_duration: 25ms
+  server_count: 1
+  shutdown_after_idle_duration: 120s
+  socket_addr: 0.0.0.0:8080
+simulation_dir: simulations/amqp/phase-1/2/simulation-7
+simulation_docker_network: lps-simulation-net
