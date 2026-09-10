@@ -126,6 +126,8 @@ def main():
         print(f"Resuming from index {args.start_index}...")
 
     for i in range(args.start_index, args.runs + 1):
+        print(f"Running simulation {i}/{args.runs}...")
+
         try:
             _ = run_simulation(
                 i, cwd, args.base_dir, args.base_config, args.protocol, args.log_dir
