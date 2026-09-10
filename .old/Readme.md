@@ -1,1 +1,0 @@
-We ran the simulations based on median latency, the new runs should run based on average latency.

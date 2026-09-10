@@ -1,8 +1,0 @@
-{
-    "protocol": "amqp",
-    "total_runs": 6,
-    "overall_average_latency_ms": 2580.2124999999996,
-    "closest_run_index": 3,
-    "closest_run_latency_ms": 2574.8174,
-    "target_directory": "simulations/amqp/phase-2/2/simulation-3"
-}
