@@ -5,17 +5,17 @@
 # python3 runner.py --protocol "amqp" --runs 10 --base-dir "simulations/amqp/phase-1/2" --base-config "simulations/amqp/phase-1/2/simulation-config.yaml" --log-dir "simulations/amqp/phase-1/2/logs"
 
 # MQTT
-# python3 runner.py --protocol "mqtt" --runs 10 --base-dir "simulations/mqtt/phase-1" --base-config "simulations/mqtt/phase-1/simulation-config.yaml" --log-dir "simulations/mqtt/phase-1/logs"
+python3 runner.py --protocol "mqtt" --runs 10 --base-dir "simulations/mqtt/phase-1" --base-config "simulations/mqtt/phase-1/simulation-config.yaml" --log-dir "simulations/mqtt/phase-1/logs"
 
 # Phase 2
-
-# MQTT
-python3 runner.py --protocol "mqtt" --start-index 11 --runs 13 --base-dir "simulations/mqtt/phase-2/1" --base-config "simulations/mqtt/phase-2/1/simulation-config.yaml" --log-dir "simulations/mqtt/phase-2/1/logs"
-# python3 runner.py --protocol "mqtt" --runs 10 --base-dir "simulations/mqtt/phase-2/2" --base-config "simulations/mqtt/phase-2/2/simulation-config.yaml" --log-dir "simulations/mqtt/phase-2/2/logs"
 
 # AMQP
 python3 runner.py --protocol "amqp" --runs 10 --base-dir "simulations/amqp/phase-2/1" --base-config "simulations/amqp/phase-2/1/simulation-config.yaml" --log-dir "simulations/amqp/phase-2/1/logs"
 python3 runner.py --protocol "amqp" --runs 10 --base-dir "simulations/amqp/phase-2/2" --base-config "simulations/amqp/phase-2/2/simulation-config.yaml" --log-dir "simulations/amqp/phase-2/2/logs"
+
+# MQTT
+python3 runner.py --protocol "mqtt" --runs 10 --base-dir "simulations/mqtt/phase-2/1" --base-config "simulations/mqtt/phase-2/1/simulation-config.yaml" --log-dir "simulations/mqtt/phase-2/1/logs"
+python3 runner.py --protocol "mqtt" --runs 10 --base-dir "simulations/mqtt/phase-2/2" --base-config "simulations/mqtt/phase-2/2/simulation-config.yaml" --log-dir "simulations/mqtt/phase-2/2/logs"
 
 # Phase 3
 
