@@ -42,15 +42,9 @@ Results (per-metric stats + representative run) are always written to a
 JSON file (default: <dir>/replication_analysis.json, override with --json).
 
 Usage:
-    python replication_analysis.py --dir /path/to/folder
     python replication_analysis.py --dir /path/to/folder \
         --metrics average_latency_ms,p99_latency_ms \
         --confidence 0.95 --precision 0.10
-    python replication_analysis.py --dir /path/to/folder --list-metrics
-    python replication_analysis.py --dir /path/to/folder --json out.json
-    python replication_analysis.py --dir /path/to/folder --csv out.csv
-    python replication_analysis.py --dir /path/to/folder \
-        --representative-metric average_latency_ms
 """
 
 import argparse
@@ -319,11 +313,6 @@ def main():
         help="Metric used to pick the representative run (closest to the mean)",
     )
     parser.add_argument(
-        "--list-metrics",
-        action="store_true",
-        help="Just print the numeric fields found in the first run's JSON and exit",
-    )
-    parser.add_argument(
         "--csv",
         default=None,
         help="Optional path to also write per-metric results as CSV",
@@ -348,16 +337,6 @@ def main():
 
     run_names = [name for name, _ in runs]
     print(f"Found {len(runs)} run(s): {', '.join(run_names)}")
-
-    if args.list_metrics:
-        _, sample_data = runs[0]
-        numeric_fields = [
-            k for k, v in sample_data.items() if isinstance(v, (int, float))
-        ]
-        print("Numeric fields available:")
-        for field in numeric_fields:
-            print(f"  - {field}")
-        return
 
     metrics = [m.strip() for m in args.metrics.split(",") if m.strip()]
 
