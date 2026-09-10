@@ -381,3 +381,4 @@ if __name__ == "__main__":
 
 # needs 3 more
 # python3 replication_analysis.py --dir simulations/mqtt/phase-2/1 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-2/1/summary.json --metrics duplication_rate,out_of_order_rate --representative-metric duplication_rate
+# python3 replication_analysis.py --dir simulations/mqtt/phase-2/2 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-2/2/summary.json --metrics duplication_rate,out_of_order_rate --representative-metric duplication_rate

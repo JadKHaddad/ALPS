@@ -1,0 +1,96 @@
+{
+  "run_dir": "simulations/mqtt/phase-2/2",
+  "pattern": "simulation-*",
+  "json_path": "mount/rates-results.json",
+  "confidence": 0.95,
+  "target_precision": 0.1,
+  "runs": [
+    "simulation-1",
+    "simulation-10",
+    "simulation-2",
+    "simulation-3",
+    "simulation-4",
+    "simulation-5",
+    "simulation-6",
+    "simulation-7",
+    "simulation-8",
+    "simulation-9"
+  ],
+  "n_runs": 10,
+  "metrics": [
+    {
+      "metric": "duplication_rate",
+      "n": 10,
+      "values": [
+        0.6619125036949454,
+        0.5804450930317402,
+        0.5883622627934166,
+        0.5601429848078642,
+        0.47384514579010595,
+        0.5588314606741573,
+        0.57834373418789,
+        0.5470554819163037,
+        0.502200335289187,
+        0.599011939069576
+      ],
+      "mean": 0.5650150941255186,
+      "stdev": 0.0517986455143576,
+      "t_value": 2.262157162798205,
+      "half_width": 0.0370545187886221,
+      "ci_low": 0.5279605753368966,
+      "ci_high": 0.6020696129141407,
+      "r_achieved": 0.06558146706854243,
+      "r_target": 0.1,
+      "sufficient": true,
+      "n_required": 10,
+      "additional_runs_needed": 0
+    },
+    {
+      "metric": "out_of_order_rate",
+      "n": 10,
+      "values": [
+        0.08765027322404371,
+        0.1082608695652174,
+        0.0978807078872624,
+        0.12007314099959367,
+        0.09277708592777086,
+        0.10880195599022005,
+        0.0908,
+        0.09594481605351171,
+        0.11997474215954536,
+        0.08583162217659138
+      ],
+      "mean": 0.10079952139837565,
+      "stdev": 0.012702801308171665,
+      "t_value": 2.262157162798205,
+      "half_width": 0.009087036640973793,
+      "ci_low": 0.09171248475740186,
+      "ci_high": 0.10988655803934945,
+      "r_achieved": 0.09014960105872315,
+      "r_target": 0.1,
+      "sufficient": true,
+      "n_required": 10,
+      "additional_runs_needed": 0
+    }
+  ],
+  "representative": {
+    "representative_metric": "duplication_rate",
+    "representative_run": "simulation-3",
+    "representative_value": 0.5601429848078642,
+    "overall_mean": 0.5650150941255185,
+    "abs_diff_from_mean": 0.004872109317654361,
+    "rel_diff_from_mean_pct": 0.8622971967138311,
+    "all_run_values": {
+      "simulation-1": 0.6619125036949454,
+      "simulation-10": 0.5804450930317402,
+      "simulation-2": 0.5883622627934166,
+      "simulation-3": 0.5601429848078642,
+      "simulation-4": 0.47384514579010595,
+      "simulation-5": 0.5588314606741573,
+      "simulation-6": 0.57834373418789,
+      "simulation-7": 0.5470554819163037,
+      "simulation-8": 0.502200335289187,
+      "simulation-9": 0.599011939069576
+    }
+  }
+}
