@@ -6,10 +6,10 @@ lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 lps_mqtt_hivemq_image: "jadkhaddad/lps-mqtt-hivemq:0.1.0"
 devices:
-  devices_count: 25
+  devices_count: 10
   max_event_interval: 500ms
   retry_duration: 500ms
-  max_events: 25
+  max_events: 10
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080 # Optional, if set, the server will expose its socket on this address. If not set, it will be exposed on the same port as socket_addr.
@@ -23,7 +23,7 @@ mqtt:
   producers:
     producers_count: 3
   consumers:
-    consumers_count: 3
+    consumers_count: 1
     mqtt_proxy: # Optional, if not set, the consumer will connect directly to hivemq
       socket_addr: 0.0.0.0:9090
       failure_rate: 0.1

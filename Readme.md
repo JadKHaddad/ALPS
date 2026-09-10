@@ -1,6 +1,12 @@
 
 # ALPS - Advanced Legacy Proxy System
 
+## Build the retry extension
+
+```bash
+./legacy-proxy-system/hivemq/build_retry_extension.sh
+```
+
 ```bash
 docker build -t jadkhaddad/lps-rs:0.1.0 -f lps-rust/Dockerfile lps-rust
 docker build -t jadkhaddad/lps-gleam:0.1.0 -f lps-gleam/lps_3/Dockerfile lps-gleam/lps_3

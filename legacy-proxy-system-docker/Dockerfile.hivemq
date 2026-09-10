@@ -1,10 +1,12 @@
 FROM hivemq/hivemq-ce:2025.5
 
 COPY hivemq/hivemq_broker/conf/config.xml /opt/hivemq/conf/config.xml
-COPY hivemq/hivemq_broker/extensions/* /tmp/custom-extensions
+COPY --chown=hivemq:hivemq hivemq/hivemq_broker/extensions/retry-priority-extension /opt/hivemq/extensions/retry-priority-extension
 
 EXPOSE 1883 8080
 
-# docker build -t jadkhaddad/lps-mqtt-hivemq:0.0.1 -f Dockerfile.hivemq ../legacy-proxy-system/
+# docker build -t jadkhaddad/lps-mqtt-hivemq:0.1.0 -f Dockerfile.hivemq ../legacy-proxy-system/
 
-# docker push jadkhaddad/lps-mqtt-hivemq:0.0.1
+# docker push jadkhaddad/lps-mqtt-hivemq:0.1.0
+
+# docker run --rm -it jadkhaddad/lps-mqtt-hivemq:0.1.0 
