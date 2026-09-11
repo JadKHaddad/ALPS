@@ -1,5 +1,5 @@
 {
-  "run_dir": "simulations/mqtt/phase-2/1",
+  "run_dir": "simulations/mqtt/phase-2/1/c",
   "pattern": "simulation-*",
   "json_path": "mount/rates-results.json",
   "confidence": 0.95,

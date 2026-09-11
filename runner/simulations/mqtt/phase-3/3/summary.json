@@ -1,0 +1,98 @@
+{
+  "run_dir": "simulations/mqtt/phase-3/3",
+  "pattern": "simulation-*",
+  "json_path": "mount/rates-results.json",
+  "confidence": 0.95,
+  "target_precision": 0.1,
+  "runs": [
+    "simulation-1",
+    "simulation-2",
+    "simulation-3",
+    "simulation-4",
+    "simulation-5"
+  ],
+  "n_runs": 5,
+  "metrics": [
+    {
+      "metric": "average_latency_ms",
+      "n": 5,
+      "values": [
+        67043.1344,
+        70086.087,
+        25210.759,
+        65776.546,
+        68342.2466
+      ],
+      "mean": 59291.7546,
+      "stdev": 19118.575305160262,
+      "t_value": 2.7764451051977934,
+      "half_width": 23738.84665336504,
+      "ci_low": 35552.907946634965,
+      "ci_high": 83030.60125336504,
+      "r_achieved": 0.40037348891957125,
+      "r_target": 0.1,
+      "sufficient": false,
+      "n_required": 81,
+      "additional_runs_needed": 76
+    },
+    {
+      "metric": "p99_latency_ms",
+      "n": 5,
+      "values": [
+        132607.0,
+        136208.0,
+        45368.0,
+        130675.0,
+        132831.0
+      ],
+      "mean": 115537.8,
+      "stdev": 39276.59983628929,
+      "t_value": 2.7764451051977934,
+      "half_width": 48768.33998857627,
+      "ci_low": 66769.46001142374,
+      "ci_high": 164306.13998857627,
+      "r_achieved": 0.4220985685081096,
+      "r_target": 0.1,
+      "sufficient": false,
+      "n_required": 90,
+      "additional_runs_needed": 85
+    },
+    {
+      "metric": "median_latency_ms",
+      "n": 5,
+      "values": [
+        66741.0,
+        70483.0,
+        25851.0,
+        65078.0,
+        68708.5
+      ],
+      "mean": 59372.3,
+      "stdev": 18849.022460064076,
+      "t_value": 2.7764451051977934,
+      "half_width": 23404.15258999571,
+      "ci_low": 35968.1474100043,
+      "ci_high": 82776.45258999571,
+      "r_achieved": 0.39419312692948916,
+      "r_target": 0.1,
+      "sufficient": false,
+      "n_required": 78,
+      "additional_runs_needed": 73
+    }
+  ],
+  "representative": {
+    "representative_metric": "average_latency_ms",
+    "representative_run": "simulation-4",
+    "representative_value": 65776.546,
+    "overall_mean": 59291.7546,
+    "abs_diff_from_mean": 6484.791400000002,
+    "rel_diff_from_mean_pct": 10.937088038207596,
+    "all_run_values": {
+      "simulation-1": 67043.1344,
+      "simulation-2": 70086.087,
+      "simulation-3": 25210.759,
+      "simulation-4": 65776.546,
+      "simulation-5": 68342.2466
+    }
+  }
+}

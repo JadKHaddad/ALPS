@@ -3,7 +3,7 @@
   "pattern": "simulation-*",
   "json_path": "mount/rates-results.json",
   "confidence": 0.95,
-  "target_precision": 0.1,
+  "target_precision": 0.2,
   "runs": [
     "simulation-1",
     "simulation-2",
@@ -30,10 +30,10 @@
       "ci_low": 34640.54387411161,
       "ci_high": 83378.0413258884,
       "r_achieved": 0.4129645967979015,
-      "r_target": 0.1,
+      "r_target": 0.2,
       "sufficient": false,
-      "n_required": 86,
-      "additional_runs_needed": 81
+      "n_required": 22,
+      "additional_runs_needed": 17
     },
     {
       "metric": "p99_latency_ms",
@@ -52,10 +52,10 @@
       "ci_low": 66263.97314386393,
       "ci_high": 164010.82685613606,
       "r_achieved": 0.4244791601698151,
-      "r_target": 0.1,
+      "r_target": 0.2,
       "sufficient": false,
-      "n_required": 91,
-      "additional_runs_needed": 86
+      "n_required": 23,
+      "additional_runs_needed": 18
     },
     {
       "metric": "median_latency_ms",
@@ -74,10 +74,10 @@
       "ci_low": 35055.06375553018,
       "ci_high": 83141.13624446982,
       "r_achieved": 0.4068326434262661,
-      "r_target": 0.1,
+      "r_target": 0.2,
       "sufficient": false,
-      "n_required": 83,
-      "additional_runs_needed": 78
+      "n_required": 21,
+      "additional_runs_needed": 16
     }
   ],
   "representative": {
