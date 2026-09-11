@@ -14,6 +14,19 @@ pub struct DockerNetwork {
     pub name: String,
 }
 
+#[derive(Debug, Serialize)]
+pub struct DependsOnCondition {
+    pub condition: DependsOnConditionKind,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DependsOnConditionKind {
+    ServiceStarted,
+    ServiceHealthy,
+    ServiceCompletedSuccessfully,
+}
+
 #[derive(Default, Debug, Serialize)]
 pub struct DockerService {
     pub image: String,
@@ -32,6 +45,10 @@ pub struct DockerService {
     pub volumes: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub restart: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub user: Option<String>,
+    #[serde(skip_serializing_if = "BTreeMap::is_empty")]
+    pub depends_on: BTreeMap<String, DependsOnCondition>,
 }
 
 impl DockerService {
@@ -82,6 +99,31 @@ impl DockerService {
 
     pub fn with_networks(mut self, networks: Vec<String>) -> Self {
         self.networks = networks;
+        self
+    }
+
+    pub fn with_user(mut self, user: String) -> Self {
+        self.user = Some(user);
+        self
+    }
+
+    pub fn with_depends_on(
+        mut self,
+        service_key: String,
+        condition: DependsOnConditionKind,
+    ) -> Self {
+        self.depends_on
+            .insert(service_key, DependsOnCondition { condition });
+        self
+    }
+
+    pub fn with_depends_on_completed(mut self, service_key: String) -> Self {
+        self.depends_on.insert(
+            service_key,
+            DependsOnCondition {
+                condition: DependsOnConditionKind::ServiceCompletedSuccessfully,
+            },
+        );
         self
     }
 }

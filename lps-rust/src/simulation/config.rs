@@ -111,9 +111,8 @@ impl Config {
         String::from("mount")
     }
 
-    fn volume_mount(&self) -> String {
-        let host_volume = self
-            .root_abs_path
+    fn abs_host_volume(&self) -> String {
+        self.root_abs_path
             .as_ref()
             .map(|path| {
                 path.join(&self.simulation_dir)
@@ -121,7 +120,12 @@ impl Config {
                     .display()
                     .to_string()
             })
-            .unwrap_or_else(|| format!("./{}", self.host_volume()));
+            .unwrap_or_else(|| format!("./{}", self.host_volume()))
+    }
+
+    /// Mounts the `host-volume:/app`
+    fn container_work_dir_volume_mount(&self) -> String {
+        let host_volume = self.abs_host_volume();
 
         format!("{}:{}", host_volume, self.container_work_dir())
     }
@@ -447,7 +451,7 @@ impl Config {
             .with_image(self.lps_rust_image_name())
             .with_container_name(self.server_container_name())
             .with_command(format!("server --config-file {config_file}"))
-            .with_volumes(vec![self.volume_mount()])
+            .with_volumes(vec![self.container_work_dir_volume_mount()])
             .with_ports(ports)
             .with_networks(vec![self.service_network_name()])
             .with_environment([(String::from("RUST_LOG"), String::from("server=debug"))].into());
@@ -464,7 +468,7 @@ impl Config {
             .with_image(self.lps_rust_image_name())
             .with_container_name(self.consumers_server_proxy_container_name())
             .with_command(format!("server-proxy --config-file {config_file}"))
-            .with_volumes(vec![self.volume_mount()])
+            .with_volumes(vec![self.container_work_dir_volume_mount()])
             .with_networks(vec![self.service_network_name()]);
 
         services.insert(String::from("consumers-server-proxy"), service);
@@ -480,7 +484,7 @@ impl Config {
                 .with_image(self.lps_rust_image_name())
                 .with_container_name(format!("lps-server-server-proxy-{i}"))
                 .with_command(format!("server-proxy --config-file {config_file}"))
-                .with_volumes(vec![self.volume_mount()])
+                .with_volumes(vec![self.container_work_dir_volume_mount()])
                 .with_networks(vec![self.service_network_name()]);
 
             services.insert(format!("server-server-proxy-{i}"), service);
@@ -522,7 +526,7 @@ impl Config {
                         )]
                         .into(),
                     )
-                    .with_volumes(vec![self.volume_mount()])
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()]);
 
                 services.insert(format!("deduplication-{i}"), service);
@@ -542,7 +546,7 @@ impl Config {
             .with_image(self.lps_rust_image_name())
             .with_container_name(String::from("lps-device"))
             .with_command(format!("device --config-file {config_file}"))
-            .with_volumes(vec![self.volume_mount()])
+            .with_volumes(vec![self.container_work_dir_volume_mount()])
             .with_networks(vec![self.service_network_name()])
     }
 
@@ -561,7 +565,7 @@ impl Config {
                     .with_image(self.lps_rust_image_name())
                     .with_container_name(format!("lps-producer-{i}"))
                     .with_command(format!("producer --config-file {config_file}"))
-                    .with_volumes(vec![self.volume_mount()])
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
@@ -585,7 +589,7 @@ impl Config {
                             .join("consumer-amqp-proxy-config.yaml")
                             .display()
                     ))
-                    .with_volumes(vec![self.volume_mount()])
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
@@ -603,7 +607,7 @@ impl Config {
                     .with_image(self.lps_rust_image_name())
                     .with_container_name(format!("lps-consumer-{i}"))
                     .with_command(format!("consumer --config-file {config_file}"))
-                    .with_volumes(vec![self.volume_mount()])
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
@@ -624,7 +628,7 @@ impl Config {
             .with_command(format!(
                 "sh -c \"validator --config-file {config_file} > /app/validator.log 2>&1\""
             ))
-            .with_volumes(vec![self.volume_mount()])
+            .with_volumes(vec![self.container_work_dir_volume_mount()])
             .with_networks(vec![self.service_network_name()])
             .with_manual_profile()
     }
@@ -641,7 +645,7 @@ impl Config {
     device   = self.device_results_file(),
     failures = self.server_failures_file(),
 ))
-            .with_volumes(vec![self.volume_mount()])
+            .with_volumes(vec![self.container_work_dir_volume_mount()])
             .with_networks(vec![self.service_network_name()])
             .with_manual_profile()
     }
@@ -883,12 +887,43 @@ impl Config {
         self.hive_mq_container_port_u16().to_string()
     }
 
+    /// Mounts the `host-volume/hivemq/log:/opt/hivemq/log`
+    fn hive_mq_log_dir_volume_mount(&self) -> String {
+        let host_volume = self.abs_host_volume();
+
+        format!("{}/hivemq/log:{}", host_volume, self.hive_mq_log_dir())
+    }
+
+    fn hive_mq_log_dir(&self) -> String {
+        String::from("/opt/hivemq/log")
+    }
+
+    fn hive_mq_log_init_container_name(&self) -> String {
+        String::from("lps-hivemq-log-init")
+    }
+
+    fn hive_mq_log_init_docker_service(&self) -> DockerService {
+        DockerService::default()
+            .with_image(String::from("busybox:latest"))
+            .with_container_name(self.hive_mq_log_init_container_name())
+            .with_command(format!("sh -c \"mkdir -p {}\"", self.hive_mq_log_dir()))
+            .with_volumes(vec![self.hive_mq_log_dir_volume_mount()])
+            .with_networks(vec![self.service_network_name()])
+    }
+
     fn hive_mq_docker_service(&self) -> DockerService {
         DockerService::default()
             .with_image(self.lps_mqtt_hivemq_image_name())
             .with_container_name(self.hive_mq_container_name())
             .with_unless_stopped()
             .with_networks(vec![self.service_network_name()])
+            .with_volumes(vec![self.hive_mq_log_dir_volume_mount()])
+            .with_depends_on_completed(self.hive_mq_log_init_container_name_key())
+    }
+
+    // Compose service *keys* (map keys), not container names, are what depends_on references.
+    fn hive_mq_log_init_container_name_key(&self) -> String {
+        String::from("hivemq-log-init")
     }
 
     fn mqtt_devices_config_files(&self) -> Vec<ConfigFile> {
@@ -940,7 +975,7 @@ impl Config {
                         ]
                         .into(),
                     )
-                    .with_volumes(vec![self.volume_mount()])
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
@@ -961,7 +996,7 @@ impl Config {
                         ]
                         .into(),
                     )
-                    .with_volumes(vec![self.volume_mount()])
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
@@ -990,7 +1025,7 @@ impl Config {
                     ]
                     .into(),
                 )
-                .with_volumes(vec![self.volume_mount()])
+                .with_volumes(vec![self.container_work_dir_volume_mount()])
                 .with_networks(vec![self.service_network_name()])
                 .with_unless_stopped(),
         );
@@ -1045,7 +1080,7 @@ impl Config {
                             .join("consumer-mqtt-proxy-config.yaml")
                             .display()
                     ))
-                    .with_volumes(vec![self.volume_mount()])
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
@@ -1089,7 +1124,7 @@ impl Config {
                         ]
                         .into(),
                     )
-                    .with_volumes(vec![self.volume_mount()])
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()])
                     .with_unless_stopped(),
             );
@@ -1117,6 +1152,10 @@ impl Config {
 
         let mut services = BTreeMap::new();
 
+        services.insert(
+            self.hive_mq_log_init_container_name_key(),
+            self.hive_mq_log_init_docker_service(),
+        );
         services.insert(String::from("hivemq"), self.hive_mq_docker_service());
         services.extend(self.server_docker_services());
         services.extend(self.deduplication_docker_services());
