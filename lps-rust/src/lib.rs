@@ -35,6 +35,8 @@ pub struct SimpleCall {
     /// Also an event identifier.
     ///
     /// Retried events have the same incremental_id as the original event.
+    /// 
+    /// If running the `mqtt` simulation, this field would be `None`, when it arrives in the server. The `python` proxy that receives this `SimpleCall`, does not have this field, so its lost.
     #[serde(default)]
     incremental_id: Option<u64>,
 }
