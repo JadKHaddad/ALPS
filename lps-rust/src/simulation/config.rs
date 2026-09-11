@@ -906,7 +906,7 @@ impl Config {
         DockerService::default()
             .with_image(String::from("busybox:latest"))
             .with_container_name(self.hive_mq_log_init_container_name())
-            .with_command(format!("sh -c \"mkdir -p {}\"", self.hive_mq_log_dir()))
+            .with_command(format!("sh -c \"mkdir -p {} && chmod -R 777 {}\"", self.hive_mq_log_dir(), self.hive_mq_log_dir()))
             .with_volumes(vec![self.hive_mq_log_dir_volume_mount()])
             .with_networks(vec![self.service_network_name()])
     }
@@ -1008,27 +1008,29 @@ impl Config {
     fn mqtt_ars_comp_2_docker_service(&self) -> BTreeMap<String, DockerService> {
         let mut services = BTreeMap::new();
 
-        services.insert(
-            String::from("ars-comp-2-proxy"),
-            DockerService::default()
-                .with_image(self.lps_mqtt_python_image_name())
-                .with_container_name(String::from("lps-ars-comp-2-proxy"))
-                .with_command(String::from("python3 /scripts/ars_comp_2_proxy.py"))
-                .with_environment(
-                    [
-                        (
-                            String::from("SERVICE_NAME"),
-                            String::from("ars-comp-2-proxy"),
-                        ),
-                        (String::from("HTTP_PORT"), self.default_http_port()),
-                        (String::from("TARGET_URL"), self.consumers_server_push_url()),
-                    ]
-                    .into(),
-                )
-                .with_volumes(vec![self.container_work_dir_volume_mount()])
-                .with_networks(vec![self.service_network_name()])
-                .with_unless_stopped(),
-        );
+        for i in 0..self.mqtt.consumers_count() {
+            services.insert(
+                format!("ars-comp-2-proxy-{i}"),
+                DockerService::default()
+                    .with_image(self.lps_mqtt_python_image_name())
+                    .with_container_name(format!("lps-ars-comp-2-proxy-{i}"))
+                    .with_command(String::from("python3 /scripts/ars_comp_2_proxy.py"))
+                    .with_environment(
+                        [
+                            (
+                                String::from("SERVICE_NAME"),
+                                format!("ars-comp-2-proxy-{i}"),
+                            ),
+                            (String::from("HTTP_PORT"), self.default_http_port()),
+                            (String::from("TARGET_URL"), self.consumers_server_push_url()),
+                        ]
+                        .into(),
+                    )
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
+                    .with_unless_stopped(),
+            );
+        }
 
         services
     }
@@ -1115,7 +1117,7 @@ impl Config {
                             (
                                 String::from("TARGET_URL"),
                                 format!(
-                                    "http://lps-ars-comp-2-proxy:{}/ID_REQ_KC_STORE7D3BPACKET",
+                                    "http://lps-ars-comp-2-proxy-{i}:{}/ID_REQ_KC_STORE7D3BPACKET",
                                     self.default_http_port()
                                 ),
                             ),
