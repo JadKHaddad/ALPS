@@ -1,0 +1,123 @@
+{
+  "run_dir": "simulations/amqp/phase-3/5",
+  "pattern": "simulation-*",
+  "json_path": "mount/rates-results.json",
+  "confidence": 0.95,
+  "target_precision": 0.1,
+  "runs": [
+    "simulation-1",
+    "simulation-10",
+    "simulation-2",
+    "simulation-3",
+    "simulation-4",
+    "simulation-5",
+    "simulation-6",
+    "simulation-7",
+    "simulation-8",
+    "simulation-9"
+  ],
+  "n_runs": 10,
+  "metrics": [
+    {
+      "metric": "average_latency_ms",
+      "n": 10,
+      "values": [
+        22849.9388,
+        22527.4922,
+        23109.441,
+        22674.3274,
+        22572.1516,
+        22845.6936,
+        22515.203,
+        22503.1538,
+        22691.7784,
+        22805.8142
+      ],
+      "mean": 22709.4994,
+      "stdev": 194.75729894455188,
+      "t_value": 2.262157162798205,
+      "half_width": 139.32097878817842,
+      "ci_low": 22570.178421211822,
+      "ci_high": 22848.82037878818,
+      "r_achieved": 0.0061349207366578245,
+      "r_target": 0.1,
+      "sufficient": true,
+      "n_required": 10,
+      "additional_runs_needed": 0
+    },
+    {
+      "metric": "p99_latency_ms",
+      "n": 10,
+      "values": [
+        53468.0,
+        53953.0,
+        54172.0,
+        53502.0,
+        53276.0,
+        54842.0,
+        53614.0,
+        53446.0,
+        53849.0,
+        54210.0
+      ],
+      "mean": 53833.2,
+      "stdev": 476.15959042694453,
+      "t_value": 2.262157162798205,
+      "half_width": 340.624051356078,
+      "ci_low": 53492.57594864392,
+      "ci_high": 54173.824051356074,
+      "r_achieved": 0.006327397430509017,
+      "r_target": 0.1,
+      "sufficient": true,
+      "n_required": 10,
+      "additional_runs_needed": 0
+    },
+    {
+      "metric": "median_latency_ms",
+      "n": 10,
+      "values": [
+        21357.5,
+        20676.5,
+        21560.5,
+        20980.0,
+        21000.0,
+        21154.0,
+        20838.0,
+        20858.5,
+        21165.0,
+        21164.5
+      ],
+      "mean": 21075.45,
+      "stdev": 261.27023579258145,
+      "t_value": 2.262157162798205,
+      "half_width": 186.90146749880708,
+      "ci_low": 20888.548532501194,
+      "ci_high": 21262.351467498807,
+      "r_achieved": 0.00886820767759678,
+      "r_target": 0.1,
+      "sufficient": true,
+      "n_required": 10,
+      "additional_runs_needed": 0
+    }
+  ],
+  "representative": {
+    "representative_metric": "average_latency_ms",
+    "representative_run": "simulation-8",
+    "representative_value": 22691.7784,
+    "overall_mean": 22709.4994,
+    "abs_diff_from_mean": 17.721000000001368,
+    "rel_diff_from_mean_pct": 0.0780334241978111,
+    "all_run_values": {
+      "simulation-1": 22849.9388,
+      "simulation-10": 22527.4922,
+      "simulation-2": 23109.441,
+      "simulation-3": 22674.3274,
+      "simulation-4": 22572.1516,
+      "simulation-5": 22845.6936,
+      "simulation-6": 22515.203,
+      "simulation-7": 22503.1538,
+      "simulation-8": 22691.7784,
+      "simulation-9": 22805.8142
+    }
+  }
+}
