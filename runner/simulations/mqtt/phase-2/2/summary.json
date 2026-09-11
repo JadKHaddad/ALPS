@@ -1,0 +1,76 @@
+{
+  "run_dir": "simulations/mqtt/phase-2/2",
+  "pattern": "simulation-*",
+  "json_path": "mount/rates-results.json",
+  "confidence": 0.95,
+  "target_precision": 0.1,
+  "runs": [
+    "simulation-1",
+    "simulation-2",
+    "simulation-3",
+    "simulation-4",
+    "simulation-5"
+  ],
+  "n_runs": 5,
+  "metrics": [
+    {
+      "metric": "duplication_rate",
+      "n": 5,
+      "values": [
+        0.4507540056550424,
+        0.47167016417726204,
+        0.43230599889928456,
+        0.3752129471890971,
+        0.44536616979909266
+      ],
+      "mean": 0.43506185714395573,
+      "stdev": 0.03633895054030571,
+      "t_value": 2.7764451051977934,
+      "half_width": 0.04512076661840482,
+      "ci_low": 0.3899410905255509,
+      "ci_high": 0.48018262376236054,
+      "r_achieved": 0.10371115251198637,
+      "r_target": 0.1,
+      "sufficient": false,
+      "n_required": 6,
+      "additional_runs_needed": 1
+    },
+    {
+      "metric": "out_of_order_rate",
+      "n": 5,
+      "values": [
+        0.20527670527670527,
+        0.1544392523364486,
+        0.11754726126999515,
+        0.14973869575096568,
+        0.15985043234400562
+      ],
+      "mean": 0.15737046939562407,
+      "stdev": 0.031439948951722224,
+      "t_value": 2.7764451051977934,
+      "half_width": 0.03903785271871766,
+      "ci_low": 0.11833261667690642,
+      "ci_high": 0.19640832211434173,
+      "r_achieved": 0.2480633937780144,
+      "r_target": 0.1,
+      "sufficient": false,
+      "n_required": 31,
+      "additional_runs_needed": 26
+    }
+  ],
+  "representative": {
+    "representative_metric": "duplication_rate",
+    "representative_run": "simulation-3",
+    "representative_value": 0.43230599889928456,
+    "overall_mean": 0.4350618571439558,
+    "abs_diff_from_mean": 0.0027558582446712276,
+    "rel_diff_from_mean_pct": 0.6334405555022843,
+    "all_run_values": {
+      "simulation-1": 0.4507540056550424,
+      "simulation-2": 0.47167016417726204,
+      "simulation-3": 0.43230599889928456,
+      "simulation-4": 0.3752129471890971,
+      "simulation-5": 0.44536616979909266
+    }
+  }
+}

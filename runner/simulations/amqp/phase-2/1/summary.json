@@ -1,0 +1,60 @@
+{
+  "run_dir": "simulations/amqp/phase-2/1",
+  "pattern": "simulation-*",
+  "json_path": "mount/rates-results.json",
+  "confidence": 0.95,
+  "target_precision": 0.1,
+  "runs": [
+    "simulation-1",
+    "simulation-2",
+    "simulation-3",
+    "simulation-4",
+    "simulation-5"
+  ],
+  "n_runs": 5,
+  "metrics": [
+    {
+      "metric": "duplication_rate",
+      "n": 5,
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean": 0.0,
+      "stdev": 0.0,
+      "error": "mean is 0, relative precision is undefined for this metric"
+    },
+    {
+      "metric": "out_of_order_rate",
+      "n": 5,
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean": 0.0,
+      "stdev": 0.0,
+      "error": "mean is 0, relative precision is undefined for this metric"
+    }
+  ],
+  "representative": {
+    "representative_metric": "average_latency_ms",
+    "representative_run": "simulation-2",
+    "representative_value": 104045.432,
+    "overall_mean": 101690.57221628672,
+    "abs_diff_from_mean": 2354.859783713284,
+    "rel_diff_from_mean_pct": 2.3157110166562034,
+    "all_run_values": {
+      "simulation-1": 104682.5096,
+      "simulation-2": 104045.432,
+      "simulation-3": 108193.9064,
+      "simulation-4": 106016.5534,
+      "simulation-5": 85514.45968143355
+    }
+  }
+}

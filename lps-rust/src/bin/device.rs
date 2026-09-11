@@ -103,7 +103,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
                             tokio::time::sleep(Duration::from_millis(duration_ms)).await;
 
-                            let call = SimpleCall::new_now(id.to_string());
+                            let call = SimpleCall::new_now(id.to_string()).with_incremental_id(i);
 
                             let mut try_index = 0;
 

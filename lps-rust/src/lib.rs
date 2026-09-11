@@ -30,6 +30,13 @@ pub struct SimpleCall {
     /// Not used in our system.
     #[serde(default)]
     headnumber: String,
+    /// Not used in our system, but the devices set them as an incremental `triggertime` so that when looking into the logs we see easy incremental numbers, that we can understand.
+    ///
+    /// Also an event identifier.
+    ///
+    /// Retried events have the same incremental_id as the original event.
+    #[serde(default)]
+    incremental_id: Option<u64>,
 }
 
 impl SimpleCall {
@@ -39,7 +46,13 @@ impl SimpleCall {
             triggertime: Utc::now(),
             branch: String::from("Branch"),
             headnumber: String::from("Headnumber"),
+            incremental_id: None,
         }
+    }
+
+    pub fn with_incremental_id(mut self, id: u64) -> Self {
+        self.incremental_id = Some(id);
+        self
     }
 }
 
@@ -365,6 +378,9 @@ const _: () = {
 
         #[serde(default)]
         headnumber: String,
+
+        #[serde(default)]
+        incremental_id: Option<u64>,
     }
 
     #[derive(Debug, Deserialize)]
@@ -393,6 +409,7 @@ const _: () = {
                 triggertime: data.triggertime,
                 branch: data.branch,
                 headnumber: data.headnumber,
+                incremental_id: data.incremental_id,
             });
         }
 
@@ -407,6 +424,7 @@ const _: () = {
                     triggertime: data.triggertime,
                     branch: data.branch,
                     headnumber: data.headnumber,
+                    incremental_id: data.incremental_id,
                 });
             }
 
@@ -488,6 +506,7 @@ const _: () = {
             triggertime,
             branch,
             headnumber,
+            incremental_id: None,
         })
     }
 };
