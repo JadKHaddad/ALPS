@@ -638,13 +638,10 @@ impl Config {
             .with_image(self.lps_scripts_image_name())
             .with_container_name(String::from("lps-scripts"))
             .with_command(format!(
-    "sh -c 'python3 /scripts/latency.py {server} latency-line.pdf && \
-             python3 /scripts/failure_order.py {device} {server} {failures} failure-order.pdf && \
-             python3 /scripts/failure_duplicate.py {device} {server} {failures} failure-duplicate.pdf'",
-    server   = self.server_results_file(),
-    device   = self.device_results_file(),
-    failures = self.server_failures_file(),
-))
+                "sh -c 'python3 /scripts/latency.py {server} latency-line.png && python3 /scripts/failure.py {device} {server} failure.png'",
+                server = self.server_results_file(),
+                device = self.device_results_file()
+            ))
             .with_volumes(vec![self.container_work_dir_volume_mount()])
             .with_networks(vec![self.service_network_name()])
             .with_manual_profile()
@@ -906,7 +903,11 @@ impl Config {
         DockerService::default()
             .with_image(String::from("busybox:latest"))
             .with_container_name(self.hive_mq_log_init_container_name())
-            .with_command(format!("sh -c \"mkdir -p {} && chmod -R 777 {}\"", self.hive_mq_log_dir(), self.hive_mq_log_dir()))
+            .with_command(format!(
+                "sh -c \"mkdir -p {} && chmod -R 777 {}\"",
+                self.hive_mq_log_dir(),
+                self.hive_mq_log_dir()
+            ))
             .with_volumes(vec![self.hive_mq_log_dir_volume_mount()])
             .with_networks(vec![self.service_network_name()])
     }

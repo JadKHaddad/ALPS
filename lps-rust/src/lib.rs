@@ -35,7 +35,7 @@ pub struct SimpleCall {
     /// Also an event identifier.
     ///
     /// Retried events have the same incremental_id as the original event.
-    /// 
+    ///
     /// If running the `mqtt` simulation, this field would be `None`, when it arrives in the server. The `python` proxy that receives this `SimpleCall`, does not have this field, so its lost.
     #[serde(default)]
     incremental_id: Option<u64>,
@@ -144,17 +144,21 @@ impl Event {
         let mut violations = Vec::new();
 
         for event in events {
-            if let Some(&prev) = last.get(&event.device_id)
-                && event.event_id < prev
-            {
-                violations.push(OrderViolation::new(
-                    event.device_id.clone(),
-                    event.event_id,
-                    prev,
-                ));
+            if let Some(&prev_max) = last.get(&event.device_id) {
+                if event.event_id < prev_max {
+                    violations.push(OrderViolation::new(
+                        event.device_id.clone(),
+                        event.event_id,
+                        prev_max,
+                    ));
+                }
             }
 
             last.insert(event.device_id.clone(), event.event_id);
+
+            // last.entry(event.device_id.clone())
+            //     .and_modify(|m| *m = (*m).max(event.event_id))
+            //     .or_insert(event.event_id);
         }
 
         if violations.is_empty() {
@@ -636,5 +640,59 @@ mod tests {
             call.triggertime,
             Utc.with_ymd_and_hms(2026, 3, 26, 10, 30, 0).unwrap()
         );
+    }
+
+    #[test]
+    fn validate_order() {
+        // #1 (08:00), #2 (09:00), #3 (09:01), #4 (08:01), #5 (08:05)
+        let device = "device-1".to_string();
+
+        let make_event = |hour: u32, minute: u32| Event {
+            device_id: device.clone(),
+            event_id: Utc
+                .with_ymd_and_hms(2026, 3, 26, hour, minute, 0)
+                .unwrap()
+                .timestamp_millis() as u64,
+            arrived_at: None,
+            original: serde_json::Value::Null,
+        };
+
+        // #1 (08:00), #2 (09:00), #3 (09:01), #4 (08:01), #5 (08:05)
+        let events = vec![
+            make_event(8, 0),
+            make_event(9, 0),
+            make_event(9, 1),
+            make_event(8, 1),
+            make_event(8, 5),
+        ];
+
+        // Map event_id -> "#N (HH:MM)" so violations print in human-readable form.
+        let labels: HashMap<u64, String> = events
+            .iter()
+            .enumerate()
+            .map(|(i, e)| {
+                let dt = Utc.timestamp_millis_opt(e.event_id as i64).unwrap();
+                (e.event_id, format!("#{} ({})", i + 1, dt.format("%H:%M")))
+            })
+            .collect();
+
+        let label = |id: u64| labels.get(&id).cloned().unwrap_or_else(|| id.to_string());
+
+        let err = Event::validate_order(events.iter()).unwrap_err();
+
+        let readable: Vec<String> = err
+            .violations
+            .iter()
+            .map(|v| {
+                format!(
+                    "device={} {} came after {}",
+                    v.device_id,
+                    label(v.first_event_id),
+                    label(v.second_event_id)
+                )
+            })
+            .collect();
+
+        println!("{}, {:#?}", err.violations.len(), readable);
     }
 }
