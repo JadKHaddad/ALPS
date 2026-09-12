@@ -1,0 +1,4292 @@
+[
+  {
+    "device_id": "1",
+    "event_id": 1789163575150,
+    "arrived_at": "2026-09-11T21:52:58.209910450Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "1",
+      "triggertime": "2026-09-11T21:52:55.150328Z"
+    }
+  },
+  {
+    "device_id": "13",
+    "event_id": 1789163575158,
+    "arrived_at": "2026-09-11T21:52:58.253312137Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "13",
+      "triggertime": "2026-09-11T21:52:55.158717Z"
+    }
+  },
+  {
+    "device_id": "27",
+    "event_id": 1789163575419,
+    "arrived_at": "2026-09-11T21:52:58.331421803Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "27",
+      "triggertime": "2026-09-11T21:52:55.419780Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163574371,
+    "arrived_at": "2026-09-11T21:52:58.382155474Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:52:54.371573Z"
+    }
+  },
+  {
+    "device_id": "82",
+    "event_id": 1789163575394,
+    "arrived_at": "2026-09-11T21:52:58.424027595Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "82",
+      "triggertime": "2026-09-11T21:52:55.394764Z"
+    }
+  },
+  {
+    "device_id": "41",
+    "event_id": 1789163575356,
+    "arrived_at": "2026-09-11T21:52:58.473978464Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "41",
+      "triggertime": "2026-09-11T21:52:55.356885Z"
+    }
+  },
+  {
+    "device_id": "93",
+    "event_id": 1789163574440,
+    "arrived_at": "2026-09-11T21:52:58.521768783Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "93",
+      "triggertime": "2026-09-11T21:52:54.440445Z"
+    }
+  },
+  {
+    "device_id": "74",
+    "event_id": 1789163575394,
+    "arrived_at": "2026-09-11T21:52:58.565541599Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "74",
+      "triggertime": "2026-09-11T21:52:55.394860Z"
+    }
+  },
+  {
+    "device_id": "16",
+    "event_id": 1789163574358,
+    "arrived_at": "2026-09-11T21:52:58.622363965Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "16",
+      "triggertime": "2026-09-11T21:52:54.358975Z"
+    }
+  },
+  {
+    "device_id": "58",
+    "event_id": 1789163574361,
+    "arrived_at": "2026-09-11T21:52:58.647620676Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "58",
+      "triggertime": "2026-09-11T21:52:54.361018Z"
+    }
+  },
+  {
+    "device_id": "8",
+    "event_id": 1789163575442,
+    "arrived_at": "2026-09-11T21:52:58.710822303Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "8",
+      "triggertime": "2026-09-11T21:52:55.442159Z"
+    }
+  },
+  {
+    "device_id": "34",
+    "event_id": 1789163574364,
+    "arrived_at": "2026-09-11T21:52:58.741292861Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "34",
+      "triggertime": "2026-09-11T21:52:54.364013Z"
+    }
+  },
+  {
+    "device_id": "25",
+    "event_id": 1789163574383,
+    "arrived_at": "2026-09-11T21:52:58.774141463Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "25",
+      "triggertime": "2026-09-11T21:52:54.383588Z"
+    }
+  },
+  {
+    "device_id": "56",
+    "event_id": 1789163575394,
+    "arrived_at": "2026-09-11T21:52:58.811459272Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "56",
+      "triggertime": "2026-09-11T21:52:55.394536Z"
+    }
+  },
+  {
+    "device_id": "61",
+    "event_id": 1789163574343,
+    "arrived_at": "2026-09-11T21:52:58.836905677Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "61",
+      "triggertime": "2026-09-11T21:52:54.343101Z"
+    }
+  },
+  {
+    "device_id": "2",
+    "event_id": 1789163574340,
+    "arrived_at": "2026-09-11T21:52:58.866680054Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "2",
+      "triggertime": "2026-09-11T21:52:54.340679Z"
+    }
+  },
+  {
+    "device_id": "83",
+    "event_id": 1789163575419,
+    "arrived_at": "2026-09-11T21:52:58.907915769Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "83",
+      "triggertime": "2026-09-11T21:52:55.419621Z"
+    }
+  },
+  {
+    "device_id": "35",
+    "event_id": 1789163574363,
+    "arrived_at": "2026-09-11T21:52:58.954859481Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "35",
+      "triggertime": "2026-09-11T21:52:54.363198Z"
+    }
+  },
+  {
+    "device_id": "77",
+    "event_id": 1789163574419,
+    "arrived_at": "2026-09-11T21:52:58.999610442Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "77",
+      "triggertime": "2026-09-11T21:52:54.419003Z"
+    }
+  },
+  {
+    "device_id": "9",
+    "event_id": 1789163575423,
+    "arrived_at": "2026-09-11T21:52:59.029611532Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "9",
+      "triggertime": "2026-09-11T21:52:55.423542Z"
+    }
+  },
+  {
+    "device_id": "84",
+    "event_id": 1789163575358,
+    "arrived_at": "2026-09-11T21:52:59.078699694Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "84",
+      "triggertime": "2026-09-11T21:52:55.358920Z"
+    }
+  },
+  {
+    "device_id": "36",
+    "event_id": 1789163574368,
+    "arrived_at": "2026-09-11T21:52:59.130426254Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "36",
+      "triggertime": "2026-09-11T21:52:54.368878Z"
+    }
+  },
+  {
+    "device_id": "37",
+    "event_id": 1789163575476,
+    "arrived_at": "2026-09-11T21:52:59.173530101Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "37",
+      "triggertime": "2026-09-11T21:52:55.476872Z"
+    }
+  },
+  {
+    "device_id": "13",
+    "event_id": 1789163575494,
+    "arrived_at": "2026-09-11T21:52:59.222388954Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "13",
+      "triggertime": "2026-09-11T21:52:55.494684Z"
+    }
+  },
+  {
+    "device_id": "51",
+    "event_id": 1789163574339,
+    "arrived_at": "2026-09-11T21:52:59.241823490Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "51",
+      "triggertime": "2026-09-11T21:52:54.339412Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163574475,
+    "arrived_at": "2026-09-11T21:52:59.275794680Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:52:54.475626Z"
+    }
+  },
+  {
+    "device_id": "11",
+    "event_id": 1789163575336,
+    "arrived_at": "2026-09-11T21:52:59.337985916Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "11",
+      "triggertime": "2026-09-11T21:52:55.336583Z"
+    }
+  },
+  {
+    "device_id": "53",
+    "event_id": 1789163574345,
+    "arrived_at": "2026-09-11T21:52:59.379179295Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "53",
+      "triggertime": "2026-09-11T21:52:54.345974Z"
+    }
+  },
+  {
+    "device_id": "30",
+    "event_id": 1789163575483,
+    "arrived_at": "2026-09-11T21:52:59.416324530Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "30",
+      "triggertime": "2026-09-11T21:52:55.483821Z"
+    }
+  },
+  {
+    "device_id": "95",
+    "event_id": 1789163574557,
+    "arrived_at": "2026-09-11T21:52:59.459102511Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "95",
+      "triggertime": "2026-09-11T21:52:54.557440Z"
+    }
+  },
+  {
+    "device_id": "81",
+    "event_id": 1789163575430,
+    "arrived_at": "2026-09-11T21:52:59.507136323Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "81",
+      "triggertime": "2026-09-11T21:52:55.430512Z"
+    }
+  },
+  {
+    "device_id": "89",
+    "event_id": 1789163574399,
+    "arrived_at": "2026-09-11T21:52:59.546709446Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "89",
+      "triggertime": "2026-09-11T21:52:54.399117Z"
+    }
+  },
+  {
+    "device_id": "42",
+    "event_id": 1789163575426,
+    "arrived_at": "2026-09-11T21:52:59.580130225Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "42",
+      "triggertime": "2026-09-11T21:52:55.426122Z"
+    }
+  },
+  {
+    "device_id": "57",
+    "event_id": 1789163574360,
+    "arrived_at": "2026-09-11T21:52:59.637919250Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "57",
+      "triggertime": "2026-09-11T21:52:54.360134Z"
+    }
+  },
+  {
+    "device_id": "70",
+    "event_id": 1789163574366,
+    "arrived_at": "2026-09-11T21:52:59.687850951Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "70",
+      "triggertime": "2026-09-11T21:52:54.366203Z"
+    }
+  },
+  {
+    "device_id": "46",
+    "event_id": 1789163575531,
+    "arrived_at": "2026-09-11T21:52:59.724957743Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "46",
+      "triggertime": "2026-09-11T21:52:55.531476Z"
+    }
+  },
+  {
+    "device_id": "86",
+    "event_id": 1789163574399,
+    "arrived_at": "2026-09-11T21:52:59.764577653Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "86",
+      "triggertime": "2026-09-11T21:52:54.399370Z"
+    }
+  },
+  {
+    "device_id": "31",
+    "event_id": 1789163575360,
+    "arrived_at": "2026-09-11T21:52:59.814369611Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "31",
+      "triggertime": "2026-09-11T21:52:55.360870Z"
+    }
+  },
+  {
+    "device_id": "75",
+    "event_id": 1789163574405,
+    "arrived_at": "2026-09-11T21:52:59.836954475Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "75",
+      "triggertime": "2026-09-11T21:52:54.405858Z"
+    }
+  },
+  {
+    "device_id": "48",
+    "event_id": 1789163575519,
+    "arrived_at": "2026-09-11T21:52:59.897866228Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "48",
+      "triggertime": "2026-09-11T21:52:55.519028Z"
+    }
+  },
+  {
+    "device_id": "55",
+    "event_id": 1789163574353,
+    "arrived_at": "2026-09-11T21:52:59.925607485Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "55",
+      "triggertime": "2026-09-11T21:52:54.353089Z"
+    }
+  },
+  {
+    "device_id": "23",
+    "event_id": 1789163575431,
+    "arrived_at": "2026-09-11T21:52:59.972789486Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "23",
+      "triggertime": "2026-09-11T21:52:55.431622Z"
+    }
+  },
+  {
+    "device_id": "68",
+    "event_id": 1789163575594,
+    "arrived_at": "2026-09-11T21:53:00.014569365Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "68",
+      "triggertime": "2026-09-11T21:52:55.594815Z"
+    }
+  },
+  {
+    "device_id": "97",
+    "event_id": 1789163574504,
+    "arrived_at": "2026-09-11T21:53:00.058591461Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "97",
+      "triggertime": "2026-09-11T21:52:54.504981Z"
+    }
+  },
+  {
+    "device_id": "45",
+    "event_id": 1789163575625,
+    "arrived_at": "2026-09-11T21:53:00.120569988Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "45",
+      "triggertime": "2026-09-11T21:52:55.625102Z"
+    }
+  },
+  {
+    "device_id": "88",
+    "event_id": 1789163574565,
+    "arrived_at": "2026-09-11T21:53:00.157066737Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "88",
+      "triggertime": "2026-09-11T21:52:54.565695Z"
+    }
+  },
+  {
+    "device_id": "64",
+    "event_id": 1789163575482,
+    "arrived_at": "2026-09-11T21:53:00.180001650Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "64",
+      "triggertime": "2026-09-11T21:52:55.482013Z"
+    }
+  },
+  {
+    "device_id": "4",
+    "event_id": 1789163575427,
+    "arrived_at": "2026-09-11T21:53:00.221917483Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "4",
+      "triggertime": "2026-09-11T21:52:55.427212Z"
+    }
+  },
+  {
+    "device_id": "17",
+    "event_id": 1789163575985,
+    "arrived_at": "2026-09-11T21:53:01.064751513Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "17",
+      "triggertime": "2026-09-11T21:52:55.985824Z"
+    }
+  },
+  {
+    "device_id": "48",
+    "event_id": 1789163576026,
+    "arrived_at": "2026-09-11T21:53:01.117778342Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "48",
+      "triggertime": "2026-09-11T21:52:56.026548Z"
+    }
+  },
+  {
+    "device_id": "53",
+    "event_id": 1789163575960,
+    "arrived_at": "2026-09-11T21:53:03.046035581Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "53",
+      "triggertime": "2026-09-11T21:52:55.960590Z"
+    }
+  },
+  {
+    "device_id": "8",
+    "event_id": 1789163576837,
+    "arrived_at": "2026-09-11T21:53:03.075364984Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "8",
+      "triggertime": "2026-09-11T21:52:56.837217Z"
+    }
+  },
+  {
+    "device_id": "99",
+    "event_id": 1789163576346,
+    "arrived_at": "2026-09-11T21:53:03.091749336Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "99",
+      "triggertime": "2026-09-11T21:52:56.346164Z"
+    }
+  },
+  {
+    "device_id": "72",
+    "event_id": 1789163577104,
+    "arrived_at": "2026-09-11T21:53:05.037062010Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "72",
+      "triggertime": "2026-09-11T21:52:57.104536Z"
+    }
+  },
+  {
+    "device_id": "23",
+    "event_id": 1789163577686,
+    "arrived_at": "2026-09-11T21:53:05.062397658Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "23",
+      "triggertime": "2026-09-11T21:52:57.686696Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163577752,
+    "arrived_at": "2026-09-11T21:53:06.007420326Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:52:57.752705Z"
+    }
+  },
+  {
+    "device_id": "10",
+    "event_id": 1789163578120,
+    "arrived_at": "2026-09-11T21:53:06.022243832Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "10",
+      "triggertime": "2026-09-11T21:52:58.120711Z"
+    }
+  },
+  {
+    "device_id": "17",
+    "event_id": 1789163578040,
+    "arrived_at": "2026-09-11T21:53:06.058355989Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "17",
+      "triggertime": "2026-09-11T21:52:58.040690Z"
+    }
+  },
+  {
+    "device_id": "97",
+    "event_id": 1789163580107,
+    "arrived_at": "2026-09-11T21:53:09.769273579Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "97",
+      "triggertime": "2026-09-11T21:53:00.107962Z"
+    }
+  },
+  {
+    "device_id": "51",
+    "event_id": 1789163580037,
+    "arrived_at": "2026-09-11T21:53:09.814828054Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "51",
+      "triggertime": "2026-09-11T21:53:00.037864Z"
+    }
+  },
+  {
+    "device_id": "45",
+    "event_id": 1789163581232,
+    "arrived_at": "2026-09-11T21:53:12.650669423Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "45",
+      "triggertime": "2026-09-11T21:53:01.232426Z"
+    }
+  },
+  {
+    "device_id": "68",
+    "event_id": 1789163580864,
+    "arrived_at": "2026-09-11T21:53:12.687361221Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "68",
+      "triggertime": "2026-09-11T21:53:00.864848Z"
+    }
+  },
+  {
+    "device_id": "24",
+    "event_id": 1789163583892,
+    "arrived_at": "2026-09-11T21:53:18.164394170Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "24",
+      "triggertime": "2026-09-11T21:53:03.892155Z"
+    }
+  },
+  {
+    "device_id": "60",
+    "event_id": 1789163584391,
+    "arrived_at": "2026-09-11T21:53:18.206780597Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "60",
+      "triggertime": "2026-09-11T21:53:04.391051Z"
+    }
+  },
+  {
+    "device_id": "14",
+    "event_id": 1789163584335,
+    "arrived_at": "2026-09-11T21:53:18.506070592Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "14",
+      "triggertime": "2026-09-11T21:53:04.335179Z"
+    }
+  },
+  {
+    "device_id": "59",
+    "event_id": 1789163584197,
+    "arrived_at": "2026-09-11T21:53:18.542545162Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "59",
+      "triggertime": "2026-09-11T21:53:04.197534Z"
+    }
+  },
+  {
+    "device_id": "27",
+    "event_id": 1789163584538,
+    "arrived_at": "2026-09-11T21:53:21.624757522Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "27",
+      "triggertime": "2026-09-11T21:53:04.538853Z"
+    }
+  },
+  {
+    "device_id": "60",
+    "event_id": 1789163585078,
+    "arrived_at": "2026-09-11T21:53:21.643734388Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "60",
+      "triggertime": "2026-09-11T21:53:05.078724Z"
+    }
+  },
+  {
+    "device_id": "33",
+    "event_id": 1789163585349,
+    "arrived_at": "2026-09-11T21:53:23.563039611Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "33",
+      "triggertime": "2026-09-11T21:53:05.349946Z"
+    }
+  },
+  {
+    "device_id": "8",
+    "event_id": 1789163585431,
+    "arrived_at": "2026-09-11T21:53:23.601990648Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "8",
+      "triggertime": "2026-09-11T21:53:05.431330Z"
+    }
+  },
+  {
+    "device_id": "16",
+    "event_id": 1789163586278,
+    "arrived_at": "2026-09-11T21:53:24.450381936Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "16",
+      "triggertime": "2026-09-11T21:53:06.278217Z"
+    }
+  },
+  {
+    "device_id": "56",
+    "event_id": 1789163586385,
+    "arrived_at": "2026-09-11T21:53:24.507406638Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "56",
+      "triggertime": "2026-09-11T21:53:06.385377Z"
+    }
+  },
+  {
+    "device_id": "21",
+    "event_id": 1789163585827,
+    "arrived_at": "2026-09-11T21:53:24.533311616Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "21",
+      "triggertime": "2026-09-11T21:53:05.827447Z"
+    }
+  },
+  {
+    "device_id": "26",
+    "event_id": 1789163586271,
+    "arrived_at": "2026-09-11T21:53:24.593040944Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "26",
+      "triggertime": "2026-09-11T21:53:06.271386Z"
+    }
+  },
+  {
+    "device_id": "96",
+    "event_id": 1789163586441,
+    "arrived_at": "2026-09-11T21:53:24.639888740Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "96",
+      "triggertime": "2026-09-11T21:53:06.441434Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163586451,
+    "arrived_at": "2026-09-11T21:53:24.679582929Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:06.451564Z"
+    }
+  },
+  {
+    "device_id": "28",
+    "event_id": 1789163586512,
+    "arrived_at": "2026-09-11T21:53:24.738248068Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "28",
+      "triggertime": "2026-09-11T21:53:06.512705Z"
+    }
+  },
+  {
+    "device_id": "65",
+    "event_id": 1789163586187,
+    "arrived_at": "2026-09-11T21:53:24.796934673Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "65",
+      "triggertime": "2026-09-11T21:53:06.187386Z"
+    }
+  },
+  {
+    "device_id": "74",
+    "event_id": 1789163586261,
+    "arrived_at": "2026-09-11T21:53:24.848917279Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "74",
+      "triggertime": "2026-09-11T21:53:06.261532Z"
+    }
+  },
+  {
+    "device_id": "53",
+    "event_id": 1789163586588,
+    "arrived_at": "2026-09-11T21:53:24.887541577Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "53",
+      "triggertime": "2026-09-11T21:53:06.588590Z"
+    }
+  },
+  {
+    "device_id": "7",
+    "event_id": 1789163586493,
+    "arrived_at": "2026-09-11T21:53:24.940782198Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "7",
+      "triggertime": "2026-09-11T21:53:06.493876Z"
+    }
+  },
+  {
+    "device_id": "72",
+    "event_id": 1789163586601,
+    "arrived_at": "2026-09-11T21:53:24.987756557Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "72",
+      "triggertime": "2026-09-11T21:53:06.601211Z"
+    }
+  },
+  {
+    "device_id": "97",
+    "event_id": 1789163586411,
+    "arrived_at": "2026-09-11T21:53:25.021081323Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "97",
+      "triggertime": "2026-09-11T21:53:06.411965Z"
+    }
+  },
+  {
+    "device_id": "55",
+    "event_id": 1789163586271,
+    "arrived_at": "2026-09-11T21:53:25.056263934Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "55",
+      "triggertime": "2026-09-11T21:53:06.271339Z"
+    }
+  },
+  {
+    "device_id": "81",
+    "event_id": 1789163586582,
+    "arrived_at": "2026-09-11T21:53:25.093636888Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "81",
+      "triggertime": "2026-09-11T21:53:06.582408Z"
+    }
+  },
+  {
+    "device_id": "98",
+    "event_id": 1789163586512,
+    "arrived_at": "2026-09-11T21:53:25.135871199Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "98",
+      "triggertime": "2026-09-11T21:53:06.512452Z"
+    }
+  },
+  {
+    "device_id": "64",
+    "event_id": 1789163586487,
+    "arrived_at": "2026-09-11T21:53:25.170208693Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "64",
+      "triggertime": "2026-09-11T21:53:06.487396Z"
+    }
+  },
+  {
+    "device_id": "82",
+    "event_id": 1789163586355,
+    "arrived_at": "2026-09-11T21:53:25.207653839Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "82",
+      "triggertime": "2026-09-11T21:53:06.355314Z"
+    }
+  },
+  {
+    "device_id": "99",
+    "event_id": 1789163586429,
+    "arrived_at": "2026-09-11T21:53:25.241586898Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "99",
+      "triggertime": "2026-09-11T21:53:06.429858Z"
+    }
+  },
+  {
+    "device_id": "83",
+    "event_id": 1789163586628,
+    "arrived_at": "2026-09-11T21:53:25.287006561Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "83",
+      "triggertime": "2026-09-11T21:53:06.628196Z"
+    }
+  },
+  {
+    "device_id": "48",
+    "event_id": 1789163586713,
+    "arrived_at": "2026-09-11T21:53:25.321188751Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "48",
+      "triggertime": "2026-09-11T21:53:06.713926Z"
+    }
+  },
+  {
+    "device_id": "24",
+    "event_id": 1789163586412,
+    "arrived_at": "2026-09-11T21:53:25.353135414Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "24",
+      "triggertime": "2026-09-11T21:53:06.412239Z"
+    }
+  },
+  {
+    "device_id": "95",
+    "event_id": 1789163586969,
+    "arrived_at": "2026-09-11T21:53:26.621579412Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "95",
+      "triggertime": "2026-09-11T21:53:06.969678Z"
+    }
+  },
+  {
+    "device_id": "49",
+    "event_id": 1789163586825,
+    "arrived_at": "2026-09-11T21:53:26.655452028Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "49",
+      "triggertime": "2026-09-11T21:53:06.825862Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1789163587538,
+    "arrived_at": "2026-09-11T21:53:27.449897664Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "0",
+      "triggertime": "2026-09-11T21:53:07.538821Z"
+    }
+  },
+  {
+    "device_id": "69",
+    "event_id": 1789163587532,
+    "arrived_at": "2026-09-11T21:53:27.464529503Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "69",
+      "triggertime": "2026-09-11T21:53:07.532628Z"
+    }
+  },
+  {
+    "device_id": "98",
+    "event_id": 1789163587450,
+    "arrived_at": "2026-09-11T21:53:27.493456515Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "98",
+      "triggertime": "2026-09-11T21:53:07.450867Z"
+    }
+  },
+  {
+    "device_id": "22",
+    "event_id": 1789163587469,
+    "arrived_at": "2026-09-11T21:53:27.491592621Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "22",
+      "triggertime": "2026-09-11T21:53:07.469765Z"
+    }
+  },
+  {
+    "device_id": "73",
+    "event_id": 1789163587495,
+    "arrived_at": "2026-09-11T21:53:27.534085350Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "73",
+      "triggertime": "2026-09-11T21:53:07.495599Z"
+    }
+  },
+  {
+    "device_id": "82",
+    "event_id": 1789163587395,
+    "arrived_at": "2026-09-11T21:53:27.579978822Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "82",
+      "triggertime": "2026-09-11T21:53:07.395182Z"
+    }
+  },
+  {
+    "device_id": "78",
+    "event_id": 1789163587245,
+    "arrived_at": "2026-09-11T21:53:27.635788101Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "78",
+      "triggertime": "2026-09-11T21:53:07.245892Z"
+    }
+  },
+  {
+    "device_id": "85",
+    "event_id": 1789163586794,
+    "arrived_at": "2026-09-11T21:53:27.660103342Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "85",
+      "triggertime": "2026-09-11T21:53:06.794649Z"
+    }
+  },
+  {
+    "device_id": "99",
+    "event_id": 1789163587420,
+    "arrived_at": "2026-09-11T21:53:27.682710823Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "99",
+      "triggertime": "2026-09-11T21:53:07.420522Z"
+    }
+  },
+  {
+    "device_id": "37",
+    "event_id": 1789163587483,
+    "arrived_at": "2026-09-11T21:53:27.720997426Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "37",
+      "triggertime": "2026-09-11T21:53:07.483897Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1789163587538,
+    "arrived_at": "2026-09-11T21:53:27.764967308Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "0",
+      "triggertime": "2026-09-11T21:53:07.538821Z"
+    }
+  },
+  {
+    "device_id": "98",
+    "event_id": 1789163587450,
+    "arrived_at": "2026-09-11T21:53:27.800857266Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "98",
+      "triggertime": "2026-09-11T21:53:07.450867Z"
+    }
+  },
+  {
+    "device_id": "43",
+    "event_id": 1789163587169,
+    "arrived_at": "2026-09-11T21:53:27.820226870Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "43",
+      "triggertime": "2026-09-11T21:53:07.169596Z"
+    }
+  },
+  {
+    "device_id": "90",
+    "event_id": 1789163587542,
+    "arrived_at": "2026-09-11T21:53:27.847662913Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "90",
+      "triggertime": "2026-09-11T21:53:07.542033Z"
+    }
+  },
+  {
+    "device_id": "77",
+    "event_id": 1789163587549,
+    "arrived_at": "2026-09-11T21:53:27.891235429Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "77",
+      "triggertime": "2026-09-11T21:53:07.549800Z"
+    }
+  },
+  {
+    "device_id": "80",
+    "event_id": 1789163587138,
+    "arrived_at": "2026-09-11T21:53:27.924058022Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "80",
+      "triggertime": "2026-09-11T21:53:07.138965Z"
+    }
+  },
+  {
+    "device_id": "64",
+    "event_id": 1789163587504,
+    "arrived_at": "2026-09-11T21:53:27.960914854Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "64",
+      "triggertime": "2026-09-11T21:53:07.504920Z"
+    }
+  },
+  {
+    "device_id": "93",
+    "event_id": 1789163586988,
+    "arrived_at": "2026-09-11T21:53:28.021388684Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "93",
+      "triggertime": "2026-09-11T21:53:06.988314Z"
+    }
+  },
+  {
+    "device_id": "29",
+    "event_id": 1789163587681,
+    "arrived_at": "2026-09-11T21:53:28.070755344Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "29",
+      "triggertime": "2026-09-11T21:53:07.681736Z"
+    }
+  },
+  {
+    "device_id": "35",
+    "event_id": 1789163587646,
+    "arrived_at": "2026-09-11T21:53:28.119407998Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "35",
+      "triggertime": "2026-09-11T21:53:07.646731Z"
+    }
+  },
+  {
+    "device_id": "84",
+    "event_id": 1789163587669,
+    "arrived_at": "2026-09-11T21:53:28.166458900Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "84",
+      "triggertime": "2026-09-11T21:53:07.669594Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163587378,
+    "arrived_at": "2026-09-11T21:53:28.201336760Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:07.378605Z"
+    }
+  },
+  {
+    "device_id": "39",
+    "event_id": 1789163587681,
+    "arrived_at": "2026-09-11T21:53:28.277467368Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "39",
+      "triggertime": "2026-09-11T21:53:07.681917Z"
+    }
+  },
+  {
+    "device_id": "15",
+    "event_id": 1789163587538,
+    "arrived_at": "2026-09-11T21:53:28.337237535Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "15",
+      "triggertime": "2026-09-11T21:53:07.538207Z"
+    }
+  },
+  {
+    "device_id": "38",
+    "event_id": 1789163587822,
+    "arrived_at": "2026-09-11T21:53:28.367838177Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "38",
+      "triggertime": "2026-09-11T21:53:07.822220Z"
+    }
+  },
+  {
+    "device_id": "33",
+    "event_id": 1789163588048,
+    "arrived_at": "2026-09-11T21:53:28.402687200Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "33",
+      "triggertime": "2026-09-11T21:53:08.048548Z"
+    }
+  },
+  {
+    "device_id": "66",
+    "event_id": 1789163586686,
+    "arrived_at": "2026-09-11T21:53:28.463420644Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "66",
+      "triggertime": "2026-09-11T21:53:06.686619Z"
+    }
+  },
+  {
+    "device_id": "88",
+    "event_id": 1789163587655,
+    "arrived_at": "2026-09-11T21:53:28.504836373Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "88",
+      "triggertime": "2026-09-11T21:53:07.655564Z"
+    }
+  },
+  {
+    "device_id": "11",
+    "event_id": 1789163587977,
+    "arrived_at": "2026-09-11T21:53:28.534756487Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "11",
+      "triggertime": "2026-09-11T21:53:07.977885Z"
+    }
+  },
+  {
+    "device_id": "63",
+    "event_id": 1789163587948,
+    "arrived_at": "2026-09-11T21:53:28.561437914Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "63",
+      "triggertime": "2026-09-11T21:53:07.948528Z"
+    }
+  },
+  {
+    "device_id": "4",
+    "event_id": 1789163588084,
+    "arrived_at": "2026-09-11T21:53:28.601611328Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "4",
+      "triggertime": "2026-09-11T21:53:08.084884Z"
+    }
+  },
+  {
+    "device_id": "12",
+    "event_id": 1789163588123,
+    "arrived_at": "2026-09-11T21:53:28.648841236Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "12",
+      "triggertime": "2026-09-11T21:53:08.123060Z"
+    }
+  },
+  {
+    "device_id": "38",
+    "event_id": 1789163588895,
+    "arrived_at": "2026-09-11T21:53:30.656350499Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "38",
+      "triggertime": "2026-09-11T21:53:08.895008Z"
+    }
+  },
+  {
+    "device_id": "1",
+    "event_id": 1789163588846,
+    "arrived_at": "2026-09-11T21:53:30.692155471Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "1",
+      "triggertime": "2026-09-11T21:53:08.846840Z"
+    }
+  },
+  {
+    "device_id": "60",
+    "event_id": 1789163589511,
+    "arrived_at": "2026-09-11T21:53:30.858261533Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "60",
+      "triggertime": "2026-09-11T21:53:09.511535Z"
+    }
+  },
+  {
+    "device_id": "7",
+    "event_id": 1789163589727,
+    "arrived_at": "2026-09-11T21:53:30.884860850Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "7",
+      "triggertime": "2026-09-11T21:53:09.727631Z"
+    }
+  },
+  {
+    "device_id": "74",
+    "event_id": 1789163589640,
+    "arrived_at": "2026-09-11T21:53:30.935915330Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "74",
+      "triggertime": "2026-09-11T21:53:09.640104Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163589796,
+    "arrived_at": "2026-09-11T21:53:30.989514543Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:53:09.796637Z"
+    }
+  },
+  {
+    "device_id": "50",
+    "event_id": 1789163589780,
+    "arrived_at": "2026-09-11T21:53:31.036350041Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "50",
+      "triggertime": "2026-09-11T21:53:09.780970Z"
+    }
+  },
+  {
+    "device_id": "96",
+    "event_id": 1789163589035,
+    "arrived_at": "2026-09-11T21:53:31.085832438Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "96",
+      "triggertime": "2026-09-11T21:53:09.035574Z"
+    }
+  },
+  {
+    "device_id": "4",
+    "event_id": 1789163589764,
+    "arrived_at": "2026-09-11T21:53:31.122829362Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "4",
+      "triggertime": "2026-09-11T21:53:09.764164Z"
+    }
+  },
+  {
+    "device_id": "61",
+    "event_id": 1789163589667,
+    "arrived_at": "2026-09-11T21:53:31.177385371Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "61",
+      "triggertime": "2026-09-11T21:53:09.667936Z"
+    }
+  },
+  {
+    "device_id": "87",
+    "event_id": 1789163589832,
+    "arrived_at": "2026-09-11T21:53:31.218598548Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "87",
+      "triggertime": "2026-09-11T21:53:09.832210Z"
+    }
+  },
+  {
+    "device_id": "77",
+    "event_id": 1789163589085,
+    "arrived_at": "2026-09-11T21:53:31.250380687Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "77",
+      "triggertime": "2026-09-11T21:53:09.085874Z"
+    }
+  },
+  {
+    "device_id": "79",
+    "event_id": 1789163589771,
+    "arrived_at": "2026-09-11T21:53:31.288153129Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "79",
+      "triggertime": "2026-09-11T21:53:09.771944Z"
+    }
+  },
+  {
+    "device_id": "6",
+    "event_id": 1789163588979,
+    "arrived_at": "2026-09-11T21:53:31.336701206Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "6",
+      "triggertime": "2026-09-11T21:53:08.979761Z"
+    }
+  },
+  {
+    "device_id": "86",
+    "event_id": 1789163589659,
+    "arrived_at": "2026-09-11T21:53:31.377669204Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "86",
+      "triggertime": "2026-09-11T21:53:09.659638Z"
+    }
+  },
+  {
+    "device_id": "30",
+    "event_id": 1789163589848,
+    "arrived_at": "2026-09-11T21:53:31.420625702Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "30",
+      "triggertime": "2026-09-11T21:53:09.848768Z"
+    }
+  },
+  {
+    "device_id": "39",
+    "event_id": 1789163589598,
+    "arrived_at": "2026-09-11T21:53:31.448039714Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "39",
+      "triggertime": "2026-09-11T21:53:09.598194Z"
+    }
+  },
+  {
+    "device_id": "83",
+    "event_id": 1789163590148,
+    "arrived_at": "2026-09-11T21:53:31.444434371Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "83",
+      "triggertime": "2026-09-11T21:53:10.148924Z"
+    }
+  },
+  {
+    "device_id": "99",
+    "event_id": 1789163589891,
+    "arrived_at": "2026-09-11T21:53:31.460691846Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "99",
+      "triggertime": "2026-09-11T21:53:09.891816Z"
+    }
+  },
+  {
+    "device_id": "18",
+    "event_id": 1789163589997,
+    "arrived_at": "2026-09-11T21:53:31.487514443Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "18",
+      "triggertime": "2026-09-11T21:53:09.997805Z"
+    }
+  },
+  {
+    "device_id": "36",
+    "event_id": 1789163589902,
+    "arrived_at": "2026-09-11T21:53:31.510279293Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "36",
+      "triggertime": "2026-09-11T21:53:09.902025Z"
+    }
+  },
+  {
+    "device_id": "47",
+    "event_id": 1789163589883,
+    "arrived_at": "2026-09-11T21:53:31.545991250Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "47",
+      "triggertime": "2026-09-11T21:53:09.883040Z"
+    }
+  },
+  {
+    "device_id": "88",
+    "event_id": 1789163589641,
+    "arrived_at": "2026-09-11T21:53:31.595487140Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "88",
+      "triggertime": "2026-09-11T21:53:09.641808Z"
+    }
+  },
+  {
+    "device_id": "12",
+    "event_id": 1789163589852,
+    "arrived_at": "2026-09-11T21:53:31.636404628Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "12",
+      "triggertime": "2026-09-11T21:53:09.852891Z"
+    }
+  },
+  {
+    "device_id": "24",
+    "event_id": 1789163589825,
+    "arrived_at": "2026-09-11T21:53:31.662960883Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "24",
+      "triggertime": "2026-09-11T21:53:09.825245Z"
+    }
+  },
+  {
+    "device_id": "35",
+    "event_id": 1789163589818,
+    "arrived_at": "2026-09-11T21:53:31.720369395Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "35",
+      "triggertime": "2026-09-11T21:53:09.818622Z"
+    }
+  },
+  {
+    "device_id": "51",
+    "event_id": 1789163589720,
+    "arrived_at": "2026-09-11T21:53:31.763027914Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "51",
+      "triggertime": "2026-09-11T21:53:09.720145Z"
+    }
+  },
+  {
+    "device_id": "99",
+    "event_id": 1789163591454,
+    "arrived_at": "2026-09-11T21:53:34.182044357Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "99",
+      "triggertime": "2026-09-11T21:53:11.454443Z"
+    }
+  },
+  {
+    "device_id": "48",
+    "event_id": 1789163591171,
+    "arrived_at": "2026-09-11T21:53:34.212244910Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "48",
+      "triggertime": "2026-09-11T21:53:11.171582Z"
+    }
+  },
+  {
+    "device_id": "47",
+    "event_id": 1789163591585,
+    "arrived_at": "2026-09-11T21:53:34.814534319Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "47",
+      "triggertime": "2026-09-11T21:53:11.585796Z"
+    }
+  },
+  {
+    "device_id": "44",
+    "event_id": 1789163591067,
+    "arrived_at": "2026-09-11T21:53:34.855742905Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "44",
+      "triggertime": "2026-09-11T21:53:11.067689Z"
+    }
+  },
+  {
+    "device_id": "25",
+    "event_id": 1789163592444,
+    "arrived_at": "2026-09-11T21:53:36.236295240Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "25",
+      "triggertime": "2026-09-11T21:53:12.444292Z"
+    }
+  },
+  {
+    "device_id": "39",
+    "event_id": 1789163592372,
+    "arrived_at": "2026-09-11T21:53:36.286391746Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "39",
+      "triggertime": "2026-09-11T21:53:12.372802Z"
+    }
+  },
+  {
+    "device_id": "50",
+    "event_id": 1789163592337,
+    "arrived_at": "2026-09-11T21:53:37.319616693Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "50",
+      "triggertime": "2026-09-11T21:53:12.337150Z"
+    }
+  },
+  {
+    "device_id": "12",
+    "event_id": 1789163592478,
+    "arrived_at": "2026-09-11T21:53:37.368942962Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "12",
+      "triggertime": "2026-09-11T21:53:12.478024Z"
+    }
+  },
+  {
+    "device_id": "27",
+    "event_id": 1789163592950,
+    "arrived_at": "2026-09-11T21:53:37.540175786Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "27",
+      "triggertime": "2026-09-11T21:53:12.950528Z"
+    }
+  },
+  {
+    "device_id": "16",
+    "event_id": 1789163592854,
+    "arrived_at": "2026-09-11T21:53:37.578061533Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "16",
+      "triggertime": "2026-09-11T21:53:12.854463Z"
+    }
+  },
+  {
+    "device_id": "1",
+    "event_id": 1789163592856,
+    "arrived_at": "2026-09-11T21:53:37.617317106Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "1",
+      "triggertime": "2026-09-11T21:53:12.856434Z"
+    }
+  },
+  {
+    "device_id": "18",
+    "event_id": 1789163592990,
+    "arrived_at": "2026-09-11T21:53:37.640691619Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "18",
+      "triggertime": "2026-09-11T21:53:12.990153Z"
+    }
+  },
+  {
+    "device_id": "76",
+    "event_id": 1789163593059,
+    "arrived_at": "2026-09-11T21:53:37.671602662Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "76",
+      "triggertime": "2026-09-11T21:53:13.059615Z"
+    }
+  },
+  {
+    "device_id": "97",
+    "event_id": 1789163592891,
+    "arrived_at": "2026-09-11T21:53:37.713782389Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "97",
+      "triggertime": "2026-09-11T21:53:12.891820Z"
+    }
+  },
+  {
+    "device_id": "8",
+    "event_id": 1789163592790,
+    "arrived_at": "2026-09-11T21:53:37.751221613Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "8",
+      "triggertime": "2026-09-11T21:53:12.790087Z"
+    }
+  },
+  {
+    "device_id": "81",
+    "event_id": 1789163592953,
+    "arrived_at": "2026-09-11T21:53:37.796185810Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "81",
+      "triggertime": "2026-09-11T21:53:12.953026Z"
+    }
+  },
+  {
+    "device_id": "68",
+    "event_id": 1789163593050,
+    "arrived_at": "2026-09-11T21:53:37.824624976Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "68",
+      "triggertime": "2026-09-11T21:53:13.050525Z"
+    }
+  },
+  {
+    "device_id": "63",
+    "event_id": 1789163592157,
+    "arrived_at": "2026-09-11T21:53:37.875437422Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "63",
+      "triggertime": "2026-09-11T21:53:12.157658Z"
+    }
+  },
+  {
+    "device_id": "3",
+    "event_id": 1789163593117,
+    "arrived_at": "2026-09-11T21:53:37.927714795Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "3",
+      "triggertime": "2026-09-11T21:53:13.117839Z"
+    }
+  },
+  {
+    "device_id": "32",
+    "event_id": 1789163593126,
+    "arrived_at": "2026-09-11T21:53:37.963329710Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "32",
+      "triggertime": "2026-09-11T21:53:13.126157Z"
+    }
+  },
+  {
+    "device_id": "67",
+    "event_id": 1789163593075,
+    "arrived_at": "2026-09-11T21:53:38.016189848Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "67",
+      "triggertime": "2026-09-11T21:53:13.075727Z"
+    }
+  },
+  {
+    "device_id": "41",
+    "event_id": 1789163592201,
+    "arrived_at": "2026-09-11T21:53:38.044685950Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "41",
+      "triggertime": "2026-09-11T21:53:12.201030Z"
+    }
+  },
+  {
+    "device_id": "45",
+    "event_id": 1789163592605,
+    "arrived_at": "2026-09-11T21:53:38.089271409Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "45",
+      "triggertime": "2026-09-11T21:53:12.605774Z"
+    }
+  },
+  {
+    "device_id": "17",
+    "event_id": 1789163592850,
+    "arrived_at": "2026-09-11T21:53:38.140110762Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "17",
+      "triggertime": "2026-09-11T21:53:12.850872Z"
+    }
+  },
+  {
+    "device_id": "13",
+    "event_id": 1789163592922,
+    "arrived_at": "2026-09-11T21:53:38.192662746Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "13",
+      "triggertime": "2026-09-11T21:53:12.922470Z"
+    }
+  },
+  {
+    "device_id": "11",
+    "event_id": 1789163593063,
+    "arrived_at": "2026-09-11T21:53:38.244756016Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "11",
+      "triggertime": "2026-09-11T21:53:13.063517Z"
+    }
+  },
+  {
+    "device_id": "55",
+    "event_id": 1789163593049,
+    "arrived_at": "2026-09-11T21:53:38.287428374Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "55",
+      "triggertime": "2026-09-11T21:53:13.049657Z"
+    }
+  },
+  {
+    "device_id": "31",
+    "event_id": 1789163591970,
+    "arrived_at": "2026-09-11T21:53:38.336157295Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "31",
+      "triggertime": "2026-09-11T21:53:11.970723Z"
+    }
+  },
+  {
+    "device_id": "87",
+    "event_id": 1789163593148,
+    "arrived_at": "2026-09-11T21:53:38.383335043Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "87",
+      "triggertime": "2026-09-11T21:53:13.148287Z"
+    }
+  },
+  {
+    "device_id": "9",
+    "event_id": 1789163592935,
+    "arrived_at": "2026-09-11T21:53:38.404939169Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "9",
+      "triggertime": "2026-09-11T21:53:12.935210Z"
+    }
+  },
+  {
+    "device_id": "30",
+    "event_id": 1789163593001,
+    "arrived_at": "2026-09-11T21:53:38.436323367Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "30",
+      "triggertime": "2026-09-11T21:53:13.001960Z"
+    }
+  },
+  {
+    "device_id": "35",
+    "event_id": 1789163593584,
+    "arrived_at": "2026-09-11T21:53:38.936939534Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "35",
+      "triggertime": "2026-09-11T21:53:13.584919Z"
+    }
+  },
+  {
+    "device_id": "14",
+    "event_id": 1789163593613,
+    "arrived_at": "2026-09-11T21:53:38.989376656Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "14",
+      "triggertime": "2026-09-11T21:53:13.613216Z"
+    }
+  },
+  {
+    "device_id": "11",
+    "event_id": 1789163596656,
+    "arrived_at": "2026-09-11T21:53:43.830434184Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "11",
+      "triggertime": "2026-09-11T21:53:16.656809Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163596933,
+    "arrived_at": "2026-09-11T21:53:43.880148283Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:16.933713Z"
+    }
+  },
+  {
+    "device_id": "11",
+    "event_id": 1789163596656,
+    "arrived_at": "2026-09-11T21:53:44.576610627Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "11",
+      "triggertime": "2026-09-11T21:53:16.656809Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163596933,
+    "arrived_at": "2026-09-11T21:53:44.624667310Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:16.933713Z"
+    }
+  },
+  {
+    "device_id": "42",
+    "event_id": 1789163597544,
+    "arrived_at": "2026-09-11T21:53:46.067274321Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "42",
+      "triggertime": "2026-09-11T21:53:17.544280Z"
+    }
+  },
+  {
+    "device_id": "55",
+    "event_id": 1789163597667,
+    "arrived_at": "2026-09-11T21:53:46.119163561Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "55",
+      "triggertime": "2026-09-11T21:53:17.667709Z"
+    }
+  },
+  {
+    "device_id": "62",
+    "event_id": 1789163597372,
+    "arrived_at": "2026-09-11T21:53:47.491099556Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "62",
+      "triggertime": "2026-09-11T21:53:17.372219Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163597941,
+    "arrived_at": "2026-09-11T21:53:47.523414048Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:53:17.941179Z"
+    }
+  },
+  {
+    "device_id": "62",
+    "event_id": 1789163597372,
+    "arrived_at": "2026-09-11T21:53:48.306962824Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "62",
+      "triggertime": "2026-09-11T21:53:17.372219Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163597941,
+    "arrived_at": "2026-09-11T21:53:48.336153119Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:53:17.941179Z"
+    }
+  },
+  {
+    "device_id": "42",
+    "event_id": 1789163598561,
+    "arrived_at": "2026-09-11T21:53:48.680081200Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "42",
+      "triggertime": "2026-09-11T21:53:18.561257Z"
+    }
+  },
+  {
+    "device_id": "92",
+    "event_id": 1789163597806,
+    "arrived_at": "2026-09-11T21:53:48.734678366Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "92",
+      "triggertime": "2026-09-11T21:53:17.806480Z"
+    }
+  },
+  {
+    "device_id": "3",
+    "event_id": 1789163599435,
+    "arrived_at": "2026-09-11T21:53:50.248364067Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "3",
+      "triggertime": "2026-09-11T21:53:19.435298Z"
+    }
+  },
+  {
+    "device_id": "22",
+    "event_id": 1789163599089,
+    "arrived_at": "2026-09-11T21:53:50.304224850Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "22",
+      "triggertime": "2026-09-11T21:53:19.089899Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163599518,
+    "arrived_at": "2026-09-11T21:53:50.522957271Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:53:19.518284Z"
+    }
+  },
+  {
+    "device_id": "80",
+    "event_id": 1789163599961,
+    "arrived_at": "2026-09-11T21:53:50.554977679Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "80",
+      "triggertime": "2026-09-11T21:53:19.961384Z"
+    }
+  },
+  {
+    "device_id": "62",
+    "event_id": 1789163599759,
+    "arrived_at": "2026-09-11T21:53:50.607732809Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "62",
+      "triggertime": "2026-09-11T21:53:19.759888Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163599843,
+    "arrived_at": "2026-09-11T21:53:50.661220025Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:19.843169Z"
+    }
+  },
+  {
+    "device_id": "34",
+    "event_id": 1789163600078,
+    "arrived_at": "2026-09-11T21:53:50.706877174Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "34",
+      "triggertime": "2026-09-11T21:53:20.078966Z"
+    }
+  },
+  {
+    "device_id": "18",
+    "event_id": 1789163599804,
+    "arrived_at": "2026-09-11T21:53:51.011090819Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "18",
+      "triggertime": "2026-09-11T21:53:19.804675Z"
+    }
+  },
+  {
+    "device_id": "64",
+    "event_id": 1789163600622,
+    "arrived_at": "2026-09-11T21:53:51.024570363Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "64",
+      "triggertime": "2026-09-11T21:53:20.622888Z"
+    }
+  },
+  {
+    "device_id": "1",
+    "event_id": 1789163600683,
+    "arrived_at": "2026-09-11T21:53:51.832896963Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "1",
+      "triggertime": "2026-09-11T21:53:20.683740Z"
+    }
+  },
+  {
+    "device_id": "55",
+    "event_id": 1789163600599,
+    "arrived_at": "2026-09-11T21:53:51.875001485Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "55",
+      "triggertime": "2026-09-11T21:53:20.599115Z"
+    }
+  },
+  {
+    "device_id": "55",
+    "event_id": 1789163601359,
+    "arrived_at": "2026-09-11T21:53:53.670902066Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "55",
+      "triggertime": "2026-09-11T21:53:21.359715Z"
+    }
+  },
+  {
+    "device_id": "8",
+    "event_id": 1789163601499,
+    "arrived_at": "2026-09-11T21:53:53.690064294Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "8",
+      "triggertime": "2026-09-11T21:53:21.499071Z"
+    }
+  },
+  {
+    "device_id": "5",
+    "event_id": 1789163601463,
+    "arrived_at": "2026-09-11T21:53:54.050813397Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "5",
+      "triggertime": "2026-09-11T21:53:21.463524Z"
+    }
+  },
+  {
+    "device_id": "48",
+    "event_id": 1789163601512,
+    "arrived_at": "2026-09-11T21:53:54.092141920Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "48",
+      "triggertime": "2026-09-11T21:53:21.512566Z"
+    }
+  },
+  {
+    "device_id": "51",
+    "event_id": 1789163601939,
+    "arrived_at": "2026-09-11T21:53:54.120436093Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "51",
+      "triggertime": "2026-09-11T21:53:21.939231Z"
+    }
+  },
+  {
+    "device_id": "68",
+    "event_id": 1789163601749,
+    "arrived_at": "2026-09-11T21:53:54.158964351Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "68",
+      "triggertime": "2026-09-11T21:53:21.749328Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1789163601412,
+    "arrived_at": "2026-09-11T21:53:54.189013934Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "0",
+      "triggertime": "2026-09-11T21:53:21.412747Z"
+    }
+  },
+  {
+    "device_id": "92",
+    "event_id": 1789163601875,
+    "arrived_at": "2026-09-11T21:53:54.212653061Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "92",
+      "triggertime": "2026-09-11T21:53:21.875697Z"
+    }
+  },
+  {
+    "device_id": "57",
+    "event_id": 1789163601901,
+    "arrived_at": "2026-09-11T21:53:54.233642213Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "57",
+      "triggertime": "2026-09-11T21:53:21.901983Z"
+    }
+  },
+  {
+    "device_id": "72",
+    "event_id": 1789163601985,
+    "arrived_at": "2026-09-11T21:53:54.254014766Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "72",
+      "triggertime": "2026-09-11T21:53:21.985521Z"
+    }
+  },
+  {
+    "device_id": "49",
+    "event_id": 1789163601783,
+    "arrived_at": "2026-09-11T21:53:54.283278604Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "49",
+      "triggertime": "2026-09-11T21:53:21.783265Z"
+    }
+  },
+  {
+    "device_id": "96",
+    "event_id": 1789163602052,
+    "arrived_at": "2026-09-11T21:53:54.333046662Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "96",
+      "triggertime": "2026-09-11T21:53:22.052989Z"
+    }
+  },
+  {
+    "device_id": "42",
+    "event_id": 1789163601618,
+    "arrived_at": "2026-09-11T21:53:54.363163078Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "42",
+      "triggertime": "2026-09-11T21:53:21.618624Z"
+    }
+  },
+  {
+    "device_id": "71",
+    "event_id": 1789163602100,
+    "arrived_at": "2026-09-11T21:53:54.390564714Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "71",
+      "triggertime": "2026-09-11T21:53:22.100537Z"
+    }
+  },
+  {
+    "device_id": "75",
+    "event_id": 1789163602018,
+    "arrived_at": "2026-09-11T21:53:54.432981619Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "75",
+      "triggertime": "2026-09-11T21:53:22.018222Z"
+    }
+  },
+  {
+    "device_id": "4",
+    "event_id": 1789163601953,
+    "arrived_at": "2026-09-11T21:53:54.488642065Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "4",
+      "triggertime": "2026-09-11T21:53:21.953139Z"
+    }
+  },
+  {
+    "device_id": "60",
+    "event_id": 1789163601696,
+    "arrived_at": "2026-09-11T21:53:54.533990100Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "60",
+      "triggertime": "2026-09-11T21:53:21.696414Z"
+    }
+  },
+  {
+    "device_id": "69",
+    "event_id": 1789163602053,
+    "arrived_at": "2026-09-11T21:53:54.579748589Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "69",
+      "triggertime": "2026-09-11T21:53:22.053827Z"
+    }
+  },
+  {
+    "device_id": "78",
+    "event_id": 1789163601187,
+    "arrived_at": "2026-09-11T21:53:54.611896740Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "78",
+      "triggertime": "2026-09-11T21:53:21.187939Z"
+    }
+  },
+  {
+    "device_id": "53",
+    "event_id": 1789163601712,
+    "arrived_at": "2026-09-11T21:53:54.667485945Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "53",
+      "triggertime": "2026-09-11T21:53:21.712592Z"
+    }
+  },
+  {
+    "device_id": "81",
+    "event_id": 1789163601741,
+    "arrived_at": "2026-09-11T21:53:54.701788202Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "81",
+      "triggertime": "2026-09-11T21:53:21.741967Z"
+    }
+  },
+  {
+    "device_id": "7",
+    "event_id": 1789163601928,
+    "arrived_at": "2026-09-11T21:53:54.757190333Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "7",
+      "triggertime": "2026-09-11T21:53:21.928161Z"
+    }
+  },
+  {
+    "device_id": "89",
+    "event_id": 1789163601835,
+    "arrived_at": "2026-09-11T21:53:54.783265083Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "89",
+      "triggertime": "2026-09-11T21:53:21.835545Z"
+    }
+  },
+  {
+    "device_id": "93",
+    "event_id": 1789163602544,
+    "arrived_at": "2026-09-11T21:53:56.328657711Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "93",
+      "triggertime": "2026-09-11T21:53:22.544831Z"
+    }
+  },
+  {
+    "device_id": "24",
+    "event_id": 1789163602431,
+    "arrived_at": "2026-09-11T21:53:56.368578124Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "24",
+      "triggertime": "2026-09-11T21:53:22.431390Z"
+    }
+  },
+  {
+    "device_id": "16",
+    "event_id": 1789163603285,
+    "arrived_at": "2026-09-11T21:53:56.981916662Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "16",
+      "triggertime": "2026-09-11T21:53:23.285897Z"
+    }
+  },
+  {
+    "device_id": "63",
+    "event_id": 1789163603092,
+    "arrived_at": "2026-09-11T21:53:57.025421262Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "63",
+      "triggertime": "2026-09-11T21:53:23.092016Z"
+    }
+  },
+  {
+    "device_id": "97",
+    "event_id": 1789163603352,
+    "arrived_at": "2026-09-11T21:53:57.081415338Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "97",
+      "triggertime": "2026-09-11T21:53:23.352991Z"
+    }
+  },
+  {
+    "device_id": "94",
+    "event_id": 1789163603129,
+    "arrived_at": "2026-09-11T21:53:57.108821992Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "94",
+      "triggertime": "2026-09-11T21:53:23.129598Z"
+    }
+  },
+  {
+    "device_id": "47",
+    "event_id": 1789163603048,
+    "arrived_at": "2026-09-11T21:53:57.158259167Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "47",
+      "triggertime": "2026-09-11T21:53:23.048566Z"
+    }
+  },
+  {
+    "device_id": "93",
+    "event_id": 1789163603379,
+    "arrived_at": "2026-09-11T21:53:57.199554375Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "93",
+      "triggertime": "2026-09-11T21:53:23.379232Z"
+    }
+  },
+  {
+    "device_id": "99",
+    "event_id": 1789163603139,
+    "arrived_at": "2026-09-11T21:53:57.225056771Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "99",
+      "triggertime": "2026-09-11T21:53:23.139542Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163603490,
+    "arrived_at": "2026-09-11T21:53:57.259996657Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:23.490238Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1789163603467,
+    "arrived_at": "2026-09-11T21:53:57.285093114Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "0",
+      "triggertime": "2026-09-11T21:53:23.467581Z"
+    }
+  },
+  {
+    "device_id": "92",
+    "event_id": 1789163603433,
+    "arrived_at": "2026-09-11T21:53:57.332747798Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "92",
+      "triggertime": "2026-09-11T21:53:23.433189Z"
+    }
+  },
+  {
+    "device_id": "68",
+    "event_id": 1789163603453,
+    "arrived_at": "2026-09-11T21:53:57.387695107Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "68",
+      "triggertime": "2026-09-11T21:53:23.453869Z"
+    }
+  },
+  {
+    "device_id": "74",
+    "event_id": 1789163603477,
+    "arrived_at": "2026-09-11T21:53:57.410208746Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "74",
+      "triggertime": "2026-09-11T21:53:23.477473Z"
+    }
+  },
+  {
+    "device_id": "43",
+    "event_id": 1789163603538,
+    "arrived_at": "2026-09-11T21:53:57.450465600Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "43",
+      "triggertime": "2026-09-11T21:53:23.538237Z"
+    }
+  },
+  {
+    "device_id": "85",
+    "event_id": 1789163603475,
+    "arrived_at": "2026-09-11T21:53:57.502563467Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "85",
+      "triggertime": "2026-09-11T21:53:23.475341Z"
+    }
+  },
+  {
+    "device_id": "76",
+    "event_id": 1789163603411,
+    "arrived_at": "2026-09-11T21:53:57.540691393Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "76",
+      "triggertime": "2026-09-11T21:53:23.411290Z"
+    }
+  },
+  {
+    "device_id": "17",
+    "event_id": 1789163603296,
+    "arrived_at": "2026-09-11T21:53:57.587008614Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "17",
+      "triggertime": "2026-09-11T21:53:23.296587Z"
+    }
+  },
+  {
+    "device_id": "56",
+    "event_id": 1789163603367,
+    "arrived_at": "2026-09-11T21:53:57.650814375Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "56",
+      "triggertime": "2026-09-11T21:53:23.367377Z"
+    }
+  },
+  {
+    "device_id": "50",
+    "event_id": 1789163603022,
+    "arrived_at": "2026-09-11T21:53:57.698722468Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "50",
+      "triggertime": "2026-09-11T21:53:23.022154Z"
+    }
+  },
+  {
+    "device_id": "98",
+    "event_id": 1789163603540,
+    "arrived_at": "2026-09-11T21:53:57.733697123Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "98",
+      "triggertime": "2026-09-11T21:53:23.540580Z"
+    }
+  },
+  {
+    "device_id": "71",
+    "event_id": 1789163603514,
+    "arrived_at": "2026-09-11T21:53:57.763754436Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "71",
+      "triggertime": "2026-09-11T21:53:23.514616Z"
+    }
+  },
+  {
+    "device_id": "28",
+    "event_id": 1789163603420,
+    "arrived_at": "2026-09-11T21:53:57.789163777Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "28",
+      "triggertime": "2026-09-11T21:53:23.420425Z"
+    }
+  },
+  {
+    "device_id": "24",
+    "event_id": 1789163603339,
+    "arrived_at": "2026-09-11T21:53:57.820889941Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "24",
+      "triggertime": "2026-09-11T21:53:23.339720Z"
+    }
+  },
+  {
+    "device_id": "83",
+    "event_id": 1789163603435,
+    "arrived_at": "2026-09-11T21:53:57.850954187Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "83",
+      "triggertime": "2026-09-11T21:53:23.435799Z"
+    }
+  },
+  {
+    "device_id": "60",
+    "event_id": 1789163603559,
+    "arrived_at": "2026-09-11T21:53:57.872706757Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "60",
+      "triggertime": "2026-09-11T21:53:23.559583Z"
+    }
+  },
+  {
+    "device_id": "8",
+    "event_id": 1789163603238,
+    "arrived_at": "2026-09-11T21:53:57.922703804Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "8",
+      "triggertime": "2026-09-11T21:53:23.238150Z"
+    }
+  },
+  {
+    "device_id": "46",
+    "event_id": 1789163603483,
+    "arrived_at": "2026-09-11T21:53:57.964711379Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "46",
+      "triggertime": "2026-09-11T21:53:23.483061Z"
+    }
+  },
+  {
+    "device_id": "14",
+    "event_id": 1789163603309,
+    "arrived_at": "2026-09-11T21:53:57.994999889Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "14",
+      "triggertime": "2026-09-11T21:53:23.309703Z"
+    }
+  },
+  {
+    "device_id": "21",
+    "event_id": 1789163603514,
+    "arrived_at": "2026-09-11T21:53:58.030639286Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "21",
+      "triggertime": "2026-09-11T21:53:23.514396Z"
+    }
+  },
+  {
+    "device_id": "45",
+    "event_id": 1789163603390,
+    "arrived_at": "2026-09-11T21:53:58.066164604Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "45",
+      "triggertime": "2026-09-11T21:53:23.390609Z"
+    }
+  },
+  {
+    "device_id": "13",
+    "event_id": 1789163603425,
+    "arrived_at": "2026-09-11T21:53:58.106513144Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "13",
+      "triggertime": "2026-09-11T21:53:23.425936Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163605478,
+    "arrived_at": "2026-09-11T21:54:00.342679976Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:25.478630Z"
+    }
+  },
+  {
+    "device_id": "43",
+    "event_id": 1789163605215,
+    "arrived_at": "2026-09-11T21:54:00.387886443Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "43",
+      "triggertime": "2026-09-11T21:53:25.215966Z"
+    }
+  },
+  {
+    "device_id": "28",
+    "event_id": 1789163605783,
+    "arrived_at": "2026-09-11T21:54:00.417896975Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "28",
+      "triggertime": "2026-09-11T21:53:25.783461Z"
+    }
+  },
+  {
+    "device_id": "24",
+    "event_id": 1789163605721,
+    "arrived_at": "2026-09-11T21:54:00.454609105Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "24",
+      "triggertime": "2026-09-11T21:53:25.721712Z"
+    }
+  },
+  {
+    "device_id": "31",
+    "event_id": 1789163605778,
+    "arrived_at": "2026-09-11T21:54:00.483652448Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "31",
+      "triggertime": "2026-09-11T21:53:25.778221Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163605469,
+    "arrived_at": "2026-09-11T21:54:00.512804700Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:53:25.469605Z"
+    }
+  },
+  {
+    "device_id": "23",
+    "event_id": 1789163605655,
+    "arrived_at": "2026-09-11T21:54:00.550626695Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "23",
+      "triggertime": "2026-09-11T21:53:25.655881Z"
+    }
+  },
+  {
+    "device_id": "67",
+    "event_id": 1789163605327,
+    "arrived_at": "2026-09-11T21:54:00.582807889Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "67",
+      "triggertime": "2026-09-11T21:53:25.327409Z"
+    }
+  },
+  {
+    "device_id": "35",
+    "event_id": 1789163605798,
+    "arrived_at": "2026-09-11T21:54:00.633725009Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "35",
+      "triggertime": "2026-09-11T21:53:25.798393Z"
+    }
+  },
+  {
+    "device_id": "1",
+    "event_id": 1789163605760,
+    "arrived_at": "2026-09-11T21:54:00.663290808Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "1",
+      "triggertime": "2026-09-11T21:53:25.760436Z"
+    }
+  },
+  {
+    "device_id": "41",
+    "event_id": 1789163605851,
+    "arrived_at": "2026-09-11T21:54:00.695962749Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "41",
+      "triggertime": "2026-09-11T21:53:25.851107Z"
+    }
+  },
+  {
+    "device_id": "73",
+    "event_id": 1789163605736,
+    "arrived_at": "2026-09-11T21:54:00.718554938Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "73",
+      "triggertime": "2026-09-11T21:53:25.736020Z"
+    }
+  },
+  {
+    "device_id": "47",
+    "event_id": 1789163605934,
+    "arrived_at": "2026-09-11T21:54:00.737799901Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "47",
+      "triggertime": "2026-09-11T21:53:25.934608Z"
+    }
+  },
+  {
+    "device_id": "76",
+    "event_id": 1789163605879,
+    "arrived_at": "2026-09-11T21:54:00.776941977Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "76",
+      "triggertime": "2026-09-11T21:53:25.879734Z"
+    }
+  },
+  {
+    "device_id": "30",
+    "event_id": 1789163605982,
+    "arrived_at": "2026-09-11T21:54:00.800898554Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "30",
+      "triggertime": "2026-09-11T21:53:25.982046Z"
+    }
+  },
+  {
+    "device_id": "80",
+    "event_id": 1789163605317,
+    "arrived_at": "2026-09-11T21:54:01.208143733Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "80",
+      "triggertime": "2026-09-11T21:53:25.317649Z"
+    }
+  },
+  {
+    "device_id": "70",
+    "event_id": 1789163605983,
+    "arrived_at": "2026-09-11T21:54:01.230835660Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "70",
+      "triggertime": "2026-09-11T21:53:25.983375Z"
+    }
+  },
+  {
+    "device_id": "54",
+    "event_id": 1789163607142,
+    "arrived_at": "2026-09-11T21:54:03.087453281Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "54",
+      "triggertime": "2026-09-11T21:53:27.142139Z"
+    }
+  },
+  {
+    "device_id": "68",
+    "event_id": 1789163607090,
+    "arrived_at": "2026-09-11T21:54:03.121793737Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "68",
+      "triggertime": "2026-09-11T21:53:27.090925Z"
+    }
+  },
+  {
+    "device_id": "31",
+    "event_id": 1789163610093,
+    "arrived_at": "2026-09-11T21:54:07.116183436Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "31",
+      "triggertime": "2026-09-11T21:53:30.093388Z"
+    }
+  },
+  {
+    "device_id": "68",
+    "event_id": 1789163610103,
+    "arrived_at": "2026-09-11T21:54:07.147341794Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "68",
+      "triggertime": "2026-09-11T21:53:30.103334Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1789163611465,
+    "arrived_at": "2026-09-11T21:54:09.672780352Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "0",
+      "triggertime": "2026-09-11T21:53:31.465217Z"
+    }
+  },
+  {
+    "device_id": "77",
+    "event_id": 1789163611631,
+    "arrived_at": "2026-09-11T21:54:09.715961991Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "77",
+      "triggertime": "2026-09-11T21:53:31.631606Z"
+    }
+  },
+  {
+    "device_id": "3",
+    "event_id": 1789163611833,
+    "arrived_at": "2026-09-11T21:54:11.260879021Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "3",
+      "triggertime": "2026-09-11T21:53:31.833709Z"
+    }
+  },
+  {
+    "device_id": "30",
+    "event_id": 1789163611704,
+    "arrived_at": "2026-09-11T21:54:11.297834848Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "30",
+      "triggertime": "2026-09-11T21:53:31.704794Z"
+    }
+  },
+  {
+    "device_id": "57",
+    "event_id": 1789163612020,
+    "arrived_at": "2026-09-11T21:54:11.323443739Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "57",
+      "triggertime": "2026-09-11T21:53:32.020034Z"
+    }
+  },
+  {
+    "device_id": "75",
+    "event_id": 1789163611946,
+    "arrived_at": "2026-09-11T21:54:11.363357768Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "75",
+      "triggertime": "2026-09-11T21:53:31.946062Z"
+    }
+  },
+  {
+    "device_id": "8",
+    "event_id": 1789163612089,
+    "arrived_at": "2026-09-11T21:54:11.415479779Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "8",
+      "triggertime": "2026-09-11T21:53:32.089608Z"
+    }
+  },
+  {
+    "device_id": "81",
+    "event_id": 1789163612049,
+    "arrived_at": "2026-09-11T21:54:11.474053518Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "81",
+      "triggertime": "2026-09-11T21:53:32.049201Z"
+    }
+  },
+  {
+    "device_id": "96",
+    "event_id": 1789163612436,
+    "arrived_at": "2026-09-11T21:54:11.520259258Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "96",
+      "triggertime": "2026-09-11T21:53:32.436085Z"
+    }
+  },
+  {
+    "device_id": "77",
+    "event_id": 1789163612447,
+    "arrived_at": "2026-09-11T21:54:11.567946989Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "77",
+      "triggertime": "2026-09-11T21:53:32.447261Z"
+    }
+  },
+  {
+    "device_id": "26",
+    "event_id": 1789163612825,
+    "arrived_at": "2026-09-11T21:54:11.900976786Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "26",
+      "triggertime": "2026-09-11T21:53:32.825361Z"
+    }
+  },
+  {
+    "device_id": "74",
+    "event_id": 1789163612828,
+    "arrived_at": "2026-09-11T21:54:11.936381877Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "74",
+      "triggertime": "2026-09-11T21:53:32.828106Z"
+    }
+  },
+  {
+    "device_id": "42",
+    "event_id": 1789163612884,
+    "arrived_at": "2026-09-11T21:54:11.960870950Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "42",
+      "triggertime": "2026-09-11T21:53:32.884094Z"
+    }
+  },
+  {
+    "device_id": "5",
+    "event_id": 1789163612731,
+    "arrived_at": "2026-09-11T21:54:11.977858485Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "5",
+      "triggertime": "2026-09-11T21:53:32.731630Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163612991,
+    "arrived_at": "2026-09-11T21:54:12.003961270Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:53:32.991579Z"
+    }
+  },
+  {
+    "device_id": "21",
+    "event_id": 1789163612847,
+    "arrived_at": "2026-09-11T21:54:12.030881748Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "21",
+      "triggertime": "2026-09-11T21:53:32.847754Z"
+    }
+  },
+  {
+    "device_id": "20",
+    "event_id": 1789163612962,
+    "arrived_at": "2026-09-11T21:54:12.052074072Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "20",
+      "triggertime": "2026-09-11T21:53:32.962290Z"
+    }
+  },
+  {
+    "device_id": "68",
+    "event_id": 1789163612722,
+    "arrived_at": "2026-09-11T21:54:12.073470154Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "68",
+      "triggertime": "2026-09-11T21:53:32.722828Z"
+    }
+  },
+  {
+    "device_id": "56",
+    "event_id": 1789163612258,
+    "arrived_at": "2026-09-11T21:54:12.105838003Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "56",
+      "triggertime": "2026-09-11T21:53:32.258138Z"
+    }
+  },
+  {
+    "device_id": "15",
+    "event_id": 1789163612810,
+    "arrived_at": "2026-09-11T21:54:12.151871323Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "15",
+      "triggertime": "2026-09-11T21:53:32.810718Z"
+    }
+  },
+  {
+    "device_id": "18",
+    "event_id": 1789163612593,
+    "arrived_at": "2026-09-11T21:54:12.177622728Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "18",
+      "triggertime": "2026-09-11T21:53:32.593646Z"
+    }
+  },
+  {
+    "device_id": "66",
+    "event_id": 1789163612971,
+    "arrived_at": "2026-09-11T21:54:12.228974741Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "66",
+      "triggertime": "2026-09-11T21:53:32.971274Z"
+    }
+  },
+  {
+    "device_id": "57",
+    "event_id": 1789163612983,
+    "arrived_at": "2026-09-11T21:54:12.253757304Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "57",
+      "triggertime": "2026-09-11T21:53:32.983245Z"
+    }
+  },
+  {
+    "device_id": "3",
+    "event_id": 1789163613018,
+    "arrived_at": "2026-09-11T21:54:12.281400440Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "3",
+      "triggertime": "2026-09-11T21:53:33.018009Z"
+    }
+  },
+  {
+    "device_id": "10",
+    "event_id": 1789163613072,
+    "arrived_at": "2026-09-11T21:54:12.310348379Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "10",
+      "triggertime": "2026-09-11T21:53:33.072257Z"
+    }
+  },
+  {
+    "device_id": "71",
+    "event_id": 1789163612740,
+    "arrived_at": "2026-09-11T21:54:12.348118272Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "71",
+      "triggertime": "2026-09-11T21:53:32.740940Z"
+    }
+  },
+  {
+    "device_id": "22",
+    "event_id": 1789163612978,
+    "arrived_at": "2026-09-11T21:54:12.370702366Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "22",
+      "triggertime": "2026-09-11T21:53:32.978592Z"
+    }
+  },
+  {
+    "device_id": "88",
+    "event_id": 1789163612546,
+    "arrived_at": "2026-09-11T21:54:12.383397786Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "88",
+      "triggertime": "2026-09-11T21:53:32.546192Z"
+    }
+  },
+  {
+    "device_id": "32",
+    "event_id": 1789163612954,
+    "arrived_at": "2026-09-11T21:54:12.416891021Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "32",
+      "triggertime": "2026-09-11T21:53:32.954758Z"
+    }
+  },
+  {
+    "device_id": "75",
+    "event_id": 1789163613074,
+    "arrived_at": "2026-09-11T21:54:12.466417815Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "75",
+      "triggertime": "2026-09-11T21:53:33.074562Z"
+    }
+  },
+  {
+    "device_id": "83",
+    "event_id": 1789163613055,
+    "arrived_at": "2026-09-11T21:54:12.521037436Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "83",
+      "triggertime": "2026-09-11T21:53:33.055002Z"
+    }
+  },
+  {
+    "device_id": "94",
+    "event_id": 1789163612316,
+    "arrived_at": "2026-09-11T21:54:12.564463379Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "94",
+      "triggertime": "2026-09-11T21:53:32.316560Z"
+    }
+  },
+  {
+    "device_id": "60",
+    "event_id": 1789163612998,
+    "arrived_at": "2026-09-11T21:54:12.601129587Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "60",
+      "triggertime": "2026-09-11T21:53:32.998809Z"
+    }
+  },
+  {
+    "device_id": "93",
+    "event_id": 1789163613002,
+    "arrived_at": "2026-09-11T21:54:12.634218987Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "93",
+      "triggertime": "2026-09-11T21:53:33.002603Z"
+    }
+  },
+  {
+    "device_id": "98",
+    "event_id": 1789163614164,
+    "arrived_at": "2026-09-11T21:54:15.466853361Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "98",
+      "triggertime": "2026-09-11T21:53:34.164989Z"
+    }
+  },
+  {
+    "device_id": "27",
+    "event_id": 1789163614601,
+    "arrived_at": "2026-09-11T21:54:15.513398072Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "27",
+      "triggertime": "2026-09-11T21:53:34.601730Z"
+    }
+  },
+  {
+    "device_id": "53",
+    "event_id": 1789163615265,
+    "arrived_at": "2026-09-11T21:54:16.058696419Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "53",
+      "triggertime": "2026-09-11T21:53:35.265248Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163615446,
+    "arrived_at": "2026-09-11T21:54:16.091412304Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:35.446006Z"
+    }
+  },
+  {
+    "device_id": "65",
+    "event_id": 1789163617337,
+    "arrived_at": "2026-09-11T21:54:19.107542866Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "65",
+      "triggertime": "2026-09-11T21:53:37.337501Z"
+    }
+  },
+  {
+    "device_id": "97",
+    "event_id": 1789163616959,
+    "arrived_at": "2026-09-11T21:54:19.141122946Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "97",
+      "triggertime": "2026-09-11T21:53:36.959993Z"
+    }
+  },
+  {
+    "device_id": "15",
+    "event_id": 1789163618415,
+    "arrived_at": "2026-09-11T21:54:21.018814816Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "15",
+      "triggertime": "2026-09-11T21:53:38.415812Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1789163618313,
+    "arrived_at": "2026-09-11T21:54:21.050880418Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "0",
+      "triggertime": "2026-09-11T21:53:38.313242Z"
+    }
+  },
+  {
+    "device_id": "41",
+    "event_id": 1789163618439,
+    "arrived_at": "2026-09-11T21:54:21.084316851Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "41",
+      "triggertime": "2026-09-11T21:53:38.439191Z"
+    }
+  },
+  {
+    "device_id": "93",
+    "event_id": 1789163618828,
+    "arrived_at": "2026-09-11T21:54:21.399773414Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "93",
+      "triggertime": "2026-09-11T21:53:38.828795Z"
+    }
+  },
+  {
+    "device_id": "2",
+    "event_id": 1789163618900,
+    "arrived_at": "2026-09-11T21:54:21.416341224Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "2",
+      "triggertime": "2026-09-11T21:53:38.900941Z"
+    }
+  },
+  {
+    "device_id": "59",
+    "event_id": 1789163618627,
+    "arrived_at": "2026-09-11T21:54:23.255179286Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "59",
+      "triggertime": "2026-09-11T21:53:38.627016Z"
+    }
+  },
+  {
+    "device_id": "10",
+    "event_id": 1789163618695,
+    "arrived_at": "2026-09-11T21:54:23.292653110Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "10",
+      "triggertime": "2026-09-11T21:53:38.695193Z"
+    }
+  },
+  {
+    "device_id": "94",
+    "event_id": 1789163619637,
+    "arrived_at": "2026-09-11T21:54:23.662115490Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "94",
+      "triggertime": "2026-09-11T21:53:39.637152Z"
+    }
+  },
+  {
+    "device_id": "25",
+    "event_id": 1789163619324,
+    "arrived_at": "2026-09-11T21:54:23.711748556Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "25",
+      "triggertime": "2026-09-11T21:53:39.324614Z"
+    }
+  },
+  {
+    "device_id": "89",
+    "event_id": 1789163619792,
+    "arrived_at": "2026-09-11T21:54:23.768926600Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "89",
+      "triggertime": "2026-09-11T21:53:39.792315Z"
+    }
+  },
+  {
+    "device_id": "50",
+    "event_id": 1789163619735,
+    "arrived_at": "2026-09-11T21:54:23.817548679Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "50",
+      "triggertime": "2026-09-11T21:53:39.735819Z"
+    }
+  },
+  {
+    "device_id": "52",
+    "event_id": 1789163619648,
+    "arrived_at": "2026-09-11T21:54:23.863789654Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "52",
+      "triggertime": "2026-09-11T21:53:39.648021Z"
+    }
+  },
+  {
+    "device_id": "84",
+    "event_id": 1789163619490,
+    "arrived_at": "2026-09-11T21:54:23.919099129Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "84",
+      "triggertime": "2026-09-11T21:53:39.490820Z"
+    }
+  },
+  {
+    "device_id": "71",
+    "event_id": 1789163619512,
+    "arrived_at": "2026-09-11T21:54:23.939885249Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "71",
+      "triggertime": "2026-09-11T21:53:39.512650Z"
+    }
+  },
+  {
+    "device_id": "54",
+    "event_id": 1789163619745,
+    "arrived_at": "2026-09-11T21:54:23.987873915Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "54",
+      "triggertime": "2026-09-11T21:53:39.745516Z"
+    }
+  },
+  {
+    "device_id": "16",
+    "event_id": 1789163619728,
+    "arrived_at": "2026-09-11T21:54:24.016722388Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "16",
+      "triggertime": "2026-09-11T21:53:39.728359Z"
+    }
+  },
+  {
+    "device_id": "59",
+    "event_id": 1789163619564,
+    "arrived_at": "2026-09-11T21:54:24.051918204Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "59",
+      "triggertime": "2026-09-11T21:53:39.564644Z"
+    }
+  },
+  {
+    "device_id": "5",
+    "event_id": 1789163619734,
+    "arrived_at": "2026-09-11T21:54:24.105422809Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "5",
+      "triggertime": "2026-09-11T21:53:39.734528Z"
+    }
+  },
+  {
+    "device_id": "24",
+    "event_id": 1789163619803,
+    "arrived_at": "2026-09-11T21:54:24.153556190Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "24",
+      "triggertime": "2026-09-11T21:53:39.803754Z"
+    }
+  },
+  {
+    "device_id": "99",
+    "event_id": 1789163619564,
+    "arrived_at": "2026-09-11T21:54:24.207988682Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "99",
+      "triggertime": "2026-09-11T21:53:39.564418Z"
+    }
+  },
+  {
+    "device_id": "79",
+    "event_id": 1789163619447,
+    "arrived_at": "2026-09-11T21:54:24.240240939Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "79",
+      "triggertime": "2026-09-11T21:53:39.447266Z"
+    }
+  },
+  {
+    "device_id": "10",
+    "event_id": 1789163619776,
+    "arrived_at": "2026-09-11T21:54:24.258459456Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "10",
+      "triggertime": "2026-09-11T21:53:39.776092Z"
+    }
+  },
+  {
+    "device_id": "38",
+    "event_id": 1789163619607,
+    "arrived_at": "2026-09-11T21:54:24.301797644Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "38",
+      "triggertime": "2026-09-11T21:53:39.607815Z"
+    }
+  },
+  {
+    "device_id": "37",
+    "event_id": 1789163619900,
+    "arrived_at": "2026-09-11T21:54:24.324868936Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "37",
+      "triggertime": "2026-09-11T21:53:39.900347Z"
+    }
+  },
+  {
+    "device_id": "91",
+    "event_id": 1789163619665,
+    "arrived_at": "2026-09-11T21:54:24.369154310Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "91",
+      "triggertime": "2026-09-11T21:53:39.665914Z"
+    }
+  },
+  {
+    "device_id": "6",
+    "event_id": 1789163619846,
+    "arrived_at": "2026-09-11T21:54:24.408812786Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "6",
+      "triggertime": "2026-09-11T21:53:39.846106Z"
+    }
+  },
+  {
+    "device_id": "96",
+    "event_id": 1789163619586,
+    "arrived_at": "2026-09-11T21:54:24.438737278Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "96",
+      "triggertime": "2026-09-11T21:53:39.586376Z"
+    }
+  },
+  {
+    "device_id": "83",
+    "event_id": 1789163619745,
+    "arrived_at": "2026-09-11T21:54:24.469475316Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "83",
+      "triggertime": "2026-09-11T21:53:39.745891Z"
+    }
+  },
+  {
+    "device_id": "60",
+    "event_id": 1789163619912,
+    "arrived_at": "2026-09-11T21:54:24.502662304Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "60",
+      "triggertime": "2026-09-11T21:53:39.912659Z"
+    }
+  },
+  {
+    "device_id": "33",
+    "event_id": 1789163619927,
+    "arrived_at": "2026-09-11T21:54:24.532987505Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "33",
+      "triggertime": "2026-09-11T21:53:39.927232Z"
+    }
+  },
+  {
+    "device_id": "13",
+    "event_id": 1789163620990,
+    "arrived_at": "2026-09-11T21:54:25.827819794Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "13",
+      "triggertime": "2026-09-11T21:53:40.990055Z"
+    }
+  },
+  {
+    "device_id": "70",
+    "event_id": 1789163621094,
+    "arrived_at": "2026-09-11T21:54:25.863343128Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "70",
+      "triggertime": "2026-09-11T21:53:41.094647Z"
+    }
+  },
+  {
+    "device_id": "34",
+    "event_id": 1789163621809,
+    "arrived_at": "2026-09-11T21:54:27.490679985Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "34",
+      "triggertime": "2026-09-11T21:53:41.809995Z"
+    }
+  },
+  {
+    "device_id": "17",
+    "event_id": 1789163621422,
+    "arrived_at": "2026-09-11T21:54:27.517689318Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "17",
+      "triggertime": "2026-09-11T21:53:41.422083Z"
+    }
+  },
+  {
+    "device_id": "49",
+    "event_id": 1789163621660,
+    "arrived_at": "2026-09-11T21:54:27.543482513Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "49",
+      "triggertime": "2026-09-11T21:53:41.660085Z"
+    }
+  },
+  {
+    "device_id": "13",
+    "event_id": 1789163621957,
+    "arrived_at": "2026-09-11T21:54:27.557682698Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "13",
+      "triggertime": "2026-09-11T21:53:41.957742Z"
+    }
+  },
+  {
+    "device_id": "93",
+    "event_id": 1789163621764,
+    "arrived_at": "2026-09-11T21:54:27.579851202Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "93",
+      "triggertime": "2026-09-11T21:53:41.764932Z"
+    }
+  },
+  {
+    "device_id": "10",
+    "event_id": 1789163621631,
+    "arrived_at": "2026-09-11T21:54:27.605568723Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "10",
+      "triggertime": "2026-09-11T21:53:41.631670Z"
+    }
+  },
+  {
+    "device_id": "51",
+    "event_id": 1789163621462,
+    "arrived_at": "2026-09-11T21:54:27.631563424Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "51",
+      "triggertime": "2026-09-11T21:53:41.462716Z"
+    }
+  },
+  {
+    "device_id": "67",
+    "event_id": 1789163621620,
+    "arrived_at": "2026-09-11T21:54:27.671049447Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "67",
+      "triggertime": "2026-09-11T21:53:41.620047Z"
+    }
+  },
+  {
+    "device_id": "78",
+    "event_id": 1789163622107,
+    "arrived_at": "2026-09-11T21:54:28.295047447Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "78",
+      "triggertime": "2026-09-11T21:53:42.107608Z"
+    }
+  },
+  {
+    "device_id": "94",
+    "event_id": 1789163622160,
+    "arrived_at": "2026-09-11T21:54:28.338680832Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "94",
+      "triggertime": "2026-09-11T21:53:42.160595Z"
+    }
+  },
+  {
+    "device_id": "42",
+    "event_id": 1789163623067,
+    "arrived_at": "2026-09-11T21:54:28.787299703Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "42",
+      "triggertime": "2026-09-11T21:53:43.067563Z"
+    }
+  },
+  {
+    "device_id": "39",
+    "event_id": 1789163623431,
+    "arrived_at": "2026-09-11T21:54:28.811596545Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "39",
+      "triggertime": "2026-09-11T21:53:43.431650Z"
+    }
+  },
+  {
+    "device_id": "56",
+    "event_id": 1789163623479,
+    "arrived_at": "2026-09-11T21:54:28.866728105Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "56",
+      "triggertime": "2026-09-11T21:53:43.479718Z"
+    }
+  },
+  {
+    "device_id": "82",
+    "event_id": 1789163623176,
+    "arrived_at": "2026-09-11T21:54:28.887625989Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "82",
+      "triggertime": "2026-09-11T21:53:43.176069Z"
+    }
+  },
+  {
+    "device_id": "15",
+    "event_id": 1789163623081,
+    "arrived_at": "2026-09-11T21:54:28.917460573Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "15",
+      "triggertime": "2026-09-11T21:53:43.081839Z"
+    }
+  },
+  {
+    "device_id": "38",
+    "event_id": 1789163623509,
+    "arrived_at": "2026-09-11T21:54:28.944413770Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "38",
+      "triggertime": "2026-09-11T21:53:43.509874Z"
+    }
+  },
+  {
+    "device_id": "2",
+    "event_id": 1789163622911,
+    "arrived_at": "2026-09-11T21:54:28.976403195Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "2",
+      "triggertime": "2026-09-11T21:53:42.911694Z"
+    }
+  },
+  {
+    "device_id": "84",
+    "event_id": 1789163623451,
+    "arrived_at": "2026-09-11T21:54:29.014516067Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "84",
+      "triggertime": "2026-09-11T21:53:43.451782Z"
+    }
+  },
+  {
+    "device_id": "27",
+    "event_id": 1789163623422,
+    "arrived_at": "2026-09-11T21:54:29.038024940Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "27",
+      "triggertime": "2026-09-11T21:53:43.422184Z"
+    }
+  },
+  {
+    "device_id": "67",
+    "event_id": 1789163623468,
+    "arrived_at": "2026-09-11T21:54:29.077219714Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "67",
+      "triggertime": "2026-09-11T21:53:43.468774Z"
+    }
+  },
+  {
+    "device_id": "17",
+    "event_id": 1789163623523,
+    "arrived_at": "2026-09-11T21:54:29.105933732Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "17",
+      "triggertime": "2026-09-11T21:53:43.523416Z"
+    }
+  },
+  {
+    "device_id": "96",
+    "event_id": 1789163623517,
+    "arrived_at": "2026-09-11T21:54:29.144959345Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "96",
+      "triggertime": "2026-09-11T21:53:43.517117Z"
+    }
+  },
+  {
+    "device_id": "19",
+    "event_id": 1789163623585,
+    "arrived_at": "2026-09-11T21:54:29.192802460Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "19",
+      "triggertime": "2026-09-11T21:53:43.585594Z"
+    }
+  },
+  {
+    "device_id": "32",
+    "event_id": 1789163623566,
+    "arrived_at": "2026-09-11T21:54:29.223766300Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "32",
+      "triggertime": "2026-09-11T21:53:43.566802Z"
+    }
+  },
+  {
+    "device_id": "76",
+    "event_id": 1789163623570,
+    "arrived_at": "2026-09-11T21:54:29.262644850Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "76",
+      "triggertime": "2026-09-11T21:53:43.570555Z"
+    }
+  },
+  {
+    "device_id": "66",
+    "event_id": 1789163623277,
+    "arrived_at": "2026-09-11T21:54:29.320565054Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "66",
+      "triggertime": "2026-09-11T21:53:43.277588Z"
+    }
+  },
+  {
+    "device_id": "57",
+    "event_id": 1789163623606,
+    "arrived_at": "2026-09-11T21:54:29.367361873Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "57",
+      "triggertime": "2026-09-11T21:53:43.606297Z"
+    }
+  },
+  {
+    "device_id": "79",
+    "event_id": 1789163623392,
+    "arrived_at": "2026-09-11T21:54:29.407419477Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "79",
+      "triggertime": "2026-09-11T21:53:43.392388Z"
+    }
+  },
+  {
+    "device_id": "49",
+    "event_id": 1789163623641,
+    "arrived_at": "2026-09-11T21:54:29.439212943Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "49",
+      "triggertime": "2026-09-11T21:53:43.641027Z"
+    }
+  },
+  {
+    "device_id": "90",
+    "event_id": 1789163623589,
+    "arrived_at": "2026-09-11T21:54:29.469204562Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "90",
+      "triggertime": "2026-09-11T21:53:43.589993Z"
+    }
+  },
+  {
+    "device_id": "16",
+    "event_id": 1789163623669,
+    "arrived_at": "2026-09-11T21:54:29.502797492Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "16",
+      "triggertime": "2026-09-11T21:53:43.669994Z"
+    }
+  },
+  {
+    "device_id": "9",
+    "event_id": 1789163623435,
+    "arrived_at": "2026-09-11T21:54:29.521820963Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "9",
+      "triggertime": "2026-09-11T21:53:43.435928Z"
+    }
+  },
+  {
+    "device_id": "97",
+    "event_id": 1789163623789,
+    "arrived_at": "2026-09-11T21:54:29.556680134Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "phone": "97",
+      "triggertime": "2026-09-11T21:53:43.789917Z"
+    }
+  }
+]
