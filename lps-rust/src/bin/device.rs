@@ -69,7 +69,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let args = Args::parse();
 
-    let mut config = Config::load_from_file(&args.config_file)
+    let config = Config::load_from_file(&args.config_file)
         .await
         .unwrap_or_else(|err| {
             tracing::error!("Failed to load config: {}", err);
@@ -77,19 +77,6 @@ async fn main() -> Result<(), anyhow::Error> {
 
             Config::default()
         });
-
-    if config
-        .min_event_interval
-        .map(|d| d.as_millis())
-        .unwrap_or(0)
-        > config.max_event_interval.as_millis()
-    {
-        tracing::warn!(
-            "min_event_interval is greater than max_event_interval, setting min_event_interval to None"
-        );
-
-        config.min_event_interval = None;
-    }
 
     tracing::info!(?config, "Starting");
 
@@ -106,15 +93,12 @@ async fn main() -> Result<(), anyhow::Error> {
                         let client = reqwest::Client::new();
 
                         for i in config.iter() {
-                            let min_ms = config.min_event_interval.map(|d| d.as_millis()).unwrap_or(0);
-
-                            // max_ms is always >= min_ms. See check above.
                             let max_ms = config.max_event_interval.as_millis();
 
                             let duration_ms = if max_ms == 0 {
                                 0
                             } else {
-                                rand::rng().random_range(min_ms..max_ms) as u64
+                                rand::rng().random_range(0..max_ms) as u64
                             };
 
                             tokio::time::sleep(Duration::from_millis(duration_ms)).await;

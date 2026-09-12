@@ -367,7 +367,6 @@ impl Config {
             ty: ConfigType::Device(CrateDeviceConfig {
                 devices_count: self.devices.devices_count,
                 max_event_interval: self.devices.max_event_interval,
-                min_event_interval: self.devices.min_event_interval,
                 max_events: Some(self.devices.max_events),
                 retry_duration: self.devices.retry_duration,
                 server_push_urls: (0..self.amqp.producers_count())
@@ -714,8 +713,6 @@ pub struct DeviceConfig {
     pub devices_count: u32,
     #[serde(with = "humantime_serde")]
     pub max_event_interval: Duration,
-    #[serde(with = "humantime_serde")]
-    pub min_event_interval: Option<Duration>,
     pub max_events: u64,
     #[serde(with = "humantime_serde")]
     pub retry_duration: Duration,
@@ -936,7 +933,6 @@ impl Config {
             ty: ConfigType::Device(CrateDeviceConfig {
                 devices_count: self.devices.devices_count,
                 max_event_interval: self.devices.max_event_interval,
-                min_event_interval: self.devices.min_event_interval,
                 max_events: Some(self.devices.max_events),
                 retry_duration: self.devices.retry_duration,
                 server_push_urls: (0..self.mqtt.producers_count())
