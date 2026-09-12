@@ -30,13 +30,23 @@ python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-
 # Phase 3
 
 # AMQP
-# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/1" --base-config "simulations/amqp/phase-3/1/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/1/logs"
-# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/2" --base-config "simulations/amqp/phase-3/2/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/2/logs"
-# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/3" --base-config "simulations/amqp/phase-3/3/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/3/logs"
-# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/4" --base-config "simulations/amqp/phase-3/4/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/4/logs"
-# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/5" --base-config "simulations/amqp/phase-3/5/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/5/logs"
+# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/a/1" --base-config "simulations/amqp/phase-3/a/1/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/a/1/logs"
+# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/a/2" --base-config "simulations/amqp/phase-3/a/2/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/a/2/logs"
+# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/a/3" --base-config "simulations/amqp/phase-3/a/3/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/a/3/logs"
+# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/a/4" --base-config "simulations/amqp/phase-3/a/4/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/a/4/logs"
+# python3 runner.py --protocol "amqp" --start-index 6 --runs 10 --base-dir "simulations/amqp/phase-3/a/5" --base-config "simulations/amqp/phase-3/a/5/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/a/5/logs"
+
+python3 runner.py --protocol "amqp" --runs 5 --base-dir "simulations/amqp/phase-3/b/1" --base-config "simulations/amqp/phase-3/b/1/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/b/1/logs"
+python3 runner.py --protocol "amqp" --runs 5 --base-dir "simulations/amqp/phase-3/b/2" --base-config "simulations/amqp/phase-3/b/2/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/b/2/logs"
+python3 runner.py --protocol "amqp" --runs 5 --base-dir "simulations/amqp/phase-3/b/3" --base-config "simulations/amqp/phase-3/b/3/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/b/3/logs"
+python3 runner.py --protocol "amqp" --runs 5 --base-dir "simulations/amqp/phase-3/b/4" --base-config "simulations/amqp/phase-3/b/4/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/b/4/logs"
+python3 runner.py --protocol "amqp" --runs 5 --base-dir "simulations/amqp/phase-3/b/5" --base-config "simulations/amqp/phase-3/b/5/simulation-config.yaml" --log-dir "simulations/amqp/phase-3/b/5/logs"
 
 # MQTT
-# python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/1" --base-config "simulations/mqtt/phase-3/1/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/1/logs"
-# python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/2" --base-config "simulations/mqtt/phase-3/2/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/2/logs"
-# python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/3" --base-config "simulations/mqtt/phase-3/3/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/3/logs"
+# python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/a/1" --base-config "simulations/mqtt/phase-3/a/1/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/a/1/logs"
+# python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/a/2" --base-config "simulations/mqtt/phase-3/a/2/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/a/2/logs"
+# python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/a/3" --base-config "simulations/mqtt/phase-3/a/3/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/a/3/logs"
+
+python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/b/1" --base-config "simulations/mqtt/phase-3/b/1/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/b/1/logs"
+python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/b/2" --base-config "simulations/mqtt/phase-3/b/2/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/b/2/logs"
+python3 runner.py --protocol "mqtt" --runs 5 --base-dir "simulations/mqtt/phase-3/b/3" --base-config "simulations/mqtt/phase-3/b/3/simulation-config.yaml" --log-dir "simulations/mqtt/phase-3/b/3/logs"

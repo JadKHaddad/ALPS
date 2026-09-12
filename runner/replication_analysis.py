@@ -379,12 +379,12 @@ if __name__ == "__main__":
 # python3 replication_analysis.py --dir simulations/mqtt/phase-2/1/c --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-2/1/c/summary.json --metrics duplication_rate,out_of_order_rate --representative-metric duplication_rate
 # python3 replication_analysis.py --dir simulations/mqtt/phase-2/2/c --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-2/2/c/summary.json --metrics duplication_rate,out_of_order_rate --representative-metric duplication_rate
 
-# python3 replication_analysis.py --dir simulations/amqp/phase-3/1 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/1/summary.json
-# python3 replication_analysis.py --dir simulations/amqp/phase-3/2 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/2/summary.json
-# python3 replication_analysis.py --dir simulations/amqp/phase-3/3 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/3/summary.json
-# python3 replication_analysis.py --dir simulations/amqp/phase-3/4 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/4/summary.json
-# python3 replication_analysis.py --dir simulations/amqp/phase-3/5 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/5/summary.json
+# python3 replication_analysis.py --dir simulations/amqp/phase-3/a/1 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/a/1/summary.json
+# python3 replication_analysis.py --dir simulations/amqp/phase-3/a/2 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/a/2/summary.json
+# python3 replication_analysis.py --dir simulations/amqp/phase-3/a/3 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/a/3/summary.json
+# python3 replication_analysis.py --dir simulations/amqp/phase-3/a/4 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/a/4/summary.json
+# python3 replication_analysis.py --dir simulations/amqp/phase-3/a/5 --confidence 0.95 --precision 0.10 --json simulations/amqp/phase-3/a/5/summary.json
 
-# python3 replication_analysis.py --dir simulations/mqtt/phase-3/1 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-3/1/summary.json
-# python3 replication_analysis.py --dir simulations/mqtt/phase-3/2 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-3/2/summary.json
-# python3 replication_analysis.py --dir simulations/mqtt/phase-3/3 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-3/3/summary.json
+# python3 replication_analysis.py --dir simulations/mqtt/phase-3/a/1 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-3/a/1/summary.json
+# python3 replication_analysis.py --dir simulations/mqtt/phase-3/a/2 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-3/a/2/summary.json
+# python3 replication_analysis.py --dir simulations/mqtt/phase-3/a/3 --confidence 0.95 --precision 0.10 --json simulations/mqtt/phase-3/a/3/summary.json
