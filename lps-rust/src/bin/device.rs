@@ -12,7 +12,7 @@ use std::{path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
 use lps_rust::{Event, SimpleCall, device::Config};
-use rand::RngExt;
+use rand::{RngExt, seq::SliceRandom};
 
 use clap::Parser;
 use tokio::sync::Mutex;
@@ -123,7 +123,11 @@ async fn main() -> Result<(), anyhow::Error> {
 
                             let mut try_index = 0;
 
-                            let mut server_push_urls = config.server_push_urls.clone().into_iter().cycle();
+                            let mut server_push_urls = config.server_push_urls.clone();
+
+                            server_push_urls.shuffle(&mut rand::rng());
+                            
+                            let mut server_push_urls = server_push_urls.into_iter().cycle();
 
                             'work: loop {
                                 try_index += 1;
