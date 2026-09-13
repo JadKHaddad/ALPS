@@ -144,14 +144,14 @@ impl Event {
         let mut violations = Vec::new();
 
         for event in events {
-            if let Some(&prev_max) = last.get(&event.device_id) {
-                if event.event_id < prev_max {
-                    violations.push(OrderViolation::new(
-                        event.device_id.clone(),
-                        event.event_id,
-                        prev_max,
-                    ));
-                }
+            if let Some(&prev_max) = last.get(&event.device_id)
+                && event.event_id < prev_max
+            {
+                violations.push(OrderViolation::new(
+                    event.device_id.clone(),
+                    event.event_id,
+                    prev_max,
+                ));
             }
 
             last.insert(event.device_id.clone(), event.event_id);
@@ -658,7 +658,7 @@ mod tests {
         };
 
         // #1 (08:00), #2 (09:00), #3 (09:01), #4 (08:01), #5 (08:05)
-        let events = vec![
+        let events = [
             make_event(8, 0),
             make_event(9, 0),
             make_event(9, 1),
