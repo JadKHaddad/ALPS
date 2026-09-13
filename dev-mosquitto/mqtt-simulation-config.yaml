@@ -11,23 +11,25 @@ devices:
   max_event_interval: 100ms
   min_event_interval: 0s
   retry_duration: 250ms
-  max_events: 10
+  max_events: 100
 
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
-  max_work_duration: 10s
-  min_work_duration: 5s
-  max_response_duration: 1ms
-  shutdown_after_idle_duration: 30s
+  max_work_duration: 250ms
+  # min_work_duration: 0s
+  max_response_duration: 250ms
+  # min_response_duration: 0s
+  shutdown_after_idle_duration: 10s
   server_count: 1
 
 mqtt:
+  use_mosquitto: true
   producers:
-    producers_count: 2
+    producers_count: 3
   consumers:
-    consumers_count: 2
+    consumers_count: 3
     # mqtt_proxy:
     #   socket_addr: 0.0.0.0:9090
     #   failure_rate: 0.4

@@ -716,7 +716,7 @@ pub struct DeviceConfig {
     pub devices_count: u32,
     #[serde(with = "humantime_serde")]
     pub max_event_interval: Duration,
-    #[serde(with = "humantime_serde")]
+    #[serde(default, with = "humantime_serde")]
     pub min_event_interval: Option<Duration>,
     pub max_events: u64,
     #[serde(with = "humantime_serde")]
@@ -832,6 +832,8 @@ pub enum ConfigType {
 pub struct MqttConfig {
     pub producers: MqttProducersConfig,
     pub consumers: MqttConsumersConfig,
+    #[serde(default)]
+    pub use_mosquitto: bool,
 }
 
 impl MqttConfig {
@@ -934,6 +936,56 @@ impl Config {
     // Compose service *keys* (map keys), not container names, are what depends_on references.
     fn hive_mq_log_init_container_name_key(&self) -> String {
         String::from("hivemq-log-init")
+    }
+
+    fn mosquitto_config_dir(&self) -> String {
+        String::from("/mosquitto/config")
+    }
+
+    /// Mounts the `host-volume/mosquitto/config:/mosquitto/config`
+    fn mosquitto_config_dir_volume_mount(&self) -> String {
+        let host_volume = self.abs_host_volume();
+
+        format!(
+            "{}/mosquitto/config:{}",
+            host_volume,
+            self.mosquitto_config_dir()
+        )
+    }
+
+    fn mosquitto_init_container_name(&self) -> String {
+        String::from("lps-mosquitto-init")
+    }
+
+    // Compose service *keys* (map keys), not container names, are what depends_on references.
+    fn mosquitto_init_container_name_key(&self) -> String {
+        String::from("mosquitto-init")
+    }
+
+    fn mosquitto_init_docker_service(&self) -> DockerService {
+        DockerService::default()
+        .with_image(String::from("busybox:latest"))
+        .with_container_name(self.mosquitto_init_container_name())
+        .with_command(format!(
+            "sh -c \"mkdir -p {dir} && echo 'listener {port}' > {dir}/mosquitto.conf && echo 'allow_anonymous true' >> {dir}/mosquitto.conf\"",
+            dir = self.mosquitto_config_dir(),
+            port = self.hive_mq_container_port_u16(),
+        ))
+        .with_volumes(vec![self.mosquitto_config_dir_volume_mount()])
+        .with_networks(vec![self.service_network_name()])
+    }
+
+    fn mosquitto_docker_service(&self) -> DockerService {
+        let port = self.hive_mq_container_port_u16();
+
+        DockerService::default()
+            .with_image(String::from("eclipse-mosquitto:2.1.2-alpine"))
+            .with_container_name(self.hive_mq_container_name())
+            .with_unless_stopped()
+            .with_networks(vec![self.service_network_name()])
+            .with_ports(vec![format!("{port}:{port}")])
+            .with_volumes(vec![self.mosquitto_config_dir_volume_mount()])
+            .with_depends_on_completed(self.mosquitto_init_container_name_key())
     }
 
     fn mqtt_devices_config_files(&self) -> Vec<ConfigFile> {
@@ -1168,11 +1220,20 @@ impl Config {
 
         let mut services = BTreeMap::new();
 
-        services.insert(
-            self.hive_mq_log_init_container_name_key(),
-            self.hive_mq_log_init_docker_service(),
-        );
-        services.insert(String::from("hivemq"), self.hive_mq_docker_service());
+        if self.mqtt.use_mosquitto {
+            services.insert(
+                self.mosquitto_init_container_name_key(),
+                self.mosquitto_init_docker_service(),
+            );
+            services.insert(String::from("hivemq"), self.mosquitto_docker_service());
+        } else {
+            services.insert(
+                self.hive_mq_log_init_container_name_key(),
+                self.hive_mq_log_init_docker_service(),
+            );
+            services.insert(String::from("hivemq"), self.hive_mq_docker_service());
+        }
+
         services.extend(self.server_docker_services());
         services.extend(self.deduplication_docker_services());
         services.insert(String::from("device"), self.device_docker_service());

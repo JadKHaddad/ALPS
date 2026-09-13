@@ -1,103 +1,560 @@
-2026-09-13 18:58:11,553 - __main__ - INFO - DNS resolved lps-ars-comp-2-proxy-1 -> 172.18.0.6
-2026-09-13 18:58:11,601 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET, HTTP/2: False
-2026-09-13 18:58:11,601 - __main__ - INFO - Starting MQTT to HTTP forwarder
-2026-09-13 18:58:11,603 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-1' properties=None
-2026-09-13 18:58:11,604 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[ReceiveMaximum : 20, TopicAliasMaximum : 10, MaximumPacketSize : 2000000]
-2026-09-13 18:58:11,604 - __main__ - INFO - Connected to MQTT broker at lps-hivemq:1883
-2026-09-13 18:58:11,605 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
-2026-09-13 18:58:11,605 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m1) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
-2026-09-13 18:58:11,605 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 1
-2026-09-13 18:58:11,605 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m2) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
-2026-09-13 18:58:11,605 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 2
-2026-09-13 18:58:11,606 - __main__ - DEBUG - Received SUBACK
-2026-09-13 18:58:11,606 - __main__ - INFO - SUBACK received for mid 1, reason_codes: ['Granted QoS 2']
-2026-09-13 18:58:11,606 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 2
-2026-09-13 18:58:11,606 - __main__ - DEBUG - Received SUBACK
-2026-09-13 18:58:11,607 - __main__ - INFO - SUBACK received for mid 2, reason_codes: ['Granted QoS 2']
-2026-09-13 18:58:11,607 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 2
-2026-09-13 18:58:12,534 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m1), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:12,534 - __main__ - DEBUG - Sending PUBREC (Mid: 1)
-2026-09-13 18:58:12,534 - __main__ - DEBUG - Received PUBREL (Mid: 1)
-2026-09-13 18:58:12,534 - __main__ - INFO - [device-1-event-0-try-3] Received message 1 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:11.940810+00:00", "request_id": "device-1-event-0-try-3"}
-2026-09-13 18:58:17,697 - __main__ - DEBUG - [device-1-event-0-try-3] HTTP version: HTTP/1.1
-2026-09-13 18:58:17,697 - __main__ - INFO - [device-1-event-0-try-3] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:58:17,697 - __main__ - INFO - [device-1-event-0-try-3] Sending Ack for 1 with QoS 2
-2026-09-13 18:58:17,698 - __main__ - DEBUG - Sending PUBCOMP (Mid: 1)
-2026-09-13 18:58:17,698 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m2), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,698 - __main__ - DEBUG - Sending PUBREC (Mid: 2)
-2026-09-13 18:58:17,698 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m3), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,698 - __main__ - DEBUG - Sending PUBREC (Mid: 3)
-2026-09-13 18:58:17,698 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m4), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,700 - __main__ - DEBUG - Sending PUBREC (Mid: 4)
-2026-09-13 18:58:17,700 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m5), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,700 - __main__ - DEBUG - Sending PUBREC (Mid: 5)
-2026-09-13 18:58:17,700 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m6), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,700 - __main__ - DEBUG - Sending PUBREC (Mid: 6)
-2026-09-13 18:58:17,700 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m7), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,700 - __main__ - DEBUG - Sending PUBREC (Mid: 7)
-2026-09-13 18:58:17,701 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m8), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,701 - __main__ - DEBUG - Sending PUBREC (Mid: 8)
-2026-09-13 18:58:17,701 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m9), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,701 - __main__ - DEBUG - Sending PUBREC (Mid: 9)
-2026-09-13 18:58:17,701 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m10), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
-2026-09-13 18:58:17,701 - __main__ - DEBUG - Sending PUBREC (Mid: 10)
-2026-09-13 18:58:17,739 - __main__ - DEBUG - Received PUBREL (Mid: 2)
-2026-09-13 18:58:17,740 - __main__ - INFO - [device-1-event-1-try-1] Received message 2 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:12.550257+00:00", "request_id": "device-1-event-1-try-1"}
-2026-09-13 18:58:24,519 - __main__ - DEBUG - [device-1-event-1-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:58:24,519 - __main__ - INFO - [device-1-event-1-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:58:24,519 - __main__ - INFO - [device-1-event-1-try-1] Sending Ack for 2 with QoS 2
-2026-09-13 18:58:24,519 - __main__ - DEBUG - Sending PUBCOMP (Mid: 2)
-2026-09-13 18:58:24,520 - __main__ - DEBUG - Received PUBREL (Mid: 3)
-2026-09-13 18:58:24,520 - __main__ - INFO - [device-1-event-2-try-1] Received message 3 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:12.711336+00:00", "request_id": "device-1-event-2-try-1"}
-2026-09-13 18:58:34,032 - __main__ - DEBUG - [device-1-event-2-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:58:34,032 - __main__ - INFO - [device-1-event-2-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:58:34,032 - __main__ - INFO - [device-1-event-2-try-1] Sending Ack for 3 with QoS 2
-2026-09-13 18:58:34,032 - __main__ - DEBUG - Sending PUBCOMP (Mid: 3)
-2026-09-13 18:58:34,033 - __main__ - DEBUG - Received PUBREL (Mid: 4)
-2026-09-13 18:58:34,033 - __main__ - INFO - [device-1-event-3-try-1] Received message 4 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:12.902422+00:00", "request_id": "device-1-event-3-try-1"}
-2026-09-13 18:58:42,731 - __main__ - DEBUG - [device-1-event-3-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:58:42,731 - __main__ - INFO - [device-1-event-3-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:58:42,731 - __main__ - INFO - [device-1-event-3-try-1] Sending Ack for 4 with QoS 2
-2026-09-13 18:58:42,731 - __main__ - DEBUG - Sending PUBCOMP (Mid: 4)
-2026-09-13 18:58:42,731 - __main__ - DEBUG - Received PUBREL (Mid: 5)
-2026-09-13 18:58:42,731 - __main__ - INFO - [device-0-event-4-try-1] Received message 5 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.085293+00:00", "request_id": "device-0-event-4-try-1"}
-2026-09-13 18:58:51,228 - __main__ - DEBUG - [device-0-event-4-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:58:51,228 - __main__ - INFO - [device-0-event-4-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:58:51,228 - __main__ - INFO - [device-0-event-4-try-1] Sending Ack for 5 with QoS 2
-2026-09-13 18:58:51,230 - __main__ - DEBUG - Sending PUBCOMP (Mid: 5)
-2026-09-13 18:58:51,231 - __main__ - DEBUG - Received PUBREL (Mid: 6)
-2026-09-13 18:58:51,231 - __main__ - INFO - [device-1-event-4-try-1] Received message 6 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.151032+00:00", "request_id": "device-1-event-4-try-1"}
-2026-09-13 18:58:57,338 - __main__ - DEBUG - [device-1-event-4-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:58:57,338 - __main__ - INFO - [device-1-event-4-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:58:57,338 - __main__ - INFO - [device-1-event-4-try-1] Sending Ack for 6 with QoS 2
-2026-09-13 18:58:57,338 - __main__ - DEBUG - Sending PUBCOMP (Mid: 6)
-2026-09-13 18:58:57,339 - __main__ - DEBUG - Received PUBREL (Mid: 7)
-2026-09-13 18:58:57,339 - __main__ - INFO - [device-0-event-6-try-1] Received message 7 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.299937+00:00", "request_id": "device-0-event-6-try-1"}
-2026-09-13 18:59:04,114 - __main__ - DEBUG - [device-0-event-6-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:59:04,114 - __main__ - INFO - [device-0-event-6-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:59:04,114 - __main__ - INFO - [device-0-event-6-try-1] Sending Ack for 7 with QoS 2
-2026-09-13 18:59:04,115 - __main__ - DEBUG - Sending PUBCOMP (Mid: 7)
-2026-09-13 18:59:04,115 - __main__ - DEBUG - Received PUBREL (Mid: 8)
-2026-09-13 18:59:04,115 - __main__ - INFO - [device-1-event-7-try-1] Received message 8 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.344017+00:00", "request_id": "device-1-event-7-try-1"}
-2026-09-13 18:59:13,916 - __main__ - DEBUG - [device-1-event-7-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:59:13,916 - __main__ - INFO - [device-1-event-7-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:59:13,917 - __main__ - INFO - [device-1-event-7-try-1] Sending Ack for 8 with QoS 2
-2026-09-13 18:59:13,917 - __main__ - DEBUG - Sending PUBCOMP (Mid: 8)
-2026-09-13 18:59:13,917 - __main__ - DEBUG - Received PUBREL (Mid: 9)
-2026-09-13 18:59:13,917 - __main__ - INFO - [device-0-event-7-try-1] Received message 9 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.445900+00:00", "request_id": "device-0-event-7-try-1"}
-2026-09-13 18:59:21,371 - __main__ - DEBUG - [device-0-event-7-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:59:21,371 - __main__ - INFO - [device-0-event-7-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:59:21,371 - __main__ - INFO - [device-0-event-7-try-1] Sending Ack for 9 with QoS 2
-2026-09-13 18:59:21,372 - __main__ - DEBUG - Sending PUBCOMP (Mid: 9)
-2026-09-13 18:59:21,372 - __main__ - DEBUG - Received PUBREL (Mid: 10)
-2026-09-13 18:59:21,372 - __main__ - INFO - [device-1-event-9-try-1] Received message 10 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.549008+00:00", "request_id": "device-1-event-9-try-1"}
-2026-09-13 18:59:28,361 - __main__ - DEBUG - [device-1-event-9-try-1] HTTP version: HTTP/1.1
-2026-09-13 18:59:28,361 - __main__ - INFO - [device-1-event-9-try-1] Successfully forwarded message to http://172.18.0.6:8080/ID_REQ_KC_STORE7D3BPACKET
-2026-09-13 18:59:28,362 - __main__ - INFO - [device-1-event-9-try-1] Sending Ack for 10 with QoS 2
-2026-09-13 18:59:28,362 - __main__ - DEBUG - Sending PUBCOMP (Mid: 10)
-2026-09-13 18:59:28,362 - __main__ - DEBUG - Sending PINGREQ
-2026-09-13 18:59:28,404 - __main__ - DEBUG - Received PINGRESP
-2026-09-13 18:59:52,472 - __main__ - WARNING - Unexpected disconnection from MQTT broker
-2026-09-13 18:59:52,481 - __main__ - INFO - Shutdown signal received
-2026-09-13 18:59:53,472 - __main__ - INFO - MQTT client stopped
-2026-09-13 18:59:53,472 - __main__ - INFO - HTTP client closed
+2026-09-13 19:19:43,601 - __main__ - INFO - DNS resolved lps-ars-comp-2-proxy-1 -> 172.18.0.15
+2026-09-13 19:19:43,697 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET, HTTP/2: False
+2026-09-13 19:19:43,699 - __main__ - INFO - Starting MQTT to HTTP forwarder
+2026-09-13 19:19:43,701 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-1' properties=None
+2026-09-13 19:19:43,703 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[ReceiveMaximum : 20, TopicAliasMaximum : 10, MaximumPacketSize : 2000000]
+2026-09-13 19:19:43,703 - __main__ - INFO - Connected to MQTT broker at lps-hivemq:1883
+2026-09-13 19:19:43,703 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-13 19:19:43,703 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m1) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-13 19:19:43,703 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 1
+2026-09-13 19:19:43,703 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m2) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-13 19:19:43,703 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 2
+2026-09-13 19:19:43,704 - __main__ - DEBUG - Received SUBACK
+2026-09-13 19:19:43,704 - __main__ - INFO - SUBACK received for mid 1, reason_codes: ['Granted QoS 2']
+2026-09-13 19:19:43,705 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 2
+2026-09-13 19:19:43,705 - __main__ - DEBUG - Received SUBACK
+2026-09-13 19:19:43,705 - __main__ - INFO - SUBACK received for mid 2, reason_codes: ['Granted QoS 2']
+2026-09-13 19:19:43,705 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 2
+2026-09-13 19:19:44,198 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m1), 'legacy-proxy-1-2/message', properties=[], ...  (158 bytes)
+2026-09-13 19:19:44,198 - __main__ - DEBUG - Sending PUBREC (Mid: 1)
+2026-09-13 19:19:44,198 - __main__ - DEBUG - Received PUBREL (Mid: 1)
+2026-09-13 19:19:44,198 - __main__ - INFO - [device-1-event-0-try-4] Received message 1 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:43.437507+00:00", "request_id": "device-1-event-0-try-4"}
+2026-09-13 19:19:44,199 - __main__ - ERROR - [device-1-event-0-try-4] Failed to forward message to HTTP endpoint: [Errno 111] Connection refused
+2026-09-13 19:19:44,199 - __main__ - DEBUG - Sending PUBLISH (d0, q2, r0, m3), 'b'legacy-proxy-2-1/retry/message'', properties=None, ... (158 bytes)
+2026-09-13 19:19:45,199 - __main__ - INFO - [device-1-event-0-try-4] Sending Ack for 1 with QoS 2
+2026-09-13 19:19:45,200 - __main__ - DEBUG - Sending PUBCOMP (Mid: 1)
+2026-09-13 19:19:45,200 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m2), 'legacy-proxy-1-2/message', properties=[], ...  (158 bytes)
+2026-09-13 19:19:45,200 - __main__ - DEBUG - Sending PUBREC (Mid: 2)
+2026-09-13 19:19:45,201 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m3), 'legacy-proxy-1-2/message', properties=[], ...  (158 bytes)
+2026-09-13 19:19:45,201 - __main__ - DEBUG - Sending PUBREC (Mid: 3)
+2026-09-13 19:19:45,202 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m4), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-13 19:19:45,202 - __main__ - DEBUG - Sending PUBREC (Mid: 4)
+2026-09-13 19:19:45,202 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m5), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-13 19:19:45,202 - __main__ - DEBUG - Sending PUBREC (Mid: 5)
+2026-09-13 19:19:45,203 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m6), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
+2026-09-13 19:19:45,203 - __main__ - DEBUG - Sending PUBREC (Mid: 6)
+2026-09-13 19:19:45,203 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m7), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:45,203 - __main__ - DEBUG - Sending PUBREC (Mid: 7)
+2026-09-13 19:19:45,204 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m8), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:45,204 - __main__ - DEBUG - Sending PUBREC (Mid: 8)
+2026-09-13 19:19:45,205 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m9), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:45,205 - __main__ - DEBUG - Sending PUBREC (Mid: 9)
+2026-09-13 19:19:45,205 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m10), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:45,205 - __main__ - DEBUG - Sending PUBREC (Mid: 10)
+2026-09-13 19:19:45,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m11), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:45,206 - __main__ - DEBUG - Sending PUBREC (Mid: 11)
+2026-09-13 19:19:45,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m12), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:45,206 - __main__ - DEBUG - Sending PUBREC (Mid: 12)
+2026-09-13 19:19:45,207 - __main__ - DEBUG - Received PUBREC (Mid: 3)
+2026-09-13 19:19:45,207 - __main__ - DEBUG - Sending PUBREL (Mid: 3)
+2026-09-13 19:19:45,207 - __main__ - DEBUG - Received PUBREL (Mid: 2)
+2026-09-13 19:19:45,207 - __main__ - INFO - [device-0-event-2-try-1] Received message 2 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.336788+00:00", "request_id": "device-0-event-2-try-1"}
+2026-09-13 19:19:45,361 - __main__ - DEBUG - [device-0-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:45,361 - __main__ - INFO - [device-0-event-2-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:45,361 - __main__ - INFO - [device-0-event-2-try-1] Sending Ack for 2 with QoS 2
+2026-09-13 19:19:45,361 - __main__ - DEBUG - Sending PUBCOMP (Mid: 2)
+2026-09-13 19:19:45,362 - __main__ - DEBUG - Received PUBREL (Mid: 3)
+2026-09-13 19:19:45,362 - __main__ - INFO - [device-1-event-3-try-1] Received message 3 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.372610+00:00", "request_id": "device-1-event-3-try-1"}
+2026-09-13 19:19:45,567 - __main__ - DEBUG - [device-1-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:45,567 - __main__ - INFO - [device-1-event-3-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:45,567 - __main__ - INFO - [device-1-event-3-try-1] Sending Ack for 3 with QoS 2
+2026-09-13 19:19:45,567 - __main__ - DEBUG - Sending PUBCOMP (Mid: 3)
+2026-09-13 19:19:45,567 - __main__ - DEBUG - Received PUBREL (Mid: 4)
+2026-09-13 19:19:45,567 - __main__ - INFO - [device-0-event-4-try-1] Received message 4 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.410410+00:00", "request_id": "device-0-event-4-try-1"}
+2026-09-13 19:19:45,609 - __main__ - DEBUG - [device-0-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:45,610 - __main__ - INFO - [device-0-event-4-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:45,610 - __main__ - INFO - [device-0-event-4-try-1] Sending Ack for 4 with QoS 2
+2026-09-13 19:19:45,610 - __main__ - DEBUG - Sending PUBCOMP (Mid: 4)
+2026-09-13 19:19:45,610 - __main__ - DEBUG - Received PUBREL (Mid: 5)
+2026-09-13 19:19:45,610 - __main__ - INFO - [device-0-event-6-try-1] Received message 5 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.505756+00:00", "request_id": "device-0-event-6-try-1"}
+2026-09-13 19:19:45,898 - __main__ - DEBUG - [device-0-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:45,898 - __main__ - INFO - [device-0-event-6-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:45,898 - __main__ - INFO - [device-0-event-6-try-1] Sending Ack for 5 with QoS 2
+2026-09-13 19:19:45,898 - __main__ - DEBUG - Sending PUBCOMP (Mid: 5)
+2026-09-13 19:19:45,898 - __main__ - DEBUG - Received PUBREL (Mid: 6)
+2026-09-13 19:19:45,898 - __main__ - INFO - [device-0-event-8-try-1] Received message 6 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.652885+00:00", "request_id": "device-0-event-8-try-1"}
+2026-09-13 19:19:46,023 - __main__ - DEBUG - [device-0-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:46,023 - __main__ - INFO - [device-0-event-8-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:46,023 - __main__ - INFO - [device-0-event-8-try-1] Sending Ack for 6 with QoS 2
+2026-09-13 19:19:46,023 - __main__ - DEBUG - Sending PUBCOMP (Mid: 6)
+2026-09-13 19:19:46,023 - __main__ - DEBUG - Received PUBREL (Mid: 7)
+2026-09-13 19:19:46,023 - __main__ - INFO - [device-1-event-10-try-1] Received message 7 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.713762+00:00", "request_id": "device-1-event-10-try-1"}
+2026-09-13 19:19:46,193 - __main__ - DEBUG - [device-1-event-10-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:46,193 - __main__ - INFO - [device-1-event-10-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:46,193 - __main__ - INFO - [device-1-event-10-try-1] Sending Ack for 7 with QoS 2
+2026-09-13 19:19:46,193 - __main__ - DEBUG - Sending PUBCOMP (Mid: 7)
+2026-09-13 19:19:46,193 - __main__ - DEBUG - Received PUBREL (Mid: 8)
+2026-09-13 19:19:46,193 - __main__ - INFO - [device-1-event-11-try-1] Received message 8 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.795730+00:00", "request_id": "device-1-event-11-try-1"}
+2026-09-13 19:19:46,205 - __main__ - DEBUG - [device-1-event-11-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:46,205 - __main__ - INFO - [device-1-event-11-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:46,205 - __main__ - INFO - [device-1-event-11-try-1] Sending Ack for 8 with QoS 2
+2026-09-13 19:19:46,205 - __main__ - DEBUG - Sending PUBCOMP (Mid: 8)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m13), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Sending PUBREC (Mid: 13)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m14), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Sending PUBREC (Mid: 14)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m15), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Sending PUBREC (Mid: 15)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m16), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Sending PUBREC (Mid: 16)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m17), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Sending PUBREC (Mid: 17)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m18), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Sending PUBREC (Mid: 18)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m19), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,206 - __main__ - DEBUG - Sending PUBREC (Mid: 19)
+2026-09-13 19:19:46,207 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m20), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,207 - __main__ - DEBUG - Sending PUBREC (Mid: 20)
+2026-09-13 19:19:46,207 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m21), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:46,207 - __main__ - DEBUG - Sending PUBREC (Mid: 21)
+2026-09-13 19:19:46,207 - __main__ - DEBUG - Received PUBREL (Mid: 9)
+2026-09-13 19:19:46,207 - __main__ - INFO - [device-0-event-13-try-1] Received message 9 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.870905+00:00", "request_id": "device-0-event-13-try-1"}
+2026-09-13 19:19:46,530 - __main__ - DEBUG - [device-0-event-13-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:46,530 - __main__ - INFO - [device-0-event-13-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:46,530 - __main__ - INFO - [device-0-event-13-try-1] Sending Ack for 9 with QoS 2
+2026-09-13 19:19:46,530 - __main__ - DEBUG - Sending PUBCOMP (Mid: 9)
+2026-09-13 19:19:46,530 - __main__ - DEBUG - Received PUBREL (Mid: 10)
+2026-09-13 19:19:46,530 - __main__ - INFO - [device-0-event-14-try-1] Received message 10 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:44.963373+00:00", "request_id": "device-0-event-14-try-1"}
+2026-09-13 19:19:46,665 - __main__ - DEBUG - [device-0-event-14-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:46,665 - __main__ - INFO - [device-0-event-14-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:46,665 - __main__ - INFO - [device-0-event-14-try-1] Sending Ack for 10 with QoS 2
+2026-09-13 19:19:46,665 - __main__ - DEBUG - Sending PUBCOMP (Mid: 10)
+2026-09-13 19:19:46,665 - __main__ - DEBUG - Received PUBREL (Mid: 11)
+2026-09-13 19:19:46,665 - __main__ - INFO - [device-0-event-16-try-1] Received message 11 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.040851+00:00", "request_id": "device-0-event-16-try-1"}
+2026-09-13 19:19:46,852 - __main__ - DEBUG - [device-0-event-16-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:46,852 - __main__ - INFO - [device-0-event-16-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:46,852 - __main__ - INFO - [device-0-event-16-try-1] Sending Ack for 11 with QoS 2
+2026-09-13 19:19:46,852 - __main__ - DEBUG - Sending PUBCOMP (Mid: 11)
+2026-09-13 19:19:46,852 - __main__ - DEBUG - Received PUBREL (Mid: 12)
+2026-09-13 19:19:46,852 - __main__ - INFO - [device-0-event-18-try-1] Received message 12 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.144086+00:00", "request_id": "device-0-event-18-try-1"}
+2026-09-13 19:19:47,108 - __main__ - DEBUG - [device-0-event-18-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:47,108 - __main__ - INFO - [device-0-event-18-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:47,108 - __main__ - INFO - [device-0-event-18-try-1] Sending Ack for 12 with QoS 2
+2026-09-13 19:19:47,108 - __main__ - DEBUG - Sending PUBCOMP (Mid: 12)
+2026-09-13 19:19:47,109 - __main__ - DEBUG - Received PUBCOMP (Mid: 3)
+2026-09-13 19:19:47,109 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m22), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:47,110 - __main__ - DEBUG - Sending PUBREC (Mid: 22)
+2026-09-13 19:19:47,110 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m23), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:47,110 - __main__ - DEBUG - Sending PUBREC (Mid: 23)
+2026-09-13 19:19:47,111 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m24), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:47,111 - __main__ - DEBUG - Sending PUBREC (Mid: 24)
+2026-09-13 19:19:47,111 - __main__ - DEBUG - Received PUBREL (Mid: 13)
+2026-09-13 19:19:47,111 - __main__ - INFO - [device-1-event-17-try-1] Received message 13 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.203958+00:00", "request_id": "device-1-event-17-try-1"}
+2026-09-13 19:19:47,372 - __main__ - DEBUG - [device-1-event-17-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:47,372 - __main__ - INFO - [device-1-event-17-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:47,372 - __main__ - INFO - [device-1-event-17-try-1] Sending Ack for 13 with QoS 2
+2026-09-13 19:19:47,372 - __main__ - DEBUG - Sending PUBCOMP (Mid: 13)
+2026-09-13 19:19:47,372 - __main__ - DEBUG - Received PUBREL (Mid: 14)
+2026-09-13 19:19:47,372 - __main__ - INFO - [device-1-event-19-try-1] Received message 14 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.275902+00:00", "request_id": "device-1-event-19-try-1"}
+2026-09-13 19:19:47,636 - __main__ - DEBUG - [device-1-event-19-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:47,636 - __main__ - INFO - [device-1-event-19-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:47,636 - __main__ - INFO - [device-1-event-19-try-1] Sending Ack for 14 with QoS 2
+2026-09-13 19:19:47,636 - __main__ - DEBUG - Sending PUBCOMP (Mid: 14)
+2026-09-13 19:19:47,637 - __main__ - DEBUG - Received PUBREL (Mid: 15)
+2026-09-13 19:19:47,637 - __main__ - INFO - [device-1-event-20-try-1] Received message 15 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.354826+00:00", "request_id": "device-1-event-20-try-1"}
+2026-09-13 19:19:48,029 - __main__ - DEBUG - [device-1-event-20-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:48,030 - __main__ - INFO - [device-1-event-20-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:48,030 - __main__ - INFO - [device-1-event-20-try-1] Sending Ack for 15 with QoS 2
+2026-09-13 19:19:48,030 - __main__ - DEBUG - Sending PUBCOMP (Mid: 15)
+2026-09-13 19:19:48,030 - __main__ - DEBUG - Received PUBREL (Mid: 16)
+2026-09-13 19:19:48,030 - __main__ - INFO - [device-0-event-24-try-1] Received message 16 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.453791+00:00", "request_id": "device-0-event-24-try-1"}
+2026-09-13 19:19:48,338 - __main__ - DEBUG - [device-0-event-24-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:48,338 - __main__ - INFO - [device-0-event-24-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:48,338 - __main__ - INFO - [device-0-event-24-try-1] Sending Ack for 16 with QoS 2
+2026-09-13 19:19:48,339 - __main__ - DEBUG - Sending PUBCOMP (Mid: 16)
+2026-09-13 19:19:48,339 - __main__ - DEBUG - Received PUBREL (Mid: 17)
+2026-09-13 19:19:48,339 - __main__ - INFO - [device-0-event-25-try-1] Received message 17 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.556368+00:00", "request_id": "device-0-event-25-try-1"}
+2026-09-13 19:19:48,719 - __main__ - DEBUG - [device-0-event-25-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:48,719 - __main__ - INFO - [device-0-event-25-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:48,719 - __main__ - INFO - [device-0-event-25-try-1] Sending Ack for 17 with QoS 2
+2026-09-13 19:19:48,719 - __main__ - DEBUG - Sending PUBCOMP (Mid: 17)
+2026-09-13 19:19:48,719 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m25), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:48,719 - __main__ - DEBUG - Sending PUBREC (Mid: 25)
+2026-09-13 19:19:48,720 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m26), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:48,720 - __main__ - DEBUG - Sending PUBREC (Mid: 26)
+2026-09-13 19:19:48,720 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m27), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:48,720 - __main__ - DEBUG - Sending PUBREC (Mid: 27)
+2026-09-13 19:19:48,720 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m28), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:48,720 - __main__ - DEBUG - Sending PUBREC (Mid: 28)
+2026-09-13 19:19:48,720 - __main__ - DEBUG - Received PUBREL (Mid: 18)
+2026-09-13 19:19:48,720 - __main__ - INFO - [device-1-event-25-try-1] Received message 18 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.665170+00:00", "request_id": "device-1-event-25-try-1"}
+2026-09-13 19:19:48,933 - __main__ - DEBUG - [device-1-event-25-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:48,933 - __main__ - INFO - [device-1-event-25-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:48,933 - __main__ - INFO - [device-1-event-25-try-1] Sending Ack for 18 with QoS 2
+2026-09-13 19:19:48,933 - __main__ - DEBUG - Sending PUBCOMP (Mid: 18)
+2026-09-13 19:19:48,933 - __main__ - DEBUG - Received PUBREL (Mid: 19)
+2026-09-13 19:19:48,933 - __main__ - INFO - [device-1-event-27-try-1] Received message 19 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.751176+00:00", "request_id": "device-1-event-27-try-1"}
+2026-09-13 19:19:49,072 - __main__ - DEBUG - [device-1-event-27-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:49,072 - __main__ - INFO - [device-1-event-27-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:49,072 - __main__ - INFO - [device-1-event-27-try-1] Sending Ack for 19 with QoS 2
+2026-09-13 19:19:49,072 - __main__ - DEBUG - Sending PUBCOMP (Mid: 19)
+2026-09-13 19:19:49,072 - __main__ - DEBUG - Received PUBREL (Mid: 20)
+2026-09-13 19:19:49,072 - __main__ - INFO - [device-1-event-29-try-1] Received message 20 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.863709+00:00", "request_id": "device-1-event-29-try-1"}
+2026-09-13 19:19:49,481 - __main__ - DEBUG - [device-1-event-29-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:49,482 - __main__ - INFO - [device-1-event-29-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:49,482 - __main__ - INFO - [device-1-event-29-try-1] Sending Ack for 20 with QoS 2
+2026-09-13 19:19:49,482 - __main__ - DEBUG - Sending PUBCOMP (Mid: 20)
+2026-09-13 19:19:49,482 - __main__ - DEBUG - Received PUBREL (Mid: 21)
+2026-09-13 19:19:49,483 - __main__ - INFO - [device-0-event-30-try-1] Received message 21 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:45.954748+00:00", "request_id": "device-0-event-30-try-1"}
+2026-09-13 19:19:49,833 - __main__ - DEBUG - [device-0-event-30-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:49,833 - __main__ - INFO - [device-0-event-30-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:49,833 - __main__ - INFO - [device-0-event-30-try-1] Sending Ack for 21 with QoS 2
+2026-09-13 19:19:49,833 - __main__ - DEBUG - Sending PUBCOMP (Mid: 21)
+2026-09-13 19:19:49,833 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m29), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:49,833 - __main__ - DEBUG - Sending PUBREC (Mid: 29)
+2026-09-13 19:19:49,833 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m30), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:49,833 - __main__ - DEBUG - Sending PUBREC (Mid: 30)
+2026-09-13 19:19:49,834 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m31), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:49,834 - __main__ - DEBUG - Sending PUBREC (Mid: 31)
+2026-09-13 19:19:49,834 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m32), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:49,834 - __main__ - DEBUG - Sending PUBREC (Mid: 32)
+2026-09-13 19:19:49,834 - __main__ - DEBUG - Received PUBREL (Mid: 22)
+2026-09-13 19:19:49,834 - __main__ - INFO - [device-1-event-32-try-1] Received message 22 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.018781+00:00", "request_id": "device-1-event-32-try-1"}
+2026-09-13 19:19:50,069 - __main__ - DEBUG - [device-1-event-32-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:50,069 - __main__ - INFO - [device-1-event-32-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:50,069 - __main__ - INFO - [device-1-event-32-try-1] Sending Ack for 22 with QoS 2
+2026-09-13 19:19:50,069 - __main__ - DEBUG - Sending PUBCOMP (Mid: 22)
+2026-09-13 19:19:50,069 - __main__ - DEBUG - Received PUBREL (Mid: 23)
+2026-09-13 19:19:50,069 - __main__ - INFO - [device-0-event-33-try-1] Received message 23 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.074345+00:00", "request_id": "device-0-event-33-try-1"}
+2026-09-13 19:19:50,500 - __main__ - DEBUG - [device-0-event-33-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:50,500 - __main__ - INFO - [device-0-event-33-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:50,500 - __main__ - INFO - [device-0-event-33-try-1] Sending Ack for 23 with QoS 2
+2026-09-13 19:19:50,500 - __main__ - DEBUG - Sending PUBCOMP (Mid: 23)
+2026-09-13 19:19:50,500 - __main__ - DEBUG - Received PUBREL (Mid: 24)
+2026-09-13 19:19:50,501 - __main__ - INFO - [device-1-event-36-try-1] Received message 24 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.155510+00:00", "request_id": "device-1-event-36-try-1"}
+2026-09-13 19:19:50,730 - __main__ - DEBUG - [device-1-event-36-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:50,730 - __main__ - INFO - [device-1-event-36-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:50,730 - __main__ - INFO - [device-1-event-36-try-1] Sending Ack for 24 with QoS 2
+2026-09-13 19:19:50,730 - __main__ - DEBUG - Sending PUBCOMP (Mid: 24)
+2026-09-13 19:19:50,730 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m33), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:50,730 - __main__ - DEBUG - Sending PUBREC (Mid: 33)
+2026-09-13 19:19:50,730 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m34), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:50,730 - __main__ - DEBUG - Sending PUBREC (Mid: 34)
+2026-09-13 19:19:50,731 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m35), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:50,731 - __main__ - DEBUG - Sending PUBREC (Mid: 35)
+2026-09-13 19:19:50,731 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m36), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:50,731 - __main__ - DEBUG - Sending PUBREC (Mid: 36)
+2026-09-13 19:19:50,731 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m37), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:50,731 - __main__ - DEBUG - Sending PUBREC (Mid: 37)
+2026-09-13 19:19:50,731 - __main__ - DEBUG - Received PUBREL (Mid: 25)
+2026-09-13 19:19:50,731 - __main__ - INFO - [device-1-event-37-try-1] Received message 25 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.240625+00:00", "request_id": "device-1-event-37-try-1"}
+2026-09-13 19:19:50,863 - __main__ - DEBUG - [device-1-event-37-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:50,863 - __main__ - INFO - [device-1-event-37-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:50,863 - __main__ - INFO - [device-1-event-37-try-1] Sending Ack for 25 with QoS 2
+2026-09-13 19:19:50,863 - __main__ - DEBUG - Sending PUBCOMP (Mid: 25)
+2026-09-13 19:19:50,864 - __main__ - DEBUG - Received PUBREL (Mid: 26)
+2026-09-13 19:19:50,864 - __main__ - INFO - [device-0-event-38-try-1] Received message 26 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.318425+00:00", "request_id": "device-0-event-38-try-1"}
+2026-09-13 19:19:51,270 - __main__ - DEBUG - [device-0-event-38-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:51,270 - __main__ - INFO - [device-0-event-38-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:51,270 - __main__ - INFO - [device-0-event-38-try-1] Sending Ack for 26 with QoS 2
+2026-09-13 19:19:51,270 - __main__ - DEBUG - Sending PUBCOMP (Mid: 26)
+2026-09-13 19:19:51,270 - __main__ - DEBUG - Received PUBREL (Mid: 27)
+2026-09-13 19:19:51,270 - __main__ - INFO - [device-0-event-40-try-1] Received message 27 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.408240+00:00", "request_id": "device-0-event-40-try-1"}
+2026-09-13 19:19:51,378 - __main__ - DEBUG - [device-0-event-40-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:51,378 - __main__ - INFO - [device-0-event-40-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:51,378 - __main__ - INFO - [device-0-event-40-try-1] Sending Ack for 27 with QoS 2
+2026-09-13 19:19:51,378 - __main__ - DEBUG - Sending PUBCOMP (Mid: 27)
+2026-09-13 19:19:51,378 - __main__ - DEBUG - Received PUBREL (Mid: 28)
+2026-09-13 19:19:51,378 - __main__ - INFO - [device-0-event-41-try-1] Received message 28 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.451101+00:00", "request_id": "device-0-event-41-try-1"}
+2026-09-13 19:19:51,711 - __main__ - DEBUG - [device-0-event-41-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:51,711 - __main__ - INFO - [device-0-event-41-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:51,711 - __main__ - INFO - [device-0-event-41-try-1] Sending Ack for 28 with QoS 2
+2026-09-13 19:19:51,711 - __main__ - DEBUG - Sending PUBCOMP (Mid: 28)
+2026-09-13 19:19:51,712 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m38), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:51,712 - __main__ - DEBUG - Sending PUBREC (Mid: 38)
+2026-09-13 19:19:51,712 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m39), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:51,713 - __main__ - DEBUG - Sending PUBREC (Mid: 39)
+2026-09-13 19:19:51,713 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m40), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:51,713 - __main__ - DEBUG - Sending PUBREC (Mid: 40)
+2026-09-13 19:19:51,714 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m41), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:51,714 - __main__ - DEBUG - Sending PUBREC (Mid: 41)
+2026-09-13 19:19:51,714 - __main__ - DEBUG - Received PUBREL (Mid: 29)
+2026-09-13 19:19:51,714 - __main__ - INFO - [device-1-event-42-try-1] Received message 29 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.574929+00:00", "request_id": "device-1-event-42-try-1"}
+2026-09-13 19:19:51,878 - __main__ - DEBUG - [device-1-event-42-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:51,878 - __main__ - INFO - [device-1-event-42-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:51,878 - __main__ - INFO - [device-1-event-42-try-1] Sending Ack for 29 with QoS 2
+2026-09-13 19:19:51,878 - __main__ - DEBUG - Sending PUBCOMP (Mid: 29)
+2026-09-13 19:19:51,879 - __main__ - DEBUG - Received PUBREL (Mid: 30)
+2026-09-13 19:19:51,879 - __main__ - INFO - [device-1-event-43-try-1] Received message 30 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.633001+00:00", "request_id": "device-1-event-43-try-1"}
+2026-09-13 19:19:52,171 - __main__ - DEBUG - [device-1-event-43-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:52,171 - __main__ - INFO - [device-1-event-43-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:52,171 - __main__ - INFO - [device-1-event-43-try-1] Sending Ack for 30 with QoS 2
+2026-09-13 19:19:52,171 - __main__ - DEBUG - Sending PUBCOMP (Mid: 30)
+2026-09-13 19:19:52,171 - __main__ - DEBUG - Received PUBREL (Mid: 31)
+2026-09-13 19:19:52,171 - __main__ - INFO - [device-1-event-44-try-1] Received message 31 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.731736+00:00", "request_id": "device-1-event-44-try-1"}
+2026-09-13 19:19:52,622 - __main__ - DEBUG - [device-1-event-44-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:52,622 - __main__ - INFO - [device-1-event-44-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:52,622 - __main__ - INFO - [device-1-event-44-try-1] Sending Ack for 31 with QoS 2
+2026-09-13 19:19:52,622 - __main__ - DEBUG - Sending PUBCOMP (Mid: 31)
+2026-09-13 19:19:52,622 - __main__ - DEBUG - Received PUBREL (Mid: 32)
+2026-09-13 19:19:52,622 - __main__ - INFO - [device-0-event-48-try-1] Received message 32 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.892239+00:00", "request_id": "device-0-event-48-try-1"}
+2026-09-13 19:19:52,669 - __main__ - DEBUG - [device-0-event-48-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:52,669 - __main__ - INFO - [device-0-event-48-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:52,669 - __main__ - INFO - [device-0-event-48-try-1] Sending Ack for 32 with QoS 2
+2026-09-13 19:19:52,669 - __main__ - DEBUG - Sending PUBCOMP (Mid: 32)
+2026-09-13 19:19:52,670 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m42), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:52,670 - __main__ - DEBUG - Sending PUBREC (Mid: 42)
+2026-09-13 19:19:52,670 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m43), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:52,670 - __main__ - DEBUG - Sending PUBREC (Mid: 43)
+2026-09-13 19:19:52,670 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m44), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:52,670 - __main__ - DEBUG - Sending PUBREC (Mid: 44)
+2026-09-13 19:19:52,670 - __main__ - DEBUG - Received PUBREL (Mid: 33)
+2026-09-13 19:19:52,670 - __main__ - INFO - [device-0-event-50-try-1] Received message 33 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:46.926924+00:00", "request_id": "device-0-event-50-try-1"}
+2026-09-13 19:19:52,989 - __main__ - DEBUG - [device-0-event-50-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:52,989 - __main__ - INFO - [device-0-event-50-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:52,989 - __main__ - INFO - [device-0-event-50-try-1] Sending Ack for 33 with QoS 2
+2026-09-13 19:19:52,989 - __main__ - DEBUG - Sending PUBCOMP (Mid: 33)
+2026-09-13 19:19:52,989 - __main__ - DEBUG - Received PUBREL (Mid: 34)
+2026-09-13 19:19:52,989 - __main__ - INFO - [device-0-event-52-try-1] Received message 34 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.025280+00:00", "request_id": "device-0-event-52-try-1"}
+2026-09-13 19:19:53,242 - __main__ - DEBUG - [device-0-event-52-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:53,242 - __main__ - INFO - [device-0-event-52-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:53,242 - __main__ - INFO - [device-0-event-52-try-1] Sending Ack for 34 with QoS 2
+2026-09-13 19:19:53,242 - __main__ - DEBUG - Sending PUBCOMP (Mid: 34)
+2026-09-13 19:19:53,242 - __main__ - DEBUG - Received PUBREL (Mid: 35)
+2026-09-13 19:19:53,242 - __main__ - INFO - [device-0-event-53-try-1] Received message 35 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.095103+00:00", "request_id": "device-0-event-53-try-1"}
+2026-09-13 19:19:53,506 - __main__ - DEBUG - [device-0-event-53-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:53,506 - __main__ - INFO - [device-0-event-53-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:53,506 - __main__ - INFO - [device-0-event-53-try-1] Sending Ack for 35 with QoS 2
+2026-09-13 19:19:53,506 - __main__ - DEBUG - Sending PUBCOMP (Mid: 35)
+2026-09-13 19:19:53,506 - __main__ - DEBUG - Received PUBREL (Mid: 36)
+2026-09-13 19:19:53,507 - __main__ - INFO - [device-0-event-55-try-1] Received message 36 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.199216+00:00", "request_id": "device-0-event-55-try-1"}
+2026-09-13 19:19:53,832 - __main__ - DEBUG - [device-0-event-55-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:53,833 - __main__ - INFO - [device-0-event-55-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:53,833 - __main__ - INFO - [device-0-event-55-try-1] Sending Ack for 36 with QoS 2
+2026-09-13 19:19:53,833 - __main__ - DEBUG - Sending PUBCOMP (Mid: 36)
+2026-09-13 19:19:53,833 - __main__ - DEBUG - Received PUBREL (Mid: 37)
+2026-09-13 19:19:53,833 - __main__ - INFO - [device-0-event-57-try-1] Received message 37 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.277889+00:00", "request_id": "device-0-event-57-try-1"}
+2026-09-13 19:19:54,117 - __main__ - DEBUG - [device-0-event-57-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:54,117 - __main__ - INFO - [device-0-event-57-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:54,117 - __main__ - INFO - [device-0-event-57-try-1] Sending Ack for 37 with QoS 2
+2026-09-13 19:19:54,117 - __main__ - DEBUG - Sending PUBCOMP (Mid: 37)
+2026-09-13 19:19:54,117 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m45), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:54,117 - __main__ - DEBUG - Sending PUBREC (Mid: 45)
+2026-09-13 19:19:54,118 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m46), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:54,118 - __main__ - DEBUG - Sending PUBREC (Mid: 46)
+2026-09-13 19:19:54,118 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m47), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:54,118 - __main__ - DEBUG - Sending PUBREC (Mid: 47)
+2026-09-13 19:19:54,118 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m48), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:54,118 - __main__ - DEBUG - Sending PUBREC (Mid: 48)
+2026-09-13 19:19:54,118 - __main__ - DEBUG - Received PUBREL (Mid: 38)
+2026-09-13 19:19:54,119 - __main__ - INFO - [device-1-event-53-try-1] Received message 38 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.361283+00:00", "request_id": "device-1-event-53-try-1"}
+2026-09-13 19:19:54,477 - __main__ - DEBUG - [device-1-event-53-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:54,477 - __main__ - INFO - [device-1-event-53-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:54,478 - __main__ - INFO - [device-1-event-53-try-1] Sending Ack for 38 with QoS 2
+2026-09-13 19:19:54,478 - __main__ - DEBUG - Sending PUBCOMP (Mid: 38)
+2026-09-13 19:19:54,478 - __main__ - DEBUG - Received PUBREL (Mid: 39)
+2026-09-13 19:19:54,478 - __main__ - INFO - [device-0-event-60-try-1] Received message 39 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.443268+00:00", "request_id": "device-0-event-60-try-1"}
+2026-09-13 19:19:54,677 - __main__ - DEBUG - [device-0-event-60-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:54,677 - __main__ - INFO - [device-0-event-60-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:54,677 - __main__ - INFO - [device-0-event-60-try-1] Sending Ack for 39 with QoS 2
+2026-09-13 19:19:54,677 - __main__ - DEBUG - Sending PUBCOMP (Mid: 39)
+2026-09-13 19:19:54,678 - __main__ - DEBUG - Received PUBREL (Mid: 40)
+2026-09-13 19:19:54,678 - __main__ - INFO - [device-1-event-55-try-1] Received message 40 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.540530+00:00", "request_id": "device-1-event-55-try-1"}
+2026-09-13 19:19:54,878 - __main__ - DEBUG - [device-1-event-55-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:54,878 - __main__ - INFO - [device-1-event-55-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:54,878 - __main__ - INFO - [device-1-event-55-try-1] Sending Ack for 40 with QoS 2
+2026-09-13 19:19:54,878 - __main__ - DEBUG - Sending PUBCOMP (Mid: 40)
+2026-09-13 19:19:54,878 - __main__ - DEBUG - Received PUBREL (Mid: 41)
+2026-09-13 19:19:54,878 - __main__ - INFO - [device-1-event-56-try-1] Received message 41 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.655152+00:00", "request_id": "device-1-event-56-try-1"}
+2026-09-13 19:19:55,276 - __main__ - DEBUG - [device-1-event-56-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:55,276 - __main__ - INFO - [device-1-event-56-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:55,276 - __main__ - INFO - [device-1-event-56-try-1] Sending Ack for 41 with QoS 2
+2026-09-13 19:19:55,277 - __main__ - DEBUG - Sending PUBCOMP (Mid: 41)
+2026-09-13 19:19:55,277 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m49), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,277 - __main__ - DEBUG - Sending PUBREC (Mid: 49)
+2026-09-13 19:19:55,278 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m50), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,278 - __main__ - DEBUG - Sending PUBREC (Mid: 50)
+2026-09-13 19:19:55,279 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m51), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,279 - __main__ - DEBUG - Sending PUBREC (Mid: 51)
+2026-09-13 19:19:55,279 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m52), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,280 - __main__ - DEBUG - Sending PUBREC (Mid: 52)
+2026-09-13 19:19:55,280 - __main__ - DEBUG - Received PUBREL (Mid: 42)
+2026-09-13 19:19:55,280 - __main__ - INFO - [device-0-event-66-try-1] Received message 42 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.734696+00:00", "request_id": "device-0-event-66-try-1"}
+2026-09-13 19:19:55,405 - __main__ - DEBUG - [device-0-event-66-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:55,405 - __main__ - INFO - [device-0-event-66-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:55,405 - __main__ - INFO - [device-0-event-66-try-1] Sending Ack for 42 with QoS 2
+2026-09-13 19:19:55,405 - __main__ - DEBUG - Sending PUBCOMP (Mid: 42)
+2026-09-13 19:19:55,405 - __main__ - DEBUG - Received PUBREL (Mid: 43)
+2026-09-13 19:19:55,405 - __main__ - INFO - [device-0-event-68-try-1] Received message 43 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.839991+00:00", "request_id": "device-0-event-68-try-1"}
+2026-09-13 19:19:55,613 - __main__ - DEBUG - [device-0-event-68-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:55,613 - __main__ - INFO - [device-0-event-68-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:55,613 - __main__ - INFO - [device-0-event-68-try-1] Sending Ack for 43 with QoS 2
+2026-09-13 19:19:55,613 - __main__ - DEBUG - Sending PUBCOMP (Mid: 43)
+2026-09-13 19:19:55,614 - __main__ - DEBUG - Received PUBREL (Mid: 44)
+2026-09-13 19:19:55,614 - __main__ - INFO - [device-1-event-60-try-1] Received message 44 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:47.925607+00:00", "request_id": "device-1-event-60-try-1"}
+2026-09-13 19:19:55,913 - __main__ - DEBUG - [device-1-event-60-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:55,913 - __main__ - INFO - [device-1-event-60-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:55,913 - __main__ - INFO - [device-1-event-60-try-1] Sending Ack for 44 with QoS 2
+2026-09-13 19:19:55,913 - __main__ - DEBUG - Sending PUBCOMP (Mid: 44)
+2026-09-13 19:19:55,913 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m53), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,913 - __main__ - DEBUG - Sending PUBREC (Mid: 53)
+2026-09-13 19:19:55,913 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m54), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,913 - __main__ - DEBUG - Sending PUBREC (Mid: 54)
+2026-09-13 19:19:55,913 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m55), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,913 - __main__ - DEBUG - Sending PUBREC (Mid: 55)
+2026-09-13 19:19:55,914 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m56), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,914 - __main__ - DEBUG - Sending PUBREC (Mid: 56)
+2026-09-13 19:19:55,914 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m57), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:55,914 - __main__ - DEBUG - Sending PUBREC (Mid: 57)
+2026-09-13 19:19:55,914 - __main__ - DEBUG - Received PUBREL (Mid: 45)
+2026-09-13 19:19:55,914 - __main__ - INFO - [device-1-event-61-try-1] Received message 45 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.014197+00:00", "request_id": "device-1-event-61-try-1"}
+2026-09-13 19:19:56,282 - __main__ - DEBUG - [device-1-event-61-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:56,282 - __main__ - INFO - [device-1-event-61-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:56,282 - __main__ - INFO - [device-1-event-61-try-1] Sending Ack for 45 with QoS 2
+2026-09-13 19:19:56,282 - __main__ - DEBUG - Sending PUBCOMP (Mid: 45)
+2026-09-13 19:19:56,282 - __main__ - DEBUG - Received PUBREL (Mid: 46)
+2026-09-13 19:19:56,282 - __main__ - INFO - [device-1-event-63-try-1] Received message 46 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.125466+00:00", "request_id": "device-1-event-63-try-1"}
+2026-09-13 19:19:56,581 - __main__ - DEBUG - [device-1-event-63-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:56,581 - __main__ - INFO - [device-1-event-63-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:56,581 - __main__ - INFO - [device-1-event-63-try-1] Sending Ack for 46 with QoS 2
+2026-09-13 19:19:56,581 - __main__ - DEBUG - Sending PUBCOMP (Mid: 46)
+2026-09-13 19:19:56,581 - __main__ - DEBUG - Received PUBREL (Mid: 47)
+2026-09-13 19:19:56,582 - __main__ - INFO - [device-1-event-65-try-1] Received message 47 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.212566+00:00", "request_id": "device-1-event-65-try-1"}
+2026-09-13 19:19:56,745 - __main__ - DEBUG - [device-1-event-65-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:56,746 - __main__ - INFO - [device-1-event-65-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:56,746 - __main__ - INFO - [device-1-event-65-try-1] Sending Ack for 47 with QoS 2
+2026-09-13 19:19:56,746 - __main__ - DEBUG - Sending PUBCOMP (Mid: 47)
+2026-09-13 19:19:56,747 - __main__ - DEBUG - Received PUBREL (Mid: 48)
+2026-09-13 19:19:56,747 - __main__ - INFO - [device-1-event-66-try-1] Received message 48 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.317279+00:00", "request_id": "device-1-event-66-try-1"}
+2026-09-13 19:19:57,000 - __main__ - DEBUG - [device-1-event-66-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:57,000 - __main__ - INFO - [device-1-event-66-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:57,000 - __main__ - INFO - [device-1-event-66-try-1] Sending Ack for 48 with QoS 2
+2026-09-13 19:19:57,000 - __main__ - DEBUG - Sending PUBCOMP (Mid: 48)
+2026-09-13 19:19:57,001 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m58), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:57,001 - __main__ - DEBUG - Sending PUBREC (Mid: 58)
+2026-09-13 19:19:57,001 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m59), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:57,002 - __main__ - DEBUG - Sending PUBREC (Mid: 59)
+2026-09-13 19:19:57,002 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m60), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:57,002 - __main__ - DEBUG - Sending PUBREC (Mid: 60)
+2026-09-13 19:19:57,003 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m61), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:57,003 - __main__ - DEBUG - Sending PUBREC (Mid: 61)
+2026-09-13 19:19:57,003 - __main__ - DEBUG - Received PUBREL (Mid: 49)
+2026-09-13 19:19:57,003 - __main__ - INFO - [device-1-event-68-try-1] Received message 49 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.420829+00:00", "request_id": "device-1-event-68-try-1"}
+2026-09-13 19:19:57,194 - __main__ - DEBUG - [device-1-event-68-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:57,194 - __main__ - INFO - [device-1-event-68-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:57,194 - __main__ - INFO - [device-1-event-68-try-1] Sending Ack for 49 with QoS 2
+2026-09-13 19:19:57,194 - __main__ - DEBUG - Sending PUBCOMP (Mid: 49)
+2026-09-13 19:19:57,194 - __main__ - DEBUG - Received PUBREL (Mid: 50)
+2026-09-13 19:19:57,194 - __main__ - INFO - [device-0-event-78-try-1] Received message 50 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.486901+00:00", "request_id": "device-0-event-78-try-1"}
+2026-09-13 19:19:57,466 - __main__ - DEBUG - [device-0-event-78-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:57,466 - __main__ - INFO - [device-0-event-78-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:57,466 - __main__ - INFO - [device-0-event-78-try-1] Sending Ack for 50 with QoS 2
+2026-09-13 19:19:57,466 - __main__ - DEBUG - Sending PUBCOMP (Mid: 50)
+2026-09-13 19:19:57,466 - __main__ - DEBUG - Received PUBREL (Mid: 51)
+2026-09-13 19:19:57,466 - __main__ - INFO - [device-1-event-70-try-1] Received message 51 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.523251+00:00", "request_id": "device-1-event-70-try-1"}
+2026-09-13 19:19:57,722 - __main__ - DEBUG - [device-1-event-70-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:57,722 - __main__ - INFO - [device-1-event-70-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:57,723 - __main__ - INFO - [device-1-event-70-try-1] Sending Ack for 51 with QoS 2
+2026-09-13 19:19:57,723 - __main__ - DEBUG - Sending PUBCOMP (Mid: 51)
+2026-09-13 19:19:57,723 - __main__ - DEBUG - Received PUBREL (Mid: 52)
+2026-09-13 19:19:57,723 - __main__ - INFO - [device-0-event-82-try-1] Received message 52 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.599980+00:00", "request_id": "device-0-event-82-try-1"}
+2026-09-13 19:19:58,151 - __main__ - DEBUG - [device-0-event-82-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:58,151 - __main__ - INFO - [device-0-event-82-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:58,151 - __main__ - INFO - [device-0-event-82-try-1] Sending Ack for 52 with QoS 2
+2026-09-13 19:19:58,152 - __main__ - DEBUG - Sending PUBCOMP (Mid: 52)
+2026-09-13 19:19:58,152 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m62), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:58,153 - __main__ - DEBUG - Sending PUBREC (Mid: 62)
+2026-09-13 19:19:58,153 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m63), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:58,153 - __main__ - DEBUG - Sending PUBREC (Mid: 63)
+2026-09-13 19:19:58,154 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m64), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:58,154 - __main__ - DEBUG - Sending PUBREC (Mid: 64)
+2026-09-13 19:19:58,155 - __main__ - DEBUG - Received PUBREL (Mid: 53)
+2026-09-13 19:19:58,155 - __main__ - INFO - [device-0-event-84-try-1] Received message 53 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.642854+00:00", "request_id": "device-0-event-84-try-1"}
+2026-09-13 19:19:58,298 - __main__ - DEBUG - [device-0-event-84-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:58,298 - __main__ - INFO - [device-0-event-84-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:58,298 - __main__ - INFO - [device-0-event-84-try-1] Sending Ack for 53 with QoS 2
+2026-09-13 19:19:58,299 - __main__ - DEBUG - Sending PUBCOMP (Mid: 53)
+2026-09-13 19:19:58,299 - __main__ - DEBUG - Received PUBREL (Mid: 54)
+2026-09-13 19:19:58,299 - __main__ - INFO - [device-1-event-74-try-1] Received message 54 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.702405+00:00", "request_id": "device-1-event-74-try-1"}
+2026-09-13 19:19:58,486 - __main__ - DEBUG - [device-1-event-74-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:58,486 - __main__ - INFO - [device-1-event-74-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:58,486 - __main__ - INFO - [device-1-event-74-try-1] Sending Ack for 54 with QoS 2
+2026-09-13 19:19:58,486 - __main__ - DEBUG - Sending PUBCOMP (Mid: 54)
+2026-09-13 19:19:58,487 - __main__ - DEBUG - Received PUBREL (Mid: 55)
+2026-09-13 19:19:58,487 - __main__ - INFO - [device-1-event-76-try-1] Received message 55 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.795530+00:00", "request_id": "device-1-event-76-try-1"}
+2026-09-13 19:19:58,828 - __main__ - DEBUG - [device-1-event-76-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:58,829 - __main__ - INFO - [device-1-event-76-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:58,829 - __main__ - INFO - [device-1-event-76-try-1] Sending Ack for 55 with QoS 2
+2026-09-13 19:19:58,829 - __main__ - DEBUG - Sending PUBCOMP (Mid: 55)
+2026-09-13 19:19:58,829 - __main__ - DEBUG - Received PUBREL (Mid: 56)
+2026-09-13 19:19:58,829 - __main__ - INFO - [device-0-event-88-try-1] Received message 56 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:48.908761+00:00", "request_id": "device-0-event-88-try-1"}
+2026-09-13 19:19:59,211 - __main__ - DEBUG - [device-0-event-88-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:59,211 - __main__ - INFO - [device-0-event-88-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:59,211 - __main__ - INFO - [device-0-event-88-try-1] Sending Ack for 56 with QoS 2
+2026-09-13 19:19:59,211 - __main__ - DEBUG - Sending PUBCOMP (Mid: 56)
+2026-09-13 19:19:59,212 - __main__ - DEBUG - Received PUBREL (Mid: 57)
+2026-09-13 19:19:59,212 - __main__ - INFO - [device-0-event-90-try-1] Received message 57 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.007562+00:00", "request_id": "device-0-event-90-try-1"}
+2026-09-13 19:19:59,324 - __main__ - DEBUG - [device-0-event-90-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:59,324 - __main__ - INFO - [device-0-event-90-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:59,324 - __main__ - INFO - [device-0-event-90-try-1] Sending Ack for 57 with QoS 2
+2026-09-13 19:19:59,324 - __main__ - DEBUG - Sending PUBCOMP (Mid: 57)
+2026-09-13 19:19:59,326 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m65), 'legacy-proxy-1-2/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:59,327 - __main__ - DEBUG - Sending PUBREC (Mid: 65)
+2026-09-13 19:19:59,327 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m66), 'legacy-proxy-1-1/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:59,327 - __main__ - DEBUG - Sending PUBREC (Mid: 66)
+2026-09-13 19:19:59,327 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m67), 'legacy-proxy-1-0/message', properties=[], ...  (159 bytes)
+2026-09-13 19:19:59,327 - __main__ - DEBUG - Sending PUBREC (Mid: 67)
+2026-09-13 19:19:59,368 - __main__ - DEBUG - Received PUBREL (Mid: 58)
+2026-09-13 19:19:59,369 - __main__ - INFO - [device-0-event-91-try-1] Received message 58 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.096835+00:00", "request_id": "device-0-event-91-try-1"}
+2026-09-13 19:19:59,612 - __main__ - DEBUG - [device-0-event-91-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:59,613 - __main__ - INFO - [device-0-event-91-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:59,613 - __main__ - INFO - [device-0-event-91-try-1] Sending Ack for 58 with QoS 2
+2026-09-13 19:19:59,615 - __main__ - DEBUG - Sending PUBCOMP (Mid: 58)
+2026-09-13 19:19:59,616 - __main__ - DEBUG - Received PUBREL (Mid: 59)
+2026-09-13 19:19:59,616 - __main__ - INFO - [device-0-event-93-try-1] Received message 59 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.167270+00:00", "request_id": "device-0-event-93-try-1"}
+2026-09-13 19:19:59,893 - __main__ - DEBUG - [device-0-event-93-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:19:59,893 - __main__ - INFO - [device-0-event-93-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:19:59,893 - __main__ - INFO - [device-0-event-93-try-1] Sending Ack for 59 with QoS 2
+2026-09-13 19:19:59,893 - __main__ - DEBUG - Sending PUBCOMP (Mid: 59)
+2026-09-13 19:19:59,893 - __main__ - DEBUG - Received PUBREL (Mid: 60)
+2026-09-13 19:19:59,893 - __main__ - INFO - [device-0-event-94-try-1] Received message 60 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.256778+00:00", "request_id": "device-0-event-94-try-1"}
+2026-09-13 19:20:00,287 - __main__ - DEBUG - [device-0-event-94-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:20:00,287 - __main__ - INFO - [device-0-event-94-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:20:00,287 - __main__ - INFO - [device-0-event-94-try-1] Sending Ack for 60 with QoS 2
+2026-09-13 19:20:00,287 - __main__ - DEBUG - Sending PUBCOMP (Mid: 60)
+2026-09-13 19:20:00,287 - __main__ - DEBUG - Received PUBREL (Mid: 61)
+2026-09-13 19:20:00,288 - __main__ - INFO - [device-1-event-85-try-1] Received message 61 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.316522+00:00", "request_id": "device-1-event-85-try-1"}
+2026-09-13 19:20:00,633 - __main__ - DEBUG - [device-1-event-85-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:20:00,633 - __main__ - INFO - [device-1-event-85-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:20:00,633 - __main__ - INFO - [device-1-event-85-try-1] Sending Ack for 61 with QoS 2
+2026-09-13 19:20:00,633 - __main__ - DEBUG - Sending PUBCOMP (Mid: 61)
+2026-09-13 19:20:00,634 - __main__ - DEBUG - Received PUBREL (Mid: 62)
+2026-09-13 19:20:00,634 - __main__ - INFO - [device-0-event-97-try-1] Received message 62 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.425139+00:00", "request_id": "device-0-event-97-try-1"}
+2026-09-13 19:20:00,852 - __main__ - DEBUG - [device-0-event-97-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:20:00,852 - __main__ - INFO - [device-0-event-97-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:20:00,852 - __main__ - INFO - [device-0-event-97-try-1] Sending Ack for 62 with QoS 2
+2026-09-13 19:20:00,852 - __main__ - DEBUG - Sending PUBCOMP (Mid: 62)
+2026-09-13 19:20:00,853 - __main__ - DEBUG - Received PUBREL (Mid: 63)
+2026-09-13 19:20:00,853 - __main__ - INFO - [device-0-event-98-try-1] Received message 63 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.497033+00:00", "request_id": "device-0-event-98-try-1"}
+2026-09-13 19:20:01,067 - __main__ - DEBUG - [device-0-event-98-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:20:01,068 - __main__ - INFO - [device-0-event-98-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:20:01,068 - __main__ - INFO - [device-0-event-98-try-1] Sending Ack for 63 with QoS 2
+2026-09-13 19:20:01,068 - __main__ - DEBUG - Sending PUBCOMP (Mid: 63)
+2026-09-13 19:20:01,069 - __main__ - DEBUG - Received PUBREL (Mid: 64)
+2026-09-13 19:20:01,069 - __main__ - INFO - [device-0-event-99-try-1] Received message 64 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.594361+00:00", "request_id": "device-0-event-99-try-1"}
+2026-09-13 19:20:01,233 - __main__ - DEBUG - [device-0-event-99-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:20:01,233 - __main__ - INFO - [device-0-event-99-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:20:01,233 - __main__ - INFO - [device-0-event-99-try-1] Sending Ack for 64 with QoS 2
+2026-09-13 19:20:01,233 - __main__ - DEBUG - Sending PUBCOMP (Mid: 64)
+2026-09-13 19:20:01,234 - __main__ - DEBUG - Received PUBREL (Mid: 65)
+2026-09-13 19:20:01,234 - __main__ - INFO - [device-1-event-93-try-1] Received message 65 on topic legacy-proxy-1-2/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.661142+00:00", "request_id": "device-1-event-93-try-1"}
+2026-09-13 19:20:01,472 - __main__ - DEBUG - [device-1-event-93-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:20:01,472 - __main__ - INFO - [device-1-event-93-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:20:01,472 - __main__ - INFO - [device-1-event-93-try-1] Sending Ack for 65 with QoS 2
+2026-09-13 19:20:01,472 - __main__ - DEBUG - Sending PUBCOMP (Mid: 65)
+2026-09-13 19:20:01,472 - __main__ - DEBUG - Received PUBREL (Mid: 66)
+2026-09-13 19:20:01,472 - __main__ - INFO - [device-1-event-96-try-1] Received message 66 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:49.824426+00:00", "request_id": "device-1-event-96-try-1"}
+2026-09-13 19:20:01,818 - __main__ - DEBUG - [device-1-event-96-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:20:01,818 - __main__ - INFO - [device-1-event-96-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:20:01,818 - __main__ - INFO - [device-1-event-96-try-1] Sending Ack for 66 with QoS 2
+2026-09-13 19:20:01,818 - __main__ - DEBUG - Sending PUBCOMP (Mid: 66)
+2026-09-13 19:20:01,818 - __main__ - DEBUG - Received PUBREL (Mid: 67)
+2026-09-13 19:20:01,819 - __main__ - INFO - [device-1-event-99-try-1] Received message 67 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 19:19:50.039953+00:00", "request_id": "device-1-event-99-try-1"}
+2026-09-13 19:20:02,061 - __main__ - DEBUG - [device-1-event-99-try-1] HTTP version: HTTP/1.1
+2026-09-13 19:20:02,061 - __main__ - INFO - [device-1-event-99-try-1] Successfully forwarded message to http://172.18.0.15:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 19:20:02,062 - __main__ - INFO - [device-1-event-99-try-1] Sending Ack for 67 with QoS 2
+2026-09-13 19:20:02,062 - __main__ - DEBUG - Sending PUBCOMP (Mid: 67)
+2026-09-13 19:20:13,302 - __main__ - INFO - Shutdown signal received
+2026-09-13 19:20:13,303 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-13 19:20:13,303 - __main__ - INFO - MQTT client stopped
+2026-09-13 19:20:13,303 - __main__ - INFO - HTTP client closed
