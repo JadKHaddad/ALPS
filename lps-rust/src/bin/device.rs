@@ -126,7 +126,7 @@ async fn main() -> Result<(), anyhow::Error> {
                             let mut server_push_urls = config.server_push_urls.clone();
 
                             server_push_urls.shuffle(&mut rand::rng());
-                            
+
                             let mut server_push_urls = server_push_urls.into_iter().cycle();
 
                             'work: loop {
@@ -135,9 +135,9 @@ async fn main() -> Result<(), anyhow::Error> {
                                 // The request id is not used in our system
                                 let request_id = format!("device-{}-event-{}-try-{}", id, i, try_index);
 
-                                tracing::info!(request_id, ?call, "Sending work request");
-
                                 let server_push_url = server_push_urls.next().expect("server_push_urls should not be empty");
+
+                                tracing::info!(request_id, url=%server_push_url, ?call, "Sending work request");
 
                                 let response = client
                                     .post(&server_push_url)
