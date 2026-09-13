@@ -43,7 +43,9 @@ struct AppState {
     events: Mutex<Vec<Event>>,
     failures: Mutex<Vec<Failure>>,
     max_work_duration: Duration,
+    min_work_duration: Option<Duration>,
     max_response_duration: Duration,
+    min_response_duration: Option<Duration>,
     failure_rate: f64,
     results_file: PathBuf,
     failures_file: PathBuf,
@@ -53,7 +55,9 @@ struct AppState {
 impl AppState {
     fn new(
         max_work_duration: Duration,
+        min_work_duration: Option<Duration>,
         max_response_duration: Duration,
+        min_response_duration: Option<Duration>,
         failure_rate: f64,
         results_file: PathBuf,
         failures_file: PathBuf,
@@ -62,7 +66,9 @@ impl AppState {
             events: Mutex::new(Vec::new()),
             failures: Mutex::new(Vec::new()),
             max_work_duration,
+            min_work_duration,
             max_response_duration,
+            min_response_duration,
             failure_rate,
             results_file,
             failures_file,
@@ -86,12 +92,15 @@ impl AppState {
 
         self.set_last_event(event.clone()).await;
 
+        let min_ms = self.min_work_duration.map(|d| d.as_millis()).unwrap_or(0);
+
+        // max_ms is always >= min_ms. See check in main.
         let max_ms = self.max_work_duration.as_millis();
 
         let work_duration_ms = if max_ms == 0 {
             0
         } else {
-            rand::rng().random_range(0..max_ms) as u64
+            rand::rng().random_range(min_ms..max_ms) as u64
         };
 
         tracing::info!(ms = work_duration_ms, ?call, "Working");
@@ -100,12 +109,18 @@ impl AppState {
 
         let fail = rand::rng().random_bool(self.failure_rate);
 
+        let min_ms = self
+            .min_response_duration
+            .map(|d| d.as_millis())
+            .unwrap_or(0);
+
+        // max_ms is always >= min_ms. See check in main.
         let max_ms = self.max_response_duration.as_millis();
 
         let response_duration_ms = if max_ms == 0 {
             0
         } else {
-            rand::rng().random_range(0..max_ms) as u64
+            rand::rng().random_range(min_ms..max_ms) as u64
         };
 
         match fail {
@@ -204,7 +219,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let args = Args::parse();
 
-    let config = Config::load_from_file(&args.config_file)
+    let mut config = Config::load_from_file(&args.config_file)
         .await
         .unwrap_or_else(|err| {
             tracing::error!("Failed to load config: {}", err);
@@ -213,11 +228,36 @@ async fn main() -> Result<(), anyhow::Error> {
             Config::default()
         });
 
+    if config.min_work_duration.map(|d| d.as_millis()).unwrap_or(0)
+        > config.max_work_duration.as_millis()
+    {
+        tracing::warn!(
+            "min_work_duration is greater than max_work_duration, setting min_work_duration to None"
+        );
+
+        config.min_work_duration = None;
+    }
+
+    if config
+        .min_response_duration
+        .map(|d| d.as_millis())
+        .unwrap_or(0)
+        > config.max_response_duration.as_millis()
+    {
+        tracing::warn!(
+            "min_response_duration is greater than max_response_duration, setting min_response_duration to None"
+        );
+
+        config.min_response_duration = None;
+    }
+
     tracing::info!(?config, "Starting");
 
     let app_state = Arc::new(AppState::new(
         config.max_work_duration,
+        config.min_work_duration,
         config.max_response_duration,
+        config.min_response_duration,
         config.failure_rate,
         config.results_file,
         config.failures_file,

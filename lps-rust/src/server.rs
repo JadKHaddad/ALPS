@@ -39,8 +39,12 @@ pub struct Config {
     pub failure_rate: f64,
     #[serde(default = "default_max_work_duration", with = "humantime_serde")]
     pub max_work_duration: Duration,
+    #[serde(default, with = "humantime_serde")]
+    pub min_work_duration: Option<Duration>,
     #[serde(default = "default_max_response_duration", with = "humantime_serde")]
     pub max_response_duration: Duration,
+    #[serde(default, with = "humantime_serde")]
+    pub min_response_duration: Option<Duration>,
     #[serde(default = "default_results_file")]
     pub results_file: PathBuf,
     #[serde(default = "default_failures_file")]
@@ -55,7 +59,9 @@ impl Default for Config {
             socket_addr: default_socket_addr(),
             failure_rate: crate::default_failure_rate(),
             max_work_duration: default_max_work_duration(),
+            min_work_duration: None,
             max_response_duration: default_max_response_duration(),
+            min_response_duration: None,
             results_file: default_results_file(),
             failures_file: default_failures_file(),
             shutdown_after_idle_duration: None,
