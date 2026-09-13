@@ -1000,7 +1000,10 @@ impl Config {
                     .with_environment(
                         [
                             (String::from("SERVICE_NAME"), format!("legacy-proxy-1-{i}")),
-                            (String::from("MQTT_TOPIC"), String::from("proxy1/message")),
+                            (
+                                String::from("MQTT_TOPIC"),
+                                format!("legacy-proxy-1-{i}/message"),
+                            ),
                             (String::from("HTTP_PORT"), self.default_http_port()),
                             (String::from("MQTT_BROKER"), self.hive_mq_container_name()),
                             (String::from("MQTT_PORT"), self.hive_mq_container_port()),

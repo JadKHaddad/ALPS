@@ -165,7 +165,7 @@ async fn main() -> Result<(), anyhow::Error> {
         while let Ok(Some(line)) = reader.next_line().await {
             println!("{line}");
 
-            if line.contains("Started HiveMQ") {
+            if line.contains("Started HiveMQ") || line.contains("mosquitto version 2.1.2 running") {
                 tracing::info!("Broker is ready");
 
                 broker_ready = true;

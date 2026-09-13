@@ -1,0 +1,13 @@
+2026-09-13 11:59:29,781 - __main__ - INFO - Starting server on 0.0.0.0:8080
+2026-09-13 11:59:29,781 - __main__ - INFO - Forwarding to: http://lps-consumers-server-proxy:8080/work
+2026-09-13 11:59:29,801 - uvicorn.error - INFO - Started server process [1]
+2026-09-13 11:59:29,801 - uvicorn.error - INFO - Waiting for application startup.
+2026-09-13 11:59:29,802 - __main__ - INFO - DNS resolved lps-consumers-server-proxy -> 172.18.0.14
+2026-09-13 11:59:29,845 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.18.0.14:8080/work
+2026-09-13 11:59:29,845 - uvicorn.error - INFO - Application startup complete.
+2026-09-13 11:59:29,847 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2026-09-13 12:00:22,202 - uvicorn.error - INFO - Shutting down
+2026-09-13 12:00:22,303 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-09-13 12:00:22,336 - __main__ - INFO - HTTP client closed
+2026-09-13 12:00:22,337 - uvicorn.error - INFO - Application shutdown complete.
+2026-09-13 12:00:22,337 - uvicorn.error - INFO - Finished server process [1]

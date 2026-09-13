@@ -1,0 +1,225 @@
+2026-09-13 11:59:29,371 - __main__ - INFO - DNS resolved lps-ars-comp-2-proxy-0 -> 172.18.0.10
+2026-09-13 11:59:29,509 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET, HTTP/2: False
+2026-09-13 11:59:29,512 - __main__ - INFO - Starting MQTT to HTTP forwarder
+2026-09-13 11:59:29,535 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-0' properties=None
+2026-09-13 11:59:29,702 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[TopicAliasMaximum : 5]
+2026-09-13 11:59:29,702 - __main__ - INFO - Connected to MQTT broker at lps-hivemq:1883
+2026-09-13 11:59:29,702 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-13 11:59:29,702 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m1) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-13 11:59:29,702 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 1
+2026-09-13 11:59:29,702 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m2) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-13 11:59:29,702 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 2
+2026-09-13 11:59:29,741 - __main__ - DEBUG - Received SUBACK
+2026-09-13 11:59:29,742 - __main__ - INFO - SUBACK received for mid 1, reason_codes: ['Granted QoS 1']
+2026-09-13 11:59:29,742 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-13 11:59:29,750 - __main__ - DEBUG - Received SUBACK
+2026-09-13 11:59:29,750 - __main__ - INFO - SUBACK received for mid 2, reason_codes: ['Granted QoS 1']
+2026-09-13 11:59:29,750 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-13 11:59:30,936 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'legacy-proxy-2-1/retry/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:30,936 - __main__ - INFO - [device-1-event-0-try-4] Received message 1 on topic legacy-proxy-2-1/retry/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:28.348536+00:00", "request_id": "device-1-event-0-try-4"}
+2026-09-13 11:59:31,911 - __main__ - DEBUG - [device-1-event-0-try-4] HTTP version: HTTP/1.1
+2026-09-13 11:59:31,911 - __main__ - INFO - [device-1-event-0-try-4] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:31,911 - __main__ - INFO - [device-1-event-0-try-4] Sending Ack for 1 with QoS 1
+2026-09-13 11:59:31,911 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-13 11:59:31,924 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:31,925 - __main__ - INFO - [device-0-event-2-try-1] Received message 1 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:31.340637+00:00", "request_id": "device-0-event-2-try-1"}
+2026-09-13 11:59:32,773 - __main__ - DEBUG - [device-0-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:32,773 - __main__ - INFO - [device-0-event-2-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:32,773 - __main__ - INFO - [device-0-event-2-try-1] Sending Ack for 1 with QoS 1
+2026-09-13 11:59:32,773 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-13 11:59:32,774 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m2), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:32,774 - __main__ - INFO - [device-1-event-3-try-1] Received message 2 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:31.825994+00:00", "request_id": "device-1-event-3-try-1"}
+2026-09-13 11:59:33,625 - __main__ - DEBUG - [device-1-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:33,625 - __main__ - INFO - [device-1-event-3-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:33,627 - __main__ - INFO - [device-1-event-3-try-1] Sending Ack for 2 with QoS 1
+2026-09-13 11:59:33,627 - __main__ - DEBUG - Sending PUBACK (Mid: 2)
+2026-09-13 11:59:33,673 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:33,674 - __main__ - INFO - [device-0-event-3-try-1] Received message 1 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:32.261823+00:00", "request_id": "device-0-event-3-try-1"}
+2026-09-13 11:59:34,598 - __main__ - DEBUG - [device-0-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:34,599 - __main__ - INFO - [device-0-event-3-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:34,599 - __main__ - INFO - [device-0-event-3-try-1] Sending Ack for 1 with QoS 1
+2026-09-13 11:59:34,599 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-13 11:59:34,599 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m2), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:34,599 - __main__ - INFO - [device-1-event-4-try-1] Received message 2 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:32.275385+00:00", "request_id": "device-1-event-4-try-1"}
+2026-09-13 11:59:35,653 - __main__ - DEBUG - [device-1-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:35,653 - __main__ - INFO - [device-1-event-4-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:35,653 - __main__ - INFO - [device-1-event-4-try-1] Sending Ack for 2 with QoS 1
+2026-09-13 11:59:35,653 - __main__ - DEBUG - Sending PUBACK (Mid: 2)
+2026-09-13 11:59:35,654 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m3), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:35,655 - __main__ - INFO - [device-0-event-4-try-1] Received message 3 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:32.400057+00:00", "request_id": "device-0-event-4-try-1"}
+2026-09-13 11:59:35,998 - __main__ - DEBUG - [device-0-event-4-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:35,998 - __main__ - INFO - [device-0-event-4-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:35,998 - __main__ - INFO - [device-0-event-4-try-1] Sending Ack for 3 with QoS 1
+2026-09-13 11:59:35,998 - __main__ - DEBUG - Sending PUBACK (Mid: 3)
+2026-09-13 11:59:35,999 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m4), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:35,999 - __main__ - INFO - [device-1-event-5-try-1] Received message 4 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:32.399720+00:00", "request_id": "device-1-event-5-try-1"}
+2026-09-13 11:59:37,823 - __main__ - DEBUG - [device-1-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:37,823 - __main__ - INFO - [device-1-event-5-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:37,823 - __main__ - INFO - [device-1-event-5-try-1] Sending Ack for 4 with QoS 1
+2026-09-13 11:59:37,823 - __main__ - DEBUG - Sending PUBACK (Mid: 4)
+2026-09-13 11:59:37,823 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m5), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:37,823 - __main__ - INFO - [device-1-event-6-try-1] Received message 5 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:32.698361+00:00", "request_id": "device-1-event-6-try-1"}
+2026-09-13 11:59:38,548 - __main__ - DEBUG - [device-1-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:38,548 - __main__ - INFO - [device-1-event-6-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:38,549 - __main__ - INFO - [device-1-event-6-try-1] Sending Ack for 5 with QoS 1
+2026-09-13 11:59:38,549 - __main__ - DEBUG - Sending PUBACK (Mid: 5)
+2026-09-13 11:59:38,549 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m6), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:38,549 - __main__ - INFO - [device-1-event-7-try-1] Received message 6 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:33.178991+00:00", "request_id": "device-1-event-7-try-1"}
+2026-09-13 11:59:39,751 - __main__ - DEBUG - [device-1-event-7-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:39,751 - __main__ - INFO - [device-1-event-7-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:39,751 - __main__ - INFO - [device-1-event-7-try-1] Sending Ack for 6 with QoS 1
+2026-09-13 11:59:39,751 - __main__ - DEBUG - Sending PUBACK (Mid: 6)
+2026-09-13 11:59:39,751 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m7), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:39,752 - __main__ - INFO - [device-0-event-5-try-1] Received message 7 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:33.218361+00:00", "request_id": "device-0-event-5-try-1"}
+2026-09-13 11:59:40,661 - __main__ - DEBUG - [device-0-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:40,661 - __main__ - INFO - [device-0-event-5-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:40,661 - __main__ - INFO - [device-0-event-5-try-1] Sending Ack for 7 with QoS 1
+2026-09-13 11:59:40,661 - __main__ - DEBUG - Sending PUBACK (Mid: 7)
+2026-09-13 11:59:40,662 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m8), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:40,662 - __main__ - INFO - [device-0-event-6-try-1] Received message 8 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:33.557344+00:00", "request_id": "device-0-event-6-try-1"}
+2026-09-13 11:59:41,747 - __main__ - DEBUG - [device-0-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:41,747 - __main__ - INFO - [device-0-event-6-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:41,747 - __main__ - INFO - [device-0-event-6-try-1] Sending Ack for 8 with QoS 1
+2026-09-13 11:59:41,747 - __main__ - DEBUG - Sending PUBACK (Mid: 8)
+2026-09-13 11:59:41,749 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m9), 'proxy1/message', properties=[], ...  (158 bytes)
+2026-09-13 11:59:41,749 - __main__ - INFO - [device-1-event-8-try-1] Received message 9 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:33.641447+00:00", "request_id": "device-1-event-8-try-1"}
+2026-09-13 11:59:42,020 - __main__ - DEBUG - [device-1-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:42,021 - __main__ - INFO - [device-1-event-8-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:42,021 - __main__ - INFO - [device-1-event-8-try-1] Sending Ack for 9 with QoS 1
+2026-09-13 11:59:42,021 - __main__ - DEBUG - Sending PUBACK (Mid: 9)
+2026-09-13 11:59:42,067 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:42,067 - __main__ - INFO - [device-0-event-11-try-1] Received message 1 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:36.198955+00:00", "request_id": "device-0-event-11-try-1"}
+2026-09-13 11:59:43,706 - __main__ - DEBUG - [device-0-event-11-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:43,706 - __main__ - INFO - [device-0-event-11-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:43,706 - __main__ - INFO - [device-0-event-11-try-1] Sending Ack for 1 with QoS 1
+2026-09-13 11:59:43,706 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-13 11:59:43,706 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m2), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:43,707 - __main__ - INFO - [device-1-event-13-try-1] Received message 2 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:36.605427+00:00", "request_id": "device-1-event-13-try-1"}
+2026-09-13 11:59:44,929 - __main__ - DEBUG - [device-1-event-13-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:44,929 - __main__ - INFO - [device-1-event-13-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:44,929 - __main__ - INFO - [device-1-event-13-try-1] Sending Ack for 2 with QoS 1
+2026-09-13 11:59:44,929 - __main__ - DEBUG - Sending PUBACK (Mid: 2)
+2026-09-13 11:59:44,929 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m3), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:44,929 - __main__ - INFO - [device-0-event-12-try-1] Received message 3 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:36.661084+00:00", "request_id": "device-0-event-12-try-1"}
+2026-09-13 11:59:46,388 - __main__ - DEBUG - [device-0-event-12-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:46,388 - __main__ - INFO - [device-0-event-12-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:46,388 - __main__ - INFO - [device-0-event-12-try-1] Sending Ack for 3 with QoS 1
+2026-09-13 11:59:46,388 - __main__ - DEBUG - Sending PUBACK (Mid: 3)
+2026-09-13 11:59:46,388 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m4), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:46,388 - __main__ - INFO - [device-1-event-14-try-1] Received message 4 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:36.963541+00:00", "request_id": "device-1-event-14-try-1"}
+2026-09-13 11:59:47,094 - __main__ - DEBUG - [device-1-event-14-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:47,094 - __main__ - INFO - [device-1-event-14-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:47,095 - __main__ - INFO - [device-1-event-14-try-1] Sending Ack for 4 with QoS 1
+2026-09-13 11:59:47,095 - __main__ - DEBUG - Sending PUBACK (Mid: 4)
+2026-09-13 11:59:47,095 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m5), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:47,095 - __main__ - INFO - [device-0-event-13-try-1] Received message 5 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:37.054805+00:00", "request_id": "device-0-event-13-try-1"}
+2026-09-13 11:59:48,377 - __main__ - DEBUG - [device-0-event-13-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:48,377 - __main__ - INFO - [device-0-event-13-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:48,377 - __main__ - INFO - [device-0-event-13-try-1] Sending Ack for 5 with QoS 1
+2026-09-13 11:59:48,377 - __main__ - DEBUG - Sending PUBACK (Mid: 5)
+2026-09-13 11:59:48,378 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m6), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:48,378 - __main__ - INFO - [device-0-event-14-try-1] Received message 6 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:37.393222+00:00", "request_id": "device-0-event-14-try-1"}
+2026-09-13 11:59:48,528 - __main__ - DEBUG - [device-0-event-14-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:48,529 - __main__ - INFO - [device-0-event-14-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:48,529 - __main__ - INFO - [device-0-event-14-try-1] Sending Ack for 6 with QoS 1
+2026-09-13 11:59:48,529 - __main__ - DEBUG - Sending PUBACK (Mid: 6)
+2026-09-13 11:59:48,529 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m7), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:48,529 - __main__ - INFO - [device-1-event-15-try-1] Received message 7 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:37.766479+00:00", "request_id": "device-1-event-15-try-1"}
+2026-09-13 11:59:50,103 - __main__ - DEBUG - [device-1-event-15-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:50,104 - __main__ - INFO - [device-1-event-15-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:50,104 - __main__ - INFO - [device-1-event-15-try-1] Sending Ack for 7 with QoS 1
+2026-09-13 11:59:50,104 - __main__ - DEBUG - Sending PUBACK (Mid: 7)
+2026-09-13 11:59:50,104 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m8), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:50,105 - __main__ - INFO - [device-0-event-15-try-1] Received message 8 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:38.065698+00:00", "request_id": "device-0-event-15-try-1"}
+2026-09-13 11:59:50,961 - __main__ - DEBUG - [device-0-event-15-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:50,961 - __main__ - INFO - [device-0-event-15-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:50,961 - __main__ - INFO - [device-0-event-15-try-1] Sending Ack for 8 with QoS 1
+2026-09-13 11:59:50,961 - __main__ - DEBUG - Sending PUBACK (Mid: 8)
+2026-09-13 11:59:50,961 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m9), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:50,961 - __main__ - INFO - [device-1-event-16-try-1] Received message 9 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:38.102269+00:00", "request_id": "device-1-event-16-try-1"}
+2026-09-13 11:59:51,986 - __main__ - DEBUG - [device-1-event-16-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:51,986 - __main__ - INFO - [device-1-event-16-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:51,986 - __main__ - INFO - [device-1-event-16-try-1] Sending Ack for 9 with QoS 1
+2026-09-13 11:59:51,986 - __main__ - DEBUG - Sending PUBACK (Mid: 9)
+2026-09-13 11:59:51,987 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m10), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:51,987 - __main__ - INFO - [device-1-event-17-try-1] Received message 10 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:38.405669+00:00", "request_id": "device-1-event-17-try-1"}
+2026-09-13 11:59:53,400 - __main__ - DEBUG - [device-1-event-17-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:53,400 - __main__ - INFO - [device-1-event-17-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:53,400 - __main__ - INFO - [device-1-event-17-try-1] Sending Ack for 10 with QoS 1
+2026-09-13 11:59:53,401 - __main__ - DEBUG - Sending PUBACK (Mid: 10)
+2026-09-13 11:59:53,401 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m11), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:53,402 - __main__ - INFO - [device-1-event-18-try-1] Received message 11 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:38.838984+00:00", "request_id": "device-1-event-18-try-1"}
+2026-09-13 11:59:54,601 - __main__ - DEBUG - [device-1-event-18-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:54,601 - __main__ - INFO - [device-1-event-18-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:54,601 - __main__ - INFO - [device-1-event-18-try-1] Sending Ack for 11 with QoS 1
+2026-09-13 11:59:54,601 - __main__ - DEBUG - Sending PUBACK (Mid: 11)
+2026-09-13 11:59:54,602 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m12), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:54,602 - __main__ - INFO - [device-0-event-16-try-1] Received message 12 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:38.852386+00:00", "request_id": "device-0-event-16-try-1"}
+2026-09-13 11:59:55,926 - __main__ - DEBUG - [device-0-event-16-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:55,926 - __main__ - INFO - [device-0-event-16-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:55,926 - __main__ - INFO - [device-0-event-16-try-1] Sending Ack for 12 with QoS 1
+2026-09-13 11:59:55,926 - __main__ - DEBUG - Sending PUBACK (Mid: 12)
+2026-09-13 11:59:55,927 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m13), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:55,927 - __main__ - INFO - [device-0-event-17-try-1] Received message 13 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:38.996246+00:00", "request_id": "device-0-event-17-try-1"}
+2026-09-13 11:59:56,860 - __main__ - DEBUG - [device-0-event-17-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:56,860 - __main__ - INFO - [device-0-event-17-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:56,860 - __main__ - INFO - [device-0-event-17-try-1] Sending Ack for 13 with QoS 1
+2026-09-13 11:59:56,860 - __main__ - DEBUG - Sending PUBACK (Mid: 13)
+2026-09-13 11:59:56,860 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m14), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:56,860 - __main__ - INFO - [device-0-event-18-try-1] Received message 14 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:39.490050+00:00", "request_id": "device-0-event-18-try-1"}
+2026-09-13 11:59:57,566 - __main__ - DEBUG - [device-0-event-18-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:57,566 - __main__ - INFO - [device-0-event-18-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:57,567 - __main__ - INFO - [device-0-event-18-try-1] Sending Ack for 14 with QoS 1
+2026-09-13 11:59:57,567 - __main__ - DEBUG - Sending PUBACK (Mid: 14)
+2026-09-13 11:59:57,569 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m15), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:57,569 - __main__ - INFO - [device-1-event-19-try-1] Received message 15 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:39.699682+00:00", "request_id": "device-1-event-19-try-1"}
+2026-09-13 11:59:58,490 - __main__ - DEBUG - [device-1-event-19-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:58,490 - __main__ - INFO - [device-1-event-19-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:58,490 - __main__ - INFO - [device-1-event-19-try-1] Sending Ack for 15 with QoS 1
+2026-09-13 11:59:58,490 - __main__ - DEBUG - Sending PUBACK (Mid: 15)
+2026-09-13 11:59:58,491 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m16), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:58,491 - __main__ - INFO - [device-0-event-19-try-1] Received message 16 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:39.864366+00:00", "request_id": "device-0-event-19-try-1"}
+2026-09-13 11:59:59,601 - __main__ - DEBUG - [device-0-event-19-try-1] HTTP version: HTTP/1.1
+2026-09-13 11:59:59,601 - __main__ - INFO - [device-0-event-19-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 11:59:59,601 - __main__ - INFO - [device-0-event-19-try-1] Sending Ack for 16 with QoS 1
+2026-09-13 11:59:59,601 - __main__ - DEBUG - Sending PUBACK (Mid: 16)
+2026-09-13 11:59:59,602 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m17), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 11:59:59,602 - __main__ - INFO - [device-1-event-20-try-1] Received message 17 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:40.365122+00:00", "request_id": "device-1-event-20-try-1"}
+2026-09-13 12:00:00,742 - __main__ - DEBUG - [device-1-event-20-try-1] HTTP version: HTTP/1.1
+2026-09-13 12:00:00,742 - __main__ - INFO - [device-1-event-20-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 12:00:00,742 - __main__ - INFO - [device-1-event-20-try-1] Sending Ack for 17 with QoS 1
+2026-09-13 12:00:00,742 - __main__ - DEBUG - Sending PUBACK (Mid: 17)
+2026-09-13 12:00:00,742 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m18), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 12:00:00,742 - __main__ - INFO - [device-0-event-20-try-1] Received message 18 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:40.623910+00:00", "request_id": "device-0-event-20-try-1"}
+2026-09-13 12:00:01,952 - __main__ - DEBUG - [device-0-event-20-try-1] HTTP version: HTTP/1.1
+2026-09-13 12:00:01,953 - __main__ - INFO - [device-0-event-20-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 12:00:01,953 - __main__ - INFO - [device-0-event-20-try-1] Sending Ack for 18 with QoS 1
+2026-09-13 12:00:01,953 - __main__ - DEBUG - Sending PUBACK (Mid: 18)
+2026-09-13 12:00:01,954 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m19), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 12:00:01,954 - __main__ - INFO - [device-1-event-21-try-1] Received message 19 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:40.964962+00:00", "request_id": "device-1-event-21-try-1"}
+2026-09-13 12:00:02,459 - __main__ - DEBUG - [device-1-event-21-try-1] HTTP version: HTTP/1.1
+2026-09-13 12:00:02,459 - __main__ - INFO - [device-1-event-21-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 12:00:02,459 - __main__ - INFO - [device-1-event-21-try-1] Sending Ack for 19 with QoS 1
+2026-09-13 12:00:02,460 - __main__ - DEBUG - Sending PUBACK (Mid: 19)
+2026-09-13 12:00:02,460 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m20), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 12:00:02,460 - __main__ - INFO - [device-0-event-21-try-1] Received message 20 on topic proxy1/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:41.605301+00:00", "request_id": "device-0-event-21-try-1"}
+2026-09-13 12:00:04,018 - __main__ - DEBUG - [device-0-event-21-try-1] HTTP version: HTTP/1.1
+2026-09-13 12:00:04,018 - __main__ - INFO - [device-0-event-21-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 12:00:04,018 - __main__ - INFO - [device-0-event-21-try-1] Sending Ack for 20 with QoS 1
+2026-09-13 12:00:04,018 - __main__ - DEBUG - Sending PUBACK (Mid: 20)
+2026-09-13 12:00:04,019 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m21), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 12:00:04,019 - __main__ - INFO - [device-1-event-22-try-1] Received message 21 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:41.821436+00:00", "request_id": "device-1-event-22-try-1"}
+2026-09-13 12:00:05,012 - __main__ - DEBUG - [device-1-event-22-try-1] HTTP version: HTTP/1.1
+2026-09-13 12:00:05,012 - __main__ - INFO - [device-1-event-22-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 12:00:05,013 - __main__ - INFO - [device-1-event-22-try-1] Sending Ack for 21 with QoS 1
+2026-09-13 12:00:05,013 - __main__ - DEBUG - Sending PUBACK (Mid: 21)
+2026-09-13 12:00:05,013 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m22), 'proxy1/message', properties=[], ...  (159 bytes)
+2026-09-13 12:00:05,014 - __main__ - INFO - [device-1-event-23-try-1] Received message 22 on topic proxy1/message (QoS 1, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 11:59:41.902500+00:00", "request_id": "device-1-event-23-try-1"}
+2026-09-13 12:00:05,221 - __main__ - DEBUG - [device-1-event-23-try-1] HTTP version: HTTP/1.1
+2026-09-13 12:00:05,221 - __main__ - INFO - [device-1-event-23-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 12:00:05,221 - __main__ - INFO - [device-1-event-23-try-1] Sending Ack for 22 with QoS 1
+2026-09-13 12:00:05,221 - __main__ - DEBUG - Sending PUBACK (Mid: 22)
+2026-09-13 12:00:22,137 - __main__ - INFO - Shutdown signal received
+2026-09-13 12:00:22,150 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-13 12:00:22,151 - __main__ - INFO - MQTT client stopped
+2026-09-13 12:00:22,151 - __main__ - INFO - HTTP client closed
