@@ -1,0 +1,7 @@
+[2m2026-09-13T18:59:53.813963Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Starting [3mconfig[0m[2m=[0mConfig { server_results_file: "server-results.json", device_results_file: "device-results.json", duplicate_events_file: "duplicate-events.json", out_of_order_events_file: "out-of-order-events.json", rates_file: "rates-results.json" }
+[2m2026-09-13T18:59:53.814071Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Loaded events [3mserver_count[0m[2m=[0m20 [3mdevice_count[0m[2m=[0m20
+[2m2026-09-13T18:59:53.814078Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Checking for duplicates
+[2m2026-09-13T18:59:53.814133Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating order
+[2m2026-09-13T18:59:53.814141Z[0m [31mERROR[0m [2mvalidator[0m[2m:[0m Order validation failed: Found 4 ordering errors: [OrderViolation { device_id: "0", first_event_id: 1789325893085, second_event_id: 1789325893130 }, OrderViolation { device_id: "1", first_event_id: 1789325893151, second_event_id: 1789325893224 }, OrderViolation { device_id: "1", first_event_id: 1789325893344, second_event_id: 1789325893439 }, OrderViolation { device_id: "0", first_event_id: 1789325893445, second_event_id: 1789325893731 }]
+[2m2026-09-13T18:59:53.814184Z[0m [32m INFO[0m [2mvalidator[0m[2m:[0m Validating completeness
+Error: Validation failed. Check logs for details.

@@ -1,0 +1,6 @@
+2026-09-13 18:52:04,630 INFO  - Starting HiveMQ Community Edition Server
+2026-09-13 18:52:04,631 INFO  - HiveMQ version: 2025.5
+2026-09-13 18:52:04,631 INFO  - HiveMQ home directory: /opt/hivemq
+2026-09-13 18:52:04,685 INFO  - Log Configuration was overridden by /opt/hivemq/conf/logback.xml
+2026-09-13 18:52:04,825 WARN  - The configured server receive maximum (2147483647) is too high. It was set to 65535 seconds instead.
+2026-09-13 18:52:04,826 INFO  - This HiveMQ ID is VSDj4

@@ -1,0 +1,103 @@
+2026-09-13 18:58:12,123 - __main__ - INFO - DNS resolved lps-ars-comp-2-proxy-0 -> 172.18.0.10
+2026-09-13 18:58:12,277 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET, HTTP/2: False
+2026-09-13 18:58:12,278 - __main__ - INFO - Starting MQTT to HTTP forwarder
+2026-09-13 18:58:12,279 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-0' properties=None
+2026-09-13 18:58:12,279 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[ReceiveMaximum : 20, TopicAliasMaximum : 10, MaximumPacketSize : 2000000]
+2026-09-13 18:58:12,280 - __main__ - INFO - Connected to MQTT broker at lps-hivemq:1883
+2026-09-13 18:58:12,280 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-13 18:58:12,280 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m1) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-13 18:58:12,308 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 1
+2026-09-13 18:58:12,308 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m2) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-13 18:58:12,308 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 2
+2026-09-13 18:58:12,309 - __main__ - DEBUG - Received SUBACK
+2026-09-13 18:58:12,309 - __main__ - INFO - SUBACK received for mid 1, reason_codes: ['Granted QoS 2']
+2026-09-13 18:58:12,309 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 2
+2026-09-13 18:58:12,309 - __main__ - DEBUG - Received SUBACK
+2026-09-13 18:58:12,309 - __main__ - INFO - SUBACK received for mid 2, reason_codes: ['Granted QoS 2']
+2026-09-13 18:58:12,309 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 2
+2026-09-13 18:58:12,534 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m1), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:12,534 - __main__ - DEBUG - Sending PUBREC (Mid: 1)
+2026-09-13 18:58:12,536 - __main__ - DEBUG - Received PUBREL (Mid: 1)
+2026-09-13 18:58:12,536 - __main__ - INFO - [device-0-event-0-try-3] Received message 1 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:11.944873+00:00", "request_id": "device-0-event-0-try-3"}
+2026-09-13 18:58:18,610 - __main__ - DEBUG - [device-0-event-0-try-3] HTTP version: HTTP/1.1
+2026-09-13 18:58:18,610 - __main__ - INFO - [device-0-event-0-try-3] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:58:18,610 - __main__ - INFO - [device-0-event-0-try-3] Sending Ack for 1 with QoS 2
+2026-09-13 18:58:18,610 - __main__ - DEBUG - Sending PUBCOMP (Mid: 1)
+2026-09-13 18:58:18,610 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m2), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,610 - __main__ - DEBUG - Sending PUBREC (Mid: 2)
+2026-09-13 18:58:18,610 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m3), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,610 - __main__ - DEBUG - Sending PUBREC (Mid: 3)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m4), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Sending PUBREC (Mid: 4)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m5), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Sending PUBREC (Mid: 5)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m6), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Sending PUBREC (Mid: 6)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m7), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Sending PUBREC (Mid: 7)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m8), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,611 - __main__ - DEBUG - Sending PUBREC (Mid: 8)
+2026-09-13 18:58:18,612 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m9), 'legacy-proxy-1-1/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,612 - __main__ - DEBUG - Sending PUBREC (Mid: 9)
+2026-09-13 18:58:18,612 - __main__ - DEBUG - Received PUBLISH (d0, q2, r0, m10), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-13 18:58:18,612 - __main__ - DEBUG - Sending PUBREC (Mid: 10)
+2026-09-13 18:58:18,651 - __main__ - DEBUG - Received PUBREL (Mid: 2)
+2026-09-13 18:58:18,652 - __main__ - INFO - [device-0-event-1-try-1] Received message 2 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:12.639897+00:00", "request_id": "device-0-event-1-try-1"}
+2026-09-13 18:58:25,479 - __main__ - DEBUG - [device-0-event-1-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:58:25,480 - __main__ - INFO - [device-0-event-1-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:58:25,480 - __main__ - INFO - [device-0-event-1-try-1] Sending Ack for 2 with QoS 2
+2026-09-13 18:58:25,480 - __main__ - DEBUG - Sending PUBCOMP (Mid: 2)
+2026-09-13 18:58:25,480 - __main__ - DEBUG - Received PUBREL (Mid: 3)
+2026-09-13 18:58:25,480 - __main__ - INFO - [device-0-event-2-try-1] Received message 3 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:12.881118+00:00", "request_id": "device-0-event-2-try-1"}
+2026-09-13 18:58:30,827 - __main__ - DEBUG - [device-0-event-2-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:58:30,828 - __main__ - INFO - [device-0-event-2-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:58:30,828 - __main__ - INFO - [device-0-event-2-try-1] Sending Ack for 3 with QoS 2
+2026-09-13 18:58:30,828 - __main__ - DEBUG - Sending PUBCOMP (Mid: 3)
+2026-09-13 18:58:30,828 - __main__ - DEBUG - Received PUBREL (Mid: 4)
+2026-09-13 18:58:30,829 - __main__ - INFO - [device-0-event-3-try-1] Received message 4 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.021611+00:00", "request_id": "device-0-event-3-try-1"}
+2026-09-13 18:58:38,782 - __main__ - DEBUG - [device-0-event-3-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:58:38,782 - __main__ - INFO - [device-0-event-3-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:58:38,783 - __main__ - INFO - [device-0-event-3-try-1] Sending Ack for 4 with QoS 2
+2026-09-13 18:58:38,783 - __main__ - DEBUG - Sending PUBCOMP (Mid: 4)
+2026-09-13 18:58:38,783 - __main__ - DEBUG - Received PUBREL (Mid: 5)
+2026-09-13 18:58:38,783 - __main__ - INFO - [device-0-event-5-try-1] Received message 5 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.130368+00:00", "request_id": "device-0-event-5-try-1"}
+2026-09-13 18:58:44,656 - __main__ - DEBUG - [device-0-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:58:44,656 - __main__ - INFO - [device-0-event-5-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:58:44,656 - __main__ - INFO - [device-0-event-5-try-1] Sending Ack for 5 with QoS 2
+2026-09-13 18:58:44,656 - __main__ - DEBUG - Sending PUBCOMP (Mid: 5)
+2026-09-13 18:58:44,657 - __main__ - DEBUG - Received PUBREL (Mid: 6)
+2026-09-13 18:58:44,657 - __main__ - INFO - [device-1-event-5-try-1] Received message 6 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.224801+00:00", "request_id": "device-1-event-5-try-1"}
+2026-09-13 18:58:51,962 - __main__ - DEBUG - [device-1-event-5-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:58:51,963 - __main__ - INFO - [device-1-event-5-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:58:51,964 - __main__ - INFO - [device-1-event-5-try-1] Sending Ack for 6 with QoS 2
+2026-09-13 18:58:51,967 - __main__ - DEBUG - Sending PUBCOMP (Mid: 6)
+2026-09-13 18:58:51,968 - __main__ - DEBUG - Received PUBREL (Mid: 7)
+2026-09-13 18:58:51,968 - __main__ - INFO - [device-1-event-6-try-1] Received message 7 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.330348+00:00", "request_id": "device-1-event-6-try-1"}
+2026-09-13 18:58:57,579 - __main__ - DEBUG - [device-1-event-6-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:58:57,579 - __main__ - INFO - [device-1-event-6-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:58:57,579 - __main__ - INFO - [device-1-event-6-try-1] Sending Ack for 7 with QoS 2
+2026-09-13 18:58:57,579 - __main__ - DEBUG - Sending PUBCOMP (Mid: 7)
+2026-09-13 18:58:57,579 - __main__ - DEBUG - Received PUBREL (Mid: 8)
+2026-09-13 18:58:57,580 - __main__ - INFO - [device-1-event-8-try-1] Received message 8 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "1", "body": "Phone: 1, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.439485+00:00", "request_id": "device-1-event-8-try-1"}
+2026-09-13 18:59:04,740 - __main__ - DEBUG - [device-1-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:59:04,740 - __main__ - INFO - [device-1-event-8-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:59:04,741 - __main__ - INFO - [device-1-event-8-try-1] Sending Ack for 8 with QoS 2
+2026-09-13 18:59:04,741 - __main__ - DEBUG - Sending PUBCOMP (Mid: 8)
+2026-09-13 18:59:04,741 - __main__ - DEBUG - Received PUBREL (Mid: 9)
+2026-09-13 18:59:04,741 - __main__ - INFO - [device-0-event-8-try-1] Received message 9 on topic legacy-proxy-1-1/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.533704+00:00", "request_id": "device-0-event-8-try-1"}
+2026-09-13 18:59:11,095 - __main__ - DEBUG - [device-0-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:59:11,095 - __main__ - INFO - [device-0-event-8-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:59:11,096 - __main__ - INFO - [device-0-event-8-try-1] Sending Ack for 9 with QoS 2
+2026-09-13 18:59:11,096 - __main__ - DEBUG - Sending PUBCOMP (Mid: 9)
+2026-09-13 18:59:11,096 - __main__ - DEBUG - Received PUBREL (Mid: 10)
+2026-09-13 18:59:11,096 - __main__ - INFO - [device-0-event-9-try-1] Received message 10 on topic legacy-proxy-1-0/message (QoS 2, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-13 18:58:13.731873+00:00", "request_id": "device-0-event-9-try-1"}
+2026-09-13 18:59:16,702 - __main__ - DEBUG - [device-0-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-13 18:59:16,703 - __main__ - INFO - [device-0-event-9-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-13 18:59:16,703 - __main__ - INFO - [device-0-event-9-try-1] Sending Ack for 10 with QoS 2
+2026-09-13 18:59:16,703 - __main__ - DEBUG - Sending PUBCOMP (Mid: 10)
+2026-09-13 18:59:16,703 - __main__ - DEBUG - Sending PINGREQ
+2026-09-13 18:59:16,746 - __main__ - DEBUG - Received PINGRESP
+2026-09-13 18:59:52,470 - __main__ - INFO - Shutdown signal received
+2026-09-13 18:59:52,472 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-13 18:59:52,472 - __main__ - INFO - MQTT client stopped
+2026-09-13 18:59:52,472 - __main__ - INFO - HTTP client closed

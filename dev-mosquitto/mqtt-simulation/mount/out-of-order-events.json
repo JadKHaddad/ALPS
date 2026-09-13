@@ -1,0 +1,22 @@
+[
+  {
+    "device_id": "0",
+    "first_event_id": 1789325893085,
+    "second_event_id": 1789325893130
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1789325893151,
+    "second_event_id": 1789325893224
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1789325893344,
+    "second_event_id": 1789325893439
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1789325893445,
+    "second_event_id": 1789325893731
+  }
+]
