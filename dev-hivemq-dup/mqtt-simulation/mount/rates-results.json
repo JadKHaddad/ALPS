@@ -1,0 +1,13 @@
+{
+  "median_latency_ms": 6908.0,
+  "average_latency_ms": 7739.8,
+  "p99_latency_ms": 15821.0,
+  "duplication_rate": 0.6,
+  "out_of_order_rate": 0.0,
+  "missing_rate": 0.8,
+  "total_events": 5,
+  "unique_events": 2,
+  "duplicate_events": 3,
+  "out_of_order_events": 0,
+  "missing_events": 8
+}

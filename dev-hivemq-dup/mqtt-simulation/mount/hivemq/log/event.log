@@ -1,0 +1,16 @@
+2026-09-14 07:48:50,806 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5, Clean Start: false, Session Expiry: 0 connected.
+2026-09-14 07:48:50,811 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5 disconnected ungracefully from TCP Listener on port: 1883.
+2026-09-14 07:48:50,876 - Client ID: legacy-proxy-1-0, IP: 172.18.0.7, Clean Start: false, Session Expiry: 0 connected.
+2026-09-14 07:48:51,684 - Client ID: legacy-proxy-2-0 session has expired at 2026-09-14 07:48:50. All persistent data for this client has been removed.
+2026-09-14 07:48:51,716 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5, Clean Start: false, Session Expiry: 0 connected.
+2026-09-14 07:48:54,102 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5 disconnected ungracefully from TCP Listener on port: 1883.
+2026-09-14 07:48:56,122 - Client ID: legacy-proxy-2-0 session has expired at 2026-09-14 07:48:54. All persistent data for this client has been removed.
+2026-09-14 07:48:56,126 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5, Clean Start: false, Session Expiry: 0 connected.
+2026-09-14 07:48:57,094 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5 disconnected ungracefully from TCP Listener on port: 1883.
+2026-09-14 07:49:03,318 - Client ID: legacy-proxy-2-0 session has expired at 2026-09-14 07:48:57. All persistent data for this client has been removed.
+2026-09-14 07:49:03,319 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5, Clean Start: false, Session Expiry: 0 connected.
+2026-09-14 07:49:06,406 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5 disconnected ungracefully from TCP Listener on port: 1883.
+2026-09-14 07:49:13,542 - Client ID: legacy-proxy-2-0 session has expired at 2026-09-14 07:49:06. All persistent data for this client has been removed.
+2026-09-14 07:49:13,544 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5, Clean Start: false, Session Expiry: 0 connected.
+2026-09-14 07:49:14,319 - Client ID: legacy-proxy-2-0, IP: 172.18.0.5 disconnected ungracefully from TCP Listener on port: 1883.
+2026-09-14 07:49:14,326 - Client ID: legacy-proxy-1-0, IP: 172.18.0.7 disconnected ungracefully from TCP Listener on port: 1883.

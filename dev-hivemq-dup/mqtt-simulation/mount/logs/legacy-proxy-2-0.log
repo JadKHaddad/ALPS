@@ -1,0 +1,106 @@
+2026-09-14 07:48:50,494 - __main__ - INFO - DNS resolved lps-ars-comp-2-proxy-0 -> 172.18.0.10
+2026-09-14 07:48:50,560 - __main__ - INFO - HTTP client initialized with resolved URL: http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET, HTTP/2: False
+2026-09-14 07:48:50,560 - __main__ - INFO - Starting MQTT to HTTP forwarder
+2026-09-14 07:48:50,561 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-0' properties=None
+2026-09-14 07:48:50,653 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-14 07:48:51,655 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-0' properties=None
+2026-09-14 07:48:51,718 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[TopicAliasMaximum : 5]
+2026-09-14 07:48:51,724 - __main__ - INFO - Connected to MQTT broker at lps-consumer-mqtt-proxy:9090
+2026-09-14 07:48:51,725 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-14 07:48:51,726 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m1) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-14 07:48:51,728 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 1
+2026-09-14 07:48:51,729 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m2) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-14 07:48:51,729 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 2
+2026-09-14 07:48:51,778 - __main__ - DEBUG - Received SUBACK
+2026-09-14 07:48:51,778 - __main__ - INFO - SUBACK received for mid 1, reason_codes: ['Granted QoS 1']
+2026-09-14 07:48:51,778 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-14 07:48:51,819 - __main__ - DEBUG - Received SUBACK
+2026-09-14 07:48:51,819 - __main__ - INFO - SUBACK received for mid 2, reason_codes: ['Granted QoS 1']
+2026-09-14 07:48:51,820 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-14 07:48:51,828 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-14 07:48:51,829 - __main__ - INFO - [device-0-event-8-try-1] Received message 1 on topic legacy-proxy-1-0/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}
+2026-09-14 07:48:55,103 - __main__ - DEBUG - [device-0-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-14 07:48:55,104 - __main__ - INFO - [device-0-event-8-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-14 07:48:55,104 - __main__ - INFO - [device-0-event-8-try-1] Sending Ack for 1 with QoS 1
+2026-09-14 07:48:55,104 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-14 07:48:55,104 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-14 07:48:56,105 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-0' properties=None
+2026-09-14 07:48:56,129 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[TopicAliasMaximum : 5]
+2026-09-14 07:48:56,129 - __main__ - INFO - Connected to MQTT broker at lps-consumer-mqtt-proxy:9090
+2026-09-14 07:48:56,129 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-14 07:48:56,130 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m3) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-14 07:48:56,130 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 3
+2026-09-14 07:48:56,130 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m4) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-14 07:48:56,131 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 4
+2026-09-14 07:48:56,140 - __main__ - DEBUG - Received SUBACK
+2026-09-14 07:48:56,141 - __main__ - INFO - SUBACK received for mid 3, reason_codes: ['Granted QoS 1']
+2026-09-14 07:48:56,141 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-14 07:48:56,147 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-14 07:48:56,149 - __main__ - INFO - [device-0-event-8-try-1] Received message 1 on topic legacy-proxy-1-0/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}
+2026-09-14 07:48:58,744 - __main__ - DEBUG - [device-0-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-14 07:48:58,744 - __main__ - INFO - [device-0-event-8-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-14 07:48:58,744 - __main__ - INFO - [device-0-event-8-try-1] Sending Ack for 1 with QoS 1
+2026-09-14 07:48:58,745 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-14 07:48:58,745 - __main__ - DEBUG - Received SUBACK
+2026-09-14 07:48:58,745 - __main__ - INFO - SUBACK received for mid 4, reason_codes: ['Granted QoS 1']
+2026-09-14 07:48:58,746 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-14 07:48:58,746 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m2), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-14 07:48:58,747 - __main__ - INFO - [device-0-event-9-try-1] Received message 2 on topic legacy-proxy-1-0/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.845773+00:00", "request_id": "device-0-event-9-try-1"}
+2026-09-14 07:49:02,307 - __main__ - DEBUG - [device-0-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-14 07:49:02,307 - __main__ - INFO - [device-0-event-9-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-14 07:49:02,307 - __main__ - INFO - [device-0-event-9-try-1] Sending Ack for 2 with QoS 1
+2026-09-14 07:49:02,307 - __main__ - DEBUG - Sending PUBACK (Mid: 2)
+2026-09-14 07:49:02,307 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-14 07:49:03,308 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-0' properties=None
+2026-09-14 07:49:03,319 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[TopicAliasMaximum : 5]
+2026-09-14 07:49:03,319 - __main__ - INFO - Connected to MQTT broker at lps-consumer-mqtt-proxy:9090
+2026-09-14 07:49:03,319 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-14 07:49:03,319 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m5) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-14 07:49:03,319 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 5
+2026-09-14 07:49:03,319 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m6) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-14 07:49:03,319 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 6
+2026-09-14 07:49:03,322 - __main__ - DEBUG - Received SUBACK
+2026-09-14 07:49:03,322 - __main__ - INFO - SUBACK received for mid 5, reason_codes: ['Granted QoS 1']
+2026-09-14 07:49:03,322 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-14 07:49:03,323 - __main__ - DEBUG - Received SUBACK
+2026-09-14 07:49:03,323 - __main__ - INFO - SUBACK received for mid 6, reason_codes: ['Granted QoS 1']
+2026-09-14 07:49:03,323 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-14 07:49:03,364 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-14 07:49:03,364 - __main__ - INFO - [device-0-event-8-try-1] Received message 1 on topic legacy-proxy-1-0/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}
+2026-09-14 07:49:07,658 - __main__ - DEBUG - [device-0-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-14 07:49:07,658 - __main__ - INFO - [device-0-event-8-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-14 07:49:07,659 - __main__ - INFO - [device-0-event-8-try-1] Sending Ack for 1 with QoS 1
+2026-09-14 07:49:07,659 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-14 07:49:07,659 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m2), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-14 07:49:07,660 - __main__ - INFO - [device-0-event-9-try-1] Received message 2 on topic legacy-proxy-1-0/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.845773+00:00", "request_id": "device-0-event-9-try-1"}
+2026-09-14 07:49:12,525 - __main__ - DEBUG - [device-0-event-9-try-1] HTTP version: HTTP/1.1
+2026-09-14 07:49:12,525 - __main__ - INFO - [device-0-event-9-try-1] Successfully forwarded message to http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET
+2026-09-14 07:49:12,525 - __main__ - INFO - [device-0-event-9-try-1] Sending Ack for 2 with QoS 1
+2026-09-14 07:49:12,526 - __main__ - DEBUG - Sending PUBACK (Mid: 2)
+2026-09-14 07:49:12,526 - __main__ - ERROR - failed to receive on socket: [Errno 32] Broken pipe
+2026-09-14 07:49:12,526 - __main__ - WARNING - Unexpected disconnection from MQTT broker
+2026-09-14 07:49:13,528 - __main__ - DEBUG - Sending CONNECT (u0, p0, wr0, wq0, wf0, c0, k60) client_id=b'legacy-proxy-2-0' properties=None
+2026-09-14 07:49:13,544 - __main__ - DEBUG - Received CONNACK (0, Success) properties=[TopicAliasMaximum : 5]
+2026-09-14 07:49:13,544 - __main__ - INFO - Connected to MQTT broker at lps-consumer-mqtt-proxy:9090
+2026-09-14 07:49:13,544 - __main__ - INFO - CONNECT response: rc=Success, flags={'session present': 0}
+2026-09-14 07:49:13,544 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m7) [(b'$share/legacy_proxy/+/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-14 07:49:13,545 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/message with QoS 2, result: 0, mid: 7
+2026-09-14 07:49:13,545 - __main__ - DEBUG - Sending SUBSCRIBE (d0, m8) [(b'$share/legacy_proxy/+/retry/message', {QoS=2, noLocal=False, retainAsPublished=False, retainHandling=0})]
+2026-09-14 07:49:13,545 - __main__ - INFO - Subscribed to topic: $share/legacy_proxy/+/retry/message with QoS 2, result: 0, mid: 8
+2026-09-14 07:49:13,551 - __main__ - DEBUG - Received SUBACK
+2026-09-14 07:49:13,551 - __main__ - INFO - SUBACK received for mid 7, reason_codes: ['Granted QoS 1']
+2026-09-14 07:49:13,551 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-14 07:49:13,553 - __main__ - DEBUG - Received SUBACK
+2026-09-14 07:49:13,553 - __main__ - INFO - SUBACK received for mid 8, reason_codes: ['Granted QoS 1']
+2026-09-14 07:49:13,553 - __main__ - INFO - Subscription 0 granted with QoS: Granted QoS 1
+2026-09-14 07:49:13,594 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m1), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-14 07:49:13,594 - __main__ - INFO - [device-0-event-8-try-1] Received message 1 on topic legacy-proxy-1-0/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}
+2026-09-14 07:49:13,618 - __main__ - DEBUG - [device-0-event-8-try-1] HTTP version: HTTP/1.1
+2026-09-14 07:49:13,619 - __main__ - ERROR - [device-0-event-8-try-1] Failed to forward message to HTTP endpoint: Server error '500 Internal Server Error' for url 'http://172.18.0.10:8080/ID_REQ_KC_STORE7D3BPACKET'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+2026-09-14 07:49:13,619 - __main__ - DEBUG - Sending PUBLISH (d0, q1, r0, m9), 'b'legacy-proxy-2-0/retry/message'', properties=None, ... (158 bytes)
+2026-09-14 07:49:14,322 - __main__ - INFO - Shutdown signal received
+2026-09-14 07:49:14,619 - __main__ - INFO - [device-0-event-8-try-1] Sending Ack for 1 with QoS 1
+2026-09-14 07:49:14,619 - __main__ - DEBUG - Sending PUBACK (Mid: 1)
+2026-09-14 07:49:14,620 - __main__ - DEBUG - Received PUBLISH (d0, q1, r0, m2), 'legacy-proxy-1-0/message', properties=[], ...  (158 bytes)
+2026-09-14 07:49:14,620 - __main__ - INFO - [device-0-event-9-try-1] Received message 2 on topic legacy-proxy-1-0/message (QoS 1, DUP False): {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.845773+00:00", "request_id": "device-0-event-9-try-1"}
