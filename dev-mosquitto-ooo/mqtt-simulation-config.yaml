@@ -9,7 +9,7 @@ lps_mqtt_hivemq_image: "jadkhaddad/lps-mqtt-hivemq:0.1.0"
 devices:
   devices_count: 2
   max_event_interval: 100ms
-  min_event_interval: 0s
+  # min_event_interval: 0s
   retry_duration: 250ms
   max_events: 100
 

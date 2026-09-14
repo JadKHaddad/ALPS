@@ -1,7 +1,7 @@
 {
-  "median_latency_ms": 6908.0,
-  "average_latency_ms": 7739.8,
-  "p99_latency_ms": 15821.0,
+  "median_latency_ms": 8858.0,
+  "average_latency_ms": 9407.0,
+  "p99_latency_ms": 17817.0,
   "duplication_rate": 0.6,
   "out_of_order_rate": 0.0,
   "missing_rate": 0.8,
