@@ -1,0 +1,141 @@
+2026-09-14 07:48:48,181 INFO  - Starting HiveMQ Community Edition Server
+2026-09-14 07:48:48,185 INFO  - HiveMQ version: 2025.5
+2026-09-14 07:48:48,185 INFO  - HiveMQ home directory: /opt/hivemq
+2026-09-14 07:48:48,237 INFO  - Log Configuration was overridden by /opt/hivemq/conf/logback.xml
+2026-09-14 07:48:48,377 WARN  - The configured server receive maximum (2147483647) is too high. It was set to 65535 seconds instead.
+2026-09-14 07:48:48,378 INFO  - This HiveMQ ID is IClaG
+2026-09-14 07:48:49,101 INFO  - Starting with file persistence mode.
+2026-09-14 07:48:49,463 INFO  - Starting HiveMQ extension system.
+2026-09-14 07:48:49,489 INFO  - [RETRY-PRIORITY] Extension starting - initializing interceptors
+2026-09-14 07:48:49,489 INFO  - Extension "Retry Priority Extension" version 1.0.0 started successfully.
+2026-09-14 07:48:49,490 WARN  - 
+################################################################################################################
+# This HiveMQ deployment is not secure! You are lacking Authentication and Authorization.                      #
+# Right now any MQTT client can connect to the broker with a full set of permissions.                          #
+# For production usage, add an appropriate security extension and remove the hivemq-allow-all extension.       #
+# You can download security extensions from the HiveMQ Marketplace (https://www.hivemq.com/extensions/).       #
+################################################################################################################
+2026-09-14 07:48:49,490 INFO  - Extension "Allow All Extension" version 1.1.0 started successfully.
+2026-09-14 07:48:49,510 INFO  - Starting TCP listener on address 0.0.0.0 and port 1883
+2026-09-14 07:48:49,527 INFO  - Started TCP Listener on address 0.0.0.0 and on port 1883.
+2026-09-14 07:48:49,527 INFO  - Started HiveMQ in 1347ms
+2026-09-14 07:48:51,021 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:50.232941+00:00", "request_id": "device-0-event-0-try-4"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,090 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.079222+00:00", "request_id": "device-0-event-1-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,164 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.151743+00:00", "request_id": "device-0-event-2-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,251 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.240068+00:00", "request_id": "device-0-event-3-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,359 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.348041+00:00", "request_id": "device-0-event-4-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,487 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.467099+00:00", "request_id": "device-0-event-5-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,592 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.584490+00:00", "request_id": "device-0-event-6-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,698 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.672569+00:00", "request_id": "device-0-event-7-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,808 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:51,827 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:48:51,849 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.845773+00:00", "request_id": "device-0-event-9-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:48:56,144 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:48:56,147 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.845773+00:00", "request_id": "device-0-event-9-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:49:03,324 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:49:03,324 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.845773+00:00", "request_id": "device-0-event-9-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:49:13,553 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.801171+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:49:13,553 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:48:51.845773+00:00", "request_id": "device-0-event-9-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:49:14,323 INFO  - Shutting down HiveMQ. Please wait, this could take a while...
+2026-09-14 07:49:16,338 INFO  - Shutting down extension system
+2026-09-14 07:49:16,355 INFO  - Extension "Retry Priority Extension" version 1.0.0 stopped successfully.
+2026-09-14 07:49:16,356 INFO  - Extension "Allow All Extension" version 1.1.0 stopped successfully.
+2026-09-14 07:49:18,562 INFO  - Shutdown completed.
+2026-09-14 07:53:18,017 INFO  - Starting HiveMQ Community Edition Server
+2026-09-14 07:53:18,017 INFO  - HiveMQ version: 2025.5
+2026-09-14 07:53:18,017 INFO  - HiveMQ home directory: /opt/hivemq
+2026-09-14 07:53:18,054 INFO  - Log Configuration was overridden by /opt/hivemq/conf/logback.xml
+2026-09-14 07:53:18,172 WARN  - The configured server receive maximum (2147483647) is too high. It was set to 65535 seconds instead.
+2026-09-14 07:53:18,172 INFO  - This HiveMQ ID is VikAF
+2026-09-14 07:53:18,778 INFO  - Starting with file persistence mode.
+2026-09-14 07:53:19,098 INFO  - Starting HiveMQ extension system.
+2026-09-14 07:53:19,149 INFO  - [RETRY-PRIORITY] Extension starting - initializing interceptors
+2026-09-14 07:53:19,151 INFO  - Extension "Retry Priority Extension" version 1.0.0 started successfully.
+2026-09-14 07:53:19,153 WARN  - 
+################################################################################################################
+# This HiveMQ deployment is not secure! You are lacking Authentication and Authorization.                      #
+# Right now any MQTT client can connect to the broker with a full set of permissions.                          #
+# For production usage, add an appropriate security extension and remove the hivemq-allow-all extension.       #
+# You can download security extensions from the HiveMQ Marketplace (https://www.hivemq.com/extensions/).       #
+################################################################################################################
+2026-09-14 07:53:19,153 INFO  - Extension "Allow All Extension" version 1.1.0 started successfully.
+2026-09-14 07:53:19,172 INFO  - Starting TCP listener on address 0.0.0.0 and port 1883
+2026-09-14 07:53:19,195 INFO  - Started TCP Listener on address 0.0.0.0 and on port 1883.
+2026-09-14 07:53:19,195 INFO  - Started HiveMQ in 1180ms
+2026-09-14 07:53:20,439 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:53:19.918680+00:00", "request_id": "device-0-event-0-try-3"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:53:20,457 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:53:19.918680+00:00", "request_id": "device-0-event-0-try-3"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:53:20,569 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:53:20.557188+00:00", "request_id": "device-0-event-1-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:53:25,930 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:53:19.918680+00:00", "request_id": "device-0-event-0-try-3"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:53:25,930 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:53:20.557188+00:00", "request_id": "device-0-event-1-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:53:26,935 INFO  - Shutting down HiveMQ. Please wait, this could take a while...
+2026-09-14 07:53:28,953 INFO  - Shutting down extension system
+2026-09-14 07:53:28,963 INFO  - Extension "Retry Priority Extension" version 1.0.0 stopped successfully.
+2026-09-14 07:53:28,964 INFO  - Extension "Allow All Extension" version 1.1.0 stopped successfully.
+2026-09-14 07:53:31,183 INFO  - Shutdown completed.
+2026-09-14 07:54:19,648 INFO  - Starting HiveMQ Community Edition Server
+2026-09-14 07:54:19,649 INFO  - HiveMQ version: 2025.5
+2026-09-14 07:54:19,649 INFO  - HiveMQ home directory: /opt/hivemq
+2026-09-14 07:54:19,709 INFO  - Log Configuration was overridden by /opt/hivemq/conf/logback.xml
+2026-09-14 07:54:19,812 WARN  - The configured server receive maximum (2147483647) is too high. It was set to 65535 seconds instead.
+2026-09-14 07:54:19,813 INFO  - This HiveMQ ID is LuClV
+2026-09-14 07:54:20,660 INFO  - Starting with file persistence mode.
+2026-09-14 07:54:20,957 INFO  - Starting HiveMQ extension system.
+2026-09-14 07:54:20,980 INFO  - [RETRY-PRIORITY] Extension starting - initializing interceptors
+2026-09-14 07:54:20,981 INFO  - Extension "Retry Priority Extension" version 1.0.0 started successfully.
+2026-09-14 07:54:20,982 WARN  - 
+################################################################################################################
+# This HiveMQ deployment is not secure! You are lacking Authentication and Authorization.                      #
+# Right now any MQTT client can connect to the broker with a full set of permissions.                          #
+# For production usage, add an appropriate security extension and remove the hivemq-allow-all extension.       #
+# You can download security extensions from the HiveMQ Marketplace (https://www.hivemq.com/extensions/).       #
+################################################################################################################
+2026-09-14 07:54:20,983 INFO  - Extension "Allow All Extension" version 1.1.0 started successfully.
+2026-09-14 07:54:20,999 INFO  - Starting TCP listener on address 0.0.0.0 and port 1883
+2026-09-14 07:54:21,017 INFO  - Started TCP Listener on address 0.0.0.0 and on port 1883.
+2026-09-14 07:54:21,017 INFO  - Started HiveMQ in 1370ms
+2026-09-14 07:54:22,234 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:21.695057+00:00", "request_id": "device-0-event-0-try-3"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,254 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:21.695057+00:00", "request_id": "device-0-event-0-try-3"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:22,345 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.340834+00:00", "request_id": "device-0-event-1-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,390 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.378148+00:00", "request_id": "device-0-event-2-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,477 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.459787+00:00", "request_id": "device-0-event-3-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,515 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.507262+00:00", "request_id": "device-0-event-4-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,539 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.535045+00:00", "request_id": "device-0-event-5-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,574 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.571692+00:00", "request_id": "device-0-event-6-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,591 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.588352+00:00", "request_id": "device-0-event-7-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,630 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.625139+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:22,718 INFO  - [INBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.715819+00:00", "request_id": "device-0-event-9-try-1"}, IsRetry: false, PendingRetries: 0, QoS: EXACTLY_ONCE
+2026-09-14 07:54:27,242 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:21.695057+00:00", "request_id": "device-0-event-0-try-3"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.340834+00:00", "request_id": "device-0-event-1-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.378148+00:00", "request_id": "device-0-event-2-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.459787+00:00", "request_id": "device-0-event-3-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.507262+00:00", "request_id": "device-0-event-4-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.535045+00:00", "request_id": "device-0-event-5-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.571692+00:00", "request_id": "device-0-event-6-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.588352+00:00", "request_id": "device-0-event-7-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.625139+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:27,243 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.715819+00:00", "request_id": "device-0-event-9-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,918 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:21.695057+00:00", "request_id": "device-0-event-0-try-3"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,919 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.340834+00:00", "request_id": "device-0-event-1-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,919 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.378148+00:00", "request_id": "device-0-event-2-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,919 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.459787+00:00", "request_id": "device-0-event-3-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,919 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.507262+00:00", "request_id": "device-0-event-4-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,919 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.535045+00:00", "request_id": "device-0-event-5-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,920 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.571692+00:00", "request_id": "device-0-event-6-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,920 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.588352+00:00", "request_id": "device-0-event-7-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,920 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.625139+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:35,920 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.715819+00:00", "request_id": "device-0-event-9-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,889 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:21.695057+00:00", "request_id": "device-0-event-0-try-3"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,890 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.340834+00:00", "request_id": "device-0-event-1-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,891 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.378148+00:00", "request_id": "device-0-event-2-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,891 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.459787+00:00", "request_id": "device-0-event-3-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,891 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.507262+00:00", "request_id": "device-0-event-4-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,892 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.535045+00:00", "request_id": "device-0-event-5-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,892 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.571692+00:00", "request_id": "device-0-event-6-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,893 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.588352+00:00", "request_id": "device-0-event-7-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,893 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.625139+00:00", "request_id": "device-0-event-8-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:45,893 INFO  - [OUTBOUND] Topic: legacy-proxy-1-0/message, Message: {"id": "0", "body": "Phone: 0, Branch: Branch, Headnumber: Headnumber, TriggerTime: 2026-09-14 07:54:22.715819+00:00", "request_id": "device-0-event-9-try-1"}, IsRetry: false, PendingRetries: 0, QoS: AT_LEAST_ONCE
+2026-09-14 07:54:46,422 INFO  - Shutting down HiveMQ. Please wait, this could take a while...
+2026-09-14 07:54:48,439 INFO  - Shutting down extension system
+2026-09-14 07:54:48,441 INFO  - Extension "Retry Priority Extension" version 1.0.0 stopped successfully.
+2026-09-14 07:54:48,441 INFO  - Extension "Allow All Extension" version 1.1.0 stopped successfully.
+2026-09-14 07:54:50,618 INFO  - Shutdown completed.

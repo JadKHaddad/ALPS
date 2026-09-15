@@ -7,30 +7,23 @@ lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 lps_mqtt_hivemq_image: "jadkhaddad/lps-mqtt-hivemq:0.1.0"
 
 devices:
-  devices_count: 2
+  devices_count: 1
   max_event_interval: 100ms
-  # min_event_interval: 0s
   retry_duration: 250ms
-  max_events: 100
+  max_events: 2
 
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
-  max_work_duration: 250ms
-  # min_work_duration: 0s
-  max_response_duration: 250ms
-  # min_response_duration: 0s
-  shutdown_after_idle_duration: 10s
+  max_work_duration: 5s
+  max_response_duration: 0ms
+  shutdown_after_idle_duration: 5s
   server_count: 1
 
 mqtt:
   use_mosquitto: true
   producers:
-    producers_count: 3
+    producers_count: 1
   consumers:
-    consumers_count: 3
-    # mqtt_proxy:
-    #   socket_addr: 0.0.0.0:9090
-    #   failure_rate: 0.4
-    #   max_up_duration: 5s
+    consumers_count: 2

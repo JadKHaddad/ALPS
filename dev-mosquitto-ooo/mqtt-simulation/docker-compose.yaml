@@ -14,33 +14,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
-    restart: unless-stopped
-  ars-comp-1-proxy-1:
-    image: jadkhaddad/lps-mqtt-python:0.1.0
-    container_name: lps-ars-comp-1-proxy-1
-    command: python3 /scripts/ars_comp_1_proxy.py
-    environment:
-      HTTP_PORT: '8080'
-      SERVICE_NAME: ars-comp-1-proxy-1
-      TARGET_URL: http://lps-legacy-proxy-1-1:8080/ID_REQ_KC_STORE7D3BPACKET
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
-    restart: unless-stopped
-  ars-comp-1-proxy-2:
-    image: jadkhaddad/lps-mqtt-python:0.1.0
-    container_name: lps-ars-comp-1-proxy-2
-    command: python3 /scripts/ars_comp_1_proxy.py
-    environment:
-      HTTP_PORT: '8080'
-      SERVICE_NAME: ars-comp-1-proxy-2
-      TARGET_URL: http://lps-legacy-proxy-1-2:8080/ID_REQ_KC_STORE7D3BPACKET
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
     restart: unless-stopped
   ars-comp-2-proxy-0:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -53,7 +27,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
     restart: unless-stopped
   ars-comp-2-proxy-1:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -66,20 +40,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
-    restart: unless-stopped
-  ars-comp-2-proxy-2:
-    image: jadkhaddad/lps-mqtt-python:0.1.0
-    container_name: lps-ars-comp-2-proxy-2
-    command: python3 /scripts/ars_comp_2_proxy.py
-    environment:
-      HTTP_PORT: '8080'
-      SERVICE_NAME: ars-comp-2-proxy-2
-      TARGET_URL: http://lps-consumers-server-proxy:8080/work
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
     restart: unless-stopped
   consumers-server-proxy:
     image: jadkhaddad/lps-rs:0.1.0
@@ -88,7 +49,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
   device:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-device
@@ -96,7 +57,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
   hivemq:
     image: eclipse-mosquitto:2.1.2-alpine
     container_name: lps-hivemq
@@ -105,7 +66,7 @@ services:
     ports:
     - 1883:1883
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount/mosquitto/config:/mosquitto/config
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount/mosquitto/config:/mosquitto/config
     restart: unless-stopped
     depends_on:
       mosquitto-init:
@@ -123,37 +84,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
-    restart: unless-stopped
-  legacy-proxy-1-1:
-    image: jadkhaddad/lps-mqtt-python:0.1.0
-    container_name: lps-legacy-proxy-1-1
-    command: python3 /scripts/legacy_proxy_1.py
-    environment:
-      HTTP_PORT: '8080'
-      MQTT_BROKER: lps-hivemq
-      MQTT_PORT: '1883'
-      MQTT_TOPIC: legacy-proxy-1-1/message
-      SERVICE_NAME: legacy-proxy-1-1
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
-    restart: unless-stopped
-  legacy-proxy-1-2:
-    image: jadkhaddad/lps-mqtt-python:0.1.0
-    container_name: lps-legacy-proxy-1-2
-    command: python3 /scripts/legacy_proxy_1.py
-    environment:
-      HTTP_PORT: '8080'
-      MQTT_BROKER: lps-hivemq
-      MQTT_PORT: '1883'
-      MQTT_TOPIC: legacy-proxy-1-2/message
-      SERVICE_NAME: legacy-proxy-1-2
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
     restart: unless-stopped
   legacy-proxy-2-0:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -167,7 +98,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
     restart: unless-stopped
   legacy-proxy-2-1:
     image: jadkhaddad/lps-mqtt-python:0.1.0
@@ -181,21 +112,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
-    restart: unless-stopped
-  legacy-proxy-2-2:
-    image: jadkhaddad/lps-mqtt-python:0.1.0
-    container_name: lps-legacy-proxy-2-2
-    command: python3 /scripts/legacy_proxy_2.py
-    environment:
-      MQTT_HOST: lps-hivemq
-      MQTT_PORT: '1883'
-      SERVICE_NAME: legacy-proxy-2-2
-      TARGET_URL: http://lps-ars-comp-2-proxy-2:8080/ID_REQ_KC_STORE7D3BPACKET
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
     restart: unless-stopped
   mosquitto-init:
     image: busybox:latest
@@ -204,7 +121,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount/mosquitto/config:/mosquitto/config
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount/mosquitto/config:/mosquitto/config
   scripts:
     image: jadkhaddad/lps-scripts:0.1.0
     container_name: lps-scripts
@@ -214,7 +131,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
   server:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server
@@ -226,7 +143,7 @@ services:
     ports:
     - 0.0.0.0:8080:8080
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
   server-server-proxy-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server-server-proxy-0
@@ -234,7 +151,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app
   validator:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-validator
@@ -244,4 +161,4 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto/mqtt-simulation/mount:/app
+    - /home/jadkhaddad/Desktop/LPS/dev-mosquitto-ooo/mqtt-simulation/mount:/app

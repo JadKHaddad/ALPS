@@ -1,9 +1,9 @@
 socket_addr: 0.0.0.0:8080
 failure_rate: 0.0
-max_work_duration: 250ms
+max_work_duration: 5s
 min_work_duration: null
-max_response_duration: 250ms
+max_response_duration: 0s
 min_response_duration: null
 results_file: /app/server-results.json
 failures_file: /app/server-failures.json
-shutdown_after_idle_duration: 10s
+shutdown_after_idle_duration: 5s

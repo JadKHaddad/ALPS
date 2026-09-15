@@ -11,14 +11,14 @@ devices:
   max_event_interval: 100ms
   # min_event_interval: 0s
   retry_duration: 250ms
-  max_events: 10
+  max_events: 1
 
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
   max_work_duration: 5s
-  min_work_duration: 2500ms
+  min_work_duration: 0ms
   max_response_duration: 0ms
   # min_response_duration: 0s
   shutdown_after_idle_duration: 5s
