@@ -304,12 +304,9 @@ impl Config {
     fn amqp_consumers_config_files(&self) -> Vec<ConfigFile> {
         let mut config_files = Vec::new();
 
-        let consumer_amqp_proxy_config =
-            self.amqp
-                .consumers
-                .amqp_proxy
-                .as_ref()
-                .map(|proxy| CrateTcpProxyConfig {
+        for i in 0..self.amqp.consumers_count() {
+            if let Some(proxy) = self.amqp.consumers.amqp_proxy.as_ref() {
+                let consumer_amqp_proxy_config = CrateTcpProxyConfig {
                     tasks: vec![CrateTcpProxyTask {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
@@ -318,26 +315,22 @@ impl Config {
                         upstream_port: self.rabbit_mq_container_port(),
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
-                        .join("consumer-amqp-proxy-results.json"),
+                        .join(format!("consumer-amqp-proxy-{i}-results.json")),
+                };
+
+                config_files.push(ConfigFile {
+                    name: format!("consumer-amqp-proxy-{i}-config.yaml"),
+                    ty: ConfigType::TcpProxy(consumer_amqp_proxy_config),
                 });
+            }
 
-        let consumer_amqp_proxy_config_file = consumer_amqp_proxy_config.map(|config| ConfigFile {
-            name: "consumer-amqp-proxy-config.yaml".to_string(),
-            ty: ConfigType::TcpProxy(config),
-        });
-
-        if let Some(config) = consumer_amqp_proxy_config_file {
-            config_files.push(config);
-        }
-
-        for i in 0..self.amqp.consumers_count() {
             let broker_domain = self
                 .amqp
                 .consumers
                 .amqp_proxy
                 .as_ref()
-                .map(|_| String::from("lps-consumer-amqp-proxy"))
-                .unwrap_or(self.rabbit_mq_container_name());
+                .map(|_| format!("lps-consumer-amqp-proxy-{i}"))
+                .unwrap_or_else(|| self.rabbit_mq_container_name());
 
             let broker_port = self
                 .amqp
@@ -345,14 +338,14 @@ impl Config {
                 .amqp_proxy
                 .as_ref()
                 .map(|proxy| proxy.socket_addr.port())
-                .unwrap_or(self.rabbit_mq_container_port());
+                .unwrap_or_else(|| self.rabbit_mq_container_port());
 
             let consumer_config_file = ConfigFile {
-                name: format!("consumer-{}.yaml", i),
+                name: format!("consumer-{i}.yaml"),
                 ty: ConfigType::Consumer(CrateConsumerConfig {
                     queues_count: self.amqp.queues_count,
                     reconnect_duration: self.amqp.consumers.reconnect_duration,
-                    rabbit_mq_url: format!("amqp://{}:{}", broker_domain, broker_port),
+                    rabbit_mq_url: format!("amqp://{broker_domain}:{broker_port}"),
                     server_push_url: self.consumers_server_push_url(),
                 }),
             };
@@ -580,25 +573,25 @@ impl Config {
     fn amqp_consumers_docker_service(&self) -> BTreeMap<String, DockerService> {
         let mut services = BTreeMap::new();
 
-        if self.amqp.consumers.amqp_proxy.is_some() {
-            services.insert(
-                String::from("consumer-amqp-proxy"),
-                DockerService::default()
-                    .with_image(self.lps_rust_image_name())
-                    .with_container_name(String::from("lps-consumer-amqp-proxy"))
-                    .with_command(format!(
-                        "tcp-proxy --config-file {}",
-                        PathBuf::from(self.container_work_dir())
-                            .join("consumer-amqp-proxy-config.yaml")
-                            .display()
-                    ))
-                    .with_volumes(vec![self.container_work_dir_volume_mount()])
-                    .with_networks(vec![self.service_network_name()])
-                    .with_unless_stopped(),
-            );
-        }
-
         for i in 0..self.amqp.consumers_count() {
+            if self.amqp.consumers.amqp_proxy.is_some() {
+                let config_file = PathBuf::from(self.container_work_dir())
+                    .join(format!("consumer-amqp-proxy-{i}-config.yaml"))
+                    .display()
+                    .to_string();
+
+                services.insert(
+                    format!("consumer-amqp-proxy-{i}"),
+                    DockerService::default()
+                        .with_image(self.lps_rust_image_name())
+                        .with_container_name(format!("lps-consumer-amqp-proxy-{i}"))
+                        .with_command(format!("tcp-proxy --config-file {config_file}"))
+                        .with_volumes(vec![self.container_work_dir_volume_mount()])
+                        .with_networks(vec![self.service_network_name()])
+                        .with_unless_stopped(),
+                );
+            }
+
             let config_file = PathBuf::from(self.container_work_dir())
                 .join(format!("consumer-{i}.yaml"))
                 .display()
@@ -1104,12 +1097,9 @@ impl Config {
     fn mqtt_consumers_config_files(&self) -> Vec<ConfigFile> {
         let mut config_files = Vec::new();
 
-        let consumer_mqtt_proxy_config =
-            self.mqtt
-                .consumers
-                .mqtt_proxy
-                .as_ref()
-                .map(|proxy| CrateTcpProxyConfig {
+        if let Some(proxy) = self.mqtt.consumers.mqtt_proxy.as_ref() {
+            for i in 0..self.mqtt.consumers_count() {
+                let consumer_mqtt_proxy_config = CrateTcpProxyConfig {
                     tasks: vec![CrateTcpProxyTask {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
@@ -1118,16 +1108,14 @@ impl Config {
                         upstream_port: self.hive_mq_container_port_u16(),
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
-                        .join("consumer-mqtt-proxy-results.json"),
+                        .join(format!("consumer-mqtt-proxy-{i}-results.json")),
+                };
+
+                config_files.push(ConfigFile {
+                    name: format!("consumer-mqtt-proxy-{i}-config.yaml"),
+                    ty: ConfigType::TcpProxy(consumer_mqtt_proxy_config),
                 });
-
-        let consumer_mqtt_proxy_config_file = consumer_mqtt_proxy_config.map(|config| ConfigFile {
-            name: "consumer-mqtt-proxy-config.yaml".to_string(),
-            ty: ConfigType::TcpProxy(config),
-        });
-
-        if let Some(config) = consumer_mqtt_proxy_config_file {
-            config_files.push(config);
+            }
         }
 
         config_files
@@ -1136,41 +1124,41 @@ impl Config {
     fn mqtt_consumers_docker_service(&self) -> BTreeMap<String, DockerService> {
         let mut services = BTreeMap::new();
 
-        if self.mqtt.consumers.mqtt_proxy.is_some() {
-            services.insert(
-                String::from("consumer-mqtt-proxy"),
-                DockerService::default()
-                    .with_image(self.lps_rust_image_name())
-                    .with_container_name(String::from("lps-consumer-mqtt-proxy"))
-                    .with_command(format!(
-                        "tcp-proxy --config-file {}",
-                        PathBuf::from(self.container_work_dir())
-                            .join("consumer-mqtt-proxy-config.yaml")
-                            .display()
-                    ))
-                    .with_volumes(vec![self.container_work_dir_volume_mount()])
-                    .with_networks(vec![self.service_network_name()])
-                    .with_unless_stopped(),
-            );
-        }
-
-        let broker_domain = self
-            .mqtt
-            .consumers
-            .mqtt_proxy
-            .as_ref()
-            .map(|_| String::from("lps-consumer-mqtt-proxy"))
-            .unwrap_or(self.hive_mq_container_name());
-
-        let broker_port = self
-            .mqtt
-            .consumers
-            .mqtt_proxy
-            .as_ref()
-            .map(|proxy| proxy.socket_addr.port())
-            .unwrap_or(self.hive_mq_container_port_u16());
-
         for i in 0..self.mqtt.consumers_count() {
+            if self.mqtt.consumers.mqtt_proxy.is_some() {
+                let config_file = PathBuf::from(self.container_work_dir())
+                    .join(format!("consumer-mqtt-proxy-{i}-config.yaml"))
+                    .display()
+                    .to_string();
+
+                services.insert(
+                    format!("consumer-mqtt-proxy-{i}"),
+                    DockerService::default()
+                        .with_image(self.lps_rust_image_name())
+                        .with_container_name(format!("lps-consumer-mqtt-proxy-{i}"))
+                        .with_command(format!("tcp-proxy --config-file {config_file}"))
+                        .with_volumes(vec![self.container_work_dir_volume_mount()])
+                        .with_networks(vec![self.service_network_name()])
+                        .with_unless_stopped(),
+                );
+            }
+
+            let broker_domain = self
+                .mqtt
+                .consumers
+                .mqtt_proxy
+                .as_ref()
+                .map(|_| format!("lps-consumer-mqtt-proxy-{i}"))
+                .unwrap_or_else(|| self.hive_mq_container_name());
+
+            let broker_port = self
+                .mqtt
+                .consumers
+                .mqtt_proxy
+                .as_ref()
+                .map(|proxy| proxy.socket_addr.port())
+                .unwrap_or_else(|| self.hive_mq_container_port_u16());
+
             services.insert(
                 format!("legacy-proxy-2-{i}"),
                 DockerService::default()
@@ -1187,7 +1175,7 @@ impl Config {
                                     self.default_http_port()
                                 ),
                             ),
-                            (String::from("MQTT_HOST"), broker_domain.clone()),
+                            (String::from("MQTT_HOST"), broker_domain),
                             (String::from("MQTT_PORT"), broker_port.to_string()),
                         ]
                         .into(),
