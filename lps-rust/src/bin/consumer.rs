@@ -1,6 +1,6 @@
 //! The consumer is our LPS2 proxy.
 //!
-//! It is an ampq client that consumes events from RabbitMQ and sends work requests to the server.
+//! It is an amqp client that consumes events from RabbitMQ and sends work requests to the server.
 //!
 //! ```not_rust
 //!
@@ -18,7 +18,12 @@ use lapin::{
     options::*,
     types::{FieldTable, ShortString},
 };
-use lps_rust::{Event, consumer::Config, shutdown_signal};
+use lps_rust::{
+    Event,
+    consumer::{Config, Job},
+    shutdown_signal,
+};
+use tokio::sync::Mutex;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -27,8 +32,37 @@ pub struct Args {
     config_file: PathBuf,
 }
 
+#[derive(Clone)]
+struct JobsSate {
+    jobs: Arc<Mutex<Vec<Job>>>,
+    jobs_file: PathBuf,
+}
+
+impl JobsSate {
+    fn new(jobs_file: PathBuf) -> Self {
+        Self {
+            jobs: Arc::new(Mutex::new(Vec::new())),
+            jobs_file,
+        }
+    }
+
+    async fn add_job(&self, job: Job) {
+        let mut jobs = self.jobs.lock().await;
+        jobs.push(job);
+    }
+
+    async fn save_jobs(&self) -> anyhow::Result<()> {
+        let data =
+            serde_json::to_vec(&*self.jobs.lock().await).context("Failed to serialize results")?;
+
+        tokio::fs::write(&self.jobs_file, data)
+            .await
+            .context("Failed to write results file")
+    }
+}
+
 // XXX: We will have duplicated events if the connection to RabbitMQ is interrupted while the server is processing our sent event.
-async fn connection(config: Config) -> Result<(), anyhow::Error> {
+async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error> {
     let queues = (0..config.queues_count).map(|i| format!("events-{i}"));
 
     let conn = Arc::new(
@@ -48,6 +82,7 @@ async fn connection(config: Config) -> Result<(), anyhow::Error> {
         .map(|queue| {
             let push_url = config.server_push_url.clone();
             let conn = conn.clone();
+            let state = state.clone();
 
             tokio::spawn(async move {
                 'channel: loop {
@@ -86,21 +121,32 @@ async fn connection(config: Config) -> Result<(), anyhow::Error> {
 
                         tracing::info!(%queue, ?event, "Sending work request");
 
+                        let job =
+                            Job::new_received_and_sent_and_waiting_for_response_now(event.clone());
+
+                        state.add_job(job.clone()).await;
+
                         let response = client.post(&push_url).json(&event.original).send().await;
 
                         match response {
                             Ok(response) if response.status().is_success() => {
                                 tracing::info!(%queue, ?event, "Work succeeded");
 
+                                state.add_job(job.clone().success_before_ack_now()).await;
+
                                 delivery
                                     .ack(BasicAckOptions::default())
                                     .await
                                     .context(format!("Failed to basic ack (work): {event:?}"))?;
 
+                                state.add_job(job.clone().success_after_ack_now()).await;
+
                                 tracing::info!(%queue, ?event, "Acknowledged");
                             }
                             _ => {
                                 tracing::warn!(%queue, ?event, ?response, "Work failed");
+
+                                state.add_job(job.clone().fail_before_nack_now()).await;
 
                                 delivery
                                     .nack(BasicNackOptions {
@@ -109,6 +155,8 @@ async fn connection(config: Config) -> Result<(), anyhow::Error> {
                                     })
                                     .await
                                     .context(format!("Failed to basic nack: {event:?}"))?;
+
+                                state.add_job(job.fail_after_nack_now()).await;
 
                                 channel
                                     .close(0, Default::default())
@@ -163,15 +211,20 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
+    let state = JobsSate::new(config.results_file.clone());
+    let state_c = state.clone();
+
     tokio::select! {
         _ = shutdown_signal() => {
             tracing::info!("Received shutdown signal, shutting down");
         }
         _ = async move {
+
+
             loop {
                 tracing::info!("Connecting to RabbitMQ");
 
-                match connection(config.clone()).await {
+                match connection(config.clone(), state.clone()).await {
                     Ok(()) => {}
                     Err(err) => {
                         tracing::error!(%err, "Connection error");
@@ -187,6 +240,13 @@ async fn main() -> Result<(), anyhow::Error> {
             }
         } => {}
     }
+
+    tracing::info!("Saving results");
+
+    state_c
+        .save_jobs()
+        .await
+        .context("Failed to save results")?;
 
     Ok(())
 }

@@ -1,7 +1,10 @@
 use std::{path::PathBuf, time::Duration};
 
 use anyhow::Context;
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+
+use crate::Event;
 
 fn default_server_push_url() -> String {
     String::from("http://localhost:8080/work")
@@ -19,6 +22,10 @@ fn default_queues_count() -> u32 {
     10
 }
 
+fn default_results_file() -> PathBuf {
+    PathBuf::from("consumer-results.json")
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Config {
     #[serde(default = "default_rabbit_mq_url")]
@@ -30,6 +37,8 @@ pub struct Config {
     /// The number of queues to consume from.
     #[serde(default = "default_queues_count")]
     pub queues_count: u32,
+    #[serde(default = "default_results_file")]
+    pub results_file: PathBuf,
 }
 
 impl Default for Config {
@@ -39,6 +48,7 @@ impl Default for Config {
             server_push_url: default_server_push_url(),
             reconnect_duration: default_reconnect_duration(),
             queues_count: default_queues_count(),
+            results_file: default_results_file(),
         }
     }
 }
@@ -51,5 +61,60 @@ impl Config {
                 .context("Failed to read config file")?,
         )
         .context("Failed to deserialize config file")
+    }
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub enum JobStatus {
+    /// The Consumer Consumer has received the job and sent it to the server and is waiting for a response.
+    ReceivedAndSentAndWaitingForResponse,
+    /// The Consumer has received a positive response from the server and not yet acknowledged it.
+    SuccessBeforeAck,
+    /// The Consumer has received a positive response from the server and has acknowledged it.
+    SuccessAfterAck,
+    /// The Consumer has received a negative response from the server and has not yet n-acknowledged it.
+    FailBeforeNack,
+    /// The Consumer has received a negative response from the server and has n-acknowledged it.
+    FailAfterNack,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct Job {
+    pub status: JobStatus,
+    pub event: Event,
+    pub happened_at: DateTime<Utc>,
+}
+
+impl Job {
+    pub fn new_received_and_sent_and_waiting_for_response_now(event: Event) -> Self {
+        Self {
+            status: JobStatus::ReceivedAndSentAndWaitingForResponse,
+            event,
+            happened_at: Utc::now(),
+        }
+    }
+
+    pub fn success_before_ack_now(mut self) -> Self {
+        self.status = JobStatus::SuccessBeforeAck;
+        self.happened_at = Utc::now();
+        self
+    }
+
+    pub fn success_after_ack_now(mut self) -> Self {
+        self.status = JobStatus::SuccessAfterAck;
+        self.happened_at = Utc::now();
+        self
+    }
+
+    pub fn fail_before_nack_now(mut self) -> Self {
+        self.status = JobStatus::FailBeforeNack;
+        self.happened_at = Utc::now();
+        self
+    }
+
+    pub fn fail_after_nack_now(mut self) -> Self {
+        self.status = JobStatus::FailAfterNack;
+        self.happened_at = Utc::now();
+        self
     }
 }

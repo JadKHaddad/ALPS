@@ -347,6 +347,8 @@ impl Config {
                     reconnect_duration: self.amqp.consumers.reconnect_duration,
                     rabbit_mq_url: format!("amqp://{broker_domain}:{broker_port}"),
                     server_push_url: self.consumers_server_push_url(),
+                    results_file: PathBuf::from(self.container_work_dir())
+                        .join(format!("consumer-{i}-results.json")),
                 }),
             };
 
