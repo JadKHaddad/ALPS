@@ -1,0 +1,2 @@
+[env]
+PYO3_PYTHON = { value = "pyo3venv/bin/python3.13", relative = true }

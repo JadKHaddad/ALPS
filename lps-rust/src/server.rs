@@ -79,3 +79,37 @@ impl Config {
         .context("Failed to deserialize config file")
     }
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct GsProdConfig {
+    #[serde(default = "default_socket_addr")]
+    pub socket_addr: SocketAddr,
+    #[serde(default = "default_results_file")]
+    pub results_file: PathBuf,
+    #[serde(default = "default_failures_file")]
+    pub failures_file: PathBuf,
+    #[serde(default, with = "humantime_serde")]
+    pub shutdown_after_idle_duration: Option<Duration>,
+}
+
+impl Default for GsProdConfig {
+    fn default() -> Self {
+        Self {
+            socket_addr: default_socket_addr(),
+            results_file: default_results_file(),
+            failures_file: default_failures_file(),
+            shutdown_after_idle_duration: None,
+        }
+    }
+}
+
+impl GsProdConfig {
+    pub async fn load_from_file(path: &PathBuf) -> anyhow::Result<Self> {
+        serde_yaml::from_slice(
+            &tokio::fs::read(path)
+                .await
+                .context("Failed to read config file")?,
+        )
+        .context("Failed to deserialize config file")
+    }
+}

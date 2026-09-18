@@ -1,5 +1,17 @@
 # LPS
 
+## Pyo3
+
+```bash
+sudo apt install python3.13 python3.13-venv python3.13-dev
+
+python3.13 -m venv pyo3venv
+
+source pyo3venv/bin/activate
+
+pip install -r pyo3-requirements.txt
+```
+
 ## Dev
 
 ```bash

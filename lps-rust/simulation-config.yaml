@@ -15,8 +15,10 @@ server:
   max_work_duration: 50ms
   max_response_duration: 50ms
   shutdown_after_idle_duration: 5s # Optional, if set, the server will shut down after being idle for this duration (no events received). If not set, the server will run indefinitely.
-  deduplication: True # Optional
-  server_count: 3
+  # deduplication: True # Optional
+  server_count: 1
+  use_gs_prod_workload: True # Optional, if set, gs-prod-workload-server will be used instead of server. If not set, server will be used. failure_rate and all random sleep durations will be ignored when using gs-prod-workload-server.
+
 amqp:
   queues_count: 1
   producers:
@@ -25,11 +27,11 @@ amqp:
   consumers:
     consumers_count: 2
     reconnect_duration: 500ms
-    amqp_proxy: # Optional, if not set, the consumer will connect directly to rabbitmq
-      socket_addr: 0.0.0.0:9090
-      failure_rate: 0.1
-      max_up_duration: 10s 
-    server_proxy: # Optional, if not set, the consumer will connect directly to the server
-      socket_addr: 0.0.0.0:9081
-      failure_rate: 0.1
-      max_up_duration: 10s 
+    # amqp_proxy: # Optional, if not set, the consumer will connect directly to rabbitmq
+    #   socket_addr: 0.0.0.0:9090
+    #   failure_rate: 0.1
+    #   max_up_duration: 10s 
+    # server_proxy: # Optional, if not set, the consumer will connect directly to the server
+    #   socket_addr: 0.0.0.0:9081
+    #   failure_rate: 0.1
+    #   max_up_duration: 10s 

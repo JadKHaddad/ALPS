@@ -1,7 +1,0 @@
-tasks:
-- socket_addr: 0.0.0.0:9090
-  upstream_domain: lps-rabbitmq
-  upstream_port: 5672
-  failure_rate: 0.1
-  max_up_duration: 10s
-results_file: /app/consumer-amqp-proxy-1-results.json

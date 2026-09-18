@@ -3,3 +3,4 @@
 *.png
 *.log
 Mnesia.*
+/pyo3venv

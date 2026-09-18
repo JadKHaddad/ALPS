@@ -477,14 +477,28 @@ impl Config {
 
         let ports = vec![format!("{exposed_addr}:{container_port}")];
 
+        let server_exe = if self.server.use_gs_prod_workload {
+            String::from("gs-prod-workload-server")
+        } else {
+            String::from("server")
+        };
+
+        let tracing_target = if self.server.use_gs_prod_workload {
+            String::from("gs_prod_workload_server")
+        } else {
+            String::from("server")
+        };
+
         let service = DockerService::default()
             .with_image(self.lps_rust_image_name())
             .with_container_name(self.server_container_name())
-            .with_command(format!("server --config-file {config_file}"))
+            .with_command(format!("{server_exe} --config-file {config_file}"))
             .with_volumes(vec![self.container_work_dir_volume_mount()])
             .with_ports(ports)
             .with_networks(vec![self.service_network_name()])
-            .with_environment([(String::from("RUST_LOG"), String::from("server=debug"))].into());
+            .with_environment(
+                [(String::from("RUST_LOG"), format!("{tracing_target}=debug"))].into(),
+            );
 
         services.insert(String::from("server"), service);
 
@@ -787,6 +801,9 @@ pub struct ServerConfig {
     pub server_count: u32,
     #[serde(default)]
     pub deduplication: bool,
+    /// If set gs-prod-workload-server will be used
+    #[serde(default)]
+    pub use_gs_prod_workload: bool,
 }
 
 impl ServerConfig {
