@@ -61,7 +61,7 @@ struct AppState {
     last_event: RwLock<Option<Event>>,
     model: Py<PyAny>,
     number_of_parallel_requests_pending: Mutex<i64>,
-    started_commands: Mutex<HashMap<u64, CommandInfo>>,
+    started_commands: Mutex<HashMap<String, CommandInfo>>,
 }
 
 impl AppState {
@@ -86,7 +86,7 @@ impl AppState {
         })
     }
 
-    async fn predict_work_duration(&self, id: u64) -> PyResult<Duration> {
+    async fn predict_work_duration(&self, id: String) -> PyResult<Duration> {
         let parallel_commands_start = {
             let mut pending = self.number_of_parallel_requests_pending.lock().await;
             let start = *pending as f32;
@@ -98,7 +98,7 @@ impl AppState {
             let mut started = self.started_commands.lock().await;
 
             started.insert(
-                id,
+                id.clone(),
                 CommandInfo {
                     parallel_commands_start,
                     parallel_commands_finished: 0.0,
@@ -138,7 +138,7 @@ impl AppState {
         Ok(Duration::from_secs_f32(seconds))
     }
 
-    async fn finish_work(&self, id: u64) {
+    async fn finish_work(&self, id: String) {
         {
             let mut pending = self.number_of_parallel_requests_pending.lock().await;
             *pending -= 1;
@@ -168,11 +168,11 @@ impl AppState {
 
     async fn work(&self, call: SimpleCall) -> StatusCode {
         let event = Event::from(call.clone()).with_arrived_at_now();
-        let id = event.event_id;
+        let id = format!("{}-{}", event.device_id, event.event_id);
 
         self.set_last_event(event.clone()).await;
 
-        let work_duration = match self.predict_work_duration(id).await {
+        let work_duration = match self.predict_work_duration(id.clone()).await {
             Ok(duration) => duration,
             Err(err) => {
                 tracing::error!(%err, "Prediction failed, using default sleep duration");
