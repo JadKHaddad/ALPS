@@ -324,6 +324,25 @@ impl Config {
                 });
             }
 
+            if let Some(proxy) = self.amqp.consumers.server_proxy.as_ref() {
+                let consumer_server_proxy_config = CrateTcpProxyConfig {
+                    tasks: vec![CrateTcpProxyTask {
+                        failure_rate: proxy.failure_rate,
+                        max_up_duration: proxy.max_up_duration,
+                        socket_addr: proxy.socket_addr,
+                        upstream_domain: self.consumers_server_proxy_container_name(),
+                        upstream_port: self.server_proxy_default_socket_addr().port(),
+                    }],
+                    results_file: PathBuf::from(self.container_work_dir())
+                        .join(format!("consumer-server-proxy-{i}-results.json")),
+                };
+
+                config_files.push(ConfigFile {
+                    name: format!("consumer-server-proxy-{i}-config.yaml"),
+                    ty: ConfigType::TcpProxy(consumer_server_proxy_config),
+                });
+            }
+
             let broker_domain = self
                 .amqp
                 .consumers
@@ -340,13 +359,26 @@ impl Config {
                 .map(|proxy| proxy.socket_addr.port())
                 .unwrap_or_else(|| self.rabbit_mq_container_port());
 
+            let server_push_url = self
+                .amqp
+                .consumers
+                .server_proxy
+                .as_ref()
+                .map(|proxy| {
+                    format!(
+                        "http://lps-consumer-server-proxy-{i}:{}/work",
+                        proxy.socket_addr.port()
+                    )
+                })
+                .unwrap_or_else(|| self.consumers_server_push_url());
+
             let consumer_config_file = ConfigFile {
                 name: format!("consumer-{i}.yaml"),
                 ty: ConfigType::Consumer(CrateConsumerConfig {
                     queues_count: self.amqp.queues_count,
                     reconnect_duration: self.amqp.consumers.reconnect_duration,
                     rabbit_mq_url: format!("amqp://{broker_domain}:{broker_port}"),
-                    server_push_url: self.consumers_server_push_url(),
+                    server_push_url,
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-{i}-results.json")),
                 }),
@@ -594,6 +626,24 @@ impl Config {
                 );
             }
 
+            if self.amqp.consumers.server_proxy.is_some() {
+                let config_file = PathBuf::from(self.container_work_dir())
+                    .join(format!("consumer-server-proxy-{i}-config.yaml"))
+                    .display()
+                    .to_string();
+
+                services.insert(
+                    format!("consumer-server-proxy-{i}"),
+                    DockerService::default()
+                        .with_image(self.lps_rust_image_name())
+                        .with_container_name(format!("lps-consumer-server-proxy-{i}"))
+                        .with_command(format!("tcp-proxy --config-file {config_file}"))
+                        .with_volumes(vec![self.container_work_dir_volume_mount()])
+                        .with_networks(vec![self.service_network_name()])
+                        .with_unless_stopped(),
+                );
+            }
+
             let config_file = PathBuf::from(self.container_work_dir())
                 .join(format!("consumer-{i}.yaml"))
                 .display()
@@ -786,6 +836,7 @@ pub struct AmqpConsumersConfig {
     #[serde(with = "humantime_serde")]
     pub reconnect_duration: Duration,
     pub amqp_proxy: Option<ProxyConfig>,
+    pub server_proxy: Option<ProxyConfig>,
 }
 
 #[derive(Debug, Deserialize)]

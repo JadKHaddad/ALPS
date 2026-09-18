@@ -29,3 +29,7 @@ amqp:
       socket_addr: 0.0.0.0:9090
       failure_rate: 0.1
       max_up_duration: 10s 
+    server_proxy: # Optional, if not set, the consumer will connect directly to the server
+      socket_addr: 0.0.0.0:9081
+      failure_rate: 0.1
+      max_up_duration: 10s 
