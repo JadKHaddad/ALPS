@@ -7,7 +7,7 @@ devices:
   devices_count: 5
   max_event_interval: 500ms
   retry_duration: 500ms
-  max_events: 5
+  max_events: 50
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080 # Optional, if set, the server will expose its socket on this address. If not set, it will be exposed on the same port as socket_addr.

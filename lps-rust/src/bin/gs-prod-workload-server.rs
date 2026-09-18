@@ -15,8 +15,11 @@
 use std::{
     collections::HashMap,
     path::PathBuf,
-    sync::{Arc, LazyLock},
-    time::Duration,
+    sync::{
+        Arc, LazyLock,
+        atomic::{AtomicI64, AtomicU64, Ordering},
+    },
+    time::{Duration, Instant},
 };
 
 use anyhow::Context;
@@ -47,10 +50,9 @@ pub struct Args {
 /// about the number part, since we use it in the prediction model.
 static COMMANDS: LazyLock<[u16; 347]> = LazyLock::new(|| std::array::from_fn(|i| i as u16));
 
-#[derive(Clone, Copy, Debug)]
-struct CommandInfo {
-    parallel_commands_start: f32,
-    parallel_commands_finished: f32,
+#[derive(Debug, Default)]
+struct ActiveRequest {
+    parallel_commands_finished: u64,
 }
 
 #[derive(Debug)]
@@ -60,8 +62,9 @@ struct AppState {
     failures_file: PathBuf,
     last_event: RwLock<Option<Event>>,
     model: Py<PyAny>,
-    number_of_parallel_requests_pending: Mutex<i64>,
-    started_commands: Mutex<HashMap<String, CommandInfo>>,
+    number_of_parallel_requests_pending: AtomicI64,
+    next_request_id: AtomicU64,
+    active_requests: Mutex<HashMap<u64, ActiveRequest>>,
 }
 
 impl AppState {
@@ -81,78 +84,99 @@ impl AppState {
             failures_file,
             last_event: RwLock::new(None),
             model: model.into(),
-            number_of_parallel_requests_pending: Mutex::new(0),
-            started_commands: Mutex::new(HashMap::new()),
+            number_of_parallel_requests_pending: AtomicI64::new(0),
+            next_request_id: AtomicU64::new(1),
+            active_requests: Mutex::new(HashMap::new()),
         })
     }
 
-    async fn predict_work_duration(&self, id: String) -> PyResult<Duration> {
-        let parallel_commands_start = {
-            let mut pending = self.number_of_parallel_requests_pending.lock().await;
-            let start = *pending as f32;
-            *pending += 1;
-            start
-        };
+    async fn start_request(&self) -> (u64, f32) {
+        let req_id = self.next_request_id.fetch_add(1, Ordering::SeqCst);
 
-        {
-            let mut started = self.started_commands.lock().await;
+        let pr_1 = self
+            .number_of_parallel_requests_pending
+            .fetch_add(1, Ordering::SeqCst) as f32;
 
-            started.insert(
-                id.clone(),
-                CommandInfo {
-                    parallel_commands_start,
-                    parallel_commands_finished: 0.0,
-                },
-            );
+        let mut active = self.active_requests.lock().await;
+
+        active.insert(
+            req_id,
+            ActiveRequest {
+                parallel_commands_finished: 0,
+            },
+        );
+
+        (req_id, pr_1)
+    }
+
+    async fn get_pr_3(&self, req_id: u64) -> f32 {
+        let active = self.active_requests.lock().await;
+
+        active
+            .get(&req_id)
+            .map(|r| r.parallel_commands_finished as f32)
+            .unwrap_or(0.0)
+    }
+
+    async fn finish_request(&self, req_id: u64) {
+        self.number_of_parallel_requests_pending
+            .fetch_sub(1, Ordering::SeqCst);
+
+        let mut active = self.active_requests.lock().await;
+
+        active.remove(&req_id);
+
+        // Increment finished count for all other concurrently running requests
+        for entry in active.values_mut() {
+            entry.parallel_commands_finished += 1;
         }
+    }
 
-        let (pr_1, pr_3) = {
-            let started = self.started_commands.lock().await;
-            let info = started.get(&id).expect("command should still be tracked");
-            (
-                info.parallel_commands_start,
-                info.parallel_commands_finished,
-            )
-        };
-
-        // pick a random command type instead of a hardcoded one
-        let request_type = *COMMANDS
-            .choose(&mut rand::rng())
-            .expect("COMMANDS is non-empty") as f32;
-
-        let result: PyResult<f32> = Python::with_gil(|py| {
+    fn run_model_predict(&self, pr_1: f32, pr_3: f32, request_type: f32) -> PyResult<f32> {
+        Python::with_gil(|py| {
             let model = self.model.bind(py);
-
             let np = PyModule::import_bound(py, "numpy")?;
+
             let input: Vec<Vec<f32>> = vec![vec![pr_1, pr_3, request_type]];
             let x = np.call_method1("array", (input,))?;
 
             let prediction = model.call_method1("predict", (x,))?;
             let value: f64 = prediction.get_item(0)?.extract()?;
 
-            Ok(value as f32)
-        });
-
-        let seconds = result?.max(0.0);
-
-        Ok(Duration::from_secs_f32(seconds))
+            Ok(value.max(0.0) as f32)
+        })
     }
 
-    async fn finish_work(&self, id: String) {
-        {
-            let mut pending = self.number_of_parallel_requests_pending.lock().await;
-            *pending -= 1;
-        }
+    async fn simulate_workload(&self, req_id: u64, pr_1: f32) -> PyResult<Duration> {
+        let request_type = *COMMANDS
+            .choose(&mut rand::rng())
+            .expect("COMMANDS is non-empty") as f32;
 
-        {
-            let mut started = self.started_commands.lock().await;
+        let start_time = Instant::now();
 
-            started.remove(&id);
+        // 1. Initial prediction
+        let pr_3 = self.get_pr_3(req_id).await;
+        let predicted_duration_secs = self.run_model_predict(pr_1, pr_3, request_type)?;
 
-            for info in started.values_mut() {
-                info.parallel_commands_finished += 1.0;
+        let mut elapsed = start_time.elapsed().as_secs_f32();
+        let sleep_time = (predicted_duration_secs - elapsed).max(0.0);
+
+        if sleep_time > 0.0 {
+            tokio::time::sleep(Duration::from_secs_f32(sleep_time)).await;
+
+            // 2. Re-evaluate iteration (mirrors Python's for i in range(1) loop)
+            elapsed = start_time.elapsed().as_secs_f32();
+            let current_pr_3 = self.get_pr_3(req_id).await;
+            let re_predicted_duration = self.run_model_predict(pr_1, current_pr_3, request_type)?;
+
+            let remaining_sleep = (re_predicted_duration - elapsed).max(0.0);
+
+            if remaining_sleep > 0.0 {
+                tokio::time::sleep(Duration::from_secs_f32(remaining_sleep)).await;
             }
         }
+
+        Ok(start_time.elapsed())
     }
 
     async fn set_last_event(&self, event: Event) {
@@ -168,29 +192,26 @@ impl AppState {
 
     async fn work(&self, call: SimpleCall) -> StatusCode {
         let event = Event::from(call.clone()).with_arrived_at_now();
-        let id = format!("{}-{}", event.device_id, event.event_id);
 
         self.set_last_event(event.clone()).await;
 
-        let work_duration = match self.predict_work_duration(id.clone()).await {
+        let (req_id, pr_1) = self.start_request().await;
+
+        let total_duration = match self.simulate_workload(req_id, pr_1).await {
             Ok(duration) => duration,
             Err(err) => {
-                tracing::error!(%err, "Prediction failed, using default sleep duration");
+                tracing::error!(%err, "Prediction failed, fallback to zero delay");
                 Duration::from_secs(0)
             }
         };
 
-        tracing::info!(ms = work_duration.as_millis(), ?call, "Working");
-
-        tokio::time::sleep(work_duration).await;
-
-        tracing::info!(?call, "Work succeeded");
+        tracing::info!(ms = total_duration.as_millis(), ?call, "Working");
 
         self.push_event(event).await;
 
-        tracing::info!(?call, "Responding");
+        tracing::info!(?call, "Work succeeded. Responding");
 
-        self.finish_work(id).await;
+        self.finish_request(req_id).await;
 
         StatusCode::OK
     }
@@ -198,9 +219,7 @@ impl AppState {
     async fn push_event(&self, event: Event) {
         let count = {
             let mut events = self.events.lock().await;
-
             events.push(event);
-
             events.len()
         };
 

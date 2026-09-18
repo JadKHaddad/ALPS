@@ -10,7 +10,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
     restart: unless-stopped
   consumer-1:
     image: jadkhaddad/lps-rs:0.1.0
@@ -19,7 +19,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
     restart: unless-stopped
   consumers-server-proxy:
     image: jadkhaddad/lps-rs:0.1.0
@@ -28,7 +28,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
   device:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-device
@@ -36,7 +36,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
   producer-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-producer-0
@@ -44,7 +44,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
     restart: unless-stopped
   rabbitmq:
     image: rabbitmq:4-management
@@ -62,7 +62,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
   server:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server
@@ -74,7 +74,7 @@ services:
     ports:
     - 0.0.0.0:8080:8080
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
   server-server-proxy-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server-server-proxy-0
@@ -82,7 +82,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
   validator:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-validator
@@ -92,4 +92,4 @@ services:
     networks:
     - lps-net
     volumes:
-    - ./mount:/app
+    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
