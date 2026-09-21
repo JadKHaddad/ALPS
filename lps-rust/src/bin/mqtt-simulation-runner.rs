@@ -80,7 +80,7 @@ async fn main() -> Result<(), anyhow::Error> {
     .await?;
 
     if config.server.deduplication {
-        let config_file = config.fist_deduplication_mounted_config_file();
+        let config_file = config.first_deduplication_mounted_config_file();
 
         // docker compose --project-directory simulation run deduplication run --config-file /app/deduplication-config.yaml --bootstrap
         select(&token, async {

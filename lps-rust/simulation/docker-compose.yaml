@@ -10,7 +10,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app
     restart: unless-stopped
   consumer-1:
     image: jadkhaddad/lps-rs:0.1.0
@@ -19,7 +19,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app
     restart: unless-stopped
   consumers-server-proxy:
     image: jadkhaddad/lps-rs:0.1.0
@@ -28,7 +28,64 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app
+  deduplication-0:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-0
+    command: run --config-file /app/deduplication-0.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-0-dist -setcookie secret -kernel inet_dist_listen_min 9100 inet_dist_listen_max 9100
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  deduplication-1:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-1
+    command: run --config-file /app/deduplication-1.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-1-dist -setcookie secret -kernel inet_dist_listen_min 9100 inet_dist_listen_max 9100
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  deduplication-2:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-2
+    command: run --config-file /app/deduplication-2.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-2-dist -setcookie secret -kernel inet_dist_listen_min 9100 inet_dist_listen_max 9100
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  deduplication-proxy-0:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-deduplication-0-dist
+    command: tcp-proxy --config-file /app/deduplication-proxy-0-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  deduplication-proxy-1:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-deduplication-1-dist
+    command: tcp-proxy --config-file /app/deduplication-proxy-1-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
+  deduplication-proxy-2:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-deduplication-2-dist
+    command: tcp-proxy --config-file /app/deduplication-proxy-2-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+    restart: unless-stopped
   device:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-device
@@ -36,7 +93,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app
   producer-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-producer-0
@@ -44,7 +101,7 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app
     restart: unless-stopped
   rabbitmq:
     image: rabbitmq:4-management
@@ -62,19 +119,19 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app
   server:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server
-    command: gs-prod-workload-server --config-file /app/server-config.yaml
+    command: server --config-file /app/server-config.yaml
     environment:
-      RUST_LOG: gs_prod_workload_server=debug
+      RUST_LOG: server=debug
     networks:
     - lps-net
     ports:
     - 0.0.0.0:8080:8080
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app
   server-server-proxy-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server-server-proxy-0
@@ -82,7 +139,23 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app
+  server-server-proxy-1:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server-server-proxy-1
+    command: server-proxy --config-file /app/server-server-proxy-1.yaml
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
+  server-server-proxy-2:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server-server-proxy-2
+    command: server-proxy --config-file /app/server-server-proxy-2.yaml
+    networks:
+    - lps-net
+    volumes:
+    - ./mount:/app
   validator:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-validator
@@ -92,4 +165,4 @@ services:
     networks:
     - lps-net
     volumes:
-    - /home/jadkhaddad/Desktop/LPS/lps-rust/simulation/mount:/app
+    - ./mount:/app

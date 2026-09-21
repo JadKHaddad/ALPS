@@ -183,6 +183,8 @@ impl Config {
     }
 
     /// One for each server -> server-server-proxy -> server
+    ///
+    /// Plus (optionally) one TCP proxy per deduplication node for the Erlang distribution.
     fn deduplication_config_files(&self) -> Vec<ConfigFile> {
         let mut config_files = Vec::new();
 
@@ -197,10 +199,41 @@ impl Config {
                             self.server_proxy_default_socket_addr().port()
                         ),
                         nodes: (0..self.server.server_count())
-                            .map(|id| format!("node@lps-deduplication-{}", id))
+                            .map(|id| format!("node@{}", self.deduplication_node_host(id)))
                             .collect(),
                     }),
                 });
+
+                if let Some(proxy) = self.server.deduplication_proxy.as_ref() {
+                    let listen =
+                        |port: u16| SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), port);
+
+                    config_files.push(ConfigFile {
+                        name: self.deduplication_proxy_config_file_name(i),
+                        ty: ConfigType::TcpProxy(CrateTcpProxyConfig {
+                            tasks: vec![
+                                // EPMD lookups: never fail, otherwise nodes cannot find each other
+                                CrateTcpProxyTask {
+                                    failure_rate: 0.0,
+                                    max_up_duration: proxy.max_up_duration,
+                                    socket_addr: listen(self.deduplication_epmd_port_u16()),
+                                    upstream_domain: self.deduplication_container_name(i),
+                                    upstream_port: self.deduplication_epmd_port_u16(),
+                                },
+                                // Erlang distribution (Mnesia replication): faulty
+                                CrateTcpProxyTask {
+                                    failure_rate: proxy.failure_rate,
+                                    max_up_duration: proxy.max_up_duration,
+                                    socket_addr: listen(self.deduplication_dist_port_u16()),
+                                    upstream_domain: self.deduplication_container_name(i),
+                                    upstream_port: self.deduplication_dist_port_u16(),
+                                },
+                            ],
+                            results_file: PathBuf::from(self.container_work_dir())
+                                .join(format!("deduplication-proxy-{i}-results.json")),
+                        }),
+                    });
+                }
             }
         }
 
@@ -542,11 +575,53 @@ impl Config {
     /// ```not_rust
     /// run --config-file file.yaml --bootstrap
     /// ```
-    pub fn fist_deduplication_mounted_config_file(&self) -> String {
+    pub fn first_deduplication_mounted_config_file(&self) -> String {
         PathBuf::from(self.container_work_dir())
             .join("deduplication-0.yaml")
             .display()
             .to_string()
+    }
+
+    fn deduplication_container_name(&self, i: u32) -> String {
+        format!("lps-deduplication-{i}")
+    }
+
+    /// Container name of the proxy in front of deduplication node `i`.
+    fn deduplication_dist_container_name(&self, i: u32) -> String {
+        format!("lps-deduplication-{i}-dist")
+    }
+
+    fn deduplication_epmd_port_u16(&self) -> u16 {
+        4369
+    }
+
+    /// Fixed Erlang distribution port, so the proxy knows what to forward.
+    fn deduplication_dist_port_u16(&self) -> u16 {
+        9100
+    }
+
+    /// The host part of the Erlang node name.
+    ///
+    /// With a proxy, peers must resolve the node name to the proxy instead of the real container.
+    fn deduplication_node_host(&self, i: u32) -> String {
+        if self.server.deduplication_proxy.is_some() {
+            self.deduplication_dist_container_name(i)
+        } else {
+            self.deduplication_container_name(i)
+        }
+    }
+
+    fn deduplication_erl_flags(&self, i: u32) -> String {
+        let port = self.deduplication_dist_port_u16();
+
+        format!(
+            "-sname node@{} -setcookie secret -kernel inet_dist_listen_min {port} inet_dist_listen_max {port}",
+            self.deduplication_node_host(i)
+        )
+    }
+
+    fn deduplication_proxy_config_file_name(&self, i: u32) -> String {
+        format!("deduplication-proxy-{i}-config.yaml")
     }
 
     fn deduplication_docker_services(&self) -> BTreeMap<String, DockerService> {
@@ -561,19 +636,33 @@ impl Config {
 
                 let service = DockerService::default()
                     .with_image(self.lps_gleam_image_name())
-                    .with_container_name(format!("lps-deduplication-{i}"))
+                    .with_container_name(self.deduplication_container_name(i))
                     .with_command(format!("run --config-file {config_file}",))
                     .with_environment(
-                        [(
-                            String::from("ERL_FLAGS"),
-                            format!("-sname node@lps-deduplication-{i} -setcookie secret",),
-                        )]
-                        .into(),
+                        [(String::from("ERL_FLAGS"), self.deduplication_erl_flags(i))].into(),
                     )
                     .with_volumes(vec![self.container_work_dir_volume_mount()])
                     .with_networks(vec![self.service_network_name()]);
 
                 services.insert(format!("deduplication-{i}"), service);
+
+                if self.server.deduplication_proxy.is_some() {
+                    let proxy_config_file = PathBuf::from(self.container_work_dir())
+                        .join(self.deduplication_proxy_config_file_name(i))
+                        .display()
+                        .to_string();
+
+                    services.insert(
+                        format!("deduplication-proxy-{i}"),
+                        DockerService::default()
+                            .with_image(self.lps_rust_image_name())
+                            .with_container_name(self.deduplication_dist_container_name(i))
+                            .with_command(format!("tcp-proxy --config-file {proxy_config_file}"))
+                            .with_volumes(vec![self.container_work_dir_volume_mount()])
+                            .with_networks(vec![self.service_network_name()])
+                            .with_unless_stopped(),
+                    );
+                }
             }
         }
 
@@ -801,6 +890,10 @@ pub struct ServerConfig {
     pub server_count: u32,
     #[serde(default)]
     pub deduplication: bool,
+    /// If set, the Erlang distribution traffic between the deduplication
+    /// (Mnesia) nodes is routed through TCP proxies.
+    #[serde(default)]
+    pub deduplication_proxy: Option<DeduplicationProxyConfig>,
     /// If set gs-prod-workload-server will be used
     #[serde(default)]
     pub use_gs_prod_workload: bool,
@@ -811,6 +904,14 @@ impl ServerConfig {
     fn server_count(&self) -> u32 {
         self.server_count.max(1)
     }
+}
+
+#[derive(Debug, Deserialize)]
+pub struct DeduplicationProxyConfig {
+    #[serde(deserialize_with = "crate::deserialize_failure_rate")]
+    pub failure_rate: f64,
+    #[serde(with = "humantime_serde")]
+    pub max_up_duration: Duration,
 }
 
 #[derive(Debug, Deserialize, Default)]

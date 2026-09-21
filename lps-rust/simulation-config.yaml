@@ -3,11 +3,13 @@ simulation_docker_network: "lps-simulation-net"
 lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
 lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
 lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
+
 devices:
   devices_count: 5
   max_event_interval: 500ms
   retry_duration: 500ms
   max_events: 50
+
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080 # Optional, if set, the server will expose its socket on this address. If not set, it will be exposed on the same port as socket_addr.
@@ -15,9 +17,12 @@ server:
   max_work_duration: 50ms
   max_response_duration: 50ms
   shutdown_after_idle_duration: 5s # Optional, if set, the server will shut down after being idle for this duration (no events received). If not set, the server will run indefinitely.
-  # deduplication: True # Optional
-  server_count: 1
-  use_gs_prod_workload: True # Optional, if set, gs-prod-workload-server will be used instead of server. If not set, server will be used. failure_rate and all random sleep durations will be ignored when using gs-prod-workload-server.
+  server_count: 3
+  # use_gs_prod_workload: True # Optional, if set, gs-prod-workload-server will be used instead of server. If not set, server will be used. failure_rate and all random sleep durations will be ignored when using gs-prod-workload-server.
+  deduplication: True # Optional
+  deduplication_proxy: # Optional
+    failure_rate: 0.1
+    max_up_duration: 5s
 
 amqp:
   queues_count: 1

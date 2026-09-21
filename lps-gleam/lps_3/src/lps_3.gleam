@@ -220,136 +220,173 @@ fn run_server(config: config.Config) -> Nil {
   process.sleep_forever()
 }
 
+type WorkError {
+  BadRequest
+  Unavailable
+}
+
+fn empty_response(status: Int) -> Response(ResponseData) {
+  response.new(status)
+  |> response.set_body(mist.Bytes(bytes_tree.new()))
+}
+
 fn handle_work(
   req: Request(Connection),
   config: config.Config,
 ) -> Response(ResponseData) {
-  let result = {
-    use _ <- result.try(
-      connect_to_other_nodes_or_fail(config) |> result.map_error(fn(_) { Nil }),
-    )
-
-    use req <- result.try(
-      mist.read_body(req, 1024 * 1024 * 10)
-      |> result.map_error(fn(_) { Nil }),
-    )
-
-    use body_string <- result.try(
-      req.body
-      |> bit_array.to_string
-      |> result.map_error(fn(_) { Nil }),
-    )
-
-    use call <- result.try(
-      json.parse(body_string, call.decoder())
-      |> result.map_error(fn(_) { Nil }),
-    )
-
-    logging.log(logging.Debug, string.inspect(call))
-
-    use event <- result.try(
-      event.from_call(call)
-      |> result.map_error(fn(_) { Nil }),
-    )
-
-    logging.log(logging.Debug, string.inspect(event))
-
-    let database_event = database.from_event(event)
-
-    logging.log(logging.Debug, string.inspect(database_event))
-
-    let table = atom.create("event")
-
-    fn() {
-      logging.log(
-        logging.Debug,
-        "Checking for duplicate event: " <> string.inspect(database_event),
-      )
-
-      use database_events <- result.try(
-        table
-        |> read.new(key: database_event.id)
-        |> read.lock(lock.Write)
-        |> read.read
-        |> Ok
-        |> result.map_error(fn(_) { Nil }),
-      )
-
-      case database_events {
-        [event, ..] -> {
-          logging.log(
-            logging.Warning,
-            "Duplicate event: "
-              <> string.inspect(event)
-              <> " for call: "
-              <> string.inspect(call),
-          )
-
-          Ok(
-            response.new(200) |> response.set_body(mist.Bytes(bytes_tree.new())),
-          )
-        }
-        [] -> {
-          logging.log(
-            logging.Info,
-            "No duplicate event found. Proceeding to post call and write event.",
-          )
-
-          logging.log(logging.Info, "Posting call: " <> string.inspect(call))
-
-          use _ <- result.try(
-            post_call(call, config)
-            |> result.map_error(fn(err) {
-              logging.log(
-                logging.Error,
-                "Failed to post call: "
-                  <> string.inspect(call)
-                  <> " err: "
-                  <> err,
-              )
-              Nil
-            }),
-          )
-
-          logging.log(
-            logging.Info,
-            "Writing event: " <> string.inspect(database_event),
-          )
-
-          use _ <- result.try(
-            database_event
-            |> write.new
-            |> write.write
-            |> Ok
-            |> result.map_error(fn(err) {
-              logging.log(
-                logging.Error,
-                "Failed to write event: "
-                  <> string.inspect(database_event)
-                  <> " for call: "
-                  <> string.inspect(call)
-                  <> " err: "
-                  <> string.inspect(err),
-              )
-              Nil
-            }),
-          )
-
-          Ok(
-            response.new(200) |> response.set_body(mist.Bytes(bytes_tree.new())),
-          )
-        }
-      }
-    }
-    |> transaction.new
-    |> transaction.execute
-    |> result.map_error(fn(_) { Nil })
+  case process_work(req, config) {
+    Ok(Nil) -> empty_response(200)
+    Error(BadRequest) -> empty_response(400)
+    Error(Unavailable) -> empty_response(500)
   }
+}
 
-  result.unwrap(
-    result.flatten(result),
-    response.new(400) |> response.set_body(mist.Bytes(bytes_tree.new())),
+fn process_work(
+  req: Request(Connection),
+  config: config.Config,
+) -> Result(Nil, WorkError) {
+  use _ <- result.try(
+    connect_to_other_nodes_or_fail(config)
+    |> result.map_error(fn(_) { Unavailable }),
   )
+
+  use req <- result.try(
+    mist.read_body(req, 1024 * 1024 * 10)
+    |> result.map_error(fn(_) { BadRequest }),
+  )
+
+  use body_string <- result.try(
+    req.body
+    |> bit_array.to_string
+    |> result.map_error(fn(_) { BadRequest }),
+  )
+
+  use simple_call <- result.try(
+    json.parse(body_string, call.decoder())
+    |> result.map_error(fn(_) { BadRequest }),
+  )
+
+  logging.log(logging.Debug, string.inspect(simple_call))
+
+  use parsed_event <- result.try(
+    event.from_call(simple_call)
+    |> result.map_error(fn(_) { BadRequest }),
+  )
+
+  let database_event = database.from_event(parsed_event)
+
+  logging.log(
+    logging.Debug,
+    "Checking for duplicate event: " <> string.inspect(database_event),
+  )
+
+  use exists <- result.try(
+    event_exists(database_event.id)
+    |> result.map_error(fn(_) { Unavailable }),
+  )
+
+  case exists {
+    True -> {
+      logging.log(
+        logging.Warning,
+        "Duplicate event: "
+          <> string.inspect(database_event)
+          <> " for call: "
+          <> string.inspect(simple_call),
+      )
+      Ok(Nil)
+    }
+
+    False -> {
+      logging.log(
+        logging.Info,
+        "No duplicate event found. Posting call: "
+          <> string.inspect(simple_call),
+      )
+      use _ <- result.try(
+        post_call(simple_call, config)
+        |> result.map_error(fn(err) {
+          logging.log(
+            logging.Error,
+            "Failed to post call: "
+              <> string.inspect(simple_call)
+              <> " err: "
+              <> err,
+          )
+          Unavailable
+        }),
+      )
+
+      logging.log(
+        logging.Info,
+        "Writing event: " <> string.inspect(database_event),
+      )
+
+      case record_event_with_retry(database_event, 10) {
+        Ok(_) -> Nil
+        Error(_) ->
+          // The server already has the call. Answering 500 would guarantee
+          // a redelivery and therefore a duplicate, so we answer 200.
+          logging.log(
+            logging.Error,
+            "Call was posted but event could not be recorded: "
+              <> string.inspect(database_event),
+          )
+      }
+
+      Ok(Nil)
+    }
+  }
+}
+
+fn event_exists(id) -> Result(Bool, Nil) {
+  let table = atom.create("event")
+
+  fn() {
+    let events =
+      table
+      |> read.new(key: id)
+      |> read.lock(lock.Write)
+      |> read.read
+
+    !list.is_empty(events)
+  }
+  |> transaction.new
+  |> transaction.execute
+  |> result.map_error(fn(_) { Nil })
+}
+
+fn record_event(database_event) -> Result(Nil, Nil) {
+  fn() {
+    let _ =
+      database_event
+      |> write.new
+      |> write.write
+
+    Nil
+  }
+  |> transaction.new
+  |> transaction.execute
+  |> result.map_error(fn(_) { Nil })
+}
+
+fn record_event_with_retry(
+  database_event,
+  attempts_left: Int,
+) -> Result(Nil, Nil) {
+  case record_event(database_event) {
+    Ok(_) -> Ok(Nil)
+    Error(_) if attempts_left > 1 -> {
+      logging.log(
+        logging.Warning,
+        "Recording event failed, retrying. Attempts left: "
+          <> string.inspect(attempts_left - 1),
+      )
+      process.sleep(200)
+      record_event_with_retry(database_event, attempts_left - 1)
+    }
+    Error(_) -> Error(Nil)
+  }
 }
 
 fn post_call(

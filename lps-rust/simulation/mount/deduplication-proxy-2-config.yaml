@@ -1,0 +1,12 @@
+tasks:
+- socket_addr: 0.0.0.0:4369
+  upstream_domain: lps-deduplication-2
+  upstream_port: 4369
+  failure_rate: 0.0
+  max_up_duration: 5s
+- socket_addr: 0.0.0.0:9100
+  upstream_domain: lps-deduplication-2
+  upstream_port: 9100
+  failure_rate: 0.1
+  max_up_duration: 5s
+results_file: /app/deduplication-proxy-2-results.json
