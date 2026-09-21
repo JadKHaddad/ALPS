@@ -210,6 +210,49 @@ impl AppState {
     }
 }
 
+/// Shuts the server down when no call has arrived for `idle_duration`.
+///
+/// Background requests do not count as activity, because they never touch `last_event`.
+fn spawn_idle_shutdown_monitor(
+    state: Arc<AppState>,
+    idle_duration: Duration,
+    token: Arc<CancellationToken>,
+) {
+    tokio::spawn(async move {
+        tracing::info!(?idle_duration, "Idle shutdown monitor started");
+
+        let monitor_start_time = chrono::Utc::now();
+        let mut interval = tokio::time::interval(Duration::from_secs(1));
+
+        loop {
+            tokio::select! {
+                _ = token.cancelled() => break,
+                _ = interval.tick() => {}
+            }
+
+            let last_activity = if let Some(event) = state.get_last_event().await {
+                event.arrived_at.unwrap_or(monitor_start_time)
+            } else {
+                monitor_start_time
+            };
+
+            let now = chrono::Utc::now();
+            let duration_since = now.signed_duration_since(last_activity);
+
+            if let Ok(elapsed_std) = duration_since.to_std()
+                && elapsed_std > idle_duration
+            {
+                tracing::warn!(
+                    ?elapsed_std,
+                    "Server idle threshold reached (no recent activity). Shutting down."
+                );
+                token.cancel();
+                break;
+            }
+        }
+    });
+}
+
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let filter = tracing_subscriber::EnvFilter::try_from_default_env()
@@ -290,39 +333,7 @@ async fn main() -> Result<(), anyhow::Error> {
     let cancellation_token = Arc::new(CancellationToken::new());
 
     if let Some(idle_duration) = config.shutdown_after_idle_duration {
-        let cancellation_token = cancellation_token.clone();
-        let app_state = app_state.clone();
-
-        tokio::spawn(async move {
-            tracing::info!(?idle_duration, "Idle shutdown monitor started");
-
-            let monitor_start_time = chrono::Utc::now();
-            let mut interval = tokio::time::interval(Duration::from_secs(1));
-
-            loop {
-                interval.tick().await;
-
-                let last_activity = if let Some(event) = app_state.get_last_event().await {
-                    event.arrived_at.unwrap_or(monitor_start_time)
-                } else {
-                    monitor_start_time
-                };
-
-                let now = chrono::Utc::now();
-                let duration_since = now.signed_duration_since(last_activity);
-
-                if let Ok(elapsed_std) = duration_since.to_std()
-                    && elapsed_std > idle_duration
-                {
-                    tracing::warn!(
-                        ?elapsed_std,
-                        "Server idle threshold reached (no recent activity). Shutting down."
-                    );
-                    cancellation_token.cancel();
-                    break;
-                }
-            }
-        });
+        spawn_idle_shutdown_monitor(app_state.clone(), idle_duration, cancellation_token.clone());
     }
 
     let shutdown_signal = async move {

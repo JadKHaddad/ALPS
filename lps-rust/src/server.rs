@@ -51,6 +51,16 @@ pub struct Config {
     pub failures_file: PathBuf,
     #[serde(default, with = "humantime_serde")]
     pub shutdown_after_idle_duration: Option<Duration>,
+
+    /// See [`GsProdConfig`]
+    ///
+    /// This is only added to make [`Config`] a superset of [`GsProdConfig`], so that [`GsProdConfig`] can be deserialized from [`Config`].
+    ///
+    /// This is necessary due to limitations in the simulation config: It only writes [`Config`] event if `use_gs_prod_workload` is set to true.
+    ///
+    /// Soe [`GsProdConfig`] must be deserializable from [`Config`].
+    #[serde(default)]
+    pub background_load_per_second: Option<f64>,
 }
 
 impl Default for Config {
@@ -65,6 +75,7 @@ impl Default for Config {
             results_file: default_results_file(),
             failures_file: default_failures_file(),
             shutdown_after_idle_duration: None,
+            background_load_per_second: None,
         }
     }
 }
@@ -90,6 +101,10 @@ pub struct GsProdConfig {
     pub failures_file: PathBuf,
     #[serde(default, with = "humantime_serde")]
     pub shutdown_after_idle_duration: Option<Duration>,
+
+    /// Background load in requests per second (Poisson arrivals).
+    #[serde(default)]
+    pub background_load_per_second: Option<f64>,
 }
 
 impl Default for GsProdConfig {
@@ -99,6 +114,7 @@ impl Default for GsProdConfig {
             results_file: default_results_file(),
             failures_file: default_failures_file(),
             shutdown_after_idle_duration: None,
+            background_load_per_second: None,
         }
     }
 }

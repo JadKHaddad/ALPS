@@ -19,6 +19,7 @@ server:
   shutdown_after_idle_duration: 5s # Optional, if set, the server will shut down after being idle for this duration (no events received). If not set, the server will run indefinitely.
   server_count: 3
   # use_gs_prod_workload: True # Optional, if set, gs-prod-workload-server will be used instead of server. If not set, server will be used. failure_rate and all random sleep durations will be ignored when using gs-prod-workload-server.
+  background_load_per_second: 70 # Optional, only active if use_gs_prod_workload is set to True.
   deduplication: True # Optional
   deduplication_proxy: # Optional
     failure_rate: 0.1

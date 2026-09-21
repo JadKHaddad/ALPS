@@ -304,6 +304,7 @@ impl Config {
                 failures_file: PathBuf::from(self.container_work_dir())
                     .join(self.server_failures_file()),
                 shutdown_after_idle_duration: self.server.shutdown_after_idle_duration,
+                background_load_per_second: self.server.background_load_per_second,
             }),
         });
 
@@ -897,6 +898,9 @@ pub struct ServerConfig {
     /// If set gs-prod-workload-server will be used
     #[serde(default)]
     pub use_gs_prod_workload: bool,
+    /// See [`CrateServerConfig::background_load_per_second`]
+    #[serde(default)]
+    background_load_per_second: Option<f64>,
 }
 
 impl ServerConfig {
