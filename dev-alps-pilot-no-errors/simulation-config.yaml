@@ -1,0 +1,42 @@
+simulation_dir: "simulation"
+simulation_docker_network: "lps-simulation-net"
+lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
+lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
+lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
+
+devices:
+  devices_count: 50
+  max_event_interval: 5s
+  min_event_interval: 499ms
+  max_events: 60
+  retry_duration: 500ms
+
+server:
+  socket_addr: 0.0.0.0:8080
+  expose_socket_addr: 0.0.0.0:8080
+  failure_rate: 0.0
+  shutdown_after_idle_duration: 5s
+  server_count: 3
+  use_gs_prod_workload: True 
+  background_load_per_second: 70
+  deduplication: True # Optional
+  # deduplication_proxy: # Optional
+  #   failure_rate: 0.1
+  #   max_up_duration: 5s
+
+amqp:
+  queues_count: 3
+  producers:
+    producers_count: 3
+    socket_addr: 0.0.0.0:5672
+  consumers:
+    consumers_count: 3
+    reconnect_duration: 500ms
+    # amqp_proxy: # Optional, if not set, the consumer will connect directly to rabbitmq
+    #   socket_addr: 0.0.0.0:9090
+    #   failure_rate: 0.1
+    #   max_up_duration: 10s 
+    # server_proxy: # Optional, if not set, the consumer will connect directly to the server
+    #   socket_addr: 0.0.0.0:9081
+    #   failure_rate: 0.1
+    #   max_up_duration: 10s 

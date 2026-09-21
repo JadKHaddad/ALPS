@@ -1,0 +1,5 @@
+rabbit_mq_url: amqp://lps-rabbitmq:5672
+server_push_url: http://lps-consumers-server-proxy:8080/work
+reconnect_duration: 500ms
+queues_count: 3
+results_file: /app/consumer-0-results.json

@@ -294,9 +294,15 @@ impl Config {
             name: self.server_config_file(),
             ty: ConfigType::Server(CrateServerConfig {
                 failure_rate: self.server.failure_rate,
-                max_work_duration: self.server.max_work_duration,
+                max_work_duration: self
+                    .server
+                    .max_work_duration
+                    .unwrap_or(crate::server::default_max_work_duration()),
                 min_work_duration: self.server.min_work_duration,
-                max_response_duration: self.server.max_response_duration,
+                max_response_duration: self
+                    .server
+                    .max_response_duration
+                    .unwrap_or(crate::server::default_max_response_duration()),
                 min_response_duration: self.server.min_response_duration,
                 socket_addr: self.server.socket_addr,
                 results_file: PathBuf::from(self.container_work_dir())
@@ -878,12 +884,12 @@ pub struct ServerConfig {
     pub expose_socket_addr: Option<SocketAddr>,
     #[serde(deserialize_with = "crate::deserialize_failure_rate")]
     pub failure_rate: f64,
-    #[serde(with = "humantime_serde")]
-    pub max_work_duration: Duration,
+    #[serde(default, with = "humantime_serde")]
+    pub max_work_duration: Option<Duration>,
     #[serde(default, with = "humantime_serde")]
     pub min_work_duration: Option<Duration>,
-    #[serde(with = "humantime_serde")]
-    pub max_response_duration: Duration,
+    #[serde(default, with = "humantime_serde")]
+    pub max_response_duration: Option<Duration>,
     #[serde(default, with = "humantime_serde")]
     pub min_response_duration: Option<Duration>,
     #[serde(default, with = "humantime_serde")]

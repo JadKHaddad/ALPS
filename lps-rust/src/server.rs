@@ -11,11 +11,11 @@ fn default_socket_addr() -> SocketAddr {
     SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080)
 }
 
-fn default_max_work_duration() -> Duration {
+pub fn default_max_work_duration() -> Duration {
     Duration::from_secs(1)
 }
 
-fn default_max_response_duration() -> Duration {
+pub fn default_max_response_duration() -> Duration {
     Duration::from_secs(1)
 }
 
