@@ -46,8 +46,9 @@ pub struct Args {
     config_file: PathBuf,
 }
 
-/// The mappings define 347 commands as String:number pairs. We only care
-/// about the number part, since we use it in the prediction model.
+/// The mappings `gs_requests_mapping_prod_workload.json` define 347 commands as String:number pairs.
+///
+/// We only care about the number part, since we use it in the prediction model.
 static COMMANDS: LazyLock<[u16; 347]> = LazyLock::new(|| std::array::from_fn(|i| i as u16));
 
 #[derive(Debug, Default)]
@@ -69,14 +70,18 @@ struct AppState {
 
 impl AppState {
     fn new(py: Python<'_>, results_file: PathBuf, failures_file: PathBuf) -> PyResult<Self> {
-        let model_bytes = include_bytes!("../../models/gs_model_prod_workload.pmml");
+        let model_bytes = include_bytes!("../../models/gs_model_LR_03-11-2022.pmml");
 
         let io = PyModule::import_bound(py, "io")?;
         let model_file = io.call_method1("BytesIO", (model_bytes.as_ref(),))?;
 
-        let module = PyModule::import_bound(py, "sklearn_pmml_model.tree")?;
-        let cls = module.getattr("PMMLTreeRegressor")?;
+        tracing::info!("Loading PMML model");
+
+        let module = PyModule::import_bound(py, "sklearn_pmml_model.linear_model")?;
+        let cls = module.getattr("PMMLLinearRegression")?;
         let model = cls.call1((model_file,))?;
+
+        tracing::info!("PMML model loaded");
 
         Ok(Self {
             events: Mutex::new(Vec::new()),
@@ -154,7 +159,6 @@ impl AppState {
 
         let start_time = Instant::now();
 
-        // 1. Initial prediction
         let pr_3 = self.get_pr_3(req_id).await;
         let predicted_duration_secs = self.run_model_predict(pr_1, pr_3, request_type)?;
 
@@ -164,7 +168,6 @@ impl AppState {
         if sleep_time > 0.0 {
             tokio::time::sleep(Duration::from_secs_f32(sleep_time)).await;
 
-            // 2. Re-evaluate iteration (mirrors Python's for i in range(1) loop)
             elapsed = start_time.elapsed().as_secs_f32();
             let current_pr_3 = self.get_pr_3(req_id).await;
             let re_predicted_duration = self.run_model_predict(pr_1, current_pr_3, request_type)?;
