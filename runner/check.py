@@ -201,3 +201,4 @@ if __name__ == "__main__":
 
 # python3 check.py simulations/alps-eod --out alps-eod.csv -v
 # python3 check.py simulations/alps-iod --out alps-iod.csv -v
+# python3 check.py simulations/alps-real --out alps-real.csv -v
