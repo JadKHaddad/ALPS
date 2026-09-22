@@ -30,3 +30,4 @@ amqp:
     reconnect_duration: 500ms
 
 # python3 runner.py --protocol "amqp" --runs 40 --base-dir "simulations/alps-iod" --base-config "simulations/alps-iod/simulation-config.yaml" --log-dir "simulations/alps-iod/logs"
+# python3 runner.py --protocol "amqp" --start-index 41 --runs 59 --base-dir "simulations/alps-iod" --base-config "simulations/alps-iod/simulation-config.yaml" --log-dir "simulations/alps-iod/logs"

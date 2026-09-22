@@ -38,3 +38,4 @@ amqp:
 
 # These one needs filtering
 # python3 runner.py --protocol "amqp" --runs 60 --base-dir "simulations/alps-eod" --base-config "simulations/alps-eod/simulation-config.yaml" --log-dir "simulations/alps-eod/logs"
+# python3 runner.py --protocol "amqp" --start-index 61 --runs 120 --base-dir "simulations/alps-eod" --base-config "simulations/alps-eod/simulation-config.yaml" --log-dir "simulations/alps-eod/logs"
