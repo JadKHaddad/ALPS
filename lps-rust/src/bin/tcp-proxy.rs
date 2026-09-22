@@ -80,6 +80,22 @@ async fn main() -> Result<(), anyhow::Error> {
     let tasks: Vec<_> = config
         .tasks
         .into_iter()
+        .map(|mut task| {
+            if task
+                .min_up_duration
+                .map(|d| d.as_millis())
+                .unwrap_or(0)
+                >= task.max_up_duration.as_millis()
+            {
+                tracing::warn!(
+                    "min_up_duration is greater than or equal to max_up_duration, setting min_up_duration to None"
+                );
+
+                task.min_up_duration = None;
+            }; 
+            
+            task
+        })
         .map(|task| {
             let state = state.clone();
             tokio::spawn(async move {
@@ -127,12 +143,15 @@ async fn main() -> Result<(), anyhow::Error> {
                                             Ok(mut upstream) => {
                                                 tracing::info!(addr=%task.socket_addr, upstream=%upstream_addr, "Connected to upstream");
 
+                                                let min_ms = task.min_up_duration.map(|d| d.as_millis()).unwrap_or(0);
+
+                                                // max_ms is always > min_ms. See check above.
                                                 let max_ms = task.max_up_duration.as_millis();
 
                                                 let duration_ms = if max_ms == 0 {
                                                     0
                                                 } else {
-                                                    rand::rng().random_range(0..max_ms) as u64
+                                                    rand::rng().random_range(min_ms..max_ms) as u64
                                                 };
 
                                                 tracing::info!(duration_ms, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying connection");

@@ -61,6 +61,13 @@ pub struct Task {
     /// Maximum duration of proxying tcp connections before a disconnection
     #[serde(default = "default_max_up_duration", with = "humantime_serde")]
     pub max_up_duration: Duration,
+    /// The minimum duration of proxying tcp connections before a disconnection. The actual interval will be a random value between `min_up_duration` and `max_up_duration.
+    ///
+    /// If not set, the minimum duration will be `0`.
+    ///
+    /// If set and greater than `max_up_duration`, the minimum duration will be `0`.
+    #[serde(default, with = "humantime_serde")]
+    pub min_up_duration: Option<Duration>,
 }
 
 impl Default for Task {
@@ -71,6 +78,7 @@ impl Default for Task {
             upstream_port: default_upstream_port(),
             failure_rate: crate::default_failure_rate(),
             max_up_duration: default_max_up_duration(),
+            min_up_duration: None,
         }
     }
 }

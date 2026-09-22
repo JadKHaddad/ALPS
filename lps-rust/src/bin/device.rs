@@ -82,10 +82,10 @@ async fn main() -> Result<(), anyhow::Error> {
         .min_event_interval
         .map(|d| d.as_millis())
         .unwrap_or(0)
-        > config.max_event_interval.as_millis()
+        >= config.max_event_interval.as_millis()
     {
         tracing::warn!(
-            "min_event_interval is greater than max_event_interval, setting min_event_interval to None"
+            "min_event_interval is greater than or equal to max_event_interval, setting min_event_interval to None"
         );
 
         config.min_event_interval = None;
@@ -108,7 +108,7 @@ async fn main() -> Result<(), anyhow::Error> {
                         for i in config.iter() {
                             let min_ms = config.min_event_interval.map(|d| d.as_millis()).unwrap_or(0);
 
-                            // max_ms is always >= min_ms. See check above.
+                            // max_ms is always > min_ms. See check above.
                             let max_ms = config.max_event_interval.as_millis();
 
                             let duration_ms = if max_ms == 0 {

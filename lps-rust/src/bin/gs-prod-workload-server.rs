@@ -210,7 +210,7 @@ impl AppState {
 
         tracing::info!(ms = total_duration.as_millis(), ?call, "Working");
 
-        self.push_event(event).await;
+        self.push_event(event.with_finished_at_now()).await;
 
         tracing::info!(?call, "Work succeeded. Responding");
 

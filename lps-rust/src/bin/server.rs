@@ -114,7 +114,7 @@ impl AppState {
             .map(|d| d.as_millis())
             .unwrap_or(0);
 
-        // max_ms is always >= min_ms. See check in main.
+        // max_ms is always > min_ms. See check in main.
         let max_ms = self.max_response_duration.as_millis();
 
         let response_duration_ms = if max_ms == 0 {
@@ -138,7 +138,7 @@ impl AppState {
             false => {
                 tracing::info!(?call, "Work succeeded");
 
-                self.push_event(event).await;
+                self.push_event(event.with_finished_at_now()).await;
 
                 tracing::info!(ms = response_duration_ms, ?call, "Responding");
 
@@ -272,10 +272,10 @@ async fn main() -> Result<(), anyhow::Error> {
         });
 
     if config.min_work_duration.map(|d| d.as_millis()).unwrap_or(0)
-        > config.max_work_duration.as_millis()
+        >= config.max_work_duration.as_millis()
     {
         tracing::warn!(
-            "min_work_duration is greater than max_work_duration, setting min_work_duration to None"
+            "min_work_duration is greater than or equal to max_work_duration, setting min_work_duration to None"
         );
 
         config.min_work_duration = None;
@@ -285,10 +285,10 @@ async fn main() -> Result<(), anyhow::Error> {
         .min_response_duration
         .map(|d| d.as_millis())
         .unwrap_or(0)
-        > config.max_response_duration.as_millis()
+        >= config.max_response_duration.as_millis()
     {
         tracing::warn!(
-            "min_response_duration is greater than max_response_duration, setting min_response_duration to None"
+            "min_response_duration is greater than or equal to max_response_duration, setting min_response_duration to None"
         );
 
         config.min_response_duration = None;

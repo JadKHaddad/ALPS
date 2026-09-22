@@ -1,6 +1,7 @@
 use std::{
     collections::{HashMap, HashSet},
     hash::{Hash, Hasher},
+    time::Duration,
 };
 
 use chrono::{DateTime, Utc};
@@ -75,6 +76,12 @@ pub struct Event {
     ///
     /// Events are created without this field, and it is filled when the event arrives at our server.
     pub arrived_at: Option<DateTime<Utc>>,
+    /// The finished_at is the time when the event processing is finished.
+    ///
+    /// It is used to measure the latency of the event processing.
+    ///
+    /// Events are created without this field, and it is filled when the event processing is finished.
+    pub finished_at: Option<DateTime<Utc>>,
     /// This is the original event [`SimpleCall`].
     ///
     /// We intentionally erase it, since our system does not care about the content of the event.
@@ -102,6 +109,7 @@ impl From<SimpleCall> for Event {
             device_id: call.phone.clone(),
             event_id: call.triggertime.timestamp_millis() as u64,
             arrived_at: None,
+            finished_at: None,
             original: serde_json::to_value(call).expect("Failed to serialize SimpleCall"),
         }
     }
@@ -111,6 +119,28 @@ impl Event {
     pub fn with_arrived_at_now(mut self) -> Self {
         self.arrived_at = Some(Utc::now());
         self
+    }
+
+    pub fn with_finished_at_now(mut self) -> Self {
+        self.finished_at = Some(Utc::now());
+        self
+    }
+
+    fn process_time(&self) -> Option<Duration> {
+        match (self.arrived_at, self.finished_at) {
+            (Some(arrived), Some(finished)) => {
+                let duration = finished.signed_duration_since(arrived);
+
+                let micros = duration.num_microseconds()?;
+
+                if micros < 0 {
+                    return None;
+                }
+
+                Some(Duration::from_micros(micros as u64))
+            }
+            _ => None,
+        }
     }
 
     /// Removes the duplicated events, and returns the unique events and the duplicated events separately. The order of the events is preserved.
@@ -271,6 +301,74 @@ impl Event {
 
         let len = latencies.len();
         // Nearest-rank method: index of the 99th percentile.
+        let rank = ((0.99 * len as f64).ceil() as usize).clamp(1, len);
+        let index = rank - 1;
+
+        Ok(latencies[index])
+    }
+
+    pub fn calculate_process_median_latency_ms<'a>(
+        events: impl Iterator<Item = &'a Event>,
+    ) -> Result<f64, anyhow::Error> {
+        let mut latencies: Vec<f64> = events
+            .filter_map(|event| event.process_time().map(|d| d.as_secs_f64() * 1000.0))
+            .collect();
+
+        if latencies.is_empty() {
+            return Err(anyhow::anyhow!(
+                "No events with both arrival and finish times found to calculate process latency"
+            ));
+        }
+
+        latencies.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+
+        let len = latencies.len();
+        let mid = len / 2;
+
+        let median = if len.is_multiple_of(2) {
+            (latencies[mid - 1] + latencies[mid]) / 2.0
+        } else {
+            latencies[mid]
+        };
+
+        Ok(median)
+    }
+
+    pub fn calculate_process_average_latency_ms<'a>(
+        events: impl Iterator<Item = &'a Event>,
+    ) -> Result<f64, anyhow::Error> {
+        let latencies: Vec<f64> = events
+            .filter_map(|event| event.process_time().map(|d| d.as_secs_f64() * 1000.0))
+            .collect();
+
+        if latencies.is_empty() {
+            return Err(anyhow::anyhow!(
+                "No events with both arrival and finish times found to calculate process latency"
+            ));
+        }
+
+        let sum: f64 = latencies.iter().sum();
+        let average = sum / latencies.len() as f64;
+
+        Ok(average)
+    }
+
+    pub fn calculate_process_p99_latency_ms<'a>(
+        events: impl Iterator<Item = &'a Event>,
+    ) -> Result<f64, anyhow::Error> {
+        let mut latencies: Vec<f64> = events
+            .filter_map(|event| event.process_time().map(|d| d.as_secs_f64() * 1000.0))
+            .collect();
+
+        if latencies.is_empty() {
+            return Err(anyhow::anyhow!(
+                "No events with both arrival and finish times found to calculate process latency"
+            ));
+        }
+
+        latencies.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+
+        let len = latencies.len();
         let rank = ((0.99 * len as f64).ceil() as usize).clamp(1, len);
         let index = rank - 1;
 
@@ -547,9 +645,16 @@ impl TcpConnectionDrop {
 
 #[derive(Debug, Serialize)]
 pub struct Rates {
+    // These fields represent the latency of the events, i.e. the time between when the event was triggered and when it arrived at the server.
     pub median_latency_ms: f64,
     pub average_latency_ms: f64,
     pub p99_latency_ms: f64,
+
+    // These fields represent the processing latency of the events, i.e. the time between when the event arrived at the server and when it finished processing.
+    pub process_median_latency_ms: f64,
+    pub process_average_latency_ms: f64,
+    pub process_p99_latency_ms: f64,
+
     pub duplication_rate: f64,
     pub out_of_order_rate: f64,
     pub missing_rate: f64,
@@ -654,6 +759,7 @@ mod tests {
                 .unwrap()
                 .timestamp_millis() as u64,
             arrived_at: None,
+            finished_at: None,
             original: serde_json::Value::Null,
         };
 

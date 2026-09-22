@@ -216,6 +216,7 @@ impl Config {
                                 CrateTcpProxyTask {
                                     failure_rate: 0.0,
                                     max_up_duration: proxy.max_up_duration,
+                                    min_up_duration: proxy.min_up_duration,
                                     socket_addr: listen(self.deduplication_epmd_port_u16()),
                                     upstream_domain: self.deduplication_container_name(i),
                                     upstream_port: self.deduplication_epmd_port_u16(),
@@ -224,6 +225,7 @@ impl Config {
                                 CrateTcpProxyTask {
                                     failure_rate: proxy.failure_rate,
                                     max_up_duration: proxy.max_up_duration,
+                                    min_up_duration: proxy.min_up_duration,
                                     socket_addr: listen(self.deduplication_dist_port_u16()),
                                     upstream_domain: self.deduplication_container_name(i),
                                     upstream_port: self.deduplication_dist_port_u16(),
@@ -350,6 +352,7 @@ impl Config {
                     tasks: vec![CrateTcpProxyTask {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
+                        min_up_duration: proxy.min_up_duration,
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.rabbit_mq_container_name(),
                         upstream_port: self.rabbit_mq_container_port(),
@@ -369,6 +372,7 @@ impl Config {
                     tasks: vec![CrateTcpProxyTask {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
+                        min_up_duration: proxy.min_up_duration,
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.consumers_server_proxy_container_name(),
                         upstream_port: self.server_proxy_default_socket_addr().port(),
@@ -922,6 +926,8 @@ pub struct DeduplicationProxyConfig {
     pub failure_rate: f64,
     #[serde(with = "humantime_serde")]
     pub max_up_duration: Duration,
+    #[serde(default, with = "humantime_serde")]
+    pub min_up_duration: Option<Duration>,
 }
 
 #[derive(Debug, Deserialize, Default)]
@@ -974,6 +980,8 @@ pub struct ProxyConfig {
     pub failure_rate: f64,
     #[serde(with = "humantime_serde")]
     pub max_up_duration: Duration,
+    #[serde(default, with = "humantime_serde")]
+    pub min_up_duration: Option<Duration>,
 }
 
 #[derive(Debug, Serialize)]
@@ -1284,6 +1292,7 @@ impl Config {
                     tasks: vec![CrateTcpProxyTask {
                         failure_rate: proxy.failure_rate,
                         max_up_duration: proxy.max_up_duration,
+                        min_up_duration: proxy.min_up_duration,
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.hive_mq_container_name(),
                         upstream_port: self.hive_mq_container_port_u16(),

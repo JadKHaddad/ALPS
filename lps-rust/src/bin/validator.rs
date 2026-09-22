@@ -131,6 +131,14 @@ fn main() -> Result<(), anyhow::Error> {
         Ok(_) => 0,
         Err(ref err) => err.missing.len(),
     };
+    let process_median_latency_ms: f64 =
+        Event::calculate_process_median_latency_ms(server_events.iter())
+            .context("Failed to calculate process median latency")?;
+    let process_average_latency_ms: f64 =
+        Event::calculate_process_average_latency_ms(server_events.iter())
+            .context("Failed to calculate process average latency")?;
+    let process_p99_latency_ms: f64 = Event::calculate_process_p99_latency_ms(server_events.iter())
+        .context("Failed to calculate process p99 latency")?;
 
     let results = Rates {
         median_latency_ms,
@@ -144,6 +152,9 @@ fn main() -> Result<(), anyhow::Error> {
         duplicate_events,
         out_of_order_events,
         missing_events,
+        process_median_latency_ms,
+        process_average_latency_ms,
+        process_p99_latency_ms,
     };
 
     std::fs::write(
