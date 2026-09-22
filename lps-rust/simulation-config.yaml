@@ -21,9 +21,6 @@ server:
   # use_gs_prod_workload: True # Optional, if set, gs-prod-workload-server will be used instead of server. If not set, server will be used. failure_rate and all random sleep durations will be ignored when using gs-prod-workload-server.
   background_load_per_second: 70 # Optional, only active if use_gs_prod_workload is set to True.
   deduplication: True # Optional
-  deduplication_proxy: # Optional
-    failure_rate: 0.1
-    max_up_duration: 5s
 
 amqp:
   queues_count: 1
