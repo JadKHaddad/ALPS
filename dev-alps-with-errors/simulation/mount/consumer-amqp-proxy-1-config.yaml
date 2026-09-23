@@ -3,6 +3,6 @@ tasks:
   upstream_domain: lps-rabbitmq
   upstream_port: 5672
   failure_rate: 0.2
-  max_up_duration: 9m 6s
-  min_up_duration: 2m 16s
+  max_up_duration: 15m 9s
+  min_up_duration: 3m 47s
 results_file: /app/consumer-amqp-proxy-1-results.json

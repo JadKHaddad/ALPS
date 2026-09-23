@@ -97,7 +97,7 @@ services:
     container_name: lps-deduplication-0
     command: run --config-file /app/deduplication-0.yaml
     environment:
-      ERL_FLAGS: -sname node@lps-deduplication-0 -setcookie secret -kernel inet_dist_listen_min 9100 inet_dist_listen_max 9100
+      ERL_FLAGS: -sname node@lps-deduplication-0 -setcookie secret
     networks:
     - lps-net
     volumes:
@@ -107,7 +107,7 @@ services:
     container_name: lps-deduplication-1
     command: run --config-file /app/deduplication-1.yaml
     environment:
-      ERL_FLAGS: -sname node@lps-deduplication-1 -setcookie secret -kernel inet_dist_listen_min 9100 inet_dist_listen_max 9100
+      ERL_FLAGS: -sname node@lps-deduplication-1 -setcookie secret
     networks:
     - lps-net
     volumes:
@@ -117,7 +117,7 @@ services:
     container_name: lps-deduplication-2
     command: run --config-file /app/deduplication-2.yaml
     environment:
-      ERL_FLAGS: -sname node@lps-deduplication-2 -setcookie secret -kernel inet_dist_listen_min 9100 inet_dist_listen_max 9100
+      ERL_FLAGS: -sname node@lps-deduplication-2 -setcookie secret
     networks:
     - lps-net
     volumes:
