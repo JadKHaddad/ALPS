@@ -199,6 +199,6 @@ def main() -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 
-# python3 check.py simulations/alps-eod --out alps-eod.csv -v
-# python3 check.py simulations/alps-iod --out alps-iod.csv -v
-# python3 check.py simulations/alps-real --out alps-real.csv -v
+# python3 runner/check.py simulations/alps/alps-eod --out simulations/alps/alps-eod.csv -v
+# python3 runner/check.py simulations/alps/alps-iod --out simulations/alps/alps-iod.csv -v
+# python3 runner/check.py simulations/alps/alps-real --out simulations/alps/alps-real.csv -v

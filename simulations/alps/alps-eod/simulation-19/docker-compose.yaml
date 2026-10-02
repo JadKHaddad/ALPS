@@ -1,0 +1,105 @@
+networks:
+  lps-net:
+    external: true
+    name: lps-simulation-net
+services:
+  consumer-0:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-consumer-0
+    command: consumer --config-file /app/consumer-0.yaml
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+    restart: unless-stopped
+  consumer-amqp-proxy-0:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-consumer-amqp-proxy-0
+    command: tcp-proxy --config-file /app/consumer-amqp-proxy-0-config.yaml
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+    restart: unless-stopped
+  consumers-server-proxy:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-consumers-server-proxy
+    command: server-proxy --config-file /app/consumers-server-proxy-config.yaml
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+  deduplication-0:
+    image: jadkhaddad/lps-gleam:0.1.0
+    container_name: lps-deduplication-0
+    command: run --config-file /app/deduplication-0.yaml
+    environment:
+      ERL_FLAGS: -sname node@lps-deduplication-0 -setcookie secret
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+  device:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-device
+    command: device --config-file /app/device-config.yaml
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+  producer-0:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-producer-0
+    command: producer --config-file /app/producer-0.yaml
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+    restart: unless-stopped
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: lps-rabbitmq
+    command: bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
+    networks:
+      - lps-net
+    restart: unless-stopped
+  scripts:
+    image: jadkhaddad/lps-scripts:0.1.0
+    container_name: lps-scripts
+    command: sh -c 'python3 /scripts/latency.py server-results.json latency-line.png && python3 /scripts/failure.py device-results.json server-results.json failure.png'
+    profiles:
+      - manual
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+  server:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server
+    command: server --config-file /app/server-config.yaml
+    environment:
+      RUST_LOG: server=debug
+    networks:
+      - lps-net
+    ports:
+      - 0.0.0.0:8080:8080
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+  server-server-proxy-0:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server-server-proxy-0
+    command: server-proxy --config-file /app/server-server-proxy-0.yaml
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
+  validator:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-validator
+    command: sh -c "validator --config-file /app/validator-config.yaml > /app/validator.log 2>&1"
+    profiles:
+      - manual
+    networks:
+      - lps-net
+    volumes:
+      - /home/jadkhaddad/Desktop/LPS/runner/simulations/apls/alps-eod/simulation-19/mount:/app
