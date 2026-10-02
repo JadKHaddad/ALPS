@@ -1,0 +1,32 @@
+simulation_dir: "simulation"
+simulation_docker_network: "lps-simulation-net"
+lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
+lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
+lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
+
+devices:
+  devices_count: 50
+  max_event_interval: 5s
+  min_event_interval: 4999ms
+  max_events: 60
+  retry_duration: 500ms
+  use_six_digit_device_id: True
+
+server:
+  socket_addr: 0.0.0.0:8080
+  expose_socket_addr: 0.0.0.0:8080
+  failure_rate: 0.0
+  shutdown_after_idle_duration: 30s
+  server_count: 3
+  use_gs_prod_workload: True 
+
+amqp:
+  queues_count: 3
+  producers:
+    producers_count: 3
+    socket_addr: 0.0.0.0:5672
+  consumers:
+    consumers_count: 3
+    reconnect_duration: 50ms
+
+# python3 runner/runner.py --protocol "amqp" --runs 1 --base-dir "simulations/alps/alps-queues/3-queues" --base-config "simulations/alps/alps-queues/3-queues/simulation-config.yaml"  --log-dir "simulations/alps/alps-queues/3-queues/logs"

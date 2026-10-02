@@ -83,14 +83,16 @@ pub struct Job {
     pub status: JobStatus,
     pub event: Event,
     pub happened_at: DateTime<Utc>,
+    pub queue: String,
 }
 
 impl Job {
-    pub fn new_received_and_sent_and_waiting_for_response_now(event: Event) -> Self {
+    pub fn new_received_and_sent_and_waiting_for_response_now(event: Event, queue: String) -> Self {
         Self {
             status: JobStatus::ReceivedAndSentAndWaitingForResponse,
             event,
             happened_at: Utc::now(),
+            queue,
         }
     }
 

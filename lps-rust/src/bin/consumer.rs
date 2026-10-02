@@ -48,6 +48,7 @@ impl JobsSate {
 
     async fn add_job(&self, job: Job) {
         let mut jobs = self.jobs.lock().await;
+
         jobs.push(job);
     }
 
@@ -121,8 +122,10 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
 
                         tracing::info!(%queue, ?event, "Sending work request");
 
-                        let job =
-                            Job::new_received_and_sent_and_waiting_for_response_now(event.clone());
+                        let job = Job::new_received_and_sent_and_waiting_for_response_now(
+                            event.clone(),
+                            queue.clone(),
+                        );
 
                         state.add_job(job.clone()).await;
 
