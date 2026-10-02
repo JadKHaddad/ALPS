@@ -1,3 +1,5 @@
+#![allow(clippy::obfuscated_if_else)]
+
 //! This is a device simulator that acts like a device.
 //!
 //! The device generates events at a fixed interval and pushes them to the server. If the push fails, it will retry after a fixed duration.
@@ -60,6 +62,37 @@ impl State {
     }
 }
 
+/// Maps an id in `0..1_000_000` to a unique, deterministic, random-looking 6-digit string.
+fn six_digit_device_id(id: usize) -> String {
+    const HALF: u32 = 1000;
+    const ROUND_KEYS: [u32; 4] = [0x9E37_79B9, 0x85EB_CA6B, 0xC2B2_AE35, 0x27D4_EB2F];
+
+    assert!(id < 1_000_000, "id must be < 1_000_000 to fit in 6 digits");
+
+    let id = id as u32;
+    let (mut left, mut right) = (id / HALF, id % HALF);
+
+    for key in ROUND_KEYS {
+        let f = mix(right, key) % HALF;
+        (left, right) = (right, (left + f) % HALF);
+    }
+
+    format!("{:06}", left * HALF + right)
+}
+
+/// Deterministic integer mixer (no std hasher, so it's stable across Rust versions).
+fn mix(x: u32, key: u32) -> u32 {
+    let mut h = x.wrapping_mul(0x9E37_79B1) ^ key;
+
+    h ^= h >> 15;
+
+    h = h.wrapping_mul(0x2C1B_3C6D);
+
+    h ^= h >> 12;
+
+    h
+}
+
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let filter = tracing_subscriber::EnvFilter::try_from_default_env()
@@ -91,11 +124,23 @@ async fn main() -> Result<(), anyhow::Error> {
         config.min_event_interval = None;
     }
 
+    if config.use_six_digit_device_id && config.devices_count >= 1_000_000 {
+        tracing::warn!(
+            "use_six_digit_device_id is set to true, but devices_count is greater than or equal to 1_000_000. Setting devices_count to 999_999"
+        );
+
+        config.devices_count = 999_999;
+    }
+
     tracing::info!(?config, "Starting");
 
     let state = Arc::new(State::new(config.results_file.clone()));
 
     let tasks: Vec<_> = (0..config.devices_count)
+        .map(|id| 
+            config.use_six_digit_device_id
+                .then_some(six_digit_device_id(id as usize))
+                .unwrap_or(id.to_string()))
         .map(|id| {
             let config = config.clone();
             let state = state.clone();
@@ -119,7 +164,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
                             tokio::time::sleep(Duration::from_millis(duration_ms)).await;
 
-                            let call = SimpleCall::new_now(id.to_string()).with_incremental_id(i);
+                            let call = SimpleCall::new_now(id.clone()).with_incremental_id(i);
 
                             let mut try_index = 0;
 
@@ -187,4 +232,16 @@ async fn main() -> Result<(), anyhow::Error> {
     state.save().await?;
 
     Ok(())
+}
+
+#[test]
+fn device_code_is_collision_free() {
+    let mut seen = std::collections::HashSet::new();
+
+    for id in 0..1_000_000 {
+        let code = six_digit_device_id(id);
+
+        assert_eq!(code.len(), 6);
+        assert!(seen.insert(code), "collision at id {id}");
+    }
 }

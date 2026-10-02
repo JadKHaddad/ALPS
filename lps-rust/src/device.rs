@@ -50,6 +50,11 @@ pub struct Config {
     pub retry_duration: Duration,
     #[serde(default = "default_results_file")]
     pub results_file: PathBuf,
+    /// Wether to generate a six digit device id instead of an incremental index.
+    ///
+    /// If this is set, `devices_count` must be less than 1_000_000, otherwise `devices_count` will be set to `999_999`.
+    #[serde(default)]
+    pub use_six_digit_device_id: bool,
 }
 
 impl Default for Config {
@@ -62,6 +67,7 @@ impl Default for Config {
             max_events: None,
             retry_duration: default_retry_duration(),
             results_file: default_results_file(),
+            use_six_digit_device_id: false,
         }
     }
 }

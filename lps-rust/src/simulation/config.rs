@@ -418,6 +418,7 @@ impl Config {
                     .collect(),
                 results_file: PathBuf::from(self.container_work_dir())
                     .join(self.device_results_file()),
+                use_six_digit_device_id: self.devices.use_six_digit_device_id,
             }),
         }]
     }
@@ -789,6 +790,8 @@ pub struct DeviceConfig {
     pub max_events: u64,
     #[serde(with = "humantime_serde")]
     pub retry_duration: Duration,
+    #[serde(default)]
+    pub use_six_digit_device_id: bool,
 }
 
 #[derive(Debug, Deserialize)]
@@ -1084,6 +1087,7 @@ impl Config {
                     .collect(),
                 results_file: PathBuf::from(self.container_work_dir())
                     .join(self.device_results_file()),
+                use_six_digit_device_id: self.devices.use_six_digit_device_id,
             }),
         }]
     }
