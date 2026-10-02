@@ -1,0 +1,123 @@
+{
+  "run_dir": "simulations/alps/alps-queues/48-queues",
+  "pattern": "simulation-*",
+  "json_path": "mount/rates-results.json",
+  "confidence": 0.95,
+  "target_precision": 0.1,
+  "runs": [
+    "simulation-1",
+    "simulation-10",
+    "simulation-2",
+    "simulation-3",
+    "simulation-4",
+    "simulation-5",
+    "simulation-6",
+    "simulation-7",
+    "simulation-8",
+    "simulation-9"
+  ],
+  "n_runs": 10,
+  "metrics": [
+    {
+      "metric": "average_latency_ms",
+      "n": 10,
+      "values": [
+        64.215,
+        38.312333333333335,
+        74.722,
+        31.048666666666666,
+        110.124,
+        60.673,
+        38.28366666666667,
+        46.00666666666667,
+        41.294333333333334,
+        31.117
+      ],
+      "mean": 53.57966666666667,
+      "stdev": 24.709965973666435,
+      "t_value": 2.262157162798205,
+      "half_width": 17.676444805562422,
+      "ci_low": 35.90322186110424,
+      "ci_high": 71.2561114722291,
+      "r_achieved": 0.32990957027658047,
+      "r_target": 0.1,
+      "sufficient": false,
+      "n_required": 109,
+      "additional_runs_needed": 99
+    },
+    {
+      "metric": "p99_latency_ms",
+      "n": 10,
+      "values": [
+        1105.0,
+        426.0,
+        1278.0,
+        768.0,
+        1402.0,
+        1181.0,
+        842.0,
+        868.0,
+        513.0,
+        323.0
+      ],
+      "mean": 870.6,
+      "stdev": 370.64754147302796,
+      "t_value": 2.262157162798205,
+      "half_width": 265.1452784737789,
+      "ci_low": 605.4547215262212,
+      "ci_high": 1135.7452784737789,
+      "r_achieved": 0.3045546502110945,
+      "r_target": 0.1,
+      "sufficient": false,
+      "n_required": 93,
+      "additional_runs_needed": 83
+    },
+    {
+      "metric": "median_latency_ms",
+      "n": 10,
+      "values": [
+        4.0,
+        12.0,
+        5.0,
+        2.0,
+        5.0,
+        4.0,
+        3.0,
+        3.0,
+        9.0,
+        9.0
+      ],
+      "mean": 5.6,
+      "stdev": 3.272783388968954,
+      "t_value": 2.262157162798205,
+      "half_width": 2.3412081990450173,
+      "ci_low": 3.2587918009549823,
+      "ci_high": 7.9412081990450165,
+      "r_achieved": 0.41807289268661024,
+      "r_target": 0.1,
+      "sufficient": false,
+      "n_required": 175,
+      "additional_runs_needed": 165
+    }
+  ],
+  "representative": {
+    "representative_metric": "average_latency_ms",
+    "representative_run": "simulation-5",
+    "representative_value": 60.673,
+    "overall_mean": 53.57966666666666,
+    "abs_diff_from_mean": 7.093333333333341,
+    "rel_diff_from_mean_pct": 13.238853047486934,
+    "all_run_values": {
+      "simulation-1": 64.215,
+      "simulation-10": 38.312333333333335,
+      "simulation-2": 74.722,
+      "simulation-3": 31.048666666666666,
+      "simulation-4": 110.124,
+      "simulation-5": 60.673,
+      "simulation-6": 38.28366666666667,
+      "simulation-7": 46.00666666666667,
+      "simulation-8": 41.294333333333334,
+      "simulation-9": 31.117
+    }
+  }
+}
