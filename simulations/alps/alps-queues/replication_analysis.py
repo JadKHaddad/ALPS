@@ -376,4 +376,4 @@ if __name__ == "__main__":
 # python3 simulations/alps/alps-queues/replication_analysis.py --confidence 0.95 --precision 0.10 --dir simulations/alps/alps-queues/24-queues --json simulations/alps/alps-queues/24-queues-summary.json
 # python3 simulations/alps/alps-queues/replication_analysis.py --confidence 0.95 --precision 0.10 --dir simulations/alps/alps-queues/48-queues --json simulations/alps/alps-queues/48-queues-summary.json
 # python3 simulations/alps/alps-queues/replication_analysis.py --confidence 0.95 --precision 0.10 --dir simulations/alps/alps-queues/50-queues --json simulations/alps/alps-queues/50-queues-summary.json
-# python3 simulations/alps/alps-queues/replication_analysis.py --confidence 0.95 --precision 0.10 --dir simulations/alps/alps-queues/98-queues --json simulations/alps/alps-queues/98-queues-summary.json
+# python3 simulations/alps/alps-queues/replication_analysis.py --confidence 0.95 --precision 0.10 --dir simulations/alps/alps-queues/96-queues --json simulations/alps/alps-queues/96-queues-summary.json

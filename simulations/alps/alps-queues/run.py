@@ -20,7 +20,8 @@ from pathlib import Path
 QUEUES_DIR = Path("simulations/alps/alps-queues")
 RUNNER = Path("runner/runner.py")
 PROTOCOL = "amqp"
-RUNS = 10
+START_INDEX = 9
+RUNS = 12
 STOP_ON_ERROR = False  # set True to abort if one folder fails
 # -----------------------------------------------------------------------------
 
@@ -76,14 +77,16 @@ def main() -> None:
             str(RUNNER),
             "--protocol",
             PROTOCOL,
+            "--start-index",
+            str(START_INDEX),
             "--runs",
             str(RUNS),
             "--base-dir",
             str(folder),
             "--base-config",
             str(config),
-            "--log-dir",
-            str(log_dir),
+            # "--log-dir",
+            # str(log_dir),
         ]
         print(
             "Running:",

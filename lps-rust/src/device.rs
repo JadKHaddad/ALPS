@@ -55,6 +55,9 @@ pub struct Config {
     /// If this is set, `devices_count` must be less than 1_000_000, otherwise `devices_count` will be set to `999_999`.
     #[serde(default)]
     pub use_six_digit_device_id: bool,
+    /// How long should the device wait before starting to generate events.
+    #[serde(default, with = "humantime_serde")]
+    pub wait_before_start: Option<Duration>,
 }
 
 impl Default for Config {
@@ -68,6 +71,7 @@ impl Default for Config {
             retry_duration: default_retry_duration(),
             results_file: default_results_file(),
             use_six_digit_device_id: false,
+            wait_before_start: None,
         }
     }
 }

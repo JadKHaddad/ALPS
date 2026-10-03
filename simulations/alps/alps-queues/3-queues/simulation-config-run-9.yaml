@@ -8,20 +8,24 @@ amqp:
   queues_count: 3
 devices:
   devices_count: 50
-  max_event_interval: 5s
+  max_event_interval: 1s
   max_events: 60
-  min_event_interval: 4999ms
+  min_event_interval: 999ms
   retry_duration: 500ms
   use_six_digit_device_id: true
+  wait_before_start: 10s
 lps_gleam_image: jadkhaddad/lps-gleam:0.1.0
 lps_rust_image: jadkhaddad/lps-rs:0.1.0
 lps_scripts_image: jadkhaddad/lps-scripts:0.1.0
 server:
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
-  server_count: 3
-  shutdown_after_idle_duration: 30s
+  max_response_duration: 2ns
+  max_work_duration: 2ns
+  min_response_duration: 1ns
+  min_work_duration: 1ns
+  server_count: 1
+  shutdown_after_idle_duration: 15s
   socket_addr: 0.0.0.0:8080
-  use_gs_prod_workload: true
 simulation_dir: simulations/alps/alps-queues/3-queues/simulation-9
 simulation_docker_network: lps-simulation-net

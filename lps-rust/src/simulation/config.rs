@@ -419,6 +419,7 @@ impl Config {
                 results_file: PathBuf::from(self.container_work_dir())
                     .join(self.device_results_file()),
                 use_six_digit_device_id: self.devices.use_six_digit_device_id,
+                wait_before_start: self.devices.wait_before_start,
             }),
         }]
     }
@@ -792,6 +793,8 @@ pub struct DeviceConfig {
     pub retry_duration: Duration,
     #[serde(default)]
     pub use_six_digit_device_id: bool,
+    #[serde(default, with = "humantime_serde")]
+    pub wait_before_start: Option<Duration>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -1088,6 +1091,7 @@ impl Config {
                 results_file: PathBuf::from(self.container_work_dir())
                     .join(self.device_results_file()),
                 use_six_digit_device_id: self.devices.use_six_digit_device_id,
+                wait_before_start: self.devices.wait_before_start,
             }),
         }]
     }

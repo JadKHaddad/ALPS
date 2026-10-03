@@ -6,19 +6,24 @@ lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 
 devices:
   devices_count: 50
-  max_event_interval: 5s
-  min_event_interval: 4999ms
+  max_event_interval: 1s
+  min_event_interval: 999ms
   max_events: 60
   retry_duration: 500ms
   use_six_digit_device_id: True
+  wait_before_start: 10s
 
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
-  shutdown_after_idle_duration: 30s
-  server_count: 3
-  use_gs_prod_workload: True 
+  shutdown_after_idle_duration: 15s
+  server_count: 1
+  max_work_duration: 2ns
+  min_work_duration: 1ns
+  max_response_duration: 2ns
+  min_response_duration: 1ns
+
 
 amqp:
   queues_count: 3

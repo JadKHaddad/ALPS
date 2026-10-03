@@ -132,6 +132,12 @@ async fn main() -> Result<(), anyhow::Error> {
         config.devices_count = 999_999;
     }
 
+    if let Some(wait_before_start) = config.wait_before_start {
+        tracing::info!(wait_before_start = ?wait_before_start, "Waiting before starting to generate events");
+
+        tokio::time::sleep(wait_before_start).await;
+    }
+
     tracing::info!(?config, "Starting");
 
     let state = Arc::new(State::new(config.results_file.clone()));
