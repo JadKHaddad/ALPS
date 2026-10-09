@@ -1,0 +1,28 @@
+[
+  {
+    "device_id": "0",
+    "event_id": 1791543850425,
+    "arrived_at": "2026-10-09T11:04:14.317859400Z",
+    "finished_at": "2026-10-09T11:04:15.608609427Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-09T11:04:10.425481Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1791543850425,
+    "arrived_at": "2026-10-09T11:04:16.683776767Z",
+    "finished_at": "2026-10-09T11:04:21.340286619Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-09T11:04:10.425481Z"
+    }
+  }
+]
