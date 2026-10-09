@@ -58,6 +58,9 @@ pub struct Config {
     /// How long should the device wait before starting to generate events.
     #[serde(default, with = "humantime_serde")]
     pub wait_before_start: Option<Duration>,
+    /// Seed for the random number generators. If omitted, a random seed is chosen and logged.
+    #[serde(default)]
+    pub seed: Option<u64>,
 }
 
 impl Default for Config {
@@ -72,6 +75,7 @@ impl Default for Config {
             results_file: default_results_file(),
             use_six_digit_device_id: false,
             wait_before_start: None,
+            seed: None,
         }
     }
 }

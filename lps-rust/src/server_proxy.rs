@@ -16,6 +16,9 @@ pub struct Config {
     pub socket_addr: SocketAddr,
     #[serde(default)]
     pub server_push_urls: Vec<String>,
+    /// Seed for the random number generators. If omitted, a random seed is chosen and logged.
+    #[serde(default)]
+    pub seed: Option<u64>,
 }
 
 impl Default for Config {
@@ -23,6 +26,7 @@ impl Default for Config {
         Self {
             socket_addr: default_socket_addr(),
             server_push_urls: Vec::new(),
+            seed: None,
         }
     }
 }

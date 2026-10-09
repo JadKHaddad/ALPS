@@ -19,11 +19,13 @@ use anyhow::Context;
 use axum::{Json, Router, extract::State, routing::post};
 use lps_rust::{SimpleCall, server_proxy::Config};
 
-use rand::RngExt;
+use rand::{RngExt, SeedableRng, rngs::StdRng};
 use reqwest::StatusCode;
 
 use clap::Parser;
-use tokio::net::TcpListener;
+use tokio::{net::TcpListener, sync::Mutex};
+
+const SEED_SALT: u64 = 0x9A1C_0000_0000_0000;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -35,23 +37,30 @@ pub struct Args {
 struct AppState {
     client: reqwest::Client,
     server_push_urls: Vec<String>,
+    rng: Mutex<StdRng>,
 }
 
 impl AppState {
-    fn new(server_push_urls: Vec<String>) -> Self {
+    fn new(server_push_urls: Vec<String>, rng: StdRng) -> Self {
         Self {
             client: reqwest::Client::new(),
             server_push_urls,
+            rng: Mutex::new(rng),
         }
     }
 
-    fn next_server_push_url(&self) -> String {
-        let index = rand::rng().random_range(0..self.server_push_urls.len());
+    async fn next_server_push_url(&self) -> String {
+        let index = self
+            .rng
+            .lock()
+            .await
+            .random_range(0..self.server_push_urls.len());
+
         self.server_push_urls[index].clone()
     }
 
     async fn work(&self, call: SimpleCall) -> StatusCode {
-        let url = self.next_server_push_url();
+        let url = self.next_server_push_url().await;
 
         let status = self
             .client
@@ -93,9 +102,15 @@ async fn main() -> Result<(), anyhow::Error> {
         .then_some(())
         .ok_or(anyhow::anyhow!("server_push_urls should not be empty"))?;
 
+    let base_seed = config.seed.unwrap_or_else(|| rand::rng().random());
+
+    tracing::info!(seed = base_seed, "Using RNG seed");
+
     tracing::info!(?config, "Starting");
 
-    let app_state = Arc::new(AppState::new(config.server_push_urls));
+    let rng = StdRng::seed_from_u64(base_seed ^ SEED_SALT);
+
+    let app_state = Arc::new(AppState::new(config.server_push_urls, rng));
 
     let app = Router::new()
         .route(

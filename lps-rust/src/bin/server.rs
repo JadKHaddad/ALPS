@@ -21,7 +21,7 @@ use axum::{
     routing::{get, post},
 };
 use lps_rust::{Event, Failure, SimpleCall, server::Config};
-use rand::RngExt;
+use rand::{RngExt, SeedableRng, rngs::StdRng};
 use reqwest::StatusCode;
 
 use clap::Parser;
@@ -30,6 +30,8 @@ use tokio::{
     sync::{Mutex, RwLock},
 };
 use tokio_util::sync::CancellationToken;
+
+const SEED_SALT: u64 = 0x9A8C_0000_0000_0000;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -50,9 +52,11 @@ struct AppState {
     results_file: PathBuf,
     failures_file: PathBuf,
     last_event: RwLock<Option<Event>>,
+    rng: Mutex<StdRng>,
 }
 
 impl AppState {
+    #[allow(clippy::too_many_arguments)]
     fn new(
         max_work_duration: Duration,
         min_work_duration: Option<Duration>,
@@ -61,6 +65,7 @@ impl AppState {
         failure_rate: f64,
         results_file: PathBuf,
         failures_file: PathBuf,
+        rng: StdRng,
     ) -> Self {
         Self {
             events: Mutex::new(Vec::new()),
@@ -73,6 +78,7 @@ impl AppState {
             results_file,
             failures_file,
             last_event: RwLock::new(None),
+            rng: Mutex::new(rng),
         }
     }
 
@@ -100,14 +106,14 @@ impl AppState {
         let work_duration_ms = if max_ms == 0 {
             0
         } else {
-            rand::rng().random_range(min_ms..max_ms) as u64
+            self.rng.lock().await.random_range(min_ms..max_ms) as u64
         };
 
         tracing::info!(ms = work_duration_ms, ?call, "Working");
 
         tokio::time::sleep(Duration::from_millis(work_duration_ms)).await;
 
-        let fail = rand::rng().random_bool(self.failure_rate);
+        let fail = self.rng.lock().await.random_bool(self.failure_rate);
 
         let min_ms = self
             .min_response_duration
@@ -120,7 +126,7 @@ impl AppState {
         let response_duration_ms = if max_ms == 0 {
             0
         } else {
-            rand::rng().random_range(min_ms..max_ms) as u64
+            self.rng.lock().await.random_range(min_ms..max_ms) as u64
         };
 
         match fail {
@@ -294,7 +300,13 @@ async fn main() -> Result<(), anyhow::Error> {
         config.min_response_duration = None;
     }
 
+    let base_seed = config.seed.unwrap_or_else(|| rand::rng().random());
+
+    tracing::info!(seed = base_seed, "Using RNG seed");
+
     tracing::info!(?config, "Starting");
+
+    let rng = StdRng::seed_from_u64(base_seed ^ SEED_SALT);
 
     let app_state = Arc::new(AppState::new(
         config.max_work_duration,
@@ -304,6 +316,7 @@ async fn main() -> Result<(), anyhow::Error> {
         config.failure_rate,
         config.results_file,
         config.failures_file,
+        rng,
     ));
 
     let app = Router::new()

@@ -33,6 +33,8 @@ pub struct Config {
     pub lps_mqtt_hivemq_image: String,
     pub simulation_dir: String,
     pub simulation_docker_network: String,
+    #[serde(default)]
+    pub seed: Option<u64>,
     pub devices: DeviceConfig,
     pub server: ServerConfig,
     #[serde(default)]
@@ -245,6 +247,7 @@ impl Config {
                 ty: ConfigType::ServerProxy(CrateServerProxyConfig {
                     socket_addr: self.server_proxy_default_socket_addr(),
                     server_push_urls: vec![self.server_push_url()],
+                    seed: self.seed,
                 }),
             });
         }
@@ -254,6 +257,7 @@ impl Config {
             ty: ConfigType::ServerProxy(CrateServerProxyConfig {
                 socket_addr: self.server_proxy_default_socket_addr(),
                 server_push_urls: self.deduplication_or_server_proxy_push_urls(),
+                seed: self.seed,
             }),
         });
 
@@ -277,6 +281,7 @@ impl Config {
                 failures_file: PathBuf::from(self.container_work_dir())
                     .join(self.server_failures_file()),
                 shutdown_after_idle_duration: self.server.shutdown_after_idle_duration,
+                seed: self.seed,
                 background_load_per_second: self.server.background_load_per_second,
             }),
         });
@@ -322,6 +327,7 @@ impl Config {
                         upstream_domain: self.rabbit_mq_container_name(),
                         upstream_port: self.rabbit_mq_container_port(),
                     }],
+                    seed: self.seed,
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-amqp-proxy-{i}-results.json")),
                 };
@@ -344,6 +350,7 @@ impl Config {
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-server-proxy-{i}-results.json")),
+                    seed: self.seed,
                 };
 
                 config_files.push(ConfigFile {
@@ -420,6 +427,7 @@ impl Config {
                     .join(self.device_results_file()),
                 use_six_digit_device_id: self.devices.use_six_digit_device_id,
                 wait_before_start: self.devices.wait_before_start,
+                seed: self.seed,
             }),
         }]
     }
@@ -1092,6 +1100,7 @@ impl Config {
                     .join(self.device_results_file()),
                 use_six_digit_device_id: self.devices.use_six_digit_device_id,
                 wait_before_start: self.devices.wait_before_start,
+                seed: self.seed,
             }),
         }]
     }
@@ -1202,6 +1211,7 @@ impl Config {
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-mqtt-proxy-{i}-results.json")),
+                    seed: self.seed,
                 };
 
                 config_files.push(ConfigFile {

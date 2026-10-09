@@ -33,6 +33,9 @@ pub struct Config {
     pub tasks: Vec<Task>,
     #[serde(default = "default_results_file")]
     pub results_file: PathBuf,
+    /// Seed for the random number generators. If omitted, a random seed is chosen and logged.
+    #[serde(default)]
+    pub seed: Option<u64>,
 }
 
 impl Default for Config {
@@ -40,6 +43,7 @@ impl Default for Config {
         Self {
             tasks: Vec::new(),
             results_file: default_results_file(),
+            seed: None,
         }
     }
 }

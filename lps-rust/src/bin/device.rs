@@ -14,10 +14,12 @@ use std::{path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
 use lps_rust::{Event, SimpleCall, device::Config};
-use rand::{RngExt, seq::SliceRandom};
+use rand::{RngExt, SeedableRng, rngs::StdRng, seq::SliceRandom};
 
 use clap::Parser;
 use tokio::sync::Mutex;
+
+const SEED_SALT: u64 = 0xD1CE_0000_0000_0000;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -138,18 +140,29 @@ async fn main() -> Result<(), anyhow::Error> {
         tokio::time::sleep(wait_before_start).await;
     }
 
+    let base_seed = config.seed.unwrap_or_else(|| rand::rng().random());
+
+    tracing::info!(seed = base_seed, "Using RNG seed");
+
     tracing::info!(?config, "Starting");
 
     let state = Arc::new(State::new(config.results_file.clone()));
 
     let tasks: Vec<_> = (0..config.devices_count)
-        .map(|id| 
-            config.use_six_digit_device_id
-                .then_some(six_digit_device_id(id as usize))
-                .unwrap_or(id.to_string()))
-        .map(|id| {
+        .map(|index| {
+            let id = if config.use_six_digit_device_id {
+                six_digit_device_id(index as usize)
+            } else {
+                index.to_string()
+            };
+
+            (index, id)
+        })
+        .map(|(index, id)| {
             let config = config.clone();
             let state = state.clone();
+
+            let mut rng = StdRng::seed_from_u64(base_seed ^ SEED_SALT ^ index as u64);
 
             tokio::spawn(async move {
                 tokio::select! {
@@ -165,7 +178,7 @@ async fn main() -> Result<(), anyhow::Error> {
                             let duration_ms = if max_ms == 0 {
                                 0
                             } else {
-                                rand::rng().random_range(min_ms..max_ms) as u64
+                                rng.random_range(min_ms..max_ms) as u64
                             };
 
                             tokio::time::sleep(Duration::from_millis(duration_ms)).await;
@@ -176,7 +189,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
                             let mut server_push_urls = config.server_push_urls.clone();
 
-                            server_push_urls.shuffle(&mut rand::rng());
+                            server_push_urls.shuffle(&mut rng);
 
                             let mut server_push_urls = server_push_urls.into_iter().cycle();
 

@@ -51,6 +51,9 @@ pub struct Config {
     pub failures_file: PathBuf,
     #[serde(default, with = "humantime_serde")]
     pub shutdown_after_idle_duration: Option<Duration>,
+    /// Seed for the random number generators. If omitted, a random seed is chosen and logged.
+    #[serde(default)]
+    pub seed: Option<u64>,
 
     /// See [`GsProdConfig`]
     ///
@@ -75,6 +78,7 @@ impl Default for Config {
             results_file: default_results_file(),
             failures_file: default_failures_file(),
             shutdown_after_idle_duration: None,
+            seed: None,
             background_load_per_second: None,
         }
     }
