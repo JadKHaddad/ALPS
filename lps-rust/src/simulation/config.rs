@@ -461,7 +461,7 @@ impl Config {
     fn rabbit_mq_docker_service(&self) -> DockerService {
         DockerService::default()
             .with_container_name(self.rabbit_mq_container_name())
-            .with_image(String::from("rabbitmq:4-management"))
+            .with_image(String::from("rabbitmq:4.3.6-management"))
             .with_command(String::from(
                 "bash -c \" rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server \"",
             ))

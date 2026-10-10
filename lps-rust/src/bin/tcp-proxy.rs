@@ -91,10 +91,10 @@ async fn main() -> Result<(), anyhow::Error> {
                 .min_up_duration
                 .map(|d| d.as_millis())
                 .unwrap_or(0)
-                >= task.max_up_duration.as_millis()
+                > task.max_up_duration.as_millis()
             {
                 tracing::warn!(
-                    "min_up_duration is greater than or equal to max_up_duration, setting min_up_duration to None"
+                    "min_up_duration is greater than max_up_duration, setting min_up_duration to None"
                 );
 
                 task.min_up_duration = None;
@@ -129,7 +129,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
                 let min_ms = task.min_up_duration.map(|d| d.as_millis()).unwrap_or(0);
 
-                // max_ms is always > min_ms. See check above.
+                // max_ms is always >= min_ms. See check above.
                 let max_ms = task.max_up_duration.as_millis();
 
                 loop {
@@ -149,7 +149,7 @@ async fn main() -> Result<(), anyhow::Error> {
                     let duration_ms = if max_ms == 0 {
                         0
                     } else {
-                        rng.random_range(min_ms..max_ms) as u64
+                        rng.random_range(min_ms..=max_ms) as u64
                     };
 
                     if fail {
