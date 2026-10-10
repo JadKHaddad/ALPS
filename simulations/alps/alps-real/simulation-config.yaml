@@ -40,5 +40,5 @@ amqp:
       max_up_duration: 48ms
       min_up_duration: 12ms
 
-# python3 runner/runner.py --protocol "amqp" --start-index 36 --runs 60 --base-dir "simulations/apls/alps-real" --base-config "simulations/apls/alps-real/simulation-config.yaml"  --log-dir "simulations/apls/alps-real/logs"
-# python3 runner/runner.py --protocol "amqp" --start-index 60 --runs 70 --base-dir "simulations/apls/alps-real" --base-config "simulations/apls/alps-real/simulation-config.yaml"  --log-dir "simulations/apls/alps-real/logs"
+# python3 runner/runner.py --protocol "amqp" --start-index 36 --runs 60 --base-dir "simulations/alps/alps-real" --base-config "simulations/alps/alps-real/simulation-config.yaml"  --log-dir "simulations/alps/alps-real/logs"
+# python3 runner/runner.py --protocol "amqp" --start-index 60 --runs 70 --base-dir "simulations/alps/alps-real" --base-config "simulations/alps/alps-real/simulation-config.yaml"  --log-dir "simulations/alps/alps-real/logs"

@@ -40,4 +40,4 @@ amqp:
       max_up_duration: 1d
       min_up_duration: 1d
 
-# python3 runner/runner.py --protocol "amqp" --runs 70 --base-dir "simulations/apls/alps-real-normal" --base-config "simulations/apls/alps-real-normal/simulation-config.yaml"
+# python3 runner/runner.py --protocol "amqp" --runs 70 --base-dir "simulations/alps/alps-real-normal" --base-config "simulations/alps/alps-real-normal/simulation-config.yaml"
