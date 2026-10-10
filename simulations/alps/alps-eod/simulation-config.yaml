@@ -39,5 +39,5 @@ amqp:
       max_up_duration: 4s
 
 # These one needs filtering
-# python3 runner/runner.py --protocol "amqp" --runs 60 --base-dir "simulations/apls/alps-eod" --base-config "simulations/apls/alps-eod/simulation-config.yaml" --log-dir "simulations/apls/alps-eod/logs"
-# python3 runner/runner.py --protocol "amqp" --start-index 61 --runs 120 --base-dir "simulations/apls/alps-eod" --base-config "simulations/apls/alps/alps-eod/simulation-config.yaml" --log-dir "simulations/apls/alps-eod/logs"
+# python3 runner/runner.py --protocol "amqp" --runs 60 --base-dir "simulations/alps/alps-eod" --base-config "simulations/alps/alps-eod/simulation-config.yaml" --log-dir "simulations/alps/alps-eod/logs"
+# python3 runner/runner.py --protocol "amqp" --start-index 61 --runs 120 --base-dir "simulations/alps/alps-eod" --base-config "simulations/alps/alps/alps-eod/simulation-config.yaml" --log-dir "simulations/alps/alps-eod/logs"
