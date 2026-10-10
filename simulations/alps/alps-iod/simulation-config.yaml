@@ -4,11 +4,14 @@ lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
 lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
 lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 
+seed: 2
+
 devices:
   devices_count: 1
   max_event_interval: 100ms
   retry_duration: 250ms
   max_events: 2
+  wait_before_start: 3s
 
 server:
   socket_addr: 0.0.0.0:8080
@@ -29,5 +32,5 @@ amqp:
     consumers_count: 2
     reconnect_duration: 500ms
 
-# python3 runner/runner.py --protocol "amqp" --runs 40 --base-dir "simulations/apls/alps-iod" --base-config "simulations/apls/alps-iod/simulation-config.yaml" --log-dir "simulations/apls/alps-iod/logs"
-# python3 runner/runner.py --protocol "amqp" --start-index 41 --runs 59 --base-dir "simulations/apls/alps-iod" --base-config "simulations/apls/alps-iod/simulation-config.yaml" --log-dir "simulations/apls/alps-iod/logs"
+# python3 runner/runner.py --protocol "amqp" --runs 40 --base-dir "simulations/alps/alps-iod" --base-config "simulations/alps/alps-iod/simulation-config.yaml" --log-dir "simulations/alps/alps-iod/logs"
+# python3 runner/runner.py --protocol "amqp" --start-index 41 --runs 59 --base-dir "simulations/alps/alps-iod" --base-config "simulations/alps/alps-iod/simulation-config.yaml" --log-dir "simulations/alps/alps-iod/logs"
