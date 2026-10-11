@@ -1,0 +1,9 @@
+tasks:
+- socket_addr: 0.0.0.0:9081
+  upstream_domain: lps-consumers-server-proxy
+  upstream_port: 8080
+  failure_rate: 0.0
+  max_up_duration: 1day
+  min_up_duration: 1day
+results_file: /app/consumer-server-proxy-2-results.json
+seed: null
