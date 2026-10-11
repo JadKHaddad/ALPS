@@ -15,6 +15,8 @@ devices:
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
+  # Not used because of `use_gs_prod_workload` but needed for the deserialization of the config file
+  failure_rate: 0.0
   shutdown_after_idle_duration: 5s
   server_count: 3
   use_gs_prod_workload: True 
