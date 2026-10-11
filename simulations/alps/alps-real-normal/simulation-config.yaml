@@ -10,14 +10,14 @@ devices:
   min_event_interval: 5s
   max_events: 60
   retry_duration: 500ms
-  wait_before_start: 3s
+  wait_before_start: 5s
 
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
   # Not used because of `use_gs_prod_workload` but needed for the deserialization of the config file
   failure_rate: 0.0
-  shutdown_after_idle_duration: 5s
+  shutdown_after_idle_duration: 30s
   server_count: 3
   use_gs_prod_workload: True 
   background_load_per_second: 70
