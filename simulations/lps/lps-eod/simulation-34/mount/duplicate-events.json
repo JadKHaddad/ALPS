@@ -1,67 +1,28 @@
 [
   {
     "device_id": "0",
-    "event_id": 1791544129186,
-    "arrived_at": "2026-10-09T11:08:53.124613904Z",
-    "finished_at": "2026-10-09T11:08:54.414438003Z",
+    "event_id": 1791631486145,
+    "arrived_at": "2026-10-10T11:24:50.092309776Z",
+    "finished_at": "2026-10-10T11:24:51.382786356Z",
     "original": {
       "branch": "Branch",
       "headnumber": "Headnumber",
       "incremental_id": null,
       "phone": "0",
-      "triggertime": "2026-10-09T11:08:49.186589Z"
+      "triggertime": "2026-10-10T11:24:46.145659Z"
     }
   },
   {
     "device_id": "0",
-    "event_id": 1791544129186,
-    "arrived_at": "2026-10-09T11:08:55.488913998Z",
-    "finished_at": "2026-10-09T11:09:00.145851113Z",
+    "event_id": 1791631486145,
+    "arrived_at": "2026-10-10T11:24:52.475361639Z",
+    "finished_at": "2026-10-10T11:24:57.133901956Z",
     "original": {
       "branch": "Branch",
       "headnumber": "Headnumber",
       "incremental_id": null,
       "phone": "0",
-      "triggertime": "2026-10-09T11:08:49.186589Z"
-    }
-  },
-  {
-    "device_id": "0",
-    "event_id": 1791544129186,
-    "arrived_at": "2026-10-09T11:09:01.213559306Z",
-    "finished_at": "2026-10-09T11:09:04.046429026Z",
-    "original": {
-      "branch": "Branch",
-      "headnumber": "Headnumber",
-      "incremental_id": null,
-      "phone": "0",
-      "triggertime": "2026-10-09T11:08:49.186589Z"
-    }
-  },
-  {
-    "device_id": "0",
-    "event_id": 1791544129186,
-    "arrived_at": "2026-10-09T11:09:05.138935451Z",
-    "finished_at": "2026-10-09T11:09:08.610286667Z",
-    "original": {
-      "branch": "Branch",
-      "headnumber": "Headnumber",
-      "incremental_id": null,
-      "phone": "0",
-      "triggertime": "2026-10-09T11:08:49.186589Z"
-    }
-  },
-  {
-    "device_id": "0",
-    "event_id": 1791544129186,
-    "arrived_at": "2026-10-09T11:09:09.678466554Z",
-    "finished_at": "2026-10-09T11:09:09.931889698Z",
-    "original": {
-      "branch": "Branch",
-      "headnumber": "Headnumber",
-      "incremental_id": null,
-      "phone": "0",
-      "triggertime": "2026-10-09T11:08:49.186589Z"
+      "triggertime": "2026-10-10T11:24:46.145659Z"
     }
   }
 ]

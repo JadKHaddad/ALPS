@@ -57,7 +57,7 @@ services:
     - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-iod/simulation-1/mount:/app
     restart: unless-stopped
   rabbitmq:
-    image: rabbitmq:4-management
+    image: rabbitmq:4.3.6-management
     container_name: lps-rabbitmq
     command: bash -c " rabbitmq-plugins enable --offline rabbitmq_consistent_hash_exchange && rabbitmq-server "
     networks:

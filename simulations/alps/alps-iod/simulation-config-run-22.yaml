@@ -10,6 +10,7 @@ devices:
   devices_count: 1
   max_event_interval: 100ms
   max_events: 2
+  min_event_interval: 100ms
   retry_duration: 250ms
   wait_before_start: 3s
 lps_gleam_image: jadkhaddad/lps-gleam:0.1.0

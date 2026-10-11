@@ -2,6 +2,7 @@ devices:
   devices_count: 1
   max_event_interval: 100ms
   max_events: 1
+  min_event_interval: 100ms
   retry_duration: 250ms
   wait_before_start: 3s
 lps_gleam_image: jadkhaddad/lps-gleam:0.1.0
@@ -24,7 +25,6 @@ server:
   failure_rate: 0.0
   max_response_duration: 0ms
   max_work_duration: 5s
-  min_work_duration: 0ms
   server_count: 1
   shutdown_after_idle_duration: 5s
   socket_addr: 0.0.0.0:8080

@@ -2,7 +2,7 @@ devices_count: 1
 server_push_urls:
 - http://ars-comp-1-proxy-0:8080/api/v1/simple
 max_event_interval: 100ms
-min_event_interval: null
+min_event_interval: 100ms
 max_events: 2
 retry_duration: 250ms
 results_file: /app/device-results.json
