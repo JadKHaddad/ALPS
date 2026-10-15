@@ -72,6 +72,17 @@ pub struct Task {
     /// If set and greater than `max_up_duration`, the minimum duration will be `0`.
     #[serde(default, with = "humantime_serde")]
     pub min_up_duration: Option<Duration>,
+    /// One-way latency added to every chunk of data forwarded, in each direction.
+    ///
+    /// A request/response round trip through the proxy therefore gets at least `2 * latency` extra.
+    #[serde(default, with = "humantime_serde")]
+    pub latency: Duration,
+    /// Maximum random jitter added on top of `latency`.
+    ///
+    /// Each chunk is delayed by a uniformly random value in `latency..=latency + jitter`.
+    /// Ordering is preserved: a chunk is never delivered before the chunk ahead of it.
+    #[serde(default, with = "humantime_serde")]
+    pub jitter: Duration,
 }
 
 impl Default for Task {
@@ -83,6 +94,8 @@ impl Default for Task {
             failure_rate: crate::default_failure_rate(),
             max_up_duration: default_max_up_duration(),
             min_up_duration: None,
+            latency: Duration::ZERO,
+            jitter: Duration::ZERO,
         }
     }
 }

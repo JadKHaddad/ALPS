@@ -326,6 +326,8 @@ impl Config {
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.rabbit_mq_container_name(),
                         upstream_port: self.rabbit_mq_container_port(),
+                        latency: proxy.latency,
+                        jitter: proxy.jitter,
                     }],
                     seed: self.seed,
                     results_file: PathBuf::from(self.container_work_dir())
@@ -347,6 +349,8 @@ impl Config {
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.consumers_server_proxy_container_name(),
                         upstream_port: self.server_proxy_default_socket_addr().port(),
+                        latency: proxy.latency,
+                        jitter: proxy.jitter,
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-server-proxy-{i}-results.json")),
@@ -891,6 +895,10 @@ pub struct ProxyConfig {
     pub max_up_duration: Duration,
     #[serde(default, with = "humantime_serde")]
     pub min_up_duration: Option<Duration>,
+    #[serde(default, with = "humantime_serde")]
+    pub latency: Duration,
+    #[serde(default, with = "humantime_serde")]
+    pub jitter: Duration,
 }
 
 #[derive(Debug, Serialize)]
@@ -1208,6 +1216,8 @@ impl Config {
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.hive_mq_container_name(),
                         upstream_port: self.hive_mq_container_port_u16(),
+                        latency: proxy.latency,
+                        jitter: proxy.jitter,
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-mqtt-proxy-{i}-results.json")),

@@ -10,9 +10,22 @@ use lps_rust::{TcpConnectionDrop, shutdown_signal, tcp_proxy::Config};
 use rand::{RngExt, SeedableRng, rngs::StdRng};
 
 use clap::Parser;
-use tokio::{net::TcpListener, sync::Mutex};
+use tokio::{
+    io::{AsyncReadExt, AsyncWriteExt},
+    net::{
+        TcpListener, TcpStream,
+        tcp::{OwnedReadHalf, OwnedWriteHalf},
+    },
+    sync::Mutex,
+    time::Instant,
+};
 
 const SEED_SALT: u64 = 0x9A0C_0000_0000_0000;
+const LATENCY_SEED_SALT: u64 = 0x1A7E_0000_0000_0000;
+const DOWNSTREAM_SEED_SALT: u64 = 0x0000_D0D0_0000_0000;
+
+const READ_BUF_SIZE: usize = 16 * 1024;
+const CHANNEL_CAPACITY: usize = 1024;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -55,6 +68,108 @@ impl State {
             .await
             .context("Failed to write results file")
     }
+}
+
+/// One-way latency applied to each forwarded chunk: `base..=base + jitter`, uniformly distributed.
+#[derive(Debug, Clone, Copy)]
+struct LatencyProfile {
+    base: Duration,
+    jitter: Duration,
+}
+
+impl LatencyProfile {
+    fn is_zero(&self) -> bool {
+        self.base.is_zero() && self.jitter.is_zero()
+    }
+
+    fn sample(&self, rng: &mut StdRng) -> Duration {
+        if self.jitter.is_zero() {
+            return self.base;
+        }
+
+        let jitter_us = rng.random_range(0..=self.jitter.as_micros() as u64);
+
+        self.base + Duration::from_micros(jitter_us)
+    }
+}
+
+/// Copies `reader` -> `writer`, delaying every chunk by `profile.sample()` without ever
+/// reordering. Propagates EOF (FIN) once the last chunk has been delivered.
+async fn delayed_copy(
+    mut reader: OwnedReadHalf,
+    mut writer: OwnedWriteHalf,
+    profile: LatencyProfile,
+    mut rng: StdRng,
+) -> std::io::Result<()> {
+    let (tx, mut rx) = tokio::sync::mpsc::channel::<(Instant, Vec<u8>)>(CHANNEL_CAPACITY);
+
+    let read_side = async move {
+        let mut buf = vec![0u8; READ_BUF_SIZE];
+        let mut last_deliver_at = Instant::now();
+
+        loop {
+            let n = reader.read(&mut buf).await?;
+
+            if n == 0 {
+                // EOF: dropping `tx` lets the writer drain the queue and shut down.
+                break;
+            }
+
+            // TCP never reorders, so a chunk can't overtake the one ahead of it.
+            let deliver_at = (Instant::now() + profile.sample(&mut rng)).max(last_deliver_at);
+            last_deliver_at = deliver_at;
+
+            if tx.send((deliver_at, buf[..n].to_vec())).await.is_err() {
+                // Writer side is gone.
+                break;
+            }
+        }
+
+        Ok::<_, std::io::Error>(())
+    };
+
+    let write_side = async move {
+        while let Some((deliver_at, chunk)) = rx.recv().await {
+            tokio::time::sleep_until(deliver_at).await;
+
+            writer.write_all(&chunk).await?;
+        }
+
+        writer.shutdown().await
+    };
+
+    tokio::try_join!(read_side, write_side).map(|_| ())
+}
+
+/// Proxies both directions, each with its own deterministic jitter sequence.
+async fn proxy_with_latency(
+    client: TcpStream,
+    upstream: TcpStream,
+    profile: LatencyProfile,
+    conn_seed: u64,
+) -> std::io::Result<()> {
+    if profile.is_zero() {
+        let (mut client, mut upstream) = (client, upstream);
+
+        return tokio::io::copy_bidirectional(&mut client, &mut upstream)
+            .await
+            .map(|_| ());
+    }
+
+    let (client_r, client_w) = client.into_split();
+    let (upstream_r, upstream_w) = upstream.into_split();
+
+    let upstream_rng = StdRng::seed_from_u64(conn_seed);
+    let downstream_rng = StdRng::seed_from_u64(conn_seed ^ DOWNSTREAM_SEED_SALT);
+
+    tokio::try_join!(
+        // client -> server
+        delayed_copy(client_r, upstream_w, profile, upstream_rng),
+        // server -> client
+        delayed_copy(upstream_r, client_w, profile, downstream_rng),
+    )?;
+
+    Ok(())
 }
 
 #[tokio::main]
@@ -108,6 +223,13 @@ async fn main() -> Result<(), anyhow::Error> {
 
             let mut rng = StdRng::seed_from_u64(base_seed ^ SEED_SALT ^ index as u64);
 
+            let latency = LatencyProfile {
+                base: task.latency,
+                jitter: task.jitter,
+            };
+
+            let latency_task_seed = base_seed ^ LATENCY_SEED_SALT ^ ((index as u64) << 40);
+
             tokio::spawn(async move {
                 let listener = TcpListener::bind(task.socket_addr)
                     .await
@@ -132,8 +254,10 @@ async fn main() -> Result<(), anyhow::Error> {
                 // max_ms is always >= min_ms. See check above.
                 let max_ms = task.max_up_duration.as_millis();
 
+                let mut conn_counter: u64 = 0;
+
                 loop {
-                    let (mut stream, _) = match listener.accept().await {
+                    let (stream, _) = match listener.accept().await {
                         Ok(accepted) => accepted,
                         Err(err) => {
                             tracing::error!(%err, "Failed to accept connection");
@@ -152,6 +276,11 @@ async fn main() -> Result<(), anyhow::Error> {
                         rng.random_range(min_ms..=max_ms) as u64
                     };
 
+                    // Per-connection latency seed: derived from the accept order rather than
+                    // drawn from `rng`, so the fail/duration sequence above is unaffected.
+                    let conn_seed = latency_task_seed ^ conn_counter;
+                    conn_counter += 1;
+
                     if fail {
                         tracing::warn!("Connection failed");
 
@@ -167,7 +296,7 @@ async fn main() -> Result<(), anyhow::Error> {
                     tokio::spawn(async move {
                         tracing::debug!(addr=%task.socket_addr, upstream=%upstream_addr, "Connecting to upstream");
 
-                        let mut upstream = match tokio::net::TcpStream::connect(upstream_addr).await {
+                        let upstream = match TcpStream::connect(upstream_addr).await {
                             Ok(upstream) => upstream,
                             Err(err) => {
                                 tracing::error!(addr=%task.socket_addr, upstream=%upstream_addr, %err, "Failed to connect to upstream");
@@ -176,11 +305,11 @@ async fn main() -> Result<(), anyhow::Error> {
                             }
                         };
 
-                        tracing::info!(duration_ms, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying connection");
+                        tracing::info!(duration_ms, ?latency, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying connection");
 
                         match tokio::time::timeout(
                             Duration::from_millis(duration_ms),
-                            tokio::io::copy_bidirectional(&mut stream, &mut upstream),
+                            proxy_with_latency(stream, upstream, latency, conn_seed),
                         )
                         .await
                         {
