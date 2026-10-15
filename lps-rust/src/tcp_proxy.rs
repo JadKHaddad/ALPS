@@ -60,6 +60,19 @@ pub struct Task {
     pub upstream_domain: String,
     #[serde(default = "default_upstream_port")]
     pub upstream_port: u16,
+    #[serde(default)]
+    pub connection: Connection,
+    /// A per connection config.
+    ///
+    /// Each connection reads its config values according to its index and applies it.
+    ///
+    /// If the index is not found the connection uses the [`latency`](Self::connection) values.
+    #[serde(default)]
+    pub connections: Vec<Connection>,
+}
+
+#[derive(Debug, Clone, Copy, Deserialize, Serialize)]
+pub struct Connection {
     /// Failure rate of accepting tcp connections, between 0 and 1
     #[serde(
         default = "crate::default_failure_rate",
@@ -76,27 +89,52 @@ pub struct Task {
     /// If set and greater than `max_up_duration`, the minimum duration will be `0`.
     #[serde(default, with = "humantime_serde")]
     pub min_up_duration: Option<Duration>,
-    /// Maximum latency per chunk for client -> server traffic.
+    #[serde(default)]
+    pub latency: Latency,
+}
+
+impl Default for Connection {
+    fn default() -> Self {
+        Self {
+            failure_rate: crate::default_failure_rate(),
+            max_up_duration: default_max_up_duration(),
+            min_up_duration: None,
+            latency: Latency::default(),
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, Deserialize, Serialize)]
+pub struct Latency {
+    /// Maximum latency per byte for client -> server traffic.
     #[serde(default, with = "humantime_serde")]
     pub max_upstream_latency: Duration,
-    /// Minimum latency per chunk for client -> server traffic. Each chunk waits a random value
-    /// between `min_upstream_latency` and `max_upstream_latency`.
+    /// Minimum latency per byte for client -> server traffic. Each read waits
+    /// `bytes * random(min_upstream_latency..=max_upstream_latency)`.
     ///
     /// If not set, or greater than `max_upstream_latency`, the minimum is `0`.
     #[serde(default, with = "humantime_serde")]
     pub min_upstream_latency: Option<Duration>,
-    /// Maximum latency per chunk for server -> client traffic.
+    /// Maximum latency per byte for server -> client traffic.
     #[serde(default, with = "humantime_serde")]
     pub max_downstream_latency: Duration,
-    /// Minimum latency per chunk for server -> client traffic. Each chunk waits a random value
-    /// between `min_downstream_latency` and `max_downstream_latency`.
+    /// Minimum latency per byte for server -> client traffic. Each read waits
+    /// `bytes * random(min_downstream_latency..=max_downstream_latency)`.
     ///
     /// If not set, or greater than `max_downstream_latency`, the minimum is `0`.
     #[serde(default, with = "humantime_serde")]
     pub min_downstream_latency: Option<Duration>,
-    /// Read buffer size in bytes; every read of up to this many bytes is delayed by `latency`.
-    #[serde(default = "default_chunk_size")]
-    pub chunk_size: std::num::NonZeroUsize,
+}
+
+impl Default for Latency {
+    fn default() -> Self {
+        Self {
+            max_upstream_latency: Duration::ZERO,
+            min_upstream_latency: None,
+            max_downstream_latency: Duration::ZERO,
+            min_downstream_latency: None,
+        }
+    }
 }
 
 impl Default for Task {
@@ -105,14 +143,8 @@ impl Default for Task {
             socket_addr: default_socket_addr(),
             upstream_domain: default_upstream_domain(),
             upstream_port: default_upstream_port(),
-            failure_rate: crate::default_failure_rate(),
-            max_up_duration: default_max_up_duration(),
-            min_up_duration: None,
-            max_upstream_latency: Duration::ZERO,
-            min_upstream_latency: None,
-            max_downstream_latency: Duration::ZERO,
-            min_downstream_latency: None,
-            chunk_size: default_chunk_size(),
+            connection: Connection::default(),
+            connections: Vec::new(),
         }
     }
 }

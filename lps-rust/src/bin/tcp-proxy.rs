@@ -3,10 +3,13 @@
 //! cargo run -r --bin tcp-proxy -- --config-file tcp-proxy-config.yaml
 //! ```
 
-use std::{net::SocketAddr, num::NonZeroUsize, path::PathBuf, sync::Arc, time::Duration};
+use std::{net::SocketAddr, path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
-use lps_rust::{TcpConnectionDrop, shutdown_signal, tcp_proxy::Config};
+use lps_rust::{
+    TcpConnectionDrop, shutdown_signal,
+    tcp_proxy::{Config, Connection, Latency},
+};
 use rand::{RngExt, SeedableRng, rngs::StdRng};
 
 use clap::Parser;
@@ -22,6 +25,9 @@ use tokio::{
 const SEED_SALT: u64 = 0x9A0C_0000_0000_0000;
 const LATENCY_SEED_SALT: u64 = 0x1A7E_0000_0000_0000;
 const DOWNSTREAM_SEED_SALT: u64 = 0x0000_D0D0_0000_0000;
+
+/// Maximum number of bytes forwarded per socket read.
+const READ_BUF_SIZE: usize = 64 * 1024;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -66,99 +72,180 @@ impl State {
     }
 }
 
-/// Latency applied to every chunk of up to `chunk_size` bytes in one direction.
+/// Resolves an optional minimum against a maximum, following the `min_up_duration` rules:
+/// a missing `min` means `0`, and a `min` greater than `max` is ignored with a warning.
 ///
-/// Each chunk waits a uniformly random duration in `min..=max` before it is sent on.
+/// `source` names the config entry (e.g. `connection` or `connections[2]`) for the warning.
+fn resolve_min(source: &str, name: &str, min: Option<Duration>, max: Duration) -> Duration {
+    match min {
+        Some(min) if min > max => {
+            tracing::warn!(
+                source,
+                "{source}: min_{name} is greater than max_{name}, setting min_{name} to None"
+            );
+
+            Duration::ZERO
+        }
+        Some(min) => min,
+        None => Duration::ZERO,
+    }
+}
+
+/// Per-byte latency in one direction.
+///
+/// For each read, a per-byte latency is drawn uniformly from `min..=max` and multiplied by
+/// the number of bytes read; the data is forwarded after sleeping that long.
 #[derive(Debug, Clone, Copy)]
-struct ChunkLatency {
+struct ByteLatency {
     min: Duration,
     max: Duration,
-    chunk_size: NonZeroUsize,
 }
 
-impl ChunkLatency {
-    /// Same rules as `min_up_duration`: a missing `min` means `0`, and a `min` greater
-    /// than `max` is ignored with a warning.
-    fn new(
-        direction: &str,
-        min: Option<Duration>,
-        max: Duration,
-        chunk_size: NonZeroUsize,
-    ) -> Self {
-        let min = match min {
-            Some(min) if min > max => {
-                tracing::warn!(
-                    direction,
-                    "min_{direction}_latency is greater than max_{direction}_latency, setting min_{direction}_latency to None"
-                );
+impl ByteLatency {
+    fn is_zero(&self) -> bool {
+        self.max.is_zero()
+    }
 
-                Duration::ZERO
-            }
-            Some(min) => min,
-            None => Duration::ZERO,
+    /// Delay for `bytes` bytes.
+    fn sample(&self, rng: &mut StdRng, bytes: usize) -> Duration {
+        let per_byte = if self.min == self.max {
+            self.max
+        } else {
+            let ns = rng.random_range(self.min.as_nanos() as u64..=self.max.as_nanos() as u64);
+
+            Duration::from_nanos(ns)
         };
 
-        Self {
-            min,
-            max,
-            chunk_size,
-        }
+        per_byte.saturating_mul(bytes as u32)
     }
-
-    fn sample(&self, rng: &mut StdRng) -> Duration {
-        if self.min == self.max {
-            return self.max;
-        }
-
-        let us = rng.random_range(self.min.as_micros() as u64..=self.max.as_micros() as u64);
-
-        Duration::from_micros(us)
-    }
-}
-
-/// Copies `reader` -> `writer` one chunk at a time:
-/// read up to `chunk_size` bytes, wait the chunk latency, write, repeat.
-///
-/// On EOF the write side is shut down, so the FIN reaches the peer after the last chunk.
-async fn chunked_copy(
-    mut reader: OwnedReadHalf,
-    mut writer: OwnedWriteHalf,
-    profile: ChunkLatency,
-    mut rng: StdRng,
-) -> std::io::Result<()> {
-    let mut buf = vec![0u8; profile.chunk_size.get()];
-
-    loop {
-        let n = reader.read(&mut buf).await?;
-
-        if n == 0 {
-            break;
-        }
-
-        let delay = profile.sample(&mut rng);
-
-        tracing::info!(delay = ?delay, bytes = n, "Chunk copied");
-
-        if !delay.is_zero() {
-            tokio::time::sleep(delay).await;
-        }
-
-        writer.write_all(&buf[..n]).await?;
-    }
-
-    writer.shutdown().await
 }
 
 /// Latency settings for both directions of a proxied connection.
 #[derive(Debug, Clone, Copy)]
 struct ProxyLatency {
     /// client -> server
-    upstream: ChunkLatency,
+    upstream: ByteLatency,
     /// server -> client
-    downstream: ChunkLatency,
+    downstream: ByteLatency,
 }
 
-/// Proxies both directions, each with its own latency and deterministic jitter sequence.
+impl ProxyLatency {
+    fn new(source: &str, latency: &Latency) -> Self {
+        Self {
+            upstream: ByteLatency {
+                min: resolve_min(
+                    source,
+                    "upstream_latency",
+                    latency.min_upstream_latency,
+                    latency.max_upstream_latency,
+                ),
+                max: latency.max_upstream_latency,
+            },
+            downstream: ByteLatency {
+                min: resolve_min(
+                    source,
+                    "downstream_latency",
+                    latency.min_downstream_latency,
+                    latency.max_downstream_latency,
+                ),
+                max: latency.max_downstream_latency,
+            },
+        }
+    }
+}
+
+/// A validated [`Connection`] config, ready to use for an accepted connection.
+#[derive(Debug, Clone, Copy)]
+struct ConnectionProfile {
+    failure_rate: f64,
+    min_up_ms: u128,
+    max_up_ms: u128,
+    latency: ProxyLatency,
+}
+
+impl ConnectionProfile {
+    fn new(source: &str, connection: &Connection) -> Self {
+        let min_up = resolve_min(
+            source,
+            "up_duration",
+            connection.min_up_duration,
+            connection.max_up_duration,
+        );
+
+        Self {
+            failure_rate: connection.failure_rate,
+            min_up_ms: min_up.as_millis(),
+            max_up_ms: connection.max_up_duration.as_millis(),
+            latency: ProxyLatency::new(source, &connection.latency),
+        }
+    }
+}
+
+/// Copies `reader` -> `writer`, delaying every read by `per-byte latency * bytes read`.
+///
+/// On EOF the write side is shut down, so the FIN reaches the peer after the last byte.
+async fn delayed_copy(
+    direction: &'static str,
+    mut reader: OwnedReadHalf,
+    mut writer: OwnedWriteHalf,
+    latency: ByteLatency,
+    mut rng: StdRng,
+) -> std::io::Result<()> {
+    let mut buf = vec![0u8; READ_BUF_SIZE];
+
+    let mut total_bytes: u64 = 0;
+    let mut total_delay = Duration::ZERO;
+
+    loop {
+        let n = match reader.read(&mut buf).await {
+            Ok(n) => {
+                tracing::debug!(
+                    direction,
+                    bytes = n,
+                    ?total_delay,
+                    total_bytes,
+                    "Read bytes"
+                );
+
+                n
+            }
+            Err(err) => {
+                tracing::error!(direction, %err, total_bytes, ?total_delay, "Read error");
+
+                return Err(err);
+            }
+        };
+
+        if n == 0 {
+            tracing::info!(direction, total_bytes, ?total_delay, "Copy finished (EOF)");
+
+            break;
+        }
+
+        if !latency.is_zero() {
+            let delay = latency.sample(&mut rng, n);
+
+            tracing::debug!(direction, ?delay, bytes = n, "Delaying bytes");
+
+            tokio::time::sleep(delay).await;
+
+            total_delay += delay;
+        }
+
+        tracing::debug!(direction, bytes = n, "Writing bytes");
+
+        writer.write_all(&buf[..n]).await?;
+        writer.flush().await?;
+
+        tracing::debug!(direction, bytes = n, "Wrote bytes");
+
+        total_bytes += n as u64;
+    }
+
+    writer.shutdown().await
+}
+
+/// Proxies both directions, each with its own latency and deterministic RNG.
 async fn proxy(
     client: TcpStream,
     upstream: TcpStream,
@@ -172,10 +259,20 @@ async fn proxy(
     let downstream_rng = StdRng::seed_from_u64(conn_seed ^ DOWNSTREAM_SEED_SALT);
 
     tokio::try_join!(
-        // client -> server
-        chunked_copy(client_r, upstream_w, latency.upstream, upstream_rng),
-        // server -> client
-        chunked_copy(upstream_r, client_w, latency.downstream, downstream_rng),
+        delayed_copy(
+            "upstream",
+            client_r,
+            upstream_w,
+            latency.upstream,
+            upstream_rng
+        ),
+        delayed_copy(
+            "downstream",
+            upstream_r,
+            client_w,
+            latency.downstream,
+            downstream_rng
+        ),
     )?;
 
     Ok(())
@@ -210,44 +307,30 @@ async fn main() -> Result<(), anyhow::Error> {
     let tasks: Vec<_> = config
         .tasks
         .into_iter()
-        .map(|mut task| {
-            if task
-                .min_up_duration
-                .map(|d| d.as_millis())
-                .unwrap_or(0)
-                > task.max_up_duration.as_millis()
-            {
-                tracing::warn!(
-                    "min_up_duration is greater than max_up_duration, setting min_up_duration to None"
-                );
-
-                task.min_up_duration = None;
-            };
-
-            task
-        })
         .enumerate()
         .map(|(index, task)| {
             let state = state.clone();
 
             let mut rng = StdRng::seed_from_u64(base_seed ^ SEED_SALT ^ index as u64);
 
-            let profile = ProxyLatency {
-                upstream: ChunkLatency::new(
-                    "upstream",
-                    task.min_upstream_latency,
-                    task.max_upstream_latency,
-                    task.chunk_size,
-                ),
-                downstream: ChunkLatency::new(
-                    "downstream",
-                    task.min_downstream_latency,
-                    task.max_downstream_latency,
-                    task.chunk_size,
-                ),
-            };
-
             let latency_task_seed = base_seed ^ LATENCY_SEED_SALT ^ ((index as u64) << 40);
+
+            // Fallback for connections without an entry in `connections`.
+            let default_profile =
+                ConnectionProfile::new(&format!("tasks[{index}].connection"), &task.connection);
+
+            // Connection `i` (in accept order) uses `connections[i]`.
+            let profiles: Vec<ConnectionProfile> = task
+                .connections
+                .iter()
+                .enumerate()
+                .map(|(i, connection)| {
+                    ConnectionProfile::new(
+                        &format!("tasks[{index}].connections[{i}]"),
+                        connection,
+                    )
+                })
+                .collect();
 
             tokio::spawn(async move {
                 let listener = TcpListener::bind(task.socket_addr)
@@ -268,12 +351,9 @@ async fn main() -> Result<(), anyhow::Error> {
 
                 let upstream_addr = SocketAddr::new(ip_addr, task.upstream_port);
 
-                let min_ms = task.min_up_duration.map(|d| d.as_millis()).unwrap_or(0);
-
-                // max_ms is always >= min_ms. See check above.
-                let max_ms = task.max_up_duration.as_millis();
-
-                let mut conn_counter: u64 = 0;
+                // Index of the accepted connection, counting failed ones too, so the
+                // mapping to `connections` depends only on accept order.
+                let mut conn_counter: usize = 0;
 
                 loop {
                     let (stream, _) = match listener.accept().await {
@@ -285,30 +365,37 @@ async fn main() -> Result<(), anyhow::Error> {
                         }
                     };
 
+                    let conn_index = conn_counter;
+                    conn_counter += 1;
+
+                    let profile = profiles
+                        .get(conn_index)
+                        .copied()
+                        .unwrap_or(default_profile);
+
                     // Always exactly two draws per accepted connection, in accept order,
                     // so the sequence depends only on the seed.
-                    let fail = rng.random_bool(task.failure_rate);
+                    let fail = rng.random_bool(profile.failure_rate);
 
-                    let duration_ms = if max_ms == 0 {
+                    let duration_ms = if profile.max_up_ms == 0 {
                         0
                     } else {
-                        rng.random_range(min_ms..=max_ms) as u64
+                        rng.random_range(profile.min_up_ms..=profile.max_up_ms) as u64
                     };
 
                     // Per-connection latency seed: derived from the accept order rather than
                     // drawn from `rng`, so the fail/duration sequence above is unaffected.
-                    let conn_seed = latency_task_seed ^ conn_counter;
-                    conn_counter += 1;
+                    let conn_seed = latency_task_seed ^ conn_index as u64;
 
                     if fail {
-                        tracing::warn!("Connection failed");
+                        tracing::warn!(conn_index, "Connection failed");
 
                         state.push(TcpConnectionDrop::new_now()).await;
 
                         continue;
                     }
 
-                    tracing::info!(addr=%task.socket_addr, "Connection accepted");
+                    tracing::info!(conn_index, addr=%task.socket_addr, "Connection accepted");
 
                     let state = state.clone();
 
@@ -324,21 +411,21 @@ async fn main() -> Result<(), anyhow::Error> {
                             }
                         };
 
-                        tracing::info!(duration_ms, ?profile, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying connection");
+                        tracing::info!(conn_index, duration_ms, latency=?profile.latency, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying connection");
 
                         match tokio::time::timeout(
                             Duration::from_millis(duration_ms),
-                            proxy(stream, upstream, profile, conn_seed),
+                            proxy(stream, upstream, profile.latency, conn_seed),
                         )
                         .await
                         {
                             Ok(_) => {
-                                tracing::info!(addr=%task.socket_addr, upstream=%upstream_addr, "Proxying completed");
+                                tracing::info!(conn_index, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying completed");
                             }
                             Err(_) => {
                                 state.push(TcpConnectionDrop::new_now()).await;
 
-                                tracing::warn!(addr=%task.socket_addr, upstream=%upstream_addr, "Proxying timed out");
+                                tracing::warn!(conn_index, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying timed out");
                             }
                         }
                     });

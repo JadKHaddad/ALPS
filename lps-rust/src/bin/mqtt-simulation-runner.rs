@@ -199,11 +199,21 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!("Starting simulation...");
 
-    tokio::spawn(async move {
-        while let Ok(Some(line)) = reader.next_line().await {
-            println!("{line}");
-        }
-    });
+    // Containers started by `up -d` print their first lines before an already running
+    // `logs -f` attaches to them, so those lines would be lost. Instead, remember the
+    // current time, stop the first log stream, start everything, and then follow the logs
+    // again with `--since`, which replays every line from that moment on.
+    let since = {
+        let now = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .context("System time is before the Unix epoch")?;
+
+        format!("{}.{:09}", now.as_secs(), now.subsec_nanos())
+    };
+
+    drop(reader);
+    let _ = docker_compose_logs.kill().await;
+    let _ = docker_compose_logs.wait().await;
 
     select(&token, async {
         tokio::process::Command::new("docker")
@@ -220,6 +230,32 @@ async fn main() -> Result<(), anyhow::Error> {
             .context("Failed to run docker compose up")
     })
     .await?;
+
+    let mut docker_compose_logs = tokio::process::Command::new("docker")
+        .arg("compose")
+        .arg("--project-directory")
+        .arg(&simulation_dir)
+        .arg("logs")
+        .arg("-f")
+        .arg("--since")
+        .arg(&since)
+        .stdout(Stdio::piped())
+        .stderr(Stdio::inherit())
+        .spawn()
+        .context("Failed to run docker compose logs")?;
+
+    let logs = docker_compose_logs
+        .stdout
+        .take()
+        .context("Failed to take docker compose logs stdout")?;
+
+    let mut reader = tokio::io::BufReader::new(logs).lines();
+
+    tokio::spawn(async move {
+        while let Ok(Some(line)) = reader.next_line().await {
+            println!("{line}");
+        }
+    });
 
     tracing::info!("Monitoring server status...");
 

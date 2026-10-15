@@ -32,7 +32,7 @@ server:
   max_response_duration: 0s
   max_work_duration: 0s
   server_count: 1
-  shutdown_after_idle_duration: 15s
+  shutdown_after_idle_duration: 30s
   socket_addr: 0.0.0.0:8080
 simulation_dir: simulations/lps/lps-iod/simulation-1
 simulation_docker_network: lps-simulation-net

@@ -7,6 +7,7 @@ use anyhow::Context;
 use serde::{Deserialize, Serialize};
 
 use crate::simulation::docker::{DockerCompose, DockerNetwork, DockerService};
+use crate::tcp_proxy::Connection;
 use crate::{
     consumer::Config as CrateConsumerConfig,
     device::Config as CrateDeviceConfig,
@@ -320,17 +321,11 @@ impl Config {
             if let Some(proxy) = self.amqp.consumers.amqp_proxy.as_ref() {
                 let consumer_amqp_proxy_config = CrateTcpProxyConfig {
                     tasks: vec![CrateTcpProxyTask {
-                        failure_rate: proxy.failure_rate,
-                        max_up_duration: proxy.max_up_duration,
-                        min_up_duration: proxy.min_up_duration,
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.rabbit_mq_container_name(),
                         upstream_port: self.rabbit_mq_container_port(),
-                        max_upstream_latency: proxy.max_upstream_latency,
-                        min_upstream_latency: proxy.min_upstream_latency,
-                        max_downstream_latency: proxy.max_downstream_latency,
-                        min_downstream_latency: proxy.min_downstream_latency,
-                        chunk_size: proxy.chunk_size,
+                        connection: proxy.connection,
+                        connections: proxy.connections.clone(),
                     }],
                     seed: self.seed,
                     results_file: PathBuf::from(self.container_work_dir())
@@ -346,17 +341,11 @@ impl Config {
             if let Some(proxy) = self.amqp.consumers.server_proxy.as_ref() {
                 let consumer_server_proxy_config = CrateTcpProxyConfig {
                     tasks: vec![CrateTcpProxyTask {
-                        failure_rate: proxy.failure_rate,
-                        max_up_duration: proxy.max_up_duration,
-                        min_up_duration: proxy.min_up_duration,
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.consumers_server_proxy_container_name(),
                         upstream_port: self.server_proxy_default_socket_addr().port(),
-                        max_upstream_latency: proxy.max_upstream_latency,
-                        min_upstream_latency: proxy.min_upstream_latency,
-                        max_downstream_latency: proxy.max_downstream_latency,
-                        min_downstream_latency: proxy.min_downstream_latency,
-                        chunk_size: proxy.chunk_size,
+                        connection: proxy.connection,
+                        connections: proxy.connections.clone(),
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-server-proxy-{i}-results.json")),
@@ -895,22 +884,10 @@ pub struct AmqpConsumersConfig {
 #[derive(Debug, Deserialize)]
 pub struct ProxyConfig {
     pub socket_addr: SocketAddr,
-    #[serde(deserialize_with = "crate::deserialize_failure_rate")]
-    pub failure_rate: f64,
-    #[serde(with = "humantime_serde")]
-    pub max_up_duration: Duration,
-    #[serde(default, with = "humantime_serde")]
-    pub min_up_duration: Option<Duration>,
-    #[serde(default, with = "humantime_serde")]
-    pub max_upstream_latency: Duration,
-    #[serde(default, with = "humantime_serde")]
-    pub min_upstream_latency: Option<Duration>,
-    #[serde(default, with = "humantime_serde")]
-    pub max_downstream_latency: Duration,
-    #[serde(default, with = "humantime_serde")]
-    pub min_downstream_latency: Option<Duration>,
-    #[serde(default = "crate::tcp_proxy::default_chunk_size")]
-    pub chunk_size: std::num::NonZeroUsize,
+    #[serde(default)]
+    pub connection: Connection,
+    #[serde(default)]
+    pub connections: Vec<Connection>,
 }
 
 #[derive(Debug, Serialize)]
@@ -1257,17 +1234,11 @@ impl Config {
             if let Some(proxy) = self.mqtt.consumers.mqtt_proxy.as_ref() {
                 let consumer_mqtt_proxy_config = CrateTcpProxyConfig {
                     tasks: vec![CrateTcpProxyTask {
-                        failure_rate: proxy.failure_rate,
-                        max_up_duration: proxy.max_up_duration,
-                        min_up_duration: proxy.min_up_duration,
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.hive_mq_container_name(),
                         upstream_port: self.hive_mq_container_port_u16(),
-                        max_upstream_latency: proxy.max_upstream_latency,
-                        min_upstream_latency: proxy.min_upstream_latency,
-                        max_downstream_latency: proxy.max_downstream_latency,
-                        min_downstream_latency: proxy.min_downstream_latency,
-                        chunk_size: proxy.chunk_size,
+                        connection: proxy.connection,
+                        connections: proxy.connections.clone(),
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-mqtt-proxy-{i}-results.json")),
@@ -1284,17 +1255,11 @@ impl Config {
             if let Some(proxy) = self.mqtt.consumers.server_proxy.as_ref() {
                 let consumer_server_proxy_config = CrateTcpProxyConfig {
                     tasks: vec![CrateTcpProxyTask {
-                        failure_rate: proxy.failure_rate,
-                        max_up_duration: proxy.max_up_duration,
-                        min_up_duration: proxy.min_up_duration,
                         socket_addr: proxy.socket_addr,
                         upstream_domain: self.ars_comp_2_proxy_container_name(i),
                         upstream_port: self.default_http_port_u16(),
-                        max_upstream_latency: proxy.max_upstream_latency,
-                        min_upstream_latency: proxy.min_upstream_latency,
-                        max_downstream_latency: proxy.max_downstream_latency,
-                        min_downstream_latency: proxy.min_downstream_latency,
-                        chunk_size: proxy.chunk_size,
+                        connection: proxy.connection,
+                        connections: proxy.connections.clone(),
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-server-proxy-{i}-results.json")),

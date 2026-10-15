@@ -22,7 +22,7 @@ server:
   failure_rate: 0.0
   max_work_duration: 0s
   max_response_duration: 0s
-  shutdown_after_idle_duration: 15s
+  shutdown_after_idle_duration: 30s
   server_count: 1
 
 mqtt:

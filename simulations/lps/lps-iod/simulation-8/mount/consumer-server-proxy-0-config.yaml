@@ -1,0 +1,14 @@
+tasks:
+- socket_addr: 0.0.0.0:9081
+  upstream_domain: lps-ars-comp-2-proxy-0
+  upstream_port: 8080
+  failure_rate: 0.0
+  max_up_duration: 1day
+  min_up_duration: null
+  max_upstream_latency: 5s
+  min_upstream_latency: 0s
+  max_downstream_latency: 0s
+  min_downstream_latency: 0s
+  chunk_size: 1024
+results_file: /app/consumer-server-proxy-0-results.json
+seed: 1

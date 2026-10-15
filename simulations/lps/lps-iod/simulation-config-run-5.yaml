@@ -1,0 +1,38 @@
+devices:
+  devices_count: 1
+  max_event_interval: 100ms
+  max_events: 2
+  min_event_interval: 100ms
+  retry_duration: 250ms
+  wait_before_start: 3s
+lps_gleam_image: jadkhaddad/lps-gleam:0.1.0
+lps_mqtt_hivemq_image: jadkhaddad/lps-mqtt-hivemq:0.1.0
+lps_mqtt_python_image: jadkhaddad/lps-mqtt-python:0.1.0
+lps_rust_image: jadkhaddad/lps-rs:0.1.0
+lps_scripts_image: jadkhaddad/lps-scripts:0.1.0
+mqtt:
+  consumers:
+    consumers_count: 2
+    server_proxy:
+      chunk_size: 1024
+      failure_rate: 0.0
+      max_downstream_latency: 0s
+      max_up_duration: 1d
+      max_upstream_latency: 5s
+      min_downstream_latency: 0s
+      min_upstream_latency: 0s
+      socket_addr: 0.0.0.0:9081
+  producers:
+    producers_count: 1
+  use_mosquitto: true
+seed: 1
+server:
+  expose_socket_addr: 0.0.0.0:8080
+  failure_rate: 0.0
+  max_response_duration: 0s
+  max_work_duration: 0s
+  server_count: 1
+  shutdown_after_idle_duration: 30s
+  socket_addr: 0.0.0.0:8080
+simulation_dir: simulations/lps/lps-iod/simulation-5
+simulation_docker_network: lps-simulation-net
