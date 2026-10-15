@@ -23,7 +23,7 @@ services:
     environment:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-2-proxy-0
-      TARGET_URL: http://lps-consumer-server-proxy-0:9081/work
+      TARGET_URL: http://lps-consumers-server-proxy:8080/work
     networks:
     - lps-net
     volumes:
@@ -105,7 +105,7 @@ services:
       MQTT_HOST: lps-consumer-mqtt-proxy-0
       MQTT_PORT: '9090'
       SERVICE_NAME: legacy-proxy-2-0
-      TARGET_URL: http://lps-ars-comp-2-proxy-0:8080/ID_REQ_KC_STORE7D3BPACKET
+      TARGET_URL: http://lps-consumer-server-proxy-0:9081/ID_REQ_KC_STORE7D3BPACKET
     networks:
     - lps-net
     volumes:

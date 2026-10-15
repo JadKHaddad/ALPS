@@ -967,7 +967,9 @@ pub struct MqttProducersConfig {
 #[derive(Debug, Deserialize, Default)]
 pub struct MqttConsumersConfig {
     pub consumers_count: u32,
+    /// TCP proxy between the broker and legacy-proxy-2-{i}
     pub mqtt_proxy: Option<ProxyConfig>,
+    /// TCP proxy between legacy-proxy-2-{i} and ars-comp-2-proxy-{i}
     pub server_proxy: Option<ProxyConfig>,
 }
 
@@ -1100,19 +1102,36 @@ impl Config {
             .with_depends_on_completed(self.mosquitto_init_container_name_key())
     }
 
-    /// ars-comp-2-proxy-{i} -> (consumer-server-proxy-{i} if configured) -> consumers-server-proxy
-    fn mqtt_consumer_server_push_url(&self, i: u32) -> String {
-        self.mqtt
+    fn ars_comp_2_proxy_container_name(&self, i: u32) -> String {
+        format!("lps-ars-comp-2-proxy-{i}")
+    }
+
+    fn mqtt_consumer_server_proxy_container_name(&self, i: u32) -> String {
+        format!("lps-consumer-server-proxy-{i}")
+    }
+
+    /// The URL legacy-proxy-2-{i} (the mqtt consumer) pushes to:
+    /// legacy-proxy-2-{i} -> (consumer-server-proxy-{i} if configured) -> ars-comp-2-proxy-{i}
+    fn mqtt_consumer_target_url(&self, i: u32) -> String {
+        let (domain, port) = self
+            .mqtt
             .consumers
             .server_proxy
             .as_ref()
             .map(|proxy| {
-                format!(
-                    "http://lps-consumer-server-proxy-{i}:{}/work",
-                    proxy.socket_addr.port()
+                (
+                    self.mqtt_consumer_server_proxy_container_name(i),
+                    proxy.socket_addr.port(),
                 )
             })
-            .unwrap_or_else(|| self.consumers_server_push_url())
+            .unwrap_or_else(|| {
+                (
+                    self.ars_comp_2_proxy_container_name(i),
+                    self.default_http_port_u16(),
+                )
+            });
+
+        format!("http://{domain}:{port}/ID_REQ_KC_STORE7D3BPACKET")
     }
 
     fn mqtt_devices_config_files(&self) -> Vec<ConfigFile> {
@@ -1209,7 +1228,7 @@ impl Config {
                 format!("ars-comp-2-proxy-{i}"),
                 DockerService::default()
                     .with_image(self.lps_mqtt_python_image_name())
-                    .with_container_name(format!("lps-ars-comp-2-proxy-{i}"))
+                    .with_container_name(self.ars_comp_2_proxy_container_name(i))
                     .with_command(String::from("python3 /scripts/ars_comp_2_proxy.py"))
                     .with_environment(
                         [
@@ -1218,10 +1237,7 @@ impl Config {
                                 format!("ars-comp-2-proxy-{i}"),
                             ),
                             (String::from("HTTP_PORT"), self.default_http_port()),
-                            (
-                                String::from("TARGET_URL"),
-                                self.mqtt_consumer_server_push_url(i),
-                            ),
+                            (String::from("TARGET_URL"), self.consumers_server_push_url()),
                         ]
                         .into(),
                     )
@@ -1264,6 +1280,7 @@ impl Config {
                 });
             }
 
+            // legacy-proxy-2-{i} -> consumer-server-proxy-{i} -> ars-comp-2-proxy-{i}
             if let Some(proxy) = self.mqtt.consumers.server_proxy.as_ref() {
                 let consumer_server_proxy_config = CrateTcpProxyConfig {
                     tasks: vec![CrateTcpProxyTask {
@@ -1271,8 +1288,8 @@ impl Config {
                         max_up_duration: proxy.max_up_duration,
                         min_up_duration: proxy.min_up_duration,
                         socket_addr: proxy.socket_addr,
-                        upstream_domain: self.consumers_server_proxy_container_name(),
-                        upstream_port: self.server_proxy_default_socket_addr().port(),
+                        upstream_domain: self.ars_comp_2_proxy_container_name(i),
+                        upstream_port: self.default_http_port_u16(),
                         max_upstream_latency: proxy.max_upstream_latency,
                         min_upstream_latency: proxy.min_upstream_latency,
                         max_downstream_latency: proxy.max_downstream_latency,
@@ -1326,7 +1343,7 @@ impl Config {
                     format!("consumer-server-proxy-{i}"),
                     DockerService::default()
                         .with_image(self.lps_rust_image_name())
-                        .with_container_name(format!("lps-consumer-server-proxy-{i}"))
+                        .with_container_name(self.mqtt_consumer_server_proxy_container_name(i))
                         .with_command(format!("tcp-proxy --config-file {config_file}"))
                         .with_volumes(vec![self.container_work_dir_volume_mount()])
                         .with_networks(vec![self.service_network_name()])
@@ -1359,13 +1376,7 @@ impl Config {
                     .with_environment(
                         [
                             (String::from("SERVICE_NAME"), format!("legacy-proxy-2-{i}")),
-                            (
-                                String::from("TARGET_URL"),
-                                format!(
-                                    "http://lps-ars-comp-2-proxy-{i}:{}/ID_REQ_KC_STORE7D3BPACKET",
-                                    self.default_http_port()
-                                ),
-                            ),
+                            (String::from("TARGET_URL"), self.mqtt_consumer_target_url(i)),
                             (String::from("MQTT_HOST"), broker_domain),
                             (String::from("MQTT_PORT"), broker_port.to_string()),
                         ]
