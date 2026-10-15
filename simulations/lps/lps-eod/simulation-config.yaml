@@ -20,7 +20,7 @@ server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
-  max_work_duration: 5s
+  max_work_duration: 0s
   max_response_duration: 0ms
   shutdown_after_idle_duration: 5s
   server_count: 1
@@ -30,6 +30,12 @@ mqtt:
     producers_count: 1
   consumers:
     consumers_count: 1
+    server_proxy:
+      socket_addr: 0.0.0.0:9081
+      failure_rate: 0.0
+      max_up_duration: 4s
+      latency: 0ms
+      jitter: 2500ms
     mqtt_proxy:
       socket_addr: 0.0.0.0:9090
       failure_rate: 0.0

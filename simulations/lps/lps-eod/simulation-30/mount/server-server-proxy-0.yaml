@@ -1,4 +1,0 @@
-socket_addr: 0.0.0.0:8080
-server_push_urls:
-- http://lps-server:8080/work
-seed: 3

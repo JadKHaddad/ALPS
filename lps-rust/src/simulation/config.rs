@@ -956,6 +956,7 @@ pub struct MqttProducersConfig {
 pub struct MqttConsumersConfig {
     pub consumers_count: u32,
     pub mqtt_proxy: Option<ProxyConfig>,
+    pub server_proxy: Option<ProxyConfig>,
 }
 
 fn default_socket_addr() -> SocketAddr {
@@ -1087,6 +1088,21 @@ impl Config {
             .with_depends_on_completed(self.mosquitto_init_container_name_key())
     }
 
+    /// ars-comp-2-proxy-{i} -> (consumer-server-proxy-{i} if configured) -> consumers-server-proxy
+    fn mqtt_consumer_server_push_url(&self, i: u32) -> String {
+        self.mqtt
+            .consumers
+            .server_proxy
+            .as_ref()
+            .map(|proxy| {
+                format!(
+                    "http://lps-consumer-server-proxy-{i}:{}/work",
+                    proxy.socket_addr.port()
+                )
+            })
+            .unwrap_or_else(|| self.consumers_server_push_url())
+    }
+
     fn mqtt_devices_config_files(&self) -> Vec<ConfigFile> {
         vec![ConfigFile {
             name: self.device_config_file(),
@@ -1190,7 +1206,10 @@ impl Config {
                                 format!("ars-comp-2-proxy-{i}"),
                             ),
                             (String::from("HTTP_PORT"), self.default_http_port()),
-                            (String::from("TARGET_URL"), self.consumers_server_push_url()),
+                            (
+                                String::from("TARGET_URL"),
+                                self.mqtt_consumer_server_push_url(i),
+                            ),
                         ]
                         .into(),
                     )
@@ -1206,8 +1225,8 @@ impl Config {
     fn mqtt_consumers_config_files(&self) -> Vec<ConfigFile> {
         let mut config_files = Vec::new();
 
-        if let Some(proxy) = self.mqtt.consumers.mqtt_proxy.as_ref() {
-            for i in 0..self.mqtt.consumers_count() {
+        for i in 0..self.mqtt.consumers_count() {
+            if let Some(proxy) = self.mqtt.consumers.mqtt_proxy.as_ref() {
                 let consumer_mqtt_proxy_config = CrateTcpProxyConfig {
                     tasks: vec![CrateTcpProxyTask {
                         failure_rate: proxy.failure_rate,
@@ -1227,6 +1246,29 @@ impl Config {
                 config_files.push(ConfigFile {
                     name: format!("consumer-mqtt-proxy-{i}-config.yaml"),
                     ty: ConfigType::TcpProxy(consumer_mqtt_proxy_config),
+                });
+            }
+
+            if let Some(proxy) = self.mqtt.consumers.server_proxy.as_ref() {
+                let consumer_server_proxy_config = CrateTcpProxyConfig {
+                    tasks: vec![CrateTcpProxyTask {
+                        failure_rate: proxy.failure_rate,
+                        max_up_duration: proxy.max_up_duration,
+                        min_up_duration: proxy.min_up_duration,
+                        socket_addr: proxy.socket_addr,
+                        upstream_domain: self.consumers_server_proxy_container_name(),
+                        upstream_port: self.server_proxy_default_socket_addr().port(),
+                        latency: proxy.latency,
+                        jitter: proxy.jitter,
+                    }],
+                    results_file: PathBuf::from(self.container_work_dir())
+                        .join(format!("consumer-server-proxy-{i}-results.json")),
+                    seed: self.seed,
+                };
+
+                config_files.push(ConfigFile {
+                    name: format!("consumer-server-proxy-{i}-config.yaml"),
+                    ty: ConfigType::TcpProxy(consumer_server_proxy_config),
                 });
             }
         }
@@ -1249,6 +1291,24 @@ impl Config {
                     DockerService::default()
                         .with_image(self.lps_rust_image_name())
                         .with_container_name(format!("lps-consumer-mqtt-proxy-{i}"))
+                        .with_command(format!("tcp-proxy --config-file {config_file}"))
+                        .with_volumes(vec![self.container_work_dir_volume_mount()])
+                        .with_networks(vec![self.service_network_name()])
+                        .with_unless_stopped(),
+                );
+            }
+
+            if self.mqtt.consumers.server_proxy.is_some() {
+                let config_file = PathBuf::from(self.container_work_dir())
+                    .join(format!("consumer-server-proxy-{i}-config.yaml"))
+                    .display()
+                    .to_string();
+
+                services.insert(
+                    format!("consumer-server-proxy-{i}"),
+                    DockerService::default()
+                        .with_image(self.lps_rust_image_name())
+                        .with_container_name(format!("lps-consumer-server-proxy-{i}"))
                         .with_command(format!("tcp-proxy --config-file {config_file}"))
                         .with_volumes(vec![self.container_work_dir_volume_mount()])
                         .with_networks(vec![self.service_network_name()])
