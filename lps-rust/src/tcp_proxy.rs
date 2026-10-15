@@ -27,6 +27,10 @@ fn default_results_file() -> PathBuf {
     PathBuf::from("tcp-proxy-results.json")
 }
 
+pub fn default_chunk_size() -> std::num::NonZeroUsize {
+    std::num::NonZeroUsize::new(16 * 1024).expect("Valid NonZeroUsize")
+}
+
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     #[serde(default)]
@@ -72,17 +76,27 @@ pub struct Task {
     /// If set and greater than `max_up_duration`, the minimum duration will be `0`.
     #[serde(default, with = "humantime_serde")]
     pub min_up_duration: Option<Duration>,
-    /// One-way latency added to every chunk of data forwarded, in each direction.
-    ///
-    /// A request/response round trip through the proxy therefore gets at least `2 * latency` extra.
+    /// Maximum latency per chunk for client -> server traffic.
     #[serde(default, with = "humantime_serde")]
-    pub latency: Duration,
-    /// Maximum random jitter added on top of `latency`.
+    pub max_upstream_latency: Duration,
+    /// Minimum latency per chunk for client -> server traffic. Each chunk waits a random value
+    /// between `min_upstream_latency` and `max_upstream_latency`.
     ///
-    /// Each chunk is delayed by a uniformly random value in `latency..=latency + jitter`.
-    /// Ordering is preserved: a chunk is never delivered before the chunk ahead of it.
+    /// If not set, or greater than `max_upstream_latency`, the minimum is `0`.
     #[serde(default, with = "humantime_serde")]
-    pub jitter: Duration,
+    pub min_upstream_latency: Option<Duration>,
+    /// Maximum latency per chunk for server -> client traffic.
+    #[serde(default, with = "humantime_serde")]
+    pub max_downstream_latency: Duration,
+    /// Minimum latency per chunk for server -> client traffic. Each chunk waits a random value
+    /// between `min_downstream_latency` and `max_downstream_latency`.
+    ///
+    /// If not set, or greater than `max_downstream_latency`, the minimum is `0`.
+    #[serde(default, with = "humantime_serde")]
+    pub min_downstream_latency: Option<Duration>,
+    /// Read buffer size in bytes; every read of up to this many bytes is delayed by `latency`.
+    #[serde(default = "default_chunk_size")]
+    pub chunk_size: std::num::NonZeroUsize,
 }
 
 impl Default for Task {
@@ -94,8 +108,11 @@ impl Default for Task {
             failure_rate: crate::default_failure_rate(),
             max_up_duration: default_max_up_duration(),
             min_up_duration: None,
-            latency: Duration::ZERO,
-            jitter: Duration::ZERO,
+            max_upstream_latency: Duration::ZERO,
+            min_upstream_latency: None,
+            max_downstream_latency: Duration::ZERO,
+            min_downstream_latency: None,
+            chunk_size: default_chunk_size(),
         }
     }
 }

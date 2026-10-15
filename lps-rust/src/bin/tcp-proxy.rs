@@ -3,7 +3,7 @@
 //! cargo run -r --bin tcp-proxy -- --config-file tcp-proxy-config.yaml
 //! ```
 
-use std::{net::SocketAddr, path::PathBuf, sync::Arc, time::Duration};
+use std::{net::SocketAddr, num::NonZeroUsize, path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
 use lps_rust::{TcpConnectionDrop, shutdown_signal, tcp_proxy::Config};
@@ -17,15 +17,11 @@ use tokio::{
         tcp::{OwnedReadHalf, OwnedWriteHalf},
     },
     sync::Mutex,
-    time::Instant,
 };
 
 const SEED_SALT: u64 = 0x9A0C_0000_0000_0000;
 const LATENCY_SEED_SALT: u64 = 0x1A7E_0000_0000_0000;
 const DOWNSTREAM_SEED_SALT: u64 = 0x0000_D0D0_0000_0000;
-
-const READ_BUF_SIZE: usize = 16 * 1024;
-const CHANNEL_CAPACITY: usize = 1024;
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -70,92 +66,103 @@ impl State {
     }
 }
 
-/// One-way latency applied to each forwarded chunk: `base..=base + jitter`, uniformly distributed.
+/// Latency applied to every chunk of up to `chunk_size` bytes in one direction.
+///
+/// Each chunk waits a uniformly random duration in `min..=max` before it is sent on.
 #[derive(Debug, Clone, Copy)]
-struct LatencyProfile {
-    base: Duration,
-    jitter: Duration,
+struct ChunkLatency {
+    min: Duration,
+    max: Duration,
+    chunk_size: NonZeroUsize,
 }
 
-impl LatencyProfile {
-    fn is_zero(&self) -> bool {
-        self.base.is_zero() && self.jitter.is_zero()
+impl ChunkLatency {
+    /// Same rules as `min_up_duration`: a missing `min` means `0`, and a `min` greater
+    /// than `max` is ignored with a warning.
+    fn new(
+        direction: &str,
+        min: Option<Duration>,
+        max: Duration,
+        chunk_size: NonZeroUsize,
+    ) -> Self {
+        let min = match min {
+            Some(min) if min > max => {
+                tracing::warn!(
+                    direction,
+                    "min_{direction}_latency is greater than max_{direction}_latency, setting min_{direction}_latency to None"
+                );
+
+                Duration::ZERO
+            }
+            Some(min) => min,
+            None => Duration::ZERO,
+        };
+
+        Self {
+            min,
+            max,
+            chunk_size,
+        }
     }
 
     fn sample(&self, rng: &mut StdRng) -> Duration {
-        if self.jitter.is_zero() {
-            return self.base;
+        if self.min == self.max {
+            return self.max;
         }
 
-        let jitter_us = rng.random_range(0..=self.jitter.as_micros() as u64);
+        let us = rng.random_range(self.min.as_micros() as u64..=self.max.as_micros() as u64);
 
-        self.base + Duration::from_micros(jitter_us)
+        Duration::from_micros(us)
     }
 }
 
-/// Copies `reader` -> `writer`, delaying every chunk by `profile.sample()` without ever
-/// reordering. Propagates EOF (FIN) once the last chunk has been delivered.
-async fn delayed_copy(
+/// Copies `reader` -> `writer` one chunk at a time:
+/// read up to `chunk_size` bytes, wait the chunk latency, write, repeat.
+///
+/// On EOF the write side is shut down, so the FIN reaches the peer after the last chunk.
+async fn chunked_copy(
     mut reader: OwnedReadHalf,
     mut writer: OwnedWriteHalf,
-    profile: LatencyProfile,
+    profile: ChunkLatency,
     mut rng: StdRng,
 ) -> std::io::Result<()> {
-    let (tx, mut rx) = tokio::sync::mpsc::channel::<(Instant, Vec<u8>)>(CHANNEL_CAPACITY);
+    let mut buf = vec![0u8; profile.chunk_size.get()];
 
-    let read_side = async move {
-        let mut buf = vec![0u8; READ_BUF_SIZE];
-        let mut last_deliver_at = Instant::now();
+    loop {
+        let n = reader.read(&mut buf).await?;
 
-        loop {
-            let n = reader.read(&mut buf).await?;
-
-            if n == 0 {
-                // EOF: dropping `tx` lets the writer drain the queue and shut down.
-                break;
-            }
-
-            // TCP never reorders, so a chunk can't overtake the one ahead of it.
-            let deliver_at = (Instant::now() + profile.sample(&mut rng)).max(last_deliver_at);
-            last_deliver_at = deliver_at;
-
-            if tx.send((deliver_at, buf[..n].to_vec())).await.is_err() {
-                // Writer side is gone.
-                break;
-            }
+        if n == 0 {
+            break;
         }
 
-        Ok::<_, std::io::Error>(())
-    };
+        let delay = profile.sample(&mut rng);
 
-    let write_side = async move {
-        while let Some((deliver_at, chunk)) = rx.recv().await {
-            tokio::time::sleep_until(deliver_at).await;
-
-            writer.write_all(&chunk).await?;
+        if !delay.is_zero() {
+            tokio::time::sleep(delay).await;
         }
 
-        writer.shutdown().await
-    };
-
-    tokio::try_join!(read_side, write_side).map(|_| ())
-}
-
-/// Proxies both directions, each with its own deterministic jitter sequence.
-async fn proxy_with_latency(
-    client: TcpStream,
-    upstream: TcpStream,
-    profile: LatencyProfile,
-    conn_seed: u64,
-) -> std::io::Result<()> {
-    if profile.is_zero() {
-        let (mut client, mut upstream) = (client, upstream);
-
-        return tokio::io::copy_bidirectional(&mut client, &mut upstream)
-            .await
-            .map(|_| ());
+        writer.write_all(&buf[..n]).await?;
     }
 
+    writer.shutdown().await
+}
+
+/// Latency settings for both directions of a proxied connection.
+#[derive(Debug, Clone, Copy)]
+struct ProxyLatency {
+    /// client -> server
+    upstream: ChunkLatency,
+    /// server -> client
+    downstream: ChunkLatency,
+}
+
+/// Proxies both directions, each with its own latency and deterministic jitter sequence.
+async fn proxy(
+    client: TcpStream,
+    upstream: TcpStream,
+    latency: ProxyLatency,
+    conn_seed: u64,
+) -> std::io::Result<()> {
     let (client_r, client_w) = client.into_split();
     let (upstream_r, upstream_w) = upstream.into_split();
 
@@ -164,9 +171,9 @@ async fn proxy_with_latency(
 
     tokio::try_join!(
         // client -> server
-        delayed_copy(client_r, upstream_w, profile, upstream_rng),
+        chunked_copy(client_r, upstream_w, latency.upstream, upstream_rng),
         // server -> client
-        delayed_copy(upstream_r, client_w, profile, downstream_rng),
+        chunked_copy(upstream_r, client_w, latency.downstream, downstream_rng),
     )?;
 
     Ok(())
@@ -223,9 +230,19 @@ async fn main() -> Result<(), anyhow::Error> {
 
             let mut rng = StdRng::seed_from_u64(base_seed ^ SEED_SALT ^ index as u64);
 
-            let latency = LatencyProfile {
-                base: task.latency,
-                jitter: task.jitter,
+            let profile = ProxyLatency {
+                upstream: ChunkLatency::new(
+                    "upstream",
+                    task.min_upstream_latency,
+                    task.max_upstream_latency,
+                    task.chunk_size,
+                ),
+                downstream: ChunkLatency::new(
+                    "downstream",
+                    task.min_downstream_latency,
+                    task.max_downstream_latency,
+                    task.chunk_size,
+                ),
             };
 
             let latency_task_seed = base_seed ^ LATENCY_SEED_SALT ^ ((index as u64) << 40);
@@ -305,11 +322,11 @@ async fn main() -> Result<(), anyhow::Error> {
                             }
                         };
 
-                        tracing::info!(duration_ms, ?latency, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying connection");
+                        tracing::info!(duration_ms, ?profile, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying connection");
 
                         match tokio::time::timeout(
                             Duration::from_millis(duration_ms),
-                            proxy_with_latency(stream, upstream, latency, conn_seed),
+                            proxy(stream, upstream, profile, conn_seed),
                         )
                         .await
                         {
