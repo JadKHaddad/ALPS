@@ -137,6 +137,8 @@ async fn chunked_copy(
 
         let delay = profile.sample(&mut rng);
 
+        tracing::info!(delay = ?delay, bytes = n, "Chunk copied");
+
         if !delay.is_zero() {
             tokio::time::sleep(delay).await;
         }

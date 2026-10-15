@@ -8,4 +8,4 @@ retry_duration: 250ms
 results_file: /app/device-results.json
 use_six_digit_device_id: false
 wait_before_start: 3s
-seed: 2
+seed: 1

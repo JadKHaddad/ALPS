@@ -1,6 +1,7 @@
 import argparse
 import os
 import subprocess
+import time
 
 import yaml
 
@@ -46,8 +47,19 @@ def parse_args():
         default=None,
         help="Directory to place stdout and stderr logs for each run. (default: suppressed)",
     )
+    parser.add_argument(
+        "--sleep",
+        type=float,
+        default=0,
+        help="Seconds to sleep between runs, e.g. 5 (default: 0, no sleep)",
+    )
 
-    return parser.parse_args()
+    args = parser.parse_args()
+
+    if args.sleep < 0:
+        parser.error("--sleep must be >= 0")
+
+    return args
 
 
 def run_simulation(run_index, cwd, base_dir, base_config_file, protocol, log_dir):
@@ -125,6 +137,9 @@ def main():
     if args.start_index > 1:
         print(f"Resuming from index {args.start_index}...")
 
+    if args.sleep > 0:
+        print(f"Sleeping {args.sleep:g}s between runs.")
+
     for i in range(args.start_index, args.runs + 1):
         print(f"Running simulation {i}/{args.runs}...")
 
@@ -144,8 +159,13 @@ def main():
 
             break
 
+        # Sleep between runs, but not after the last one
+        if args.sleep > 0 and i < args.runs:
+            print(f"[{i}] Sleeping for {args.sleep:g}s before run {i + 1}...")
+            time.sleep(args.sleep)
+
 
 if __name__ == "__main__":
     main()
 
-# python3 runner.py --protocol "amqp" --runs 10 --base-dir "simulation" --base-config "dev-simulation-config.yaml" --log-dir "simulation/logs"
+# python3 runner.py --protocol "amqp" --runs 10 --base-dir "simulation" --base-config "dev-simulation-config.yaml" --log-dir "simulation/logs" --sleep 5

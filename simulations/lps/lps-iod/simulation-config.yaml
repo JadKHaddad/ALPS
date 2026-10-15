@@ -6,7 +6,7 @@ lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 lps_mqtt_hivemq_image: "jadkhaddad/lps-mqtt-hivemq:0.1.0"
 
-seed: 2
+seed: 1
 
 devices:
   devices_count: 1
@@ -20,9 +20,9 @@ server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
-  max_work_duration: 5s
-  max_response_duration: 0ms
-  shutdown_after_idle_duration: 5s
+  max_work_duration: 0s
+  max_response_duration: 0s
+  shutdown_after_idle_duration: 15s
   server_count: 1
 
 mqtt:
@@ -31,5 +31,14 @@ mqtt:
     producers_count: 1
   consumers:
     consumers_count: 2
+    server_proxy:
+      socket_addr: 0.0.0.0:9081
+      failure_rate: 0.0
+      max_up_duration: 1d
+      min_upstream_latency: 0s
+      max_upstream_latency: 5s
+      min_downstream_latency: 0s
+      max_downstream_latency: 0s
+      chunk_size: 1024
 
-# python3 runner/runner.py --protocol "mqtt" --runs 60 --base-dir "simulations/lps/lps-iod" --base-config "simulations/lps/lps-iod/simulation-config.yaml" --log-dir "simulations/lps/lps-iod/logs"
+# python3 runner/runner.py --protocol "mqtt" --runs 60 --sleep 5 --base-dir "simulations/lps/lps-iod" --base-config "simulations/lps/lps-iod/simulation-config.yaml" --log-dir "simulations/lps/lps-iod/logs"

@@ -23,7 +23,7 @@ services:
     environment:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-2-proxy-0
-      TARGET_URL: http://lps-consumers-server-proxy:8080/work
+      TARGET_URL: http://lps-consumer-server-proxy-0:9081/work
     networks:
     - lps-net
     volumes:
@@ -36,7 +36,25 @@ services:
     environment:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-2-proxy-1
-      TARGET_URL: http://lps-consumers-server-proxy:8080/work
+      TARGET_URL: http://lps-consumer-server-proxy-1:9081/work
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/lps/lps-iod/simulation-1/mount:/app
+    restart: unless-stopped
+  consumer-server-proxy-0:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-consumer-server-proxy-0
+    command: tcp-proxy --config-file /app/consumer-server-proxy-0-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/lps/lps-iod/simulation-1/mount:/app
+    restart: unless-stopped
+  consumer-server-proxy-1:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-consumer-server-proxy-1
+    command: tcp-proxy --config-file /app/consumer-server-proxy-1-config.yaml
     networks:
     - lps-net
     volumes:
