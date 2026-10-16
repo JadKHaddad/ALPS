@@ -1,0 +1,158 @@
+[
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:20:44.255517958Z",
+    "finished_at": "2026-10-16T08:20:44.256744193Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:20:49.218727665Z",
+    "finished_at": "2026-10-16T08:20:49.219930786Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:20:54.426312910Z",
+    "finished_at": "2026-10-16T08:20:54.427471400Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:20:59.249105015Z",
+    "finished_at": "2026-10-16T08:20:59.250341801Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:21:05.130203728Z",
+    "finished_at": "2026-10-16T08:21:05.131327909Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:21:09.871013020Z",
+    "finished_at": "2026-10-16T08:21:09.872232546Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:21:13.412048644Z",
+    "finished_at": "2026-10-16T08:21:13.413142357Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:21:15.528788970Z",
+    "finished_at": "2026-10-16T08:21:15.529907105Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:21:20.683010938Z",
+    "finished_at": "2026-10-16T08:21:20.684232814Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:21:24.180024422Z",
+    "finished_at": "2026-10-16T08:21:24.181250785Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:21:30.033037036Z",
+    "finished_at": "2026-10-16T08:21:30.034276405Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  },
+  {
+    "device_id": "0",
+    "event_id": 1792138842061,
+    "arrived_at": "2026-10-16T08:21:35.787038438Z",
+    "finished_at": "2026-10-16T08:21:35.788262733Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-10-16T08:20:42.061351Z"
+    }
+  }
+]

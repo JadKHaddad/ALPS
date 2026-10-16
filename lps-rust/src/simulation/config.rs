@@ -327,7 +327,7 @@ impl Config {
                         connection: proxy.connection,
                         connections: proxy.connections.clone(),
                     }],
-                    seed: self.seed,
+                    seed: self.seed.map(|seed| seed + i as u64),
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-amqp-proxy-{i}-results.json")),
                 };
@@ -349,7 +349,7 @@ impl Config {
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-server-proxy-{i}-results.json")),
-                    seed: self.seed,
+                    seed: self.seed.map(|seed| seed + i as u64),
                 };
 
                 config_files.push(ConfigFile {
@@ -948,6 +948,10 @@ pub struct MqttConsumersConfig {
     pub mqtt_proxy: Option<ProxyConfig>,
     /// TCP proxy between legacy-proxy-2-{i} and ars-comp-2-proxy-{i}
     pub server_proxy: Option<ProxyConfig>,
+    /// If set, the runner starts every other service once the broker is ready,
+    /// waits this long, and only then starts the consumers (legacy-proxy-2-{i}).
+    #[serde(default, with = "humantime_serde")]
+    pub wait_before_start: Option<Duration>,
 }
 
 fn default_socket_addr() -> SocketAddr {
@@ -1058,7 +1062,7 @@ impl Config {
         .with_image(String::from("busybox:latest"))
         .with_container_name(self.mosquitto_init_container_name())
         .with_command(format!(
-            "sh -c \"mkdir -p {dir} && echo 'listener {port}' > {dir}/mosquitto.conf && echo 'allow_anonymous true' >> {dir}/mosquitto.conf\"",
+            "sh -c \"mkdir -p {dir} && echo 'listener {port}' > {dir}/mosquitto.conf && echo 'allow_anonymous true' >> {dir}/mosquitto.conf && echo 'log_type all' >> {dir}/mosquitto.conf\"",
             dir = self.mosquitto_config_dir(),
             port = self.hive_mq_container_port_u16(),
         ))
@@ -1242,7 +1246,7 @@ impl Config {
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-mqtt-proxy-{i}-results.json")),
-                    seed: self.seed,
+                    seed: self.seed.map(|seed| seed + i as u64),
                 };
 
                 config_files.push(ConfigFile {
@@ -1263,7 +1267,7 @@ impl Config {
                     }],
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-server-proxy-{i}-results.json")),
-                    seed: self.seed,
+                    seed: self.seed.map(|seed| seed + i as u64),
                 };
 
                 config_files.push(ConfigFile {
@@ -1333,14 +1337,17 @@ impl Config {
                 .unwrap_or_else(|| self.hive_mq_container_port_u16());
 
             services.insert(
-                format!("legacy-proxy-2-{i}"),
+                self.mqtt_legacy_proxy_2_service_key(i),
                 DockerService::default()
                     .with_image(self.lps_mqtt_python_image_name())
                     .with_container_name(format!("lps-legacy-proxy-2-{i}"))
                     .with_command(String::from("python3 /scripts/legacy_proxy_2.py"))
                     .with_environment(
                         [
-                            (String::from("SERVICE_NAME"), format!("legacy-proxy-2-{i}")),
+                            (
+                                String::from("SERVICE_NAME"),
+                                self.mqtt_legacy_proxy_2_service_key(i),
+                            ),
                             (String::from("TARGET_URL"), self.mqtt_consumer_target_url(i)),
                             (String::from("MQTT_HOST"), broker_domain),
                             (String::from("MQTT_PORT"), broker_port.to_string()),
@@ -1440,5 +1447,35 @@ impl Config {
         .context("Failed to write docker compose file")?;
 
         Ok(())
+    }
+
+    // Compose service key of the mqtt consumer
+    fn mqtt_legacy_proxy_2_service_key(&self, i: u32) -> String {
+        format!("legacy-proxy-2-{i}")
+    }
+
+    pub fn mqtt_consumers_wait_before_start(&self) -> Option<Duration> {
+        self.mqtt.consumers.wait_before_start
+    }
+
+    /// Compose service keys of the mqtt consumers, started after `wait_before_start`.
+    pub fn mqtt_consumer_service_keys(&self) -> Vec<String> {
+        (0..self.mqtt.consumers_count())
+            .map(|i| self.mqtt_legacy_proxy_2_service_key(i))
+            .collect()
+    }
+
+    /// Compose service keys started as soon as the broker is ready.
+    ///
+    /// Excludes the consumers and the manual-profile services (validator, scripts),
+    /// because naming a profiled service explicitly in `up` would activate it.
+    pub fn mqtt_pre_consumer_service_keys(&self) -> Vec<String> {
+        let consumers = self.mqtt_consumer_service_keys();
+
+        self.mqtt_docker_compose()
+            .services
+            .into_keys()
+            .filter(|key| !consumers.contains(key) && key != "validator" && key != "scripts")
+            .collect()
     }
 }

@@ -5,12 +5,12 @@ tasks:
   connection:
     failure_rate: 0.0
     max_up_duration: 1day
-    min_up_duration: null
+    min_up_duration: 1day
     latency:
       max_upstream_latency: 0s
       min_upstream_latency: null
-      max_downstream_latency: 29ms 101us
+      max_downstream_latency: 27ms
       min_downstream_latency: null
   connections: []
 results_file: /app/consumer-server-proxy-0-results.json
-seed: 3
+seed: 4

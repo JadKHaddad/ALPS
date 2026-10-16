@@ -7,9 +7,7 @@ import yaml
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description="Run MQTT/AMQP simulations until average latency converges."
-    )
+    parser = argparse.ArgumentParser(description="Run MQTT/AMQP simulations.")
     parser.add_argument(
         "--protocol",
         type=str,
@@ -60,6 +58,18 @@ def parse_args():
         parser.error("--sleep must be >= 0")
 
     return args
+
+
+def stop_process(process, timeout=10):
+    """Terminate a running process, escalating to kill if it doesn't exit in time."""
+    if process.poll() is not None:
+        return
+    process.terminate()
+    try:
+        process.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait()
 
 
 def run_simulation(run_index, cwd, base_dir, base_config_file, protocol, log_dir):
@@ -114,8 +124,18 @@ def run_simulation(run_index, cwd, base_dir, base_config_file, protocol, log_dir
         cwd,
     ]
 
+    process = None
     try:
-        subprocess.run(cmd, check=True, stdout=stdout_target, stderr=stderr_target)
+        process = subprocess.Popen(cmd, stdout=stdout_target, stderr=stderr_target)
+        returncode = process.wait()
+
+        if returncode != 0:
+            raise subprocess.CalledProcessError(returncode, cmd)
+    except BaseException:
+        # Covers KeyboardInterrupt too: don't leave the docker client running.
+        if process is not None:
+            stop_process(process)
+        raise
     finally:
         if stdout_target is not subprocess.DEVNULL:
             stdout_target.close()
@@ -150,8 +170,12 @@ def main():
 
             print(f"[{i}] Run complete.")
 
-        except subprocess.CalledProcessError:
-            print(f"Docker execution failed on run {i}.")
+        except KeyboardInterrupt:
+            print(f"\nInterrupted on run {i}. Resume with --start-index {i}.")
+
+            break
+        except subprocess.CalledProcessError as e:
+            print(f"Docker execution failed on run {i} (exit code {e.returncode}).")
 
             break
         except Exception as e:

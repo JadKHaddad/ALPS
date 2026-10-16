@@ -225,19 +225,21 @@ async fn delayed_copy(
         if !latency.is_zero() {
             let delay = latency.sample(&mut rng, n);
 
-            tracing::debug!(direction, ?delay, bytes = n, "Delaying bytes");
+            tracing::info!(direction, ?delay, bytes = n, "Delaying bytes");
 
             tokio::time::sleep(delay).await;
 
             total_delay += delay;
         }
 
-        tracing::debug!(direction, bytes = n, "Writing bytes");
+        let bytes_string = String::from_utf8_lossy(&buf[..n]);
+
+        tracing::info!(direction, bytes = n, ?bytes_string, "Writing bytes");
 
         writer.write_all(&buf[..n]).await?;
         writer.flush().await?;
 
-        tracing::debug!(direction, bytes = n, "Wrote bytes");
+        tracing::info!(direction, bytes = n, "Wrote bytes");
 
         total_bytes += n as u64;
     }

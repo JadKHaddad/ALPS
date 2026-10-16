@@ -1,0 +1,16 @@
+tasks:
+- socket_addr: 0.0.0.0:9090
+  upstream_domain: lps-hivemq
+  upstream_port: 1883
+  connection:
+    failure_rate: 0.0
+    max_up_duration: 4s
+    min_up_duration: null
+    latency:
+      max_upstream_latency: 0s
+      min_upstream_latency: null
+      max_downstream_latency: 0s
+      min_downstream_latency: null
+  connections: []
+results_file: /app/consumer-mqtt-proxy-0-results.json
+seed: 4

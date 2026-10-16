@@ -6,15 +6,15 @@ lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 lps_mqtt_hivemq_image: "jadkhaddad/lps-mqtt-hivemq:0.1.0"
 
-seed: 3
+seed: 4
 
 devices:
   devices_count: 1
-  max_event_interval: 100ms
-  min_event_interval: 100ms
+  max_event_interval: 1ms
+  min_event_interval: 1ms
   retry_duration: 250ms
   max_events: 1
-  wait_before_start: 3s
+  wait_before_start: 6s
 
 server:
   socket_addr: 0.0.0.0:8080
@@ -22,22 +22,23 @@ server:
   failure_rate: 0.0
   max_work_duration: 0s
   max_response_duration: 0s
-  shutdown_after_idle_duration: 10s
+  shutdown_after_idle_duration: 15s
   server_count: 1
 
 mqtt:
   producers:
     producers_count: 1
   consumers:
+    wait_before_start: 5s
     consumers_count: 1
     server_proxy:
       socket_addr: 0.0.0.0:9081
       connection:
         failure_rate: 0.0
         max_up_duration: 1d
+        min_up_duration: 1d
         latency:
-          max_downstream_latency: 29101us   # 189 × 29.101ms ≈ 5.5s
-
+          max_downstream_latency: 27ms   # 189 bytes x 27ms = 5103ms = 5.103s
     mqtt_proxy:
       socket_addr: 0.0.0.0:9090
       connection:

@@ -178,7 +178,7 @@ async fn main() -> Result<(), anyhow::Error> {
             if line.contains("lps-deduplication-0")
                 && (
                     // First run, no schema was created on disk
-                    line.contains("Starting server") || 
+                    line.contains("Starting server") ||
                     // Subsequent runs, if the schema dir was not deleted
                     line.contains("Table discovered in schema")
                 )
@@ -215,21 +215,35 @@ async fn main() -> Result<(), anyhow::Error> {
     let _ = docker_compose_logs.kill().await;
     let _ = docker_compose_logs.wait().await;
 
-    select(&token, async {
-        tokio::process::Command::new("docker")
-            .arg("compose")
-            .arg("--project-directory")
-            .arg(&simulation_dir)
-            .arg("up")
-            .arg("-d")
-            .stdout(Stdio::inherit())
-            .stderr(Stdio::inherit())
-            .status()
-            .await
-            .map(|_| ())
-            .context("Failed to run docker compose up")
-    })
-    .await?;
+    match config.mqtt_consumers_wait_before_start() {
+        None => {
+            select(&token, compose_up_detached(&simulation_dir, &[])).await?;
+        }
+        Some(wait) => {
+            // Start everything except the consumers (and the manual-profile services)
+            select(
+                &token,
+                compose_up_detached(&simulation_dir, &config.mqtt_pre_consumer_service_keys()),
+            )
+            .await?;
+
+            tracing::info!("Waiting {wait:?} before starting consumers...");
+
+            select(&token, async {
+                tokio::time::sleep(wait).await;
+                Ok(())
+            })
+            .await?;
+
+            tracing::info!("Starting consumers...");
+
+            select(
+                &token,
+                compose_up_detached(&simulation_dir, &config.mqtt_consumer_service_keys()),
+            )
+            .await?;
+        }
+    }
 
     let mut docker_compose_logs = tokio::process::Command::new("docker")
         .arg("compose")
@@ -340,6 +354,24 @@ async fn main() -> Result<(), anyhow::Error> {
     .await?;
 
     Ok(())
+}
+
+/// `docker compose up -d [services...]`. An empty `services` slice starts every
+/// (non-profiled) service.
+async fn compose_up_detached(simulation_dir: &str, services: &[String]) -> anyhow::Result<()> {
+    tokio::process::Command::new("docker")
+        .arg("compose")
+        .arg("--project-directory")
+        .arg(simulation_dir)
+        .arg("up")
+        .arg("-d")
+        .args(services)
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .status()
+        .await
+        .map(|_| ())
+        .context("Failed to run docker compose up")
 }
 
 async fn select<T, F: Future<Output = anyhow::Result<T>>>(

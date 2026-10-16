@@ -135,7 +135,7 @@ services:
   mosquitto-init:
     image: busybox:latest
     container_name: lps-mosquitto-init
-    command: sh -c "mkdir -p /mosquitto/config && echo 'listener 1883' > /mosquitto/config/mosquitto.conf && echo 'allow_anonymous true' >> /mosquitto/config/mosquitto.conf"
+    command: sh -c "mkdir -p /mosquitto/config && echo 'listener 1883' > /mosquitto/config/mosquitto.conf && echo 'allow_anonymous true' >> /mosquitto/config/mosquitto.conf && echo 'log_type all' >> /mosquitto/config/mosquitto.conf"
     networks:
     - lps-net
     volumes:
