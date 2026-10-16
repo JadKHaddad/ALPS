@@ -6,7 +6,7 @@ lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 lps_mqtt_hivemq_image: "jadkhaddad/lps-mqtt-hivemq:0.1.0"
 
-seed: 4
+seed: 6
 
 devices:
   devices_count: 1
@@ -14,7 +14,7 @@ devices:
   min_event_interval: 1ms
   retry_duration: 250ms
   max_events: 1
-  wait_before_start: 6s
+  wait_before_start: 7500ms
 
 server:
   socket_addr: 0.0.0.0:8080
@@ -22,7 +22,7 @@ server:
   failure_rate: 0.0
   max_work_duration: 0s
   max_response_duration: 0s
-  shutdown_after_idle_duration: 15s
+  shutdown_after_idle_duration: 20s
   server_count: 1
 
 mqtt:
