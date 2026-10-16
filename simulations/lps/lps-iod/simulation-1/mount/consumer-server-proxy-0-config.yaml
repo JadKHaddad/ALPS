@@ -7,10 +7,10 @@ tasks:
     max_up_duration: 1day
     min_up_duration: 1day
     latency:
-      max_upstream_latency: 20ms
+      max_upstream_latency: 10ms
       min_upstream_latency: null
       max_downstream_latency: 0s
       min_downstream_latency: null
   connections: []
 results_file: /app/consumer-server-proxy-0-results.json
-seed: 2
+seed: 6

@@ -19,7 +19,8 @@ use tokio::{
         TcpListener, TcpStream,
         tcp::{OwnedReadHalf, OwnedWriteHalf},
     },
-    sync::Mutex,
+    sync::{Mutex, mpsc},
+    time::Instant,
 };
 
 const SEED_SALT: u64 = 0x9A0C_0000_0000_0000;
@@ -28,6 +29,16 @@ const DOWNSTREAM_SEED_SALT: u64 = 0x0000_D0D0_0000_0000;
 
 /// Maximum number of bytes forwarded per socket read.
 const READ_BUF_SIZE: usize = 64 * 1024;
+
+/// Chunks arriving within this gap of the previous one belong to the same burst
+/// (e.g. the headers and body of one HTTP request, however TCP split them).
+const BURST_GAP: Duration = Duration::from_millis(5);
+
+/// Number of read chunks buffered between the reader and the delayed writer.
+const CHUNK_CHANNEL_CAPACITY: usize = 64;
+
+/// How long to wait before retrying a failed upstream DNS lookup.
+const UPSTREAM_LOOKUP_RETRY: Duration = Duration::from_millis(250);
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -93,8 +104,10 @@ fn resolve_min(source: &str, name: &str, min: Option<Duration>, max: Duration) -
 
 /// Per-byte latency in one direction.
 ///
-/// For each read, a per-byte latency is drawn uniformly from `min..=max` and multiplied by
-/// the number of bytes read; the data is forwarded after sleeping that long.
+/// One per-byte latency is drawn uniformly from `min..=max` per burst of bytes (see
+/// [`BURST_GAP`]). Each chunk of the burst is forwarded at
+/// `burst start + per-byte latency * bytes so far in the burst`, so the delays do not
+/// depend on how TCP split the burst into reads.
 #[derive(Debug, Clone, Copy)]
 struct ByteLatency {
     min: Duration,
@@ -106,18 +119,24 @@ impl ByteLatency {
         self.max.is_zero()
     }
 
-    /// Delay for `bytes` bytes.
-    fn sample(&self, rng: &mut StdRng, bytes: usize) -> Duration {
-        let per_byte = if self.min == self.max {
+    /// Draws one per-byte latency.
+    fn sample_per_byte(&self, rng: &mut StdRng) -> Duration {
+        if self.min == self.max {
             self.max
         } else {
             let ns = rng.random_range(self.min.as_nanos() as u64..=self.max.as_nanos() as u64);
 
             Duration::from_nanos(ns)
-        };
-
-        per_byte.saturating_mul(bytes as u32)
+        }
     }
+}
+
+/// Bytes that arrived back to back and share one latency draw.
+struct Burst {
+    start: Instant,
+    last_arrival: Instant,
+    per_byte: Duration,
+    bytes: usize,
 }
 
 /// Latency settings for both directions of a proxied connection.
@@ -181,7 +200,8 @@ impl ConnectionProfile {
     }
 }
 
-/// Copies `reader` -> `writer`, delaying every read by `per-byte latency * bytes read`.
+/// Copies `reader` -> `writer`, delaying each burst of bytes by
+/// `per-byte latency * bytes`, with one latency draw per burst.
 ///
 /// On EOF the write side is shut down, so the FIN reaches the peer after the last byte.
 async fn delayed_copy(
@@ -191,60 +211,107 @@ async fn delayed_copy(
     latency: ByteLatency,
     mut rng: StdRng,
 ) -> std::io::Result<()> {
-    let mut buf = vec![0u8; READ_BUF_SIZE];
+    // The reader timestamps chunks as they arrive, so burst detection is not skewed by
+    // the writer sleeping. The bounded channel keeps TCP backpressure.
+    let (tx, mut rx) = mpsc::channel::<(Instant, Vec<u8>)>(CHUNK_CHANNEL_CAPACITY);
 
-    let mut total_bytes: u64 = 0;
-    let mut total_delay = Duration::ZERO;
+    let read = async move {
+        let mut buf = vec![0u8; READ_BUF_SIZE];
+        let mut total_bytes: u64 = 0;
 
-    loop {
-        let n = match reader.read(&mut buf).await {
-            Ok(n) => {
-                tracing::debug!(
-                    direction,
-                    bytes = n,
-                    ?total_delay,
-                    total_bytes,
-                    "Read bytes"
-                );
+        loop {
+            let n = match reader.read(&mut buf).await {
+                Ok(n) => n,
+                Err(err) => {
+                    tracing::error!(direction, %err, total_bytes, "Read error");
 
-                n
+                    return Err(err);
+                }
+            };
+
+            let arrived = Instant::now();
+
+            if n == 0 {
+                tracing::debug!(direction, total_bytes, "Read finished (EOF)");
+
+                return Ok::<(), std::io::Error>(());
             }
-            Err(err) => {
-                tracing::error!(direction, %err, total_bytes, ?total_delay, "Read error");
 
-                return Err(err);
+            tracing::debug!(direction, bytes = n, total_bytes, "Read bytes");
+
+            total_bytes += n as u64;
+
+            if tx.send((arrived, buf[..n].to_vec())).await.is_err() {
+                // The writer is gone
+                return Ok(());
             }
-        };
+        }
+    };
 
-        if n == 0 {
-            tracing::info!(direction, total_bytes, ?total_delay, "Copy finished (EOF)");
+    let write = async move {
+        let mut burst: Option<Burst> = None;
+        let mut total_bytes: u64 = 0;
+        let mut total_delay = Duration::ZERO;
 
-            break;
+        while let Some((arrived, data)) = rx.recv().await {
+            if !latency.is_zero() {
+                let same_burst = burst
+                    .as_ref()
+                    .is_some_and(|b| arrived.duration_since(b.last_arrival) <= BURST_GAP);
+
+                if !same_burst {
+                    let per_byte = latency.sample_per_byte(&mut rng);
+
+                    tracing::info!(direction, ?per_byte, "New burst");
+
+                    burst = Some(Burst {
+                        start: arrived,
+                        last_arrival: arrived,
+                        per_byte,
+                        bytes: 0,
+                    });
+                }
+
+                let b = burst.as_mut().expect("burst was set above");
+
+                b.bytes += data.len();
+                b.last_arrival = arrived;
+
+                let release = b.start + b.per_byte.saturating_mul(b.bytes as u32);
+                let delay = release.saturating_duration_since(Instant::now());
+
+                tracing::info!(direction, ?delay, bytes = data.len(), "Delaying bytes");
+
+                tokio::time::sleep_until(release).await;
+
+                total_delay += delay;
+            }
+
+            let bytes_string = String::from_utf8_lossy(&data);
+
+            tracing::info!(
+                direction,
+                bytes = data.len(),
+                ?bytes_string,
+                "Writing bytes"
+            );
+
+            writer.write_all(&data).await?;
+            writer.flush().await?;
+
+            tracing::info!(direction, bytes = data.len(), "Wrote bytes");
+
+            total_bytes += data.len() as u64;
         }
 
-        if !latency.is_zero() {
-            let delay = latency.sample(&mut rng, n);
+        tracing::info!(direction, total_bytes, ?total_delay, "Copy finished (EOF)");
 
-            tracing::info!(direction, ?delay, bytes = n, "Delaying bytes");
+        writer.shutdown().await
+    };
 
-            tokio::time::sleep(delay).await;
+    tokio::try_join!(read, write)?;
 
-            total_delay += delay;
-        }
-
-        let bytes_string = String::from_utf8_lossy(&buf[..n]);
-
-        tracing::info!(direction, bytes = n, ?bytes_string, "Writing bytes");
-
-        writer.write_all(&buf[..n]).await?;
-        writer.flush().await?;
-
-        tracing::info!(direction, bytes = n, "Wrote bytes");
-
-        total_bytes += n as u64;
-    }
-
-    writer.shutdown().await
+    Ok(())
 }
 
 /// Proxies both directions, each with its own latency and deterministic RNG.
@@ -335,6 +402,9 @@ async fn main() -> Result<(), anyhow::Error> {
                 .collect();
 
             tokio::spawn(async move {
+                // Run the task in an inner block so an error is logged right away instead of
+                // only surfacing (and being discarded) when the task is awaited at shutdown.
+                let result: anyhow::Result<()> = async move {
                 let listener = TcpListener::bind(task.socket_addr)
                     .await
                     .context("Failed to bind to socket")?;
@@ -343,13 +413,30 @@ async fn main() -> Result<(), anyhow::Error> {
                     .and_then(|builder| builder.build())
                     .context("Failed to create dns resolver")?;
 
-                let ip_addr = resolver
-                    .lookup_ip(task.upstream_domain)
-                    .await
-                    .context("Failed to lookup IP")?
-                    .iter()
-                    .next()
-                    .ok_or_else(|| anyhow::anyhow!("No IP found"))?;
+                // The upstream container may not be registered in Docker's DNS yet when this
+                // proxy starts, so retry instead of giving up. The listener is already bound,
+                // so clients connecting meanwhile wait in the accept backlog instead of
+                // getting "connection refused".
+                let ip_addr = loop {
+                    match resolver.lookup_ip(task.upstream_domain.as_str()).await {
+                        Ok(lookup) => match lookup.iter().next() {
+                            Some(ip) => break ip,
+                            None => tracing::warn!(
+                                upstream = %task.upstream_domain,
+                                "No IP found for upstream, retrying"
+                            ),
+                        },
+                        Err(err) => tracing::warn!(
+                            upstream = %task.upstream_domain,
+                            %err,
+                            "Failed to look up upstream, retrying"
+                        ),
+                    }
+
+                    tokio::time::sleep(UPSTREAM_LOOKUP_RETRY).await;
+                };
+
+                tracing::info!(upstream = %task.upstream_domain, %ip_addr, "Resolved upstream");
 
                 let upstream_addr = SocketAddr::new(ip_addr, task.upstream_port);
 
@@ -435,6 +522,14 @@ async fn main() -> Result<(), anyhow::Error> {
 
                 #[allow(unreachable_code)]
                 Ok::<(), anyhow::Error>(())
+                }
+                .await;
+
+                if let Err(err) = &result {
+                    tracing::error!("Task {index} failed: {err:#}");
+                }
+
+                result
             })
         })
         .collect();

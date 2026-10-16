@@ -107,7 +107,7 @@ services:
   legacy-proxy-2-0:
     image: jadkhaddad/lps-mqtt-python:0.1.0
     container_name: lps-legacy-proxy-2-0
-    command: python3 /scripts/legacy_proxy_2.py
+    command: sh -c "mkdir -p logs; touch logs/legacy-proxy-2-0.log; tail -n 0 -F logs/legacy-proxy-2-0.log & exec python3 /scripts/legacy_proxy_2.py"
     environment:
       MQTT_HOST: lps-hivemq
       MQTT_PORT: '1883'
@@ -121,7 +121,7 @@ services:
   legacy-proxy-2-1:
     image: jadkhaddad/lps-mqtt-python:0.1.0
     container_name: lps-legacy-proxy-2-1
-    command: python3 /scripts/legacy_proxy_2.py
+    command: sh -c "mkdir -p logs; touch logs/legacy-proxy-2-1.log; tail -n 0 -F logs/legacy-proxy-2-1.log & exec python3 /scripts/legacy_proxy_2.py"
     environment:
       MQTT_HOST: lps-hivemq
       MQTT_PORT: '1883'

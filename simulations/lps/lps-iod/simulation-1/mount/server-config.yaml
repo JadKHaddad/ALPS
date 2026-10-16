@@ -7,5 +7,5 @@ min_response_duration: null
 results_file: /app/server-results.json
 failures_file: /app/server-failures.json
 shutdown_after_idle_duration: 20s
-seed: 2
+seed: 6
 background_load_per_second: null

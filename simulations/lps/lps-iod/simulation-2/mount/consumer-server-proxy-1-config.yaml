@@ -13,4 +13,4 @@ tasks:
       min_downstream_latency: null
   connections: []
 results_file: /app/consumer-server-proxy-1-results.json
-seed: 3
+seed: 7

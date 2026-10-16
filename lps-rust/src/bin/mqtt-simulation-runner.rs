@@ -4,13 +4,19 @@
 //!
 //! ```
 
-use std::{path::PathBuf, process::Stdio, sync::Arc};
+use std::{path::PathBuf, process::Stdio, sync::Arc, time::Duration};
 
 use anyhow::Context;
 use clap::Parser;
 use lps_rust::simulation::config::Config;
 use tokio::io::AsyncBufReadExt;
 use tokio_util::sync::CancellationToken;
+
+/// Must match the default `MQTT_TOPIC` in `legacy_proxy_2.py`.
+const MQTT_CONSUMER_SHARED_TOPIC: &str = "$share/legacy_proxy/+/message";
+
+/// How long to wait for each consumer to subscribe before starting the next one anyway.
+const MQTT_CONSUMER_SUBSCRIBE_TIMEOUT: Duration = Duration::from_secs(10);
 
 #[derive(Debug, Parser)]
 pub struct Args {
@@ -203,45 +209,59 @@ async fn main() -> Result<(), anyhow::Error> {
     // `logs -f` attaches to them, so those lines would be lost. Instead, remember the
     // current time, stop the first log stream, start everything, and then follow the logs
     // again with `--since`, which replays every line from that moment on.
-    let since = {
-        let now = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .context("System time is before the Unix epoch")?;
-
-        format!("{}.{:09}", now.as_secs(), now.subsec_nanos())
-    };
+    let since = now_since()?;
 
     drop(reader);
     let _ = docker_compose_logs.kill().await;
     let _ = docker_compose_logs.wait().await;
 
-    match config.mqtt_consumers_wait_before_start() {
-        None => {
-            select(&token, compose_up_detached(&simulation_dir, &[])).await?;
-        }
-        Some(wait) => {
-            // Start everything except the consumers (and the manual-profile services)
-            select(
-                &token,
-                compose_up_detached(&simulation_dir, &config.mqtt_pre_consumer_service_keys()),
-            )
-            .await?;
+    // Start everything except the consumers (and the manual-profile services)
+    select(
+        &token,
+        compose_up_detached(&simulation_dir, &config.mqtt_pre_consumer_service_keys()),
+    )
+    .await?;
 
-            tracing::info!("Waiting {wait:?} before starting consumers...");
+    if let Some(wait) = config.mqtt_consumers_wait_before_start() {
+        tracing::info!("Waiting {wait:?} before starting consumers...");
 
-            select(&token, async {
-                tokio::time::sleep(wait).await;
-                Ok(())
-            })
-            .await?;
+        select(&token, async {
+            tokio::time::sleep(wait).await;
+            Ok(())
+        })
+        .await?;
+    }
 
-            tracing::info!("Starting consumers...");
+    tracing::info!("Starting consumers...");
 
-            select(
-                &token,
-                compose_up_detached(&simulation_dir, &config.mqtt_consumer_service_keys()),
-            )
-            .await?;
+    // The broker hands the first message of a shared subscription to whoever subscribed
+    // first, so start the consumers one at a time and wait until each has subscribed.
+    // That makes the message assignment the same on every run.
+    for key in config.mqtt_consumer_service_keys() {
+        let consumer_since = now_since()?;
+
+        select(
+            &token,
+            compose_up_detached(&simulation_dir, std::slice::from_ref(&key)),
+        )
+        .await?;
+
+        match select(
+            &token,
+            wait_for_subscription(
+                &simulation_dir,
+                &consumer_since,
+                &key,
+                MQTT_CONSUMER_SUBSCRIBE_TIMEOUT,
+            ),
+        )
+        .await?
+        {
+            Some(true) => tracing::info!("{key} subscribed"),
+            Some(false) => tracing::warn!(
+                "{key} did not subscribe within {MQTT_CONSUMER_SUBSCRIBE_TIMEOUT:?}; starting the next consumer anyway"
+            ),
+            None => break, // cancelled
         }
     }
 
@@ -372,6 +392,80 @@ async fn compose_up_detached(simulation_dir: &str, services: &[String]) -> anyho
         .await
         .map(|_| ())
         .context("Failed to run docker compose up")
+}
+
+/// Current time in the format `docker compose logs --since` accepts.
+fn now_since() -> anyhow::Result<String> {
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .context("System time is before the Unix epoch")?;
+
+    Ok(format!("{}.{:09}", now.as_secs(), now.subsec_nanos()))
+}
+
+/// Follows `service`'s logs from `since` until legacy_proxy_2.py logs a granted SUBACK
+/// for its shared subscription. Works with both brokers, because it reads the consumer's
+/// own log (streamed to stdout by the `tail -F` in its compose command).
+///
+/// Returns `false` on timeout or if the broker rejected the subscription.
+async fn wait_for_subscription(
+    simulation_dir: &str,
+    since: &str,
+    service: &str,
+    timeout: Duration,
+) -> anyhow::Result<bool> {
+    let mut child = tokio::process::Command::new("docker")
+        .arg("compose")
+        .arg("--project-directory")
+        .arg(simulation_dir)
+        .arg("logs")
+        .arg("-f")
+        .arg("--no-log-prefix")
+        .arg("--since")
+        .arg(since)
+        .arg(service)
+        .stdout(Stdio::piped())
+        .stderr(Stdio::inherit())
+        .kill_on_drop(true)
+        .spawn()
+        .with_context(|| format!("Failed to follow {service} logs"))?;
+
+    let stdout = child
+        .stdout
+        .take()
+        .context("Failed to take consumer logs stdout")?;
+
+    let mut lines = tokio::io::BufReader::new(stdout).lines();
+
+    // on_connect logs: "Subscribed to topic: <topic> with QoS 2, result: ..., mid: <mid>"
+    // on_subscribe logs: "SUBACK received for mid <mid>, reason_codes: ['Granted QoS 2']"
+    let subscribed = format!("Subscribed to topic: {MQTT_CONSUMER_SHARED_TOPIC} ");
+
+    let granted = tokio::time::timeout(timeout, async {
+        let mut suback: Option<String> = None;
+
+        while let Some(line) = lines.next_line().await? {
+            match &suback {
+                None if line.contains(&subscribed) => {
+                    let mid = line.rsplit("mid: ").next().unwrap_or_default().trim();
+                    suback = Some(format!("SUBACK received for mid {mid},"));
+                }
+                Some(pattern) if line.contains(pattern.as_str()) => {
+                    return Ok::<_, anyhow::Error>(line.contains("Granted"));
+                }
+                _ => {}
+            }
+        }
+
+        Ok(false)
+    })
+    .await
+    .unwrap_or(Ok(false))?;
+
+    let _ = child.kill().await;
+    let _ = child.wait().await;
+
+    Ok(granted)
 }
 
 async fn select<T, F: Future<Output = anyhow::Result<T>>>(

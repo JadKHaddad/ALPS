@@ -1336,12 +1336,17 @@ impl Config {
                 .map(|proxy| proxy.socket_addr.port())
                 .unwrap_or_else(|| self.hive_mq_container_port_u16());
 
+            let service_key = self.mqtt_legacy_proxy_2_service_key(i);
+            let log_file = format!("logs/{service_key}.log");
+
             services.insert(
                 self.mqtt_legacy_proxy_2_service_key(i),
                 DockerService::default()
                     .with_image(self.lps_mqtt_python_image_name())
                     .with_container_name(format!("lps-legacy-proxy-2-{i}"))
-                    .with_command(String::from("python3 /scripts/legacy_proxy_2.py"))
+                    .with_command(format!(
+                        "sh -c \"mkdir -p logs; touch {log_file}; tail -n 0 -F {log_file} & exec python3 /scripts/legacy_proxy_2.py\""
+                    ))
                     .with_environment(
                         [
                             (
