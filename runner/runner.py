@@ -2,8 +2,24 @@ import argparse
 import os
 import subprocess
 import time
+from datetime import datetime
 
 import yaml
+
+
+def log(msg="", leading_newline=False):
+    """Print a message prefixed with the current local time."""
+    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    prefix = "\n" if leading_newline else ""
+    print(f"{prefix}[{ts}] {msg}", flush=True)
+
+
+def format_duration(seconds):
+    """Format a duration in seconds as H:MM:SS."""
+    seconds = int(round(seconds))
+    h, rem = divmod(seconds, 3600)
+    m, s = divmod(rem, 60)
+    return f"{h}:{m:02d}:{s:02d}"
 
 
 def parse_args():
@@ -100,8 +116,9 @@ def run_simulation(run_index, cwd, base_dir, base_config_file, protocol, log_dir
 
         log_msg = f"(Logs saved to {log_dir}/std{{out,err}}-run-{run_index}.log)"
 
-    print(
-        f"\n[{run_index}] Starting {protocol.upper()} simulation into directory: {simulation_dir} {log_msg}..."
+    log(
+        f"[{run_index}] Starting {protocol.upper()} simulation into directory: {simulation_dir} {log_msg}...",
+        leading_newline=True,
     )
 
     runner_executable = (
@@ -155,38 +172,47 @@ def main():
         os.makedirs(args.log_dir, exist_ok=True)
 
     if args.start_index > 1:
-        print(f"Resuming from index {args.start_index}...")
+        log(f"Resuming from index {args.start_index}...")
 
     if args.sleep > 0:
-        print(f"Sleeping {args.sleep:g}s between runs.")
+        log(f"Sleeping {args.sleep:g}s between runs.")
+
+    total_start = time.monotonic()
 
     for i in range(args.start_index, args.runs + 1):
-        print(f"Running simulation {i}/{args.runs}...")
+        log(f"Running simulation {i}/{args.runs}...")
+        run_start = time.monotonic()
 
         try:
             _ = run_simulation(
                 i, cwd, args.base_dir, args.base_config, args.protocol, args.log_dir
             )
 
-            print(f"[{i}] Run complete.")
+            elapsed = format_duration(time.monotonic() - run_start)
+            log(f"[{i}] Run complete (took {elapsed}).")
 
         except KeyboardInterrupt:
-            print(f"\nInterrupted on run {i}. Resume with --start-index {i}.")
+            log(
+                f"Interrupted on run {i}. Resume with --start-index {i}.",
+                leading_newline=True,
+            )
 
             break
         except subprocess.CalledProcessError as e:
-            print(f"Docker execution failed on run {i} (exit code {e.returncode}).")
+            log(f"Docker execution failed on run {i} (exit code {e.returncode}).")
 
             break
         except Exception as e:
-            print(f"An error occurred on run {i}: {e}")
+            log(f"An error occurred on run {i}: {e}")
 
             break
 
         # Sleep between runs, but not after the last one
         if args.sleep > 0 and i < args.runs:
-            print(f"[{i}] Sleeping for {args.sleep:g}s before run {i + 1}...")
+            log(f"[{i}] Sleeping for {args.sleep:g}s before run {i + 1}...")
             time.sleep(args.sleep)
+
+    log(f"Finished. Total elapsed: {format_duration(time.monotonic() - total_start)}.")
 
 
 if __name__ == "__main__":
