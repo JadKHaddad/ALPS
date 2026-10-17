@@ -22,15 +22,16 @@ use crate::{
 pub struct Config {
     #[serde(skip)]
     pub root_abs_path: Option<PathBuf>,
-    #[serde(default)]
+    #[serde(default = "default_lps_rust_image")]
     pub lps_rust_image: String,
-    #[serde(default)]
+    #[serde(default = "default_lps_scripts_image")]
     pub lps_scripts_image: String,
-    #[serde(default)]
+    #[serde(default = "default_lps_gleam_image")]
     pub lps_gleam_image: String,
-    #[serde(default)]
+    /// Python image for the ars proxies (amqp and mqtt) and the mqtt legacy proxies.
+    #[serde(default = "default_lps_mqtt_python_image")]
     pub lps_mqtt_python_image: String,
-    #[serde(default)]
+    #[serde(default = "default_lps_mqtt_hivemq_image")]
     pub lps_mqtt_hivemq_image: String,
     pub simulation_dir: String,
     pub simulation_docker_network: String,
@@ -314,6 +315,14 @@ impl Config {
         config_files
     }
 
+    /// The URL ars-comp-1-proxy-{i} forwards to: the amqp producer
+    fn amqp_producer_push_url(&self, i: u32) -> String {
+        format!(
+            "http://lps-producer-{i}:{}/work",
+            self.amqp.producers.socket_addr.port()
+        )
+    }
+
     fn amqp_consumers_config_files(&self) -> Vec<ConfigFile> {
         let mut config_files = Vec::new();
 
@@ -338,24 +347,9 @@ impl Config {
                 });
             }
 
+            // consumer-{i} -> consumer-server-proxy-{i} -> ars-comp-2-proxy-{i}
             if let Some(proxy) = self.amqp.consumers.server_proxy.as_ref() {
-                let consumer_server_proxy_config = CrateTcpProxyConfig {
-                    tasks: vec![CrateTcpProxyTask {
-                        socket_addr: proxy.socket_addr,
-                        upstream_domain: self.consumers_server_proxy_container_name(),
-                        upstream_port: self.server_proxy_default_socket_addr().port(),
-                        connection: proxy.connection,
-                        connections: proxy.connections.clone(),
-                    }],
-                    results_file: PathBuf::from(self.container_work_dir())
-                        .join(format!("consumer-server-proxy-{i}-results.json")),
-                    seed: self.seed.map(|seed| seed + i as u64),
-                };
-
-                config_files.push(ConfigFile {
-                    name: format!("consumer-server-proxy-{i}-config.yaml"),
-                    ty: ConfigType::TcpProxy(consumer_server_proxy_config),
-                });
+                config_files.push(self.consumer_server_proxy_config_file(i, proxy));
             }
 
             let broker_domain = self
@@ -374,18 +368,8 @@ impl Config {
                 .map(|proxy| proxy.socket_addr.port())
                 .unwrap_or_else(|| self.rabbit_mq_container_port());
 
-            let server_push_url = self
-                .amqp
-                .consumers
-                .server_proxy
-                .as_ref()
-                .map(|proxy| {
-                    format!(
-                        "http://lps-consumer-server-proxy-{i}:{}/work",
-                        proxy.socket_addr.port()
-                    )
-                })
-                .unwrap_or_else(|| self.consumers_server_push_url());
+            let server_push_url =
+                self.consumer_target_url(i, self.amqp.consumers.server_proxy.as_ref());
 
             let consumer_config_file = ConfigFile {
                 name: format!("consumer-{i}.yaml"),
@@ -396,6 +380,7 @@ impl Config {
                     server_push_url,
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-{i}-results.json")),
+                    use_simple_call_format: true,
                 }),
             };
 
@@ -405,6 +390,7 @@ impl Config {
         config_files
     }
 
+    /// device -> ars-comp-1-proxy-{i} -> producer-{i}
     fn amqp_devices_config_files(&self) -> Vec<ConfigFile> {
         vec![ConfigFile {
             name: self.device_config_file(),
@@ -415,12 +401,7 @@ impl Config {
                 max_events: Some(self.devices.max_events),
                 retry_duration: self.devices.retry_duration,
                 server_push_urls: (0..self.amqp.producers_count())
-                    .map(|i| {
-                        format!(
-                            "http://lps-producer-{i}:{}/work",
-                            self.amqp.producers.socket_addr.port()
-                        )
-                    })
+                    .map(|i| self.ars_comp_1_proxy_push_url(i))
                     .collect(),
                 results_file: PathBuf::from(self.container_work_dir())
                     .join(self.device_results_file()),
@@ -636,6 +617,18 @@ impl Config {
         services
     }
 
+    /// One ars-comp-1-proxy-{i} in front of every producer-{i}
+    fn amqp_ars_comp_1_docker_services(&self) -> BTreeMap<String, DockerService> {
+        (0..self.amqp.producers_count())
+            .map(|i| {
+                (
+                    self.ars_comp_1_proxy_service_key(i),
+                    self.ars_comp_1_proxy_docker_service(i, self.amqp_producer_push_url(i)),
+                )
+            })
+            .collect()
+    }
+
     fn amqp_consumers_docker_service(&self) -> BTreeMap<String, DockerService> {
         let mut services = BTreeMap::new();
 
@@ -659,20 +652,9 @@ impl Config {
             }
 
             if self.amqp.consumers.server_proxy.is_some() {
-                let config_file = PathBuf::from(self.container_work_dir())
-                    .join(format!("consumer-server-proxy-{i}-config.yaml"))
-                    .display()
-                    .to_string();
-
                 services.insert(
                     format!("consumer-server-proxy-{i}"),
-                    DockerService::default()
-                        .with_image(self.lps_rust_image_name())
-                        .with_container_name(format!("lps-consumer-server-proxy-{i}"))
-                        .with_command(format!("tcp-proxy --config-file {config_file}"))
-                        .with_volumes(vec![self.container_work_dir_volume_mount()])
-                        .with_networks(vec![self.service_network_name()])
-                        .with_unless_stopped(),
+                    self.consumer_server_proxy_docker_service(i),
                 );
             }
 
@@ -682,7 +664,7 @@ impl Config {
                 .to_string();
 
             services.insert(
-                format!("consumer-{i}"),
+                self.amqp_consumer_service_key(i),
                 DockerService::default()
                     .with_image(self.lps_rust_image_name())
                     .with_container_name(format!("lps-consumer-{i}"))
@@ -727,6 +709,9 @@ impl Config {
             .with_manual_profile()
     }
 
+    /// device -> ars-comp-1-proxy-{i} -> producer-{i} -> rabbitmq
+    ///   -> (consumer-amqp-proxy-{i}) -> consumer-{i}
+    ///   -> (consumer-server-proxy-{i}) -> ars-comp-2-proxy-{i} -> consumers-server-proxy -> ...
     pub fn amqp_docker_compose(&self) -> DockerCompose {
         let networks = [(self.service_network_name(), self.docker_compose_network())]
             .into_iter()
@@ -738,8 +723,10 @@ impl Config {
         services.extend(self.server_docker_services());
         services.extend(self.deduplication_docker_services());
         services.insert(String::from("device"), self.device_docker_service());
+        services.extend(self.amqp_ars_comp_1_docker_services());
         services.extend(self.amqp_producers_docker_service());
         services.extend(self.amqp_consumers_docker_service());
+        services.extend(self.ars_comp_2_docker_services(self.amqp.consumers_count()));
         services.insert(String::from("validator"), self.validator_docker_service());
         services.insert(String::from("scripts"), self.scripts_docker_service());
 
@@ -785,6 +772,36 @@ impl Config {
         .context("Failed to write docker compose file")?;
 
         Ok(())
+    }
+
+    // Compose service key of the amqp consumer
+    fn amqp_consumer_service_key(&self, i: u32) -> String {
+        format!("consumer-{i}")
+    }
+
+    pub fn amqp_consumers_wait_before_start(&self) -> Option<Duration> {
+        self.amqp.consumers.wait_before_start
+    }
+
+    /// Compose service keys of the amqp consumers, started after `wait_before_start`.
+    pub fn amqp_consumer_service_keys(&self) -> Vec<String> {
+        (0..self.amqp.consumers_count())
+            .map(|i| self.amqp_consumer_service_key(i))
+            .collect()
+    }
+
+    /// Compose service keys started as soon as the broker is ready.
+    ///
+    /// Excludes the consumers and the manual-profile services (validator, scripts),
+    /// because naming a profiled service explicitly in `up` would activate it.
+    pub fn amqp_pre_consumer_service_keys(&self) -> Vec<String> {
+        let consumers = self.amqp_consumer_service_keys();
+
+        self.amqp_docker_compose()
+            .services
+            .into_keys()
+            .filter(|key| !consumers.contains(key) && key != "validator" && key != "scripts")
+            .collect()
     }
 }
 
@@ -877,8 +894,14 @@ pub struct AmqpConsumersConfig {
     pub consumers_count: u32,
     #[serde(with = "humantime_serde")]
     pub reconnect_duration: Duration,
+    /// TCP proxy between the broker and consumer-{i}
     pub amqp_proxy: Option<ProxyConfig>,
+    /// TCP proxy between consumer-{i} and ars-comp-2-proxy-{i}
     pub server_proxy: Option<ProxyConfig>,
+    /// If set, the runner starts every other service once the broker is ready,
+    /// waits this long, and only then starts the consumers (consumer-{i}).
+    #[serde(default, with = "humantime_serde")]
+    pub wait_before_start: Option<Duration>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -958,10 +981,30 @@ fn default_socket_addr() -> SocketAddr {
     SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080)
 }
 
-// Mqtt config
+fn default_lps_rust_image() -> String {
+    String::from("jadkhaddad/lps-rs:0.1.0")
+}
+
+fn default_lps_scripts_image() -> String {
+    String::from("jadkhaddad/lps-scripts:0.1.0")
+}
+
+fn default_lps_gleam_image() -> String {
+    String::from("jadkhaddad/lps-gleam:0.1.0")
+}
+
+fn default_lps_mqtt_python_image() -> String {
+    String::from("jadkhaddad/lps-mqtt-python:0.1.0")
+}
+
+fn default_lps_mqtt_hivemq_image() -> String {
+    String::from("jadkhaddad/lps-mqtt-hivemq:0.1.0")
+}
+
+// ARS proxies and consumer server proxy (shared by amqp and mqtt)
 
 impl Config {
-    /// Used for all mqtt http components as HTTP_PORT
+    /// Used for all python http components (ars proxies, legacy proxies) as HTTP_PORT
     fn default_http_port(&self) -> String {
         self.default_http_port_u16().to_string()
     }
@@ -974,6 +1017,156 @@ impl Config {
         self.lps_mqtt_python_image.clone()
     }
 
+    /// Runs a python script from the image's `/scripts`.
+    ///
+    /// The python services share the `/app` mount and each script creates `logs`
+    /// with a non-atomic exists-check + `os.makedirs`, so services starting at the
+    /// same time race and crash with `FileExistsError`. Creating it in the shell
+    /// first (`mkdir -p` is idempotent) means the script always finds it.
+    fn python_script_command(&self, script: &str) -> String {
+        format!("sh -c \"mkdir -p logs && exec python3 /scripts/{script}\"")
+    }
+
+    fn ars_comp_1_proxy_service_key(&self, i: u32) -> String {
+        format!("ars-comp-1-proxy-{i}")
+    }
+
+    fn ars_comp_1_proxy_container_name(&self, i: u32) -> String {
+        format!("lps-ars-comp-1-proxy-{i}")
+    }
+
+    fn ars_comp_2_proxy_service_key(&self, i: u32) -> String {
+        format!("ars-comp-2-proxy-{i}")
+    }
+
+    fn ars_comp_2_proxy_container_name(&self, i: u32) -> String {
+        format!("lps-ars-comp-2-proxy-{i}")
+    }
+
+    fn consumer_server_proxy_container_name(&self, i: u32) -> String {
+        format!("lps-consumer-server-proxy-{i}")
+    }
+
+    /// The URL the device pushes to for producer slot `i`
+    fn ars_comp_1_proxy_push_url(&self, i: u32) -> String {
+        format!(
+            "http://{}:{}/api/v1/simple",
+            self.ars_comp_1_proxy_service_key(i),
+            self.default_http_port()
+        )
+    }
+
+    /// The URL a consumer pushes to:
+    /// consumer-{i} -> (consumer-server-proxy-{i} if configured) -> ars-comp-2-proxy-{i}
+    fn consumer_target_url(&self, i: u32, server_proxy: Option<&ProxyConfig>) -> String {
+        let (domain, port) = server_proxy
+            .map(|proxy| {
+                (
+                    self.consumer_server_proxy_container_name(i),
+                    proxy.socket_addr.port(),
+                )
+            })
+            .unwrap_or_else(|| {
+                (
+                    self.ars_comp_2_proxy_container_name(i),
+                    self.default_http_port_u16(),
+                )
+            });
+
+        format!("http://{domain}:{port}/ID_REQ_KC_STORE7D3BPACKET")
+    }
+
+    /// TCP proxy config: consumer-{i} -> consumer-server-proxy-{i} -> ars-comp-2-proxy-{i}
+    fn consumer_server_proxy_config_file(&self, i: u32, proxy: &ProxyConfig) -> ConfigFile {
+        ConfigFile {
+            name: format!("consumer-server-proxy-{i}-config.yaml"),
+            ty: ConfigType::TcpProxy(CrateTcpProxyConfig {
+                tasks: vec![CrateTcpProxyTask {
+                    socket_addr: proxy.socket_addr,
+                    upstream_domain: self.ars_comp_2_proxy_container_name(i),
+                    upstream_port: self.default_http_port_u16(),
+                    connection: proxy.connection,
+                    connections: proxy.connections.clone(),
+                }],
+                results_file: PathBuf::from(self.container_work_dir())
+                    .join(format!("consumer-server-proxy-{i}-results.json")),
+                seed: self.seed.map(|seed| seed + i as u64),
+            }),
+        }
+    }
+
+    fn consumer_server_proxy_docker_service(&self, i: u32) -> DockerService {
+        let config_file = PathBuf::from(self.container_work_dir())
+            .join(format!("consumer-server-proxy-{i}-config.yaml"))
+            .display()
+            .to_string();
+
+        DockerService::default()
+            .with_image(self.lps_rust_image_name())
+            .with_container_name(self.consumer_server_proxy_container_name(i))
+            .with_command(format!("tcp-proxy --config-file {config_file}"))
+            .with_volumes(vec![self.container_work_dir_volume_mount()])
+            .with_networks(vec![self.service_network_name()])
+            .with_unless_stopped()
+    }
+
+    /// ars-comp-1-proxy-{i} -> `target_url` (amqp producer or mqtt legacy-proxy-1)
+    fn ars_comp_1_proxy_docker_service(&self, i: u32, target_url: String) -> DockerService {
+        DockerService::default()
+            .with_image(self.lps_mqtt_python_image_name())
+            .with_container_name(self.ars_comp_1_proxy_container_name(i))
+            .with_command(self.python_script_command("ars_comp_1_proxy.py"))
+            .with_environment(
+                [
+                    (
+                        String::from("SERVICE_NAME"),
+                        self.ars_comp_1_proxy_service_key(i),
+                    ),
+                    (String::from("HTTP_PORT"), self.default_http_port()),
+                    (String::from("TARGET_URL"), target_url),
+                ]
+                .into(),
+            )
+            .with_volumes(vec![self.container_work_dir_volume_mount()])
+            .with_networks(vec![self.service_network_name()])
+            .with_unless_stopped()
+    }
+
+    /// ars-comp-2-proxy-{i} -> consumers-server-proxy, one per consumer
+    fn ars_comp_2_docker_services(&self, count: u32) -> BTreeMap<String, DockerService> {
+        let mut services = BTreeMap::new();
+
+        for i in 0..count {
+            services.insert(
+                self.ars_comp_2_proxy_service_key(i),
+                DockerService::default()
+                    .with_image(self.lps_mqtt_python_image_name())
+                    .with_container_name(self.ars_comp_2_proxy_container_name(i))
+                    .with_command(self.python_script_command("ars_comp_2_proxy.py"))
+                    .with_environment(
+                        [
+                            (
+                                String::from("SERVICE_NAME"),
+                                self.ars_comp_2_proxy_service_key(i),
+                            ),
+                            (String::from("HTTP_PORT"), self.default_http_port()),
+                            (String::from("TARGET_URL"), self.consumers_server_push_url()),
+                        ]
+                        .into(),
+                    )
+                    .with_volumes(vec![self.container_work_dir_volume_mount()])
+                    .with_networks(vec![self.service_network_name()])
+                    .with_unless_stopped(),
+            );
+        }
+
+        services
+    }
+}
+
+// Mqtt config
+
+impl Config {
     fn lps_mqtt_hivemq_image_name(&self) -> String {
         self.lps_mqtt_hivemq_image.clone()
     }
@@ -1083,38 +1276,6 @@ impl Config {
             .with_depends_on_completed(self.mosquitto_init_container_name_key())
     }
 
-    fn ars_comp_2_proxy_container_name(&self, i: u32) -> String {
-        format!("lps-ars-comp-2-proxy-{i}")
-    }
-
-    fn mqtt_consumer_server_proxy_container_name(&self, i: u32) -> String {
-        format!("lps-consumer-server-proxy-{i}")
-    }
-
-    /// The URL legacy-proxy-2-{i} (the mqtt consumer) pushes to:
-    /// legacy-proxy-2-{i} -> (consumer-server-proxy-{i} if configured) -> ars-comp-2-proxy-{i}
-    fn mqtt_consumer_target_url(&self, i: u32) -> String {
-        let (domain, port) = self
-            .mqtt
-            .consumers
-            .server_proxy
-            .as_ref()
-            .map(|proxy| {
-                (
-                    self.mqtt_consumer_server_proxy_container_name(i),
-                    proxy.socket_addr.port(),
-                )
-            })
-            .unwrap_or_else(|| {
-                (
-                    self.ars_comp_2_proxy_container_name(i),
-                    self.default_http_port_u16(),
-                )
-            });
-
-        format!("http://{domain}:{port}/ID_REQ_KC_STORE7D3BPACKET")
-    }
-
     fn mqtt_devices_config_files(&self) -> Vec<ConfigFile> {
         vec![ConfigFile {
             name: self.device_config_file(),
@@ -1125,12 +1286,7 @@ impl Config {
                 max_events: Some(self.devices.max_events),
                 retry_duration: self.devices.retry_duration,
                 server_push_urls: (0..self.mqtt.producers_count())
-                    .map(|i| {
-                        format!(
-                            "http://ars-comp-1-proxy-{i}:{}/api/v1/simple",
-                            self.default_http_port()
-                        )
-                    })
+                    .map(|i| self.ars_comp_1_proxy_push_url(i))
                     .collect(),
                 results_file: PathBuf::from(self.container_work_dir())
                     .join(self.device_results_file()),
@@ -1146,31 +1302,14 @@ impl Config {
 
         for i in 0..self.mqtt.producers_count() {
             services.insert(
-                format!("ars-comp-1-proxy-{i}"),
-                DockerService::default()
-                    .with_image(self.lps_mqtt_python_image_name())
-                    .with_container_name(format!("lps-ars-comp-1-proxy-{i}"))
-                    .with_command(String::from("python3 /scripts/ars_comp_1_proxy.py"))
-                    .with_environment(
-                        [
-                            (
-                                String::from("SERVICE_NAME"),
-                                format!("ars-comp-1-proxy-{i}"),
-                            ),
-                            (String::from("HTTP_PORT"), self.default_http_port()),
-                            (
-                                String::from("TARGET_URL"),
-                                format!(
-                                    "http://lps-legacy-proxy-1-{i}:{}/ID_REQ_KC_STORE7D3BPACKET",
-                                    self.default_http_port()
-                                ),
-                            ),
-                        ]
-                        .into(),
-                    )
-                    .with_volumes(vec![self.container_work_dir_volume_mount()])
-                    .with_networks(vec![self.service_network_name()])
-                    .with_unless_stopped(),
+                self.ars_comp_1_proxy_service_key(i),
+                self.ars_comp_1_proxy_docker_service(
+                    i,
+                    format!(
+                        "http://lps-legacy-proxy-1-{i}:{}/ID_REQ_KC_STORE7D3BPACKET",
+                        self.default_http_port()
+                    ),
+                ),
             );
 
             services.insert(
@@ -1178,7 +1317,7 @@ impl Config {
                 DockerService::default()
                     .with_image(self.lps_mqtt_python_image_name())
                     .with_container_name(format!("lps-legacy-proxy-1-{i}"))
-                    .with_command(String::from("python3 /scripts/legacy_proxy_1.py"))
+                    .with_command(self.python_script_command("legacy_proxy_1.py"))
                     .with_environment(
                         [
                             (String::from("SERVICE_NAME"), format!("legacy-proxy-1-{i}")),
@@ -1189,36 +1328,6 @@ impl Config {
                             (String::from("HTTP_PORT"), self.default_http_port()),
                             (String::from("MQTT_BROKER"), self.hive_mq_container_name()),
                             (String::from("MQTT_PORT"), self.hive_mq_container_port()),
-                        ]
-                        .into(),
-                    )
-                    .with_volumes(vec![self.container_work_dir_volume_mount()])
-                    .with_networks(vec![self.service_network_name()])
-                    .with_unless_stopped(),
-            );
-        }
-
-        services
-    }
-
-    fn mqtt_ars_comp_2_docker_service(&self) -> BTreeMap<String, DockerService> {
-        let mut services = BTreeMap::new();
-
-        for i in 0..self.mqtt.consumers_count() {
-            services.insert(
-                format!("ars-comp-2-proxy-{i}"),
-                DockerService::default()
-                    .with_image(self.lps_mqtt_python_image_name())
-                    .with_container_name(self.ars_comp_2_proxy_container_name(i))
-                    .with_command(String::from("python3 /scripts/ars_comp_2_proxy.py"))
-                    .with_environment(
-                        [
-                            (
-                                String::from("SERVICE_NAME"),
-                                format!("ars-comp-2-proxy-{i}"),
-                            ),
-                            (String::from("HTTP_PORT"), self.default_http_port()),
-                            (String::from("TARGET_URL"), self.consumers_server_push_url()),
                         ]
                         .into(),
                     )
@@ -1257,23 +1366,7 @@ impl Config {
 
             // legacy-proxy-2-{i} -> consumer-server-proxy-{i} -> ars-comp-2-proxy-{i}
             if let Some(proxy) = self.mqtt.consumers.server_proxy.as_ref() {
-                let consumer_server_proxy_config = CrateTcpProxyConfig {
-                    tasks: vec![CrateTcpProxyTask {
-                        socket_addr: proxy.socket_addr,
-                        upstream_domain: self.ars_comp_2_proxy_container_name(i),
-                        upstream_port: self.default_http_port_u16(),
-                        connection: proxy.connection,
-                        connections: proxy.connections.clone(),
-                    }],
-                    results_file: PathBuf::from(self.container_work_dir())
-                        .join(format!("consumer-server-proxy-{i}-results.json")),
-                    seed: self.seed.map(|seed| seed + i as u64),
-                };
-
-                config_files.push(ConfigFile {
-                    name: format!("consumer-server-proxy-{i}-config.yaml"),
-                    ty: ConfigType::TcpProxy(consumer_server_proxy_config),
-                });
+                config_files.push(self.consumer_server_proxy_config_file(i, proxy));
             }
         }
 
@@ -1303,20 +1396,9 @@ impl Config {
             }
 
             if self.mqtt.consumers.server_proxy.is_some() {
-                let config_file = PathBuf::from(self.container_work_dir())
-                    .join(format!("consumer-server-proxy-{i}-config.yaml"))
-                    .display()
-                    .to_string();
-
                 services.insert(
                     format!("consumer-server-proxy-{i}"),
-                    DockerService::default()
-                        .with_image(self.lps_rust_image_name())
-                        .with_container_name(self.mqtt_consumer_server_proxy_container_name(i))
-                        .with_command(format!("tcp-proxy --config-file {config_file}"))
-                        .with_volumes(vec![self.container_work_dir_volume_mount()])
-                        .with_networks(vec![self.service_network_name()])
-                        .with_unless_stopped(),
+                    self.consumer_server_proxy_docker_service(i),
                 );
             }
 
@@ -1353,7 +1435,13 @@ impl Config {
                                 String::from("SERVICE_NAME"),
                                 self.mqtt_legacy_proxy_2_service_key(i),
                             ),
-                            (String::from("TARGET_URL"), self.mqtt_consumer_target_url(i)),
+                            (
+                                String::from("TARGET_URL"),
+                                self.consumer_target_url(
+                                    i,
+                                    self.mqtt.consumers.server_proxy.as_ref(),
+                                ),
+                            ),
                             (String::from("MQTT_HOST"), broker_domain),
                             (String::from("MQTT_PORT"), broker_port.to_string()),
                         ]
@@ -1405,7 +1493,7 @@ impl Config {
         services.extend(self.deduplication_docker_services());
         services.insert(String::from("device"), self.device_docker_service());
         services.extend(self.mqtt_producers_and_ars_comp_1_docker_service());
-        services.extend(self.mqtt_ars_comp_2_docker_service());
+        services.extend(self.ars_comp_2_docker_services(self.mqtt.consumers_count()));
         services.extend(self.mqtt_consumers_docker_service());
         services.insert(String::from("validator"), self.validator_docker_service());
         services.insert(String::from("scripts"), self.scripts_docker_service());

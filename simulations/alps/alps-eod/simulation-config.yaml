@@ -3,24 +3,25 @@ simulation_docker_network: "lps-simulation-net"
 lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
 lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
 lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
+lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 
-seed: 3
+seed: 6
 
 devices:
   devices_count: 1
-  max_event_interval: 100ms
-  min_event_interval: 100ms
+  max_event_interval: 1ms
+  min_event_interval: 1ms
   retry_duration: 250ms
   max_events: 1
-  wait_before_start: 3s
+  wait_before_start: 7500ms
 
 server:
   socket_addr: 0.0.0.0:8080
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
-  max_work_duration: 5s
-  max_response_duration: 0ms
-  shutdown_after_idle_duration: 5s
+  max_work_duration: 0s
+  max_response_duration: 0s
+  shutdown_after_idle_duration: 20s
   server_count: 1
   deduplication: True
 
@@ -31,12 +32,21 @@ amqp:
     socket_addr: 0.0.0.0:5672
   consumers:
     consumers_count: 1
-    reconnect_duration: 500ms
+    reconnect_duration: 1ms
+    server_proxy:
+      socket_addr: 0.0.0.0:9081
+      connection:
+        failure_rate: 0.0
+        max_up_duration: 1d
+        min_up_duration: 1d
+        latency:
+          max_downstream_latency: 27ms   # 189 bytes x 27ms = 5103ms = 5.103s
     amqp_proxy:
       socket_addr: 0.0.0.0:9090
-      failure_rate: 0.0
-      max_up_duration: 4s
+      connection:
+        failure_rate: 0.0
+        max_up_duration: 4s
 
 # These one needs filtering
-# python3 runner/runner.py --protocol "amqp" --runs 60 --base-dir "simulations/alps/alps-eod" --base-config "simulations/alps/alps-eod/simulation-config.yaml" --log-dir "simulations/alps/alps-eod/logs"
+# python3 runner/runner.py --protocol "amqp" --runs 60 --sleep 5 --base-dir "simulations/alps/alps-eod" --base-config "simulations/alps/alps-eod/simulation-config.yaml" --log-dir "simulations/alps/alps-eod/logs"
 # python3 runner/runner.py --protocol "amqp" --start-index 61 --runs 120 --base-dir "simulations/alps/alps-eod" --base-config "simulations/alps/alps/alps-eod/simulation-config.yaml" --log-dir "simulations/alps/alps-eod/logs"

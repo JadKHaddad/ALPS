@@ -1,4 +1,0 @@
-socket_addr: 0.0.0.0:5672
-rabbit_mq_url: amqp://lps-rabbitmq:5672
-queues_count: 2
-purge_queues_on_start: true

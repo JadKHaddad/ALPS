@@ -39,6 +39,9 @@ pub struct Config {
     pub queues_count: u32,
     #[serde(default = "default_results_file")]
     pub results_file: PathBuf,
+    /// If set, work requests are sent in the ars-comp-2 simple call format: `{ "id": ..., "body": ... }`
+    #[serde(default)]
+    pub use_simple_call_format: bool,
 }
 
 impl Default for Config {
@@ -49,6 +52,7 @@ impl Default for Config {
             reconnect_duration: default_reconnect_duration(),
             queues_count: default_queues_count(),
             results_file: default_results_file(),
+            use_simple_call_format: false,
         }
     }
 }

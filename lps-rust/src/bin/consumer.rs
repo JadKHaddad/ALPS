@@ -32,6 +32,33 @@ pub struct Args {
     config_file: PathBuf,
 }
 
+/// The request body ars-comp-2-proxy accepts on `/ID_REQ_KC_STORE7D3BPACKET`
+/// (its pydantic `Message` model: `id: str`, `body: str`).
+#[derive(Debug, serde::Serialize)]
+struct SimpleCall {
+    id: String,
+    /// The original event, serialized as a JSON string
+    body: String,
+}
+
+impl SimpleCall {
+    /// `id` is taken from the original event's `id` field if it has one,
+    /// otherwise `fallback_id` is used.
+    fn new<T: serde::Serialize>(original: &T, fallback_id: String) -> anyhow::Result<Self> {
+        let value = serde_json::to_value(original).context("Failed to serialize event")?;
+
+        let id = match value.get("id") {
+            Some(serde_json::Value::String(id)) => id.clone(),
+            Some(id) if !id.is_null() => id.to_string(),
+            _ => fallback_id,
+        };
+
+        let body = serde_json::to_string(&value).context("Failed to serialize event body")?;
+
+        Ok(Self { id, body })
+    }
+}
+
 #[derive(Clone)]
 struct JobsSate {
     jobs: Arc<Mutex<Vec<Job>>>,
@@ -82,6 +109,7 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
         .into_iter()
         .map(|queue| {
             let push_url = config.server_push_url.clone();
+            let use_simple_call_format = config.use_simple_call_format;
             let conn = conn.clone();
             let state = state.clone();
 
@@ -129,7 +157,23 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
 
                         state.add_job(job.clone()).await;
 
-                        let response = client.post(&push_url).json(&event.original).send().await;
+                        let request = client.post(&push_url);
+
+                        let request = if use_simple_call_format {
+                            let simple_call = SimpleCall::new(
+                                &event.original,
+                                format!("{queue}-{}", delivery.delivery_tag),
+                            )
+                            .context(format!("Failed to build simple call: {event:?}"))?;
+
+                            tracing::debug!(%queue, ?simple_call, "Using simple call format");
+
+                            request.json(&simple_call)
+                        } else {
+                            request.json(&event.original)
+                        };
+
+                        let response = request.send().await;
 
                         match response {
                             Ok(response) if response.status().is_success() => {
