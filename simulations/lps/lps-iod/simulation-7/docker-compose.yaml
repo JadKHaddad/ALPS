@@ -6,7 +6,7 @@ services:
   ars-comp-1-proxy-0:
     image: jadkhaddad/lps-mqtt-python:0.1.0
     container_name: lps-ars-comp-1-proxy-0
-    command: python3 /scripts/ars_comp_1_proxy.py
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_1_proxy.py"
     environment:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-1-proxy-0
@@ -19,7 +19,7 @@ services:
   ars-comp-2-proxy-0:
     image: jadkhaddad/lps-mqtt-python:0.1.0
     container_name: lps-ars-comp-2-proxy-0
-    command: python3 /scripts/ars_comp_2_proxy.py
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_2_proxy.py"
     environment:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-2-proxy-0
@@ -32,7 +32,7 @@ services:
   ars-comp-2-proxy-1:
     image: jadkhaddad/lps-mqtt-python:0.1.0
     container_name: lps-ars-comp-2-proxy-1
-    command: python3 /scripts/ars_comp_2_proxy.py
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_2_proxy.py"
     environment:
       HTTP_PORT: '8080'
       SERVICE_NAME: ars-comp-2-proxy-1
@@ -92,7 +92,7 @@ services:
   legacy-proxy-1-0:
     image: jadkhaddad/lps-mqtt-python:0.1.0
     container_name: lps-legacy-proxy-1-0
-    command: python3 /scripts/legacy_proxy_1.py
+    command: sh -c "mkdir -p logs && exec python3 /scripts/legacy_proxy_1.py"
     environment:
       HTTP_PORT: '8080'
       MQTT_BROKER: lps-hivemq

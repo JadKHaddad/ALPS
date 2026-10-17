@@ -1,0 +1,39 @@
+amqp:
+  consumers:
+    consumers_count: 2
+    reconnect_duration: 1ms
+    server_proxy:
+      connection:
+        failure_rate: 0.0
+        latency:
+          max_upstream_latency: 10ms
+        max_up_duration: 1d
+        min_up_duration: 1d
+      socket_addr: 0.0.0.0:9081
+  producers:
+    producers_count: 1
+    socket_addr: 0.0.0.0:5672
+  queues_count: 2
+devices:
+  devices_count: 1
+  max_event_interval: 1s
+  max_events: 2
+  min_event_interval: 1s
+  retry_duration: 250ms
+  wait_before_start: 10s
+lps_gleam_image: jadkhaddad/lps-gleam:0.1.0
+lps_mqtt_python_image: jadkhaddad/lps-mqtt-python:0.1.0
+lps_rust_image: jadkhaddad/lps-rs:0.1.0
+lps_scripts_image: jadkhaddad/lps-scripts:0.1.0
+seed: 6
+server:
+  deduplication: true
+  expose_socket_addr: 0.0.0.0:8080
+  failure_rate: 0.0
+  max_response_duration: 0s
+  max_work_duration: 0s
+  server_count: 1
+  shutdown_after_idle_duration: 20s
+  socket_addr: 0.0.0.0:8080
+simulation_dir: simulations/alps/alps-iod/simulation-51
+simulation_docker_network: lps-simulation-net

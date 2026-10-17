@@ -1,28 +1,28 @@
 [
   {
     "device_id": "0",
-    "event_id": 1792172989373,
-    "arrived_at": "2026-10-16T17:49:55.620605951Z",
-    "finished_at": "2026-10-16T17:49:55.621722397Z",
+    "event_id": 1792232654131,
+    "arrived_at": "2026-10-17T10:24:20.464130011Z",
+    "finished_at": "2026-10-17T10:24:20.465249288Z",
     "original": {
       "branch": "Branch",
       "headnumber": "Headnumber",
       "incremental_id": null,
       "phone": "0",
-      "triggertime": "2026-10-16T17:49:49.373290Z"
+      "triggertime": "2026-10-17T10:24:14.131631Z"
     }
   },
   {
     "device_id": "0",
-    "event_id": 1792172989373,
-    "arrived_at": "2026-10-16T17:50:00.912191270Z",
-    "finished_at": "2026-10-16T17:50:00.913584871Z",
+    "event_id": 1792232654131,
+    "arrived_at": "2026-10-17T10:24:25.729514752Z",
+    "finished_at": "2026-10-17T10:24:25.730720554Z",
     "original": {
       "branch": "Branch",
       "headnumber": "Headnumber",
       "incremental_id": null,
       "phone": "0",
-      "triggertime": "2026-10-16T17:49:49.373290Z"
+      "triggertime": "2026-10-17T10:24:14.131631Z"
     }
   }
 ]
