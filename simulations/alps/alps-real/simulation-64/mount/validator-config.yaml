@@ -1,5 +1,0 @@
-server_results_file: server-results.json
-device_results_file: device-results.json
-duplicate_events_file: duplicate-events.json
-out_of_order_events_file: out-of-order-events.json
-rates_file: rates-results.json

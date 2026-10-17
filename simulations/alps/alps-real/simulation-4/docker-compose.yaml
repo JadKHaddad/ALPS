@@ -3,6 +3,84 @@ networks:
     external: true
     name: lps-simulation-net
 services:
+  ars-comp-1-proxy-0:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-ars-comp-1-proxy-0
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_1_proxy.py"
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-1-proxy-0
+      TARGET_URL: http://lps-producer-0:5672/work
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
+  ars-comp-1-proxy-1:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-ars-comp-1-proxy-1
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_1_proxy.py"
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-1-proxy-1
+      TARGET_URL: http://lps-producer-1:5672/work
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
+  ars-comp-1-proxy-2:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-ars-comp-1-proxy-2
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_1_proxy.py"
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-1-proxy-2
+      TARGET_URL: http://lps-producer-2:5672/work
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
+  ars-comp-2-proxy-0:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-ars-comp-2-proxy-0
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_2_proxy.py"
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-2-proxy-0
+      TARGET_URL: http://lps-consumers-server-proxy:8080/work
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
+  ars-comp-2-proxy-1:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-ars-comp-2-proxy-1
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_2_proxy.py"
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-2-proxy-1
+      TARGET_URL: http://lps-consumers-server-proxy:8080/work
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
+  ars-comp-2-proxy-2:
+    image: jadkhaddad/lps-mqtt-python:0.1.0
+    container_name: lps-ars-comp-2-proxy-2
+    command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_2_proxy.py"
+    environment:
+      HTTP_PORT: '8080'
+      SERVICE_NAME: ars-comp-2-proxy-2
+      TARGET_URL: http://lps-consumers-server-proxy:8080/work
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
   consumer-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-0
@@ -210,6 +288,33 @@ services:
     - lps-net
     volumes:
     - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+  server-tcp-proxy-0:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server-tcp-proxy-0
+    command: tcp-proxy --config-file /app/server-tcp-proxy-0-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
+  server-tcp-proxy-1:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server-tcp-proxy-1
+    command: tcp-proxy --config-file /app/server-tcp-proxy-1-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
+  server-tcp-proxy-2:
+    image: jadkhaddad/lps-rs:0.1.0
+    container_name: lps-server-tcp-proxy-2
+    command: tcp-proxy --config-file /app/server-tcp-proxy-2-config.yaml
+    networks:
+    - lps-net
+    volumes:
+    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real/simulation-4/mount:/app
+    restart: unless-stopped
   validator:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-validator

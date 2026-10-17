@@ -3,6 +3,7 @@ simulation_docker_network: "lps-simulation-net"
 lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
 lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
 lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
+lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 
 devices:
   devices_count: 50
@@ -21,7 +22,13 @@ server:
   server_count: 3
   use_gs_prod_workload: True 
   background_load_per_second: 70
-  deduplication: True 
+  deduplication: True
+  tcp_proxy:
+    socket_addr: 0.0.0.0:9000
+    connection:
+      failure_rate: 0.0
+      max_up_duration: 1d
+      min_up_duration: 1d
 
 amqp:
   queues_count: 3
@@ -33,14 +40,16 @@ amqp:
     reconnect_duration: 50ms
     amqp_proxy:
       socket_addr: 0.0.0.0:9090
-      failure_rate: 0.0
-      max_up_duration: 1d
-      min_up_duration: 1d
+      connection:
+        failure_rate: 0.0
+        max_up_duration: 1d
+        min_up_duration: 1d
     server_proxy:
       socket_addr: 0.0.0.0:9081
-      failure_rate: 0.0
-      max_up_duration: 1d
-      min_up_duration: 1d
+      connection:
+        failure_rate: 0.0
+        max_up_duration: 1d
+        min_up_duration: 1d
 
-# python3 runner/runner.py --protocol "amqp" --runs 70 --base-dir "simulations/alps/alps-real-normal" --base-config "simulations/alps/alps-real-normal/simulation-config.yaml"
+# python3 runner/runner.py --protocol "amqp" --runs 70 --base-dir "simulations/alps/alps-real-normal" --base-config "simulations/alps/alps-real-normal/simulation-config.yaml" --log-dir "simulations/alps/alps-real-normal/logs"
 # python3 runner/runner.py --protocol "amqp" --start-index 61 --runs 70 --base-dir "simulations/alps/alps-real-normal" --base-config "simulations/alps/alps-real-normal/simulation-config.yaml"

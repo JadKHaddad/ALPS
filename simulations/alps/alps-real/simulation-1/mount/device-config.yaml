@@ -1,8 +1,8 @@
 devices_count: 50
 server_push_urls:
-- http://lps-producer-0:5672/work
-- http://lps-producer-1:5672/work
-- http://lps-producer-2:5672/work
+- http://ars-comp-1-proxy-0:8080/api/v1/simple
+- http://ars-comp-1-proxy-1:8080/api/v1/simple
+- http://ars-comp-1-proxy-2:8080/api/v1/simple
 max_event_interval: 5s
 min_event_interval: 5s
 max_events: 60

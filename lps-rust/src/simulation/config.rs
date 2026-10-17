@@ -215,29 +215,53 @@ impl Config {
         SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), 8080)
     }
 
-    fn deduplication_or_server_proxy_push_urls(&self) -> Vec<String> {
+    /// What sits directly behind the consumers-server-proxy (or the server-tcp-proxy) for slot `i`:
+    /// deduplication-{i} if enabled, otherwise server-server-proxy-{i}
+    fn server_entry_domain_and_port(&self, i: u32) -> (String, u16) {
         if self.server.deduplication {
-            (0..self.server.server_count())
-                .map(|i| {
-                    format!(
-                        "http://lps-deduplication-{i}:{}/work",
-                        self.deduplication_http_port_u16()
-                    )
-                })
-                .collect()
+            (
+                format!("lps-deduplication-{i}"),
+                self.deduplication_http_port_u16(),
+            )
         } else {
-            (0..self.server.server_count())
-                .map(|i| {
-                    format!(
-                        "http://lps-server-server-proxy-{i}:{}/work",
-                        self.server_proxy_default_socket_addr().port()
-                    )
-                })
-                .collect()
+            (
+                format!("lps-server-server-proxy-{i}"),
+                self.server_proxy_default_socket_addr().port(),
+            )
         }
     }
 
-    /// One consumers-server-proxy -> server-server-proxies or (if deduplication) deduplication -> server-server-proxies)
+    fn server_tcp_proxy_service_key(&self, i: u32) -> String {
+        format!("server-tcp-proxy-{i}")
+    }
+
+    fn server_tcp_proxy_container_name(&self, i: u32) -> String {
+        format!("lps-server-tcp-proxy-{i}")
+    }
+
+    fn server_tcp_proxy_config_file(&self, i: u32) -> String {
+        format!("server-tcp-proxy-{i}-config.yaml")
+    }
+
+    /// consumers-server-proxy -> (server-tcp-proxy-{i}) -> deduplication-{i} | server-server-proxy-{i}
+    fn deduplication_or_server_proxy_push_urls(&self) -> Vec<String> {
+        (0..self.server.server_count())
+            .map(|i| {
+                let (domain, port) = match self.server.tcp_proxy.as_ref() {
+                    Some(proxy) => (
+                        self.server_tcp_proxy_container_name(i),
+                        proxy.socket_addr.port(),
+                    ),
+                    None => self.server_entry_domain_and_port(i),
+                };
+
+                format!("http://{domain}:{port}/work")
+            })
+            .collect()
+    }
+
+    /// One consumers-server-proxy -> (server-tcp-proxies) -> server-server-proxies
+    ///   or (if deduplication) deduplication -> server-server-proxies
     /// Multiple server-server-proxies according to server count -> server
     /// One server
     fn server_config_files(&self) -> Vec<ConfigFile> {
@@ -262,6 +286,29 @@ impl Config {
                 seed: self.seed,
             }),
         });
+
+        // consumers-server-proxy -> server-tcp-proxy-{i} -> deduplication-{i} | server-server-proxy-{i}
+        if let Some(proxy) = self.server.tcp_proxy.as_ref() {
+            for i in 0..self.server.server_count() {
+                let (upstream_domain, upstream_port) = self.server_entry_domain_and_port(i);
+
+                config_files.push(ConfigFile {
+                    name: self.server_tcp_proxy_config_file(i),
+                    ty: ConfigType::TcpProxy(CrateTcpProxyConfig {
+                        tasks: vec![CrateTcpProxyTask {
+                            socket_addr: proxy.socket_addr,
+                            upstream_domain,
+                            upstream_port,
+                            connection: proxy.connection,
+                            connections: proxy.connections.clone(),
+                        }],
+                        results_file: PathBuf::from(self.container_work_dir())
+                            .join(format!("server-tcp-proxy-{i}-results.json")),
+                        seed: self.seed.map(|seed| seed + i as u64),
+                    }),
+                });
+            }
+        }
 
         config_files.push(ConfigFile {
             name: self.server_config_file(),
@@ -516,6 +563,28 @@ impl Config {
 
         services.insert(String::from("consumers-server-proxy"), service);
 
+        // The server-tcp-proxies: consumers-server-proxy -> server-tcp-proxy-{i}
+        //   -> deduplication-{i} | server-server-proxy-{i}
+        if self.server.tcp_proxy.is_some() {
+            for i in 0..self.server.server_count() {
+                let config_file = PathBuf::from(self.container_work_dir())
+                    .join(self.server_tcp_proxy_config_file(i))
+                    .display()
+                    .to_string();
+
+                services.insert(
+                    self.server_tcp_proxy_service_key(i),
+                    DockerService::default()
+                        .with_image(self.lps_rust_image_name())
+                        .with_container_name(self.server_tcp_proxy_container_name(i))
+                        .with_command(format!("tcp-proxy --config-file {config_file}"))
+                        .with_volumes(vec![self.container_work_dir_volume_mount()])
+                        .with_networks(vec![self.service_network_name()])
+                        .with_unless_stopped(),
+                );
+            }
+        }
+
         // The server-server-proxies
         for i in 0..self.server.server_count() {
             let config_file = PathBuf::from(self.container_work_dir())
@@ -711,7 +780,8 @@ impl Config {
 
     /// device -> ars-comp-1-proxy-{i} -> producer-{i} -> rabbitmq
     ///   -> (consumer-amqp-proxy-{i}) -> consumer-{i}
-    ///   -> (consumer-server-proxy-{i}) -> ars-comp-2-proxy-{i} -> consumers-server-proxy -> ...
+    ///   -> (consumer-server-proxy-{i}) -> ars-comp-2-proxy-{i} -> consumers-server-proxy
+    ///   -> (server-tcp-proxy-{i}) -> (deduplication-{i}) -> server-server-proxy-{i} -> server
     pub fn amqp_docker_compose(&self) -> DockerCompose {
         let networks = [(self.service_network_name(), self.docker_compose_network())]
             .into_iter()
@@ -846,6 +916,10 @@ pub struct ServerConfig {
     /// See [`CrateServerConfig::background_load_per_second`]
     #[serde(default)]
     background_load_per_second: Option<f64>,
+    /// TCP proxy between the consumers-server-proxy and deduplication-{i}
+    /// (or server-server-proxy-{i} without deduplication), one per server slot
+    #[serde(default)]
+    pub tcp_proxy: Option<ProxyConfig>,
 }
 
 impl ServerConfig {
