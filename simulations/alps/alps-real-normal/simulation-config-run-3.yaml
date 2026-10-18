@@ -26,6 +26,7 @@ devices:
   retry_duration: 500ms
   wait_before_start: 5s
 lps_gleam_image: jadkhaddad/lps-gleam:0.1.0
+lps_mqtt_python_image: jadkhaddad/lps-mqtt-python:0.1.0
 lps_rust_image: jadkhaddad/lps-rs:0.1.0
 lps_scripts_image: jadkhaddad/lps-scripts:0.1.0
 server:
