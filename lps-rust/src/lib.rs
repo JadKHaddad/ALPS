@@ -631,14 +631,37 @@ impl Failure {
 }
 
 #[derive(Debug, Serialize)]
-pub struct TcpConnectionDrop {
-    dropped_at: DateTime<Utc>,
+pub struct TcpConnectionEvent {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    dropped_at: Option<DateTime<Utc>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    accepted_at: Option<DateTime<Utc>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    refused_at: Option<DateTime<Utc>>,
 }
 
-impl TcpConnectionDrop {
-    pub fn new_now() -> Self {
+impl TcpConnectionEvent {
+    pub fn new_dropped_now() -> Self {
         Self {
-            dropped_at: Utc::now(),
+            dropped_at: Some(Utc::now()),
+            accepted_at: None,
+            refused_at: None,
+        }
+    }
+
+    pub fn new_accepted_now() -> Self {
+        Self {
+            dropped_at: None,
+            accepted_at: Some(Utc::now()),
+            refused_at: None,
+        }
+    }
+
+    pub fn new_refused_now() -> Self {
+        Self {
+            dropped_at: None,
+            accepted_at: None,
+            refused_at: Some(Utc::now()),
         }
     }
 }

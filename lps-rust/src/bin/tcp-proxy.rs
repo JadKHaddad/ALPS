@@ -7,7 +7,7 @@ use std::{net::SocketAddr, path::PathBuf, sync::Arc, time::Duration};
 
 use anyhow::Context;
 use lps_rust::{
-    TcpConnectionDrop, shutdown_signal,
+    TcpConnectionEvent, shutdown_signal,
     tcp_proxy::{Config, Connection, Latency},
 };
 use rand::{RngExt, SeedableRng, rngs::StdRng};
@@ -49,7 +49,7 @@ pub struct Args {
 
 #[derive(Debug)]
 struct State {
-    drops: Mutex<Vec<TcpConnectionDrop>>,
+    drops: Mutex<Vec<TcpConnectionEvent>>,
     results_file: PathBuf,
 }
 
@@ -61,7 +61,7 @@ impl State {
         }
     }
 
-    async fn push(&self, drop: TcpConnectionDrop) {
+    async fn push(&self, drop: TcpConnectionEvent) {
         let count = {
             let mut drops = self.drops.lock().await;
 
@@ -479,12 +479,14 @@ async fn main() -> Result<(), anyhow::Error> {
                     if fail {
                         tracing::warn!(conn_index, "Connection failed");
 
-                        state.push(TcpConnectionDrop::new_now()).await;
+                        state.push(TcpConnectionEvent::new_refused_now()).await;
 
                         continue;
                     }
 
                     tracing::info!(conn_index, addr=%task.socket_addr, "Connection accepted");
+
+                    state.push(TcpConnectionEvent::new_accepted_now()).await;
 
                     let state = state.clone();
 
@@ -512,7 +514,7 @@ async fn main() -> Result<(), anyhow::Error> {
                                 tracing::info!(conn_index, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying completed");
                             }
                             Err(_) => {
-                                state.push(TcpConnectionDrop::new_now()).await;
+                                state.push(TcpConnectionEvent::new_dropped_now()).await;
 
                                 tracing::warn!(conn_index, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying timed out");
                             }
