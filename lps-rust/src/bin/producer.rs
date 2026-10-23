@@ -57,7 +57,13 @@ impl AppState {
             .await
             .context("Failed to publish event")?
             .await
-            .context("Failed to confirm publish")?;
+            .context("Failed to confirm publish")
+            .and_then(|confirm| {
+                confirm
+                    .is_ack()
+                    .then_some(())
+                    .ok_or(anyhow::Error::msg("Message was not acknowledged"))
+            })?;
 
         Ok(())
     }
@@ -158,6 +164,10 @@ async fn main() -> Result<(), anyhow::Error> {
                     )
                     .await
                     .context("Failed to bind queue")?;
+
+                channel.confirm_select(ConfirmSelectOptions { nowait: false })
+                    .await
+                    .context("Failed to enable publisher confirms")?;
             }
 
             anyhow::Ok(channel)
