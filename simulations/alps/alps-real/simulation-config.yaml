@@ -37,13 +37,13 @@ amqp:
     socket_addr: 0.0.0.0:5672
   consumers:
     consumers_count: 3
-    reconnect_duration: 50ms
+    reconnect_duration: 0ms
     amqp_proxy:
       socket_addr: 0.0.0.0:9090
       connection:
         failure_rate: 0.2
-        max_up_duration: 300s
-        min_up_duration: 0s
+        max_up_duration: 105ms
+        min_up_duration: 105ms
     server_proxy:
       socket_addr: 0.0.0.0:9081
       connection:
@@ -51,5 +51,4 @@ amqp:
         max_up_duration: 84ms
         min_up_duration: 84ms
 
-# python3 runner/runner.py --protocol "amqp" --start-index 36 --runs 60 --base-dir "simulations/alps/alps-real" --base-config "simulations/alps/alps-real/simulation-config.yaml"  --log-dir "simulations/alps/alps-real/logs"
-# python3 runner/runner.py --protocol "amqp" --start-index 60 --runs 70 --base-dir "simulations/alps/alps-real" --base-config "simulations/alps/alps-real/simulation-config.yaml"  --log-dir "simulations/alps/alps-real/logs"
+# python3 runner/runner.py --protocol "amqp" --runs 10 --base-dir "simulations/alps/alps-real" --base-config "simulations/alps/alps-real/simulation-config.yaml"  --log-dir "simulations/alps/alps-real/logs"
