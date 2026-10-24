@@ -61,6 +61,7 @@ impl SimpleCall {
 
 #[derive(Clone)]
 struct JobsSate {
+    client: reqwest::Client,
     jobs: Arc<Mutex<Vec<Job>>>,
     jobs_file: PathBuf,
 }
@@ -68,6 +69,7 @@ struct JobsSate {
 impl JobsSate {
     fn new(jobs_file: PathBuf) -> Self {
         Self {
+            client: reqwest::Client::new(),
             jobs: Arc::new(Mutex::new(Vec::new())),
             jobs_file,
         }
@@ -135,8 +137,6 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
                         .await
                         .context("Failed to create basic consume")?;
 
-                    let client = reqwest::Client::new();
-
                     while let Some(delivery) = consumer.next().await {
                         let delivery = delivery.context("Failed to consume message")?;
 
@@ -157,7 +157,7 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
 
                         state.add_job(job.clone()).await;
 
-                        let request = client.post(&push_url);
+                        let request = state.client.post(&push_url);
 
                         let request = if use_simple_call_format {
                             let simple_call = SimpleCall::new(
@@ -266,8 +266,6 @@ async fn main() -> Result<(), anyhow::Error> {
             tracing::info!("Received shutdown signal, shutting down");
         }
         _ = async move {
-
-
             loop {
                 tracing::info!("Connecting to RabbitMQ");
 
