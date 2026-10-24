@@ -203,3 +203,4 @@ if __name__ == "__main__":
 # python3 runner/check.py simulations/alps/alps-iod --out simulations/alps/alps-iod.csv -v
 # python3 runner/check.py simulations/alps/alps-real-normal --out simulations/alps/alps-real-normal.csv -v
 # python3 runner/check.py simulations/alps/alps-real --out simulations/alps/alps-real.csv -v
+# python3 runner/check.py simulations/alps/alps-real-dev --out simulations/alps/alps-real-dev.csv -v

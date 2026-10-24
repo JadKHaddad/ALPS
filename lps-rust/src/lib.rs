@@ -638,6 +638,8 @@ pub struct TcpConnectionEvent {
     accepted_at: Option<DateTime<Utc>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     refused_at: Option<DateTime<Utc>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    completed_at: Option<DateTime<Utc>>,
 }
 
 impl TcpConnectionEvent {
@@ -646,6 +648,7 @@ impl TcpConnectionEvent {
             dropped_at: Some(Utc::now()),
             accepted_at: None,
             refused_at: None,
+            completed_at: None,
         }
     }
 
@@ -654,6 +657,7 @@ impl TcpConnectionEvent {
             dropped_at: None,
             accepted_at: Some(Utc::now()),
             refused_at: None,
+            completed_at: None,
         }
     }
 
@@ -662,6 +666,16 @@ impl TcpConnectionEvent {
             dropped_at: None,
             accepted_at: None,
             refused_at: Some(Utc::now()),
+            completed_at: None,
+        }
+    }
+
+    pub fn new_completed_now() -> Self {
+        Self {
+            dropped_at: None,
+            accepted_at: None,
+            refused_at: None,
+            completed_at: Some(Utc::now()),
         }
     }
 }

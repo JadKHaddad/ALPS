@@ -511,6 +511,8 @@ async fn main() -> Result<(), anyhow::Error> {
                         .await
                         {
                             Ok(_) => {
+                                state.push(TcpConnectionEvent::new_completed_now()).await;
+
                                 tracing::info!(conn_index, addr=%task.socket_addr, upstream=%upstream_addr, "Proxying completed");
                             }
                             Err(_) => {
