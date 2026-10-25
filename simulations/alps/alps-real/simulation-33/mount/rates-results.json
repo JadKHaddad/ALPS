@@ -1,0 +1,16 @@
+{
+  "median_latency_ms": 1861.0,
+  "average_latency_ms": 3721.4873333333335,
+  "p99_latency_ms": 13681.0,
+  "process_median_latency_ms": 9.592500000000001,
+  "process_average_latency_ms": 40.02354833333334,
+  "process_p99_latency_ms": 234.40800000000002,
+  "duplication_rate": 0.0,
+  "out_of_order_rate": 0.0,
+  "missing_rate": 0.0,
+  "total_events": 3000,
+  "unique_events": 3000,
+  "duplicate_events": 0,
+  "out_of_order_events": 0,
+  "missing_events": 0
+}
