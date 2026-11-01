@@ -177,7 +177,9 @@ def check_simulation(sim_dir: Path) -> SimulationResult:
             continue
 
         windows = build_waiting_windows(consumer_entries)
-        drop_times = [parse_ts(e["dropped_at"]) for e in proxy_entries]
+        drop_times = [
+            parse_ts(e["dropped_at"]) for e in proxy_entries if "dropped_at" in e
+        ]
 
         for window in windows:
             for dt in drop_times:
