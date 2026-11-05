@@ -1,0 +1,55 @@
+simulation_dir: "simulation"
+simulation_docker_network: "lps-simulation-net"
+lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
+lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
+lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
+lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
+
+devices:
+  devices_count: 50
+  max_event_interval: 5s
+  min_event_interval: 5s
+  max_events: 60
+  retry_duration: 500ms
+  wait_before_start: 5s
+
+server:
+  socket_addr: 0.0.0.0:8080
+  expose_socket_addr: 0.0.0.0:8080
+  # Not used because of `use_gs_prod_workload` but needed for the deserialization of the config file
+  failure_rate: 0.0
+  shutdown_after_idle_duration: 30s
+  server_count: 3
+  use_gs_prod_workload: True 
+  background_load_per_second: 70
+  deduplication: False
+  tcp_proxy:
+    socket_addr: 0.0.0.0:9000
+    connection:
+      failure_rate: 0.0
+      max_up_duration: 1d
+      min_up_duration: 1d
+
+amqp:
+  use_features: False
+  queues_count: 1
+  producers:
+    producers_count: 3
+    socket_addr: 0.0.0.0:5672
+  consumers:
+    consumers_count: 1
+    reconnect_duration: 50ms
+    amqp_proxy:
+      socket_addr: 0.0.0.0:9090
+      connection:
+        failure_rate: 0.0
+        max_up_duration: 1d
+        min_up_duration: 1d
+    server_proxy:
+      socket_addr: 0.0.0.0:9081
+      connection:
+        failure_rate: 0.0
+        max_up_duration: 1d
+        min_up_duration: 1d
+
+# python3 runner/runner.py --protocol "amqp" --runs 5 --base-dir "simulations/alps/alps-real-normal-no-features" --base-config "simulations/alps/alps-real-normal-no-features/simulation-config.yaml" --log-dir "simulations/alps/alps-real-normal-no-features/logs"

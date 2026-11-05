@@ -6,7 +6,6 @@ lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 
 seed: 6
-# seed: 6
 
 devices:
   devices_count: 1
@@ -27,7 +26,7 @@ server:
   deduplication: False
 
 amqp:
-  use_features: false
+  use_features: False
   queues_count: 1
   producers:
     producers_count: 1
