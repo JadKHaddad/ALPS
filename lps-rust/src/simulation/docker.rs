@@ -126,4 +126,14 @@ impl DockerService {
         );
         self
     }
+
+    pub fn with_depends_on_started(mut self, service_key: String) -> Self {
+        self.depends_on.insert(
+            service_key,
+            DependsOnCondition {
+                condition: DependsOnConditionKind::ServiceStarted,
+            },
+        );
+        self
+    }
 }

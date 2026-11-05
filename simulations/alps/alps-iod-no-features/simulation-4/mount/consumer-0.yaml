@@ -1,0 +1,6 @@
+rabbit_mq_url: amqp://lps-rabbitmq:5672
+server_push_url: http://lps-consumer-server-proxy-0:9081/ID_REQ_KC_STORE7D3BPACKET
+reconnect_duration: 1ms
+queues_count: 1
+results_file: /app/consumer-0-results.json
+use_simple_call_format: true

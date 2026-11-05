@@ -733,16 +733,20 @@ impl Config {
                 .display()
                 .to_string();
 
-            services.insert(
-                self.amqp_consumer_service_key(i),
-                DockerService::default()
-                    .with_image(self.lps_rust_image_name())
-                    .with_container_name(format!("lps-consumer-{i}"))
-                    .with_command(format!("consumer --config-file {config_file}"))
-                    .with_volumes(vec![self.container_work_dir_volume_mount()])
-                    .with_networks(vec![self.service_network_name()])
-                    .with_unless_stopped(),
-            );
+            let mut service = DockerService::default()
+                .with_image(self.lps_rust_image_name())
+                .with_container_name(format!("lps-consumer-{i}"))
+                .with_command(format!("consumer --config-file {config_file}"))
+                .with_volumes(vec![self.container_work_dir_volume_mount()])
+                .with_networks(vec![self.service_network_name()])
+                .with_unless_stopped();
+
+            // consumer-{i} starts after consumer-{i-1}; consumer-0 has no dependency
+            if i > 0 {
+                service = service.with_depends_on_started(self.amqp_consumer_service_key(i - 1));
+            }
+
+            services.insert(self.amqp_consumer_service_key(i), service);
         }
 
         services
