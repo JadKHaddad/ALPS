@@ -8,7 +8,14 @@
 //!
 //! ```
 
-use std::{collections::BTreeMap, path::PathBuf, sync::Arc};
+use std::{
+    collections::BTreeMap,
+    path::PathBuf,
+    sync::{
+        Arc,
+        atomic::{AtomicUsize, Ordering},
+    },
+};
 
 use anyhow::Context;
 use axum::{Json, Router, extract::State, routing::post};
@@ -22,6 +29,8 @@ use lps_rust::{Event, SimpleCall, producer::Config};
 use reqwest::StatusCode;
 use tokio::net::TcpListener;
 
+const HASH_EXCHANGE: &str = "events.hash";
+
 #[derive(Debug, Parser)]
 pub struct Args {
     #[clap(long, default_value = "producer-config.yaml")]
@@ -29,17 +38,25 @@ pub struct Args {
     config_file: PathBuf,
 }
 
+fn queue_name(i: usize) -> String {
+    format!("events-{i}")
+}
+
 #[derive(Debug)]
 struct AppState {
     channel: Channel,
     use_features: bool,
+    queues_count: usize,
+    next_queue: AtomicUsize,
 }
 
 impl AppState {
-    fn new(channel: Channel, use_features: bool) -> Self {
+    fn new(channel: Channel, use_features: bool, queues_count: usize) -> Self {
         Self {
             channel,
             use_features,
+            queues_count,
+            next_queue: AtomicUsize::new(0),
         }
     }
 
@@ -51,19 +68,28 @@ impl AppState {
         let payload = serde_json::to_vec(&event).context("Failed to serialize event")?;
 
         let (exchange, routing_key) = if self.use_features {
+            // The consistent-hash exchange picks the queue from the routing key.
             (
-                ShortString::from("events.hash"),
+                ShortString::from(HASH_EXCHANGE),
                 ShortString::from(event.device_id),
             )
         } else {
-            (ShortString::from(""), ShortString::from(""))
+            // Default exchange: the routing key is simply the queue name.
+            // Rotate through the queues (with queues_count = 1 this is always "events-0").
+            let index = self.next_queue.fetch_add(1, Ordering::Relaxed) % self.queues_count;
+
+            (ShortString::from(""), ShortString::from(queue_name(index)))
         };
 
         self.channel
             .basic_publish(
                 exchange,
                 routing_key,
-                BasicPublishOptions::default(),
+                BasicPublishOptions {
+                    // Return an error instead of silently dropping unroutable messages.
+                    mandatory: true,
+                    ..Default::default()
+                },
                 &payload,
                 BasicProperties::default(),
             )
@@ -85,7 +111,10 @@ impl AppState {
         self.publish(call)
             .await
             .map(|_| StatusCode::OK)
-            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)
+            .map_err(|err| {
+                tracing::error!(?err, "Failed to publish");
+                StatusCode::INTERNAL_SERVER_ERROR
+            })
     }
 }
 
@@ -109,6 +138,9 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
+    let queues_count = config.queues_count as usize;
+    anyhow::ensure!(queues_count > 0, "queues_count must be at least 1");
+
     let channel = tokio::select! {
         _ = lps_rust::shutdown_signal() => {
             anyhow::bail!("Shutdown signal received while connecting to RabbitMQ")
@@ -128,10 +160,15 @@ async fn main() -> Result<(), anyhow::Error> {
                 .await
                 .context("Failed to create channel")?;
 
+            channel
+                .confirm_select(ConfirmSelectOptions { nowait: false })
+                .await
+                .context("Failed to enable publisher confirms")?;
+
             if config.use_features {
                 channel
                     .exchange_declare(
-                        ShortString::from(String::from("events.hash")),
+                        ShortString::from(HASH_EXCHANGE),
                         ExchangeKind::Custom(String::from("x-consistent-hash")),
                         ExchangeDeclareOptions::default(),
                         FieldTable::default(),
@@ -142,9 +179,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
             tracing::info!("Declaring queues and bindings");
 
-            let queues = (0..config.queues_count).map(|i| format!("events-{i}"));
-
-            for queue_name in queues {
+            for queue_name in (0..queues_count).map(queue_name) {
                 let field_table = if config.use_features {
                     FieldTable::from(BTreeMap::<_, _>::from([(
                         ShortString::from("x-single-active-consumer"),
@@ -175,29 +210,21 @@ async fn main() -> Result<(), anyhow::Error> {
                         .context("Failed to purge queue")?;
                 }
 
-                let (exchange, routing_key) = if config.use_features {
-                    (
-                        ShortString::from("events.hash"),
-                        ShortString::from("1")
-                    )
-                } else {
-                    (ShortString::from(""), ShortString::from(""))
-                };
-
-                channel
-                    .queue_bind(
-                        queue.name().clone(),
-                        exchange,
-                        routing_key,
-                        QueueBindOptions::default(),
-                        FieldTable::default(),
-                    )
-                    .await
-                    .context("Failed to bind queue")?;
-
-                channel.confirm_select(ConfirmSelectOptions { nowait: false })
-                    .await
-                    .context("Failed to enable publisher confirms")?;
+                // Every queue is already implicitly bound to the default exchange under
+                // its own name, and explicit bindings to it are refused by the broker.
+                // So only bind when using the consistent-hash exchange.
+                if config.use_features {
+                    channel
+                        .queue_bind(
+                            queue.name().clone(),
+                            ShortString::from(HASH_EXCHANGE),
+                            ShortString::from("1"), // weight for the consistent-hash exchange
+                            QueueBindOptions::default(),
+                            FieldTable::default(),
+                        )
+                        .await
+                        .context("Failed to bind queue")?;
+                }
             }
 
             anyhow::Ok(channel)
@@ -206,7 +233,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!("Starting server");
 
-    let app_state = Arc::new(AppState::new(channel, config.use_features));
+    let app_state = Arc::new(AppState::new(channel, config.use_features, queues_count));
 
     let app = Router::new()
         .route(
