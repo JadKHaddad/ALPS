@@ -18,6 +18,9 @@ pub struct Config {
     /// Whether to purge the queues on start.
     #[serde(default)]
     pub purge_queues_on_start: bool,
+    /// Wether to use `x-consistent-hash` and `x-single-active-consumer`.
+    #[serde(default = "default_use_features")]
+    pub use_features: bool,
 }
 
 fn default_socket_addr() -> SocketAddr {
@@ -32,6 +35,10 @@ fn default_queues_count() -> u32 {
     10
 }
 
+fn default_use_features() -> bool {
+    true
+}
+
 impl Default for Config {
     fn default() -> Self {
         Self {
@@ -39,6 +46,7 @@ impl Default for Config {
             rabbit_mq_url: default_rabbit_mq_url(),
             queues_count: default_queues_count(),
             purge_queues_on_start: false,
+            use_features: default_use_features(),
         }
     }
 }

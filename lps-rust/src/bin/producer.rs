@@ -32,11 +32,15 @@ pub struct Args {
 #[derive(Debug)]
 struct AppState {
     channel: Channel,
+    use_features: bool,
 }
 
 impl AppState {
-    fn new(channel: Channel) -> Self {
-        Self { channel }
+    fn new(channel: Channel, use_features: bool) -> Self {
+        Self {
+            channel,
+            use_features,
+        }
     }
 
     async fn publish(&self, call: SimpleCall) -> anyhow::Result<()> {
@@ -46,10 +50,19 @@ impl AppState {
 
         let payload = serde_json::to_vec(&event).context("Failed to serialize event")?;
 
+        let (exchange, routing_key) = if self.use_features {
+            (
+                ShortString::from("events.hash"),
+                ShortString::from(event.device_id),
+            )
+        } else {
+            (ShortString::from(""), ShortString::from(""))
+        };
+
         self.channel
             .basic_publish(
-                ShortString::from("events.hash"),
-                ShortString::from(event.device_id), // routing key = event_id
+                exchange,
+                routing_key,
                 BasicPublishOptions::default(),
                 &payload,
                 BasicProperties::default(),
@@ -115,21 +128,32 @@ async fn main() -> Result<(), anyhow::Error> {
                 .await
                 .context("Failed to create channel")?;
 
-            channel
-                .exchange_declare(
-                    ShortString::from(String::from("events.hash")),
-                    ExchangeKind::Custom(String::from("x-consistent-hash")),
-                    ExchangeDeclareOptions::default(),
-                    FieldTable::default(),
-                )
-                .await
-                .context("Failed to declare exchange")?;
+            if config.use_features {
+                channel
+                    .exchange_declare(
+                        ShortString::from(String::from("events.hash")),
+                        ExchangeKind::Custom(String::from("x-consistent-hash")),
+                        ExchangeDeclareOptions::default(),
+                        FieldTable::default(),
+                    )
+                    .await
+                    .context("Failed to declare exchange")?;
+            }
 
             tracing::info!("Declaring queues and bindings");
 
             let queues = (0..config.queues_count).map(|i| format!("events-{i}"));
 
             for queue_name in queues {
+                let field_table = if config.use_features {
+                    FieldTable::from(BTreeMap::<_, _>::from([(
+                        ShortString::from("x-single-active-consumer"),
+                        AMQPValue::Boolean(true),
+                    )]))
+                } else {
+                    FieldTable::default()
+                };
+
                 let queue = channel
                     .queue_declare(
                         ShortString::from(queue_name),
@@ -137,10 +161,7 @@ async fn main() -> Result<(), anyhow::Error> {
                             durable: true, // persist across broker restarts
                             ..Default::default()
                         },
-                        FieldTable::from(BTreeMap::<_, _>::from([(
-                            ShortString::from("x-single-active-consumer"),
-                            AMQPValue::Boolean(true),
-                        )])),
+                        field_table,
                     )
                     .await
                     .context("Failed to declare queue")?;
@@ -154,11 +175,20 @@ async fn main() -> Result<(), anyhow::Error> {
                         .context("Failed to purge queue")?;
                 }
 
+                let (exchange, routing_key) = if config.use_features {
+                    (
+                        ShortString::from("events.hash"),
+                        ShortString::from("1")
+                    )
+                } else {
+                    (ShortString::from(""), ShortString::from(""))
+                };
+
                 channel
                     .queue_bind(
                         queue.name().clone(),
-                        ShortString::from("events.hash"),
-                        ShortString::from("1"), // weight = 1
+                        exchange,
+                        routing_key,
                         QueueBindOptions::default(),
                         FieldTable::default(),
                     )
@@ -176,7 +206,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!("Starting server");
 
-    let app_state = Arc::new(AppState::new(channel));
+    let app_state = Arc::new(AppState::new(channel, config.use_features));
 
     let app = Router::new()
         .route(

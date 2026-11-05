@@ -353,6 +353,7 @@ impl Config {
                         self.rabbit_mq_container_port()
                     ),
                     socket_addr: self.amqp.producers.socket_addr,
+                    use_features: self.amqp.use_features,
                 }),
             };
 
@@ -931,12 +932,19 @@ impl ServerConfig {
 
 #[derive(Debug, Deserialize, Default)]
 pub struct AmqpConfig {
+    /// Wether to use `x-consistent-hash` and `x-single-active-consumer`.
+    #[serde(default = "AmqpConfig::default_use_features")]
+    pub use_features: bool,
     pub queues_count: u32,
     pub producers: AmqpProducersConfig,
     pub consumers: AmqpConsumersConfig,
 }
 
 impl AmqpConfig {
+    fn default_use_features() -> bool {
+        true
+    }
+
     /// A non-zero number
     fn producers_count(&self) -> u32 {
         self.producers.producers_count.max(1)
