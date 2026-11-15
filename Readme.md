@@ -89,3 +89,11 @@ docker run --rm -it \
 ```bash
 docker compose --project-directory simulation up validator scripts
 ```
+
+### LP2 Patch
+
+HTTP client timeout is patched to `1` second on line `92` to make the simulations easier to reproduce.
+
+```python
+92: timeout=httpx.Timeout(1.0)
+```
