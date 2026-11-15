@@ -430,6 +430,7 @@ impl Config {
                         .join(format!("consumer-{i}-results.json")),
                     use_simple_call_format: true,
                     prefetch_count: self.amqp.consumers.prefetch_count,
+                    http_timeout: self.amqp.consumers.http_timeout,
                 }),
             };
 
@@ -991,6 +992,8 @@ pub struct AmqpConsumersConfig {
     pub wait_before_start: Option<Duration>,
     #[serde(default = "crate::consumer::default_prefetch_count")]
     pub prefetch_count: u16,
+    #[serde(default = "crate::consumer::default_http_timeout")]
+    pub http_timeout: Duration,
 }
 
 #[derive(Debug, Deserialize)]

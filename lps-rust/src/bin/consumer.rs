@@ -67,9 +67,13 @@ struct JobsSate {
 }
 
 impl JobsSate {
-    fn new(jobs_file: PathBuf) -> Self {
+    fn new(jobs_file: PathBuf, http_timeout: Duration) -> Self {
         Self {
-            client: reqwest::Client::new(),
+            client: reqwest::ClientBuilder::new()
+                .read_timeout(http_timeout)
+                .timeout(http_timeout)
+                .build()
+                .expect("Failed to build http client"),
             jobs: Arc::new(Mutex::new(Vec::new())),
             jobs_file,
         }
@@ -259,7 +263,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
-    let state = JobsSate::new(config.results_file.clone());
+    let state = JobsSate::new(config.results_file.clone(), config.http_timeout);
     let state_c = state.clone();
 
     tokio::select! {
