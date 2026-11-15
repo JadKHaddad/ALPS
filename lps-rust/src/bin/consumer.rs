@@ -114,6 +114,7 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
             let use_simple_call_format = config.use_simple_call_format;
             let conn = conn.clone();
             let state = state.clone();
+            let prefetch_count = config.prefetch_count;
 
             tokio::spawn(async move {
                 'channel: loop {
@@ -123,7 +124,7 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
                         .context("Failed to create channel")?;
 
                     channel
-                        .basic_qos(1, BasicQosOptions::default())
+                        .basic_qos(prefetch_count, BasicQosOptions::default())
                         .await
                         .context("Failed to create basic qos")?;
 

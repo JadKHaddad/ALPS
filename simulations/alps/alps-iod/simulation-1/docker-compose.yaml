@@ -60,6 +60,9 @@ services:
     volumes:
     - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-iod/simulation-1/mount:/app
     restart: unless-stopped
+    depends_on:
+      consumer-0:
+        condition: service_started
   consumer-server-proxy-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-server-proxy-0

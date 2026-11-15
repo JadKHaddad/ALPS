@@ -99,6 +99,9 @@ services:
     volumes:
     - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real-normal/simulation-1/mount:/app
     restart: unless-stopped
+    depends_on:
+      consumer-0:
+        condition: service_started
   consumer-2:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-2
@@ -108,6 +111,9 @@ services:
     volumes:
     - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real-normal/simulation-1/mount:/app
     restart: unless-stopped
+    depends_on:
+      consumer-1:
+        condition: service_started
   consumer-amqp-proxy-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-amqp-proxy-0

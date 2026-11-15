@@ -4,8 +4,8 @@ tasks:
   upstream_port: 8080
   connection:
     failure_rate: 0.2
-    max_up_duration: 84ms
-    min_up_duration: 84ms
+    max_up_duration: 1day
+    min_up_duration: 1day
     latency:
       max_upstream_latency: 0s
       min_upstream_latency: null

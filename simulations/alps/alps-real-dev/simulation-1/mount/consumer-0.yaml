@@ -4,3 +4,4 @@ reconnect_duration: 0s
 queues_count: 3
 results_file: /app/consumer-0-results.json
 use_simple_call_format: true
+prefetch_count: 0

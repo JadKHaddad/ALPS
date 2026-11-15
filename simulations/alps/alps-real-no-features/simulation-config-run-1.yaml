@@ -3,16 +3,22 @@ amqp:
     amqp_proxy:
       connection:
         failure_rate: 0.2
-        max_up_duration: 116ms
-        min_up_duration: 116ms
+        latency:
+          max_downstream_latency: 2ms
+          max_upstream_latency: 2ms
+          min_downstream_latency: 0s
+          min_upstream_latency: 0s
       socket_addr: 0.0.0.0:9090
     consumers_count: 3
     reconnect_duration: 0ms
     server_proxy:
       connection:
         failure_rate: 0.2
-        max_up_duration: 93ms
-        min_up_duration: 93ms
+        latency:
+          max_downstream_latency: 2ms
+          max_upstream_latency: 2ms
+          min_downstream_latency: 0s
+          min_upstream_latency: 0s
       socket_addr: 0.0.0.0:9081
   producers:
     producers_count: 3
@@ -36,13 +42,16 @@ server:
   expose_socket_addr: 0.0.0.0:8080
   failure_rate: 0.0
   server_count: 3
-  shutdown_after_idle_duration: 30s
+  shutdown_after_idle_duration: 300s
   socket_addr: 0.0.0.0:8080
   tcp_proxy:
     connection:
       failure_rate: 0.2
-      max_up_duration: 93ms
-      min_up_duration: 93ms
+      latency:
+        max_downstream_latency: 2ms
+        max_upstream_latency: 2ms
+        min_downstream_latency: 0s
+        min_upstream_latency: 0s
     socket_addr: 0.0.0.0:9000
   use_gs_prod_workload: true
 simulation_dir: simulations/alps/alps-real-no-features/simulation-1

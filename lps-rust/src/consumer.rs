@@ -26,6 +26,10 @@ fn default_results_file() -> PathBuf {
     PathBuf::from("consumer-results.json")
 }
 
+pub fn default_prefetch_count() -> u16 {
+    1
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Config {
     #[serde(default = "default_rabbit_mq_url")]
@@ -42,6 +46,9 @@ pub struct Config {
     /// If set, work requests are sent in the ars-comp-2 simple call format: `{ "id": ..., "body": ... }`
     #[serde(default)]
     pub use_simple_call_format: bool,
+    /// `0` for unlimited. Default `1`
+    #[serde(default = "default_prefetch_count")]
+    pub prefetch_count: u16,
 }
 
 impl Default for Config {
@@ -53,6 +60,7 @@ impl Default for Config {
             queues_count: default_queues_count(),
             results_file: default_results_file(),
             use_simple_call_format: false,
+            prefetch_count: default_prefetch_count(),
         }
     }
 }

@@ -18,7 +18,7 @@ server:
   expose_socket_addr: 0.0.0.0:8080
   # Not used because of `use_gs_prod_workload` but needed for the deserialization of the config file
   failure_rate: 0.0
-  shutdown_after_idle_duration: 30s
+  shutdown_after_idle_duration: 300s
   server_count: 3
   use_gs_prod_workload: True 
   background_load_per_second: 70
@@ -27,8 +27,13 @@ server:
     socket_addr: 0.0.0.0:9000
     connection:
       failure_rate: 0.2
-      max_up_duration: 93ms
-      min_up_duration: 93ms
+      # max_up_duration: 93ms
+      # min_up_duration: 93ms
+      latency:
+        max_upstream_latency: 2ms
+        min_upstream_latency: 0s
+        max_downstream_latency: 2ms
+        min_downstream_latency: 0s
 
 amqp:
   use_features: False
@@ -43,13 +48,23 @@ amqp:
       socket_addr: 0.0.0.0:9090
       connection:
         failure_rate: 0.2
-        max_up_duration: 116ms
-        min_up_duration: 116ms # 93ms / 0.8
+        # max_up_duration: 116ms
+        # min_up_duration: 116ms # 93ms / 0.8
+        latency:
+          max_upstream_latency: 2ms
+          min_upstream_latency: 0s
+          max_downstream_latency: 2ms
+          min_downstream_latency: 0s
     server_proxy:
       socket_addr: 0.0.0.0:9081
       connection:
         failure_rate: 0.2
-        max_up_duration: 93ms
-        min_up_duration: 93ms
+        # max_up_duration: 93ms
+        # min_up_duration: 93ms
+        latency:
+          max_upstream_latency: 2ms
+          min_upstream_latency: 0s
+          max_downstream_latency: 2ms
+          min_downstream_latency: 0s
 
 # python3 runner/runner.py --protocol "amqp" --runs 5 --base-dir "simulations/alps/alps-real-no-features" --base-config "simulations/alps/alps-real-no-features/simulation-config.yaml"  --log-dir "simulations/alps/alps-real-no-features/logs"

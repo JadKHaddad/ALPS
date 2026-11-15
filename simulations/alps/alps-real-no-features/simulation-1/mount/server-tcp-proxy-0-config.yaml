@@ -4,13 +4,13 @@ tasks:
   upstream_port: 8080
   connection:
     failure_rate: 0.2
-    max_up_duration: 93ms
-    min_up_duration: 93ms
+    max_up_duration: 1m
+    min_up_duration: null
     latency:
-      max_upstream_latency: 0s
-      min_upstream_latency: null
-      max_downstream_latency: 0s
-      min_downstream_latency: null
+      max_upstream_latency: 2ms
+      min_upstream_latency: 0s
+      max_downstream_latency: 2ms
+      min_downstream_latency: 0s
   connections: []
 results_file: /app/server-tcp-proxy-0-results.json
 seed: null

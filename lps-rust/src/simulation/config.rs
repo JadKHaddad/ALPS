@@ -429,6 +429,7 @@ impl Config {
                     results_file: PathBuf::from(self.container_work_dir())
                         .join(format!("consumer-{i}-results.json")),
                     use_simple_call_format: true,
+                    prefetch_count: self.amqp.consumers.prefetch_count,
                 }),
             };
 
@@ -988,6 +989,8 @@ pub struct AmqpConsumersConfig {
     /// waits this long, and only then starts the consumers (consumer-{i}).
     #[serde(default, with = "humantime_serde")]
     pub wait_before_start: Option<Duration>,
+    #[serde(default = "crate::consumer::default_prefetch_count")]
+    pub prefetch_count: u16,
 }
 
 #[derive(Debug, Deserialize)]

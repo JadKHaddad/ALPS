@@ -99,6 +99,9 @@ services:
     volumes:
     - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real-dev/simulation-1/mount:/app
     restart: unless-stopped
+    depends_on:
+      consumer-0:
+        condition: service_started
   consumer-2:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-2
@@ -108,6 +111,9 @@ services:
     volumes:
     - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real-dev/simulation-1/mount:/app
     restart: unless-stopped
+    depends_on:
+      consumer-1:
+        condition: service_started
   consumer-amqp-proxy-0:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-consumer-amqp-proxy-0
@@ -170,36 +176,6 @@ services:
     - lps-net
     volumes:
     - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real-dev/simulation-1/mount:/app
-  deduplication-0:
-    image: jadkhaddad/lps-gleam:0.1.0
-    container_name: lps-deduplication-0
-    command: run --config-file /app/deduplication-0.yaml
-    environment:
-      ERL_FLAGS: -sname node@lps-deduplication-0 -setcookie secret
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real-dev/simulation-1/mount:/app
-  deduplication-1:
-    image: jadkhaddad/lps-gleam:0.1.0
-    container_name: lps-deduplication-1
-    command: run --config-file /app/deduplication-1.yaml
-    environment:
-      ERL_FLAGS: -sname node@lps-deduplication-1 -setcookie secret
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real-dev/simulation-1/mount:/app
-  deduplication-2:
-    image: jadkhaddad/lps-gleam:0.1.0
-    container_name: lps-deduplication-2
-    command: run --config-file /app/deduplication-2.yaml
-    environment:
-      ERL_FLAGS: -sname node@lps-deduplication-2 -setcookie secret
-    networks:
-    - lps-net
-    volumes:
-    - /home/jadkhaddad/Desktop/LPS/simulations/alps/alps-real-dev/simulation-1/mount:/app
   device:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-device
@@ -255,9 +231,9 @@ services:
   server:
     image: jadkhaddad/lps-rs:0.1.0
     container_name: lps-server
-    command: gs-prod-workload-server --config-file /app/server-config.yaml
+    command: server --config-file /app/server-config.yaml
     environment:
-      RUST_LOG: gs_prod_workload_server=debug
+      RUST_LOG: server=debug
     networks:
     - lps-net
     ports:
