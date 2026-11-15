@@ -992,6 +992,7 @@ pub struct AmqpConsumersConfig {
     pub wait_before_start: Option<Duration>,
     #[serde(default = "crate::consumer::default_prefetch_count")]
     pub prefetch_count: u16,
+    #[serde(with = "humantime_serde")]
     #[serde(default = "crate::consumer::default_http_timeout")]
     pub http_timeout: Duration,
 }

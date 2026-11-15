@@ -31,7 +31,7 @@ pub fn default_prefetch_count() -> u16 {
 }
 
 pub fn default_http_timeout() -> Duration {
-    Duration::from_secs(1)
+    Duration::from_secs(30)
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
