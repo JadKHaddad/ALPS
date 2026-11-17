@@ -67,9 +67,10 @@ struct JobsSate {
 }
 
 impl JobsSate {
-    fn new(jobs_file: PathBuf, http_timeout: Duration) -> Self {
+    fn new(jobs_file: PathBuf, tcp_keepalive: Option<Duration>, http_timeout: Duration) -> Self {
         Self {
             client: reqwest::ClientBuilder::new()
+                .tcp_keepalive(tcp_keepalive)
                 .read_timeout(http_timeout)
                 .timeout(http_timeout)
                 .build()
@@ -263,7 +264,11 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
-    let state = JobsSate::new(config.results_file.clone(), config.http_timeout);
+    let state = JobsSate::new(
+        config.results_file.clone(),
+        config.tcp_keepalive,
+        config.http_timeout,
+    );
     let state_c = state.clone();
 
     tokio::select! {
