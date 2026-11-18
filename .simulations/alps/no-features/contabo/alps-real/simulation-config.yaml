@@ -6,7 +6,7 @@ lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
 lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
 
 devices:
-  devices_count: 100
+  devices_count: 70
   max_event_interval: 1s
   min_event_interval: 1s
   max_events: 100
@@ -20,7 +20,7 @@ server:
   failure_rate: 0.0
   shutdown_after_idle_duration: 30s
   server_count: 3
-  use_gs_prod_workload: True 
+  use_gs_prod_workload: True
   background_load_per_second: 70
   deduplication: False
   tcp_proxy:
@@ -70,4 +70,4 @@ amqp:
           min_downstream_latency: 0.009ms
           max_downstream_latency: 2ms
 
-# python3 runner/runner.py --protocol "amqp" --runs 1 --base-dir ".simulations/alps/no-features/alps-real" --base-config ".simulations/alps/no-features/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/no-features/alps-real/logs"
+# python3 runner/runner.py --protocol "amqp" --runs 59 --base-dir ".simulations/alps/no-features/contabo/alps-real/simulation-config.yaml" --base-config ".simulations/alps/no-features/contabo/alps-real/simulation-config.yaml/simulation-config.yaml" --log-dir ".simulations/alps/no-features/contabo/alps-real/simulation-config.yaml/logs"
