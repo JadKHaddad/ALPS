@@ -69,4 +69,4 @@ amqp:
           min_downstream_latency: 0.009ms
           max_downstream_latency: 2ms
 
-# python3 runner/runner.py --protocol "amqp" --runs 59 --base-dir ".simulations/alps/no-features/contabo/alps-real/simulation-config.yaml" --base-config ".simulations/alps/no-features/contabo/alps-real/simulation-config.yaml/simulation-config.yaml" --log-dir ".simulations/alps/no-features/contabo/alps-real/simulation-config.yaml/logs"
+# python3 runner/runner.py --protocol "amqp" --runs 59 --base-dir ".simulations/alps/no-features/contabo/alps-real" --base-config ".simulations/alps/no-features/contabo/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/no-features/contabo/alps-real/logs"
