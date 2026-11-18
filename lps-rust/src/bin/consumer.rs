@@ -60,18 +60,18 @@ impl SimpleCall {
 }
 
 #[derive(Clone)]
-struct JobsSate {
+struct JobsState {
     client: reqwest::Client,
     jobs: Arc<Mutex<Vec<Job>>>,
     jobs_file: PathBuf,
 }
 
-impl JobsSate {
-    fn new(jobs_file: PathBuf, tcp_keepalive: Option<Duration>, http_timeout: Duration) -> Self {
+impl JobsState {
+    fn new(jobs_file: PathBuf, http_timeout: Duration) -> Self {
         Self {
             client: reqwest::ClientBuilder::new()
-                .tcp_keepalive(tcp_keepalive)
-                .read_timeout(http_timeout)
+                .http1_only()
+                .pool_max_idle_per_host(0)
                 .timeout(http_timeout)
                 .build()
                 .expect("Failed to build http client"),
@@ -97,7 +97,7 @@ impl JobsSate {
 }
 
 // XXX: We will have duplicated events if the connection to RabbitMQ is interrupted while the server is processing our sent event.
-async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error> {
+async fn connection(config: Config, state: JobsState) -> Result<(), anyhow::Error> {
     let queues = (0..config.queues_count).map(|i| format!("events-{i}"));
 
     let conn = Arc::new(
@@ -264,11 +264,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     tracing::info!(?config, "Starting");
 
-    let state = JobsSate::new(
-        config.results_file.clone(),
-        config.tcp_keepalive,
-        config.http_timeout,
-    );
+    let state = JobsState::new(config.results_file.clone(), config.http_timeout);
     let state_c = state.clone();
 
     tokio::select! {

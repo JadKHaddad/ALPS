@@ -53,8 +53,6 @@ pub struct Config {
     /// `0` for unlimited. Default `1`
     #[serde(default = "default_prefetch_count")]
     pub prefetch_count: u16,
-    #[serde(default, with = "humantime_serde")]
-    pub tcp_keepalive: Option<Duration>,
     #[serde(default = "default_http_timeout", with = "humantime_serde")]
     pub http_timeout: Duration,
 }
@@ -69,7 +67,6 @@ impl Default for Config {
             results_file: default_results_file(),
             use_simple_call_format: false,
             prefetch_count: default_prefetch_count(),
-            tcp_keepalive: None,
             http_timeout: default_http_timeout(),
         }
     }
