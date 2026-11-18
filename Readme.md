@@ -97,3 +97,11 @@ HTTP client timeout is patched to `1` second on line `92` to make the simulation
 ```python
 92: timeout=httpx.Timeout(1.0)
 ```
+
+### SRV2 Patch
+
+HTTP client keepalive is patched to `5.0` second on line `85` to make the simulations easier to reproduce.
+
+```python
+85: keepalive_expiry=5.0,
+```
