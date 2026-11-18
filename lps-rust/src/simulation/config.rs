@@ -430,6 +430,7 @@ impl Config {
                         .join(format!("consumer-{i}-results.json")),
                     use_simple_call_format: true,
                     prefetch_count: self.amqp.consumers.prefetch_count,
+                    tcp_keepalive: self.amqp.consumers.tcp_keepalive,
                     http_timeout: self.amqp.consumers.http_timeout,
                 }),
             };
