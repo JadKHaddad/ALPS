@@ -73,6 +73,8 @@ impl JobsSate {
                 .tcp_keepalive(tcp_keepalive)
                 .read_timeout(http_timeout)
                 .timeout(http_timeout)
+                .pool_max_idle_per_host(0)
+                .http1_only()
                 .build()
                 .expect("Failed to build http client"),
             jobs: Arc::new(Mutex::new(Vec::new())),
