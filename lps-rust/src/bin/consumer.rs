@@ -71,7 +71,6 @@ impl JobsSate {
         Self {
             client: reqwest::ClientBuilder::new()
                 .tcp_keepalive(tcp_keepalive)
-                .read_timeout(http_timeout)
                 .timeout(http_timeout)
                 .http1_only()
                 .build()

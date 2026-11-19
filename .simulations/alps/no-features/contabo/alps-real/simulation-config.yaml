@@ -18,7 +18,7 @@ server:
   expose_socket_addr: 0.0.0.0:8080
   # Not used because of `use_gs_prod_workload` but needed for the deserialization of the config file
   failure_rate: 0.0
-  shutdown_after_idle_duration: 300s
+  shutdown_after_idle_duration: 60s
   server_count: 3
   use_gs_prod_workload: True
   background_load_per_second: 70
@@ -47,17 +47,6 @@ amqp:
     http_timeout: 1s
     consumers_count: 3
     reconnect_duration: 50ms
-    amqp_proxy:
-      socket_addr: 0.0.0.0:9090
-      connection:
-        failure_rate: 0.2
-        max_up_duration: 1d
-        min_up_duration: 1d
-        latency:
-          min_upstream_latency: 0.009ms
-          max_upstream_latency: 2ms
-          min_downstream_latency: 0.009ms
-          max_downstream_latency: 2ms
     server_proxy:
       socket_addr: 0.0.0.0:9081
       connection:
@@ -69,5 +58,16 @@ amqp:
           max_upstream_latency: 2ms
           min_downstream_latency: 0.009ms
           max_downstream_latency: 2ms
+    amqp_proxy:
+      socket_addr: 0.0.0.0:9090
+      connection:
+        failure_rate: 0.2
+        max_up_duration: 1d
+        min_up_duration: 1d
+        latency:
+          min_upstream_latency: 0.009ms
+          max_upstream_latency: 0.009ms
+          min_downstream_latency: 0.009ms
+          max_downstream_latency: 0.009ms
 
 # python3 runner/runner.py --protocol "amqp" --runs 59 --base-dir ".simulations/alps/no-features/contabo/alps-real" --base-config ".simulations/alps/no-features/contabo/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/no-features/contabo/alps-real/logs"

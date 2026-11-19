@@ -9,7 +9,7 @@ devices:
   devices_count: 70
   max_event_interval: 1s
   min_event_interval: 1s
-  max_events: 500
+  max_events: 100
   retry_duration: 500ms
   wait_before_start: 5s
 
@@ -31,9 +31,9 @@ server:
       min_up_duration: 1d
       latency:
         min_upstream_latency: 0.009ms
-        max_upstream_latency: 0.009ms
+        max_upstream_latency: 2ms
         min_downstream_latency: 0.009ms
-        max_downstream_latency: 0.009ms
+        max_downstream_latency: 2ms
 
 amqp:
   use_features: False
@@ -47,6 +47,17 @@ amqp:
     http_timeout: 1s
     consumers_count: 3
     reconnect_duration: 50ms
+    server_proxy:
+      socket_addr: 0.0.0.0:9081
+      connection:
+        failure_rate: 0.2
+        max_up_duration: 1d
+        min_up_duration: 1d
+        latency:
+          min_upstream_latency: 0.009ms
+          max_upstream_latency: 2ms
+          min_downstream_latency: 0.009ms
+          max_downstream_latency: 2ms
     amqp_proxy:
       socket_addr: 0.0.0.0:9090
       connection:
@@ -58,16 +69,6 @@ amqp:
           max_upstream_latency: 0.009ms
           min_downstream_latency: 0.009ms
           max_downstream_latency: 0.009ms
-    server_proxy:
-      socket_addr: 0.0.0.0:9081
-      connection:
-        failure_rate: 0.2
-        max_up_duration: 1d
-        min_up_duration: 1d
-        latency:
-          min_upstream_latency: 0ms
-          max_upstream_latency: 0.009ms
-          min_downstream_latency: 0ms
-          max_downstream_latency: 0.009ms
+
 
 # python3 runner/runner.py --protocol "amqp" --runs 1 --base-dir ".simulations/alps/no-features/ubuntu/alps-real" --base-config ".simulations/alps/no-features/ubuntu/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/no-features/ubuntu/alps-real/logs"

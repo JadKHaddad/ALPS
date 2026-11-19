@@ -1,0 +1,16 @@
+tasks:
+- socket_addr: 0.0.0.0:9000
+  upstream_domain: lps-server-server-proxy-0
+  upstream_port: 8080
+  connection:
+    failure_rate: 0.2
+    max_up_duration: 1day
+    min_up_duration: 1day
+    latency:
+      max_upstream_latency: 2ms
+      min_upstream_latency: 9us
+      max_downstream_latency: 2ms
+      min_downstream_latency: 9us
+  connections: []
+results_file: /app/server-tcp-proxy-0-results.json
+seed: null
