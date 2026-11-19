@@ -59,82 +59,6 @@ impl SimpleCall {
     }
 }
 
-/// Target size, in bytes, of every request we send.
-const TARGET_SIZE: usize = 1024;
-/// Maximum length of a single padding header's value, in bytes.
-const MAX_PADDING_VALUE_LEN: usize = 100;
-
-/// Padding headers (`x-pad-0`, `x-pad-1`, ...) that fill a message of `current_size` bytes up to `TARGET_SIZE`.
-///
-/// Each header costs `"x-pad-N: " + value + "\r\n"` bytes on the wire, and the last one is
-/// shortened so the total lands exactly on the target.
-fn padding_headers(current_size: usize) -> reqwest::header::HeaderMap {
-    use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
-
-    let mut headers = HeaderMap::new();
-    let mut remaining = TARGET_SIZE.saturating_sub(current_size);
-
-    for i in 0usize.. {
-        let name = format!("x-pad-{i}");
-        // "name: value\r\n"
-        let overhead = name.len() + 2 + 2;
-
-        if remaining <= overhead {
-            break;
-        }
-
-        let value_len = (remaining - overhead).min(MAX_PADDING_VALUE_LEN);
-
-        headers.insert(
-            HeaderName::from_bytes(name.as_bytes()).expect("padding header name is valid"),
-            HeaderValue::from_str(&"x".repeat(value_len)).expect("padding value is valid ASCII"),
-        );
-
-        remaining -= overhead + value_len;
-    }
-
-    headers
-}
-
-/// Size on the wire of the request we send before any padding is added:
-/// request line, the headers reqwest sends by default, and the body.
-fn request_base_size(url: &reqwest::Url, body_len: usize) -> usize {
-    let target = match url.query() {
-        Some(query) => format!("{}?{query}", url.path()),
-        None => url.path().to_string(),
-    };
-
-    let host = match url.port() {
-        Some(port) => format!("{}:{port}", url.host_str().unwrap_or_default()),
-        None => url.host_str().unwrap_or_default().to_string(),
-    };
-
-    format!("POST {target} HTTP/1.1\r\n").len()
-        + "content-type: application/json\r\n".len()
-        + "accept: */*\r\n".len()
-        + format!("host: {host}\r\n").len()
-        + format!("content-length: {body_len}\r\n").len()
-        + "\r\n".len()
-        + body_len
-}
-
-/// Builds a JSON POST request to `url`, padded with headers to `TARGET_SIZE` bytes.
-fn padded_request(
-    client: &reqwest::Client,
-    url: &str,
-    body: Vec<u8>,
-) -> anyhow::Result<reqwest::RequestBuilder> {
-    let parsed_url = reqwest::Url::parse(url).context("Failed to parse push url")?;
-
-    let padding = padding_headers(request_base_size(&parsed_url, body.len()));
-
-    Ok(client
-        .post(url)
-        .header(reqwest::header::CONTENT_TYPE, "application/json")
-        .headers(padding)
-        .body(body))
-}
-
 #[derive(Clone)]
 struct JobsSate {
     client: reqwest::Client,
@@ -240,7 +164,9 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
 
                         state.add_job(job.clone()).await;
 
-                        let body = if use_simple_call_format {
+                        let request = state.client.post(&push_url);
+
+                        let request = if use_simple_call_format {
                             let simple_call = SimpleCall::new(
                                 &event.original,
                                 format!("{queue}-{}", delivery.delivery_tag),
@@ -249,14 +175,10 @@ async fn connection(config: Config, state: JobsSate) -> Result<(), anyhow::Error
 
                             tracing::debug!(%queue, ?simple_call, "Using simple call format");
 
-                            serde_json::to_vec(&simple_call)
+                            request.json(&simple_call)
                         } else {
-                            serde_json::to_vec(&event.original)
-                        }
-                        .context(format!("Failed to serialize request body: {event:?}"))?;
-
-                        let request = padded_request(&state.client, &push_url, body)
-                            .context(format!("Failed to build request: {event:?}"))?;
+                            request.json(&event.original)
+                        };
 
                         let response = request.send().await;
 
