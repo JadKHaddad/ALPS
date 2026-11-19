@@ -3,7 +3,12 @@
 //! cargo run -r --bin tcp-proxy -- --config-file tcp-proxy-config.yaml
 //! ```
 
-use std::{net::SocketAddr, path::PathBuf, sync::Arc, time::Duration};
+use std::{
+    net::SocketAddr,
+    path::PathBuf,
+    sync::Arc,
+    time::{Duration, Instant},
+};
 
 use anyhow::Context;
 use lps_rust::{
@@ -20,15 +25,15 @@ use tokio::{
         tcp::{OwnedReadHalf, OwnedWriteHalf},
     },
     sync::{Mutex, mpsc},
-    time::Instant,
 };
+use tokio_timerfd::Delay;
 
 const SEED_SALT: u64 = 0x9A0C_0000_0000_0000;
 const LATENCY_SEED_SALT: u64 = 0x1A7E_0000_0000_0000;
 const DOWNSTREAM_SEED_SALT: u64 = 0x0000_D0D0_0000_0000;
 
 /// Maximum number of bytes forwarded per socket read.
-const READ_BUF_SIZE: usize = 64 * 1024;
+const READ_BUF_SIZE: usize = 1024;
 
 /// Number of read chunks buffered between the reader and the delayed writer.
 const CHUNK_CHANNEL_CAPACITY: usize = 64;
@@ -198,6 +203,9 @@ async fn delayed_copy(
 ) -> std::io::Result<()> {
     // The reader timestamps chunks as they arrive, so delays are measured from the
     // read, not skewed by the writer sleeping. The bounded channel keeps TCP backpressure.
+    //
+    // `std::time::Instant` (CLOCK_MONOTONIC) is used on purpose: it is the clock the
+    // timerfd below is armed against.
     let (tx, mut rx) = mpsc::channel::<(Instant, Vec<u8>)>(CHUNK_CHANNEL_CAPACITY);
 
     let read = async move {
@@ -237,9 +245,15 @@ async fn delayed_copy(
         let mut total_bytes: u64 = 0;
         let mut total_delay = Duration::ZERO;
 
+        // One timerfd per direction, re-armed for every chunk. Unlike `tokio::time::sleep`
+        // (1 ms wheel granularity), timerfd has nanosecond resolution.
+        let mut timer = Delay::new(Instant::now())?;
+
         while let Some((arrived, data)) = rx.recv().await {
             if !latency.is_zero() {
-                let latency_delay = latency.sample_delay(&mut rng);
+                let latency_delay = latency
+                    .sample_delay(&mut rng)
+                    .saturating_mul(data.len() as u32);
                 let release = arrived + latency_delay;
                 let delay = release.saturating_duration_since(Instant::now());
 
@@ -251,7 +265,10 @@ async fn delayed_copy(
                     "Delaying bytes"
                 );
 
-                tokio::time::sleep_until(release).await;
+                if delay > Duration::ZERO {
+                    timer.reset(release);
+                    (&mut timer).await?;
+                }
 
                 total_delay += delay;
             }

@@ -31,9 +31,9 @@ server:
       min_up_duration: 1d
       latency:
         min_upstream_latency: 0.009ms
-        max_upstream_latency: 0.5ms
+        max_upstream_latency: 0.009ms
         min_downstream_latency: 0.009ms
-        max_downstream_latency: 0.5ms
+        max_downstream_latency: 0.009ms
 
 amqp:
   use_features: False
@@ -55,9 +55,9 @@ amqp:
         min_up_duration: 1d
         latency:
           min_upstream_latency: 0.009ms
-          max_upstream_latency: 0.5ms
+          max_upstream_latency: 0.009ms
           min_downstream_latency: 0.009ms
-          max_downstream_latency: 0.5ms
+          max_downstream_latency: 0.009ms
     server_proxy:
       socket_addr: 0.0.0.0:9081
       connection:
