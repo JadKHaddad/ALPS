@@ -30,10 +30,6 @@ const DOWNSTREAM_SEED_SALT: u64 = 0x0000_D0D0_0000_0000;
 /// Maximum number of bytes forwarded per socket read.
 const READ_BUF_SIZE: usize = 64 * 1024;
 
-/// Chunks arriving within this gap of the previous one belong to the same burst
-/// (e.g. the headers and body of one HTTP request, however TCP split them).
-const BURST_GAP: Duration = Duration::from_millis(5);
-
 /// Number of read chunks buffered between the reader and the delayed writer.
 const CHUNK_CHANNEL_CAPACITY: usize = 64;
 
@@ -102,25 +98,23 @@ fn resolve_min(source: &str, name: &str, min: Option<Duration>, max: Duration) -
     }
 }
 
-/// Per-byte latency in one direction.
+/// Latency in one direction.
 ///
-/// One per-byte latency is drawn uniformly from `min..=max` per burst of bytes (see
-/// [`BURST_GAP`]). Each chunk of the burst is forwarded at
-/// `burst start + per-byte latency * bytes so far in the burst`, so the delays do not
-/// depend on how TCP split the burst into reads.
+/// A new delay is drawn uniformly from `min..=max` for every chunk read from the socket,
+/// from the connection's seeded RNG, and the chunk is forwarded at `arrival + delay`.
 #[derive(Debug, Clone, Copy)]
-struct ByteLatency {
+struct DirectionLatency {
     min: Duration,
     max: Duration,
 }
 
-impl ByteLatency {
+impl DirectionLatency {
     fn is_zero(&self) -> bool {
         self.max.is_zero()
     }
 
-    /// Draws one per-byte latency.
-    fn sample_per_byte(&self, rng: &mut StdRng) -> Duration {
+    /// Draws one delay.
+    fn sample_delay(&self, rng: &mut StdRng) -> Duration {
         if self.min == self.max {
             self.max
         } else {
@@ -131,27 +125,19 @@ impl ByteLatency {
     }
 }
 
-/// Bytes that arrived back to back and share one latency draw.
-struct Burst {
-    start: Instant,
-    last_arrival: Instant,
-    per_byte: Duration,
-    bytes: usize,
-}
-
 /// Latency settings for both directions of a proxied connection.
 #[derive(Debug, Clone, Copy)]
 struct ProxyLatency {
     /// client -> server
-    upstream: ByteLatency,
+    upstream: DirectionLatency,
     /// server -> client
-    downstream: ByteLatency,
+    downstream: DirectionLatency,
 }
 
 impl ProxyLatency {
     fn new(source: &str, latency: &Latency) -> Self {
         Self {
-            upstream: ByteLatency {
+            upstream: DirectionLatency {
                 min: resolve_min(
                     source,
                     "upstream_latency",
@@ -160,7 +146,7 @@ impl ProxyLatency {
                 ),
                 max: latency.max_upstream_latency,
             },
-            downstream: ByteLatency {
+            downstream: DirectionLatency {
                 min: resolve_min(
                     source,
                     "downstream_latency",
@@ -200,19 +186,18 @@ impl ConnectionProfile {
     }
 }
 
-/// Copies `reader` -> `writer`, delaying each burst of bytes by
-/// `per-byte latency * bytes`, with one latency draw per burst.
+/// Copies `reader` -> `writer`, delaying each chunk read by a freshly drawn random delay.
 ///
 /// On EOF the write side is shut down, so the FIN reaches the peer after the last byte.
 async fn delayed_copy(
     direction: &'static str,
     mut reader: OwnedReadHalf,
     mut writer: OwnedWriteHalf,
-    latency: ByteLatency,
+    latency: DirectionLatency,
     mut rng: StdRng,
 ) -> std::io::Result<()> {
-    // The reader timestamps chunks as they arrive, so burst detection is not skewed by
-    // the writer sleeping. The bounded channel keeps TCP backpressure.
+    // The reader timestamps chunks as they arrive, so delays are measured from the
+    // read, not skewed by the writer sleeping. The bounded channel keeps TCP backpressure.
     let (tx, mut rx) = mpsc::channel::<(Instant, Vec<u8>)>(CHUNK_CHANNEL_CAPACITY);
 
     let read = async move {
@@ -249,38 +234,22 @@ async fn delayed_copy(
     };
 
     let write = async move {
-        let mut burst: Option<Burst> = None;
         let mut total_bytes: u64 = 0;
         let mut total_delay = Duration::ZERO;
 
         while let Some((arrived, data)) = rx.recv().await {
             if !latency.is_zero() {
-                let same_burst = burst
-                    .as_ref()
-                    .is_some_and(|b| arrived.duration_since(b.last_arrival) <= BURST_GAP);
-
-                if !same_burst {
-                    let per_byte = latency.sample_per_byte(&mut rng);
-
-                    tracing::info!(direction, ?per_byte, "New burst");
-
-                    burst = Some(Burst {
-                        start: arrived,
-                        last_arrival: arrived,
-                        per_byte,
-                        bytes: 0,
-                    });
-                }
-
-                let b = burst.as_mut().expect("burst was set above");
-
-                b.bytes += data.len();
-                b.last_arrival = arrived;
-
-                let release = b.start + b.per_byte.saturating_mul(b.bytes as u32);
+                let latency_delay = latency.sample_delay(&mut rng);
+                let release = arrived + latency_delay;
                 let delay = release.saturating_duration_since(Instant::now());
 
-                tracing::info!(direction, ?delay, bytes = data.len(), "Delaying bytes");
+                tracing::info!(
+                    direction,
+                    ?latency_delay,
+                    ?delay,
+                    bytes = data.len(),
+                    "Delaying bytes"
+                );
 
                 tokio::time::sleep_until(release).await;
 

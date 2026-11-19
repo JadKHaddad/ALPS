@@ -1,0 +1,73 @@
+simulation_dir: "simulation"
+simulation_docker_network: "lps-simulation-net"
+lps_rust_image: "jadkhaddad/lps-rs:0.1.0"
+lps_scripts_image: "jadkhaddad/lps-scripts:0.1.0"
+lps_gleam_image: "jadkhaddad/lps-gleam:0.1.0"
+lps_mqtt_python_image: "jadkhaddad/lps-mqtt-python:0.1.0"
+
+devices:
+  devices_count: 70
+  max_event_interval: 1s
+  min_event_interval: 1s
+  max_events: 500
+  retry_duration: 500ms
+  wait_before_start: 5s
+
+server:
+  socket_addr: 0.0.0.0:8080
+  expose_socket_addr: 0.0.0.0:8080
+  # Not used because of `use_gs_prod_workload` but needed for the deserialization of the config file
+  failure_rate: 0.0
+  shutdown_after_idle_duration: 60s
+  server_count: 3
+  use_gs_prod_workload: True
+  background_load_per_second: 70
+  deduplication: False
+  tcp_proxy:
+    socket_addr: 0.0.0.0:9000
+    connection:
+      failure_rate: 0.2
+      max_up_duration: 1d
+      min_up_duration: 1d
+      latency:
+        min_upstream_latency: 0.009ms
+        max_upstream_latency: 0.5ms
+        min_downstream_latency: 0.009ms
+        max_downstream_latency: 0.5ms
+
+amqp:
+  use_features: False
+  queues_count: 1
+  producers:
+    producers_count: 3
+    socket_addr: 0.0.0.0:5672
+  consumers:
+    prefetch_count: 0
+    tcp_keepalive: 5s
+    http_timeout: 1s
+    consumers_count: 3
+    reconnect_duration: 50ms
+    amqp_proxy:
+      socket_addr: 0.0.0.0:9090
+      connection:
+        failure_rate: 0.2
+        max_up_duration: 1d
+        min_up_duration: 1d
+        latency:
+          min_upstream_latency: 0.009ms
+          max_upstream_latency: 0.5ms
+          min_downstream_latency: 0.009ms
+          max_downstream_latency: 0.5ms
+    server_proxy:
+      socket_addr: 0.0.0.0:9081
+      connection:
+        failure_rate: 0.2
+        max_up_duration: 1d
+        min_up_duration: 1d
+        latency:
+          min_upstream_latency: 0ms
+          max_upstream_latency: 0.009ms
+          min_downstream_latency: 0ms
+          max_downstream_latency: 0.009ms
+
+# python3 runner/runner.py --protocol "amqp" --runs 1 --base-dir ".simulations/alps/no-features/ubuntu/alps-real" --base-config ".simulations/alps/no-features/ubuntu/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/no-features/ubuntu/alps-real/logs"

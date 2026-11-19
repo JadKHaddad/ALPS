@@ -27,3 +27,4 @@ hickory-resolver = { version = "0.26.0", default-features = false, features = [
     "system-config",
 ] }
 pyo3 = { version = "0.22", features = ["auto-initialize"] }
+tokio-timerfd = "0.2.0"
