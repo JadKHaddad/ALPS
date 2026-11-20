@@ -71,4 +71,4 @@ amqp:
           max_downstream_latency: 0.009ms
 
 
-# python3 runner/runner.py --protocol "amqp" --runs 1 --base-dir ".simulations/alps/no-features/ubuntu/alps-real" --base-config ".simulations/alps/no-features/ubuntu/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/no-features/ubuntu/alps-real/logs"
+# python3 runner/runner.py --protocol "amqp" --runs 59 --base-dir ".simulations/alps/no-features/lenovo/alps-real" --base-config ".simulations/alps/no-features/lenovo/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/no-features/lenovo/alps-real/logs"
