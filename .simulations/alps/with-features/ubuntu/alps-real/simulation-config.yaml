@@ -72,3 +72,4 @@ amqp:
 
 
 # python3 runner/runner.py --protocol "amqp" --runs 59 --base-dir ".simulations/alps/with-features/ubuntu/alps-real" --base-config ".simulations/alps/with-features/ubuntu/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/with-features/ubuntu/alps-real/logs"
+# python3 runner/runner.py --protocol "amqp" --start-index 9 --runs 59 --base-dir ".simulations/alps/with-features/ubuntu/alps-real" --base-config ".simulations/alps/with-features/ubuntu/alps-real/simulation-config.yaml" --log-dir ".simulations/alps/with-features/ubuntu/alps-real/logs"

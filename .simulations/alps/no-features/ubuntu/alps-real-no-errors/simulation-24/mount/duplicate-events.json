@@ -1,0 +1,15 @@
+[
+  {
+    "device_id": "0",
+    "event_id": 1795283706915,
+    "arrived_at": "2026-11-21T17:55:10.107495975Z",
+    "finished_at": "2026-11-21T17:55:10.113285667Z",
+    "original": {
+      "branch": "Branch",
+      "headnumber": "Headnumber",
+      "incremental_id": null,
+      "phone": "0",
+      "triggertime": "2026-11-21T17:55:06.915844Z"
+    }
+  }
+]

@@ -1,0 +1,5452 @@
+[
+  {
+    "device_id": "54",
+    "first_event_id": 1795285444322,
+    "second_event_id": 1795285445330
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285444327,
+    "second_event_id": 1795285445336
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285445246,
+    "second_event_id": 1795285446267
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285445279,
+    "second_event_id": 1795285446286
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285445284,
+    "second_event_id": 1795285446292
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285445307,
+    "second_event_id": 1795285446312
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285445317,
+    "second_event_id": 1795285446326
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285445331,
+    "second_event_id": 1795285446339
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285445341,
+    "second_event_id": 1795285446347
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285446177,
+    "second_event_id": 1795285447185
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285446196,
+    "second_event_id": 1795285447200
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285446240,
+    "second_event_id": 1795285447245
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285446253,
+    "second_event_id": 1795285447259
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285446261,
+    "second_event_id": 1795285447266
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285446265,
+    "second_event_id": 1795285447273
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285446273,
+    "second_event_id": 1795285447280
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285446281,
+    "second_event_id": 1795285447284
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285446281,
+    "second_event_id": 1795285447289
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285446288,
+    "second_event_id": 1795285447300
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285446306,
+    "second_event_id": 1795285447313
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285446318,
+    "second_event_id": 1795285447322
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285446331,
+    "second_event_id": 1795285447336
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285446333,
+    "second_event_id": 1795285447342
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285446345,
+    "second_event_id": 1795285447354
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285446347,
+    "second_event_id": 1795285447356
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285447210,
+    "second_event_id": 1795285448216
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285447240,
+    "second_event_id": 1795285448245
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285447246,
+    "second_event_id": 1795285448251
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285447257,
+    "second_event_id": 1795285448262
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285447265,
+    "second_event_id": 1795285448273
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285447271,
+    "second_event_id": 1795285448278
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285447289,
+    "second_event_id": 1795285448294
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285447295,
+    "second_event_id": 1795285448301
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285447311,
+    "second_event_id": 1795285448316
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285447356,
+    "second_event_id": 1795285448367
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285447360,
+    "second_event_id": 1795285448367
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285447366,
+    "second_event_id": 1795285448375
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285448206,
+    "second_event_id": 1795285449215
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285448231,
+    "second_event_id": 1795285449237
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285448242,
+    "second_event_id": 1795285449252
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285448249,
+    "second_event_id": 1795285449263
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285448259,
+    "second_event_id": 1795285449267
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285448296,
+    "second_event_id": 1795285449313
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285448322,
+    "second_event_id": 1795285449332
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285448354,
+    "second_event_id": 1795285449359
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285448362,
+    "second_event_id": 1795285449368
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285448367,
+    "second_event_id": 1795285449377
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285449198,
+    "second_event_id": 1795285450203
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285449213,
+    "second_event_id": 1795285450217
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285449221,
+    "second_event_id": 1795285450230
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285449247,
+    "second_event_id": 1795285450253
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285449260,
+    "second_event_id": 1795285450267
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285449276,
+    "second_event_id": 1795285450286
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285449294,
+    "second_event_id": 1795285450305
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285449303,
+    "second_event_id": 1795285450314
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285449319,
+    "second_event_id": 1795285450327
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285449324,
+    "second_event_id": 1795285450335
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285449307,
+    "second_event_id": 1795285450342
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285450334,
+    "second_event_id": 1795285451340
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285450357,
+    "second_event_id": 1795285451361
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285450361,
+    "second_event_id": 1795285451368
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285450371,
+    "second_event_id": 1795285451377
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285450381,
+    "second_event_id": 1795285451393
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285450394,
+    "second_event_id": 1795285451407
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285455449,
+    "second_event_id": 1795285456456
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285458401,
+    "second_event_id": 1795285459405
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285458407,
+    "second_event_id": 1795285459415
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285458419,
+    "second_event_id": 1795285459426
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285458429,
+    "second_event_id": 1795285459436
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285459258,
+    "second_event_id": 1795285460266
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285459410,
+    "second_event_id": 1795285460414
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285459452,
+    "second_event_id": 1795285460462
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285459479,
+    "second_event_id": 1795285460483
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285460345,
+    "second_event_id": 1795285461352
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285460352,
+    "second_event_id": 1795285461356
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285460335,
+    "second_event_id": 1795285461340
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285460368,
+    "second_event_id": 1795285461372
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285460382,
+    "second_event_id": 1795285461386
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285460395,
+    "second_event_id": 1795285461400
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285460405,
+    "second_event_id": 1795285461417
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285460407,
+    "second_event_id": 1795285461423
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285460435,
+    "second_event_id": 1795285461440
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285460449,
+    "second_event_id": 1795285461454
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285460457,
+    "second_event_id": 1795285461463
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285460462,
+    "second_event_id": 1795285461470
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285460468,
+    "second_event_id": 1795285461473
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285460481,
+    "second_event_id": 1795285461490
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285460477,
+    "second_event_id": 1795285461483
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285461267,
+    "second_event_id": 1795285462272
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285461272,
+    "second_event_id": 1795285462279
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285461296,
+    "second_event_id": 1795285462302
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285461310,
+    "second_event_id": 1795285462316
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285461325,
+    "second_event_id": 1795285462331
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285461303,
+    "second_event_id": 1795285462308
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285461356,
+    "second_event_id": 1795285462362
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285461340,
+    "second_event_id": 1795285462344
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285461350,
+    "second_event_id": 1795285462354
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285461368,
+    "second_event_id": 1795285462372
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285461381,
+    "second_event_id": 1795285462385
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285461397,
+    "second_event_id": 1795285462401
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285461413,
+    "second_event_id": 1795285462418
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285461423,
+    "second_event_id": 1795285462440
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285461430,
+    "second_event_id": 1795285462449
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285461450,
+    "second_event_id": 1795285462456
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285461469,
+    "second_event_id": 1795285462475
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285466426,
+    "second_event_id": 1795285467435
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285466446,
+    "second_event_id": 1795285467454
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285466457,
+    "second_event_id": 1795285467467
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285466497,
+    "second_event_id": 1795285467505
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285470559,
+    "second_event_id": 1795285471566
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285470566,
+    "second_event_id": 1795285471574
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285470570,
+    "second_event_id": 1795285471579
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285471337,
+    "second_event_id": 1795285472344
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285471349,
+    "second_event_id": 1795285472354
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285471365,
+    "second_event_id": 1795285472369
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285471380,
+    "second_event_id": 1795285472390
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285471384,
+    "second_event_id": 1795285472398
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285471400,
+    "second_event_id": 1795285472411
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285471407,
+    "second_event_id": 1795285472416
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285471421,
+    "second_event_id": 1795285472431
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285471429,
+    "second_event_id": 1795285472439
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285471432,
+    "second_event_id": 1795285472441
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285471451,
+    "second_event_id": 1795285472455
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285471457,
+    "second_event_id": 1795285472463
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285471473,
+    "second_event_id": 1795285472479
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285471492,
+    "second_event_id": 1795285472497
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285471507,
+    "second_event_id": 1795285472514
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285471516,
+    "second_event_id": 1795285472520
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285471529,
+    "second_event_id": 1795285472534
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285471536,
+    "second_event_id": 1795285472545
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285471548,
+    "second_event_id": 1795285472554
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285471559,
+    "second_event_id": 1795285472566
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285471571,
+    "second_event_id": 1795285472576
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285472338,
+    "second_event_id": 1795285473341
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285472350,
+    "second_event_id": 1795285473354
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285472363,
+    "second_event_id": 1795285473367
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285472396,
+    "second_event_id": 1795285473405
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285472404,
+    "second_event_id": 1795285473412
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285472428,
+    "second_event_id": 1795285473432
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285472444,
+    "second_event_id": 1795285473449
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285472486,
+    "second_event_id": 1795285473491
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285472508,
+    "second_event_id": 1795285473512
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285472519,
+    "second_event_id": 1795285473532
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285472528,
+    "second_event_id": 1795285473543
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285472540,
+    "second_event_id": 1795285473548
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285472553,
+    "second_event_id": 1795285473558
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285472564,
+    "second_event_id": 1795285473568
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285472573,
+    "second_event_id": 1795285473577
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285472583,
+    "second_event_id": 1795285473590
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285473331,
+    "second_event_id": 1795285474337
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285473351,
+    "second_event_id": 1795285474356
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285473363,
+    "second_event_id": 1795285474368
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285473396,
+    "second_event_id": 1795285474403
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285473533,
+    "second_event_id": 1795285474543
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285473420,
+    "second_event_id": 1795285474431
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285473440,
+    "second_event_id": 1795285474445
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285473468,
+    "second_event_id": 1795285474472
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285473491,
+    "second_event_id": 1795285474496
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285473508,
+    "second_event_id": 1795285474513
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285473529,
+    "second_event_id": 1795285474534
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285473543,
+    "second_event_id": 1795285474551
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285474543,
+    "second_event_id": 1795285475550
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285474556,
+    "second_event_id": 1795285475561
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285474575,
+    "second_event_id": 1795285475581
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285473563,
+    "second_event_id": 1795285474568
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285473575,
+    "second_event_id": 1795285474579
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285473587,
+    "second_event_id": 1795285474592
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285473592,
+    "second_event_id": 1795285474600
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285474356,
+    "second_event_id": 1795285475361
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285474365,
+    "second_event_id": 1795285475371
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285474377,
+    "second_event_id": 1795285475384
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285475425,
+    "second_event_id": 1795285476433
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285475468,
+    "second_event_id": 1795285476474
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285474419,
+    "second_event_id": 1795285475424
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285474431,
+    "second_event_id": 1795285475436
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285474436,
+    "second_event_id": 1795285475441
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285474445,
+    "second_event_id": 1795285475450
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285474453,
+    "second_event_id": 1795285476467
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285474459,
+    "second_event_id": 1795285475464
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285474466,
+    "second_event_id": 1795285475473
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285474477,
+    "second_event_id": 1795285475488
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285474488,
+    "second_event_id": 1795285476501
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285474507,
+    "second_event_id": 1795285475511
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285474523,
+    "second_event_id": 1795285475529
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285474543,
+    "second_event_id": 1795285476553
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285475502,
+    "second_event_id": 1795285476506
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285475549,
+    "second_event_id": 1795285476560
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285474546,
+    "second_event_id": 1795285475554
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285475558,
+    "second_event_id": 1795285476565
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285475572,
+    "second_event_id": 1795285476576
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285474551,
+    "second_event_id": 1795285475561
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285474564,
+    "second_event_id": 1795285475570
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285474575,
+    "second_event_id": 1795285477590
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285474585,
+    "second_event_id": 1795285475590
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285475585,
+    "second_event_id": 1795285477593
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285475598,
+    "second_event_id": 1795285477606
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285475606,
+    "second_event_id": 1795285477617
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285474597,
+    "second_event_id": 1795285475602
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285475351,
+    "second_event_id": 1795285476355
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285475365,
+    "second_event_id": 1795285476369
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285475378,
+    "second_event_id": 1795285476382
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285475395,
+    "second_event_id": 1795285476402
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285475416,
+    "second_event_id": 1795285476420
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285475424,
+    "second_event_id": 1795285477438
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285475439,
+    "second_event_id": 1795285476445
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285475443,
+    "second_event_id": 1795285476451
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285475455,
+    "second_event_id": 1795285476464
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285475468,
+    "second_event_id": 1795285477480
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285476564,
+    "second_event_id": 1795285477570
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285475484,
+    "second_event_id": 1795285476490
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285476571,
+    "second_event_id": 1795285477586
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285475502,
+    "second_event_id": 1795285477514
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285475525,
+    "second_event_id": 1795285476529
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285475549,
+    "second_event_id": 1795285477564
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285475555,
+    "second_event_id": 1795285476564
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285475564,
+    "second_event_id": 1795285477583
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285475588,
+    "second_event_id": 1795285476592
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285475602,
+    "second_event_id": 1795285476609
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285476347,
+    "second_event_id": 1795285477351
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285476364,
+    "second_event_id": 1795285478378
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285476379,
+    "second_event_id": 1795285477385
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285476401,
+    "second_event_id": 1795285477407
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285476416,
+    "second_event_id": 1795285477420
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285477459,
+    "second_event_id": 1795285478466
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285476442,
+    "second_event_id": 1795285477446
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285476448,
+    "second_event_id": 1795285478461
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285476460,
+    "second_event_id": 1795285477466
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285476482,
+    "second_event_id": 1795285477488
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285476496,
+    "second_event_id": 1795285477500
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285476522,
+    "second_event_id": 1795285477526
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285476544,
+    "second_event_id": 1795285477548
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285476564,
+    "second_event_id": 1795285478576
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285476579,
+    "second_event_id": 1795285478595
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285476602,
+    "second_event_id": 1795285478614
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285477614,
+    "second_event_id": 1795285478622
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285477380,
+    "second_event_id": 1795285478384
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285477393,
+    "second_event_id": 1795285478398
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285477419,
+    "second_event_id": 1795285478424
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285477435,
+    "second_event_id": 1795285478440
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285477446,
+    "second_event_id": 1795285478454
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285477462,
+    "second_event_id": 1795285479472
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285477471,
+    "second_event_id": 1795285478478
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285477484,
+    "second_event_id": 1795285478492
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285477500,
+    "second_event_id": 1795285478507
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285477507,
+    "second_event_id": 1795285478515
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285478471,
+    "second_event_id": 1795285479476
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285478522,
+    "second_event_id": 1795285479530
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285477523,
+    "second_event_id": 1795285478529
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285477538,
+    "second_event_id": 1795285479547
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285478568,
+    "second_event_id": 1795285479573
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285478576,
+    "second_event_id": 1795285479584
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285478609,
+    "second_event_id": 1795285479619
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285477561,
+    "second_event_id": 1795285478565
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285477575,
+    "second_event_id": 1795285478581
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285479389,
+    "second_event_id": 1795285480397
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285477587,
+    "second_event_id": 1795285478600
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285477596,
+    "second_event_id": 1795285478611
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285478371,
+    "second_event_id": 1795285479375
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285478380,
+    "second_event_id": 1795285481410
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285478392,
+    "second_event_id": 1795285479397
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285478416,
+    "second_event_id": 1795285479421
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285479603,
+    "second_event_id": 1795285480607
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285479615,
+    "second_event_id": 1795285480629
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285479625,
+    "second_event_id": 1795285480644
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285478432,
+    "second_event_id": 1795285480442
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285478447,
+    "second_event_id": 1795285480456
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285478457,
+    "second_event_id": 1795285480470
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285478467,
+    "second_event_id": 1795285481491
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285478475,
+    "second_event_id": 1795285480485
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285478485,
+    "second_event_id": 1795285479491
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285478490,
+    "second_event_id": 1795285479500
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285478502,
+    "second_event_id": 1795285481524
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285478514,
+    "second_event_id": 1795285480525
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285478524,
+    "second_event_id": 1795285480534
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285478540,
+    "second_event_id": 1795285479545
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285478562,
+    "second_event_id": 1795285479568
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285480488,
+    "second_event_id": 1795285481494
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285480498,
+    "second_event_id": 1795285481503
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285478571,
+    "second_event_id": 1795285480581
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285480553,
+    "second_event_id": 1795285481559
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285478578,
+    "second_event_id": 1795285480593
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285480598,
+    "second_event_id": 1795285481605
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285478590,
+    "second_event_id": 1795285479597
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285478601,
+    "second_event_id": 1795285480614
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285478605,
+    "second_event_id": 1795285481641
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285478607,
+    "second_event_id": 1795285481638
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285478624,
+    "second_event_id": 1795285479631
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285479364,
+    "second_event_id": 1795285480369
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285479384,
+    "second_event_id": 1795285481402
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285479395,
+    "second_event_id": 1795285482420
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285479420,
+    "second_event_id": 1795285480424
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285479432,
+    "second_event_id": 1795285480440
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285479449,
+    "second_event_id": 1795285480453
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285479462,
+    "second_event_id": 1795285480467
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285481492,
+    "second_event_id": 1795285482509
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285479469,
+    "second_event_id": 1795285481482
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285479479,
+    "second_event_id": 1795285481492
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285479488,
+    "second_event_id": 1795285480494
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285479495,
+    "second_event_id": 1795285482517
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285479503,
+    "second_event_id": 1795285480516
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285479517,
+    "second_event_id": 1795285482541
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285479537,
+    "second_event_id": 1795285480542
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285479559,
+    "second_event_id": 1795285480563
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285479575,
+    "second_event_id": 1795285482592
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285479593,
+    "second_event_id": 1795285480601
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285479603,
+    "second_event_id": 1795285481613
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285479615,
+    "second_event_id": 1795285482636
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285479625,
+    "second_event_id": 1795285480642
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285479631,
+    "second_event_id": 1795285481650
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285480391,
+    "second_event_id": 1795285483417
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285481609,
+    "second_event_id": 1795285482614
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285481615,
+    "second_event_id": 1795285482621
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285480403,
+    "second_event_id": 1795285482416
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285480409,
+    "second_event_id": 1795285481416
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285480437,
+    "second_event_id": 1795285481442
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285481650,
+    "second_event_id": 1795285482656
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285480448,
+    "second_event_id": 1795285483474
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285480464,
+    "second_event_id": 1795285482476
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285480474,
+    "second_event_id": 1795285482487
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285480489,
+    "second_event_id": 1795285483532
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285480499,
+    "second_event_id": 1795285483523
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285480521,
+    "second_event_id": 1795285481533
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285480539,
+    "second_event_id": 1795285481544
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285480580,
+    "second_event_id": 1795285481587
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285480592,
+    "second_event_id": 1795285481597
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285480598,
+    "second_event_id": 1795285482609
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285480615,
+    "second_event_id": 1795285481620
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285482554,
+    "second_event_id": 1795285483563
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285482603,
+    "second_event_id": 1795285483610
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285482647,
+    "second_event_id": 1795285483653
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285480637,
+    "second_event_id": 1795285482646
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285482656,
+    "second_event_id": 1795285483662
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285480645,
+    "second_event_id": 1795285482656
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285481384,
+    "second_event_id": 1795285482388
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285481433,
+    "second_event_id": 1795285482440
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285481448,
+    "second_event_id": 1795285484473
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285481463,
+    "second_event_id": 1795285483483
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285481472,
+    "second_event_id": 1795285483496
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285483436,
+    "second_event_id": 1795285484445
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285481488,
+    "second_event_id": 1795285482495
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285481500,
+    "second_event_id": 1795285483512
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285481513,
+    "second_event_id": 1795285482520
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285481525,
+    "second_event_id": 1795285483556
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285481542,
+    "second_event_id": 1795285483560
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285481559,
+    "second_event_id": 1795285482565
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285481576,
+    "second_event_id": 1795285482581
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285481587,
+    "second_event_id": 1795285483602
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285481608,
+    "second_event_id": 1795285483619
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285481619,
+    "second_event_id": 1795285483630
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285483565,
+    "second_event_id": 1795285484571
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285481648,
+    "second_event_id": 1795285484674
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285482381,
+    "second_event_id": 1795285483388
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285482406,
+    "second_event_id": 1795285484423
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285482417,
+    "second_event_id": 1795285483436
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285482437,
+    "second_event_id": 1795285483445
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285482481,
+    "second_event_id": 1795285483499
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285482537,
+    "second_event_id": 1795285483548
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285482538,
+    "second_event_id": 1795285484563
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285482550,
+    "second_event_id": 1795285483565
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285482574,
+    "second_event_id": 1795285483578
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285482604,
+    "second_event_id": 1795285484615
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285482636,
+    "second_event_id": 1795285483643
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285482643,
+    "second_event_id": 1795285483653
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285482651,
+    "second_event_id": 1795285484666
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285482655,
+    "second_event_id": 1795285483662
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285484479,
+    "second_event_id": 1795285485484
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285483429,
+    "second_event_id": 1795285485437
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285483478,
+    "second_event_id": 1795285484482
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285483488,
+    "second_event_id": 1795285485498
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285483497,
+    "second_event_id": 1795285484506
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285483503,
+    "second_event_id": 1795285485516
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285483517,
+    "second_event_id": 1795285484520
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285483529,
+    "second_event_id": 1795285484536
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285483538,
+    "second_event_id": 1795285484541
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285484529,
+    "second_event_id": 1795285486538
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285484537,
+    "second_event_id": 1795285486551
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285483572,
+    "second_event_id": 1795285484580
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285483601,
+    "second_event_id": 1795285484607
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285483618,
+    "second_event_id": 1795285484623
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285484608,
+    "second_event_id": 1795285486618
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285483627,
+    "second_event_id": 1795285484637
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285483631,
+    "second_event_id": 1795285484646
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285483649,
+    "second_event_id": 1795285484656
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285483662,
+    "second_event_id": 1795285485680
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285484403,
+    "second_event_id": 1795285485408
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285484624,
+    "second_event_id": 1795285486635
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285484642,
+    "second_event_id": 1795285486655
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285484452,
+    "second_event_id": 1795285486461
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285484479,
+    "second_event_id": 1795285486489
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285484503,
+    "second_event_id": 1795285485507
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285484518,
+    "second_event_id": 1795285485524
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285484531,
+    "second_event_id": 1795285485537
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285484664,
+    "second_event_id": 1795285486673
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285484541,
+    "second_event_id": 1795285485546
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285484667,
+    "second_event_id": 1795285486681
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285484563,
+    "second_event_id": 1795285485569
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285484675,
+    "second_event_id": 1795285486688
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285484567,
+    "second_event_id": 1795285485573
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285484572,
+    "second_event_id": 1795285485581
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285484578,
+    "second_event_id": 1795285485584
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285484596,
+    "second_event_id": 1795285485600
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285484610,
+    "second_event_id": 1795285485616
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285484621,
+    "second_event_id": 1795285486631
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285484636,
+    "second_event_id": 1795285485641
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285484644,
+    "second_event_id": 1795285485650
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285484651,
+    "second_event_id": 1795285485655
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285484664,
+    "second_event_id": 1795285485670
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285485399,
+    "second_event_id": 1795285486404
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285485429,
+    "second_event_id": 1795285486434
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285485446,
+    "second_event_id": 1795285486450
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285485494,
+    "second_event_id": 1795285486499
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285485505,
+    "second_event_id": 1795285486510
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285485511,
+    "second_event_id": 1795285486519
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285485521,
+    "second_event_id": 1795285486525
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285485581,
+    "second_event_id": 1795285486590
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285485588,
+    "second_event_id": 1795285486596
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285485652,
+    "second_event_id": 1795285486660
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285486454,
+    "second_event_id": 1795285487463
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285485557,
+    "second_event_id": 1795285486561
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285485572,
+    "second_event_id": 1795285486580
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285485578,
+    "second_event_id": 1795285486587
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285486554,
+    "second_event_id": 1795285487562
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285485584,
+    "second_event_id": 1795285487608
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285485590,
+    "second_event_id": 1795285487604
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285486621,
+    "second_event_id": 1795285488637
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285486631,
+    "second_event_id": 1795285488648
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285486646,
+    "second_event_id": 1795285488657
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285486655,
+    "second_event_id": 1795285488666
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285486660,
+    "second_event_id": 1795285487670
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285486675,
+    "second_event_id": 1795285488686
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285486684,
+    "second_event_id": 1795285488691
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285485623,
+    "second_event_id": 1795285486631
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285485630,
+    "second_event_id": 1795285487641
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285485655,
+    "second_event_id": 1795285486660
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285486432,
+    "second_event_id": 1795285487437
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285486443,
+    "second_event_id": 1795285487449
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285486454,
+    "second_event_id": 1795285488465
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285486481,
+    "second_event_id": 1795285487487
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285486491,
+    "second_event_id": 1795285487500
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285486503,
+    "second_event_id": 1795285487510
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285487517,
+    "second_event_id": 1795285488522
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285486517,
+    "second_event_id": 1795285487523
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285486522,
+    "second_event_id": 1795285487527
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285486532,
+    "second_event_id": 1795285487539
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285486550,
+    "second_event_id": 1795285487555
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285486577,
+    "second_event_id": 1795285487585
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285486580,
+    "second_event_id": 1795285488600
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285487608,
+    "second_event_id": 1795285488618
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285486593,
+    "second_event_id": 1795285488615
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285486617,
+    "second_event_id": 1795285487623
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285486627,
+    "second_event_id": 1795285487632
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285486650,
+    "second_event_id": 1795285487654
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285486660,
+    "second_event_id": 1795285487666
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285486664,
+    "second_event_id": 1795285487668
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285486679,
+    "second_event_id": 1795285487683
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285487417,
+    "second_event_id": 1795285488422
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285487447,
+    "second_event_id": 1795285488454
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285487468,
+    "second_event_id": 1795285488472
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285487498,
+    "second_event_id": 1795285488502
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285487509,
+    "second_event_id": 1795285488513
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285487517,
+    "second_event_id": 1795285489527
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285487526,
+    "second_event_id": 1795285488533
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285488530,
+    "second_event_id": 1795285489537
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285488533,
+    "second_event_id": 1795285489540
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285487533,
+    "second_event_id": 1795285488538
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285487547,
+    "second_event_id": 1795285488551
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285487560,
+    "second_event_id": 1795285488568
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285487580,
+    "second_event_id": 1795285488584
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285487601,
+    "second_event_id": 1795285489610
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285487611,
+    "second_event_id": 1795285489627
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285487625,
+    "second_event_id": 1795285489640
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285487662,
+    "second_event_id": 1795285489670
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285487668,
+    "second_event_id": 1795285488674
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285488414,
+    "second_event_id": 1795285489417
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285488446,
+    "second_event_id": 1795285489450
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285488459,
+    "second_event_id": 1795285489465
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285488469,
+    "second_event_id": 1795285489477
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285488499,
+    "second_event_id": 1795285489509
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285488508,
+    "second_event_id": 1795285489515
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285488530,
+    "second_event_id": 1795285489537
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285488536,
+    "second_event_id": 1795285490546
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285488546,
+    "second_event_id": 1795285489551
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285488566,
+    "second_event_id": 1795285489573
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285488573,
+    "second_event_id": 1795285489579
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285488599,
+    "second_event_id": 1795285489605
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285488604,
+    "second_event_id": 1795285489610
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285488612,
+    "second_event_id": 1795285489616
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285488648,
+    "second_event_id": 1795285489653
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285488654,
+    "second_event_id": 1795285489662
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285489684,
+    "second_event_id": 1795285490691
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285488666,
+    "second_event_id": 1795285489670
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285488674,
+    "second_event_id": 1795285489682
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285488684,
+    "second_event_id": 1795285489689
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285488691,
+    "second_event_id": 1795285489700
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285490514,
+    "second_event_id": 1795285491519
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285488699,
+    "second_event_id": 1795285489707
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285489446,
+    "second_event_id": 1795285490451
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285489459,
+    "second_event_id": 1795285490467
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285489472,
+    "second_event_id": 1795285490478
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285489496,
+    "second_event_id": 1795285490499
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285489511,
+    "second_event_id": 1795285490517
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285489521,
+    "second_event_id": 1795285490526
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285489539,
+    "second_event_id": 1795285490543
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285489540,
+    "second_event_id": 1795285491554
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285490580,
+    "second_event_id": 1795285491587
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285490609,
+    "second_event_id": 1795285491614
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285489548,
+    "second_event_id": 1795285490555
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285489563,
+    "second_event_id": 1795285490567
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285489577,
+    "second_event_id": 1795285490582
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285490667,
+    "second_event_id": 1795285491673
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285490676,
+    "second_event_id": 1795285491684
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285490703,
+    "second_event_id": 1795285491708
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285489594,
+    "second_event_id": 1795285490598
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285489606,
+    "second_event_id": 1795285490612
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285489613,
+    "second_event_id": 1795285490620
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285489625,
+    "second_event_id": 1795285490631
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285489633,
+    "second_event_id": 1795285490641
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285491591,
+    "second_event_id": 1795285492601
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285489643,
+    "second_event_id": 1795285491653
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285489657,
+    "second_event_id": 1795285491671
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285489665,
+    "second_event_id": 1795285491682
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285489677,
+    "second_event_id": 1795285491690
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285489684,
+    "second_event_id": 1795285491702
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285489691,
+    "second_event_id": 1795285491712
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285489706,
+    "second_event_id": 1795285490714
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285490431,
+    "second_event_id": 1795285492440
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285490464,
+    "second_event_id": 1795285492473
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285490474,
+    "second_event_id": 1795285492483
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285490483,
+    "second_event_id": 1795285492496
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285490514,
+    "second_event_id": 1795285492524
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285490521,
+    "second_event_id": 1795285492533
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285490535,
+    "second_event_id": 1795285492545
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285490547,
+    "second_event_id": 1795285491554
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285490552,
+    "second_event_id": 1795285492564
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285490560,
+    "second_event_id": 1795285492572
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285490580,
+    "second_event_id": 1795285492591
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285490592,
+    "second_event_id": 1795285491597
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285490610,
+    "second_event_id": 1795285492621
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285490618,
+    "second_event_id": 1795285492631
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285490626,
+    "second_event_id": 1795285492643
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285490635,
+    "second_event_id": 1795285492646
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285490648,
+    "second_event_id": 1795285492659
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285490662,
+    "second_event_id": 1795285492678
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285490669,
+    "second_event_id": 1795285492681
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285490678,
+    "second_event_id": 1795285492693
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285490691,
+    "second_event_id": 1795285492708
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285490703,
+    "second_event_id": 1795285492717
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285490708,
+    "second_event_id": 1795285492725
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285491427,
+    "second_event_id": 1795285493437
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285491458,
+    "second_event_id": 1795285493470
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285491474,
+    "second_event_id": 1795285493484
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285491488,
+    "second_event_id": 1795285493498
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285491519,
+    "second_event_id": 1795285493529
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285491526,
+    "second_event_id": 1795285493537
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285491538,
+    "second_event_id": 1795285493547
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285491550,
+    "second_event_id": 1795285493558
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285491554,
+    "second_event_id": 1795285493572
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285491560,
+    "second_event_id": 1795285493577
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285491585,
+    "second_event_id": 1795285493597
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285491591,
+    "second_event_id": 1795285493605
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285491614,
+    "second_event_id": 1795285493625
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285491621,
+    "second_event_id": 1795285492629
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285491627,
+    "second_event_id": 1795285493643
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285491635,
+    "second_event_id": 1795285493650
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285491651,
+    "second_event_id": 1795285493660
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285491666,
+    "second_event_id": 1795285493676
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285491676,
+    "second_event_id": 1795285493689
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285491685,
+    "second_event_id": 1795285494705
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285491696,
+    "second_event_id": 1795285493705
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285491707,
+    "second_event_id": 1795285493721
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285491714,
+    "second_event_id": 1795285493730
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285491719,
+    "second_event_id": 1795285492732
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285492461,
+    "second_event_id": 1795285494472
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285492476,
+    "second_event_id": 1795285494487
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285492487,
+    "second_event_id": 1795285494501
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285492510,
+    "second_event_id": 1795285494519
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285492529,
+    "second_event_id": 1795285494539
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285492537,
+    "second_event_id": 1795285494548
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285492551,
+    "second_event_id": 1795285494561
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285492563,
+    "second_event_id": 1795285494578
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285492570,
+    "second_event_id": 1795285494582
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285492579,
+    "second_event_id": 1795285494592
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285492601,
+    "second_event_id": 1795285494610
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285492609,
+    "second_event_id": 1795285494619
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285492626,
+    "second_event_id": 1795285494636
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285492636,
+    "second_event_id": 1795285493642
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285492645,
+    "second_event_id": 1795285494654
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285492650,
+    "second_event_id": 1795285494660
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285492658,
+    "second_event_id": 1795285494670
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285492681,
+    "second_event_id": 1795285494698
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285492688,
+    "second_event_id": 1795285494702
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285492698,
+    "second_event_id": 1795285493703
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285492712,
+    "second_event_id": 1795285494719
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285492724,
+    "second_event_id": 1795285494733
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285492729,
+    "second_event_id": 1795285494745
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285493444,
+    "second_event_id": 1795285495454
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285493478,
+    "second_event_id": 1795285495489
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285493487,
+    "second_event_id": 1795285495498
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285493500,
+    "second_event_id": 1795285495512
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285493529,
+    "second_event_id": 1795285495537
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285493537,
+    "second_event_id": 1795285495549
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285493552,
+    "second_event_id": 1795285495560
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285493562,
+    "second_event_id": 1795285495572
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285493572,
+    "second_event_id": 1795285495586
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285493583,
+    "second_event_id": 1795285495599
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285493597,
+    "second_event_id": 1795285495608
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285493609,
+    "second_event_id": 1795285495619
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285493629,
+    "second_event_id": 1795285495637
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285493635,
+    "second_event_id": 1795285495645
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285495677,
+    "second_event_id": 1795285496681
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285493647,
+    "second_event_id": 1795285495659
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285493653,
+    "second_event_id": 1795285495666
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285493666,
+    "second_event_id": 1795285495677
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285493687,
+    "second_event_id": 1795285495696
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285493690,
+    "second_event_id": 1795285495705
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285493712,
+    "second_event_id": 1795285494717
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285493723,
+    "second_event_id": 1795285495732
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285493735,
+    "second_event_id": 1795285495745
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285494442,
+    "second_event_id": 1795285495447
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285494474,
+    "second_event_id": 1795285495478
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285494489,
+    "second_event_id": 1795285496500
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285494503,
+    "second_event_id": 1795285496516
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285494533,
+    "second_event_id": 1795285496541
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285494551,
+    "second_event_id": 1795285496561
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285494566,
+    "second_event_id": 1795285495570
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285494578,
+    "second_event_id": 1795285496587
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285496664,
+    "second_event_id": 1795285497675
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285494590,
+    "second_event_id": 1795285496599
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285494604,
+    "second_event_id": 1795285495608
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285494613,
+    "second_event_id": 1795285497633
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285496724,
+    "second_event_id": 1795285497737
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285494630,
+    "second_event_id": 1795285496637
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285494639,
+    "second_event_id": 1795285496651
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285494647,
+    "second_event_id": 1795285496662
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285494659,
+    "second_event_id": 1795285497672
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285494665,
+    "second_event_id": 1795285496675
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285494679,
+    "second_event_id": 1795285496688
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285494698,
+    "second_event_id": 1795285496710
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285494705,
+    "second_event_id": 1795285496719
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285494708,
+    "second_event_id": 1795285496724
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285494726,
+    "second_event_id": 1795285496733
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285494735,
+    "second_event_id": 1795285496747
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285497490,
+    "second_event_id": 1795285498494
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285494746,
+    "second_event_id": 1795285496759
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285495477,
+    "second_event_id": 1795285496482
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285495492,
+    "second_event_id": 1795285497510
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285495507,
+    "second_event_id": 1795285497518
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285495524,
+    "second_event_id": 1795285497539
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285495545,
+    "second_event_id": 1795285497553
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285495552,
+    "second_event_id": 1795285497565
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285495565,
+    "second_event_id": 1795285497574
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285495583,
+    "second_event_id": 1795285498599
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285495588,
+    "second_event_id": 1795285496593
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285495600,
+    "second_event_id": 1795285497611
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285495614,
+    "second_event_id": 1795285497628
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285495623,
+    "second_event_id": 1795285496629
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285495640,
+    "second_event_id": 1795285497650
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285495654,
+    "second_event_id": 1795285496662
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285495660,
+    "second_event_id": 1795285496666
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285495669,
+    "second_event_id": 1795285496674
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285495677,
+    "second_event_id": 1795285497689
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285495712,
+    "second_event_id": 1795285498734
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285495714,
+    "second_event_id": 1795285496724
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285495724,
+    "second_event_id": 1795285496728
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285495737,
+    "second_event_id": 1795285497745
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285497689,
+    "second_event_id": 1795285498697
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285495750,
+    "second_event_id": 1795285497759
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285496458,
+    "second_event_id": 1795285498469
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285496498,
+    "second_event_id": 1795285498516
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285496504,
+    "second_event_id": 1795285498526
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285496517,
+    "second_event_id": 1795285498531
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285496541,
+    "second_event_id": 1795285497548
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285496555,
+    "second_event_id": 1795285499581
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285496564,
+    "second_event_id": 1795285497570
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285496577,
+    "second_event_id": 1795285497582
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285496593,
+    "second_event_id": 1795285497598
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285496616,
+    "second_event_id": 1795285499644
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285496625,
+    "second_event_id": 1795285499648
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285496641,
+    "second_event_id": 1795285498650
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285496653,
+    "second_event_id": 1795285497657
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285496671,
+    "second_event_id": 1795285499700
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285496681,
+    "second_event_id": 1795285499705
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285496701,
+    "second_event_id": 1795285497706
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285496716,
+    "second_event_id": 1795285499738
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285496719,
+    "second_event_id": 1795285497729
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285496728,
+    "second_event_id": 1795285499746
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285496736,
+    "second_event_id": 1795285498751
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285496751,
+    "second_event_id": 1795285497755
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285497456,
+    "second_event_id": 1795285498461
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285497514,
+    "second_event_id": 1795285498520
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285497521,
+    "second_event_id": 1795285499534
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285497548,
+    "second_event_id": 1795285498554
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285497560,
+    "second_event_id": 1795285498572
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285497566,
+    "second_event_id": 1795285498575
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285497580,
+    "second_event_id": 1795285500599
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285499561,
+    "second_event_id": 1795285500565
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285497604,
+    "second_event_id": 1795285498611
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285497622,
+    "second_event_id": 1795285498628
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285497631,
+    "second_event_id": 1795285499647
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285497643,
+    "second_event_id": 1795285500662
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285497656,
+    "second_event_id": 1795285499669
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285497667,
+    "second_event_id": 1795285499682
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285497680,
+    "second_event_id": 1795285498684
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285497692,
+    "second_event_id": 1795285500707
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285497721,
+    "second_event_id": 1795285498727
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285497750,
+    "second_event_id": 1795285498756
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285497763,
+    "second_event_id": 1795285498768
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285498494,
+    "second_event_id": 1795285501508
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285498519,
+    "second_event_id": 1795285499524
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285498527,
+    "second_event_id": 1795285501546
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285498546,
+    "second_event_id": 1795285499551
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285498559,
+    "second_event_id": 1795285499563
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285500528,
+    "second_event_id": 1795285501534
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285498579,
+    "second_event_id": 1795285499589
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285498597,
+    "second_event_id": 1795285499603
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285498608,
+    "second_event_id": 1795285499612
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285498620,
+    "second_event_id": 1795285499626
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285498641,
+    "second_event_id": 1795285501665
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285498655,
+    "second_event_id": 1795285499662
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285498672,
+    "second_event_id": 1795285499682
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285498679,
+    "second_event_id": 1795285499686
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285498683,
+    "second_event_id": 1795285501712
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285498719,
+    "second_event_id": 1795285499724
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285498729,
+    "second_event_id": 1795285501749
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285498745,
+    "second_event_id": 1795285500757
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285498751,
+    "second_event_id": 1795285500765
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285498765,
+    "second_event_id": 1795285499770
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285499474,
+    "second_event_id": 1795285500478
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285499520,
+    "second_event_id": 1795285500527
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285499534,
+    "second_event_id": 1795285502552
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285499537,
+    "second_event_id": 1795285500543
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285499579,
+    "second_event_id": 1795285500583
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285499589,
+    "second_event_id": 1795285500593
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285499609,
+    "second_event_id": 1795285500613
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285499622,
+    "second_event_id": 1795285500626
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285499642,
+    "second_event_id": 1795285500648
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285499671,
+    "second_event_id": 1795285500676
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285499685,
+    "second_event_id": 1795285501698
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285499695,
+    "second_event_id": 1795285500700
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285499703,
+    "second_event_id": 1795285502719
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285499718,
+    "second_event_id": 1795285500722
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285499736,
+    "second_event_id": 1795285502754
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285499741,
+    "second_event_id": 1795285500748
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285499746,
+    "second_event_id": 1795285500755
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285499758,
+    "second_event_id": 1795285500765
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285499767,
+    "second_event_id": 1795285500772
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285500470,
+    "second_event_id": 1795285501475
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285500504,
+    "second_event_id": 1795285502512
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285500528,
+    "second_event_id": 1795285502538
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285500540,
+    "second_event_id": 1795285502553
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285500565,
+    "second_event_id": 1795285501569
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285500580,
+    "second_event_id": 1795285503600
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285502575,
+    "second_event_id": 1795285503583
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285500588,
+    "second_event_id": 1795285502600
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285500597,
+    "second_event_id": 1795285503617
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285500611,
+    "second_event_id": 1795285501619
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285500620,
+    "second_event_id": 1795285501626
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285500636,
+    "second_event_id": 1795285501640
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285500661,
+    "second_event_id": 1795285501667
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285500674,
+    "second_event_id": 1795285501679
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285500687,
+    "second_event_id": 1795285502704
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285500694,
+    "second_event_id": 1795285502710
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285500715,
+    "second_event_id": 1795285501720
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285500742,
+    "second_event_id": 1795285501749
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285500748,
+    "second_event_id": 1795285501756
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285500754,
+    "second_event_id": 1795285501761
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285500763,
+    "second_event_id": 1795285501768
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285500769,
+    "second_event_id": 1795285501778
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285500780,
+    "second_event_id": 1795285501786
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285501508,
+    "second_event_id": 1795285502512
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285501559,
+    "second_event_id": 1795285502565
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285501574,
+    "second_event_id": 1795285502579
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285501591,
+    "second_event_id": 1795285502598
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285501603,
+    "second_event_id": 1795285502609
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285501615,
+    "second_event_id": 1795285502621
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285501623,
+    "second_event_id": 1795285502630
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285501635,
+    "second_event_id": 1795285502641
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285501659,
+    "second_event_id": 1795285502663
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285501665,
+    "second_event_id": 1795285502677
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285502783,
+    "second_event_id": 1795285503789
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285501671,
+    "second_event_id": 1795285502685
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285501699,
+    "second_event_id": 1795285503721
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285501712,
+    "second_event_id": 1795285502717
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285501718,
+    "second_event_id": 1795285503729
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285501736,
+    "second_event_id": 1795285502741
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285503518,
+    "second_event_id": 1795285504523
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285503559,
+    "second_event_id": 1795285504568
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285501749,
+    "second_event_id": 1795285502754
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285501757,
+    "second_event_id": 1795285502765
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285501765,
+    "second_event_id": 1795285503780
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285501772,
+    "second_event_id": 1795285502777
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285501783,
+    "second_event_id": 1795285502787
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285502487,
+    "second_event_id": 1795285503492
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285502537,
+    "second_event_id": 1795285503542
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285502552,
+    "second_event_id": 1795285503559
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285502554,
+    "second_event_id": 1795285503562
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285502603,
+    "second_event_id": 1795285503608
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285502612,
+    "second_event_id": 1795285504623
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285502627,
+    "second_event_id": 1795285503632
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285502639,
+    "second_event_id": 1795285503643
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285502658,
+    "second_event_id": 1795285503667
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285502674,
+    "second_event_id": 1795285503679
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285502683,
+    "second_event_id": 1795285503687
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285502691,
+    "second_event_id": 1795285503696
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285503624,
+    "second_event_id": 1795285505633
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285503647,
+    "second_event_id": 1795285505656
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285502704,
+    "second_event_id": 1795285503717
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285503683,
+    "second_event_id": 1795285505694
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285503689,
+    "second_event_id": 1795285505703
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285503710,
+    "second_event_id": 1795285505719
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285503717,
+    "second_event_id": 1795285505736
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285503723,
+    "second_event_id": 1795285504732
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285503730,
+    "second_event_id": 1795285505746
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285503746,
+    "second_event_id": 1795285505755
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285503759,
+    "second_event_id": 1795285505777
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285503780,
+    "second_event_id": 1795285505796
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285503791,
+    "second_event_id": 1795285504797
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285503794,
+    "second_event_id": 1795285504802
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285502717,
+    "second_event_id": 1795285505741
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285502733,
+    "second_event_id": 1795285503737
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285502753,
+    "second_event_id": 1795285505780
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285502763,
+    "second_event_id": 1795285503769
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285502770,
+    "second_event_id": 1795285503780
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285504615,
+    "second_event_id": 1795285506627
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285504623,
+    "second_event_id": 1795285506636
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285502777,
+    "second_event_id": 1795285503781
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285502783,
+    "second_event_id": 1795285503791
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285503484,
+    "second_event_id": 1795285504489
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285504636,
+    "second_event_id": 1795285505648
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285503518,
+    "second_event_id": 1795285505529
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285503543,
+    "second_event_id": 1795285505555
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285504648,
+    "second_event_id": 1795285506658
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285503562,
+    "second_event_id": 1795285505572
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285504738,
+    "second_event_id": 1795285506752
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285504742,
+    "second_event_id": 1795285506758
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285503583,
+    "second_event_id": 1795285504588
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285503600,
+    "second_event_id": 1795285504604
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285503605,
+    "second_event_id": 1795285504614
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285503630,
+    "second_event_id": 1795285504635
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285503639,
+    "second_event_id": 1795285504645
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285503650,
+    "second_event_id": 1795285504655
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285503679,
+    "second_event_id": 1795285504686
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285503684,
+    "second_event_id": 1795285504690
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285503694,
+    "second_event_id": 1795285506712
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285503718,
+    "second_event_id": 1795285504723
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285503733,
+    "second_event_id": 1795285504738
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285503759,
+    "second_event_id": 1795285506788
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285503764,
+    "second_event_id": 1795285506778
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285503771,
+    "second_event_id": 1795285504781
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285503781,
+    "second_event_id": 1795285504793
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285503784,
+    "second_event_id": 1795285505803
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285503796,
+    "second_event_id": 1795285505807
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285504551,
+    "second_event_id": 1795285505555
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285504576,
+    "second_event_id": 1795285505580
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285504591,
+    "second_event_id": 1795285505595
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285504611,
+    "second_event_id": 1795285505616
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285504622,
+    "second_event_id": 1795285505627
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285504641,
+    "second_event_id": 1795285506652
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285505805,
+    "second_event_id": 1795285506814
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285504674,
+    "second_event_id": 1795285506686
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285504695,
+    "second_event_id": 1795285506707
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285504773,
+    "second_event_id": 1795285505780
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285505501,
+    "second_event_id": 1795285506505
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285505551,
+    "second_event_id": 1795285506556
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285505566,
+    "second_event_id": 1795285506571
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285505575,
+    "second_event_id": 1795285506581
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285505592,
+    "second_event_id": 1795285506598
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285505609,
+    "second_event_id": 1795285506616
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285505652,
+    "second_event_id": 1795285507661
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285505693,
+    "second_event_id": 1795285506698
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285505736,
+    "second_event_id": 1795285506744
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285505736,
+    "second_event_id": 1795285507755
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285505740,
+    "second_event_id": 1795285506753
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285505746,
+    "second_event_id": 1795285506761
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285505774,
+    "second_event_id": 1795285507782
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285505780,
+    "second_event_id": 1795285506787
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285505790,
+    "second_event_id": 1795285506798
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285505799,
+    "second_event_id": 1795285506806
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285505809,
+    "second_event_id": 1795285506815
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285506499,
+    "second_event_id": 1795285507505
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285506533,
+    "second_event_id": 1795285508549
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285506559,
+    "second_event_id": 1795285507567
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285507766,
+    "second_event_id": 1795285508773
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285507768,
+    "second_event_id": 1795285508777
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285506577,
+    "second_event_id": 1795285508589
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285506598,
+    "second_event_id": 1795285508607
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285506616,
+    "second_event_id": 1795285508625
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285506627,
+    "second_event_id": 1795285508638
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285506633,
+    "second_event_id": 1795285508644
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285506644,
+    "second_event_id": 1795285508654
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285506656,
+    "second_event_id": 1795285507662
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285506663,
+    "second_event_id": 1795285508675
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285506695,
+    "second_event_id": 1795285508703
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285506702,
+    "second_event_id": 1795285507714
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285506712,
+    "second_event_id": 1795285507717
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285506731,
+    "second_event_id": 1795285508741
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285506748,
+    "second_event_id": 1795285508761
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285506750,
+    "second_event_id": 1795285507762
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285506758,
+    "second_event_id": 1795285507766
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285506786,
+    "second_event_id": 1795285507793
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285506795,
+    "second_event_id": 1795285507799
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285506803,
+    "second_event_id": 1795285507808
+  },
+  {
+    "device_id": "13",
+    "first_event_id": 1795285506816,
+    "second_event_id": 1795285507822
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285506817,
+    "second_event_id": 1795285507825
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285507539,
+    "second_event_id": 1795285508549
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285507567,
+    "second_event_id": 1795285508571
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285507584,
+    "second_event_id": 1795285508588
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285507591,
+    "second_event_id": 1795285508600
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285507608,
+    "second_event_id": 1795285508614
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285507630,
+    "second_event_id": 1795285508635
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285507637,
+    "second_event_id": 1795285508644
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285507646,
+    "second_event_id": 1795285508650
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285507657,
+    "second_event_id": 1795285508666
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285507665,
+    "second_event_id": 1795285508671
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285507692,
+    "second_event_id": 1795285508698
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285507708,
+    "second_event_id": 1795285508712
+  },
+  {
+    "device_id": "44",
+    "first_event_id": 1795285507714,
+    "second_event_id": 1795285508721
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285507730,
+    "second_event_id": 1795285508736
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285507759,
+    "second_event_id": 1795285509776
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285507765,
+    "second_event_id": 1795285509784
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285507790,
+    "second_event_id": 1795285508795
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285507808,
+    "second_event_id": 1795285508812
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285507816,
+    "second_event_id": 1795285508822
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285507823,
+    "second_event_id": 1795285508830
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285508515,
+    "second_event_id": 1795285509519
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285508566,
+    "second_event_id": 1795285509571
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285508580,
+    "second_event_id": 1795285509587
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285508596,
+    "second_event_id": 1795285509602
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285508609,
+    "second_event_id": 1795285509614
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285508629,
+    "second_event_id": 1795285509633
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285508640,
+    "second_event_id": 1795285509647
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285508649,
+    "second_event_id": 1795285509654
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285508664,
+    "second_event_id": 1795285509669
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285508670,
+    "second_event_id": 1795285509678
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285508694,
+    "second_event_id": 1795285509699
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285508711,
+    "second_event_id": 1795285509716
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285508722,
+    "second_event_id": 1795285509726
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285508755,
+    "second_event_id": 1795285509760
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285508766,
+    "second_event_id": 1795285509776
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285508777,
+    "second_event_id": 1795285509792
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285508786,
+    "second_event_id": 1795285509794
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285508801,
+    "second_event_id": 1795285509812
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285508807,
+    "second_event_id": 1795285509814
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285508816,
+    "second_event_id": 1795285509823
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285509515,
+    "second_event_id": 1795285510526
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285509576,
+    "second_event_id": 1795285510582
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285509597,
+    "second_event_id": 1795285510604
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285509613,
+    "second_event_id": 1795285510618
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285509630,
+    "second_event_id": 1795285510635
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285509645,
+    "second_event_id": 1795285510652
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285509651,
+    "second_event_id": 1795285510658
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285509677,
+    "second_event_id": 1795285510681
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285509683,
+    "second_event_id": 1795285510690
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285509708,
+    "second_event_id": 1795285510714
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285509723,
+    "second_event_id": 1795285510727
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285509746,
+    "second_event_id": 1795285510753
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285509772,
+    "second_event_id": 1795285510776
+  },
+  {
+    "device_id": "66",
+    "first_event_id": 1795285509781,
+    "second_event_id": 1795285510787
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285509792,
+    "second_event_id": 1795285510799
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285509814,
+    "second_event_id": 1795285510819
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285509820,
+    "second_event_id": 1795285510827
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285509835,
+    "second_event_id": 1795285510841
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285509839,
+    "second_event_id": 1795285510844
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285510562,
+    "second_event_id": 1795285511570
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285510580,
+    "second_event_id": 1795285511585
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285510602,
+    "second_event_id": 1795285511607
+  },
+  {
+    "device_id": "26",
+    "first_event_id": 1795285510611,
+    "second_event_id": 1795285511618
+  },
+  {
+    "device_id": "36",
+    "first_event_id": 1795285510622,
+    "second_event_id": 1795285511630
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285510646,
+    "second_event_id": 1795285511652
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285510655,
+    "second_event_id": 1795285511664
+  },
+  {
+    "device_id": "20",
+    "first_event_id": 1795285510664,
+    "second_event_id": 1795285511672
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285510675,
+    "second_event_id": 1795285511680
+  },
+  {
+    "device_id": "27",
+    "first_event_id": 1795285510689,
+    "second_event_id": 1795285511693
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285510708,
+    "second_event_id": 1795285511713
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285510722,
+    "second_event_id": 1795285511733
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285510735,
+    "second_event_id": 1795285511739
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285510745,
+    "second_event_id": 1795285511749
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285510771,
+    "second_event_id": 1795285511776
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285510797,
+    "second_event_id": 1795285511806
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285510803,
+    "second_event_id": 1795285511815
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285510803,
+    "second_event_id": 1795285511820
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285510823,
+    "second_event_id": 1795285511836
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285510833,
+    "second_event_id": 1795285511839
+  },
+  {
+    "device_id": "69",
+    "first_event_id": 1795285510844,
+    "second_event_id": 1795285511853
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285511538,
+    "second_event_id": 1795285512548
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285511580,
+    "second_event_id": 1795285512586
+  },
+  {
+    "device_id": "0",
+    "first_event_id": 1795285511596,
+    "second_event_id": 1795285512602
+  },
+  {
+    "device_id": "38",
+    "first_event_id": 1795285511612,
+    "second_event_id": 1795285512622
+  },
+  {
+    "device_id": "18",
+    "first_event_id": 1795285511624,
+    "second_event_id": 1795285512629
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285511643,
+    "second_event_id": 1795285512647
+  },
+  {
+    "device_id": "19",
+    "first_event_id": 1795285511661,
+    "second_event_id": 1795285512669
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285511671,
+    "second_event_id": 1795285512679
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285511690,
+    "second_event_id": 1795285512696
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285511710,
+    "second_event_id": 1795285512717
+  },
+  {
+    "device_id": "29",
+    "first_event_id": 1795285511727,
+    "second_event_id": 1795285512731
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285511737,
+    "second_event_id": 1795285512743
+  },
+  {
+    "device_id": "22",
+    "first_event_id": 1795285511770,
+    "second_event_id": 1795285512773
+  },
+  {
+    "device_id": "65",
+    "first_event_id": 1795285511788,
+    "second_event_id": 1795285512793
+  },
+  {
+    "device_id": "60",
+    "first_event_id": 1795285511812,
+    "second_event_id": 1795285512817
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285511819,
+    "second_event_id": 1795285512828
+  },
+  {
+    "device_id": "61",
+    "first_event_id": 1795285511824,
+    "second_event_id": 1795285512845
+  },
+  {
+    "device_id": "4",
+    "first_event_id": 1795285511828,
+    "second_event_id": 1795285512857
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285511836,
+    "second_event_id": 1795285512860
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285512536,
+    "second_event_id": 1795285513540
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285512593,
+    "second_event_id": 1795285513598
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285512617,
+    "second_event_id": 1795285513624
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285512629,
+    "second_event_id": 1795285513639
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285512661,
+    "second_event_id": 1795285513664
+  },
+  {
+    "device_id": "46",
+    "first_event_id": 1795285512677,
+    "second_event_id": 1795285513681
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285512692,
+    "second_event_id": 1795285513700
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285512725,
+    "second_event_id": 1795285513729
+  },
+  {
+    "device_id": "50",
+    "first_event_id": 1795285512764,
+    "second_event_id": 1795285513769
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285512786,
+    "second_event_id": 1795285513791
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285512801,
+    "second_event_id": 1795285513806
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285512816,
+    "second_event_id": 1795285513821
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285512824,
+    "second_event_id": 1795285513828
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285512834,
+    "second_event_id": 1795285513838
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285513873,
+    "second_event_id": 1795285514884
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285512855,
+    "second_event_id": 1795285513862
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285512858,
+    "second_event_id": 1795285513866
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285512869,
+    "second_event_id": 1795285513874
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285513598,
+    "second_event_id": 1795285514603
+  },
+  {
+    "device_id": "23",
+    "first_event_id": 1795285513621,
+    "second_event_id": 1795285514626
+  },
+  {
+    "device_id": "17",
+    "first_event_id": 1795285513649,
+    "second_event_id": 1795285514659
+  },
+  {
+    "device_id": "8",
+    "first_event_id": 1795285513660,
+    "second_event_id": 1795285514667
+  },
+  {
+    "device_id": "9",
+    "first_event_id": 1795285513677,
+    "second_event_id": 1795285514684
+  },
+  {
+    "device_id": "41",
+    "first_event_id": 1795285513687,
+    "second_event_id": 1795285514693
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285513722,
+    "second_event_id": 1795285514728
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285513759,
+    "second_event_id": 1795285514765
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285513785,
+    "second_event_id": 1795285514790
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285513798,
+    "second_event_id": 1795285514806
+  },
+  {
+    "device_id": "64",
+    "first_event_id": 1795285513817,
+    "second_event_id": 1795285514822
+  },
+  {
+    "device_id": "37",
+    "first_event_id": 1795285513828,
+    "second_event_id": 1795285514833
+  },
+  {
+    "device_id": "42",
+    "first_event_id": 1795285513837,
+    "second_event_id": 1795285514842
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285513857,
+    "second_event_id": 1795285514861
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285513868,
+    "second_event_id": 1795285514905
+  },
+  {
+    "device_id": "14",
+    "first_event_id": 1795285514557,
+    "second_event_id": 1795285515562
+  },
+  {
+    "device_id": "35",
+    "first_event_id": 1795285514597,
+    "second_event_id": 1795285515607
+  },
+  {
+    "device_id": "32",
+    "first_event_id": 1795285515592,
+    "second_event_id": 1795285516600
+  },
+  {
+    "device_id": "1",
+    "first_event_id": 1795285515610,
+    "second_event_id": 1795285516615
+  },
+  {
+    "device_id": "5",
+    "first_event_id": 1795285515633,
+    "second_event_id": 1795285516639
+  },
+  {
+    "device_id": "16",
+    "first_event_id": 1795285515657,
+    "second_event_id": 1795285516662
+  },
+  {
+    "device_id": "30",
+    "first_event_id": 1795285515667,
+    "second_event_id": 1795285516672
+  },
+  {
+    "device_id": "24",
+    "first_event_id": 1795285515675,
+    "second_event_id": 1795285516680
+  },
+  {
+    "device_id": "6",
+    "first_event_id": 1795285515702,
+    "second_event_id": 1795285516709
+  },
+  {
+    "device_id": "7",
+    "first_event_id": 1795285515719,
+    "second_event_id": 1795285516726
+  },
+  {
+    "device_id": "48",
+    "first_event_id": 1795285515728,
+    "second_event_id": 1795285516734
+  },
+  {
+    "device_id": "51",
+    "first_event_id": 1795285515742,
+    "second_event_id": 1795285516749
+  },
+  {
+    "device_id": "11",
+    "first_event_id": 1795285515764,
+    "second_event_id": 1795285516770
+  },
+  {
+    "device_id": "57",
+    "first_event_id": 1795285515778,
+    "second_event_id": 1795285516785
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285515782,
+    "second_event_id": 1795285516792
+  },
+  {
+    "device_id": "56",
+    "first_event_id": 1795285515802,
+    "second_event_id": 1795285516807
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285515817,
+    "second_event_id": 1795285516822
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285515837,
+    "second_event_id": 1795285516846
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285515844,
+    "second_event_id": 1795285516852
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285515854,
+    "second_event_id": 1795285516864
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285515871,
+    "second_event_id": 1795285516877
+  },
+  {
+    "device_id": "43",
+    "first_event_id": 1795285515910,
+    "second_event_id": 1795285516919
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285516599,
+    "second_event_id": 1795285517604
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285516615,
+    "second_event_id": 1795285517620
+  },
+  {
+    "device_id": "25",
+    "first_event_id": 1795285519837,
+    "second_event_id": 1795285520842
+  },
+  {
+    "device_id": "68",
+    "first_event_id": 1795285519858,
+    "second_event_id": 1795285520863
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285519870,
+    "second_event_id": 1795285520878
+  },
+  {
+    "device_id": "58",
+    "first_event_id": 1795285519884,
+    "second_event_id": 1795285520888
+  },
+  {
+    "device_id": "63",
+    "first_event_id": 1795285519892,
+    "second_event_id": 1795285520896
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285519920,
+    "second_event_id": 1795285520925
+  },
+  {
+    "device_id": "54",
+    "first_event_id": 1795285519926,
+    "second_event_id": 1795285520937
+  },
+  {
+    "device_id": "53",
+    "first_event_id": 1795285519937,
+    "second_event_id": 1795285520944
+  },
+  {
+    "device_id": "31",
+    "first_event_id": 1795285520617,
+    "second_event_id": 1795285521621
+  },
+  {
+    "device_id": "15",
+    "first_event_id": 1795285520638,
+    "second_event_id": 1795285521643
+  },
+  {
+    "device_id": "10",
+    "first_event_id": 1795285520766,
+    "second_event_id": 1795285521772
+  },
+  {
+    "device_id": "52",
+    "first_event_id": 1795285520785,
+    "second_event_id": 1795285521790
+  },
+  {
+    "device_id": "45",
+    "first_event_id": 1795285520793,
+    "second_event_id": 1795285521798
+  },
+  {
+    "device_id": "47",
+    "first_event_id": 1795285520812,
+    "second_event_id": 1795285521818
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285520821,
+    "second_event_id": 1795285521828
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285520840,
+    "second_event_id": 1795285521847
+  },
+  {
+    "device_id": "59",
+    "first_event_id": 1795285520928,
+    "second_event_id": 1795285521934
+  },
+  {
+    "device_id": "67",
+    "first_event_id": 1795285520939,
+    "second_event_id": 1795285521948
+  },
+  {
+    "device_id": "39",
+    "first_event_id": 1795285521584,
+    "second_event_id": 1795285522589
+  },
+  {
+    "device_id": "33",
+    "first_event_id": 1795285521737,
+    "second_event_id": 1795285522745
+  },
+  {
+    "device_id": "49",
+    "first_event_id": 1795285522824,
+    "second_event_id": 1795285523829
+  },
+  {
+    "device_id": "3",
+    "first_event_id": 1795285530824,
+    "second_event_id": 1795285531834
+  },
+  {
+    "device_id": "12",
+    "first_event_id": 1795285530830,
+    "second_event_id": 1795285531846
+  },
+  {
+    "device_id": "21",
+    "first_event_id": 1795285530857,
+    "second_event_id": 1795285531867
+  },
+  {
+    "device_id": "2",
+    "first_event_id": 1795285538951,
+    "second_event_id": 1795285539956
+  },
+  {
+    "device_id": "55",
+    "first_event_id": 1795285538961,
+    "second_event_id": 1795285539967
+  },
+  {
+    "device_id": "34",
+    "first_event_id": 1795285538981,
+    "second_event_id": 1795285539986
+  },
+  {
+    "device_id": "40",
+    "first_event_id": 1795285538993,
+    "second_event_id": 1795285540004
+  },
+  {
+    "device_id": "62",
+    "first_event_id": 1795285539006,
+    "second_event_id": 1795285540013
+  },
+  {
+    "device_id": "28",
+    "first_event_id": 1795285539016,
+    "second_event_id": 1795285540026
+  }
+]
