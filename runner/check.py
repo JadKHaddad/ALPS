@@ -32,6 +32,13 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 RATE_KEYS = ("duplication_rate", "out_of_order_rate", "missing_rate")
+COUNT_KEYS = (
+    "total_events",
+    "unique_events",
+    "duplicate_events",
+    "out_of_order_events",
+    "missing_events",
+)
 
 
 @dataclass
@@ -68,17 +75,7 @@ def check_simulation(sim_dir: Path) -> SimulationRates:
         return result
 
     result.rates = {k: data[k] for k in RATE_KEYS}
-    result.counts = {
-        k: data[k]
-        for k in (
-            "total_events",
-            "unique_events",
-            "duplicate_events",
-            "out_of_order_events",
-            "missing_events",
-        )
-        if k in data
-    }
+    result.counts = {k: data[k] for k in COUNT_KEYS if k in data}
     result.passed = all(result.rates[k] == 0.0 for k in RATE_KEYS)
     return result
 
@@ -152,7 +149,7 @@ def main() -> int:
         print("\nFailed runs (violation detected):")
         for r in failed:
             bad = {k: v for k, v in r.rates.items() if v != 0.0}
-            print(f"  - {r.name}: {bad}")
+            print(f"  - {r.name}: {bad}  counts={r.counts}")
 
     if broken:
         print("\nRuns that could not be evaluated:")
@@ -172,10 +169,8 @@ def main() -> int:
                 [
                     "simulation",
                     "passed",
-                    "duplication_rate",
-                    "out_of_order_rate",
-                    "missing_rate",
-                    "total_events",
+                    *RATE_KEYS,
+                    *COUNT_KEYS,
                     "warnings",
                 ]
             )
@@ -184,10 +179,8 @@ def main() -> int:
                     [
                         r.name,
                         r.passed,
-                        r.rates.get("duplication_rate", ""),
-                        r.rates.get("out_of_order_rate", ""),
-                        r.rates.get("missing_rate", ""),
-                        r.counts.get("total_events", ""),
+                        *(r.rates.get(k, "") for k in RATE_KEYS),
+                        *(r.counts.get(k, "") for k in COUNT_KEYS),
                         " | ".join(r.warnings),
                     ]
                 )
