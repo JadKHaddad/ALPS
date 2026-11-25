@@ -1,0 +1,37 @@
+devices:
+  devices_count: 1
+  max_event_interval: 1ms
+  max_events: 1
+  min_event_interval: 1ms
+  retry_duration: 250ms
+  wait_before_start: 7500ms
+lps_gleam_image: jadkhaddad/lps-gleam:0.1.0
+lps_mqtt_hivemq_image: jadkhaddad/lps-mqtt-hivemq:0.1.0
+lps_mqtt_python_image: jadkhaddad/lps-mqtt-python:0.1.0
+lps_rust_image: jadkhaddad/lps-rs:0.1.0
+lps_scripts_image: jadkhaddad/lps-scripts:0.1.0
+mqtt:
+  consumers:
+    consumers_count: 1
+    server_proxy:
+      connection:
+        failure_rate: 0.0
+        latency:
+          max_downstream_latency: 10ms
+        max_up_duration: 1d
+        min_up_duration: 1d
+      socket_addr: 0.0.0.0:9081
+    wait_before_start: 5s
+  producers:
+    producers_count: 1
+seed: 6
+server:
+  expose_socket_addr: 0.0.0.0:8080
+  failure_rate: 0.0
+  max_response_duration: 0s
+  max_work_duration: 0s
+  server_count: 1
+  shutdown_after_idle_duration: 20s
+  socket_addr: 0.0.0.0:8080
+simulation_dir: .simulations/lps/lps-eod/simulation-45
+simulation_docker_network: lps-simulation-net

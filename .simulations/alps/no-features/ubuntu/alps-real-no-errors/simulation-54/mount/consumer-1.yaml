@@ -6,4 +6,4 @@ results_file: /app/consumer-1-results.json
 use_simple_call_format: true
 prefetch_count: 0
 tcp_keepalive: 5s
-http_timeout: 1s
+http_timeout: 30s

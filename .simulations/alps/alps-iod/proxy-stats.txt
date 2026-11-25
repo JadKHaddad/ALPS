@@ -1,0 +1,259 @@
+run 1                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 2                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 3                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 4                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 5                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 6                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 7                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 8                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 9                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 10                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  0         0         0       0.0%       0.0%       0.0%
+  consumer-server-proxy-1                  1         0         0       0.0%       0.0%     100.0%
+
+run 11                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 12                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 13                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 14                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 15                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 16                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 17                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 18                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 19                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 20                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  0         0         0       0.0%       0.0%       0.0%
+  consumer-server-proxy-1                  1         0         0       0.0%       0.0%     100.0%
+
+run 21                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 22                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 23                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 24                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 25                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 26                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 27                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 28                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 29                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 30                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 31                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 32                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 33                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 34                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 35                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 36                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 37                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 38                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 39                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 40                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 41                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 42                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 43                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 44                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 45                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 46                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 47                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 48                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 49                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 50                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 51                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 52                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 53                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 54                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 55                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 56                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 57                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 58                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 59                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-1                  0         0         0       0.0%       0.0%       0.0%
+
+run 60                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy-0                  0         0         0       0.0%       0.0%       0.0%
+  consumer-server-proxy-1                  1         0         0       0.0%       0.0%     100.0%
+
+Runs processed: 60
+
+Per proxy and i (sum over runs)     accepted   dropped   refused  refused %  dropped %   closed %  runs w/ drop
+  consumer-server-proxy-0                 57         0         0       0.0%       0.0%     100.0%  other: completed=22        0/60
+  consumer-server-proxy-1                  3         0         0       0.0%       0.0%     100.0%        0/60
+
+Per proxy type (sum over runs and i)  accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-server-proxy                   60         0         0       0.0%       0.0%     100.0%  other: completed=22
+
+Per consumer i (sum over runs and proxies)  accepted   dropped   refused  refused %  dropped %   closed %
+  i = 0                                   57         0         0       0.0%       0.0%     100.0%  other: completed=22
+  i = 1                                    3         0         0       0.0%       0.0%     100.0%
+
+Per proxy type, mean per run        accepted   dropped   refused
+  consumer-server-proxy                  1.0       0.0       0.0
+
+  refused % = refused / (accepted + refused)
+  dropped % = dropped / accepted
+  closed %  = (accepted - dropped) / accepted   (closed normally)

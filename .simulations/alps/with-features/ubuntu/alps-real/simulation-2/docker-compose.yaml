@@ -9,6 +9,7 @@ services:
     command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_1_proxy.py"
     environment:
       HTTP_PORT: '8080'
+      HTTP_TIMEOUT: ''
       SERVICE_NAME: ars-comp-1-proxy-0
       TARGET_URL: http://lps-producer-0:5672/work
     networks:
@@ -22,6 +23,7 @@ services:
     command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_1_proxy.py"
     environment:
       HTTP_PORT: '8080'
+      HTTP_TIMEOUT: ''
       SERVICE_NAME: ars-comp-1-proxy-1
       TARGET_URL: http://lps-producer-1:5672/work
     networks:
@@ -35,6 +37,7 @@ services:
     command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_1_proxy.py"
     environment:
       HTTP_PORT: '8080'
+      HTTP_TIMEOUT: ''
       SERVICE_NAME: ars-comp-1-proxy-2
       TARGET_URL: http://lps-producer-2:5672/work
     networks:

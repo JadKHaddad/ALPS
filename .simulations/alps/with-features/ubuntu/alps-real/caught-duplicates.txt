@@ -1,0 +1,23 @@
+  run  duplicates
+    1        3634
+    2        3567
+    3        3697
+    4        3626
+    5        3685
+    6        3795
+    7        3631
+    8        3788
+    9        3605
+   10        3682
+   11        3677
+   12        3632
+   13        3515
+   14        3629
+   15        3557
+
+Runs processed:        15
+Runs with duplicates:  15/15 (100.0%)
+Total duplicates:      54720
+Mean per run:          3648.00
+Median per run:        3632.0
+Min / max per run:     3515 / 3795

@@ -1073,6 +1073,12 @@ pub struct MqttConsumersConfig {
     /// waits this long, and only then starts the consumers (legacy-proxy-2-{i}).
     #[serde(default, with = "humantime_serde")]
     pub wait_before_start: Option<Duration>,
+    #[serde(default = "default_http_timeout_seconds_float")]
+    pub http_timeout_seconds_float: String,
+}
+
+fn default_http_timeout_seconds_float() -> String {
+    String::from("1.0")
 }
 
 fn default_socket_addr() -> SocketAddr {
@@ -1222,6 +1228,10 @@ impl Config {
                     ),
                     (String::from("HTTP_PORT"), self.default_http_port()),
                     (String::from("TARGET_URL"), target_url),
+                    (
+                        String::from("HTTP_TIMEOUT"),
+                        self.mqtt.consumers.http_timeout_seconds_float.clone(),
+                    ),
                 ]
                 .into(),
             )

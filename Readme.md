@@ -92,10 +92,10 @@ docker compose --project-directory simulation up validator scripts
 
 ### LP2 Patch
 
-HTTP client timeout is patched to `1` second on line `92` to make the simulations easier to reproduce.
+HTTP client timeout is patched to an env var `HTTP_TIMEOUT` with default = `30.0` second on line `92` to make the simulations easier to reproduce.
 
 ```python
-92: timeout=httpx.Timeout(1.0)
+92: timeout=httpx.Timeout(HTTP_TIMEOUT)
 ```
 
 ### SRV2 Patch

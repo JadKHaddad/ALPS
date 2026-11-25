@@ -12,7 +12,7 @@ amqp:
         min_up_duration: 1d
       socket_addr: 0.0.0.0:9090
     consumers_count: 3
-    http_timeout: 1s
+    http_timeout: 30s
     prefetch_count: 0
     reconnect_duration: 50ms
     server_proxy:

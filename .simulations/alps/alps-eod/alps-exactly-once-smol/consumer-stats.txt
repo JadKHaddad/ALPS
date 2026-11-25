@@ -1,0 +1,131 @@
+Runs processed: 59
+
+Per run:
+run      Received    Success       Fail   Success %    Fail %
+run 1           2          1          1       50.0%     50.0%
+run 2           2          1          1       50.0%     50.0%
+run 3           2          1          1       50.0%     50.0%
+run 4           2          1          1       50.0%     50.0%
+run 5           2          1          1       50.0%     50.0%
+run 6           2          1          1       50.0%     50.0%
+run 7           2          1          1       50.0%     50.0%
+run 8           2          1          1       50.0%     50.0%
+run 9           2          1          1       50.0%     50.0%
+run 10          2          1          1       50.0%     50.0%
+run 11          2          1          1       50.0%     50.0%
+run 12          2          1          1       50.0%     50.0%
+run 13          2          1          1       50.0%     50.0%
+run 14          2          1          1       50.0%     50.0%
+run 15          2          1          1       50.0%     50.0%
+run 16          2          1          1       50.0%     50.0%
+run 17          2          1          1       50.0%     50.0%
+run 18          2          1          1       50.0%     50.0%
+run 19          2          1          1       50.0%     50.0%
+run 20          2          1          1       50.0%     50.0%
+run 21          2          1          1       50.0%     50.0%
+run 22          2          1          1       50.0%     50.0%
+run 23          2          1          1       50.0%     50.0%
+run 24          2          1          1       50.0%     50.0%
+run 25          2          1          1       50.0%     50.0%
+run 26          2          1          1       50.0%     50.0%
+run 27          2          1          1       50.0%     50.0%
+run 28          2          1          1       50.0%     50.0%
+run 29          2          1          1       50.0%     50.0%
+run 30          2          1          1       50.0%     50.0%
+run 31          2          1          1       50.0%     50.0%
+run 32          2          1          1       50.0%     50.0%
+run 33          2          1          1       50.0%     50.0%
+run 34          2          1          1       50.0%     50.0%
+run 35          2          1          1       50.0%     50.0%
+run 36          2          1          1       50.0%     50.0%
+run 37          2          1          1       50.0%     50.0%
+run 38          2          1          1       50.0%     50.0%
+run 39          2          1          1       50.0%     50.0%
+run 40          2          1          1       50.0%     50.0%
+run 41          2          1          1       50.0%     50.0%
+run 42          2          1          1       50.0%     50.0%
+run 43          2          1          1       50.0%     50.0%
+run 44          2          1          1       50.0%     50.0%
+run 45          2          1          1       50.0%     50.0%
+run 46          2          1          1       50.0%     50.0%
+run 47          2          1          1       50.0%     50.0%
+run 48          2          1          1       50.0%     50.0%
+run 49          2          1          1       50.0%     50.0%
+run 50          2          1          1       50.0%     50.0%
+run 51          2          1          1       50.0%     50.0%
+run 52          2          1          1       50.0%     50.0%
+run 53          2          1          1       50.0%     50.0%
+run 54          2          1          1       50.0%     50.0%
+run 55          2          1          1       50.0%     50.0%
+run 56          2          1          1       50.0%     50.0%
+run 57          2          1          1       50.0%     50.0%
+run 58          2          1          1       50.0%     50.0%
+run 59          2          1          1       50.0%     50.0%
+-------------------------------------------------------------
+TOTAL         118         59         59       50.0%     50.0%
+
+Per run and consumer:
+run / consumer      Received    Success       Fail   Success %    Fail %
+run 1 consumer 0           2          1          1       50.0%     50.0%
+run 2 consumer 0           2          1          1       50.0%     50.0%
+run 3 consumer 0           2          1          1       50.0%     50.0%
+run 4 consumer 0           2          1          1       50.0%     50.0%
+run 5 consumer 0           2          1          1       50.0%     50.0%
+run 6 consumer 0           2          1          1       50.0%     50.0%
+run 7 consumer 0           2          1          1       50.0%     50.0%
+run 8 consumer 0           2          1          1       50.0%     50.0%
+run 9 consumer 0           2          1          1       50.0%     50.0%
+run 10 consumer 0          2          1          1       50.0%     50.0%
+run 11 consumer 0          2          1          1       50.0%     50.0%
+run 12 consumer 0          2          1          1       50.0%     50.0%
+run 13 consumer 0          2          1          1       50.0%     50.0%
+run 14 consumer 0          2          1          1       50.0%     50.0%
+run 15 consumer 0          2          1          1       50.0%     50.0%
+run 16 consumer 0          2          1          1       50.0%     50.0%
+run 17 consumer 0          2          1          1       50.0%     50.0%
+run 18 consumer 0          2          1          1       50.0%     50.0%
+run 19 consumer 0          2          1          1       50.0%     50.0%
+run 20 consumer 0          2          1          1       50.0%     50.0%
+run 21 consumer 0          2          1          1       50.0%     50.0%
+run 22 consumer 0          2          1          1       50.0%     50.0%
+run 23 consumer 0          2          1          1       50.0%     50.0%
+run 24 consumer 0          2          1          1       50.0%     50.0%
+run 25 consumer 0          2          1          1       50.0%     50.0%
+run 26 consumer 0          2          1          1       50.0%     50.0%
+run 27 consumer 0          2          1          1       50.0%     50.0%
+run 28 consumer 0          2          1          1       50.0%     50.0%
+run 29 consumer 0          2          1          1       50.0%     50.0%
+run 30 consumer 0          2          1          1       50.0%     50.0%
+run 31 consumer 0          2          1          1       50.0%     50.0%
+run 32 consumer 0          2          1          1       50.0%     50.0%
+run 33 consumer 0          2          1          1       50.0%     50.0%
+run 34 consumer 0          2          1          1       50.0%     50.0%
+run 35 consumer 0          2          1          1       50.0%     50.0%
+run 36 consumer 0          2          1          1       50.0%     50.0%
+run 37 consumer 0          2          1          1       50.0%     50.0%
+run 38 consumer 0          2          1          1       50.0%     50.0%
+run 39 consumer 0          2          1          1       50.0%     50.0%
+run 40 consumer 0          2          1          1       50.0%     50.0%
+run 41 consumer 0          2          1          1       50.0%     50.0%
+run 42 consumer 0          2          1          1       50.0%     50.0%
+run 43 consumer 0          2          1          1       50.0%     50.0%
+run 44 consumer 0          2          1          1       50.0%     50.0%
+run 45 consumer 0          2          1          1       50.0%     50.0%
+run 46 consumer 0          2          1          1       50.0%     50.0%
+run 47 consumer 0          2          1          1       50.0%     50.0%
+run 48 consumer 0          2          1          1       50.0%     50.0%
+run 49 consumer 0          2          1          1       50.0%     50.0%
+run 50 consumer 0          2          1          1       50.0%     50.0%
+run 51 consumer 0          2          1          1       50.0%     50.0%
+run 52 consumer 0          2          1          1       50.0%     50.0%
+run 53 consumer 0          2          1          1       50.0%     50.0%
+run 54 consumer 0          2          1          1       50.0%     50.0%
+run 55 consumer 0          2          1          1       50.0%     50.0%
+run 56 consumer 0          2          1          1       50.0%     50.0%
+run 57 consumer 0          2          1          1       50.0%     50.0%
+run 58 consumer 0          2          1          1       50.0%     50.0%
+run 59 consumer 0          2          1          1       50.0%     50.0%
+------------------------------------------------------------------------
+TOTAL                    118         59         59       50.0%     50.0%
+
+  Success % = Success / Received, Fail % = Fail / Received (Received counts every request sent, incl. retries)

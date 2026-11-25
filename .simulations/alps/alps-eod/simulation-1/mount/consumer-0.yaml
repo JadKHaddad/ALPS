@@ -5,4 +5,5 @@ queues_count: 1
 results_file: /app/consumer-0-results.json
 use_simple_call_format: true
 prefetch_count: 1
+tcp_keepalive: null
 http_timeout: 1s

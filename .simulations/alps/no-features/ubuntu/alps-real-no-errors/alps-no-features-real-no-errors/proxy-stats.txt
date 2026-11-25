@@ -1,0 +1,680 @@
+run 1                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                531         0         0       0.0%       0.0%     100.0%  other: completed=531
+  consumer-server-proxy-1                521         0         0       0.0%       0.0%     100.0%  other: completed=521
+  consumer-server-proxy-2                562         0         0       0.0%       0.0%     100.0%  other: completed=562
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 2                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                570         0         0       0.0%       0.0%     100.0%  other: completed=570
+  consumer-server-proxy-1                534         0         0       0.0%       0.0%     100.0%  other: completed=534
+  consumer-server-proxy-2                560         0         0       0.0%       0.0%     100.0%  other: completed=560
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 3                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                595         0         0       0.0%       0.0%     100.0%  other: completed=595
+  consumer-server-proxy-1                677         0         0       0.0%       0.0%     100.0%  other: completed=677
+  consumer-server-proxy-2                594         0         0       0.0%       0.0%     100.0%  other: completed=594
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 4                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                600         0         0       0.0%       0.0%     100.0%  other: completed=600
+  consumer-server-proxy-1                584         0         0       0.0%       0.0%     100.0%  other: completed=584
+  consumer-server-proxy-2                596         0         0       0.0%       0.0%     100.0%  other: completed=596
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 5                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                521         0         0       0.0%       0.0%     100.0%  other: completed=521
+  consumer-server-proxy-1                549         0         0       0.0%       0.0%     100.0%  other: completed=549
+  consumer-server-proxy-2                522         0         0       0.0%       0.0%     100.0%  other: completed=522
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 6                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                568         0         0       0.0%       0.0%     100.0%  other: completed=568
+  consumer-server-proxy-1                458         0         0       0.0%       0.0%     100.0%  other: completed=458
+  consumer-server-proxy-2                492         0         0       0.0%       0.0%     100.0%  other: completed=492
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 7                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                508         0         0       0.0%       0.0%     100.0%  other: completed=508
+  consumer-server-proxy-1                465         0         0       0.0%       0.0%     100.0%  other: completed=465
+  consumer-server-proxy-2                506         0         0       0.0%       0.0%     100.0%  other: completed=506
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 8                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                619         0         0       0.0%       0.0%     100.0%  other: completed=619
+  consumer-server-proxy-1                580         0         0       0.0%       0.0%     100.0%  other: completed=580
+  consumer-server-proxy-2                553         0         0       0.0%       0.0%     100.0%  other: completed=553
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 9                               accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                541         0         0       0.0%       0.0%     100.0%  other: completed=541
+  consumer-server-proxy-1                541         0         0       0.0%       0.0%     100.0%  other: completed=541
+  consumer-server-proxy-2                528         0         0       0.0%       0.0%     100.0%  other: completed=528
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 10                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                622         0         0       0.0%       0.0%     100.0%  other: completed=622
+  consumer-server-proxy-1                576         0         0       0.0%       0.0%     100.0%  other: completed=576
+  consumer-server-proxy-2                524         0         0       0.0%       0.0%     100.0%  other: completed=524
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=1
+
+run 11                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                626         0         0       0.0%       0.0%     100.0%  other: completed=626
+  consumer-server-proxy-1                548         0         0       0.0%       0.0%     100.0%  other: completed=548
+  consumer-server-proxy-2                555         0         0       0.0%       0.0%     100.0%  other: completed=555
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 12                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                446         0         0       0.0%       0.0%     100.0%  other: completed=446
+  consumer-server-proxy-1                451         0         0       0.0%       0.0%     100.0%  other: completed=451
+  consumer-server-proxy-2                455         0         0       0.0%       0.0%     100.0%  other: completed=455
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 13                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                557         0         0       0.0%       0.0%     100.0%  other: completed=557
+  consumer-server-proxy-1                625         0         0       0.0%       0.0%     100.0%  other: completed=625
+  consumer-server-proxy-2                595         0         0       0.0%       0.0%     100.0%  other: completed=595
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 14                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                593         0         0       0.0%       0.0%     100.0%  other: completed=593
+  consumer-server-proxy-1                541         0         0       0.0%       0.0%     100.0%  other: completed=541
+  consumer-server-proxy-2                500         0         0       0.0%       0.0%     100.0%  other: completed=500
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 15                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    3         0         0       0.0%       0.0%     100.0%  other: completed=2
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                435         0         0       0.0%       0.0%     100.0%  other: completed=435
+  consumer-server-proxy-1                410         0         0       0.0%       0.0%     100.0%  other: completed=410
+  consumer-server-proxy-2                449         0         0       0.0%       0.0%     100.0%  other: completed=449
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 16                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                601         0         0       0.0%       0.0%     100.0%  other: completed=601
+  consumer-server-proxy-1                529         0         0       0.0%       0.0%     100.0%  other: completed=529
+  consumer-server-proxy-2                594         0         0       0.0%       0.0%     100.0%  other: completed=594
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 17                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                593         0         0       0.0%       0.0%     100.0%  other: completed=593
+  consumer-server-proxy-1                523         0         0       0.0%       0.0%     100.0%  other: completed=523
+  consumer-server-proxy-2                616         0         0       0.0%       0.0%     100.0%  other: completed=616
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 18                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                602         0         0       0.0%       0.0%     100.0%  other: completed=602
+  consumer-server-proxy-1                629         0         0       0.0%       0.0%     100.0%  other: completed=629
+  consumer-server-proxy-2                620         0         0       0.0%       0.0%     100.0%  other: completed=620
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 19                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                527         0         0       0.0%       0.0%     100.0%  other: completed=527
+  consumer-server-proxy-1                554         0         0       0.0%       0.0%     100.0%  other: completed=554
+  consumer-server-proxy-2                597         0         0       0.0%       0.0%     100.0%  other: completed=597
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 20                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                606         0         0       0.0%       0.0%     100.0%  other: completed=606
+  consumer-server-proxy-1                589         0         0       0.0%       0.0%     100.0%  other: completed=589
+  consumer-server-proxy-2                602         0         0       0.0%       0.0%     100.0%  other: completed=602
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 21                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                563         0         0       0.0%       0.0%     100.0%  other: completed=563
+  consumer-server-proxy-1                584         0         0       0.0%       0.0%     100.0%  other: completed=584
+  consumer-server-proxy-2                576         0         0       0.0%       0.0%     100.0%  other: completed=576
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 22                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                545         0         0       0.0%       0.0%     100.0%  other: completed=545
+  consumer-server-proxy-1                525         0         0       0.0%       0.0%     100.0%  other: completed=525
+  consumer-server-proxy-2                548         0         0       0.0%       0.0%     100.0%  other: completed=548
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 23                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                635         0         0       0.0%       0.0%     100.0%  other: completed=635
+  consumer-server-proxy-1                594         0         0       0.0%       0.0%     100.0%  other: completed=594
+  consumer-server-proxy-2                627         0         0       0.0%       0.0%     100.0%  other: completed=627
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 24                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                579         0         0       0.0%       0.0%     100.0%  other: completed=579
+  consumer-server-proxy-1                606         0         0       0.0%       0.0%     100.0%  other: completed=606
+  consumer-server-proxy-2                580         0         0       0.0%       0.0%     100.0%  other: completed=580
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 25                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                587         0         0       0.0%       0.0%     100.0%  other: completed=587
+  consumer-server-proxy-1                555         0         0       0.0%       0.0%     100.0%  other: completed=555
+  consumer-server-proxy-2                557         0         0       0.0%       0.0%     100.0%  other: completed=557
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 26                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                571         0         0       0.0%       0.0%     100.0%  other: completed=571
+  consumer-server-proxy-1                539         0         0       0.0%       0.0%     100.0%  other: completed=539
+  consumer-server-proxy-2                532         0         0       0.0%       0.0%     100.0%  other: completed=532
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 27                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                560         0         0       0.0%       0.0%     100.0%  other: completed=560
+  consumer-server-proxy-1                533         0         0       0.0%       0.0%     100.0%  other: completed=533
+  consumer-server-proxy-2                545         0         0       0.0%       0.0%     100.0%  other: completed=545
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 28                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                599         0         0       0.0%       0.0%     100.0%  other: completed=599
+  consumer-server-proxy-1                541         0         0       0.0%       0.0%     100.0%  other: completed=541
+  consumer-server-proxy-2                616         0         0       0.0%       0.0%     100.0%  other: completed=616
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 29                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                573         0         0       0.0%       0.0%     100.0%  other: completed=573
+  consumer-server-proxy-1                613         0         0       0.0%       0.0%     100.0%  other: completed=613
+  consumer-server-proxy-2                516         0         0       0.0%       0.0%     100.0%  other: completed=516
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 30                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                583         0         0       0.0%       0.0%     100.0%  other: completed=583
+  consumer-server-proxy-1                589         0         0       0.0%       0.0%     100.0%  other: completed=589
+  consumer-server-proxy-2                567         0         0       0.0%       0.0%     100.0%  other: completed=567
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 31                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                592         0         0       0.0%       0.0%     100.0%  other: completed=592
+  consumer-server-proxy-1                561         0         0       0.0%       0.0%     100.0%  other: completed=561
+  consumer-server-proxy-2                580         0         0       0.0%       0.0%     100.0%  other: completed=580
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 32                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                609         0         0       0.0%       0.0%     100.0%  other: completed=609
+  consumer-server-proxy-1                559         0         0       0.0%       0.0%     100.0%  other: completed=559
+  consumer-server-proxy-2                588         0         0       0.0%       0.0%     100.0%  other: completed=588
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 33                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                527         0         0       0.0%       0.0%     100.0%  other: completed=527
+  consumer-server-proxy-1                556         0         0       0.0%       0.0%     100.0%  other: completed=556
+  consumer-server-proxy-2                501         0         0       0.0%       0.0%     100.0%  other: completed=501
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 34                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    2         0         0       0.0%       0.0%     100.0%  other: completed=2
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                554         0         0       0.0%       0.0%     100.0%  other: completed=554
+  consumer-server-proxy-1                577         0         0       0.0%       0.0%     100.0%  other: completed=577
+  consumer-server-proxy-2                560         0         0       0.0%       0.0%     100.0%  other: completed=560
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 35                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                578         0         0       0.0%       0.0%     100.0%  other: completed=578
+  consumer-server-proxy-1                568         0         0       0.0%       0.0%     100.0%  other: completed=568
+  consumer-server-proxy-2                560         0         0       0.0%       0.0%     100.0%  other: completed=560
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 36                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                605         0         0       0.0%       0.0%     100.0%  other: completed=605
+  consumer-server-proxy-1                618         0         0       0.0%       0.0%     100.0%  other: completed=618
+  consumer-server-proxy-2                602         0         0       0.0%       0.0%     100.0%  other: completed=602
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 37                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                563         0         0       0.0%       0.0%     100.0%  other: completed=563
+  consumer-server-proxy-1                572         0         0       0.0%       0.0%     100.0%  other: completed=572
+  consumer-server-proxy-2                545         0         0       0.0%       0.0%     100.0%  other: completed=545
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 38                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                528         0         0       0.0%       0.0%     100.0%  other: completed=528
+  consumer-server-proxy-1                560         0         0       0.0%       0.0%     100.0%  other: completed=560
+  consumer-server-proxy-2                533         0         0       0.0%       0.0%     100.0%  other: completed=533
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 39                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                546         0         0       0.0%       0.0%     100.0%  other: completed=546
+  consumer-server-proxy-1                547         0         0       0.0%       0.0%     100.0%  other: completed=547
+  consumer-server-proxy-2                552         0         0       0.0%       0.0%     100.0%  other: completed=552
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 40                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                524         0         0       0.0%       0.0%     100.0%  other: completed=524
+  consumer-server-proxy-1                517         0         0       0.0%       0.0%     100.0%  other: completed=517
+  consumer-server-proxy-2                543         0         0       0.0%       0.0%     100.0%  other: completed=543
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 41                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                418         0         0       0.0%       0.0%     100.0%  other: completed=418
+  consumer-server-proxy-1                392         0         0       0.0%       0.0%     100.0%  other: completed=392
+  consumer-server-proxy-2                381         0         0       0.0%       0.0%     100.0%  other: completed=381
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 42                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                560         0         0       0.0%       0.0%     100.0%  other: completed=560
+  consumer-server-proxy-1                597         0         0       0.0%       0.0%     100.0%  other: completed=597
+  consumer-server-proxy-2                573         0         0       0.0%       0.0%     100.0%  other: completed=573
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 43                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                556         0         0       0.0%       0.0%     100.0%  other: completed=556
+  consumer-server-proxy-1                573         0         0       0.0%       0.0%     100.0%  other: completed=573
+  consumer-server-proxy-2                521         0         0       0.0%       0.0%     100.0%  other: completed=521
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 44                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                573         0         0       0.0%       0.0%     100.0%  other: completed=573
+  consumer-server-proxy-1                611         0         0       0.0%       0.0%     100.0%  other: completed=611
+  consumer-server-proxy-2                550         0         0       0.0%       0.0%     100.0%  other: completed=550
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 45                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                574         0         0       0.0%       0.0%     100.0%  other: completed=574
+  consumer-server-proxy-1                623         0         0       0.0%       0.0%     100.0%  other: completed=623
+  consumer-server-proxy-2                570         0         0       0.0%       0.0%     100.0%  other: completed=570
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 46                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                582         0         0       0.0%       0.0%     100.0%  other: completed=582
+  consumer-server-proxy-1                621         0         0       0.0%       0.0%     100.0%  other: completed=621
+  consumer-server-proxy-2                612         0         0       0.0%       0.0%     100.0%  other: completed=612
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 47                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                579         0         0       0.0%       0.0%     100.0%  other: completed=579
+  consumer-server-proxy-1                624         0         0       0.0%       0.0%     100.0%  other: completed=624
+  consumer-server-proxy-2                583         0         0       0.0%       0.0%     100.0%  other: completed=583
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 48                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                656         0         0       0.0%       0.0%     100.0%  other: completed=656
+  consumer-server-proxy-1                640         0         0       0.0%       0.0%     100.0%  other: completed=640
+  consumer-server-proxy-2                625         0         0       0.0%       0.0%     100.0%  other: completed=625
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 49                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                554         0         0       0.0%       0.0%     100.0%  other: completed=554
+  consumer-server-proxy-1                571         0         0       0.0%       0.0%     100.0%  other: completed=571
+  consumer-server-proxy-2                570         0         0       0.0%       0.0%     100.0%  other: completed=570
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 50                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    2         0         0       0.0%       0.0%     100.0%  other: completed=2
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                560         0         0       0.0%       0.0%     100.0%  other: completed=560
+  consumer-server-proxy-1                604         0         0       0.0%       0.0%     100.0%  other: completed=604
+  consumer-server-proxy-2                638         0         0       0.0%       0.0%     100.0%  other: completed=638
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 51                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                558         0         0       0.0%       0.0%     100.0%  other: completed=558
+  consumer-server-proxy-1                633         0         0       0.0%       0.0%     100.0%  other: completed=633
+  consumer-server-proxy-2                605         0         0       0.0%       0.0%     100.0%  other: completed=605
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 52                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                568         0         0       0.0%       0.0%     100.0%  other: completed=568
+  consumer-server-proxy-1                583         0         0       0.0%       0.0%     100.0%  other: completed=583
+  consumer-server-proxy-2                596         0         0       0.0%       0.0%     100.0%  other: completed=596
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 53                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                598         0         0       0.0%       0.0%     100.0%  other: completed=598
+  consumer-server-proxy-1                650         0         0       0.0%       0.0%     100.0%  other: completed=650
+  consumer-server-proxy-2                616         0         0       0.0%       0.0%     100.0%  other: completed=616
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 54                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                608         0         0       0.0%       0.0%     100.0%  other: completed=608
+  consumer-server-proxy-1                589         0         0       0.0%       0.0%     100.0%  other: completed=589
+  consumer-server-proxy-2                634         0         0       0.0%       0.0%     100.0%  other: completed=634
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 55                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                564         0         0       0.0%       0.0%     100.0%  other: completed=564
+  consumer-server-proxy-1                580         0         0       0.0%       0.0%     100.0%  other: completed=580
+  consumer-server-proxy-2                649         0         0       0.0%       0.0%     100.0%  other: completed=649
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 56                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                603         0         0       0.0%       0.0%     100.0%  other: completed=603
+  consumer-server-proxy-1                594         0         0       0.0%       0.0%     100.0%  other: completed=594
+  consumer-server-proxy-2                602         0         0       0.0%       0.0%     100.0%  other: completed=602
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 57                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                537         0         0       0.0%       0.0%     100.0%  other: completed=537
+  consumer-server-proxy-1                576         0         0       0.0%       0.0%     100.0%  other: completed=576
+  consumer-server-proxy-2                549         0         0       0.0%       0.0%     100.0%  other: completed=549
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%
+
+run 58                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%  other: completed=1
+  consumer-server-proxy-0                572         0         0       0.0%       0.0%     100.0%  other: completed=572
+  consumer-server-proxy-1                616         0         0       0.0%       0.0%     100.0%  other: completed=616
+  consumer-server-proxy-2                585         0         0       0.0%       0.0%     100.0%  other: completed=585
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+run 59                              accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy-0                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-1                    1         0         0       0.0%       0.0%     100.0%
+  consumer-amqp-proxy-2                    1         0         0       0.0%       0.0%     100.0%
+  consumer-server-proxy-0                578         0         0       0.0%       0.0%     100.0%  other: completed=578
+  consumer-server-proxy-1                643         0         0       0.0%       0.0%     100.0%  other: completed=643
+  consumer-server-proxy-2                571         0         0       0.0%       0.0%     100.0%  other: completed=571
+  server-tcp-proxy-0                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-1                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+  server-tcp-proxy-2                       3         0         0       0.0%       0.0%     100.0%  other: completed=3
+
+Runs processed: 59
+
+Per proxy and i (sum over runs)     accepted   dropped   refused  refused %  dropped %   closed %  runs w/ drop
+  consumer-amqp-proxy-0                   65         0         0       0.0%       0.0%     100.0%  other: completed=14        0/59
+  consumer-amqp-proxy-1                   59         0         0       0.0%       0.0%     100.0%  other: completed=7        0/59
+  consumer-amqp-proxy-2                   59         0         0       0.0%       0.0%     100.0%  other: completed=17        0/59
+  consumer-server-proxy-0              33480         0         0       0.0%       0.0%     100.0%  other: completed=33480        0/59
+  consumer-server-proxy-1              33518         0         0       0.0%       0.0%     100.0%  other: completed=33518        0/59
+  consumer-server-proxy-2              33278         0         0       0.0%       0.0%     100.0%  other: completed=33278        0/59
+  server-tcp-proxy-0                     177         0         0       0.0%       0.0%     100.0%  other: completed=129        0/59
+  server-tcp-proxy-1                     177         0         0       0.0%       0.0%     100.0%  other: completed=117        0/59
+  server-tcp-proxy-2                     177         0         0       0.0%       0.0%     100.0%  other: completed=112        0/59
+
+Per proxy type (sum over runs and i)  accepted   dropped   refused  refused %  dropped %   closed %
+  consumer-amqp-proxy                    183         0         0       0.0%       0.0%     100.0%  other: completed=38
+  consumer-server-proxy               100276         0         0       0.0%       0.0%     100.0%  other: completed=100276
+  server-tcp-proxy                       531         0         0       0.0%       0.0%     100.0%  other: completed=358
+
+Per consumer i (sum over runs and proxies)  accepted   dropped   refused  refused %  dropped %   closed %
+  i = 0                                33722         0         0       0.0%       0.0%     100.0%  other: completed=33623
+  i = 1                                33754         0         0       0.0%       0.0%     100.0%  other: completed=33642
+  i = 2                                33514         0         0       0.0%       0.0%     100.0%  other: completed=33407
+
+Per proxy type, mean per run        accepted   dropped   refused
+  consumer-amqp-proxy                    3.1       0.0       0.0
+  consumer-server-proxy               1699.6       0.0       0.0
+  server-tcp-proxy                       9.0       0.0       0.0
+
+  refused % = refused / (accepted + refused)
+  dropped % = dropped / accepted
+  closed %  = (accepted - dropped) / accepted   (closed normally)

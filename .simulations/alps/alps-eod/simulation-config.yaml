@@ -45,4 +45,4 @@ amqp:
 
 # These one needs filtering that duplicates happened.
 
-# python3 runner/runner.py --protocol "amqp" --runs 1 --sleep 5 --base-dir ".simulations/alps/alps-eod" --base-config ".simulations/alps/alps-eod/simulation-config.yaml" --log-dir ".simulations/alps/alps-eod/logs"
+# python3 runner/runner.py --protocol "amqp" --runs 59 --sleep 5 --base-dir ".simulations/alps/alps-eod" --base-config ".simulations/alps/alps-eod/simulation-config.yaml" --log-dir ".simulations/alps/alps-eod/logs"
