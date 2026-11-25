@@ -9,6 +9,7 @@ services:
     command: sh -c "mkdir -p logs && exec python3 /scripts/ars_comp_1_proxy.py"
     environment:
       HTTP_PORT: '8080'
+      HTTP_TIMEOUT: '1.0'
       SERVICE_NAME: ars-comp-1-proxy-0
       TARGET_URL: http://lps-legacy-proxy-1-0:8080/ID_REQ_KC_STORE7D3BPACKET
     networks:

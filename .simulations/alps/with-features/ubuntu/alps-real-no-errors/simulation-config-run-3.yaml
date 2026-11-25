@@ -1,0 +1,67 @@
+amqp:
+  consumers:
+    amqp_proxy:
+      connection:
+        failure_rate: 0.0
+        latency:
+          max_downstream_latency: 0.009ms
+          max_upstream_latency: 0.009ms
+          min_downstream_latency: 0.009ms
+          min_upstream_latency: 0.009ms
+        max_up_duration: 1d
+        min_up_duration: 1d
+      socket_addr: 0.0.0.0:9090
+    consumers_count: 3
+    http_timeout: 30s
+    prefetch_count: 1
+    reconnect_duration: 50ms
+    server_proxy:
+      connection:
+        failure_rate: 0.0
+        latency:
+          max_downstream_latency: 0.009ms
+          max_upstream_latency: 0.009ms
+          min_downstream_latency: 0.009ms
+          min_upstream_latency: 0.009ms
+        max_up_duration: 1d
+        min_up_duration: 1d
+      socket_addr: 0.0.0.0:9081
+    tcp_keepalive: 5s
+  producers:
+    producers_count: 3
+    socket_addr: 0.0.0.0:5672
+  queues_count: 3
+  use_features: true
+devices:
+  devices_count: 70
+  max_event_interval: 1s
+  max_events: 100
+  min_event_interval: 1s
+  retry_duration: 500ms
+  wait_before_start: 5s
+lps_gleam_image: jadkhaddad/lps-gleam:0.1.0
+lps_mqtt_python_image: jadkhaddad/lps-mqtt-python:0.1.0
+lps_rust_image: jadkhaddad/lps-rs:0.1.0
+lps_scripts_image: jadkhaddad/lps-scripts:0.1.0
+server:
+  background_load_per_second: 70
+  deduplication: true
+  expose_socket_addr: 0.0.0.0:8080
+  failure_rate: 0.0
+  server_count: 3
+  shutdown_after_idle_duration: 60s
+  socket_addr: 0.0.0.0:8080
+  tcp_proxy:
+    connection:
+      failure_rate: 0.0
+      latency:
+        max_downstream_latency: 0.009ms
+        max_upstream_latency: 0.009ms
+        min_downstream_latency: 0.009ms
+        min_upstream_latency: 0.009ms
+      max_up_duration: 1d
+      min_up_duration: 1d
+    socket_addr: 0.0.0.0:9000
+  use_gs_prod_workload: true
+simulation_dir: .simulations/alps/with-features/ubuntu/alps-real-no-errors/simulation-3
+simulation_docker_network: lps-simulation-net

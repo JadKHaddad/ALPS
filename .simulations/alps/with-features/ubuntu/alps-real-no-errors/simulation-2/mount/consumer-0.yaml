@@ -1,0 +1,9 @@
+rabbit_mq_url: amqp://lps-consumer-amqp-proxy-0:9090
+server_push_url: http://lps-consumer-server-proxy-0:9081/ID_REQ_KC_STORE7D3BPACKET
+reconnect_duration: 50ms
+queues_count: 3
+results_file: /app/consumer-0-results.json
+use_simple_call_format: true
+prefetch_count: 1
+tcp_keepalive: 5s
+http_timeout: 30s
